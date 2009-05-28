@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="solr" version="20080603-01"
+           handler="nva.universalsearch.exportimport.importSolrSettings"
+           title="solr configuration">
+  <dependency step="componentregistry"/>
+  Import settings for Solr integration.
+ </import-step>
+</import-steps>
+

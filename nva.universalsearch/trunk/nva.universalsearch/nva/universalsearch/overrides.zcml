@@ -1,0 +1,10 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="nva.universalsearch">
+
+  <utility
+      factory="nva.universalsearch.search.UniversalSearch"
+      provides=".interfaces.ISearch" />
+
+</configure>
