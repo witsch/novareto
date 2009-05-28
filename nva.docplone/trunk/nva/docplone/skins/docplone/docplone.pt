@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="nva.docplone">
+  <head><title></title></head>
+  <body>
+
+    <!-- String Widgets -->
+    <metal:view_macro define-macro="view"
+            tal:define="kssClassesView context/@@kss_field_decorator_view;
+                        getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;">
+        <span metal:define-macro="string-field-view"
+            tal:define="kss_class python:getKssClasses(fieldName,
+                              templateId='widgets/string', macro='string-field-view');"
+            tal:attributes="class kss_class;
+                            id string:parent-fieldname-$fieldName">
+            <span metal:define-slot="inside" 
+                  tal:replace="accessor">string</span>
+        </span>
+    </metal:view_macro>
+
+    <metal:define define-macro="edit">
+      <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+       <div metal:fill-slot="widget_body" tal:define="dzeichen value">
+         
+            <table class="listing" tal:condition="dzeichen">
+            <tr>
+              <th> </th>
+              <th> DOK-Zeichen </th>
+            <tr>
+            <tr tal:repeat="dz dzeichen">
+               <td> <a class="docplone-delete" href="" href1="" tal:attributes="href1 dz"> entfernen </a> </td>
+               <td> <span tal:content="dz"> </span> </td>
+            </tr>
+            </table>
+
+            <div class="formHelp" i18n:translate="hg1">Bitte vergeben Sie hier in 3 Schritten eine DOK-Zahl fuer den Artikel</div>
+
+            <select name="dz1" tal:define="vocab python:field.getVocabs('JANEIN');
+                                                       selectionview context/@@at_selection_widget;
+                                                       selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> <br>
+
+            <select name="dz2" id="dz2" tal:define="vocab python:field.getVocabsEmpty();
+                                                       selectionview context/@@at_selection_widget;
+                                                       selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> <br>
+
+            <select name="dz3" id="dz3" tal:define="vocab python:field.getVocabsEmpty();
+                                                       selectionview context/@@at_selection_widget;
+                                                       selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> <br> 
+
+<div class="formHelp" i18n:translate="anhangzahl">Bitte vergeben Sie nach Bedarf eine Anhaengezahl zur naeheren Spezifikation des Inhalts</div>
+
+            <select name="dz4" id="dz4" tal:define="vocab python:field.getVocabsAZ();
+                                                       selectionview context/@@at_selection_widget;
+                                                       selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> <br>
+
+<div class="formHelp" i18n:translate="anhangbegriff">Bitte vergeben Sie nach Bedarf einen Anhaengebegriff zur naeheren Spezifikation des Inhalts</div>
+
+            <select name="dz5" id="dz5" tal:define="vocab python:field.getVocabsAB();
+                                                       selectionview context/@@at_selection_widget;
+                                                       selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> 
+
+            <div class="formHelp" i18n:translate="quickentry"> Ihr Doczeichen (QuickEntry) </div>
+            <input type="text" name="ddzz" id="ddzz" />
+
+           <br> <br>
+           <input id="save_doczeichen" type="submit" class="context" value="Speichern">
+         <!--</form>-->
+      </div>
+
+      </metal:use>
+    </metal:define>
+
+    <div metal:define-macro="search">
+      <div metal:use-macro="here/widgets/string/macros/edit">
+      </div>
+    </div>
+
+  </body>
+
+</html>

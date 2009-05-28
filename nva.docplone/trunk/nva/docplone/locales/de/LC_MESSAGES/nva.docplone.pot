@@ -1,0 +1,48 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2008-02-11 12:23+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: nva.docplone\n"
+
+#. Default: "Bitte vergeben Sie nach Bedarf einen Anhaengebegriff zur naeheren Spezifikation des Inhalts"
+#: ./skins/docplone/docplone.pt:94
+msgid "anhangbegriff"
+msgstr "Bitte wählen Sie einen Anhängebegriff zur näheren Spezifikation des Inhalts."
+
+#. Default: "Bitte vergeben Sie nach Bedarf eine Anhaengezahl zur naeheren Spezifikation des Inhalts"
+#: ./skins/docplone/docplone.pt:79
+msgid "anhangzahl"
+msgstr "Bitte wählen Sie eine Anhängezahl zur näheren Spezifikation des Inhalts"
+
+#: ./utils/utility.py:31
+msgid "bitte auswaehlen"
+msgstr "bitte auswählen"
+
+#. Default: "Bitte vergeben Sie hier in 3 Schritten eine DOK-Zahl fuer den Artikel"
+#: ./skins/docplone/docplone.pt:38
+msgid "hg1"
+msgstr ""
+
+#. Default: "Ihr Doczeichen (QuickEntry)"
+#: ./skins/docplone/docplone.pt:109
+msgid "quickentry"
+msgstr "Ihr DOK-Zeichen (QuickEntry)"
+
+#. Default: "Bitte grenzen Sie Ihre Suchbegriffe ein"
+#: ./skins/docplone/docz.pt:17
+msgid "search_label"
+msgstr ""
+

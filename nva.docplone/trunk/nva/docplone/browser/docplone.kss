@@ -1,0 +1,33 @@
+.portlet .contextActions:load {
+    action-server:              initPortletHash;
+    initPortletHash-portlethash:            kssAttr(portlethash, True)
+	}
+
+div#archetypes-fieldname-doczeichen select:change {
+    action-server: 		  listConstraint;
+    listConstraint-masterid:      nodeAttr("name");
+    listConstraint-value:         currentFormVar();
+    listConstraint-kssSubmitForm: currentForm();
+    }
+
+div.doczeichenview select:change {
+    action-server: 		  listDoczeichen;
+    listDoczeichen-masterid:      nodeAttr("name");
+    listDoczeichen-value:         currentFormVar();
+    }
+
+input#save_doczeichen:click {
+    evt-click-preventdefault: true;
+    action-server: addDocZeichen;
+    log-message: kssAttr(porlethash, True);
+    addDocZeichen-portlethash: kssAttr(portlethash, True);
+    addDocZeichen-kssSubmitForm: currentForm();
+}
+
+a.docplone-delete:click {
+    evt-click-preventdefault: True;
+    action-server: deleteDoczeichen;
+    log-message: kssAttr(porlethash, True);
+    deleteDoczeichen-doczeichen: nodeAttr(href1);
+    deleteDoczeichen-portlethash:  kssAttr(portlethash, True);
+}

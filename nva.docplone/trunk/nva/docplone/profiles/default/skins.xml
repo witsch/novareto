@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+ <object name="docplone" meta_type="Filesystem Directory View"
+    directory="nva.docplone:skins/docplone"/>
+ <skin-path name="*">
+  <layer name="docplone"
+         insert-after="custom"/>
+ </skin-path>
+</object>

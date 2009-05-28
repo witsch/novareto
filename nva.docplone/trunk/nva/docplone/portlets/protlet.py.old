@@ -1,0 +1,70 @@
+from zope.interface import implements
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+
+from plone.app.portlets.portlets import base
+from plone.memoize import request
+from plone.memoize.interfaces import ICacheChooser
+	
+from zope.formlib import form
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from plone.portlets.interfaces import IPortletDataProvider
+
+from nva.docplone import MessageFactory as _
+
+class IDocZeichenPortlet(IPortletDataProvider):
+    """A portlet which shows Doczeichen."""
+
+class Assignment(base.Assignment):
+    """Portlet assignment.
+    
+    This is what is actually managed through the portlets UI and associated
+    with columns.
+    """
+    implements(IDocZeichenPortlet)
+
+    def __init__(self, title="Doczeichen"):
+        self.__title__=title
+
+    @property
+    def title(self):
+        return self.__title__
+
+class Renderer(base.Renderer):
+    """Portlet renderer.
+    """
+    render = ViewPageTemplateFile("portlet.pt")
+
+    @property
+    def title(self):
+        return self.data.title
+
+    def showDoczeichen(self):
+	""" Return the Doczeichen of the object """
+	context = self.context
+	rc=[]
+	if not hasattr(context,'doczeichen'):
+	    return rc
+	try:
+	    for doczeichen in context.doczeichen:
+	        d = {'title': doczeichen}
+	        rc.append(d)
+	except:
+	    print "EXECPT"
+	    return rc
+	return rc 
+ 
+class AddForm(base.AddForm):
+    """Portlet add form.
+    """
+    form_fields = form.Fields(IDocZeichenPortlet)
+
+    def create(self, data):
+        return Assignment(**data)
+
+
+class EditForm(base.EditForm):
+    """Portlet edit form.
+    """
+    form_fields = form.Fields(IDocZeichenPortlet)

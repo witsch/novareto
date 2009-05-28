@@ -1,0 +1,16 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="plone">
+	  
+<tal:block define="_dummy python:request.response.setHeader('content-type','text/html;;charset=utf-8')" />
+
+<metal:block use-macro="here/global_defines/macros/defines" />
+
+
+        <metal:widgets tal:define="field options/field;
+				   n python: {};
+				   field_macro here/widgets/field/macros/edit;
+                                   errors options/state/getErrors | n">
+            <metal:fieldMacro use-macro="python:here.widget(field, mode='edit')" />
+        </metal:widgets>
+</tal:block>

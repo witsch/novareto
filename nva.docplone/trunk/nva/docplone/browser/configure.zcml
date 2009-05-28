@@ -1,0 +1,52 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:azax="http://namespaces.zope.org/azax"
+           >
+
+    <browser:resource
+        name="docplone.kss"
+        file="docplone.kss"
+        />
+
+    <browser:page
+        for="*"
+        attribute="addDocZeichen"
+        class=".kssview.KSSDocZeichen"
+        name="addDocZeichen"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="*"
+        attribute="deleteDoczeichen"
+        class=".kssview.KSSDocZeichen"
+        name="deleteDoczeichen"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="*"
+        attribute="listConstraint"
+        class=".kssview.KSSDocZeichen"
+        name="listConstraint"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="*"
+        attribute="listDoczeichen"
+        class=".kssview.KSSDocZeichen"
+        name="listDoczeichen"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="*"
+        class=".doczeichen.DocZeichenView"
+        name="doczeichenview"
+        permission="zope2.View"
+	allowed_interface="nva.docplone.interfaces.IDocZeichenView"
+        />
+
+</configure>

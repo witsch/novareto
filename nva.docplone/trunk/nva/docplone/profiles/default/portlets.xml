@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<portlets>
+ <portlet
+   addview="nva.doczeichen.portlets.portlet.DocZeichenPortlet"
+   title="DocZeichen"
+   description="Portlet which can show doczeichen"
+   />
+
+    <assignment name="doczeichen" category="context" key="/"
+        manager="plone.rightcolumn"
+	    type="nva.doczeichen.portlets.portlet.DocZeichenPortlet"/>
+
+</portlets>

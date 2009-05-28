@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+ <index name="doczeichen" meta_type="KeywordIndex">
+  <indexed_attr value="doczeichen"/>
+ </index>
+ <index name="searchdoczeichen" meta_type="ZCTextIndex">
+  <indexed_attr value="searchdoczeichen"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+ </index>
+ <column value="doczeichen"/>
+ <column value="searchdoczeichen"/>
+</object>

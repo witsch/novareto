@@ -1,0 +1,52 @@
+<dl class="portlet portletdoczeichen"
+    tal:define="entries view/showDoczeichen"
+    tal:condition="entries"
+    i18n:domain="portlet.doczeichen">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span tal:content="string: DOK-Zeichen">
+           Header
+        </span>
+        <span class="portletTopRight"></span>
+    </dt>
+	
+    <tal:entry
+        tal:repeat="entry entries">
+
+        <dd class="portletItem"
+            tal:define="oddrow repeat/entry/odd"
+            tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
+
+            <a href=""
+               tal:attributes="href string: ${entry/zurueck};
+                               title entry/title" 
+	       tal:condition="entry/zurueck"> <<
+            </a>
+
+            <a href=""
+               tal:attributes="href string: search?doczeichen=${entry/link};
+                               title entry/title">
+                <span tal:replace="structure entry/title">Title</span>
+            </a>
+
+            <a href=""
+               tal:attributes="href string: ${entry/vor};
+                               title entry/title"
+	       tal:condition="entry/vor"> >> 
+            </a>
+
+        </dd>
+
+    </tal:entry>
+   
+    <dd class="portletFooter" tal:define="url python: here.absolute_url()">
+      <a href="#"
+          class="tile"
+          tal:attributes="href string:${url}/edit?fieldset=categorization"
+          i18n:translate="box_f_feed_view">Add New</a>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

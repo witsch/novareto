@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.docplone">
+
+<head>
+
+<body>
+
+<div metal:fill-slot="main" tal:define="view context/@@doczeichenview; value python:request.get('dz1')">
+ <h1> DOK-Zeichen Suche </h1>
+  <div class="doczeichenview">
+  <form action="doczeichenoverview">
+  <fieldset>
+   <legend i18n:translate="search_label"> Bitte grenzen Sie Ihre Suchbegriffe ein </legend>
+
+            <select name="dzv1" tal:define="vocab python:view.getVocabs();
+                                                       selectionview context/@@at_selection_widget;
+                                                     selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> <br>
+
+            <select name="dzv2" id="dzv2" tal:define="vocab python:view.getVocabsEmpty();
+                                                       selectionview context/@@at_selection_widget;
+                                                       selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> <br>
+
+            <select name="dzv3" id="dzv3" tal:define="vocab python:view.getVocabsEmpty();
+                                                       selectionview context/@@at_selection_widget;
+                                                       selection python:selectionview.getSelected(vocab, value); ">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;
+                                                selected python:item in selection and 'selected' or None"
+                                tal:content="python:vocab.getValue(item)"
+                                i18n:translate=""
+                                />
+
+            </select> <br>
+
+  </fieldset>
+  <form>
+
+  <div id="doczeichenresults">
+
+  </div>
+
+  </div>
+</div>
+</html>
