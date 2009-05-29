@@ -1,6 +1,6 @@
 from zope.interface import implements
 from logging import getLogger
-from collective.solr.indexer import (SolrIndexQueueProcessor,
+from collective.solr.indexer import (SolrIndexProcessor,
      indexable)
 from nva.universalsearch.interfaces import IUniversalSearchQueueProcessor
 from nva.universalsearch.config import SYSTEM
@@ -14,7 +14,7 @@ from zope.component import getMultiAdapter
 logger = getLogger('nva.universalsearch.indexer')
 
 
-class UniversalSearchQueueProcessor(SolrIndexQueueProcessor):
+class UniversalSearchQueueProcessor(SolrIndexProcessor):
     implements(IUniversalSearchQueueProcessor)
 
     def index(self, obj, attributes=None):
