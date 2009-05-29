@@ -1,6 +1,6 @@
 from kss.core import kssaction
 from kss.core import force_unicode
-from zope.component import getUtility
+from zope.component import getUtility, getMultiAdapter
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from plone.app.kss.plonekssview import PloneKSSView
 from nva.docplone.interfaces import IDocZeichenUtility
@@ -35,6 +35,8 @@ class KSSDocZeichen(PloneKSSView):
 	value.append(doczeichen)
         field.set(context, value)
         context.reindexObject()
+        system = getMultiAdapter((context, request), name="plone_portal_state")
+        info['key'] = '/' + system.portal().getId() 
 	portlethash = hashPortletInfo(info)
         self.getCommandSet('plone').refreshPortlet(portlethash)
 	mac = self.macroField(field='doczeichen')

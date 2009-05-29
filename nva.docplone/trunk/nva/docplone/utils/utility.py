@@ -4,7 +4,8 @@ import pysqlite2.dbapi2 as sqlite
 from string import split, strip, replace 
 from nva.docplone import messagedomain as _
 
-pfad = "/Users/larswalther/docplone/src/nva.docplone/nva/docplone/utils/dz.db"
+pfad = '/'.join(__file__.split('/')[:-1])+"/dz.db"
+
 
 class DocZeichenUtility(object):
     implements(IDocZeichenUtility)
