@@ -27,6 +27,7 @@ doczeichen fuer plone""",
       install_requires=[
           'setuptools',
 	  'pysqlite',
+	  'archetypes.schemaextender',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
