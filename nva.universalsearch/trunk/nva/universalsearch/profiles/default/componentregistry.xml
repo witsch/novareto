@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<componentregistry>
+ <adapters/>
+  <utilities>
+  <utility
+     interface="collective.solr.interfaces.ISolrIndexQueueProcessor"
+     name="solr"
+     factory="nva.universalsearch.indexer.UniversalSearchQueueProcessor"/>
+ </utilities>
+</componentregistry>

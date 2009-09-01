@@ -1,0 +1,68 @@
+Metadata-Version: 1.0
+Name: nva.universalsearch
+Version: 1.0dev-r507
+Summary: UNKNOWN
+Home-page: http://svn.plone.org/svn/plone/plone.example
+Author: cklinger
+Author-email: plone-developers@lists.sourceforge.net
+License: GPL
+Description: .. contents::
+        
+        .. Note!
+        -----
+        Update the following URLs to point to your:
+        
+        - code repository
+        - bug tracker
+        - questions/comments feedback mail
+        (do not set a real mail, to avoid spams)
+        
+        Or remove it if not used.
+        
+        - Code repository: http://svn.somewhere.com/...
+        - Questions and comments to somemailing_list
+        - Report bugs at http://bug.somewhere.com/..
+        
+        
+        Change history
+        **************
+        
+        Changelog
+        =========
+        
+        1.0 (xxxx-xx-xx)
+        ----------------
+        
+        - Created recipe with ZopeSkel
+        [cklinger]
+        
+        Detailed Documentation
+        **********************
+        
+        nva.universalsearch
+        ===================
+        
+        Installation
+        ------------
+        
+        Mit dem Quickinstaller die Extension nva.universalsearch installieren.
+        
+        Jede PloneSite wird mit Ihrem title in Solr gekennzeichnet.
+        Den Title kann man über das Plone-Control-Panel unter WebSite eintragen.
+        
+        Facets kann mann über die config.py eintragen.
+        
+        Contributors
+        ************
+        
+        cklinger, Author
+        
+        
+        Download
+        ********
+        
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
