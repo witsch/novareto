@@ -33,7 +33,7 @@
     <permission value="Modify portal content" />
   </action>
   <action title="Add Moderator" action_id="addmoderator" category="object" condition_expr=""
-    url_expr="string:${object_url}/createObject?type_name='Moderatorenliste'" visible="True">
+    url_expr="string:${object_url}/createObject?type_name=Moderatorenliste" visible="True">
     <permission value="Modify portal content" />
   </action>
 </object>
