@@ -44,7 +44,6 @@ def initialize(context):
    
 
     for atype, constructor in zip(content_types, constructors):
-        print atype.portal_type
         utils.ContentInit('%s: %s' % (config.PROJECTNAME, atype.portal_type),
             content_types      = (atype,),
             permission         = config.ADD_PERMISSIONS[atype.portal_type],

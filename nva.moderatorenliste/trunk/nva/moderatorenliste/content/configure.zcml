@@ -16,7 +16,7 @@
         set_schema="..interfaces.IModeratorenContainer"
         />
   </class>
-  <class class=".moderatorenliste.Moderatoren">
+  <class class=".moderatoren.Moderatoren">
     <require
         permission="zope2.View"
         interface="..interfaces.IModeratoren"
