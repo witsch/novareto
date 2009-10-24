@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="nva.moderatorenliste">
+
+  <!-- configure your content components here -->
+  
+  <!-- -*- extra stuff goes here -*- -->
+  <class class=".moderatorencontainer.ModeratorenContainer">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IModeratorenContainer"
+        />
+    <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.IModeratorenContainer"
+        />
+  </class>
+  <class class=".moderatorenliste.Moderatorenliste">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IModeratorenliste"
+        />
+    <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.IModeratorenliste"
+        />
+  </class>
+
+</configure>
