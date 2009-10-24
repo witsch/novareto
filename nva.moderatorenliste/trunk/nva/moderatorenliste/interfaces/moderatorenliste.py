@@ -16,7 +16,7 @@ class IModeratorenliste(Interface):
         description=_(u"Field description"),
     )
 
-    mitgieldsnummer = schema.TextLine(
+    mitgliedsnummer = schema.TextLine(
         title=_(u"Mitgliedsnummer"), 
         required=True,
         description=_(u"Bitte geben Sie hier die Mitgliedsnummer ein."),

@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.moderatorenliste">
+<body>
+    <div metal:fill-slot="main">
+        <tal:main-macro metal:define-macro="main">
+
+
+            <fieldset>
+             <label> Moderatoren Suchen </label>
+             <form action="search_view">
+              <input type="text" name="plz" value="" tal:attributes="value request/plz|nothing"/>
+              <input type="Submit" value="Suchen" class="context"/>
+             </form>
+
+
+            </fieldset>
+
+
+
+            <table class="listing" id="sortable">
+               <thead>
+                 <tr>
+                   <th> Mitgliedsnummer </th>
+                   <th> Name </th>
+                   <th> Strasse, Nr </th>
+                   <th> Postleitzahl </th>
+                   <th> Ort </th>
+                 </tr>
+               <thead>
+
+               <tbody tal:repeat="ml view/getResults">
+                 <tr>
+                   <td tal:content="ml/getMitgliedsnummer"> </td>
+                   <td tal:content="ml/getName"> </td>
+                   <td tal:content="ml/getStrassenr"> </td>
+                   <td tal:content="ml/getPlz"> </td>
+                   <td tal:content="ml/getOrt"> </td>
+                  </tr>
+               </tbody>
+            </table>
+
+        </tal:main-macro>
+    </div>
+</body>
+</html>

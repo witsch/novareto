@@ -7,4 +7,14 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <browser:page
+      for="*"
+      name="search_view"
+      class=".searchview.SearchView"
+      template="searchview.pt"
+      allowed_interface=".searchview.ISearchView"
+      permission="zope.Public"
+      />
+
+
 </configure>

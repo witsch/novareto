@@ -18,7 +18,7 @@ ModeratorenlisteSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
 
     atapi.StringField(
-        'mitgieldsnummer',
+        'mitgliedsnummer',
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
             label=_(u"Mitgliedsnummer"),
@@ -113,7 +113,7 @@ class Moderatorenliste(base.ATCTContent):
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
     name = atapi.ATFieldProperty('name')
 
-    mitgieldsnummer = atapi.ATFieldProperty('mitgieldsnummer')
+    mitgliedsnummer = atapi.ATFieldProperty('mitgliedsnummer')
 
 
 atapi.registerType(Moderatorenliste, PROJECTNAME)
