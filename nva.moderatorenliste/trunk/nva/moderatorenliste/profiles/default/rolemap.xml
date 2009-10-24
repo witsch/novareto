@@ -6,7 +6,7 @@
       <role name="Manager" />
       <role name="Contributor" />
     </permission>
-    <permission name="nva.moderatorenliste: Add Moderatorenliste" acquire="False">
+    <permission name="nva.moderatorenliste: Add Moderatoren" acquire="False">
       <role name="Manager" />
       <role name="Contributor" />
     </permission>

@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<object name="Moderatorenliste"
+<object name="Moderatoren"
    meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="nva.moderatorenliste" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-  <property name="title" i18n:translate="">Moderatorenliste</property>
+  <property name="title" i18n:translate="">Moderatoren</property>
   <property name="description"
-    i18n:translate="">Moderatorenliste</property>
-  <property name="content_meta_type">Moderatorenliste</property>
+    i18n:translate="">Moderatoren</property>
+  <property name="content_meta_type">Moderatoren</property>
   <property name="content_icon">group.gif</property>
   <property name="product">nva.moderatorenliste</property>
-  <property name="factory">addModeratorenliste</property>
+  <property name="factory">addModeratoren</property>
   <property name="immediate_view">atct_edit</property>
   <property name="global_allow">False</property>
   <property name="filter_content_types">False</property>

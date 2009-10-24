@@ -41,8 +41,10 @@ def initialize(context):
     # permissions for each content type to allow maximum flexibility of who
     # can add which content types, where. The roles are set up in rolemap.xml
     # in the GenericSetup profile.
+   
 
     for atype, constructor in zip(content_types, constructors):
+        print atype.portal_type
         utils.ContentInit('%s: %s' % (config.PROJECTNAME, atype.portal_type),
             content_types      = (atype,),
             permission         = config.ADD_PERMISSIONS[atype.portal_type],

@@ -16,14 +16,14 @@
         set_schema="..interfaces.IModeratorenContainer"
         />
   </class>
-  <class class=".moderatorenliste.Moderatorenliste">
+  <class class=".moderatorenliste.Moderatoren">
     <require
         permission="zope2.View"
-        interface="..interfaces.IModeratorenliste"
+        interface="..interfaces.IModeratoren"
         />
     <require
         permission="cmf.ModifyPortalContent"
-        set_schema="..interfaces.IModeratorenliste"
+        set_schema="..interfaces.IModeratoren"
         />
   </class>
 

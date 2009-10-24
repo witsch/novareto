@@ -39,7 +39,7 @@ class SearchView(BrowserView):
         """
         plz = self.request.get('plz', None)
         if not plz:
-            return [obj.getObject() for obj in self.portal_catalog(meta_type="Moderatorenliste")]
+            return [obj.getObject() for obj in self.portal_catalog(meta_type="Moderatoren")]
         if plz:
             plz = "%s*" %plz
-        return [obj.getObject() for obj in self.portal_catalog(plz=plz, meta_type="Moderatorenliste")]
+        return [obj.getObject() for obj in self.portal_catalog(plz=plz, meta_type="Moderatoren")]

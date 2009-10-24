@@ -1,4 +1,4 @@
-"""Definition of the Moderatorenliste content type
+"""Definition of the Moderatoren content type
 """
 
 from zope.interface import implements, directlyProvides
@@ -8,10 +8,10 @@ from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 
 from nva.moderatorenliste import moderatorenlisteMessageFactory as _
-from nva.moderatorenliste.interfaces import IModeratorenliste
+from nva.moderatorenliste.interfaces import IModeratoren
 from nva.moderatorenliste.config import PROJECTNAME
 
-ModeratorenlisteSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
+ModeratorenSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
 
@@ -95,17 +95,17 @@ ModeratorenlisteSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 # Set storage on fields copied from ATContentTypeSchema, making sure
 # they work well with the python bridge properties.
 
-ModeratorenlisteSchema['title'].storage = atapi.AnnotationStorage()
-ModeratorenlisteSchema['description'].storage = atapi.AnnotationStorage()
+ModeratorenSchema['title'].storage = atapi.AnnotationStorage()
+ModeratorenSchema['description'].storage = atapi.AnnotationStorage()
 
-schemata.finalizeATCTSchema(ModeratorenlisteSchema, moveDiscussion=False)
+schemata.finalizeATCTSchema(ModeratorenSchema, moveDiscussion=False)
 
-class Moderatorenliste(base.ATCTContent):
-    """Moderatorenliste"""
-    implements(IModeratorenliste)
+class Moderatoren(base.ATCTContent):
+    """Moderatoren"""
+    implements(IModeratoren)
 
-    meta_type = "Moderatorenliste"
-    schema = ModeratorenlisteSchema
+    meta_type = "Moderatoren"
+    schema = ModeratorenSchema
 
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
@@ -116,4 +116,4 @@ class Moderatorenliste(base.ATCTContent):
     mitgliedsnummer = atapi.ATFieldProperty('mitgliedsnummer')
 
 
-atapi.registerType(Moderatorenliste, PROJECTNAME)
+atapi.registerType(Moderatoren, PROJECTNAME)

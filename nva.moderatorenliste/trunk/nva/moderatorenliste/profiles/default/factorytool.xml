@@ -11,6 +11,6 @@
   <factorytypes>
     <!-- -*- extra stuff goes here -*- -->
     <type portal_type="ModeratorenContainer" />
-    <type portal_type="Moderatorenliste" />
+    <type portal_type="Moderatoren" />
   </factorytypes>
 </object>

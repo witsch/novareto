@@ -6,8 +6,8 @@ from zope.app.container.constraints import containers
 
 from nva.moderatorenliste import moderatorenlisteMessageFactory as _
 
-class IModeratorenliste(Interface):
-    """Moderatorenliste"""
+class IModeratoren(Interface):
+    """Moderatoren"""
     
     # -*- schema definition goes here -*-
     name = schema.TextLine(

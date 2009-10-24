@@ -6,5 +6,5 @@ PROJECTNAME = 'nva.moderatorenliste'
 ADD_PERMISSIONS = {
     # -*- extra stuff goes here -*-
     'ModeratorenContainer': 'nva.moderatorenliste: Add ModeratorenContainer',
-    'Moderatorenliste': 'nva.moderatorenliste: Add Moderatorenliste',
+    'Moderatoren': 'nva.moderatorenliste: Add Moderatoren',
 }
