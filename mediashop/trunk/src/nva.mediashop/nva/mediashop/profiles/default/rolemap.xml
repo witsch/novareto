@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <!-- -*- extra stuff goes here -*- -->
+    <permission name="nva.mediashop: Add Artikel" acquire="False">
+      <role name="Manager" />
+      <role name="Contributor" />
+    </permission>
+    <permission name="nva.mediashop: Add MedienShop" acquire="False">
+      <role name="Manager" />
+      <role name="Contributor" />
+    </permission>
+  </permissions>
+</rolemap>
