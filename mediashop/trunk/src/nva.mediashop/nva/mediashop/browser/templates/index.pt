@@ -23,17 +23,28 @@
 
 <br>
 
-       <form action=".">
-         Artikelsuche <input type="text" value="" name="artikel"/> <br>
+   <form action="." method="POST">
+   Artikelsuche <input type="text" 
+                       value="" 
+                       name="form.artikel"
+                       tal:attributes="value request/form.artikel|nothing"/> <br>
 
       <div id="actionsView">
         <span class="actionButtons">
-          <input type="submit" id="form.actions.suchen" name="form.actions.suchen" value="Suchen" class="context" />
+          <input type="submit" 
+                 id="form.actions.suchen" 
+                 name="form.actions.suchen" 
+                 value="Suchen" 
+                 class="context" />
         </span>
       </div>
+     </form>
+
+     <div tal:condition="view/results" tal:repeat="result view/results">
+          <span tal:content="result"/>
+     </div>
 
 
-       </form>
 
     </tal:main-macro>
 </metal:main>
