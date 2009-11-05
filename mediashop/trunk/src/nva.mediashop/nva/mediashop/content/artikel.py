@@ -1,6 +1,7 @@
 """Definition of the Artikel content type
 """
 
+import five.grok as grok
 from zope.interface import implements, directlyProvides
 
 from Products.Archetypes import atapi
@@ -28,6 +29,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     atapi.StringField(
         'code',
+        required=True,
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
             label=_(u"Artikel Nummer"),
@@ -50,29 +52,18 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Image"),
             description=_(u"Representative article image."),
         ),
-    ),
-
-   atapi.FileField(
-        'file',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.FileWidget(
-            label=_(u"Details"),
-            description=_(u"For more information..."),
-        ),
-    ),
-
-   atapi.IntegerField(
-        'quantity',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.IntegerWidget(
-            label=_(u"Maximum quantity"),
-        ),
+        sizes = {'large'   : (768, 768),
+                 'preview' : (400, 400),
+                 'mini'    : (200, 200),
+                 'thumb'   : (128, 128),
+                },
+        validators=('isNonEmptyFile'),
     ),
 
   atapi.TextField(
         'tax',
         storage=atapi.AnnotationStorage(),
-        widget=atapi.IntegerWidget(
+        widget=atapi.RichWidget(
             label=_(u"Taxes information"),
         ),
     ),
@@ -85,6 +76,24 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             description=_(u"Field description"),
         ),
         validators=('isDecimal'),
+    ),
+
+   atapi.FileField(
+        'file',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.FileWidget(
+            label=_(u"Details"),
+            description=_(u"For more information..."),
+        ),
+        validators=('isNonEmptyFile'),
+    ),
+
+   atapi.IntegerField(
+        'quantity',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.IntegerWidget(
+            label=_(u"Maximum quantity"),
+        ),
     ),
 
     atapi.StringField(
@@ -131,13 +140,33 @@ class Artikel(base.ATCTContent):
     text = atapi.ATFieldProperty('text')
     year = atapi.ATFieldProperty('year')
 
+    # workaround to make resized images
+    def __bobo_traverse__(self, REQUEST, name):
+        """Transparent access to image scales
+        """
+        if name.startswith('image'):
+            field = self.getField('image')
+            image = None
+            if name == 'image':
+                image = field.getScale(self)
+            else:
+                scalename = name[len('image_'):]
+                if scalename in field.getAvailableSizes(self):
+                    image = field.getScale(self, scale=scalename)
+            if image is not None and not isinstance(image, basestring):
+                # image might be None or '' for empty images
+                return image
+
+        return base.ATCTContent.__bobo_traverse__(self, REQUEST, name)
+
+
 
 atapi.registerType(Artikel, PROJECTNAME)
 
 
-class BuyableContentAdapter(object):
-
-    implements(IBuyableContent)
+class BuyableContentAdapter(grok.Adapter):
+    grok.context(IArtikel)
+    grok.provides(IBuyableContent)
 
     def __init__(self, context):
         self.context = context

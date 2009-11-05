@@ -1,42 +1,56 @@
+# -*- coding: utf-8 -*-
+
 from zope import schema
 from zope.interface import Interface
-
-from zope.app.container.constraints import contains
-from zope.app.container.constraints import containers
+from zope.app.container.constraints import contains, containers
 
 from nva.mediashop import mediashopMessageFactory as _
+
 
 class IArtikel(Interface):
     """Artikel"""
     
     # -*- schema definition goes here -*-
     status = schema.TextLine(
-        title=_(u"New Field"), 
+        title=_(u"Article status"), 
         required=False,
-        description=_(u"Field description"),
+        description=_(u"Availability of the article"),
     )
 
     preis = schema.Float(
         title=_(u"Preis"), 
         required=False,
-        description=_(u"Field description"),
-    )
-
-    stand = schema.TextLine(
-        title=_(u"New Field"), 
-        required=False,
-        description=_(u"Field description"),
+        description=_(u"Price"),
     )
 
     text = schema.Text(
         title=_(u"Text"), 
         required=False,
-        description=_(u"Field description"),
+        description=_(u"Article description"),
     )
 
-    artikel_nr = schema.TextLine(
+    tax = schema.Text(
+        title=_(u"Tax"), 
+        required=False,
+        description=_(u"Tax information"),
+    )
+
+    code = schema.TextLine(
         title=_(u"Artikel Nummer"), 
         required=False,
-        description=_(u"Field description"),
     )
 
+    quantity = schema.TextLine(
+        title=_(u"Quantity"), 
+        required=False,
+    )
+
+    image = schema.Bytes(
+        title=_(u"Image"), 
+        required=False,
+    )
+
+    file = schema.Bytes(
+        title=_(u"File"), 
+        required=False,
+    )
