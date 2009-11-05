@@ -11,4 +11,4 @@ class Index(grok.View):
     artikel = []
 
     def update(self):
-        self.artikel = self.context.getFolderContents()
+        self.artikel = self.context.getFolderContents(full_objects=True)
