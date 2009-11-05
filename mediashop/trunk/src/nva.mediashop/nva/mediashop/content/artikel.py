@@ -78,6 +78,18 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         validators=('isDecimal'),
     ),
 
+    atapi.StringField(
+        'preisinfo',
+        storage=atapi.AnnotationStorage(),
+        vocabulary=((1, 'Price is equal for member and non member'),
+                    (2, 'Members get a discount of 50%'),
+                    (2, 'Members get it for free')),
+        widget=atapi.SelectionWidget(
+            label=_(u"Preis Information / Member"),
+            description=_(u"Field description"),
+        ),
+    ),
+
    atapi.FileField(
         'file',
         storage=atapi.AnnotationStorage(),
@@ -134,6 +146,7 @@ class Artikel(base.ATCTContent):
     file = atapi.ATFieldProperty('file')
     image = atapi.ATFieldProperty('image')
     preis = atapi.ATFieldProperty('preis')
+    preisinfo = atapi.ATFieldProperty('preisinfo')
     quantity = atapi.ATFieldProperty('quantity')
     status = atapi.ATFieldProperty('status')
     tax = atapi.ATFieldProperty('tax')

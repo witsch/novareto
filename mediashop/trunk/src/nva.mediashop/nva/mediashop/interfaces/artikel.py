@@ -23,6 +23,12 @@ class IArtikel(Interface):
         description=_(u"Price"),
     )
 
+    preisinfo = schema.TextLine(
+        title=_(u"Preisinfo"), 
+        required=False,
+        description=_(u"Priceinfo"),
+    )
+
     text = schema.Text(
         title=_(u"Text"), 
         required=False,
