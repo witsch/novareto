@@ -12,13 +12,28 @@
        <p class="documentDescription" tal:content="context/description">
             This is the message view of the content object
         </p>
-                                     
-        <div tal:repeat="kategorie view/categories">
+                                    
+        <h3> Bitte wählen Sie aus einer der folgenden Rubriken </h3>                        
 
-           <span tal:content="kategorie"/>
-        </div>
+        <ul tal:repeat="kategorie view/categories">
+           <li>
+             <a href="" tal:attributes="href kategorie" > <span tal:content="kategorie"/> </a>
+           </li>
+        </ul>
 
-        
+<br>
+
+       <form action=".">
+         Artikelsuche <input type="text" value="" name="artikel"/> <br>
+
+      <div id="actionsView">
+        <span class="actionButtons">
+          <input type="submit" id="form.actions.suchen" name="form.actions.suchen" value="Suchen" class="context" />
+        </span>
+      </div>
+
+
+       </form>
 
     </tal:main-macro>
 </metal:main>
