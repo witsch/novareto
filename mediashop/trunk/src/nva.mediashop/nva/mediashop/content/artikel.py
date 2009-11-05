@@ -17,6 +17,55 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
 
+    atapi.TextField(
+        'text',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.RichWidget(
+            label=_(u"Text"),
+            description=_(u"Field description"),
+        ),
+    ),
+
+    atapi.StringField(
+        'artikel_nr',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u"Artikel Nummer"),
+            description=_(u"Field description"),
+        ),
+    ),
+
+    atapi.FixedPointField(
+        'preis',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.DecimalWidget(
+            label=_(u"Preis"),
+            description=_(u"Field description"),
+        ),
+        validators=('isDecimal'),
+    ),
+
+    atapi.StringField(
+        'stand',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u"New Field"),
+            description=_(u"Field description"),
+        ),
+    ),
+
+    atapi.StringField(
+        'status',
+        storage=atapi.AnnotationStorage(),
+        vocabulary = ['Bestellen', 
+                      'Dieser Artikel ist derzeit leider vergriffen'],
+        widget=atapi.SelectionWidget(
+            label=_(u"New Field"),
+            description=_(u"Field description"),
+        ),
+    ),
+
+
 ))
 
 # Set storage on fields copied from ATContentTypeSchema, making sure
@@ -40,6 +89,16 @@ class Artikel(base.ATCTContent):
     description = atapi.ATFieldProperty('description')
     
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
+    status = atapi.ATFieldProperty('status')
+
+    preis = atapi.ATFieldProperty('preis')
+
+    stand = atapi.ATFieldProperty('stand')
+
+    text = atapi.ATFieldProperty('text')
+
+    artikel_nr = atapi.ATFieldProperty('artikel_nr')
+
 
 atapi.registerType(Artikel, PROJECTNAME)
 
@@ -52,7 +111,7 @@ class BuyableContentAdapter(object):
 
     def __init__(self, context):
         self.context = context
-        self.price = 20.0 
-        self.product_code = "3333"
+        self.price = float(self.context.preis) 
+        self.product_code = self.context.artikel_nr 
         self.weight = 0 
 

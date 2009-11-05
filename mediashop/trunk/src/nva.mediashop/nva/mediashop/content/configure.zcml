@@ -6,6 +6,16 @@
   <!-- configure your content components here -->
   
   <!-- -*- extra stuff goes here -*- -->
+  <class class=".kategorie.Kategorie">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IKategorie"
+        />
+    <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.IKategorie"
+        />
+  </class>
   <class class=".artikel.Artikel">
     <require
         permission="zope2.View"
