@@ -84,9 +84,9 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     atapi.StringField(
         'preisinfo',
         storage=atapi.AnnotationStorage(),
-        vocabulary=(('1', 'Price is equal for member and non member'),
-                    ('2', 'Members get a discount of 50%'),
-                    ('3', 'Members get it for free')),
+        vocabulary= ('Price is equal for member and non member',
+                     'Members get a discount of 50%',
+                     'Members get it for free'),
         widget=atapi.SelectionWidget(
             label=_(u"Preis Information / Member"),
             description=_(u"Field description"),
