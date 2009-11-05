@@ -38,10 +38,10 @@
       </metal:field>
     </p>
 
-    <div class="article-year"
-	 tal:condition="context/year">
+    <div class="article-stand"
+	 tal:condition="context/stand">
       <strong>Stand:</strong>
-      <metal:field use-macro="python:here.widget('year', mode='view')">
+      <metal:field use-macro="python:here.widget('stand', mode='view')">
 	Description
       </metal:field>
     </div>

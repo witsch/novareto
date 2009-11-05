@@ -38,10 +38,10 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
     atapi.StringField(
-        'year',
+        'stand',
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
-            label=_(u"Year"),
+            label=_(u"Stand"),
         ),
     ),
 
@@ -49,8 +49,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'image',
         storage=atapi.AnnotationStorage(),
         widget=atapi.ImageWidget(
-            label=_(u"Image"),
-            description=_(u"Representative article image."),
+            label=_(u"Bild"),
+            description=_(u"Bild des Artikels."),
         ),
         sizes = {'large'   : (768, 768),
                  'preview' : (400, 400),
@@ -63,8 +63,11 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
   atapi.TextField(
         'tax',
         storage=atapi.AnnotationStorage(),
-        widget=atapi.RichWidget(
-            label=_(u"Taxes information"),
+        vocabulary=(
+              ('1', 'Preisangaben verstehen sich zzgl. MwSt. und Versandkosten'),
+              ('2', 'Preisangaben verstehen sich zzgl. Mwst.')), 
+        widget=atapi.SelectionWidget(
+            label=_(u"Mwst Informationen"),
         ),
     ),
 
@@ -81,9 +84,9 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     atapi.StringField(
         'preisinfo',
         storage=atapi.AnnotationStorage(),
-        vocabulary=((1, 'Price is equal for member and non member'),
-                    (2, 'Members get a discount of 50%'),
-                    (2, 'Members get it for free')),
+        vocabulary=(('1', 'Price is equal for member and non member'),
+                    ('2', 'Members get a discount of 50%'),
+                    ('3', 'Members get it for free')),
         widget=atapi.SelectionWidget(
             label=_(u"Preis Information / Member"),
             description=_(u"Field description"),
@@ -94,8 +97,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'file',
         storage=atapi.AnnotationStorage(),
         widget=atapi.FileWidget(
-            label=_(u"Details"),
-            description=_(u"For more information..."),
+            label=_(u"Broschüre"),
+            description=_(u"Bitte hier die Broschre uploaden."),
         ),
         validators=('isNonEmptyFile'),
     ),
@@ -111,11 +114,11 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     atapi.StringField(
         'status',
         storage=atapi.AnnotationStorage(),
-        vocabulary = ['Bestellen', 
-                      'Dieser Artikel ist derzeit leider vergriffen'],
+        vocabulary =  ( ('1', 'Lieferbar'),
+                        ('2', 'nicht Lieferbar') ),
         widget=atapi.SelectionWidget(
             label=_(u"Status"),
-            description=_(u"Status of the article."),
+            description=_(u"Ist dieser Artikel momentan Lieferbar?"),
         ),
     ),
 
@@ -151,7 +154,7 @@ class Artikel(base.ATCTContent):
     status = atapi.ATFieldProperty('status')
     tax = atapi.ATFieldProperty('tax')
     text = atapi.ATFieldProperty('text')
-    year = atapi.ATFieldProperty('year')
+    stand = atapi.ATFieldProperty('stand')
 
     # workaround to make resized images
     def __bobo_traverse__(self, REQUEST, name):
