@@ -7,6 +7,7 @@ grok.templatedir('templates')
 
 class Index(grok.Form):
     grok.context(IMedienShop)
+    grok.template('mediashop_view')
     categories = []
     results = False
 
@@ -15,7 +16,7 @@ class Index(grok.Form):
         return getToolByName(self.context, 'portal_catalog')
 
     def update(self):
-        self.categories = self.context.objectIds()
+        self.categories = [dict(title=x.Title, url=x.getURL()) for x in self.context.getFolderContents()] 
 
     @grok.action('Suchen')
     def handle_search(self, **kw):
