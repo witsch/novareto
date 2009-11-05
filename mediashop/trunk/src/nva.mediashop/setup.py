@@ -54,6 +54,7 @@ setup(name='nva.mediashop',
       include_package_data=True,
       zip_safe=False,
       install_requires=['setuptools',
+                        'five.grok',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,
