@@ -62,6 +62,9 @@
       <metal:field use-macro="python:here.widget('preis', mode='view')">
 	Price
       </metal:field>
+      <metal:field use-macro="python:here.widget('preisinfo', mode='view')">
+	Price
+      </metal:field>
     </p>
 
     <tal:file condition="context/file/getSize">
