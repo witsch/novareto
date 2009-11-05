@@ -27,11 +27,53 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
     atapi.StringField(
-        'artikel_nr',
+        'code',
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
             label=_(u"Artikel Nummer"),
             description=_(u"Field description"),
+        ),
+    ),
+
+    atapi.StringField(
+        'year',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u"Year"),
+        ),
+    ),
+
+   atapi.ImageField(
+        'image',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.ImageWidget(
+            label=_(u"Image"),
+            description=_(u"Representative article image."),
+        ),
+    ),
+
+   atapi.FileField(
+        'file',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.FileWidget(
+            label=_(u"Details"),
+            description=_(u"For more information..."),
+        ),
+    ),
+
+   atapi.IntegerField(
+        'quantity',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.IntegerWidget(
+            label=_(u"Maximum quantity"),
+        ),
+    ),
+
+  atapi.TextField(
+        'tax',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.IntegerWidget(
+            label=_(u"Taxes information"),
         ),
     ),
 
@@ -46,22 +88,13 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
     atapi.StringField(
-        'stand',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.StringWidget(
-            label=_(u"New Field"),
-            description=_(u"Field description"),
-        ),
-    ),
-
-    atapi.StringField(
         'status',
         storage=atapi.AnnotationStorage(),
         vocabulary = ['Bestellen', 
                       'Dieser Artikel ist derzeit leider vergriffen'],
         widget=atapi.SelectionWidget(
-            label=_(u"New Field"),
-            description=_(u"Field description"),
+            label=_(u"Status"),
+            description=_(u"Status of the article."),
         ),
     ),
 
@@ -87,22 +120,19 @@ class Artikel(base.ATCTContent):
 
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
-    
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
-    status = atapi.ATFieldProperty('status')
 
+    code = atapi.ATFieldProperty('code')
+    file = atapi.ATFieldProperty('file')
+    image = atapi.ATFieldProperty('image')
     preis = atapi.ATFieldProperty('preis')
-
-    stand = atapi.ATFieldProperty('stand')
-
+    quantity = atapi.ATFieldProperty('quantity')
+    status = atapi.ATFieldProperty('status')
+    tax = atapi.ATFieldProperty('tax')
     text = atapi.ATFieldProperty('text')
-
-    artikel_nr = atapi.ATFieldProperty('artikel_nr')
+    year = atapi.ATFieldProperty('year')
 
 
 atapi.registerType(Artikel, PROJECTNAME)
-
-
 
 
 class BuyableContentAdapter(object):
@@ -112,6 +142,6 @@ class BuyableContentAdapter(object):
     def __init__(self, context):
         self.context = context
         self.price = float(self.context.preis) 
-        self.product_code = self.context.artikel_nr 
+        self.product_code = self.context.code 
         self.weight = 0 
 
