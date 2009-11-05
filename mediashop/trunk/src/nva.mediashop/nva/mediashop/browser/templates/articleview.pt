@@ -20,7 +20,7 @@
     </h1>
 
     <div class="article-image" style="float:right"
-	 tal:condition="context/image/getSize">>
+	 tal:condition="context/image/getSize">
       <metal:field use-macro="python:here.widget('image', mode='view')">
 	Image
       </metal:field>
