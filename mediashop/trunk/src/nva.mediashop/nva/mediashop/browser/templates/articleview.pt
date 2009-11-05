@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+<div metal:fill-slot="main">
+  <metal:main_macro
+      define-macro="main"
+      tal:define="kssClassesView context/@@kss_field_decorator_view;
+		  getKC nocall:kssClassesView/getKssClassesInlineEditable;">
+
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+    <h1 class="article-code">
+      <metal:field use-macro="python:here.widget('code', mode='view')">
+	Code
+      </metal:field>
+    </h1>
+
+    <div class="article-image" style="float:right"
+	 tal:condition="context/image/getSize">>
+      <metal:field use-macro="python:here.widget('image', mode='view')">
+	Image
+      </metal:field>
+    </div>
+
+    <h2 class="article-title">
+      <metal:field use-macro="python:here.widget('title', mode='view')">
+	Title
+      </metal:field>
+    </h2>
+
+    <p>
+      <metal:field use-macro="python:here.widget('description', mode='view')">
+	Description
+      </metal:field>
+    </p>
+
+    <div class="article-year"
+	 tal:condition="context/year">
+      <strong>Stand:</strong>
+      <metal:field use-macro="python:here.widget('year', mode='view')">
+	Description
+      </metal:field>
+    </div>
+
+    <p>
+      <metal:field use-macro="python:here.widget('text', mode='view')">
+	Details
+      </metal:field>
+    </p>
+   
+    <h3>Price details</h3>
+    <p>
+      <metal:field use-macro="python:here.widget('tax', mode='view')">
+	Taxes
+      </metal:field>
+    </p>
+    <p>
+      <metal:field use-macro="python:here.widget('preis', mode='view')">
+	Price
+      </metal:field>
+    </p>
+
+    <tal:file condition="context/file/getSize">
+      <h3>Misc. information</h3>
+      <metal:field use-macro="python:here.widget('file', mode='view')">
+	Download file
+      </metal:field>
+    </tal:file>
+
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+
+</metal:main_macro>
+</div>
+
+</body>
+
+</html>
