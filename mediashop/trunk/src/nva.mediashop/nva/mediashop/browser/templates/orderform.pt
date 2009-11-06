@@ -1,0 +1,17 @@
+<tal metal:use-macro="context/main_template/macros/master">
+  <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="nmd.sugar.forms"
+    xml:lang="en" lang="en"
+    tal:define="lang language"
+    tal:attributes="lang lang; xml:lang lang">
+    <body>
+      <metal:main fill-slot="body">
+        <tal:block tal:content="structure python:view.render_form()"></tal:block>
+      </metal:main>
+    </body>
+  </html>
+</tal>
+
