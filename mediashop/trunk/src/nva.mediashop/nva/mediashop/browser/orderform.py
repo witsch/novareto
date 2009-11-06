@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import five.grok as grok
 
 from zope.interface import Interface
@@ -11,7 +13,7 @@ grok.templatedir('templates')
 
 class BasicForm(ExtensibleForm, form.Form):
     """A z3c.form"""
-    ingoreContext = True
+    ignoreContext = True
     fields = field.Fields(IOrderForm) 
     label = u"Bestellformular"
 
@@ -30,6 +32,8 @@ class BasicForm(ExtensibleForm, form.Form):
 
 class OrderForm(PloneFormWrapper):
     grok.context(Interface)
-    ingoreContext = True
     form = BasicForm
 
+    def renderField(self, field):
+        field = self.form.fields.get(field)
+        import pdb; pdb.set_trace() 

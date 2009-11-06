@@ -10,6 +10,8 @@
     <body>
       <metal:main fill-slot="body">
         <tal:block tal:content="structure python:view.render_form()"></tal:block>
+        <span tal:content="python: view.renderField('plz')"/> 
+       <!-- <span tal:content="view/widgets/plz"/> -->
       </metal:main>
     </body>
   </html>
