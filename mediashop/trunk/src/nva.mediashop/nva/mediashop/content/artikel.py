@@ -2,17 +2,17 @@
 """
 
 import five.grok as grok
+from zope.schema.fieldproperty import FieldProperty
 from zope.interface import implements, directlyProvides
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 
+from nva.cart import ICartItem, ICartAddable
 from nva.mediashop import mediashopMessageFactory as _
 from nva.mediashop.interfaces import IArtikel
 from nva.mediashop.config import PROJECTNAME
-from Products.PloneGetPaid.interfaces import IBuyableMarker, IShippableMarker
-from getpaid.core.interfaces import IBuyableContent
 
 ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
@@ -135,9 +135,7 @@ schemata.finalizeATCTSchema(ArtikelSchema, moveDiscussion=False)
 
 class Artikel(base.ATCTContent):
     """Artikel"""
-    implements(IArtikel, 
-               IBuyableMarker,
-               )
+    implements(IArtikel, ICartAddable)
 
     meta_type = "Artikel"
     schema = ArtikelSchema
@@ -176,17 +174,18 @@ class Artikel(base.ATCTContent):
         return base.ATCTContent.__bobo_traverse__(self, REQUEST, name)
 
 
-
 atapi.registerType(Artikel, PROJECTNAME)
 
 
 class BuyableContentAdapter(grok.Adapter):
     grok.context(IArtikel)
-    grok.provides(IBuyableContent)
+    grok.provides(ICartItem)
 
+    weight = FieldProperty(ICartItem["weight"])
+    quantity = FieldProperty(ICartItem["quantity"])
+    
     def __init__(self, context):
-        self.context = context
-        self.price = float(self.context.preis) 
-        self.product_code = self.context.code 
-        self.weight = 0 
-
+        self.title = context.Title()
+        self.url = context.absolute_url()
+        self.code = context.code
+        self.price = float(context.preis) 

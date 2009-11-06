@@ -1,0 +1,56 @@
+<div xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:metal="http://xml.zope.org/namespaces/metal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     i18n:domain="nva.plone.cart"
+     metal:define-macro="portlet">
+
+    <dl class="portlet" id="portlet-cart">
+
+        <dt class="portletHeader">
+            <span class="portletTopLeft"></span>
+            <span class="portletTopMiddle"
+		  i18n:translate="cart">Your Cart</span>
+            <span class="portletTopRight"></span>
+        </dt>
+
+	<dd class="portletItem">
+	  <table class="listing">
+	    <tr>
+	      <th>Name</th>
+	      <th>Quantity</th>
+	    </tr>
+	    <tr tal:repeat="item view/handler/getItems">
+	      <td>
+		<a href="" tal:content="item/title"
+		   tal:attributes="href item/url" />
+	      </td>
+	      <td tal:content="item/quantity" />
+	    </tr>
+	  </table>
+	</dd>
+
+	<dd>
+	  total : <span tal:content="view/handler/getTotalPrice" />
+	</dd>
+
+        <dd class="portletFooter">
+            <a href="" i18n:translate="manage_cart"
+	       tal:attributes="href string:${view/portal}/@@cart.manager">
+              Manage Cart
+            </a>
+        </dd>
+        <dd class="portletFooter">
+            <a href="" i18n:translate="checkout_cart"
+	       tal:attributes="href string:${view/portal}/@@cart.checkout">
+              Checkout
+            </a>
+            <span class="portletBottomLeft"></span>
+            <span class="portletBottomRight"></span>
+        </dd>
+    </dl>
+
+    <a href="" tal:attributes="href string:${view/url}/@@cart.add">
+      Add this item to the cart
+    </a>
+
+</div>

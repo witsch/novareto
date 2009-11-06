@@ -19,12 +19,4 @@
       layer=".interfaces.IMediashopLayer"
       />
 
-  <browser:page
-     for="*"
-     layer=".interfaces.IMediashopLayer"
-     name="checkout-address-info"
-     class=".checkout.CheckoutAddress"
-     permission="zope2.View"
-     />
-
 </configure>
