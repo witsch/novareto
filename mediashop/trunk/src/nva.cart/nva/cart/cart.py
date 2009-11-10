@@ -44,7 +44,7 @@ class CartHandler(object):
     def getTotalPrice(self):
         price = 0.0
         for item in self.getItems():
-            price += (item.price*item.quantity)
+            price += item.total_price
         return price
 
     def clear(self):

@@ -4,6 +4,7 @@ from five import grok
 from zope.interface import implements, Interface
 from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
+from zope.cachedescriptors.property import CachedProperty
 
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
@@ -35,16 +36,15 @@ class AddForm(base.NullAddForm):
 class Renderer(base.Renderer):
     render = ViewPageTemplateFile('templates/cart.pt')
 
+    @CachedProperty
+    def cart(self):
+        return ICartRetriever(self.request.SESSION)
+
     def update(self):
         self.portal = self.context.portal_url()
         self.url = self.context.absolute_url()
-        self.cart = ICartRetriever(self.request.SESSION)
         self.handler = ICartHandler(self.cart)
 
     @property
     def available(self):
-        return True
-
-    @property
-    def addable(self):
-        return ICartAddable.providedBy(self.context)
+        return bool(len(self.cart))

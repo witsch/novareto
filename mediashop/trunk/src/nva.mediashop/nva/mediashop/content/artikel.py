@@ -2,14 +2,13 @@
 """
 
 import five.grok as grok
-from zope.schema.fieldproperty import FieldProperty
 from zope.interface import implements, directlyProvides
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 
-from nva.cart import ICartItem, ICartAddable
+from nva.cart import CartItem, ICartAddable
 from nva.mediashop import mediashopMessageFactory as _
 from nva.mediashop.interfaces import IArtikel
 from nva.mediashop.config import PROJECTNAME
@@ -177,15 +176,13 @@ class Artikel(base.ATCTContent):
 atapi.registerType(Artikel, PROJECTNAME)
 
 
-class BuyableContentAdapter(grok.Adapter):
+class BuyableContentAdapter(CartItem, grok.Adapter):
+    """A cart item adapter
+    """
     grok.context(IArtikel)
-    grok.provides(ICartItem)
-
-    weight = FieldProperty(ICartItem["weight"])
-    quantity = FieldProperty(ICartItem["quantity"])
-    
+   
     def __init__(self, context):
-        self.title = context.Title()
+        self.title = unicode(context.Title(), 'utf-8')
         self.url = context.absolute_url()
         self.code = context.code
         self.price = float(context.preis) 

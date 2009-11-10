@@ -13,7 +13,6 @@
   <include package=".portlets" />
 
   <include package="five.grok" />
-  <include package="collective.z3cform.grok"/>
   <grok:grok package="."/>
 
   <!-- Register the installation GenericSetup extension profile -->

@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master">
+  <head><title>Cart view</title></head>
+  <body>
+    <metal:main fill-slot="content"
+		tal:define="items handler/getItems">
+      <h1>Cart</h1>
+      <table class="listing" tal:condition="items">
+	<thead>
+	  <tr>
+	    <th>Product name</th>
+	    <th>Code</th>
+	    <th>Unit price</th>
+	    <th>Quantity</th>
+	    <th>Price</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr tal:repeat="item items">
+	    <td tal:content="item/title" />
+	    <td tal:content="item/code" />
+	    <td tal:content="item/price" />
+	    <td tal:content="item/quantity" />
+	    <td tal:content="item/total_price" />
+	  </tr>
+	  <tr>
+	    <td colspan="4" style="text-align: right;">Total</td>
+	    <td tal:content="handler/getTotalPrice" />
+	  </tr>
+	</tbody>
+      </table>
+    </metal:main>
+  </body>
+</html>

@@ -46,6 +46,8 @@ class ICartItem(Interface):
         title = u"Weight of the product",
         )
 
+    total_price = Attribute("Computed attribute.")
+
 
 class ICart(IContainer):
     """A cart containing items, ready for a checkout.
