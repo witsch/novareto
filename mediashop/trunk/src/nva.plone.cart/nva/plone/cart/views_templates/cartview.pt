@@ -5,7 +5,7 @@
       metal:use-macro="context/main_template/macros/master">
   <head><title>Cart view</title></head>
   <body>
-    <metal:main fill-slot="content"
+    <metal:main fill-slot="main"
 		tal:define="items handler/getItems">
       <h1>Cart</h1>
       <table class="listing" tal:condition="items">
@@ -16,6 +16,7 @@
 	    <th>Unit price</th>
 	    <th>Quantity</th>
 	    <th>Price</th>
+	    <th colspan="3">Actions</th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -25,6 +26,20 @@
 	    <td tal:content="item/price" />
 	    <td tal:content="item/quantity" />
 	    <td tal:content="item/total_price" />
+	    <td>
+	      <a href=""
+		 tal:attributes="href string:${cart_url}/plus/${item/code}"
+		 >+</a></td>
+	    <td>
+	      <a href=""
+		 tal:attributes="href string:${cart_url}/minus/${item/code}"
+		 >-</a>
+	    </td>
+	    <td>
+	      <a href=""
+		 tal:attributes="href string:${cart_url}/delete/${item/code}"
+		 >X</a>
+	    </td>
 	  </tr>
 	  <tr>
 	    <td colspan="4" style="text-align: right;">Total</td>

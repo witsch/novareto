@@ -35,13 +35,13 @@
 
         <dd class="portletFooter">
             <a href="" i18n:translate="manage_cart"
-	       tal:attributes="href string:${view/portal}/++cart++/@@manage">
+	       tal:attributes="href string:${view/portal}/++cart++/manage">
               Manage Cart
             </a>
         </dd>
         <dd class="portletFooter">
             <a href="" i18n:translate="checkout_cart"
-	       tal:attributes="href string:${view/portal}/++cart++/@@checkout">
+	       tal:attributes="href string:${view/portal}/++cart++/checkout">
               Checkout
             </a>
             <span class="portletBottomLeft"></span>

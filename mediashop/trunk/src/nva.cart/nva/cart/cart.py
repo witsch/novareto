@@ -41,6 +41,12 @@ class CartHandler(object):
     def getItems(self):
         return self.cart.values()
 
+    def delItem(self, code):
+        if code in self.cart:
+            del self.cart[code]
+            return True
+        return False
+
     def getTotalPrice(self):
         price = 0.0
         for item in self.getItems():
