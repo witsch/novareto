@@ -99,30 +99,7 @@
         <div tal:replace="structure python: view.renderField(land, ustid)"/>
         <div tal:replace="structure python: view.renderField(datenschutz)"/>
         
-<!--
-<div class="field" tal:define="error name/error">
-<label> <span tal:content="name/label">label</span> </label>
-<span class="fieldRequired" title="Required" tal:condition="name/required"> (Required) </span>
-<div class="formHelp" tal:content="name/hint" tal:condition="name/hint"></div>
-<span class="fieldErrorBox" tal:content="structure error"> </span>
-<span class="widget formlibInlineValidation" tal:content="structure name"><input type="text" /></span>
-</div>
-
-<div class="field" tal:define="error plz/error">
-<label> <span tal:content="python: plz.label+' '+ort.label">label</span> </label>
-<span class="fieldRequired" title="Required" tal:condition="plz/required"> (Required) </span>
-<div class="formHelp" tal:content="plz/hint" tal:condition="plz/hint"></div>
-<span class="fieldErrorBox" tal:content="structure error"> </span>
-<span class="widget formlibInlineValidation" tal:content="structure plz"><input type="text" /></span>
-<span class="widget formlibInlineValidation" tal:content="structure ort"><input type="text" /></span>
-</div>
--->
-
-
       </div>
-
-
-
 
     <metal:block define-slot="above_buttons" />
     <div id="actionsView">
