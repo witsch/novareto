@@ -1,6 +1,6 @@
 <fieldset>
   <legend>Cart</legend>
   <a href="" tal:attributes="href string:${context/absolute_url}/@@cart.add">
-    Add this item to the cart
+    Bestellen 
   </a>
 </fieldset>

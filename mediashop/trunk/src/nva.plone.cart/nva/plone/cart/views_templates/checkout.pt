@@ -1,0 +1,145 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master">
+<body>
+ <metal:main fill-slot="body">
+  <div metal:define-macro="form">
+
+    <form action="." metal:define-macro="master"
+          tal:attributes="action request/URL;
+                          class string:kssattr-formname-${view/__name__}"
+          method="post"
+          enctype="multipart/form-data"
+          id="zc.page.browser_form">
+
+     <div id="viewspace" metal:define-slot="viewspace">
+
+    <tal:status define="status view/status" condition="status">
+      <dl class="portalMessage error"
+               tal:condition="view/errors">
+         <dt i18n:translate=""> Error </dt>
+         <dd tal:content="status" />
+      </dl>
+
+      <dl class="portalMessage info" tal:condition="not: view/errors">
+         <dt i18n:translate=""> Info </dt>
+         <dd tal:content="status" />
+      </dl>
+    </tal:status>
+
+    <h1 class="documentFirstHeading"
+        i18n:translate=""
+        tal:condition="view/label"
+        tal:content="view/label"
+        metal:define-slot="heading">Do something</h1>
+
+    <p tal:content="view/description|nothing">Description</p>
+
+   <fieldset>
+     <legend> Informationen </legend>
+     <ul> 
+      <li> Sie sind Mitglied der BGF </li>
+      <li> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice"/> zugl. MwST und Versand </li> 
+     </ul> 
+   </fieldset>
+
+
+   <metal:block define-macro="header">
+
+   <tal:block replace="nothing">
+   <div class="form-status" tal:define="status view/status" tal:condition="status">
+
+    <div class="summary"
+         i18n:translate=""
+         tal:content="view/status">
+         Form status summary
+    </div>
+
+    <ul id="formlib-errors" class="errors" tal:condition="view/errors">
+       <li tal:repeat="error view/error_views">
+         <span tal:replace="structure error">Error Type</span>
+       </li>
+    </ul>
+   </div>
+   </tal:block>
+   </metal:block>
+
+    <div metal:define-slot="extra_info" tal:replace="nothing">
+    </div>
+
+    <fieldset tal:define="form_name view/form_name|nothing"
+              tal:omit-tag="not:form_name">
+      <legend tal:condition="form_name" tal:content="form_name">Form name</legend>
+
+
+      <div tal:define="mnr python: view.widgets['mitgliedsnummer'];
+                       firma python: view.widgets['firma'];
+                       name python: view.widgets['name'];
+                       vorname python: view.widgets['vorname'];
+                       strasse python: view.widgets['strasse'];
+                       plz python: view.widgets['plz'];
+                       ort python: view.widgets['ort'];
+                       email python: view.widgets['email'];
+                       telefax python: view.widgets['telefax'];
+                       telefon python: view.widgets['telefon'];
+                       ustid python: view.widgets['ustid'];
+                       datenschutz python: view.widgets['datenschutz'];
+                       land python: view.widgets['land']">
+
+        <div tal:replace="structure python: view.renderField(mnr)"/>
+        <div tal:replace="structure python: view.renderField(firma)"/>
+        <div tal:replace="structure python: view.renderField(name, vorname)"/>
+        <div tal:replace="structure python: view.renderField(strasse)"/>
+        <div tal:replace="structure python: view.renderField(plz, ort)"/>
+        <div tal:replace="structure python: view.renderField(telefon, telefax)"/>
+        <div tal:replace="structure python: view.renderField(email)"/>
+        <hr>
+        <div tal:replace="structure python: view.renderField(land, ustid)"/>
+        <div tal:replace="structure python: view.renderField(datenschutz)"/>
+        
+<!--
+<div class="field" tal:define="error name/error">
+<label> <span tal:content="name/label">label</span> </label>
+<span class="fieldRequired" title="Required" tal:condition="name/required"> (Required) </span>
+<div class="formHelp" tal:content="name/hint" tal:condition="name/hint"></div>
+<span class="fieldErrorBox" tal:content="structure error"> </span>
+<span class="widget formlibInlineValidation" tal:content="structure name"><input type="text" /></span>
+</div>
+
+<div class="field" tal:define="error plz/error">
+<label> <span tal:content="python: plz.label+' '+ort.label">label</span> </label>
+<span class="fieldRequired" title="Required" tal:condition="plz/required"> (Required) </span>
+<div class="formHelp" tal:content="plz/hint" tal:condition="plz/hint"></div>
+<span class="fieldErrorBox" tal:content="structure error"> </span>
+<span class="widget formlibInlineValidation" tal:content="structure plz"><input type="text" /></span>
+<span class="widget formlibInlineValidation" tal:content="structure ort"><input type="text" /></span>
+</div>
+-->
+
+
+      </div>
+
+
+
+
+    <metal:block define-slot="above_buttons" />
+    <div id="actionsView">
+     <span class="actionButtons"
+           tal:condition="view/availableActions"
+           metal:define-slot="bottom_buttons">
+            <input tal:repeat="action view/actions"
+                   tal:replace="structure action/render" />
+     </span>
+    </div>
+    </fieldset>
+    </div>
+    </form>
+
+
+</div>
+
+</metal:main>
+</body>
+</html>
