@@ -71,8 +71,8 @@ class Checkout(CartNamespace, grok.Form):
     """A view for the Plone cart
     """
     grok.context(IPloneCart)
-    lable="Bestellformular"
-    form_name="Bitte geben Sie alle Werte ein."
+    label = "Bestellformular"
+    form_name = "Bitte geben Sie alle Werte ein."
     form_fields = grok.Fields(IOrderForm)
 
     @form.action(u'Abbrechen', validator=null_validator)
