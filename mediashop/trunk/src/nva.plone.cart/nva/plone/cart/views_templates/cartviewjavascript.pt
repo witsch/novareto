@@ -1,0 +1,24 @@
+<script type="text/javascript">
+jq(document).ready(function() {
+ 
+   var base_url = jq("link[rel=kss-base-url]").attr('href')
+
+   jq("#cart-member").change(function() {
+     jq.ajax({
+       type: "GET",
+       url: base_url + "++cart++/membership",
+     });
+   });
+
+   jq(".cart-action").click(function(event) {
+     event.preventDefault();
+     alert('pouet');
+     var url = jq(this).attr('href');
+     jq.ajax({
+       type: "GET",
+       url: url,
+     });
+   });
+
+});
+</script>

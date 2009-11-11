@@ -38,13 +38,13 @@
     <p tal:content="view/description|nothing">Description</p>
 
    <fieldset>
-     <legend> Informationen </legend>
+     <legend>Informationen</legend>
      <ul> 
       <li> Sie sind Mitglied der BGF </li>
+      <li tal:condition="context/is_member">You are a member</li>
       <li> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice"/> zugl. MwST und Versand </li> 
      </ul> 
    </fieldset>
-
 
    <metal:block define-macro="header">
 

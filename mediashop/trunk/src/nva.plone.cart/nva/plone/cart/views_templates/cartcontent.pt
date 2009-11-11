@@ -1,0 +1,64 @@
+<tal:content define="items handler/getItems">
+  <h1>Cart</h1>
+  <div tal:condition="not: items">
+    The shopping cart is empty.
+  </div>
+  <div tal:condition="items">
+    <fieldset>
+      <legend>Membership</legend>
+      <p>Some text</p>
+      <input type="checkbox" id="cart-member"
+	     tal:attributes="checked is_member"/> I am a member
+    </fieldset>
+    <table class="listing nosort">
+      <thead>
+	<tr>
+	  <th>Product name</th>
+	  <th>Code</th>
+	  <th>Unit price</th>
+	  <th>Quantity</th>
+	  <th>Price</th>
+	  <th colspan="3">Actions</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tal:loop repeat="item items">
+	  <tr tal:attributes="id string:item-${item/code}">
+	    <td>
+	      <a href="" tal:content="item/title"
+		 tal:attributes="href item/url" />
+	    </td>
+	    <td tal:content="item/code" />
+	    <td tal:content="item/price" />
+	    <td class="quantity" tal:content="item/quantity" />
+	    <td tal:content="item/total_price" />
+	    <td>
+	      <a href=""
+		 class="cart-action"
+		 tal:attributes="href string:${cart_url}/plus/${item/code}"
+		 >+</a></td>
+	    <td>
+	      <a href=""
+		 class="cart-action"
+		 tal:attributes="href string:${cart_url}/minus/${item/code}"
+		 >-</a>
+	    </td>
+	    <td>
+	      <a href=""
+		 class="cart-action"
+		 tal:attributes="href string:${cart_url}/delete/${item/code}"
+		 >X</a>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td colspan="4" style="text-align: right;">Total</td>
+	    <td tal:content="handler/getTotalPrice" />
+	  </tr>
+	</tal:loop>
+      </tbody>
+    </table>
+
+    <a href="++cart++/checkout">Checkout</a>
+
+  </div>
+</tal:content>

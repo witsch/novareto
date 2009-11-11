@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from Acquisition import Explicit
+from OFS.SimpleItem import SimpleItem
+from BTrees.OOBTree import OOBTree
+from Acquisition import Explicit, aq_inner
+from zope.schema import Bool
+from zope.annotation.interfaces import IAnnotations, IAttributeAnnotatable
 from zope.component import adapts, getMultiAdapter
-from zope.interface import Interface, implements, Attribute
-from zope.traversing.interfaces import ITraversable
+from zope.interface import Interface, implements, Attribute, directlyProvides
 from zope.publisher.interfaces.http import IHTTPRequest
+from zope.traversing.interfaces import ITraversable
 from nva.cart import ICartRetriever, ICartHandler
 
 
@@ -13,32 +17,44 @@ class IPloneCart(Interface):
     """A cart for Plone
     """
     cart = Attribute("The cart object")
+    is_member = Bool(title=u"I am a member")
 
 
-class CartWrapper(Explicit):
+class CartWrapper(SimpleItem):
     """A class that wraps a cart for acquisition (evil AQ !).
     """
     implements(IPloneCart)
+    id = "++cart++"
+
+    Title = getTitle = lambda self:u"Cart"
+
+    @apply
+    def is_member():
+        def set(self, value):
+            self.properties['is_member'] = value
+        def get(self):
+            return self.properties.get('is_member', False)
+        return property(get, set)
+
+    def cart_properties(self):
+        annotation = IAnnotations(self.cart)
+        properties = annotation.get('nva.plone.cart')
+        if not properties:
+            properties = annotation['nva.plone.cart'] = OOBTree()
+        return properties
 
     def __init__(self, parent, request, cart):
+        if not IAttributeAnnotatable.providedBy(cart):
+            directlyProvides(cart, IAttributeAnnotatable)
         self.cart = cart
         self.handler = ICartHandler(cart)
         self.request = request
         self.parent = parent
+        self.properties = self.cart_properties()
 
     def browserDefault(self, request):
-        return self, ()
-
-    def update(self):
-        pass
-
-    def render(self):
-        view = getMultiAdapter((self, self.request), name="manage")
-        return view.__call__()
-    
-    def __call__(self):
-        self.update()
-        return self.render()
+        view = getMultiAdapter((self, self.request), name="summary")
+        return view, ()
 
 
 class CartTraverser(grok.MultiAdapter):

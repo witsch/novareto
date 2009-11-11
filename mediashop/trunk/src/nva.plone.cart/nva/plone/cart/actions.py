@@ -6,6 +6,18 @@ from zope.publisher.interfaces import NotFound
 from Products.CMFCore.utils import getToolByName
 
 
+class CartItemMember(grok.View):
+    grok.name("membership")
+    grok.context(IPloneCart)
+
+    def update(self):
+        self.context.is_member = not self.context.is_member
+
+    def render(self):
+        portal_url = getToolByName(self.context, 'portal_url')()
+        self.redirect(portal_url + "/++cart++/summary")
+
+
 class CartItemDelete(grok.View):
     grok.name("delete")
     grok.context(IPloneCart)
@@ -21,7 +33,7 @@ class CartItemDelete(grok.View):
             utils.flash(self.request, u"Item %r removed from cart." % name)
 
         portal_url = getToolByName(self.context, 'portal_url')()
-        self.redirect(portal_url + "/++cart++/manage")
+        self.redirect(portal_url + "/++cart++/summary")
 
 
 class CartItemPlus(grok.View):
@@ -40,7 +52,7 @@ class CartItemPlus(grok.View):
             utils.flash(self.request, u"Quantity increased for item %r." % name)
 
         portal_url = getToolByName(self.context, 'portal_url')()
-        self.redirect(portal_url + "/++cart++/manage")
+        self.redirect(portal_url + "/++cart++/summary")
 
 
 class CartItemMinus(grok.View):
@@ -64,4 +76,4 @@ class CartItemMinus(grok.View):
 
         utils.flash(self.request, status % name)
         portal_url = getToolByName(self.context, 'portal_url')()
-        self.redirect(portal_url + "/++cart++/manage")
+        self.redirect(portal_url + "/++cart++/summary")

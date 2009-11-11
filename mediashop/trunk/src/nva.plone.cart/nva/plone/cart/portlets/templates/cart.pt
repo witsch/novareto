@@ -29,13 +29,13 @@
 	  </table>
 	</dd>
 
-	<dd>
+	<dd class="portletItem odd">
 	  total : <span tal:content="view/handler/getTotalPrice" />
 	</dd>
 
         <dd class="portletFooter">
             <a href="" i18n:translate="manage_cart"
-	       tal:attributes="href string:${view/portal}/++cart++/manage">
+	       tal:attributes="href string:${view/portal}/++cart++/summary">
               Manage Cart
             </a>
         </dd>

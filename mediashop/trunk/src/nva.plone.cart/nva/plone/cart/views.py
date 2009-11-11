@@ -3,12 +3,13 @@
 from five import grok
 
 from zope.formlib import form
+from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 from plone.app.layout.viewlets.interfaces import IBelowContentBody
 
-from nva.cart import ICartAddable, ICartRetriever, ICartHandler
-from nva.plone.cart import utils, IPloneCart
 from nva.mediashop.interfaces import IOrderForm
+from nva.plone.cart import utils, IPloneCart
+from nva.cart import ICartAddable, ICartRetriever, ICartHandler
 
 
 def null_validator(*args, **kwargs):
@@ -53,18 +54,26 @@ class CartNamespace(object):
     def default_namespace(self):
         namespace = grok.View.default_namespace(self)
         namespace['cart'] = self.context.cart
+        namespace['is_member'] = self.context.is_member
         namespace['cart_url'] = self.portal_url + '/++cart++'
         namespace['handler'] = self.context.handler
-        namespace['context'] = self.context.parent
-        namespace['here'] = self.context.parent
         return namespace
 
+
+class CartContent(CartNamespace, grok.View):
+    grok.context(IPloneCart)
+    
 
 class CartView(CartNamespace, grok.View):
     """A view for the Plone cart
     """
-    grok.name("manage")
+    grok.name("summary")
     grok.context(IPloneCart)
+
+    def update(self):
+        CartNamespace.update(self)
+        self.content = getMultiAdapter((self.context, self.request),
+                                       name="cartcontent")()
 
 
 class Checkout(CartNamespace, grok.Form):
