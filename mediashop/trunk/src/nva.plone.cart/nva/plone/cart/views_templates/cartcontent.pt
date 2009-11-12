@@ -13,11 +13,11 @@
     <table class="listing nosort">
       <thead>
 	<tr>
-	  <th>Product name</th>
-	  <th>Code</th>
-	  <th>Unit price</th>
-	  <th>Quantity</th>
-	  <th>Price</th>
+	  <th>Titel der Broschüre</th>
+	  <th>Artikelnummer</th>
+	  <th>Einzelpreis</th>
+	  <th>Anzahl</th>
+	  <th>Gesamtpreis</th>
 	  <th colspan="3">Actions</th>
 	</tr>
       </thead>
@@ -29,9 +29,9 @@
 		 tal:attributes="href item/url" />
 	    </td>
 	    <td tal:content="item/code" />
-	    <td tal:content="item/price" />
+	    <td tal:content="python: item.single_price(is_member)" />
 	    <td class="quantity" tal:content="item/quantity" />
-	    <td tal:content="item/total_price" />
+	    <td tal:content="python: item.show_total_price(is_member)" />
 	    <td>
 	      <a href=""
 		 class="cart-action"

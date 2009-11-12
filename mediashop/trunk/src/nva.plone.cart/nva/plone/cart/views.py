@@ -62,7 +62,7 @@ class CartNamespace(object):
 
 class CartContent(CartNamespace, grok.View):
     grok.context(IPloneCart)
-    
+
 
 class CartView(CartNamespace, grok.View):
     """A view for the Plone cart
@@ -101,7 +101,7 @@ class Checkout(CartNamespace, grok.Form):
             label += "%s " %field.label 
             if field.required:
                 required = ('<span class="fieldRequired" title="Required"'
-                            'tal:condition="plz/required">(Required)</span>')
+                            '>(Required)</span>')
             if field.hint:
                 description += "%s " % field.hint
             if field.error():

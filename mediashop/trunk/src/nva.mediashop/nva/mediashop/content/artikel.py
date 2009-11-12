@@ -186,3 +186,17 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         self.url = context.absolute_url()
         self.code = context.code
         self.price = float(context.preis) 
+        self.price_info = context.preisinfo
+
+    def single_price(self, is_member):
+        """ Example for a calculation based on Member"""
+        if is_member:
+            return self.price / 2
+        return self.price    
+
+
+    def show_total_price(self, is_member=False):
+        """ rrrrr"""
+        if is_member:
+            return self.total_price / 2
+        return self.total_price 
