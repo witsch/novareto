@@ -32,6 +32,7 @@
 	    <td tal:content="python: item.single_price(is_member)" />
 	    <td class="quantity" tal:content="item/quantity" />
 	    <td tal:content="python: item.show_total_price(is_member)" />
+            HELLLO
 	    <td>
 	      <a href=""
 		 class="cart-action"
