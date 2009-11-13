@@ -17,10 +17,23 @@
 
 
   <browser:defaultView
-      for=".cart.IPloneCart"
+      for=".cart.ISessionCart"
       name="summary"
       />
-  <five:defaultViewable class=".cart.CartWrapper" />
+
+  <browser:defaultView
+      for=".cart.IOrder"
+      name="summary"
+      />
+
+  <browser:defaultView
+      for=".cart.IOrderFolder"
+      name="summary"
+      />
+
+  <five:defaultViewable class=".cart.SessionCart" />
+  <five:defaultViewable class=".cart.OrderFolder" />
+  <five:defaultViewable class=".cart.Order" />
 
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile

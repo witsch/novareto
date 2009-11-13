@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from nva.plone.cart import utils, IPloneCart
+from nva.plone.cart import utils, ISessionCart
 from zope.publisher.interfaces import NotFound
 from Products.CMFCore.utils import getToolByName
 
 
 class CartItemMember(grok.View):
     grok.name("membership")
-    grok.context(IPloneCart)
+    grok.context(ISessionCart)
 
     def update(self):
-        self.context.is_member = not self.context.is_member
+        self.context['is_member'] = not self.context['is_member']
 
     def render(self):
         portal_url = getToolByName(self.context, 'portal_url')()
@@ -20,7 +20,7 @@ class CartItemMember(grok.View):
 
 class CartItemDelete(grok.View):
     grok.name("delete")
-    grok.context(IPloneCart)
+    grok.context(ISessionCart)
 
     def render(self):
         return u"Product code missing."
@@ -38,7 +38,7 @@ class CartItemDelete(grok.View):
 
 class CartItemPlus(grok.View):
     grok.name("plus")
-    grok.context(IPloneCart)
+    grok.context(ISessionCart)
 
     def render(self):
         return u"Product code missing."
@@ -57,7 +57,7 @@ class CartItemPlus(grok.View):
 
 class CartItemMinus(grok.View):
     grok.name("minus")
-    grok.context(IPloneCart)
+    grok.context(ISessionCart)
 
     def render(self):
         return u"Product code missing."

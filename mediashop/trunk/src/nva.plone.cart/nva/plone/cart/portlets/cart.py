@@ -10,7 +10,7 @@ from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from nva.plone.cart import utils, IPloneCart
+from nva.plone.cart import utils, ISessionCart
 from nva.cart import Cart, ICartAddable, ICartRetriever, ICartHandler
 
 _ = MessageFactory('nva.plone.cart')
@@ -49,4 +49,4 @@ class Renderer(base.Renderer):
     @property
     def available(self):
         return (bool(len(self.cart)) and
-                not IPloneCart.providedBy(self.context))
+                not ISessionCart.providedBy(self.context))

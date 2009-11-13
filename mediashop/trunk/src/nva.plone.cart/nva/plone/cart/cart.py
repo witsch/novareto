@@ -1,60 +1,69 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from OFS.SimpleItem import SimpleItem
 from BTrees.OOBTree import OOBTree
-from Acquisition import Explicit, aq_inner
-from zope.schema import Bool
-from zope.annotation.interfaces import IAnnotations, IAttributeAnnotatable
-from zope.component import adapts, getMultiAdapter
-from zope.interface import Interface, implements, Attribute, directlyProvides
-from zope.publisher.interfaces.http import IHTTPRequest
+from OFS.SimpleItem import SimpleItem
+
+from zope.component import getMultiAdapter
+from zope.interface import Interface, implements
 from zope.traversing.interfaces import ITraversable
+from zope.publisher.interfaces.http import IHTTPRequest
+from plone.app.content.container import Container
+
 from nva.cart import ICartRetriever, ICartHandler
+from nva.plone.cart.interfaces import IOrderFolder, IOrder
+from nva.plone.cart.interfaces import ISessionCart, ICartWrapper
 
 
-class IPloneCart(Interface):
-    """A cart for Plone
+class OrderFolder(Container):
+    """A Cart folder implementation.
     """
-    cart = Attribute("The cart object")
-    is_member = Bool(title=u"I am a member")
+    implements(IOrderFolder)
+    meta_type = portal_type = 'OrderFolder'
+
+    def __setitem__(self, name, obj):
+        name = name.encode('ascii') # may raise if there's a bugus id
+        self._setObject(name, obj, set_owner=0)
 
 
-class CartWrapper(SimpleItem):
-    """A class that wraps a cart for acquisition (evil AQ !).
+class CartMixin(SimpleItem, OOBTree):
+    """A cart wrapper that takes care of all the non-core accesses.
     """
-    implements(IPloneCart)
-    id = "++cart++"
-
-    Title = getTitle = lambda self:u"Cart"
-
-    @apply
-    def is_member():
-        def set(self, value):
-            self.properties['is_member'] = value
-        def get(self):
-            return self.properties.get('is_member', False)
-        return property(get, set)
-
-    def cart_properties(self):
-        annotation = IAnnotations(self.cart)
-        properties = annotation.get('nva.plone.cart')
-        if not properties:
-            properties = annotation['nva.plone.cart'] = OOBTree()
-        return properties
-
-    def __init__(self, parent, request, cart):
-        if not IAttributeAnnotatable.providedBy(cart):
-            directlyProvides(cart, IAttributeAnnotatable)
-        self.cart = cart
-        self.handler = ICartHandler(cart)
-        self.request = request
-        self.parent = parent
-        self.properties = self.cart_properties()
+    implements(ICartWrapper)
+    
+    def __init__(self, cart, id="++cart++", is_member=False):
+        SimpleItem.__init__(self, id=id)
+        OOBTree.__init__(self)
+        self['cart'] = cart
+        self['is_member'] = is_member
+        self.id = id
 
     def browserDefault(self, request):
-        view = getMultiAdapter((self, self.request), name="summary")
+        view = getMultiAdapter((self, request), name="summary")
         return view, ()
+
+
+class SessionCart(CartMixin):
+    """A cart living in the session.
+    """
+    implements(ISessionCart)
+    Title = getTitle = lambda self:u"Cart"
+
+    @property
+    def handler(self):
+        return ICartHandler(self['cart'])
+
+
+class Order(CartMixin):
+    """A persisted cart.
+    """
+    implements(IOrder)
+    meta_type = portal_type = 'Order'
+    Title = getTitle = lambda self:u"Order %s" % self.id
+
+    @property
+    def reference(self):
+        return self.id
 
 
 class CartTraverser(grok.MultiAdapter):
@@ -68,5 +77,4 @@ class CartTraverser(grok.MultiAdapter):
 
     def traverse(self, name, ignore):
         cart = ICartRetriever(self.request.SESSION)
-        wrap = CartWrapper(self.context, self.request, cart)
-        return wrap.__of__(self.context)
+        return SessionCart(cart).__of__(self.context)

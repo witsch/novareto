@@ -1,15 +1,25 @@
 # -*- coding: utf-8 -*-
 
+import copy 
 from five import grok
+from Acquisition import aq_base
 
+import uuid
 from zope.formlib import form
 from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 from plone.app.layout.viewlets.interfaces import IBelowContentBody
+from Products.CMFPlone.utils import _createObjectByType
 
 from nva.mediashop.interfaces import IOrderForm
-from nva.plone.cart import utils, IPloneCart
 from nva.cart import ICartAddable, ICartRetriever, ICartHandler
+
+from nva.plone.cart import utils
+from nva.plone.cart import ISessionCart
+from nva.plone.cart import IOrder, IOrderFolder, OrderFolder, Order
+
+
+ORDERS = "orders"
 
 
 def null_validator(*args, **kwargs):
@@ -53,22 +63,46 @@ class CartNamespace(object):
     
     def default_namespace(self):
         namespace = grok.View.default_namespace(self)
-        namespace['cart'] = self.context.cart
-        namespace['is_member'] = self.context.is_member
+        namespace['cart'] = self.context['cart']
+        namespace['is_member'] = self.context['is_member']
         namespace['cart_url'] = self.portal_url + '/++cart++'
         namespace['handler'] = self.context.handler
         return namespace
 
 
 class CartContent(CartNamespace, grok.View):
-    grok.context(IPloneCart)
+    grok.context(ISessionCart)
+
+
+class OrderFolderView(grok.View):
+    grok.name("summary")
+    grok.context(IOrderFolder)
+
+    def orders(self):
+        for order in self.context.values():
+            yield {
+                'ref': order.reference,
+                'len': len(order['cart']),
+                'price': order['total_price'],
+                'is_member': order['is_member']
+                }
+
+
+class OrderView(grok.View):
+    grok.name("summary")
+    grok.context(IOrder)
+
+    def update(self):
+        self.ordered_items = self.context['cart'].values()
+        self.total_price = self.context['total_price']
+        self.is_member = self.context['is_member']
 
 
 class CartView(CartNamespace, grok.View):
     """A view for the Plone cart
     """
     grok.name("summary")
-    grok.context(IPloneCart)
+    grok.context(ISessionCart)
 
     def update(self):
         CartNamespace.update(self)
@@ -79,7 +113,7 @@ class CartView(CartNamespace, grok.View):
 class Checkout(CartNamespace, grok.Form):
     """A view for the Plone cart
     """
-    grok.context(IPloneCart)
+    grok.context(ISessionCart)
     label = "Bestellformular"
     form_name = "Bitte geben Sie alle Werte ein."
     form_fields = grok.Fields(IOrderForm)
@@ -92,7 +126,28 @@ class Checkout(CartNamespace, grok.Form):
 
     @form.action(u'Bestellen')
     def handle_order(self, action, data):
-        print data, action
+        plone = getToolByName(self.context, 'portal_url').getPortalObject()
+
+        # We create the folder
+        if not ORDERS in plone:
+            plone[ORDERS] = OrderFolder(id=ORDERS)
+
+        # We generate a unique id
+        cid = str(uuid.uuid4())
+        
+        # we deepcopy the cart for more security.
+        # It won't be altered later.
+        cart = copy.deepcopy(self.context['cart'])
+
+        # We instanciate an order.
+        order = Order(cart, id=cid, is_member=self.context['is_member'])
+
+        # We write down the price. This won't be altered.
+        order['total_price'] = self.context.handler.getTotalPrice()
+
+        # We write it down.
+        plone[ORDERS][cid] = order
+        
 
     def renderField(self, *args):
         label = required = description = error = input = "" 
