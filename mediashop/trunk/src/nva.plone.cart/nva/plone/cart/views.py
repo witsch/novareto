@@ -121,6 +121,10 @@ class Checkout(CartNamespace, grok.Form):
     form_name = "Bitte geben Sie alle Werte ein."
     form_fields = grok.Fields(IOrderForm)
 
+    @form.action(u'Zurck', validator=null_validator)
+    def handle_cancel(self, action, data):
+        self.request.response.redirect(self.portal_url+'++cart++')
+
     @form.action(u'Abbrechen', validator=null_validator)
     def handle_cancel(self, action, data):
         self.context.cart.clear()
@@ -151,6 +155,8 @@ class Checkout(CartNamespace, grok.Form):
         # We write it down.
         plone[ORDERS][cid] = order
         
+        utils.flash(self.request, u"Der Bestellvorgang ist bei uns eingegangen.")
+        self.request.response.redirect(self.portal_url+'/++cart++/thanks')
 
     def renderField(self, *args):
         label = required = description = error = input = "" 

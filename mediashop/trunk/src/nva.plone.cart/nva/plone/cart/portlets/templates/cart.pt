@@ -9,7 +9,7 @@
         <dt class="portletHeader">
             <span class="portletTopLeft"></span>
             <span class="portletTopMiddle"
-		  i18n:translate="cart">Your Cart</span>
+		  i18n:translate="cart">Einkaufswagen</span>
             <span class="portletTopRight"></span>
         </dt>
 
@@ -17,7 +17,7 @@
 	  <table class="listing">
 	    <tr>
 	      <th>Name</th>
-	      <th>Quantity</th>
+	      <th>Anzahl</th>
 	    </tr>
 	    <tr tal:repeat="item view/handler/getItems">
 	      <td>
@@ -36,13 +36,13 @@
         <dd class="portletFooter">
             <a href="" i18n:translate="manage_cart"
 	       tal:attributes="href string:${view/portal}/++cart++/summary">
-              Manage Cart
+              Zum Einkaufswagen 
             </a>
         </dd>
         <dd class="portletFooter">
             <a href="" i18n:translate="checkout_cart"
 	       tal:attributes="href string:${view/portal}/++cart++/checkout">
-              Checkout
+              Zur Kasse gehen 
             </a>
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>
