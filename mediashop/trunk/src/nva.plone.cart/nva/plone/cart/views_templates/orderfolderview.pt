@@ -7,9 +7,10 @@
   <body>
     <metal:main fill-slot="main">
       <div id="orders">
-	<table class="listing nosort">
+	<table class="listing">
 	  <thead>
 	    <tr>
+	      <th>Date</th>
 	      <th>Reference</th>
 	      <th>Number of items</th>
 	      <th>Price</th>
@@ -17,6 +18,7 @@
 	  </thead>
 	  <tbody tal:define="url context/absolute_url">
 	    <tr tal:repeat="order view/orders">
+	      <td tal:content="order/date" />
 	      <td>
 		<a tal:attributes="href string:${url}/${order/ref}"
 		   tal:content="order/ref"/>

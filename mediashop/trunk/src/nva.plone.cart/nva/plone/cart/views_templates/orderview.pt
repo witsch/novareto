@@ -8,6 +8,7 @@
     <metal:main fill-slot="main">
       <div id="order-content">
 	<h1>Order</h1>
+	<h3>Order sent the <span tal:content="view/date" /></h3>
 	<table class="listing nosort">
 	  <thead>
 	    <tr>
