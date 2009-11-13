@@ -15,10 +15,11 @@
 	      <th>Price</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody tal:define="url context/absolute_url">
 	    <tr tal:repeat="order view/orders">
 	      <td>
-		<a tal:content="order/ref"/>
+		<a tal:attributes="href string:${url}/${order/ref}"
+		   tal:content="order/ref"/>
 	      </td>
 	      <td tal:content="order/len" />
 	      <td tal:content="order/price" />

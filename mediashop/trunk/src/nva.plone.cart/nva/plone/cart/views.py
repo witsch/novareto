@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import copy 
+import copy
+import datetime
 from five import grok
 from Acquisition import aq_base
 
@@ -63,8 +64,8 @@ class CartNamespace(object):
     
     def default_namespace(self):
         namespace = grok.View.default_namespace(self)
-        namespace['cart'] = self.context['cart']
-        namespace['is_member'] = self.context['is_member']
+        namespace['cart'] = self.context.cart
+        namespace['is_member'] = self.context.is_member
         namespace['cart_url'] = self.portal_url + '/++cart++'
         namespace['handler'] = self.context.handler
         return namespace
@@ -82,9 +83,10 @@ class OrderFolderView(grok.View):
         for order in self.context.values():
             yield {
                 'ref': order.reference,
-                'len': len(order['cart']),
-                'price': order['total_price'],
-                'is_member': order['is_member']
+                'date': order.CreationDate(),
+                'len': len(order.cart),
+                'price': order.total_price,
+                'is_member': order.is_member
                 }
 
 
@@ -93,10 +95,11 @@ class OrderView(grok.View):
     grok.context(IOrder)
 
     def update(self):
-        self.ordered_items = self.context['cart'].values()
-        self.total_price = self.context['total_price']
-        self.is_member = self.context['is_member']
-
+        self.ordered_items = self.context.cart.values()
+        self.total_price = self.context.total_price
+        self.is_member = self.context.is_member
+        self.date = self.context.CreationDate()
+        
 
 class CartView(CartNamespace, grok.View):
     """A view for the Plone cart
@@ -137,13 +140,13 @@ class Checkout(CartNamespace, grok.Form):
         
         # we deepcopy the cart for more security.
         # It won't be altered later.
-        cart = copy.deepcopy(self.context['cart'])
+        cart = copy.deepcopy(self.context.cart)
 
         # We instanciate an order.
-        order = Order(cart, id=cid, is_member=self.context['is_member'])
+        order = Order(cart, id=cid, is_member=self.context.is_member)
 
         # We write down the price. This won't be altered.
-        order['total_price'] = self.context.handler.getTotalPrice()
+        order.total_price = self.context.handler.getTotalPrice()
 
         # We write it down.
         plone[ORDERS][cid] = order

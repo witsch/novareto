@@ -11,7 +11,7 @@ class CartItemMember(grok.View):
     grok.context(ISessionCart)
 
     def update(self):
-        self.context['is_member'] = not self.context['is_member']
+        self.context.is_member = not self.context.is_member
 
     def render(self):
         portal_url = getToolByName(self.context, 'portal_url')()

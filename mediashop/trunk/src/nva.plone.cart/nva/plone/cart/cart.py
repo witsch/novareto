@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from BTrees.OOBTree import OOBTree
 from OFS.SimpleItem import SimpleItem
+from Products.CMFCore.PortalFolder import PortalFolderBase
 
 from zope.component import getMultiAdapter
 from zope.interface import Interface, implements
 from zope.traversing.interfaces import ITraversable
 from zope.publisher.interfaces.http import IHTTPRequest
+from plone.app.content.item import Item
 from plone.app.content.container import Container
 
 from nva.cart import ICartRetriever, ICartHandler
@@ -20,24 +21,24 @@ class OrderFolder(Container):
     """
     implements(IOrderFolder)
     meta_type = portal_type = 'OrderFolder'
+    manage_options = PortalFolderBase.manage_options
 
     def __setitem__(self, name, obj):
         name = name.encode('ascii') # may raise if there's a bugus id
         self._setObject(name, obj, set_owner=0)
 
 
-class CartMixin(SimpleItem, OOBTree):
+class CartMixin(Item):
     """A cart wrapper that takes care of all the non-core accesses.
     """
     implements(ICartWrapper)
-    
-    def __init__(self, cart, id="++cart++", is_member=False):
-        SimpleItem.__init__(self, id=id)
-        OOBTree.__init__(self)
-        self['cart'] = cart
-        self['is_member'] = is_member
-        self.id = id
 
+    def __init__(self, cart, id="++cart++", is_member=False):
+        Item.__init__(self, id=id)
+        self.cart = cart
+        self.is_member = is_member
+        self.id = id
+    
     def browserDefault(self, request):
         view = getMultiAdapter((self, request), name="summary")
         return view, ()
@@ -47,11 +48,12 @@ class SessionCart(CartMixin):
     """A cart living in the session.
     """
     implements(ISessionCart)
+    meta_type = portal_type = 'TempFolder'
     Title = getTitle = lambda self:u"Cart"
 
     @property
     def handler(self):
-        return ICartHandler(self['cart'])
+        return ICartHandler(self.cart)
 
 
 class Order(CartMixin):
@@ -60,6 +62,7 @@ class Order(CartMixin):
     implements(IOrder)
     meta_type = portal_type = 'Order'
     Title = getTitle = lambda self:u"Order %s" % self.id
+    manage_options = PortalFolderBase.manage_options
 
     @property
     def reference(self):
