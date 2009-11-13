@@ -13,7 +13,7 @@ from plone.app.content.container import Container
 
 from nva.cart import ICartRetriever, ICartHandler
 from nva.plone.cart.interfaces import IOrderFolder, IOrder
-from nva.plone.cart.interfaces import ISessionCart, ICartWrapper
+from nva.plone.cart.interfaces import ISessionCart, ICartWrapper, IMemberCart
 
 
 class OrderFolder(Container):
@@ -33,10 +33,9 @@ class CartMixin(Item):
     """
     implements(ICartWrapper)
 
-    def __init__(self, cart, id="++cart++", is_member=False):
+    def __init__(self, cart, id="++cart++"):
         Item.__init__(self, id=id)
         self.cart = cart
-        self.is_member = is_member
         self.id = id
     
     def browserDefault(self, request):
@@ -52,6 +51,10 @@ class SessionCart(CartMixin):
     Title = getTitle = lambda self:u"Cart"
 
     @property
+    def is_member(self):
+        return IMemberCart.providedBy(self.cart)
+
+    @property
     def handler(self):
         return ICartHandler(self.cart)
 
@@ -63,6 +66,8 @@ class Order(CartMixin):
     meta_type = portal_type = 'Order'
     Title = getTitle = lambda self:u"Order %s" % self.id
     manage_options = PortalFolderBase.manage_options
+
+    is_member = False
 
     @property
     def reference(self):

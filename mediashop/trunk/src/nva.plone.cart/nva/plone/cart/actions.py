@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-from nva.plone.cart import utils, ISessionCart
+from nva.cart import IDiscountedCartItem
+from nva.plone.cart import utils, ISessionCart, IMemberCart
+from zope.interface import directlyProvides, noLongerProvides
 from zope.publisher.interfaces import NotFound
 from Products.CMFCore.utils import getToolByName
 
@@ -11,8 +13,17 @@ class CartItemMember(grok.View):
     grok.context(ISessionCart)
 
     def update(self):
-        self.context.is_member = not self.context.is_member
-
+        if IMemberCart.providedBy(self.context.cart):
+            noLongerProvides(self.context.cart, IMemberCart)
+            for item in self.context.cart.values():
+                noLongerProvides(item, IDiscountedCartItem)
+        else:
+            directlyProvides(self.context.cart, IMemberCart)
+            for item in self.context.cart.values():
+                item.discount_factor = 0.5
+                item.discount = u"Membership"
+                directlyProvides(item, IDiscountedCartItem)            
+            
     def render(self):
         portal_url = getToolByName(self.context, 'portal_url')()
         self.redirect(portal_url + "/++cart++/summary")

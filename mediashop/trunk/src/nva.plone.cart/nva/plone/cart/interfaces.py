@@ -21,12 +21,22 @@ class ICartWrapper(Interface):
 
 class ISessionCart(ICartWrapper):
     """A cart for Plone
-    """        
+    """
+    modified_price = Float(
+        title = u"Modifier of the cart price.",
+        default = 1.0
+        )
+    
     handler = Object(
         title = u"Cart controler allowing CRUD operations",
         schema = ICartHandler,
         readonly = True
         )
+
+
+class IMemberCart(ISessionCart):
+    """Marker interface.
+    """
 
 
 class IOrder(ICartWrapper):

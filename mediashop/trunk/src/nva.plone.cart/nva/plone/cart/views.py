@@ -14,6 +14,7 @@ from Products.CMFPlone.utils import _createObjectByType
 
 from nva.mediashop.interfaces import IOrderForm
 from nva.cart import ICartAddable, ICartRetriever, ICartHandler
+from nva.cart import IDiscountedCartItem
 
 from nva.plone.cart import utils
 from nva.plone.cart import ISessionCart
@@ -65,7 +66,6 @@ class CartNamespace(object):
     def default_namespace(self):
         namespace = grok.View.default_namespace(self)
         namespace['cart'] = self.context.cart
-        namespace['is_member'] = self.context.is_member
         namespace['cart_url'] = self.portal_url + '/++cart++'
         namespace['handler'] = self.context.handler
         return namespace
@@ -147,15 +147,17 @@ class Checkout(CartNamespace, grok.Form):
         cart = copy.deepcopy(self.context.cart)
 
         # We instanciate an order.
-        order = Order(cart, id=cid, is_member=self.context.is_member)
+        order = Order(cart, id=cid)
 
         # We write down the price. This won't be altered.
         order.total_price = self.context.handler.getTotalPrice()
+        order.is_member = bool(self.context.is_member)
 
         # We write it down.
         plone[ORDERS][cid] = order
         
-        utils.flash(self.request, u"Der Bestellvorgang ist bei uns eingegangen.")
+        utils.flash(self.request,
+                    u"Der Bestellvorgang ist bei uns eingegangen.")
         self.request.response.redirect(self.portal_url+'/++cart++/thanks')
 
     def renderField(self, *args):

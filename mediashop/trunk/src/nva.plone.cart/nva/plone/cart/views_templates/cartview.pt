@@ -17,7 +17,17 @@
 	        type: "GET",
 	        url: base_url + "/++cart++/membership",
 	        async: false,
-	      });
+	        success: function() {
+	          jq.ajax({
+	            type: "GET",
+		    url: base_url + "/++cart++/cartcontent",
+		    async: false,
+		    success: function(html){
+	              jq("#cart-content").html(html);
+		    },
+		 });
+	       },
+	    });
 	  });
 
 	  jq('a.cart-action').live("click", function(e) {

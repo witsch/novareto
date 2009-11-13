@@ -8,7 +8,7 @@ from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 
-from nva.cart import CartItem, ICartAddable
+from nva.cart import CartItem, ICartAddable, IDiscountedCartItem
 from nva.mediashop import mediashopMessageFactory as _
 from nva.mediashop.interfaces import IArtikel
 from nva.mediashop.config import PROJECTNAME
@@ -188,15 +188,13 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         self.price = float(context.preis) 
         self.price_info = context.preisinfo
 
-    def single_price(self, is_member):
-        """ Example for a calculation based on Member"""
-        if is_member:
-            return self.price / 2
-        return self.price    
+    @property
+    def discount_price(self):
+        return self.price * self.discount_factor
 
-
-    def show_total_price(self, is_member=False):
-        """ rrrrr"""
-        if is_member:
-            return self.total_price / 2
-        return self.total_price 
+    @property
+    def total_price(self):
+        if IDiscountedCartItem.providedBy(self):
+            return self.discount_price * self.quantity
+        return self.price * self.quantity
+    

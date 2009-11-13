@@ -11,6 +11,24 @@ class ICartAddable(Interface):
     """
 
 
+class IDiscountedCartItem(Interface):
+    """A discounted item.
+    """
+    discount = Attribute('Reason of the discount')
+
+    discount_factor = schema.Float(
+        default = 0.5,
+        required = True,
+        title = u"Discount percentage"
+        )
+    
+    discount_price = schema.Float(
+        default = 0.0,
+        required = True,
+        title = u"Price for a unit"
+        )
+
+
 class ICartItem(Interface):
     """A cart item.
     """

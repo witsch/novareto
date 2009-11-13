@@ -8,7 +8,8 @@
       <legend>Membership</legend>
       <p>Some text</p>
       <input type="checkbox" id="cart-member"
-	     tal:attributes="checked is_member"/> I am a member
+	     tal:attributes="checked context/is_member"
+	     /> I am a member
     </fieldset>
     <table class="listing nosort">
       <thead>
@@ -29,9 +30,9 @@
 		 tal:attributes="href item/url" />
 	    </td>
 	    <td tal:content="item/code" />
-	    <td tal:content="python: item.single_price(is_member)" />
+	    <td tal:content="item/price" />
 	    <td class="quantity" tal:content="item/quantity" />
-	    <td tal:content="python: item.show_total_price(is_member)" />
+	    <td tal:content="item/total_price" />
             HELLLO
 	    <td>
 	      <a href=""
