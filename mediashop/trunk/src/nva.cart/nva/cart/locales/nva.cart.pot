@@ -1,0 +1,47 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-11-30 13:23+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: nva.cart\n"
+
+#: ./interfaces.py:38
+msgid "Descritive name of the product"
+msgstr ""
+
+#: ./interfaces.py:23
+msgid "Discount percentage"
+msgstr ""
+
+#: ./interfaces.py:60
+msgid "Number of unit"
+msgstr ""
+
+#: ./interfaces.py:29
+msgid "Price for a unit"
+msgstr ""
+
+#: ./interfaces.py:54
+msgid "URL to the product's sheet"
+msgstr ""
+
+#: ./interfaces.py:43
+msgid "Unique code of the product"
+msgstr ""
+
+#: ./interfaces.py:65
+msgid "Weight of the product"
+msgstr ""
+

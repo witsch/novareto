@@ -4,6 +4,7 @@ from zope import schema
 from zope.interface import Interface, Attribute
 from zope.app.container.interfaces import IContainer
 from zope.app.container.constraints import contains
+from nva.cart import cartFactory as _
 
 
 class ICartAddable(Interface):
@@ -19,13 +20,13 @@ class IDiscountedCartItem(Interface):
     discount_factor = schema.Float(
         default = 0.5,
         required = True,
-        title = u"Discount percentage"
+        title = _(u"Discount percentage")
         )
     
     discount_price = schema.Float(
         default = 0.0,
         required = True,
-        title = u"Price for a unit"
+        title = _(u"Price for a unit")
         )
 
 
@@ -34,34 +35,34 @@ class ICartItem(Interface):
     """
     title = schema.TextLine(
         required = True,
-        title = u"Descritive name of the product"
+        title = _(u"Descritive name of the product")
         )
     
     code = schema.ASCIILine(
         required = True,
-        title = u"Unique code of the product"
+        title = _(u"Unique code of the product")
         )
     
     price = schema.Float(
         default = 0.0,
         required = True,
-        title = u"Price for a unit"
+        title = _(u"Price for a unit")
         )
 
     url = schema.URI(
         required = False,
-        title = u"URL to the product's sheet"
+        title = _(u"URL to the product's sheet")
         )
 
     quantity = schema.Int(
         default = 1,
         required = True,
-        title = u"Number of unit"
+        title = _(u"Number of unit")
         )
 
     weight = schema.Float(
         required = False,
-        title = u"Weight of the product",
+        title = _(u"Weight of the product"),
         )
 
     total_price = Attribute("Computed attribute.")
