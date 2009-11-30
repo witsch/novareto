@@ -1,0 +1,161 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-11-30 16:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: nva.plone.cart\n"
+
+#: ./views.py:129
+msgid "Abbrechen"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:27
+msgid "Actions"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:25
+msgid "Anzahl"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:23
+msgid "Artikelnummer"
+msgstr ""
+
+#: ./views.py:135
+#: ./views_templates/addtocartlink.pt:4
+msgid "Bestellen"
+msgstr ""
+
+#: ./views.py:121
+#: ./views_templates/checkout.pt:68
+msgid "Bestellformular"
+msgstr ""
+
+#: ./views.py:122
+msgid "Bitte geben Sie alle Werte ein."
+msgstr ""
+
+#: ./views_templates/thanks.pt:7
+msgid "Cart view"
+msgstr ""
+
+#: ./views.py:161
+msgid "Der Bestellvorgang ist bei uns eingegangen."
+msgstr ""
+
+#: ./views.py:132
+msgid "Der Bestellvorgang wurde abgebrochen."
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:24
+msgid "Einzelpreis"
+msgstr ""
+
+#: ./views_templates/checkout.pt:23
+msgid "Error"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:15
+msgid "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT}"
+msgstr ""
+
+#: ./views_templates/checkout.pt:44
+msgid "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT} zugl. MwST und Versand"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:26
+msgid "Gesamtpreis"
+msgstr ""
+
+#: ./views_templates/thanks.pt:14
+msgid "Ihre Bestellung ist erfolgreich bei uns eingegangen"
+msgstr ""
+
+#: ./views_templates/checkout.pt:28
+msgid "Info"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:12
+#: ./views_templates/checkout.pt:43
+msgid "Mitgliedsbetrieb der BG Verkehr"
+msgstr ""
+
+#: ./profiles/default/types/Order.xml
+msgid "Order"
+msgstr ""
+
+#: ./profiles/default/types/OrderFolder.xml
+msgid "Order Folder"
+msgstr ""
+
+#: ./portlets/cart.py:28
+msgid "Shopping Cart"
+msgstr ""
+
+#: ./views_templates/thanks.pt:16
+msgid "Sie erhalten in Kuerze Ihre Ware"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:4
+msgid "The shopping cart is empty."
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:22
+msgid "Titel der Broschuere"
+msgstr ""
+
+#: ./views_templates/thanks.pt:18
+msgid "Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF - Symbol"
+msgstr ""
+
+#: ./views_templates/thanks.pt:12
+msgid "Vielen Dank fuer Ihren Einkauf im Medienshop der BG-Verkehr"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:3
+msgid "Warenkorb"
+msgstr ""
+
+#: ./views.py:125
+msgid "Zuerck"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:70
+msgid "aus dem Warenkorb entfernen"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:84
+msgid "bestellen"
+msgstr ""
+
+#. Default: "Einkaufswagen"
+#: ./portlets/templates/cart.pt:11
+msgid "cart"
+msgstr ""
+
+#. Default: "Zur Kasse gehen"
+#: ./portlets/templates/cart.pt:43
+msgid "checkout_cart"
+msgstr ""
+
+#. Default: "Zum Einkaufswagen"
+#: ./portlets/templates/cart.pt:37
+msgid "manage_cart"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:16
+msgid "zzgl. MwST. und Versand"
+msgstr ""
+

@@ -4,7 +4,8 @@
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="nva.mediashop">
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="nva.plone.cart">
 
   <five:registerPackage package="." />
 
@@ -44,4 +45,7 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
  
+  <i18n:registerTranslations directory="locales" />
+
+
 </configure>

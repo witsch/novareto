@@ -20,6 +20,7 @@ from nva.plone.cart import utils
 from nva.plone.cart import ISessionCart
 from nva.plone.cart import IOrder, IOrderFolder, OrderFolder, Order
 
+from nva.plone.cart import ploneCartFactory as _
 
 ORDERS = "orders"
 
@@ -117,21 +118,21 @@ class Checkout(CartNamespace, grok.Form):
     """A view for the Plone cart
     """
     grok.context(ISessionCart)
-    label = "Bestellformular"
-    form_name = "Bitte geben Sie alle Werte ein."
+    label = _(u"Bestellformular")
+    form_name = _(u"Bitte geben Sie alle Werte ein.")
     form_fields = grok.Fields(IOrderForm)
 
-    @form.action(u'Zurck', validator=null_validator)
+    @form.action(_(u'Zuerck'), validator=null_validator)
     def handle_cancel(self, action, data):
         self.request.response.redirect(self.portal_url+'++cart++')
 
-    @form.action(u'Abbrechen', validator=null_validator)
+    @form.action(_(u'Abbrechen'), validator=null_validator)
     def handle_cancel(self, action, data):
         self.context.cart.clear()
-        utils.flash(self.request, u"Der Bestellvorgang wurde abgebrochen.")
+        utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
         self.request.response.redirect(self.portal_url)
 
-    @form.action(u'Bestellen')
+    @form.action(_(u'Bestellen'))
     def handle_order(self, action, data):
         plone = getToolByName(self.context, 'portal_url').getPortalObject()
 
@@ -157,7 +158,7 @@ class Checkout(CartNamespace, grok.Form):
         plone[ORDERS][cid] = order
         
         utils.flash(self.request,
-                    u"Der Bestellvorgang ist bei uns eingegangen.")
+                    _(u"Der Bestellvorgang ist bei uns eingegangen."))
         self.request.response.redirect(self.portal_url+'/++cart++/thanks')
 
     def renderField(self, *args):

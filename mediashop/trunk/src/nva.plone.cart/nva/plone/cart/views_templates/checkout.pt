@@ -2,7 +2,8 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="context/main_template/macros/master">
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.plone.cart">
 <body>
  <metal:main fill-slot="body">
   <div metal:define-macro="form">
@@ -35,12 +36,12 @@
         tal:content="view/label"
         metal:define-slot="heading">Do something</h1>
 -->
-    <p tal:content="view/description|nothing">Description</p>
+    <p tal:content="view/description|nothing" i18n:translate="">Description</p>
 
    <fieldset>
      <ul> 
-      <li tal:condition="context/is_member">Mitgliedsbetrieb der BG Verkehr</li>
-      <li> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice"/> zugl. MwST und Versand </li> 
+      <li tal:condition="context/is_member" i18n:translate="">Mitgliedsbetrieb der BG Verkehr</li>
+      <li i18n:translate=""> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice"/> zugl. MwST und Versand </li> 
      </ul> 
 
    <metal:block define-macro="header">
@@ -64,7 +65,7 @@
    </metal:block>
 
 
-   <h3> Bestellformular </h3>
+   <h3 i18n:translate=""> Bestellformular </h3>
 
     <div metal:define-slot="extra_info" tal:replace="nothing">
     </div>

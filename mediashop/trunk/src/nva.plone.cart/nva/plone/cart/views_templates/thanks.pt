@@ -2,19 +2,20 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="context/main_template/macros/master">
-  <head><title>Cart view</title></head>
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.plone.cart">
+  <head><title i18n:translate="">Cart view</title></head>
   <body>
     <metal:main fill-slot="main">
 
 
-     <h1> Vielen Dank für Ihren Einkauf im Medienshop der BG-Verkehr </h1>
+     <h1 i18n:translate=""> Vielen Dank fuer Ihren Einkauf im Medienshop der BG-Verkehr </h1>
 
-     <p> Ihre Bestellung ist erfolgreich bei uns eingegangen </p>
+     <p i18n:translate=""> Ihre Bestellung ist erfolgreich bei uns eingegangen </p>
 
-     <p> Sie erhalten in Kürze Ihre Ware </p>
+     <p i18n:translate=""> Sie erhalten in Kuerze Ihre Ware </p>
 
-     <p> Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF -
+     <p i18n:translate=""> Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF -
      Symbol </p>
 
     </metal:main>

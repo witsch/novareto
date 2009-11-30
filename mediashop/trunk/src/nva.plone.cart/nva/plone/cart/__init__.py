@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from zope.i18nmessageid import MessageFactory
-ploneCartFactory = MessageFactory('nva.mediashop')
+ploneCartFactory = MessageFactory('plone.nva.cart')
 
 
 from nva.plone.cart.interfaces import IOrderFolder, IOrder, IMemberCart
