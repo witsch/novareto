@@ -1,16 +1,18 @@
 <tal:content define="items handler/getItems">
-  <h1>Cart</h1>
+  <h1>Warenkorb</h1>
   <div tal:condition="not: items">
     The shopping cart is empty.
   </div>
   <div tal:condition="items">
     <fieldset>
-      <legend>Membership</legend>
-      <p>Some text</p>
       <input type="checkbox" id="cart-member"
 	     tal:attributes="checked context/is_member"
-	     /> I am a member
-    </fieldset>
+	     /> Mitgliedsbetrieb der BG Verkehr 
+           <span align="right"> 
+            <strong> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice" /> </strong>
+            zzgl. MwST. und Versand 
+           </span>
+            
     <table class="listing nosort">
       <thead>
 	<tr>
@@ -30,10 +32,22 @@
 		 tal:attributes="href item/url" />
 	    </td>
 	    <td tal:content="item/code" />
-	    <td tal:content="item/price" />
-	    <td class="quantity" tal:content="item/quantity" />
+	    <td>
+                <span tal:content="item/price" />
+            </td>
+	    <td> 
+                <span class="quantity" tal:content="item/quantity" />
+                  <a href=""
+                     class="cart-action"
+                     tal:attributes="href string:${cart_url}/plus/${item/code}"
+                     >+</a>
+                  <a href=""
+                     class="cart-action"
+                     tal:attributes="href string:${cart_url}/minus/${item/code}"
+                     >-</a>
+            </td>    
 	    <td tal:content="item/total_price" />
-            HELLLO
+            <!--
 	    <td>
 	      <a href=""
 		 class="cart-action"
@@ -45,22 +59,26 @@
 		 tal:attributes="href string:${cart_url}/minus/${item/code}"
 		 >-</a>
 	    </td>
+            -->
 	    <td>
 	      <a href=""
 		 class="cart-action"
 		 tal:attributes="href string:${cart_url}/delete/${item/code}"
-		 >X</a>
+		 >aus dem <br> Warenkorb <br> entfernen</a>
 	    </td>
 	  </tr>
+          <!--
 	  <tr>
 	    <td colspan="4" style="text-align: right;">Total</td>
 	    <td tal:content="handler/getTotalPrice" />
 	  </tr>
+          -->
 	</tal:loop>
       </tbody>
     </table>
 
-    <a href="++cart++/checkout">Checkout</a>
+    <a href="++cart++/checkout">bestellen</a>
+    </fieldset>
 
   </div>
 </tal:content>

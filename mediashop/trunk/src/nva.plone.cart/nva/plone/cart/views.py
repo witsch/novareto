@@ -186,3 +186,10 @@ class Checkout(CartNamespace, grok.Form):
            <span class="widget"> %s </span>
         </div>""" %(id, css_class, label, required, description, error, input)
         return ret 
+
+
+class Thanks(grok.View):
+    grok.context(ISessionCart)
+
+    def update(self):
+        print self.context.cart

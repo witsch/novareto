@@ -11,7 +11,7 @@ class ICartWrapper(Interface):
     """
     is_member = Bool(
         title = u"The cart owner is a member",
-        default = False
+        default = True 
         )
 
     def __init__(cart, *arg, **kw):

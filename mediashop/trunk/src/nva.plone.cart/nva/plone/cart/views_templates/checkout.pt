@@ -28,23 +28,20 @@
          <dd tal:content="status" />
       </dl>
     </tal:status>
-
+<!--
     <h1 class="documentFirstHeading"
         i18n:translate=""
         tal:condition="view/label"
         tal:content="view/label"
         metal:define-slot="heading">Do something</h1>
-
+-->
     <p tal:content="view/description|nothing">Description</p>
 
    <fieldset>
-     <legend>Informationen</legend>
      <ul> 
-      <span tal:content="context/is_member"/>
-      <li tal:condition="context/is_member">You are a member</li>
+      <li tal:condition="context/is_member">Mitgliedsbetrieb der BG Verkehr</li>
       <li> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice"/> zugl. MwST und Versand </li> 
      </ul> 
-   </fieldset>
 
    <metal:block define-macro="header">
 
@@ -66,12 +63,12 @@
    </tal:block>
    </metal:block>
 
+
+   <h3> Bestellformular </h3>
+
     <div metal:define-slot="extra_info" tal:replace="nothing">
     </div>
 
-    <fieldset tal:define="form_name view/form_name|nothing"
-              tal:omit-tag="not:form_name">
-      <legend tal:condition="form_name" tal:content="form_name">Form name</legend>
 
 
       <div tal:define="mnr python: view.widgets['mitgliedsnummer'];

@@ -52,7 +52,7 @@ class SessionCart(CartMixin):
 
     @property
     def is_member(self):
-        return IMemberCart.providedBy(self.cart)
+        return not IMemberCart.providedBy(self.cart)
 
     @property
     def handler(self):
@@ -67,7 +67,7 @@ class Order(CartMixin):
     Title = getTitle = lambda self:u"Order %s" % self.id
     manage_options = PortalFolderBase.manage_options
 
-    is_member = False
+    is_member = True 
 
     @property
     def reference(self):
