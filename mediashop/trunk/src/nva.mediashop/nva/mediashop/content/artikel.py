@@ -96,8 +96,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'file',
         storage=atapi.AnnotationStorage(),
         widget=atapi.FileWidget(
-            label=_(u"Broschüre"),
-            description=_(u"Bitte hier die Broschre uploaden."),
+            label=_(u"Broschuere"),
+            description=_(u"Bitte hier die Broschure uploaden."),
         ),
         validators=('isNonEmptyFile'),
     ),
@@ -113,8 +113,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     atapi.StringField(
         'status',
         storage=atapi.AnnotationStorage(),
-        vocabulary =  ( ('1', 'Lieferbar'),
-                        ('2', 'nicht Lieferbar') ),
+        vocabulary =  ( 'lieferbar',
+                        'vergriffen' ),
         widget=atapi.SelectionWidget(
             label=_(u"Status"),
             description=_(u"Ist dieser Artikel momentan Lieferbar?"),

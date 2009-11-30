@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
       lang="en-US"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="nva.mediashop">
 
 <body>
 
@@ -38,6 +38,12 @@
       </metal:field>
     </p>
 
+    <p>
+      <metal:field use-macro="python:here.widget('text', mode='view')">
+	Details
+      </metal:field>
+    </p>
+    <br>
     <div class="article-stand"
 	 tal:condition="context/stand">
       <strong>Stand:</strong>
@@ -45,35 +51,27 @@
 	Description
       </metal:field>
     </div>
-
-    <p>
-      <metal:field use-macro="python:here.widget('text', mode='view')">
-	Details
-      </metal:field>
-    </p>
-   
-    <h3>Price details</h3>
-    <p>
-      <metal:field use-macro="python:here.widget('tax', mode='view')">
-	Taxes
-      </metal:field>
-    </p>
+    <br>
+    <strong i18n:translate="">Price details</strong>
     <p>
       <metal:field use-macro="python:here.widget('preis', mode='view')">
 	Price
       </metal:field>
       <span tal:content="context/preisinfo"/>
     </p>
+    <p>
+      <metal:field use-macro="python:here.widget('tax', mode='view')">
+	Taxes
+      </metal:field>
+    </p>
 
     <tal:file condition="context/file/getSize">
-      <h3>Misc. information</h3>
       <metal:field use-macro="python:here.widget('file', mode='view')">
 	Download file
       </metal:field>
     </tal:file>
 
     <div tal:replace="structure provider:plone.belowcontentbody" />
-
 </metal:main_macro>
 </div>
 
