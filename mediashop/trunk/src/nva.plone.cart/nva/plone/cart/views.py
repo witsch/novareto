@@ -161,7 +161,7 @@ class Checkout(CartNamespace, grok.Form):
 
         # We write it down.
         plone[ORDERS][cid] = order
-        
+        self.context.cart.clear()        
         utils.flash(self.request,
                     _(u"Der Bestellvorgang ist bei uns eingegangen."))
         self.request.response.redirect(self.portal_url+'/++cart++/thanks')
