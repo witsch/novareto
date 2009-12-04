@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from zope.interface import Interface, Attribute, moduleProvides
+
 from nva.mediashop.content.medienshop import MedienShop
 from nva.mediashop.content.kategorie import Kategorie
 from nva.mediashop.content.artikel import Artikel
-from nva.mediashop.interfaces import IMedienShop, IKategorie, IArtikel
-
-from zope.interface import Interface, Attribute, moduleProvides
+from nva.mediashop.content.shippinginfo import ShippingInformation
+from nva.mediashop.interfaces import (
+    IMedienShop, IKategorie, IArtikel, IOrderForm)
 
 
 class IShopContents(Interface):
@@ -20,6 +22,8 @@ class IShopContents(Interface):
     Artikel  = Attribute("A shop article.")
     IArtikel = Attribute("Represents a shop article item.")
 
+    ShippingInformation = Attribute("Shipping information.")
+    IOrderForm = Attribute("Represents the customer address information.")
 
 moduleProvides(IShopContents)
 __all__ = list(IShopContents)

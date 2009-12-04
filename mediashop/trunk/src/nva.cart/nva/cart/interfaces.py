@@ -60,6 +60,11 @@ class ICartItem(Interface):
         title = _(u"Number of unit")
         )
 
+    max_quantity = schema.Int(
+        required = True,
+        title = _(u"Maximum number of orderable items.")
+        )
+
     weight = schema.Float(
         required = False,
         title = _(u"Weight of the product"),

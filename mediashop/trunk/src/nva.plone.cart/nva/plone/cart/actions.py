@@ -35,7 +35,7 @@ class CartItemDelete(grok.View):
 
     def render(self):
         return u"Product code missing."
-
+    
     def publishTraverse(self, request, name):
         result = self.context.handler.delItem(name)
         if not result:
@@ -45,45 +45,50 @@ class CartItemDelete(grok.View):
 
         portal_url = getToolByName(self.context, 'portal_url')()
         self.redirect(portal_url + "/++cart++/summary")
+        
 
-
-class CartItemPlus(grok.View):
-    grok.name("plus")
+class CartAction(grok.View):
+    grok.baseclass()
     grok.context(ISessionCart)
 
     def render(self):
         return u"Product code missing."
 
-    def publishTraverse(self, request, name):
+    def getItem(self, name):
         item = self.context.handler.getItem(name)
         if not item:
-            raise NotFound(self, name, request)
-        else:
-            item.quantity += 1
-            utils.flash(self.request, u"Quantity increased for item %r." % name)
+            raise NotFound(self, name, self.request)
+        return item
 
+
+class CartItemPlus(CartAction):
+    grok.name("plus")
+
+    def publishTraverse(self, request, name):
+        item = self.getItem(name)
+        if item.quantity < item.max_quantity:
+            item.quantity += 1
+            status = u"Quantity increased for item %r."
+        else:
+            status = u"Reached max quantity for item %r."
+            
+        utils.flash(self.request, status % name)
         portal_url = getToolByName(self.context, 'portal_url')()
         self.redirect(portal_url + "/++cart++/summary")
 
 
-class CartItemMinus(grok.View):
+class CartItemMinus(CartAction):
     grok.name("minus")
-    grok.context(ISessionCart)
-
-    def render(self):
-        return u"Product code missing."
 
     def publishTraverse(self, request, name):
+        item = self.getItem(name)
         item = self.context.handler.getItem(name)
-        if not item:
-            raise NotFound(self, name, request)
+        if item.quantity <= 1:
+            status = u"Deleted item %r."
+            self.context.handler.delItem(name)
         else:
-            if item.quantity <= 1:
-                status = u"Deleted item %r."
-                self.context.handler.delItem(name)
-            else:
-                status = u"Quantity decreased for item %r."
-                item.quantity -= 1
+            status = u"Quantity decreased for item %r."
+            item.quantity -= 1
 
         utils.flash(self.request, status % name)
         portal_url = getToolByName(self.context, 'portal_url')()

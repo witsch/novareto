@@ -11,6 +11,7 @@ from zope.publisher.interfaces.http import IHTTPRequest
 from plone.app.content.item import Item
 from plone.app.content.container import Container
 
+
 from nva.cart import ICartRetriever, ICartHandler
 from nva.plone.cart.interfaces import IOrderFolder, IOrder
 from nva.plone.cart.interfaces import ISessionCart, ICartWrapper, IMemberCart
@@ -28,27 +29,17 @@ class OrderFolder(Container):
         self._setObject(name, obj, set_owner=0)
 
 
-class CartMixin(Item):
-    """A cart wrapper that takes care of all the non-core accesses.
+class SessionCart(Item):
+    """A cart living in the session.
     """
-    implements(ICartWrapper)
+    implements(ICartWrapper, ISessionCart)
+    meta_type = portal_type = 'TempFolder'
+    Title = getTitle = lambda self:u"Cart"
 
     def __init__(self, cart, id="++cart++"):
         Item.__init__(self, id=id)
         self.cart = cart
         self.id = id
-    
-    def browserDefault(self, request):
-        view = getMultiAdapter((self, request), name="summary")
-        return view, ()
-
-
-class SessionCart(CartMixin):
-    """A cart living in the session.
-    """
-    implements(ISessionCart)
-    meta_type = portal_type = 'TempFolder'
-    Title = getTitle = lambda self:u"Cart"
 
     @property
     def is_member(self):
@@ -59,15 +50,21 @@ class SessionCart(CartMixin):
         return ICartHandler(self.cart)
 
 
-class Order(CartMixin):
+class Order(Item):
     """A persisted cart.
     """
-    implements(IOrder)
+    implements(ICartWrapper, IOrder)
     meta_type = portal_type = 'Order'
     Title = getTitle = lambda self:u"Order %s" % self.id
     manage_options = PortalFolderBase.manage_options
 
     is_member = True 
+
+    def __init__(self, cart, shipping_information, id=None):
+        Item.__init__(self, id=id)
+        self.cart = cart
+        self.shipping_information = shipping_information
+        self.id = id
 
     @property
     def reference(self):

@@ -188,6 +188,7 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         self.code = context.code
         self.price = float(context.preis) 
         self.price_info = context.preisinfo
+        self.max_quantity = context.quantity
 
     @property
     def discount_price(self):

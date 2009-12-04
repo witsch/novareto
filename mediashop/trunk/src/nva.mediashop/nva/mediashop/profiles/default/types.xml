@@ -14,4 +14,6 @@
     meta_type="Factory-based Type Information with dynamic views" />
   <object name="MedienShop"
     meta_type="Factory-based Type Information with dynamic views" />
+  <object name="ShippingInformation"
+    meta_type="Factory-based Type Information" />
 </object>

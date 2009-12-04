@@ -13,6 +13,7 @@ from plone.app.layout.viewlets.interfaces import IBelowContentBody
 from Products.CMFPlone.utils import _createObjectByType
 
 from nva.mediashop.interfaces import IOrderForm
+from nva.mediashop.content import ShippingInformation
 from nva.cart import ICartAddable, ICartRetriever, ICartHandler
 from nva.cart import IDiscountedCartItem
 
@@ -147,8 +148,12 @@ class Checkout(CartNamespace, grok.Form):
         # It won't be altered later.
         cart = copy.deepcopy(self.context.cart)
 
+        # We write down the shipping information
+        shipping_information = ShippingInformation(id='shipping_information')
+        utils.writeChanges(shipping_information, self.form_fields, data)
+
         # We instanciate an order.
-        order = Order(cart, id=cid)
+        order = Order(cart, shipping_information, id=cid)
 
         # We write down the price. This won't be altered.
         order.total_price = self.context.handler.getTotalPrice()
@@ -194,3 +199,13 @@ class Thanks(grok.View):
 
     def update(self):
         print self.context.cart
+
+
+class ShippingInformationView(grok.DisplayForm):
+    grok.name("index")
+    grok.context(IOrderForm)
+    grok.require("zope2.View")
+
+    @property
+    def label(self):
+        return self.context.title

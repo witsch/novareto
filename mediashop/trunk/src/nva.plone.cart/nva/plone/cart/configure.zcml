@@ -32,9 +32,15 @@
       name="summary"
       />
 
+  <browser:defaultView
+      for="nva.mediashop.content.ShippingInformation"
+      name="index"
+      />
+
   <five:defaultViewable class=".cart.SessionCart" />
   <five:defaultViewable class=".cart.OrderFolder" />
   <five:defaultViewable class=".cart.Order" />
+  <five:defaultViewable class="nva.mediashop.content.ShippingInformation" />
 
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile

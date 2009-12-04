@@ -42,6 +42,8 @@ class IMemberCart(ISessionCart):
 class IOrder(ICartWrapper):
     """A cart that has been checked out.
     """
+    shipping_information = Attribute('Shipping information')
+    
     reference = TextLine(
         title = u"Reference of the order",
         readonly = True
