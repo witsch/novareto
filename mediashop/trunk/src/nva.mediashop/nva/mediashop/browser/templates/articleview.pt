@@ -56,8 +56,12 @@
     <p>
       <metal:field use-macro="python:here.widget('preis', mode='view')">
 	Price
+      </metal:field> Euro
+    </p>
+    <p>
+      <metal:field use-macro="python:here.widget('preisinfo', mode='view')">
+        Price info
       </metal:field>
-      <span tal:content="context/preisinfo"/>
     </p>
     <p>
       <metal:field use-macro="python:here.widget('tax', mode='view')">
