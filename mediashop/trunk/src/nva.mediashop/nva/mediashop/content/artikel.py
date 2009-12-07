@@ -85,9 +85,10 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'preisinfo',
         storage=atapi.AnnotationStorage(),
         vocabulary= (
-                ('1', 'Preis ist gleich für Mitglieder und nicht Mitglieder'),
-                ('2', 'Mitglieder zahlen nur die 50%'),
-                ('3', 'Mitglieder zahlen erst ab einer Menge > 4')),
+                ('1', 'Preis ist gleich für Mitglieder und nicht Mitglieder.'),
+                ('2', 'Mitglieder erhalten den Artikel unentgeltlich.'),
+                ('3', 'Mitglieder erhalten einen Rabatt von 50% des Artikelpreises.'),
+                ('4', 'Mitglieder zahlen ab einer Menge von mehr als 4 Stck. den vollen Artikelpreis.')),
         widget=atapi.SelectionWidget(
             label=_(u"Preis Information / Member"),
             description=_(u"Field description"),
@@ -193,19 +194,28 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
 
     @property
     def discount_price(self):
-        print "DISCOUTN", self.price_info
         if self.price_info == '1':
             preis = self.price
         elif self.price_info == '2':
-            preis = self.price / 2
+            preis = 0
         elif self.price_info == '3':
-            preis = self.price
-            self.quantity -= 4
+            preis = self.price / 2
+        elif self.price_info == '4':
+            preis = 0
+            if self.quantity > 4:
+                preis = self.price 
         return preis 
 
     @property
+    def calculate_quantity(self):
+        if self.price_info == '4':
+            if self.quantity > 4:
+                return self.quantity - 4
+        return self.quantity
+        
+    @property
     def total_price(self):
         if not IDiscountedCartItem.providedBy(self):
-            return self.discount_price * self.quantity
+            return self.discount_price * self.calculate_quantity
         return self.price * self.quantity
     
