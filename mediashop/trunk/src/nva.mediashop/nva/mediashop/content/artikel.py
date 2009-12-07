@@ -198,7 +198,7 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
             preis = self.price
         elif self.price_info == '2':
             preis = self.price / 2
-        elif sef.price_info == '3':
+        elif self.price_info == '3':
             preis = self.price
             self.quantity -= 4
         return preis 
