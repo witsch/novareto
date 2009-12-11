@@ -12,19 +12,20 @@
 		  getKC nocall:kssClassesView/getKssClassesInlineEditable;">
 
     <div tal:replace="structure provider:plone.abovecontenttitle" />
-
+<!--
     <h1 class="article-code">
       <metal:field use-macro="python:here.widget('code', mode='view')">
 	Code
       </metal:field>
     </h1>
-
+-->
     <div class="article-image" style="float:right"
-	 tal:condition="context/image/getSize">
+	 tal:condition="context/image">
       <metal:field use-macro="python:here.widget('image', mode='view')">
 	Image
       </metal:field>
     </div>
+    
 
     <h2 class="article-title">
       <metal:field use-macro="python:here.widget('title', mode='view')">

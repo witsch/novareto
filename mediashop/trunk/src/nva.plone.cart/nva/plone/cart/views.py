@@ -23,6 +23,12 @@ from nva.plone.cart import IOrder, IOrderFolder, OrderFolder, Order
 
 from nva.plone.cart import ploneCartFactory as _
 
+from zope.app.form.interfaces import WidgetInputError
+from zope.formlib.form import setUpWidgets
+from zope.app.form.browser.boolwidgets import CheckBoxWidget
+from zope.event import notify
+from zope.app.container.contained import ObjectAddedEvent
+
 ORDERS = "orders"
 
 
@@ -39,6 +45,7 @@ def null_validator(*args, **kwargs):
     return ()
 
 
+
 class AddToCartLink(grok.Viewlet):
     grok.viewletmanager(IBelowContentBody)
     grok.context(ICartAddable)
@@ -50,13 +57,25 @@ class AddToCart(grok.View):
     grok.name('cart.add')
     grok.context(ICartAddable)
 
-    def update(self):
+    def update(self, redirect=0):
         self.cart = ICartRetriever(self.request.SESSION)
+        self.redirect = redirect
 
     def render(self):
+        quantity = 0
         handler = ICartHandler(self.cart)
-        handler.addItem(self.context)
-        self.redirect(self.url(self.context))
+        max_quantity = self.context.quantity
+        buyablecontentadapter = handler.getItem(self.context.code)
+        if buyablecontentadapter:
+            quantity = buyablecontentadapter.quantity
+        if quantity < max_quantity:
+            handler.addItem(self.context)
+        else:    
+            utils.flash(self.request, _(u"Der maximale Bestellmenge dieses Artikel ist erreicht."))
+        url = self.url(self.context)    
+        if self.redirect != '1':
+            url = self.url(self.context.aq_inner.aq_parent)
+        self.request.response.redirect(url)
 
 
 class CartNamespace(object):
@@ -114,7 +133,6 @@ class CartView(CartNamespace, grok.View):
         self.content = getMultiAdapter((self.context, self.request),
                                        name="cartcontent")()
 
-
 class Checkout(CartNamespace, grok.Form):
     """A view for the Plone cart
     """
@@ -122,18 +140,42 @@ class Checkout(CartNamespace, grok.Form):
     label = _(u"Bestellformular")
     form_name = _(u"Bitte geben Sie alle Werte ein.")
     form_fields = grok.Fields(IOrderForm)
+    form_fields['datenschutz'].custom_widget = CheckBoxWidget
+
+    def validate_checkout(self, action, data):
+        errors = self.validate(action, data)
+        err = None 
+        if data.get('datenschutz') == False:
+            datenschutz = self.widgets.get('datenschutz')
+            datenschutz._error = err = WidgetInputError(field_name='datenschutz',
+                                           widget_title=u'Datenschutz', 
+                                           errors=_(u'Bitte das Feld DS ank.'))
+            errors.append(err) 
+
+        if self.context.is_member and data.get('mitgliedsnummer') == None:
+            mnr = self.widgets.get('mitgliedsnummer')
+            mnr._error = err = WidgetInputError(field_name='mitgliedsnummer',
+                                                widget_title=u'Mitgliedsnummer', 
+                                                errors=_(u'MitgliedsnummerFehler'))
+            errors.append(err) 
+        return errors    
+
+    def setUpWidgets(self, ignore_request=False):
+        super(Checkout, self).setUpWidgets(ignore_request=ignore_request)
+        self.widgets['plz'].displayWidth = 5 
+
 
     @form.action(_(u'Zuerck'), validator=null_validator)
     def handle_cancel(self, action, data):
-        self.request.response.redirect(self.portal_url+'++cart++')
+        self.request.response.redirect(self.portal_url+'/++cart++')
 
     @form.action(_(u'Abbrechen'), validator=null_validator)
     def handle_cancel(self, action, data):
-        self.context.cart.clear()
+        #self.context.cart.clear()
         utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
         self.request.response.redirect(self.portal_url)
 
-    @form.action(_(u'Bestellen'))
+    @form.action(_(u'Bestellen'), validator=validate_checkout)
     def handle_order(self, action, data):
         plone = getToolByName(self.context, 'portal_url').getPortalObject()
 

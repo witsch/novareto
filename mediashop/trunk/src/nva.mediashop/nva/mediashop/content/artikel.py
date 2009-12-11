@@ -57,12 +57,13 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
                  'mini'    : (200, 200),
                  'thumb'   : (128, 128),
                 },
-        validators=('isNonEmptyFile'),
+        #validators=('isNonEmptyFile'),
     ),
 
   atapi.TextField(
         'tax',
         storage=atapi.AnnotationStorage(),
+        default = '1',
         vocabulary=(
               ('1', 'Preisangaben verstehen sich zzgl. MwSt. und Versandkosten'),
               ('2', 'Preisangaben verstehen sich zzgl. Mwst.')), 
@@ -107,6 +108,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
    atapi.IntegerField(
         'quantity',
+        default = 99,
         storage=atapi.AnnotationStorage(),
         widget=atapi.IntegerWidget(
             label=_(u"Maximum quantity"),
@@ -116,6 +118,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     atapi.StringField(
         'status',
         storage=atapi.AnnotationStorage(),
+        default = 'lieferbar',
         vocabulary =  ( 'lieferbar',
                         'vergriffen' ),
         widget=atapi.SelectionWidget(
@@ -174,6 +177,13 @@ class Artikel(base.ATCTContent):
                 return image
 
         return base.ATCTContent.__bobo_traverse__(self, REQUEST, name)
+
+
+    def validate_quantity(self, value):
+        if not value.isdigit():
+            return _(u"Bitte nur ganze Zahlen eingeben")
+        if int(value) <= 0 or int(value) >= 100:
+            return _(u"Bitte nur Werte zwischen 1 und 99 eintragen")
 
 
 atapi.registerType(Artikel, PROJECTNAME)

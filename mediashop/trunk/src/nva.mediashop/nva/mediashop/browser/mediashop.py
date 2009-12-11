@@ -22,7 +22,7 @@ class Index(grok.Form):
     def handle_search(self, **kw):
         artikel = self.request.get('form.artikel', None)
         if artikel:
-            self.results = self.portal_catalog(portal_type="Artikel", searchableText=artikel)
+            self.results = self.portal_catalog(portal_type="Artikel", SearchableText=artikel)
             message = "Es wurden %s Ergebnisse gefunden" %len(self.results)
         else:
             message="Bitte geben Sie einen Suchbegriff ein" 
