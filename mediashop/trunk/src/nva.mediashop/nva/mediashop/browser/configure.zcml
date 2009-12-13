@@ -19,4 +19,12 @@
       layer=".interfaces.IMediashopLayer"
       />
 
+  <browser:menuItem
+    for="..interfaces.kategorie.IKategorie"
+    menu="plone_displayviews"
+    title="Kategorien"
+    action="@@index"
+    description="Tabellenansicht Kategorien"
+    />
+
 </configure>
