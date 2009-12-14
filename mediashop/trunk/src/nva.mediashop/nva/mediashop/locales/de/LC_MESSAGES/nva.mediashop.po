@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-11-30 14:03+0000\n"
+"POT-Creation-Date: 2009-12-14 10:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,12 +25,12 @@ msgstr ""
 msgid "Article status"
 msgstr ""
 
+#. Default: "Artikel"
 #: ./profiles/default/types/Artikel.xml
 msgid "Artikel"
 msgstr ""
 
-#: ./content/artikel.py:34
-#: ./interfaces/artikel.py:45
+#: ./content/artikel.py:35
 msgid "Artikel Nummer"
 msgstr ""
 
@@ -38,31 +38,45 @@ msgstr ""
 msgid "Availability of the article"
 msgstr ""
 
-#: ./content/artikel.py:51
+#: ./content/artikel.py:52
 msgid "Bild"
 msgstr ""
 
-#: ./content/artikel.py:52
+#: ./content/artikel.py:53
 msgid "Bild des Artikels."
 msgstr ""
 
-#: ./content/artikel.py:100
-msgid "Bitte hier die Broschre uploaden."
+#: ./content/artikel.py:80
+msgid "Bitte geben Sie hier den Preis an, der fuer Mitglieder gilt."
+msgstr "Bitte geben Sie hier den Preis an, der für Mitglieder gilt"
+
+#: ./content/artikel.py:102
+msgid "Bitte geben Sie hier den Preis an, der fuer Nicht-Mitglieder gilt."
+msgstr "Bitte geben Sie hier den Preis an, der für Nicht-Mitglieder gilt."
+
+#: ./content/artikel.py:112
+msgid "Bitte hier die Broschure uploaden."
 msgstr ""
 
-#: ./browser/templates/kategorie_view.pt:22
+#: ./content/artikel.py:195
+msgid "Bitte nur Werte zwischen 1 und 99 eintragen"
+msgstr ""
+
+#: ./content/artikel.py:193
+msgid "Bitte nur ganze Zahlen eingeben"
+msgstr ""
+
+#. Default: "Broschuere"
+#: ./browser/templates/kategorie_view.pt:21
 msgid "Broschuere"
 msgstr "Broschüre"
 
-#: ./content/artikel.py:99
-msgid "BroschÃ¼re"
-msgstr ""
-
-#: ./browser/templates/kategorie_view.pt:23
+#. Default: "Download"
+#: ./browser/templates/kategorie_view.pt:22
 msgid "Download"
 msgstr ""
 
-#: ./content/artikel.py:25
+#: ./content/artikel.py:26
 msgid "Field description"
 msgstr ""
 
@@ -74,38 +88,45 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: ./content/artikel.py:120
+#: ./content/artikel.py:134
 msgid "Ist dieser Artikel momentan Lieferbar?"
 msgstr ""
 
+#. Default: "Kategorie"
 #: ./profiles/default/types/Kategorie.xml
 msgid "Kategorie"
 msgstr ""
 
-#: ./content/artikel.py:109
+#: ./content/artikel.py:122
 msgid "Maximum quantity"
 msgstr ""
 
+#. Default: "MedienShop"
 #: ./profiles/default/types/MedienShop.xml
 msgid "MedienShop"
 msgstr ""
 
-#: ./content/artikel.py:69
+#: ./content/artikel.py:71
 msgid "Mwst Informationen"
 msgstr ""
 
-#: ./browser/templates/kategorie_view.pt:19
-msgid "Nr."
-msgstr ""
-
-#: ./content/artikel.py:77
 #: ./interfaces/artikel.py:21
 msgid "Preis"
 msgstr ""
 
-#: ./content/artikel.py:90
+#: ./content/artikel.py:92
 msgid "Preis Information / Member"
-msgstr ""
+msgstr "Zusätzliche Preisinformation für Mitglieder"
+
+#. Default: "Preis fuer Mitglieder"
+#: ./browser/templates/articleview.pt:56
+msgid "Preis fuer Mitglieder"
+msgstr "Preis für Mitglieder"
+
+#. Default: "Preis fuer Nicht-Mitglieder"
+#: ./browser/templates/articleview.pt:67
+msgid "Preis fuer Nicht-Mitglieder"
+msgstr "Preis für Nicht-Mitglieder"
 
 #: ./interfaces/artikel.py:27
 msgid "Preisinfo"
@@ -123,12 +144,12 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: ./browser/templates/kategorie_view.pt:21
-#: ./content/artikel.py:43
+#. Default: "Stand"
+#: ./browser/templates/kategorie_view.pt:20
 msgid "Stand"
 msgstr ""
 
-#: ./content/artikel.py:119
+#: ./content/artikel.py:133
 msgid "Status"
 msgstr ""
 
@@ -140,12 +161,12 @@ msgstr ""
 msgid "Tax information"
 msgstr ""
 
-#: ./content/artikel.py:24
-#: ./interfaces/artikel.py:33
+#: ./content/artikel.py:25
 msgid "Text"
 msgstr ""
 
-#: ./browser/templates/kategorie_view.pt:20
+#. Default: "Title"
+#: ./browser/templates/kategorie_view.pt:19
 msgid "Title"
 msgstr ""
 

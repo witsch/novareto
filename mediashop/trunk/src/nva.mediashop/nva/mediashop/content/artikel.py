@@ -76,8 +76,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'preis',
         storage=atapi.AnnotationStorage(),
         widget=atapi.DecimalWidget(
-            label=_(u"Preis"),
-            description=_(u"Field description"),
+            label=_(u"Preis fuer Mitglieder"),
+            description=_(u"Bitte geben Sie hier den Preis an, der fuer Mitglieder gilt."),
         ),
         validators=('isDecimal'),
     ),
@@ -86,14 +86,22 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'preisinfo',
         storage=atapi.AnnotationStorage(),
         vocabulary= (
-                ('1', 'Preis ist gleich für Mitglieder und nicht Mitglieder.'),
-                ('2', 'Mitglieder erhalten den Artikel unentgeltlich.'),
-                ('3', 'Mitglieder erhalten einen Rabatt von 50% des Artikelpreises.'),
-                ('4', 'Mitglieder zahlen ab einer Menge von mehr als 4 Stck. den vollen Artikelpreis.')),
+                ('1', 'Für Mitglieder gilt der angegebene Preis'),
+                ('2', 'Mitglieder zahlen erst ab einer Menge von mehr als 4 Stck. den angegebenen Preis.')),
         widget=atapi.SelectionWidget(
             label=_(u"Preis Information / Member"),
             description=_(u"Field description"),
         ),
+    ),
+
+    atapi.FixedPointField(
+        'preis_non_member',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.DecimalWidget(
+            label=_(u"Preis fuer Nicht-Mitglieder"),
+            description=_(u"Bitte geben Sie hier den Preis an, der fuer Nicht-Mitglieder gilt."),
+        ),
+        validators=('isDecimal'),
     ),
 
    atapi.FileField(
@@ -152,6 +160,7 @@ class Artikel(base.ATCTContent):
     file = atapi.ATFieldProperty('file')
     image = atapi.ATFieldProperty('image')
     preis = atapi.ATFieldProperty('preis')
+    preis_non_member = atapi.ATFieldProperty('preis_non_member')
     preisinfo = atapi.ATFieldProperty('preisinfo')
     quantity = atapi.ATFieldProperty('quantity')
     status = atapi.ATFieldProperty('status')
@@ -198,7 +207,8 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         self.title = unicode(context.Title(), 'utf-8')
         self.url = context.absolute_url()
         self.code = context.code
-        self.price = float(context.preis) 
+        self.price = float(context.preis)
+        self.non_member_price = float(context.preis_non_member) 
         self.price_info = context.preisinfo
         self.max_quantity = context.quantity
 
@@ -208,17 +218,13 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
             preis = self.price
         elif self.price_info == '2':
             preis = 0
-        elif self.price_info == '3':
-            preis = self.price / 2
-        elif self.price_info == '4':
-            preis = 0
             if self.quantity > 4:
                 preis = self.price 
         return preis 
 
     @property
     def calculate_quantity(self):
-        if self.price_info == '4':
+        if self.price_info == '2':
             if self.quantity > 4:
                 return self.quantity - 4
         return self.quantity
@@ -227,5 +233,4 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
     def total_price(self):
         if not IDiscountedCartItem.providedBy(self):
             return self.discount_price * self.calculate_quantity
-        return self.price * self.quantity
-    
+        return self.non_member_price * self.quantity

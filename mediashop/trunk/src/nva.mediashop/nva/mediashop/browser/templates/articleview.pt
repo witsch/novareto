@@ -53,16 +53,22 @@
       </metal:field>
     </div>
     <br>
-    <strong i18n:translate="">Price details</strong>
+    <strong i18n:translate="Preis fuer Mitglieder">Preis fuer Mitglieder</strong>
     <p>
       <metal:field use-macro="python:here.widget('preis', mode='view')">
 	Price
       </metal:field> Euro
     </p>
-    <p>
+    <p tal:condition="python: here.preisinfo != '1'">
       <metal:field use-macro="python:here.widget('preisinfo', mode='view')">
         Price info
       </metal:field>
+    </p>
+    <strong i18n:translate="Preis fuer Nicht-Mitglieder">Preis fuer Nicht-Mitglieder</strong>
+    <p>                                                                                                                                                          
+      <metal:field use-macro="python:here.widget('preis_non_member', mode='view')">
+        Price
+      </metal:field> Euro
     </p>
     <p>
       <metal:field use-macro="python:here.widget('tax', mode='view')">
