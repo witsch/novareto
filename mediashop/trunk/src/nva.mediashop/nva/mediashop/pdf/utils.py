@@ -10,7 +10,7 @@ from email.MIMEText import MIMEText
 import string
 import whrandom
 
-mailserver='192.168.2.13'
+mailserver='10.33.176.4'
 
 
 def sMail(to,sender,cc,subject,text,path,filename):

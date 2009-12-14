@@ -24,13 +24,25 @@ def splitline (line):
 
     return zeilen
 
+def kopf (c):
+    '''
+    Kopf: Ueberschrift, Logo, Trennlinie
+
+    Achtung: Pfad fuer 'Logo' anpassen
+    '''
+   # bcp="/opt/plone/plone/products/Registrierung/lib/Logo-BG-Verkehr-schwarz-2z.png"
+    bcp="/opt/plone/medienshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
+
+    c.drawImage(bcp,13*cm,26.7*cm,width=6.00*cm,height=1.55*cm)
+
+    c.setLineWidth (1) 
+    c.line(2.5*cm,26.5*cm,19.0*cm,26.5*cm)
+
 
 #Definition einer Funktion
 def createpdf (filename, daten):
     """
     Schreibt eine PDF-Datei
-
-    Achtung: Pfad fuer 'Logo' anpassen
     """
 
     #---------------------------------------------------------------------------
@@ -47,18 +59,12 @@ def createpdf (filename, daten):
     schriftart     = "Helvetica"
     courier        = "Courier-Bold"
     schriftartfett = "Helvetica-Bold"
+
     datum          = strftime("%d.%m.%Y",gmtime())
 
-    # Kopf: Ueberschrift, Logo, Trennlinie
-    c.setFont(schriftartfett, 14)
-
-    bcp="/Users/cklinger/work/bgf/mshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
-    c.drawImage(bcp,13*cm,26.7*cm,width=6.00*cm,height=1.55*cm)
-
-    c.line(2.5*cm,26.5*cm,19.0*cm,26.5*cm)
+    kopf(c)
 
     # Adressfeld
-    offset = 0.0
     c.setFont(schriftartfett, 15)
     c.drawString(14.0*cm, 24.5*cm, 'Fax.: 040 3980-1040')
 
@@ -88,8 +94,10 @@ def createpdf (filename, daten):
     c.drawString( 2.5*cm, 15.5*cm, 'Anzahl')
     c.drawString( 4.0*cm, 15.5*cm, 'Artikel')
     c.drawString(17.0*cm, 15.5*cm, 'Bestellwert')
+  
+    c.setLineWidth (0.5) 
+    c.line(2.5*cm,15.3*cm,19.0*cm,15.3*cm)
 
-    c.setFont(schriftart, 12)
     for artikel in daten['Bestellung']:
         offset += 0.6
         c.setFont(courier, 14)                            #  Proportionalschrift
@@ -99,17 +107,25 @@ def createpdf (filename, daten):
         c.setFont(schriftart, 12)
         c.drawString(16.0*cm, (14.7-offset)*cm, 'EUR')
 
+        # Einzelpreise zusammenzaehlen
+        gesamtpreis +=  artikel['Preis']
+
         # Die Artikelbeschreibung kann ueber mehrere Zeilen gehen
         text_artikel = splitline(artikel['Artikel'])
-        print text_artikel
         offset_text = 0.0
         for zeile in text_artikel:
             offset += offset_text
             c.drawString( 4.0*cm, (14.7-offset)*cm, zeile)
             offset_text = 0.4
-
-        # Einzelpreise zusammenzaehlen
-        gesamtpreis +=  artikel['Preis']
+   
+        c.setLineWidth (0.5) 
+        c.line(2.5*cm,(14.55-offset)*cm,19.0*cm,(14.55-offset)*cm)
+     
+        # Neue Seite, wenn Seite voll
+        if offset > 10.0:
+            c.showPage()
+            kopf(c)
+            offset = -11.5
 
     c.setFont(schriftart, 12)
     c.drawString( 2.5*cm, (13.5-offset)*cm, 'Gesamtbestellwert:')
@@ -119,7 +135,12 @@ def createpdf (filename, daten):
     c.setFont(schriftart, 12)
     c.drawString( 9.3*cm, (13.5-offset)*cm, daten['Mwst'])
 
-    # Angaben zum Besteller
+    # Angaben zum Besteller. Neue Seite, wenn Seite voll
+    if offset > 7.0:
+        c.showPage()
+        kopf(c)
+        offset = -11.0
+
     c.setFont(schriftartfett, 12)
     c.drawString( 2.5*cm, (12.3-offset)*cm, 'Absender:')
     c.setFont(schriftart, 10)
@@ -163,6 +184,12 @@ if __name__=='__main__':
     # Bestellte Artikel 
     bestellung = [ { 'Anzahl': 16, 'Artikel': 'Mitgliederzeitschrift "Sicherheitspartner"', 'Preis': 122.30},
                    { 'Anzahl': 5, 'Artikel': '"Der Fahrensmann" - das Informationsblatt für die Binnenschifffahrt', 'Preis': 10.00},
+                   { 'Anzahl': 5, 'Artikel': '"Der Fahrensmann" - das Informationsblatt für die Binnenschifffahrt', 'Preis': 10.00},
+                   { 'Anzahl': 5, 'Artikel': '"Der Fahrensmann" - das Informationsblatt für die Binnenschifffahrt', 'Preis': 10.00},
+                   { 'Anzahl': 5, 'Artikel': '"Der Fahrensmann" - das Informationsblatt für die Binnenschifffahrt', 'Preis': 10.00},
+                   { 'Anzahl': 5, 'Artikel': '"Der Fahrensmann" - das Informationsblatt für die Binnenschifffahrt', 'Preis': 10.00},
+                   { 'Anzahl': 5, 'Artikel': '"Der Fahrensmann" - das Informationsblatt für die Binnenschifffahrt', 'Preis': 10.00},
+                   { 'Anzahl': 5, 'Artikel': '"Der Fahrensmann" - das Informationsblatt für die Binnenschifffahrt', 'Preis': 10.00},
               ]
 
     # Mehrwertsteuer aus Artikelbeschreibung
@@ -196,7 +223,5 @@ if __name__=='__main__':
     daten['Telefon']     = telefon
     daten['Telefax']     = telefax
     daten['Email']       = email
-
-    print daten
 
     test = createpdf (filename, daten )
