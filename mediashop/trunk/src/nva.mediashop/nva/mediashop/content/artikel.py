@@ -90,6 +90,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         widget=atapi.MultiSelectionWidget(
             label=_(u"Preis Information / Member"),
             description=_(u"Field description"),
+            format = "checkbox",
         ),
     ),
 
