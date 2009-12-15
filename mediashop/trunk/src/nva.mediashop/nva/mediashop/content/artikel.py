@@ -86,9 +86,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'preisinfo',
         storage=atapi.AnnotationStorage(),
         vocabulary= (
-                ('1', 'Für Mitglieder gilt der angegebene Preis'),
-                ('2', 'Mitglieder zahlen erst ab einer Menge von mehr als 4 Stck. den angegebenen Preis.')),
-        widget=atapi.SelectionWidget(
+                ('2', 'Mitglieder erhalten 3 Examplare kostenlos.')),
+        widget=atapi.MultiSelectionWidget(
             label=_(u"Preis Information / Member"),
             description=_(u"Field description"),
         ),
@@ -109,7 +108,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         widget=atapi.FileWidget(
             label=_(u"Broschuere"),
-            macro="custom_file.pt",
+            macro="custom_file",
             description=_(u"Bitte hier die Broschure uploaden."),
         ),
         validators=('isNonEmptyFile'),
@@ -226,8 +225,8 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
     @property
     def calculate_quantity(self):
         if self.price_info == '2':
-            if self.quantity > 4:
-                return self.quantity - 4
+            if self.quantity > 3:
+                return self.quantity - 3 
         return self.quantity
         
     @property
