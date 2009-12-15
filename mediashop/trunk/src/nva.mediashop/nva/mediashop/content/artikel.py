@@ -109,6 +109,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         widget=atapi.FileWidget(
             label=_(u"Broschuere"),
+            macro="custom_file.pt",
             description=_(u"Bitte hier die Broschure uploaden."),
         ),
         validators=('isNonEmptyFile'),
