@@ -48,6 +48,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
    atapi.ImageField(
         'image',
         storage=atapi.AnnotationStorage(),
+        max_size=(150,216),
         widget=atapi.ImageWidget(
             label=_(u"Bild"),
             description=_(u"Bild des Artikels."),
