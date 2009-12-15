@@ -1,3 +1,4 @@
+<html-cond tal:condition="python: context.status == 'lieferbar'">
 <ul i18n:domain="nva.plone.cart">
    <li>
      <a href="" tal:attributes="href string:${context/absolute_url}/@@cart.add">
@@ -5,3 +6,4 @@
      </a>
     </li>
 </ul>
+</html-cond>

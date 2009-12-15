@@ -20,7 +20,6 @@
       <thead>
 	<tr>
 	  <th i18n:translate="">Titel der Broschuere</th>
-	  <th i18n:translate="">Artikelnummer</th>
 	  <th i18n:translate="">Einzelpreis</th>
 	  <th i18n:translate="">Anzahl</th>
 	  <th i18n:translate="">Gesamtpreis</th>
@@ -34,7 +33,6 @@
 	      <a href="" tal:content="item/title"
 		 tal:attributes="href item/url" />
 	    </td>
-	    <td tal:content="item/code" />
 	    <td>
                 <span tal:content="item/price" />
             </td>
@@ -44,12 +42,12 @@
                      class="cart-action"
 		     tal:condition="python: item.quantity < item.max_quantity"
                      tal:attributes="href string:${cart_url}/plus/${item/code}"
-                     > <font size="2">+</font> </a>
+                     > <font size="4">+</font> </a>
                   <a href=""
                      class="cart-action"
 		     tal:condition="item/quantity"
                      tal:attributes="href string:${cart_url}/minus/${item/code}"
-                     ><font size="2">-</font></a>
+                     ><font size="4">-</font></a>
             </td>    
 	    <td tal:content="item/total_price" />
             <!--

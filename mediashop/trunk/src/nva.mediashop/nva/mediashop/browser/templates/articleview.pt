@@ -59,10 +59,8 @@
 	Price
       </metal:field> Euro
     </p>
-    <p tal:condition="python: here.preisinfo != '1'">
-      <metal:field use-macro="python:here.widget('preisinfo', mode='view')">
-        Price info
-      </metal:field>
+    <p i18n:translate="" tal:condition="here/preisinfo">
+       Mitglieder erhalten 3 Exemplare kostenlos.
     </p>
     <strong i18n:translate="Preis fuer Nicht-Mitglieder">Preis fuer Nicht-Mitglieder</strong>
     <p>                                                                                                                                                          

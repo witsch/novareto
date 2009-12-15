@@ -29,8 +29,8 @@
 	  </table>
 	</dd>
 
-	<dd class="portletItem odd">
-	  total : <span tal:content="view/handler/getTotalPrice" />
+	<dd i18n:translate="" class="portletItem odd">
+	  Preis für Mitglieder : <span tal:content="view/handler/getTotalPrice" /> Euro
 	</dd>
 
         <dd class="portletFooter">

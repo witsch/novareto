@@ -17,7 +17,6 @@
 
      <div id="viewspace" metal:define-slot="viewspace">
 
-      <span tal:content="view/errors"/>
     <tal:status define="status view/status" condition="status">
       <dl class="portalMessage error"
                tal:condition="view/errors">
@@ -85,7 +84,7 @@
                        datenschutz python: view.widgets['datenschutz'];
                        land python: view.widgets['land']">
 
-        <div tal:replace="structure python: view.renderField(mnr)"/>
+        <div tal:replace="structure python: view.renderField(mnr)" tal:condition="context/is_member" />
         <div tal:replace="structure python: view.renderField(firma)"/>
         <div tal:replace="structure python: view.renderField(name, vorname)"/>
         <div tal:replace="structure python: view.renderField(strasse)"/>

@@ -171,7 +171,6 @@ class Checkout(CartNamespace, grok.Form):
 
     @form.action(_(u'Abbrechen'), validator=null_validator)
     def handle_cancel(self, action, data):
-        #self.context.cart.clear()
         utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
         self.request.response.redirect(self.portal_url)
 
@@ -206,7 +205,7 @@ class Checkout(CartNamespace, grok.Form):
         self.context.cart.clear()        
         utils.flash(self.request,
                     _(u"Der Bestellvorgang ist bei uns eingegangen."))
-        self.request.response.redirect(self.portal_url+'/++cart++/thanks')
+        self.request.response.redirect(self.portal_url+'/++cart++/thanks?id=cid')
 
     def renderField(self, *args):
         label = required = description = error = input = "" 
