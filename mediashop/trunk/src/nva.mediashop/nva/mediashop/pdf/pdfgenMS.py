@@ -31,7 +31,8 @@ def kopf (c):
     Achtung: Pfad fuer 'Logo' anpassen
     '''
    # bcp="/opt/plone/plone/products/Registrierung/lib/Logo-BG-Verkehr-schwarz-2z.png"
-    bcp="/opt/plone/medienshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
+    #bcp="/opt/plone/medienshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
+    bcp="/Users/cklinger/work/bgf/mshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
 
     c.drawImage(bcp,13*cm,26.7*cm,width=6.00*cm,height=1.55*cm)
 

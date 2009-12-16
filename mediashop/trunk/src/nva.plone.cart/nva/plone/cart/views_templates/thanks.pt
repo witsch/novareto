@@ -17,7 +17,7 @@
 
      <p i18n:translate=""> Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF -
      Symbol </p>
-
+      <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}"> Download </a>
     </metal:main>
   </body>
 </html>

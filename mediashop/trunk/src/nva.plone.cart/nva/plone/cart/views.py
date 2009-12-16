@@ -205,7 +205,7 @@ class Checkout(CartNamespace, grok.Form):
         self.context.cart.clear()        
         utils.flash(self.request,
                     _(u"Der Bestellvorgang ist bei uns eingegangen."))
-        self.request.response.redirect(self.portal_url+'/++cart++/thanks?id=cid')
+        self.request.response.redirect(self.portal_url+'/++cart++/thanks?id=%s' % cid)
 
     def renderField(self, *args):
         label = required = description = error = input = "" 
@@ -241,6 +241,23 @@ class Thanks(grok.View):
     def update(self):
         print self.context.cart
 
+
+class pdf(grok.View):
+    grok.context(ISessionCart)
+
+    def render(self, id=None):
+        plone = getToolByName(self.context, 'portal_url').getPortalObject()
+        if id:
+            orders = plone[ORDERS]
+            order = getattr(orders, id, None)
+            if order:
+                pdf = order.asPDF()
+                RESPONSE = self.request.response
+                RESPONSE.setHeader('content-type', 'application/pdf')
+                RESPONSE.setHeader('content-length', str(len(pdf)))
+                RESPONSE.setHeader('content-disposition', 'attachment; filename=Bestellung.pdf')
+                return pdf
+        return 
 
 class ShippingInformationView(grok.DisplayForm):
     grok.name("index")

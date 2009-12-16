@@ -16,6 +16,7 @@ from nva.cart import ICartRetriever, ICartHandler
 from nva.plone.cart.interfaces import IOrderFolder, IOrder
 from nva.plone.cart.interfaces import ISessionCart, ICartWrapper, IMemberCart
 
+from nva.mediashop.pdf.pdfgenMS import createpdf
 
 class OrderFolder(Container):
     """A Cart folder implementation.
@@ -50,6 +51,12 @@ class SessionCart(Item):
         return ICartHandler(self.cart)
 
 
+def nN(v):
+    if not v:
+        return ''
+    return v
+
+
 class Order(Item):
     """A persisted cart.
     """
@@ -69,6 +76,30 @@ class Order(Item):
     @property
     def reference(self):
         return self.id
+
+
+    def asPDF(self):
+        si = self.shipping_information
+        artikel = []
+        for item in self.cart.itervalues():
+            bestellung = {}
+            bestellung['Anzahl'] = item.quantity
+            bestellung['Artikel'] = item.title
+            bestellung['Preis'] = item.price
+            artikel.append(bestellung)
+        daten = {}
+        daten['Bestellung']  = artikel
+        daten['Mwst']        = 'zzgl. Versandkosten und gesetzl. MwSt.'
+        daten['VornameName'] = si.vorname + ' ' + si.name
+        daten['Mitglnr']     = nN(si.mitgliedsnummer)
+        daten['Firma']       = si.firma
+        daten['Strasse']     = si.strasse
+        daten['PlzOrt']      = si.plz + ' ' + si.ort
+        daten['Telefon']     = nN(si.telefon)
+        daten['Telefax']     = nN(si.telefax)
+        daten['Email']       = si.email
+        return createpdf('/Users/cklinger/Desktop/order.pdf', daten)
+
 
 
 class CartTraverser(grok.MultiAdapter):
