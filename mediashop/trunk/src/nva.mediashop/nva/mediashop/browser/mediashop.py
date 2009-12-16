@@ -17,6 +17,7 @@ class Index(grok.Form):
 
     def update(self):
         self.categories = [dict(title=x.Title, url=x.getURL()) for x in self.context.getFolderContents()] 
+        self.categories.append(dict(title='Alle Artikel', url=self.url(self.context, 'all')))
 
     @grok.action('Suchen')
     def handle_search(self, **kw):
@@ -28,3 +29,15 @@ class Index(grok.Form):
             message="Bitte geben Sie einen Suchbegriff ein" 
          
         IStatusMessage(self.request).addStatusMessage(message, type="info")
+        
+
+class All(grok.View):
+    grok.context(IMedienShop)
+    results = []
+
+    @property
+    def portal_catalog(self):
+        return getToolByName(self.context, 'portal_catalog')
+
+    def update(self):
+        self.results = self.portal_catalog(portal_type="Artikel")

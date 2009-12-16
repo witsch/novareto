@@ -85,7 +85,7 @@ class Order(Item):
             bestellung = {}
             bestellung['Anzahl'] = item.quantity
             bestellung['Artikel'] = item.title
-            bestellung['Preis'] = item.price
+            bestellung['Preis'] = item.total_price
             artikel.append(bestellung)
         daten = {}
         daten['Bestellung']  = artikel
