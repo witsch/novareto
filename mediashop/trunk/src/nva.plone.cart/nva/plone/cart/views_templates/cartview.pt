@@ -10,6 +10,7 @@
       <script type="text/javascript">
 	jq(document).ready(function() {
 	
+          jq.ajaxSetup({cache: false});
           var base_url = jq("link[rel=kss-base-url]").attr('href');
 
 	  jq('#cart-member').live("click", function(e){
@@ -24,9 +25,9 @@
 		    async: false,
 		    success: function(html){
 	              jq("#cart-content").html(html);
-		    },
+		    }
 		 });
-	       },
+	       }
 	    });
 	  });
 
@@ -41,12 +42,12 @@
 	         jq.ajax({
 	           type: "GET",
 		   url: base_url + "/++cart++/cartcontent",
-		   async: true,
+		   async: false,
 		   success: function(html){
 	             jq("#cart-content").html(html);
-		   },
+		   }
                  });
-	       },
+	       }
 	     });
 	   });
 
