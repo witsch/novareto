@@ -30,9 +30,8 @@ def kopf (c):
 
     Achtung: Pfad fuer 'Logo' anpassen
     '''
-   # bcp="/opt/plone/plone/products/Registrierung/lib/Logo-BG-Verkehr-schwarz-2z.png"
-    #bcp="/opt/plone/medienshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
-    bcp="/Users/cklinger/work/bgf/mshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
+    bcp="./src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
+    #bcp="/Users/cklinger/work/bgf/mshop/src/nva.mediashop/nva/mediashop/pdf/Logo-BG-Verkehr-schwarz-2z.png"
 
     c.drawImage(bcp,13*cm,26.7*cm,width=6.00*cm,height=1.55*cm)
 
@@ -145,7 +144,8 @@ def createpdf (filename, daten):
     c.setFont(schriftartfett, 12)
     c.drawString( 2.5*cm, (12.3-offset)*cm, 'Absender:')
     c.setFont(schriftart, 10)
-    c.drawString( 2.5*cm, (11.7-offset)*cm, 'Mitgliedsnummer:')
+    if len(daten['Mitglnr']) > 0:
+        c.drawString( 2.5*cm, (11.7-offset)*cm, 'Mitgliedsnummer:')
     c.drawString( 2.5*cm, (11.2-offset)*cm, 'Name:')
     c.drawString( 2.5*cm, (10.7-offset)*cm, 'Firma:')
     c.drawString( 2.5*cm, (10.2-offset)*cm, 'Straße:')
