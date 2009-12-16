@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-12-14 10:12+0000\n"
+"POT-Creation-Date: 2009-12-16 08:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,31 +38,36 @@ msgstr ""
 msgid "Availability of the article"
 msgstr ""
 
-#: ./content/artikel.py:52
+#. Default: "Back"
+#: ./browser/templates/articleview.pt:86
+msgid "Back"
+msgstr "Zurück"
+
+#: ./content/artikel.py:53
 msgid "Bild"
 msgstr ""
 
-#: ./content/artikel.py:53
+#: ./content/artikel.py:54
 msgid "Bild des Artikels."
 msgstr ""
 
-#: ./content/artikel.py:80
+#: ./content/artikel.py:81
 msgid "Bitte geben Sie hier den Preis an, der fuer Mitglieder gilt."
 msgstr "Bitte geben Sie hier den Preis an, der für Mitglieder gilt"
 
-#: ./content/artikel.py:102
+#: ./content/artikel.py:100
 msgid "Bitte geben Sie hier den Preis an, der fuer Nicht-Mitglieder gilt."
 msgstr "Bitte geben Sie hier den Preis an, der für Nicht-Mitglieder gilt."
 
-#: ./content/artikel.py:112
+#: ./content/artikel.py:111
 msgid "Bitte hier die Broschure uploaden."
 msgstr ""
 
-#: ./content/artikel.py:195
+#: ./content/artikel.py:194
 msgid "Bitte nur Werte zwischen 1 und 99 eintragen"
 msgstr ""
 
-#: ./content/artikel.py:193
+#: ./content/artikel.py:192
 msgid "Bitte nur ganze Zahlen eingeben"
 msgstr ""
 
@@ -88,7 +93,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: ./content/artikel.py:134
+#: ./content/artikel.py:133
 msgid "Ist dieser Artikel momentan Lieferbar?"
 msgstr ""
 
@@ -97,7 +102,7 @@ msgstr ""
 msgid "Kategorie"
 msgstr ""
 
-#: ./content/artikel.py:122
+#: ./content/artikel.py:121
 msgid "Maximum quantity"
 msgstr ""
 
@@ -106,7 +111,12 @@ msgstr ""
 msgid "MedienShop"
 msgstr ""
 
-#: ./content/artikel.py:71
+#. Default: "Mitglieder erhalten 3 Exemplare kostenlos."
+#: ./browser/templates/articleview.pt:62
+msgid "Mitglieder erhalten 3 Exemplare kostenlos."
+msgstr ""
+
+#: ./content/artikel.py:72
 msgid "Mwst Informationen"
 msgstr ""
 
@@ -114,7 +124,7 @@ msgstr ""
 msgid "Preis"
 msgstr ""
 
-#: ./content/artikel.py:92
+#: ./content/artikel.py:90
 msgid "Preis Information / Member"
 msgstr "Zusätzliche Preisinformation für Mitglieder"
 
@@ -124,7 +134,7 @@ msgid "Preis fuer Mitglieder"
 msgstr "Preis für Mitglieder"
 
 #. Default: "Preis fuer Nicht-Mitglieder"
-#: ./browser/templates/articleview.pt:67
+#: ./browser/templates/articleview.pt:65
 msgid "Preis fuer Nicht-Mitglieder"
 msgstr "Preis für Nicht-Mitglieder"
 
@@ -149,7 +159,7 @@ msgstr ""
 msgid "Stand"
 msgstr ""
 
-#: ./content/artikel.py:133
+#: ./content/artikel.py:132
 msgid "Status"
 msgstr ""
 
