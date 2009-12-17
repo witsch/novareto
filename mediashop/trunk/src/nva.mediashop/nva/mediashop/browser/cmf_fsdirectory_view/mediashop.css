@@ -1,3 +1,8 @@
 .fix {
     width: 100%;
 }
+
+dl.collapsible {
+    width: 350px;
+}
+
