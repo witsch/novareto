@@ -35,6 +35,12 @@ class IArtikel(Interface):
         description=_(u"Article description"),
     )
 
+    beschreibung = schema.Text(
+        title=_(u"Beschreibung"), 
+        required=False,
+        description=_(u"Beschreibugn"),
+    )
+
     tax = schema.Text(
         title=_(u"Tax"), 
         required=False,

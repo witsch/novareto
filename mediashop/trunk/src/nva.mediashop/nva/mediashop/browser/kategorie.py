@@ -12,3 +12,11 @@ class Index(grok.View):
 
     def update(self):
         self.artikel = self.context.getFolderContents(full_objects=True)
+
+    @property
+    def showDownload(self):
+        show = False
+        for artikel in self.artikel:
+            if artikel.file.get_size() > 0:
+                show = True
+        return show

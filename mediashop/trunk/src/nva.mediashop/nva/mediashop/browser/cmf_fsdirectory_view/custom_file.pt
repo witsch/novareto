@@ -24,20 +24,23 @@
                 <img tal:condition="icon" src=""
                      tal:attributes="src string:${here/portal_url}/$icon"/>
               </a>
+<!--
               <span class="discreet">
                   &mdash;
                   <span tal:replace="python:here.lookupMime(field.getContentType(here))">ContentType</span>,
                   <tal:size content="python:'%sKb' % (size / 1024)">0Kb</tal:size>
               </span>
+-->
           </tal:link>
           <span tal:condition="not:showLink">
               <img tal:condition="icon" src=""
                    tal:attributes="src string:${here/portal_url}/$icon"/>
-                  
+      <!--            
               <span class="discreet">
                   <span tal:content="python:here.lookupMime(field.getContentType(here))">ContentType</span> &mdash;
                   <tal:size content="python:'%s KB' % (size / 1024)">0 KB</tal:size>
               </span>
+      -->
           </span>
 
         </tal:block>

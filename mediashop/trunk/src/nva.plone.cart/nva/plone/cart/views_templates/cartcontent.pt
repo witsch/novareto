@@ -50,19 +50,6 @@
                      ><font size="4">-</font></a>
             </td>    
 	    <td tal:content="item/total_price" />
-            <!--
-	    <td>
-	      <a href=""
-		 class="cart-action"
-		 tal:attributes="href string:${cart_url}/plus/${item/code}"
-		 >+</a></td>
-	    <td>
-	      <a href=""
-		 class="cart-action"
-		 tal:attributes="href string:${cart_url}/minus/${item/code}"
-		 >-</a>
-	    </td>
-            -->
 	    <td>
 	      <a href=""
 		 class="cart-action"
@@ -71,12 +58,6 @@
                  </a>
 	    </td>
 	  </tr>
-          <!--
-	  <tr>
-	    <td colspan="4" style="text-align: right;">Total</td>
-	    <td tal:content="handler/getTotalPrice" />
-	  </tr>
-          -->
 	</tal:loop>
       </tbody>
     </table>

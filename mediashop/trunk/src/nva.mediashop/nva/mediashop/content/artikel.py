@@ -28,6 +28,17 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         ),
     ),
 
+    atapi.TextField(
+        'beschreibung',
+        storage=atapi.AnnotationStorage(),
+        default_output_type = 'text/x-html-safe',
+        searchable = 1,
+        widget=atapi.RichWidget(
+            label=_(u"Beschreibung"),
+            description=_(u"Beschreibung description"),
+        ),
+    ),
+
     atapi.StringField(
         'code',
         required=True,
@@ -52,6 +63,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         max_size=(150,216),
         widget=atapi.ImageWidget(
             label=_(u"Bild"),
+            macro="custom_image",
             description=_(u"Bild des Artikels."),
         ),
         sizes = {'large'   : (768, 768),
@@ -166,6 +178,7 @@ class Artikel(base.ATCTContent):
     status = atapi.ATFieldProperty('status')
     tax = atapi.ATFieldProperty('tax')
     text = atapi.ATFieldProperty('text')
+    beschreibung = atapi.ATFieldProperty('beschreibung')
     stand = atapi.ATFieldProperty('stand')
 
     # workaround to make resized images

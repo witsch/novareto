@@ -171,8 +171,9 @@ class Checkout(CartNamespace, grok.Form):
 
     @form.action(_(u'Abbrechen'), validator=null_validator)
     def handle_cancel(self, action, data):
+        self.context.cart.clear()        
         utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
-        self.request.response.redirect(self.portal_url)
+        self.request.response.redirect(self.portal_url+'/medienshop-der-bg-verkehr')
 
     @form.action(_(u'Bestellen'), validator=validate_checkout)
     def handle_order(self, action, data):

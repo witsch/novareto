@@ -43,6 +43,42 @@
       <li tal:condition="context/is_member" i18n:translate="">Mitgliedsbetrieb der BG Verkehr</li>
       <li i18n:translate=""> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice"/> zugl. MwST und Versand </li> 
      </ul> 
+
+
+    <dl id="beschreibung" class="collapsible collapsedOnLoad">          
+       <dt class="collapsibleHeader">Warenkorb anzeigen</dt>
+        <dd class="collapsibleContent">
+	    <table class="listing nosort" tal:define="items handler/getItems">
+	      <thead>
+		<tr>
+		  <th i18n:translate="">Titel der Broschuere</th>
+		  <th i18n:translate="">Einzelpreis</th>
+		  <th i18n:translate="">Anzahl</th>
+		  <th i18n:translate="">Gesamtpreis</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tal:loop repeat="item items">
+		  <tr tal:attributes="id string:item-${item/code}">
+		    <td>
+		      <a href="" tal:content="item/title"
+			 tal:attributes="href item/url" />
+		    </td>
+		    <td>
+			<span tal:content="item/price" />
+		    </td>
+		    <td> 
+			<span class="quantity" tal:content="item/quantity" />
+		    </td>    
+		    <td tal:content="item/total_price" />
+		  </tr>
+		</tal:loop>
+	      </tbody>
+	    </table>
+        </dd>
+    </dl>
+
+
 <!--
    <metal:block define-macro="header">
 
