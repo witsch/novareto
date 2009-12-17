@@ -51,7 +51,7 @@
      <div tal:condition="results">
 
 
-       <table class="grid listing">
+       <table class="grid listing fix">
         <thead>
          <tr>
            <th i18n:translate=""> Title </th>
