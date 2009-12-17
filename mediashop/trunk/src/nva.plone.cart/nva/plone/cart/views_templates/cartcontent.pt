@@ -42,12 +42,12 @@
                      class="cart-action"
 		     tal:condition="python: item.quantity < item.max_quantity"
                      tal:attributes="href string:${cart_url}/plus/${item/code}"
-                     > <font size="4">+</font> </a>
+                     > <img src="" tal:attributes="src string:pfeil-oben-2.gif"/> </a>
                   <a href=""
                      class="cart-action"
 		     tal:condition="item/quantity"
                      tal:attributes="href string:${cart_url}/minus/${item/code}"
-                     ><font size="4">-</font></a>
+                     > <img src="" tal:attributes="src string:pfeil-unten-2.gif"></a>
             </td>    
 	    <td tal:content="item/total_price" />
 	    <td>
