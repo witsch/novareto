@@ -21,6 +21,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'text',
         storage=atapi.AnnotationStorage(),
         default_output_type = 'text/x-html-safe',
+        searchable = 1,
         widget=atapi.RichWidget(
             label=_(u"Text"),
             description=_(u"Field description"),

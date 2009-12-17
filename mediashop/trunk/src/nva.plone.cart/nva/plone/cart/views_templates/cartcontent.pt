@@ -80,8 +80,11 @@
 	</tal:loop>
       </tbody>
     </table>
-
-    <a href="++cart++/checkout"><span i18n:translate="">bestellen </span></a>
+  
+    <ul>
+      <li> <a href="++cart++/checkout"><span i18n:translate="">bestellen </span></a></li>
+      <li> <a href="medienshop-der-bg-verkehr" i18n:translate=""> back </a> </li>
+    </ul>
     </fieldset>
 
   </div>

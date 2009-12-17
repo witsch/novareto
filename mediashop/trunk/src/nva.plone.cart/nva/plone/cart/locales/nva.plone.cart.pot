@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-12-16 08:27+0000\n"
+"POT-Creation-Date: 2009-12-17 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,22 +21,20 @@ msgstr ""
 msgid "Abbrechen"
 msgstr ""
 
-#. Default: "Actions"
 #: ./views_templates/cartcontent.pt:26
 msgid "Actions"
 msgstr ""
 
-#. Default: "Anzahl"
 #: ./views_templates/cartcontent.pt:24
 msgid "Anzahl"
 msgstr ""
 
-#. Default: "Bestellen"
+#: ./views.py:177
 #: ./views_templates/addtocartlink.pt:5
 msgid "Bestellen"
 msgstr ""
 
-#. Default: "Bestellformular"
+#: ./views.py:140
 #: ./views_templates/checkout.pt:66
 msgid "Bestellformular"
 msgstr ""
@@ -49,7 +47,6 @@ msgstr ""
 msgid "Bitte geben Sie alle Werte ein."
 msgstr ""
 
-#. Default: "Cart view"
 #: ./views_templates/thanks.pt:7
 msgid "Cart view"
 msgstr ""
@@ -66,43 +63,36 @@ msgstr ""
 msgid "Der maximale Bestellmenge dieses Artikel ist erreicht."
 msgstr ""
 
-#. Default: "Einzelpreis"
 #: ./views_templates/cartcontent.pt:23
 msgid "Einzelpreis"
 msgstr ""
 
-#. Default: "Error"
 #: ./views_templates/checkout.pt:23
 msgid "Error"
 msgstr ""
 
-#. Default: "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT}"
 #: ./views_templates/cartcontent.pt:15
 msgid "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT}"
 msgstr ""
 
-#. Default: "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT} zugl. MwST und Versand"
 #: ./views_templates/checkout.pt:44
 msgid "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT} zugl. MwST und Versand"
 msgstr ""
 
-#. Default: "Gesamtpreis"
 #: ./views_templates/cartcontent.pt:25
 msgid "Gesamtpreis"
 msgstr ""
 
-#. Default: "Ihre Bestellung ist erfolgreich bei uns eingegangen"
 #: ./views_templates/thanks.pt:14
 msgid "Ihre Bestellung ist erfolgreich bei uns eingegangen"
 msgstr ""
 
-#. Default: "Info"
 #: ./views_templates/checkout.pt:28
 msgid "Info"
 msgstr ""
 
-#. Default: "Mitgliedsbetrieb der BG Verkehr"
 #: ./views_templates/cartcontent.pt:12
+#: ./views_templates/checkout.pt:43
 msgid "Mitgliedsbetrieb der BG Verkehr"
 msgstr ""
 
@@ -110,17 +100,14 @@ msgstr ""
 msgid "MitgliedsnummerFehler"
 msgstr ""
 
-#. Default: "Order"
 #: ./profiles/default/types/Order.xml
 msgid "Order"
 msgstr ""
 
-#. Default: "Order Folder"
 #: ./profiles/default/types/OrderFolder.xml
 msgid "Order Folder"
 msgstr ""
 
-#. Default: "Preis für Mitglieder : <span>${DYNAMIC_CONTENT}</span> Euro"
 #: ./portlets/templates/cart.pt:33
 msgid "Preis für Mitglieder : <span>${DYNAMIC_CONTENT}</span> Euro"
 msgstr ""
@@ -129,32 +116,26 @@ msgstr ""
 msgid "Shopping Cart"
 msgstr ""
 
-#. Default: "Sie erhalten in Kuerze Ihre Ware"
 #: ./views_templates/thanks.pt:16
 msgid "Sie erhalten in Kuerze Ihre Ware"
 msgstr ""
 
-#. Default: "The shopping cart is empty."
 #: ./views_templates/cartcontent.pt:4
 msgid "The shopping cart is empty."
 msgstr ""
 
-#. Default: "Titel der Broschuere"
 #: ./views_templates/cartcontent.pt:22
 msgid "Titel der Broschuere"
 msgstr ""
 
-#. Default: "Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF - Symbol"
 #: ./views_templates/thanks.pt:18
 msgid "Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF - Symbol"
 msgstr ""
 
-#. Default: "Vielen Dank fuer Ihren Einkauf im Medienshop der BG-Verkehr"
 #: ./views_templates/thanks.pt:12
 msgid "Vielen Dank fuer Ihren Einkauf im Medienshop der BG-Verkehr"
 msgstr ""
 
-#. Default: "Warenkorb"
 #: ./views_templates/cartcontent.pt:3
 msgid "Warenkorb"
 msgstr ""
@@ -163,13 +144,15 @@ msgstr ""
 msgid "Zuerck"
 msgstr ""
 
-#. Default: "aus dem Warenkorb entfernen"
 #: ./views_templates/cartcontent.pt:70
 msgid "aus dem Warenkorb entfernen"
 msgstr ""
 
-#. Default: "bestellen"
-#: ./views_templates/cartcontent.pt:84
+#: ./views_templates/cartcontent.pt:86
+msgid "back"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:85
 msgid "bestellen"
 msgstr ""
 
@@ -188,7 +171,6 @@ msgstr ""
 msgid "manage_cart"
 msgstr ""
 
-#. Default: "zzgl. MwST. und Versand"
 #: ./views_templates/cartcontent.pt:16
 msgid "zzgl. MwST. und Versand"
 msgstr ""

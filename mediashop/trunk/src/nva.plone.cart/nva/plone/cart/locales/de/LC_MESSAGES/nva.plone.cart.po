@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-12-16 08:27+0000\n"
+"POT-Creation-Date: 2009-12-17 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,11 +32,13 @@ msgid "Anzahl"
 msgstr ""
 
 #. Default: "Bestellen"
+#: ./views.py:177
 #: ./views_templates/addtocartlink.pt:5
 msgid "Bestellen"
 msgstr ""
 
 #. Default: "Bestellformular"
+#: ./views.py:140
 #: ./views_templates/checkout.pt:66
 msgid "Bestellformular"
 msgstr ""
@@ -103,6 +105,7 @@ msgstr ""
 
 #. Default: "Mitgliedsbetrieb der BG Verkehr"
 #: ./views_templates/cartcontent.pt:12
+#: ./views_templates/checkout.pt:43
 msgid "Mitgliedsbetrieb der BG Verkehr"
 msgstr ""
 
@@ -161,15 +164,19 @@ msgstr ""
 
 #: ./views.py:168
 msgid "Zuerck"
-msgstr ""
+msgstr "Zurück"
 
 #. Default: "aus dem Warenkorb entfernen"
 #: ./views_templates/cartcontent.pt:70
 msgid "aus dem Warenkorb entfernen"
 msgstr ""
 
+#: ./views_templates/cartcontent.pt:86
+msgid "back"
+msgstr "Zurück"
+
 #. Default: "bestellen"
-#: ./views_templates/cartcontent.pt:84
+#: ./views_templates/cartcontent.pt:85
 msgid "bestellen"
 msgstr ""
 

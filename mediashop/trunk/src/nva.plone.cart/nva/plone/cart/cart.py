@@ -98,7 +98,9 @@ class Order(Item):
         daten['Telefon']     = nN(si.telefon)
         daten['Telefax']     = nN(si.telefax)
         daten['Email']       = si.email
-        return createpdf('/Users/cklinger/Desktop/order.pdf', daten)
+        #return createpdf('/Users/cklinger/Desktop/order.pdf', daten)
+        file = "/tmp/order-%s.pdf" % self.id
+        return createpdf(file, daten)
 
 
 
