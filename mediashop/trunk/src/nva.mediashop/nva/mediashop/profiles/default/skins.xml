@@ -1,47 +1,9 @@
 <?xml version="1.0"?>
-<object name="portal_skins" meta_type="Plone Skins Tool" allow_any="False"
-   cookie_persistence="False" default_skin="nva.mediashop.skin"
-   request_varname="plone_skin">
-
-  <object
-      name="nva.mediashop"
-      meta_type="Filesystem Directory View"
-      directory="nva.mediashop.browser:cmf_fsdirectory_view"
-      />
-
- <skin-path name="nva.mediashop.skin">
-  <layer name="custom"/>
-  <layer name="nva.mediashop" />
-  <layer name="LanguageTool"/>
-  <layer name="cmfeditions_views"/>
-  <layer name="CMFEditions"/>
-  <layer name="ChangeSet"/>
-  <layer name="kupu_plone"/>
-  <layer name="kupu"/>
-  <layer name="kupu_tests"/>
-  <layer name="archetypes"/>
-  <layer name="archetypes_kss"/>
-  <layer name="mimetypes_icons"/>
-  <layer name="plone_kss"/>
-  <layer name="ATContentTypes"/>
-  <layer name="ATReferenceBrowserWidget"/>
-  <layer name="ResourceRegistries"/>
-  <layer name="PasswordReset"/>
-  <layer name="gruf"/>
-  <layer name="plone_ecmascript"/>
-  <layer name="plone_wysiwyg"/>
-  <layer name="plone_prefs"/>
-  <layer name="plone_portlets"/>
-  <layer name="plone_templates"/>
-  <layer name="plone_styles"/>
-  <layer name="plone_form_scripts"/>
-  <layer name="plone_scripts"/>
-  <layer name="plone_forms"/>
-  <layer name="plone_images"/>
-  <layer name="plone_content"/>
-  <layer name="plone_login"/>
-  <layer name="plone_deprecated"/>
-  <layer name="plone_3rdParty"/>
-  <layer name="cmf_legacy"/>
+<object name="portal_skins">
+ <object name="nva.mediashop" meta_type="Filesystem Directory View"
+    directory="nva.mediashop.browser:cmf_fsdirectory_view"/>
+ <skin-path name="*">
+  <layer name="nva.mediashop"
+         insert-after="custom"/>
  </skin-path>
 </object>
