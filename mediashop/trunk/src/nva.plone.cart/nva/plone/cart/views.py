@@ -73,8 +73,10 @@ class AddToCart(grok.View):
         else:    
             utils.flash(self.request, _(u"Der maximale Bestellmenge dieses Artikel ist erreicht."))
         url = self.url(self.context)    
-        if self.redirect != '1':
+        if self.redirect == '0':
             url = self.url(self.context.aq_inner.aq_parent)
+        elif self.redirect == '2':
+            url = self.url(self.context.aq_inner.aq_parent.aq_parent, 'all')
         self.request.response.redirect(url)
 
 
