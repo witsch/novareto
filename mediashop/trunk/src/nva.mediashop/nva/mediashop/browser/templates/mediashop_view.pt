@@ -35,9 +35,8 @@
    Artikelsuche <input type="text" 
                        value="" 
                        name="form.artikel"
-                       tal:attributes="value request/form.artikel|nothing"/> <br>
+                       tal:attributes="value request/form.artikel|nothing"/> 
 
-      <div id="actionsView">
         <span class="actionButtons">
           <input type="submit" 
                  id="form.actions.suchen" 
@@ -45,7 +44,6 @@
                  value="Suchen" 
                  class="context" />
         </span>
-      </div>
      </form>
 
      <div tal:condition="results">

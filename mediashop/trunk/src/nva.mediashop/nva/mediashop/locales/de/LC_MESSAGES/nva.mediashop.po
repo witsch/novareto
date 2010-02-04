@@ -178,5 +178,5 @@ msgstr ""
 #. Default: "Title"
 #: ./browser/templates/kategorie_view.pt:19
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 

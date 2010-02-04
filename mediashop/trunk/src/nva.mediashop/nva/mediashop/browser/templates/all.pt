@@ -8,7 +8,7 @@
 <body>
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
-    <h1 class="documentFirstHeading"><span tal:content="context/title"/></h1>
+    <h1 class="documentFirstHeading">Alle Artikel</h1>
     <p class="documentDescription" tal:content="context/description">
        This is the message view of the content object</p>
 
@@ -17,8 +17,8 @@
     <thead>
      <tr>
        <th i18n:translate=""> Title </th>
-       <th i18n:translate=""> Stand </th>
-       <th i18n:translate=""> Broschuere </th>
+       <th id="center" i18n:translate=""> Stand </th>
+       <th id="center" i18n:translate=""> Broschuere </th>
        <th i18n:translate=""> Download </th>
      </tr>  
     </thead>
@@ -27,10 +27,10 @@
       <hh tal:define="art brain/getObject">
        <td> <span tal:content="art/title"/> <br> <a href=""
                   tal:attributes="href art/absolute_url"> ...weiter </a> </td>
-       <td> <span tal:content="art/stand"/> </td>
-       <td> 
+       <td id="center">  <span tal:content="art/stand"/> </td>
+       <td id="center"> 
             <span tal:content="art/status"/> <br>
-            <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add?redirect=0"
+            <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add?redirect=2"
                        tal:condition="python: art.status == 'lieferbar'">
               bestellen 
             </a> 

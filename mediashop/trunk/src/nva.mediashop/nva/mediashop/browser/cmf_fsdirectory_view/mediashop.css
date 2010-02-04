@@ -6,3 +6,20 @@ dl.collapsible {
     width: 350px;
 }
 
+#center {
+    text-align: center;
+}
+
+table.listing th, .stx table th {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#DEE7EC none repeat scroll 0 0;
+	border-bottom:1px solid #004994;
+	border-right:1px solid #004994;
+	border-top:1px solid #004994;
+	font-weight:normal;
+	padding:0.25em 0.5em;
+	text-transform:none;
+        width:100%;
+}

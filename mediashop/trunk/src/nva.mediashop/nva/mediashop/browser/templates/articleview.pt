@@ -38,13 +38,13 @@
 	Description
       </metal:field>
     </p>
-
+    <br>
     <p>
       <metal:field use-macro="python:here.widget('text', mode='view')">
 	Details
       </metal:field>
     </p>
-    <dl id="beschreibung" class="collapsible collapsedOnLoad"> 
+    <dl id="beschreibung" class="collapsible collapsedOnLoad" tal:condition="context/beschreibung"> 
        <dt class="collapsibleHeader">Zusätzliche Beschreibung</dt>
         <dd class="collapsibleContent">
 	      <metal:field use-macro="python:here.widget('beschreibung', mode='view')">
@@ -70,6 +70,7 @@
     <p i18n:translate="" tal:condition="here/preisinfo">
        Mitglieder erhalten 3 Exemplare kostenlos.
     </p>
+    <br>
     <strong i18n:translate="Preis fuer Nicht-Mitglieder">Preis fuer Nicht-Mitglieder</strong>
     <p>                                                                                                                                                          
       <metal:field use-macro="python:here.widget('preis_non_member', mode='view')">
@@ -88,7 +89,7 @@
       </metal:field>
     </tal:file>
 
-
+     <br>
     <div tal:replace="structure provider:plone.belowcontentbody" />
 
     <a href="" tal:attributes="href view/getParentUrl" i18n:translate=""> Back </a>
