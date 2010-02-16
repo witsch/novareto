@@ -135,6 +135,8 @@ class CartView(CartNamespace, grok.View):
         self.content = getMultiAdapter((self.context, self.request),
                                        name="cartcontent")()
 
+
+
 class Checkout(CartNamespace, grok.Form):
     """A view for the Plone cart
     """
@@ -143,6 +145,7 @@ class Checkout(CartNamespace, grok.Form):
     form_name = _(u"Bitte geben Sie alle Werte ein.")
     form_fields = grok.Fields(IOrderForm)
     form_fields['datenschutz'].custom_widget = CheckBoxWidget
+    form_fields['lieferadresse'].custom_widget = CheckBoxWidget 
 
     def validate_checkout(self, action, data):
         errors = self.validate(action, data)
@@ -160,6 +163,39 @@ class Checkout(CartNamespace, grok.Form):
                                                 widget_title=u'Mitgliedsnummer', 
                                                 errors=_(u'MitgliedsnummerFehler'))
             errors.append(err) 
+
+        if data.get('lieferadresse'):
+            lname = data.get('lname')
+            if not lname:
+		field = self.widgets.get('lname')
+		field._error = err = WidgetInputError(field_name='Name',
+							widget_title=u'Name', 
+							errors=_(u'Bitte dieses Feld bearbeiten.'))
+		errors.append(err) 
+
+            lstrasse = data.get('lstrasse')
+            if not lstrasse:
+		field = self.widgets.get('lstrasse')
+		field._error = err = WidgetInputError(field_name='Strasse',
+							widget_title=u'Strasse', 
+							errors=_(u'Bitte dieses Feld bearbeiten.'))
+		errors.append(err) 
+
+            lplz = data.get('lplz')
+            if not lplz:
+		field = self.widgets.get('lplz')
+		field._error = err = WidgetInputError(field_name='Postleitzahl',
+							widget_title=u'Postleitzahl', 
+							errors=_(u'Bitte dieses Feld bearbeiten.'))
+		errors.append(err) 
+
+            lort = data.get('lort')
+            if not lort:
+		field = self.widgets.get('lort')
+		field._error = err = WidgetInputError(field_name='Ort',
+							widget_title=u'Ort', 
+							errors=_(u'Bitte dieses Feld bearbeiten.'))
+		errors.append(err) 
         return errors    
 
     def setUpWidgets(self, ignore_request=False):
@@ -222,7 +258,7 @@ class Checkout(CartNamespace, grok.Form):
                 description += "%s " % field.hint
             if field.error():
                 error += "%s " %field.error()
-            input += "%s " %field()    
+            input += "%s " %field().replace('id="form.', 'id="form_')    
             id = field.name.replace('.', '_')
             css_class += "%s_" %field.name
         if len(error.strip()) > 0:

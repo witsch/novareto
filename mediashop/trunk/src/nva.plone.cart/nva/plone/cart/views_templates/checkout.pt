@@ -4,8 +4,28 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="nva.plone.cart">
+<head>
+</head>
 <body>
  <metal:main fill-slot="body">
+  <script type="text/javascript">
+   jq(document).ready(function() {
+       var lf = jq('input#form_lieferadresse').attr("checked");
+       if (lf != true)
+           jq('#lieferadresse').hide();
+       jq('#form_lieferadresse').click(function() {
+          var val = jq('input#form_lieferadresse').attr("checked");
+          if (val != true)
+             {
+                jq('#lieferadresse').hide();
+             }
+          else
+             {
+                jq('#lieferadresse').show();
+             }
+         });
+       });
+  </script>
   <div metal:define-macro="form">
 
     <form action="." metal:define-macro="master"
@@ -79,26 +99,6 @@
     </dl>
 
 
-<!--
-   <metal:block define-macro="header">
-
-   <div class="form-status" tal:define="status view/status" tal:condition="status">
-
-    <div class="summary"
-         i18n:translate=""
-         tal:content="view/status">
-         Form status summary
-    </div>
-
-    <ul id="formlib-errors" class="errors" tal:condition="view/errors">
-       <li tal:repeat="error view/error_views"> 
-         <span tal:replace="structure error">Error Type</span>
-       </li>
-    </ul>
-   </div>
-   </metal:block>
--->
-
    <h3 i18n:translate=""> Bestellformular </h3>
 
     <div metal:define-slot="extra_info" tal:replace="nothing">
@@ -117,6 +117,11 @@
                        telefax python: view.widgets['telefax'];
                        telefon python: view.widgets['telefon'];
                        ustid python: view.widgets['ustid'];
+                       lieferadresse python: view.widgets['lieferadresse'];
+                       lname python: view.widgets['lname'];
+                       lstrasse python: view.widgets['lstrasse'];
+                       lplz python: view.widgets['lplz'];
+                       lort python: view.widgets['lort'];
                        datenschutz python: view.widgets['datenschutz'];
                        land python: view.widgets['land']">
 
@@ -127,7 +132,14 @@
         <div tal:replace="structure python: view.renderField(plz, ort)"/>
         <div tal:replace="structure python: view.renderField(telefon, telefax)"/>
         <div tal:replace="structure python: view.renderField(email)"/>
+        <div tal:replace="structure python: view.renderField(lieferadresse)"/>
+        <div id="lieferadresse">
+           <div tal:replace="structure python: view.renderField(lname)"/>
+           <div tal:replace="structure python: view.renderField(lstrasse)"/>
+           <div tal:replace="structure python: view.renderField(lplz, lort)"/>
+        </div>
         <hr>
+
         Bei EU-Auslandsbestellung
         <div tal:replace="structure python: view.renderField(land)"/>
         <div tal:replace="structure python: view.renderField(ustid)"/>
