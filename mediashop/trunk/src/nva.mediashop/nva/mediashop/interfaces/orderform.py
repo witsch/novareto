@@ -19,6 +19,13 @@ class IOrderForm(Interface):
     land = TextLine(title=u"Land", required=False)
     ustid = TextLine(title=u"USTID-Nr.", required=False)
 
+    lieferadresse = Bool(title=u"Lieferadresse / Rechnungsadresse",
+                         description=u"Wenn Sie eine abweichende Lieferadresse haben klicken Sie bitte hier.")
+    lname = TextLine(title=u"Name", required=False)
+    lstrasse = TextLine(title=u"Straße", required=False)
+    lplz = TextLine(title=u"Postleitzahl", required=False)
+    lort = TextLine(title=u"Ort", required=False)
+
     datenschutz = Bool(title=u"Datenschutzvereinbarung", 
                        description=u"Mit der Übermittlung meiner Adressdaten an das von der BG Verkehr"
                                     "beauftragte Versandunternehmen GSV GmbH erkläre ich mich einverstanden."
