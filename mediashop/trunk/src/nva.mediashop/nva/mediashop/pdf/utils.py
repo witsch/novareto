@@ -56,7 +56,7 @@ def sMail(to,sender,cc,subject,text,path,filename):
     outer.attach(msg)
 
     server = smtplib.SMTP(mailserver)
-    server.set_debuglevel(9)
+    server.set_debuglevel(0)
     server.sendmail(absender, empfaenger, outer.as_string())
     #server.sendmail(absender, kopie, outer.as_string())
     server.close()

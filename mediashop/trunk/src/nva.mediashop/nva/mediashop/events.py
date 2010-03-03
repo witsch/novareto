@@ -14,11 +14,23 @@ def nN(v):
 
 @grok.subscribe(IOrder, IObjectAddedEvent)
 def printMessage(obj, event):
-    pass
-    #sMail(to="cklinger@novareto.de",
-    #      sender="cklinger@novareto.de",
-    #      cc="cklinger@novareto.de",
-    #      subject="Neue Bestellung",
-    #      text="WAREN",
-    #      path="/Users/cklinger/Desktop/order.pdf",
-    #      filename="order.pdf")
+    obj.asPDF()
+    filename="/tmp/order-%s.pdf" %obj.id
+    try:
+        to = obj.shipping_information.email 
+        sMail(to=to,
+	      sender="medienversand@bg-verkehr.de",
+	      cc="cklinger@novareto.de",
+	      subject="Neue Bestellung",
+	      text="Sie haben bestellt ... ",
+	       path=filename,
+	       filename="order.pdf")
+    except:
+        pass
+    sMail(to="christian.hanf@bg-verkehr.de",
+          sender="medienversand@bg-verkehr.de",
+          cc="cklinger@novareto.de",
+          subject="Neue Bestellung",
+          text="WAREN",
+          path=filename,
+          filename="order.pdf")

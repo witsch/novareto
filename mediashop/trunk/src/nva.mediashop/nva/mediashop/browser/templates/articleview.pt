@@ -62,14 +62,16 @@
     </div>
     <br>
     <strong i18n:translate="Preis fuer Mitglieder">Preis fuer Mitglieder</strong>
-    <p>
+    <br>
+    <span>
       <metal:field use-macro="python:here.widget('preis', mode='view')">
 	Price
       </metal:field> Euro
-    </p>
+    </span>
     <p i18n:translate="" tal:condition="here/preisinfo">
        Mitglieder erhalten 3 Exemplare kostenlos.
     </p>
+    <p tal:condition="not: here/preisinfo"> &nbsp; </p>
     <br>
     <strong i18n:translate="Preis fuer Nicht-Mitglieder">Preis fuer Nicht-Mitglieder</strong>
     <p>                                                                                                                                                          

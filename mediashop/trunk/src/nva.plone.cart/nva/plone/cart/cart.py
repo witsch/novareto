@@ -99,6 +99,12 @@ class Order(Item):
         daten['Telefax']     = nN(si.telefax)
         daten['Email']       = si.email
         #return createpdf('/Users/cklinger/Desktop/order.pdf', daten)
+        if si.lieferadresse:
+            daten['VornameName'] = si.lname
+            daten['Firma']       = ""
+            daten['Strasse']     = si.lstrasse
+            daten['PlzOrt']      = si.lplz + ' ' + si.lort
+
         file = "/tmp/order-%s.pdf" % self.id
         return createpdf(file, daten)
 

@@ -28,8 +28,8 @@ class IOrderForm(Interface):
 
     datenschutz = Bool(title=u"Datenschutzvereinbarung", 
                        description=u"Mit der Übermittlung meiner Adressdaten an das von der BG Verkehr"
-                                    "beauftragte Versandunternehmen GSV GmbH erkläre ich mich einverstanden."
-                                    "Die Adressdaten dienen ausschließlich dem einmaligen Versand. Eine"
-                                    "Weitergabe der Daten an Dritte ist untersagt.",
+                                    " beauftragte Versandunternehmen GSV GmbH erkläre ich mich einverstanden."
+                                    " Die Adressdaten dienen ausschließlich dem einmaligen Versand. Eine"
+                                    " Weitergabe der Daten an Dritte ist untersagt.",
                        required = True)
 

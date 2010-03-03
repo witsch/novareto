@@ -1,9 +1,12 @@
-<html-cond tal:condition="python: context.status == 'lieferbar'">
-<ul i18n:domain="nva.plone.cart">
+<ul i18n:domain="nva.plone.cart"
+    tal:condition="python: context.status == 'lieferbar'">
    <li>
      <a href="" tal:attributes="href string:${context/absolute_url}/@@cart.add">
        <span i18n:translate=""> Bestellen </span> 
      </a>
     </li>
 </ul>
-</html-cond>
+<ul i18n:domain="nva.plone.cart"
+    tal:condition="python: context.status != 'lieferbar'">
+  <li> Dieser Artikel ist derzeit vergriffen. </li>
+</ul>

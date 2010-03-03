@@ -10,19 +10,12 @@
  <metal:main fill-slot="body">
   <script type="text/javascript">
    jq(document).ready(function() {
-       var lf = jq('input#form_lieferadresse').attr("checked");
+       var lf = jq('input#form_lieferadresse').attr('checked');
        if (lf != true)
            jq('#lieferadresse').hide();
        jq('#form_lieferadresse').click(function() {
-          var val = jq('input#form_lieferadresse').attr("checked");
-          if (val != true)
-             {
-                jq('#lieferadresse').hide();
-             }
-          else
-             {
-                jq('#lieferadresse').show();
-             }
+          /*var val = jq('input#form_lieferadresse').attr("checked");*/
+           jq('#lieferadresse').toggle()
          });
        });
   </script>

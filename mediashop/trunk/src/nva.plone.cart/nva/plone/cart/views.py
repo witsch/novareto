@@ -201,9 +201,9 @@ class Checkout(CartNamespace, grok.Form):
     def setUpWidgets(self, ignore_request=False):
         super(Checkout, self).setUpWidgets(ignore_request=ignore_request)
         self.widgets['plz'].displayWidth = 5 
+        self.widgets['lplz'].displayWidth = 5 
 
-
-    @form.action(_(u'Zuerck'), validator=null_validator)
+    @form.action(_(u'Zurück'), validator=null_validator)
     def handle_cancel(self, action, data):
         self.request.response.redirect(self.portal_url+'/++cart++')
 
