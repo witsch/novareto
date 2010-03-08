@@ -15,22 +15,26 @@ def nN(v):
 @grok.subscribe(IOrder, IObjectAddedEvent)
 def printMessage(obj, event):
     obj.asPDF()
+    textmail = obj.asText()
+
     filename="/tmp/order-%s.pdf" %obj.id
+   
+    # Mail an Besteller
     try:
         to = obj.shipping_information.email 
         sMail(to=to,
 	      sender="medienversand@bg-verkehr.de",
-	      cc="cklinger@novareto.de",
-	      subject="Neue Bestellung",
-	      text="Sie haben bestellt ... ",
+              cc="",
+	      subject="Ihre Medienbestellung bei der BG Verkehr",
+	      text="In der Anlage zu dieser E-Mail finden Sie das PDF-Dokument mit Ihrer Medienbestellung bei Ihrer BG-Verkehr. ",
 	       path=filename,
-	       filename="order.pdf")
+	       filename="Bestellung.pdf")
     except:
         pass
-    sMail(to="christian.hanf@bg-verkehr.de",
+    sMail(to="ulrike.roth@bg-verkehr.de",
           sender="medienversand@bg-verkehr.de",
-          cc="cklinger@novareto.de",
+          cc="",
           subject="Neue Bestellung",
-          text="WAREN",
+          text=textmail,
           path=filename,
-          filename="order.pdf")
+          filename="Bestellung.pdf")

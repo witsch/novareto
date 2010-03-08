@@ -14,13 +14,13 @@ class IOrderForm(Interface):
     plz = TextLine(title=u"Postleitzahl")
     ort = TextLine(title=u"Ort")
     email = TextLine(title=u"E-Mail", required=True)
-    telefon = TextLine(title=u"Telefon,", required=False)
+    telefon = TextLine(title=u"Telefon", required=False)
     telefax = TextLine(title=u"Telefax", required=False)
     land = TextLine(title=u"Land", required=False)
-    ustid = TextLine(title=u"USTID-Nr.", required=False)
+    ustid = TextLine(title=u"USt-IdNr.", required=False)
 
-    lieferadresse = Bool(title=u"Lieferadresse / Rechnungsadresse",
-                         description=u"Wenn Sie eine abweichende Lieferadresse haben klicken Sie bitte hier.")
+    lieferadresse = Bool(title=u"Abweichende Lieferadresse",
+                         description=u"Wenn Sie eine abweichende Lieferadresse haben klicken Sie bitte hier.", required=False)
     lname = TextLine(title=u"Name", required=False)
     lstrasse = TextLine(title=u"Straße", required=False)
     lplz = TextLine(title=u"Postleitzahl", required=False)

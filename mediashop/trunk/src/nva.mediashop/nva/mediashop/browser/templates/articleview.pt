@@ -45,7 +45,7 @@
       </metal:field>
     </p>
     <dl id="beschreibung" class="collapsible collapsedOnLoad" tal:condition="context/beschreibung"> 
-       <dt class="collapsibleHeader">Zusätzliche Beschreibung</dt>
+       <dt class="collapsibleHeader">Weitere Informationen</dt>
         <dd class="collapsibleContent">
 	      <metal:field use-macro="python:here.widget('beschreibung', mode='view')">
 		Details

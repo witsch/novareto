@@ -8,21 +8,23 @@ from reportlab.lib.colors import gray
 
 def splitline (line):
     """ Wenn Zeile groesser 50 Char, aufsplitten in 2 Zeilen """
-    maxchar = 50
+    maxchar = 55
     zeilen  = []
     zeile   = ''
 
     woerter = line.split( ' ')
     for wort in woerter:
-        zeile += wort + ' '
-        if len(zeile) > maxchar:
+        if (len(zeile)+len(wort)) > maxchar:
             zeilen.append(zeile)
             zeile = ''
+
+        zeile += wort + ' '
 
     if zeile != '':
         zeilen.append(zeile)
 
     return zeilen
+
 
 def kopf (c):
     '''
@@ -45,6 +47,9 @@ def createpdf (filename, daten):
     """
     Schreibt eine PDF-Datei
     """
+    ausland = False
+    if len(daten['Land']) > 0  or len(daten['Ustid']) > 0:
+       ausland = True
 
     #---------------------------------------------------------------------------
     # Pfad und Dateiname
@@ -70,9 +75,9 @@ def createpdf (filename, daten):
     c.drawString(14.0*cm, 24.5*cm, 'Fax.: 040 3980-1040')
 
     c.setFont(schriftart, 12)
-    c.drawString( 2.5*cm, 24.5*cm, 'An')
-    c.drawString( 2.5*cm, 24.1*cm, 'Vertriebsgesellschaft für BG-Medien')
-    c.drawString( 2.5*cm, 23.7*cm, 'G S V')
+    c.drawString( 2.5*cm, 24.5*cm, 'An die')
+    c.drawString( 2.5*cm, 24.1*cm, 'Vertriebsgesellschaft für Medien der BG Verkehr')
+    c.drawString( 2.5*cm, 23.7*cm, 'GSV Gmbh')
     c.drawString( 2.5*cm, 23.3*cm, 'Ottenser Hauptstraße 54')
     c.drawString( 2.5*cm, 22.9*cm, '22765 Hamburg')
 
@@ -80,7 +85,7 @@ def createpdf (filename, daten):
 
     # Betreff
     c.setFont(schriftartfett, 12)
-    c.drawString( 2.5*cm, 19.0*cm, 'Mein Bestellschein aus dem BG Verkehr Medienkatalog')
+    c.drawString( 2.5*cm, 19.0*cm, 'Medienbestellung bei der BG Verkehr')
 
     # Anschreiben
     c.setFont(schriftart,12)
@@ -90,7 +95,6 @@ def createpdf (filename, daten):
     # Angaben zu den ausgesuchten Artikeln
     offset      = -0.6
     gesamtpreis = 0.0
-
     c.setFont(schriftartfett, 10)
     c.drawString( 2.5*cm, 15.5*cm, 'Anzahl')
     c.drawString( 4.0*cm, 15.5*cm, 'Artikel')
@@ -136,34 +140,76 @@ def createpdf (filename, daten):
     c.setFont(schriftart, 12)
     c.drawString( 9.3*cm, (13.5-offset)*cm, daten['Mwst'])
 
-    # Angaben zum Besteller. Neue Seite, wenn Seite voll
-    if offset > 7.0:
+    # Passt Anschrift noch auf Seite? Sonst neue Seite.
+    neueSeite = False
+
+    if offset > 5.5:
+        neueSeite = True
+    if offset > 4.5 and ausland:
+        neueSeite = True
+    if offset > 3.0 and daten['Abwadr']:
+        neueSeite = True
+    if offset > 2.0 and ausland and daten['Abwadr']:
+        neueSeite = True
+     
+    if neueSeite:
+  
+        c.drawString(11.5*cm, 2.0*cm, 'Absender/Lieferadresse auf Folgeseite.')
         c.showPage()
         kopf(c)
         offset = -11.0
 
+    # Angaben zum Besteller. 
     c.setFont(schriftartfett, 12)
-    c.drawString( 2.5*cm, (12.3-offset)*cm, 'Absender:')
+    c.drawString( 2.5*cm, (12.5-offset)*cm, 'Absender:')
     c.setFont(schriftart, 10)
     if len(daten['Mitglnr']) > 0:
-        c.drawString( 2.5*cm, (11.7-offset)*cm, 'Mitgliedsnummer:')
-    c.drawString( 2.5*cm, (11.2-offset)*cm, 'Name:')
-    c.drawString( 2.5*cm, (10.7-offset)*cm, 'Firma:')
-    c.drawString( 2.5*cm, (10.2-offset)*cm, 'Straße:')
-    c.drawString( 2.5*cm,  (9.7-offset)*cm, 'Plz/Ort:')
-    c.drawString(12.5*cm, (10.7-offset)*cm, 'Telefon:')
-    c.drawString(12.5*cm, (10.2-offset)*cm, 'Telefax:')
-    c.drawString(12.5*cm,  (9.7-offset)*cm, 'E-Mail:')
-    c.setFont(schriftart, 12)
-    c.drawString( 5.5*cm, (11.7-offset)*cm, daten['Mitglnr'])
-    c.drawString( 4.5*cm, (11.2-offset)*cm, daten['VornameName'])
-    c.drawString( 4.5*cm, (10.7-offset)*cm, daten['Firma'])
-    c.drawString( 4.5*cm, (10.2-offset)*cm, daten['Strasse'])
-    c.drawString( 4.5*cm,  (9.7-offset)*cm, daten['PlzOrt'])
-    c.drawString(14.5*cm, (10.7-offset)*cm, daten['Telefon'])
-    c.drawString(14.5*cm, (10.2-offset)*cm, daten['Telefax'])
-    c.drawString(14.5*cm,  (9.7-offset)*cm, daten['Email'])
+        c.drawString( 2.5*cm, (11.9-offset)*cm, 'Mitgliedsnummer:')
+    c.drawString( 2.5*cm, (11.4-offset)*cm, 'Name:')
+    c.drawString( 2.5*cm, (10.9-offset)*cm, 'Firma:')
+    c.drawString( 2.5*cm, (10.4-offset)*cm, 'Straße:')
+    c.drawString( 2.5*cm,  (9.9-offset)*cm, 'Plz/Ort:')
 
+    c.drawString(11.5*cm, (10.9-offset)*cm, 'Telefon:')
+    c.drawString(11.5*cm, (10.4-offset)*cm, 'Telefax:')
+    c.drawString(11.5*cm,  (9.9-offset)*cm, 'E-Mail:')
+
+    c.setFont(schriftart, 12)
+    c.drawString( 5.5*cm, (11.9-offset)*cm, daten['Mitglnr'])
+    c.drawString( 4.5*cm, (11.4-offset)*cm, daten['VornameName'])
+    c.drawString( 4.5*cm, (10.9-offset)*cm, daten['Firma'])
+    c.drawString( 4.5*cm, (10.4-offset)*cm, daten['Strasse'])
+    c.drawString( 4.5*cm,  (9.9-offset)*cm, daten['PlzOrt'])
+
+    c.drawString(13.0*cm, (10.9-offset)*cm, daten['Telefon'])
+    c.drawString(13.0*cm, (10.4-offset)*cm, daten['Telefax'])
+    c.drawString(13.0*cm,  (9.9-offset)*cm, daten['Email'])
+        
+    if ausland:
+        c.setFont(schriftart, 10)
+        c.drawString( 2.5*cm,  (9.4-offset)*cm, 'Land:')
+        c.drawString( 2.5*cm,  (8.9-offset)*cm, 'USt-IdNr:')
+        c.setFont(schriftart, 12)
+        c.drawString( 4.5*cm,  (9.4-offset)*cm, daten['Land'])
+        c.drawString( 4.5*cm,  (8.9-offset)*cm, daten['Ustid'])
+        offset += 1.0
+
+    if daten['Abwadr']:
+        c.setFont(schriftartfett, 12)
+        c.drawString( 2.5*cm, (8.9-offset)*cm, 'Abweichende Lieferanschrift:')
+        c.setFont(schriftart, 10)
+        c.drawString( 2.5*cm, (8.3-offset)*cm, 'Name:')
+        c.drawString( 2.5*cm, (7.8-offset)*cm, 'Straße:')
+        c.drawString( 2.5*cm, (7.3-offset)*cm, 'Plz/Ort:')
+        c.setFont(schriftart, 12)
+        c.drawString( 4.5*cm, (8.3-offset)*cm, daten['ALVornameName'])
+        c.drawString( 4.5*cm, (7.8-offset)*cm, daten['ALStrasse'])
+        c.drawString( 4.5*cm, (7.3-offset)*cm, daten['ALPlzOrt'])
+        offset += 2.6
+
+    c.setFont(schriftartfett, 12)
+    c.drawString( 2.5*cm, (7.9-offset)*cm, 'Unterschrift:')
+ 
     #Seitenumbruch
     c.showPage()
 

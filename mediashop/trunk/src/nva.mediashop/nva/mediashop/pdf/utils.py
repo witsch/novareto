@@ -28,11 +28,11 @@ def sMail(to,sender,cc,subject,text,path,filename):
     betreff=subject
     text=text
 
-    msg="To: %s\n" %empfaenger
-    msg=msg+"From: %s\n" %absender
-    msg=msg+"Subject: %s\n\n" %betreff
-    msg=msg+text
-
+    #msg="To: %s\n" %empfaenger
+    #msg=msg+"From: %s\n" %absender
+    #msg=msg+"Subject: %s\n\n" %betreff
+    #msg=msg+text
+    msg = text
 
     body=msg
     outer=MIMEMultipart()
@@ -57,8 +57,10 @@ def sMail(to,sender,cc,subject,text,path,filename):
 
     server = smtplib.SMTP(mailserver)
     server.set_debuglevel(0)
+   
     server.sendmail(absender, empfaenger, outer.as_string())
     #server.sendmail(absender, kopie, outer.as_string())
+
     server.close()
 
     return None

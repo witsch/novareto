@@ -164,7 +164,7 @@ msgstr ""
 
 #: ./views.py:168
 msgid "Zuerck"
-msgstr "Zurück"
+msgstr "Zurück zum Warenkorb"
 
 #. Default: "aus dem Warenkorb entfernen"
 #: ./views_templates/cartcontent.pt:70
@@ -188,7 +188,7 @@ msgstr "Warenkorb"
 #. Default: "Zur Kasse gehen"
 #: ./portlets/templates/cart.pt:43
 msgid "checkout_cart"
-msgstr "Zur Kasse gehen"
+msgstr "Zum Bestellformular"
 
 #. Default: "Zum Einkaufswagen"
 #: ./portlets/templates/cart.pt:37

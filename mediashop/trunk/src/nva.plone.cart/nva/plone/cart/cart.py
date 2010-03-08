@@ -17,6 +17,7 @@ from nva.plone.cart.interfaces import IOrderFolder, IOrder
 from nva.plone.cart.interfaces import ISessionCart, ICartWrapper, IMemberCart
 
 from nva.mediashop.pdf.pdfgenMS import createpdf
+from nva.mediashop.pdf.textgen  import createtext
 
 class OrderFolder(Container):
     """A Cart folder implementation.
@@ -78,15 +79,16 @@ class Order(Item):
         return self.id
 
 
-    def asPDF(self):
+    def getData(self):
         si = self.shipping_information
         artikel = []
         for item in self.cart.itervalues():
             bestellung = {}
-            bestellung['Anzahl'] = item.quantity
+            bestellung['Anzahl']  = item.quantity
             bestellung['Artikel'] = item.title
-            bestellung['Preis'] = item.total_price
+            bestellung['Preis']   = item.total_price
             artikel.append(bestellung)
+
         daten = {}
         daten['Bestellung']  = artikel
         daten['Mwst']        = 'zzgl. Versandkosten und gesetzl. MwSt.'
@@ -98,16 +100,31 @@ class Order(Item):
         daten['Telefon']     = nN(si.telefon)
         daten['Telefax']     = nN(si.telefax)
         daten['Email']       = si.email
-        #return createpdf('/Users/cklinger/Desktop/order.pdf', daten)
+        daten['Land']        = nN(si.land)
+        daten['Ustid']       = nN(si.ustid)
+        daten['Abwadr']      = si.lieferadresse
         if si.lieferadresse:
-            daten['VornameName'] = si.lname
-            daten['Firma']       = ""
-            daten['Strasse']     = si.lstrasse
-            daten['PlzOrt']      = si.lplz + ' ' + si.lort
+            daten['ALVornameName'] = si.lname  # Abweichende Lieferadresse
+            daten['ALStrasse']     = si.lstrasse
+            daten['ALPlzOrt']      = si.lplz + ' ' + si.lort
 
+        return  daten
+
+
+    def asPDF(self):
+
+        daten = self.getData()
+
+        #return createpdf('/Users/cklinger/Desktop/order.pdf', daten)
         file = "/tmp/order-%s.pdf" % self.id
         return createpdf(file, daten)
 
+
+    def asText(self):
+
+        daten = self.getData()
+
+        return createtext(daten)
 
 
 class CartTraverser(grok.MultiAdapter):
