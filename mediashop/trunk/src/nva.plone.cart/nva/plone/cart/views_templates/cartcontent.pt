@@ -1,9 +1,9 @@
 <tal:content define="items handler/getItems"
   i18n:domain="nva.plone.cart">
   <h1 i18n:translate="">Warenkorb</h1>
-  <div tal:condition="not: items" i18n:translate="">
+  <div tal:condition="not: items">
    
-    Keine Artikel im Warenkorb.
+    <span i18n:translate=""> Keine Artikel im Warenkorb. </span>
     <ul>
       <li> <a href="medienshop-der-bg-verkehr" i18n:translate=""> zurück </a> </li>
     </ul>

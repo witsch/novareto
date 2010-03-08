@@ -203,7 +203,7 @@ class Checkout(CartNamespace, grok.Form):
         self.widgets['plz'].displayWidth = 5 
         self.widgets['lplz'].displayWidth = 5 
 
-    @form.action(_(u'Zurück'), validator=null_validator)
+    @form.action(_(u'Zurück zum Warenkorb'), validator=null_validator)
     def handle_cancel(self, action, data):
         self.request.response.redirect(self.portal_url+'/++cart++')
 
@@ -213,7 +213,7 @@ class Checkout(CartNamespace, grok.Form):
         utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
         self.request.response.redirect(self.portal_url+'/medienshop-der-bg-verkehr')
 
-    @form.action(_(u'Bestellen'), validator=validate_checkout)
+    @form.action(_(u'Bestellung senden'), validator=validate_checkout)
     def handle_order(self, action, data):
         plone = getToolByName(self.context, 'portal_url').getPortalObject()
 
