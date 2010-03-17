@@ -53,5 +53,11 @@ class CartHandler(object):
             price += item.total_price
         return price
 
+    def getMemberPrice(self):
+        price = 0.0
+        for item in self.getItems():
+            price += item.discount_price 
+        return price
+
     def clear(self):
         self.cart.clear()

@@ -21,6 +21,7 @@ class IOrderForm(Interface):
 
     lieferadresse = Bool(title=u"Abweichende Lieferadresse",
                          description=u"Wenn Sie eine abweichende Lieferadresse haben klicken Sie bitte hier.", required=False)
+    lfirma = TextLine(title=u"Firma", required=False)
     lname = TextLine(title=u"Name", required=False)
     lstrasse = TextLine(title=u"Straße", required=False)
     lplz = TextLine(title=u"Postleitzahl", required=False)

@@ -15,7 +15,7 @@
 	     /><span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr
              </span>
            <span align="right"> 
-            <strong i18n:translate=""> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice" /> </strong>
+            <strong i18n:translate=""> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getTotalPrice())" /> </strong>
             <span i18n:translate=""> zzgl. MwST. und Versand </span> 
            </span>
             
@@ -37,7 +37,7 @@
 		 tal:attributes="href item/url" />
 	    </td>
 	    <td>
-                <span tal:content="item/basic_price" />
+                <span tal:content="python: context.fF(item.basic_price)" />
             </td>
 	    <td nowrap> 
                 <span class="quantity" tal:content="item/quantity" /> &nbsp;
@@ -52,7 +52,7 @@
                      tal:attributes="href string:${cart_url}/minus/${item/code}"
                      > <img src="" tal:attributes="src string:pfeil-unten-2.gif"></a>
             </td>    
-	    <td tal:content="item/total_price" />
+	    <td tal:content="python: context.fF(item.total_price)" />
 	    <td>
 	      <a href=""
 		 class="cart-action"
@@ -64,11 +64,18 @@
 	</tal:loop>
       </tbody>
     </table>
-  
+  <!--
     <ul>
       <li> <a href="++cart++/checkout"><span i18n:translate=""> zum Bestellformular </span></a></li>
       <li> <a href="medienshop-der-bg-verkehr" i18n:translate=""> zurück </a> </li>
     </ul>
+   -->
+     <form action="++cart++/checkout">
+       <input type="submit" class="context" value="zum Bestellformular" />
+     </form>
+     <form action="medienshop-der-bg-verkehr">
+       <input type="submit" class="context" value="zurück" />
+     </form>
     </fieldset>
 
   </div>

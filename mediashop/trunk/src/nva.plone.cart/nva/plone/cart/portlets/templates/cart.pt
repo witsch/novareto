@@ -30,7 +30,11 @@
 	</dd>
 
 	<dd i18n:translate="" class="portletItem odd">
-	  Preis für Mitglieder : <span tal:content="view/handler/getTotalPrice" /> Euro
+	  <h3> Preis für: </h3>
+          <ul>
+            <li> Mitglieder : <span tal:content="python: context.fF(view.handler.getTotalPrice())" /> Euro </li>
+	    <li> Nicht-Mitglieder : <span tal:content="python: context.fF(view.handler.getMemberPrice())" /> Euro </li>
+          </ul>
 	</dd>
 
         <dd class="portletFooter">

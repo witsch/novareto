@@ -54,7 +54,7 @@
    <fieldset>
      <ul> 
       <li tal:condition="context/is_member" i18n:translate="">Mitgliedsbetrieb der BG Verkehr</li>
-      <li i18n:translate=""> Gesamtbestellwert: EUR <span tal:replace="handler/getTotalPrice"/> zugl. MwST und Versand </li> 
+      <li i18n:translate=""> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
      </ul> 
 
 
@@ -111,6 +111,7 @@
                        telefon python: view.widgets['telefon'];
                        ustid python: view.widgets['ustid'];
                        lieferadresse python: view.widgets['lieferadresse'];
+                       lfirma python: view.widgets['lfirma'];
                        lname python: view.widgets['lname'];
                        lstrasse python: view.widgets['lstrasse'];
                        lplz python: view.widgets['lplz'];
@@ -127,6 +128,7 @@
         <div tal:replace="structure python: view.renderField(email)"/>
         <div tal:replace="structure python: view.renderField(lieferadresse)"/>
         <div id="lieferadresse">
+           <div tal:replace="structure python: view.renderField(lfirma)"/>
            <div tal:replace="structure python: view.renderField(lname)"/>
            <div tal:replace="structure python: view.renderField(lstrasse)"/>
            <div tal:replace="structure python: view.renderField(lplz, lort)"/>
@@ -149,6 +151,10 @@
                    tal:replace="structure action/render" />
      </span>
     </div>
+ <br> 
+     <p>
+       <strong> Hinweis: </strong> Bei Klick auf 'Bestellung senden' erfolgt Ihre Bestellung per E-Mail an die BG Verkehr. Sie erhalten in diesem Fall eine Versandbestätigung ebenfalls per E-Mail Bei Klick 'Bestellung drucken' erfolgt hingegen keine Benachrichtigung der Berufsgenossenschaft. In diesem Fall müssten Sie uns das ausgefüllte Formular noch per Fax oder Brief zusenden.
+     </p>
     </fieldset>
     </div>
     </form>

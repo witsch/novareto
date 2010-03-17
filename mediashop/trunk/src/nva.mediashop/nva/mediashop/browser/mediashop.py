@@ -40,4 +40,19 @@ class All(grok.View):
         return getToolByName(self.context, 'portal_catalog')
 
     def update(self):
-        self.results = self.portal_catalog(portal_type="Artikel")
+        tmp_results = []
+        for rubrik in self.context.values():
+            for artikel in rubrik.values():
+                tmp_results.append(artikel) 
+        self.results = tmp_results 
+
+    @grok.action('Suchen')
+    def handle_search(self, **kw):
+        artikel = self.request.get('form.artikel', None)
+        if artikel:
+            self.results = [x.getObject() for x in self.portal_catalog(portal_type="Artikel", SearchableText=artikel)]
+            message = "Es wurden %s Ergebnisse gefunden" %len(self.results)
+        else:
+            message="Bitte geben Sie einen Suchbegriff ein" 
+         
+        IStatusMessage(self.request).addStatusMessage(message, type="info")

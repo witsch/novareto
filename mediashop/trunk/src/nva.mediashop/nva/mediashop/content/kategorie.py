@@ -15,6 +15,17 @@ KategorieSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
 
+    atapi.TextField(
+        'text',
+        storage=atapi.AnnotationStorage(),
+        default_output_type = 'text/x-html-safe',
+        searchable = 1,
+        widget=atapi.RichWidget(
+            label=_(u"Text"),
+            description=_(u"Field description"),
+        ),
+    ),
+
 ))
 
 # Set storage on fields copied from ATFolderSchema, making sure

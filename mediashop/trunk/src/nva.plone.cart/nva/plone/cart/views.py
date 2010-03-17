@@ -30,6 +30,7 @@ from zope.event import notify
 from zope.app.container.contained import ObjectAddedEvent
 
 ORDERS = "orders"
+TEMPORDERS = "temp_print"
 
 
 def null_validator(*args, **kwargs):
@@ -213,6 +214,20 @@ class Checkout(CartNamespace, grok.Form):
         utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
         self.request.response.redirect(self.portal_url+'/medienshop-der-bg-verkehr')
 
+    @form.action(_(u'Bestellung drucken'), validator=validate_checkout)
+    def handle_print(self, action, data):
+        plone = getToolByName(self.context, 'portal_url').getPortalObject()
+        cid = str(uuid.uuid4())
+        cart = copy.deepcopy(self.context.cart)
+        shipping_information = ShippingInformation(id='shipping_information')
+        utils.writeChanges(shipping_information, self.form_fields, data)
+        order = Order(cart, shipping_information, id=cid)
+        order.total_price = self.context.handler.getTotalPrice()
+        order.is_member = bool(self.context.is_member)
+        plone[TEMPORDERS][cid] = order
+        self.context.cart.clear()        
+        self.request.response.redirect(self.portal_url+'/++cart++/print?id=%s' % cid)
+
     @form.action(_(u'Bestellung senden'), validator=validate_checkout)
     def handle_order(self, action, data):
         plone = getToolByName(self.context, 'portal_url').getPortalObject()
@@ -274,21 +289,27 @@ class Checkout(CartNamespace, grok.Form):
         return ret 
 
 
+class Print(grok.View):
+    grok.context(ISessionCart)
+   
+
 class Thanks(grok.View):
     grok.context(ISessionCart)
-
-    def update(self):
-        print self.context.cart
 
 
 class pdf(grok.View):
     grok.context(ISessionCart)
 
-    def render(self, id=None):
+    def render(self, id=None, temp=None):
         plone = getToolByName(self.context, 'portal_url').getPortalObject()
         if id:
-            orders = plone[ORDERS]
-            order = getattr(orders, id, None)
+            if temp:
+                ORDERS = TEMPORDERS 
+                orders = plone[ORDERS]
+                order = orders.get(id)
+            else:
+                orders = plone[ORDERS]
+                order = getattr(orders, id, None)
             if order:
                 pdf = order.asPDF()
                 RESPONSE = self.request.response

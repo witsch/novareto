@@ -14,6 +14,12 @@
     <p class="documentDescription" tal:content="context/description">
        This is the message view of the content object</p>
 
+    <p>
+      <metal:field use-macro="python:here.widget('text', mode='view')">
+        Details
+      </metal:field>
+    </p>
+
 
    <table class="grid listing" tal:condition="not: results">
     <thead>

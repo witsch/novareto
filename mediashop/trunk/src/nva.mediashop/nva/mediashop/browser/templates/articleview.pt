@@ -94,7 +94,7 @@
      <br>
     <div tal:replace="structure provider:plone.belowcontentbody" />
 
-    <a href="" tal:attributes="href view/getParentUrl" i18n:translate=""> Back </a>
+<!--    <a href="" tal:attributes="href view/getParentUrl" i18n:translate=""> Back </a> -->
 
 </metal:main_macro>
 </div>

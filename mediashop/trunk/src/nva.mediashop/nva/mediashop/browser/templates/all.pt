@@ -6,46 +6,65 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="nva.mediashop">
 <body>
-<metal:main fill-slot="main">
+<metal:main fill-slot="main"
+       tal:define="results view/results;
+                   searchterm request/artikel|nothing">
+
     <tal:main-macro metal:define-macro="main">
     <h1 class="documentFirstHeading">Alle Artikel</h1>
     <p class="documentDescription" tal:content="context/description">
        This is the message view of the content object</p>
 
 
-   <table class="grid listing">
-    <thead>
-     <tr>
-       <th i18n:translate=""> Title </th>
-       <th id="center" i18n:translate=""> Stand </th>
-       <th id="center" i18n:translate=""> Broschuere </th>
-       <th i18n:translate=""> Download </th>
-     </tr>  
-    </thead>
-    <tbody>
-     <tr tal:repeat="brain view/results">
-      <hh tal:define="art brain/getObject">
-       <td> <span tal:content="art/title"/> <br> <a href=""
-                  tal:attributes="href art/absolute_url"> ...weiter </a> </td>
-       <td id="center">  <span tal:content="art/stand"/> </td>
-       <td id="center"> 
-            <span tal:content="art/status"/> <br>
-            <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add?redirect=2"
-                       tal:condition="python: art.status == 'lieferbar'">
-              bestellen 
-            </a> 
-       </td>
-       <td> 
-          <tal:file condition="art/file/getSize">
-              <metal:field use-macro="python:art.widget('file', mode='view')">
-               Download file
-              </metal:field>
-          </tal:file>
-       </td>
-       </hh>
-     </tr>
-    </tbody>
-   </table> 
+
+   <form action="." method="POST">
+      Suche in alle Artikel 
+                <input type="text" 
+                       value="" 
+                       name="form.artikel"
+                       tal:attributes="value request/form.artikel|nothing"/> 
+
+        <span class="actionButtons">
+          <input type="submit" 
+                 id="form.actions.suchen" 
+                 name="form.actions.suchen" 
+                 value="Suchen" 
+                 class="context" />
+        </span>
+     </form>
+
+     <div tal:condition="results">
+       <table class="grid listing fix">
+        <thead>
+         <tr>
+           <th i18n:translate=""> Title </th>
+           <th i18n:translate=""> Stand </th>
+           <th i18n:translate=""> Broschuere </th>
+           <th i18n:translate=""> Download </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr tal:repeat="art results">
+           <td> <span tal:content="art/title"/> <br> <a href=""
+                      tal:attributes="href art/absolute_url"> ...weiter </a> </td>
+           <td> <span tal:content="art/stand"/> </td>
+           <td>
+                <span tal:content="art/status"/> <br>
+                <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add">
+                  bestellen
+                </a>
+           </td>
+           <td>
+              <tal:file condition="art/file/getSize">
+                  <metal:field use-macro="python:art.widget('file', mode='view')">
+                   Download file
+                  </metal:field>
+              </tal:file>
+           </td>
+         </tr>
+        </tbody>
+       </table>
+     </div>
 
 
 

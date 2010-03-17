@@ -104,6 +104,7 @@ class Order(Item):
         daten['Ustid']       = nN(si.ustid)
         daten['Abwadr']      = si.lieferadresse
         if si.lieferadresse:
+            daten['ALFirma'] = si.lfirma  # Abweichende Lieferadresse
             daten['ALVornameName'] = si.lname  # Abweichende Lieferadresse
             daten['ALStrasse']     = si.lstrasse
             daten['ALPlzOrt']      = si.lplz + ' ' + si.lort
