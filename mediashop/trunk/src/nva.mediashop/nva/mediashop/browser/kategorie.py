@@ -8,15 +8,15 @@ grok.templatedir('templates')
 class Index(grok.Form):
     grok.context(IKategorie)
     grok.template('kategorie_view')
-    artikel = results = []
+    results = []
 
     def update(self):
-        self.artikel = self.context.getFolderContents(full_objects=True)
+        self.results = self.context.getFolderContents(full_objects=True)
 
     @property
     def showDownload(self):
         show = False
-        for artikel in self.artikel:
+        for artikel in self.results:
             if artikel.file.get_size() > 0:
                 show = True
         return show
@@ -30,7 +30,10 @@ class Index(grok.Form):
         artikel = self.request.get('form.artikel', None)
         if artikel:
             path = '/'.join(self.context.getPhysicalPath())[1:]
-            self.results = self.portal_catalog(portal_type="Artikel", SearchableText=artikel, path=path)
+            self.results = [x.getObject() for x in self.portal_catalog(
+                  portal_type="Artikel", 
+                  SearchableText=artikel, 
+                  path=path)]
             message = "Es wurden %s Ergebnisse gefunden" %len(self.results)
         else:
             message="Bitte geben Sie einen Suchbegriff ein" 

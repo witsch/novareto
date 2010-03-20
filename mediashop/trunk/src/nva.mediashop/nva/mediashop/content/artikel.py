@@ -252,3 +252,11 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         if not IDiscountedCartItem.providedBy(self):
             return self.discount_price 
         return self.non_member_price
+
+    @property
+    def portlet_member_price(self):
+        return self.discount_price * self.calculate_quantity
+
+    @property
+    def portlet_total_price(self):
+        return self.non_member_price * self.quantity

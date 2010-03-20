@@ -50,13 +50,13 @@ class CartHandler(object):
     def getTotalPrice(self):
         price = 0.0
         for item in self.getItems():
-            price += item.total_price
+            price += item.portlet_total_price
         return price
 
     def getMemberPrice(self):
         price = 0.0
         for item in self.getItems():
-            price += item.discount_price 
+            price += item.portlet_member_price 
         return price
 
     def clear(self):

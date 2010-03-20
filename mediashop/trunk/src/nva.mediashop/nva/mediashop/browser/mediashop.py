@@ -48,11 +48,15 @@ class All(grok.View):
 
     @grok.action('Suchen')
     def handle_search(self, **kw):
+        r = False
         artikel = self.request.get('form.artikel', None)
         if artikel:
             self.results = [x.getObject() for x in self.portal_catalog(portal_type="Artikel", SearchableText=artikel)]
             message = "Es wurden %s Ergebnisse gefunden" %len(self.results)
+            r = True
         else:
             message="Bitte geben Sie einen Suchbegriff ein" 
          
         IStatusMessage(self.request).addStatusMessage(message, type="info")
+        if r:
+            self.redirect(self.url(self.context))

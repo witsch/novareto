@@ -21,7 +21,7 @@
     </p>
 
 
-   <table class="grid listing" tal:condition="not: results">
+   <table class="grid listing" tal:condition="results">
     <thead>
      <tr>
        <th i18n:translate=""> Title </th>
@@ -31,7 +31,7 @@
      </tr>  
     </thead>
     <tbody>
-     <tr tal:repeat="art view/artikel">
+     <tr tal:repeat="art view/results">
        <td> <span tal:content="art/title"/> <br> <a href=""
                   tal:attributes="href art/absolute_url"> ...weiter </a> </td>
        <td> <span tal:content="art/stand"/> </td>
@@ -68,7 +68,7 @@
                  class="context" />
         </span>
      </form>
-
+<!--
      <div tal:condition="results">
        <table class="grid listing fix">
         <thead>
@@ -103,7 +103,7 @@
         </tbody>
        </table>
      </div>
-
+-->
     <div tal:replace="structure provider:plone.belowcontentbody" />
     </tal:main-macro>
 </metal:main>
