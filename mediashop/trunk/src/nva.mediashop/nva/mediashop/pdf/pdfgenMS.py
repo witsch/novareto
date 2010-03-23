@@ -75,9 +75,9 @@ def createpdf (filename, daten):
     c.drawString(14.0*cm, 24.5*cm, 'Fax.: 040 3980-1040')
 
     c.setFont(schriftart, 12)
-    c.drawString( 2.5*cm, 24.5*cm, 'An die')
-    c.drawString( 2.5*cm, 24.1*cm, 'Vertriebsgesellschaft für Medien der BG Verkehr')
-    c.drawString( 2.5*cm, 23.7*cm, 'GSV Gmbh')
+    #c.drawString( 2.5*cm, 24.5*cm, 'An die')
+    #c.drawString( 2.5*cm, 24.1*cm, 'Vertriebsgesellschaft für Medien der BG Verkehr')
+    c.drawString( 2.5*cm, 23.7*cm, 'GSV GmbH')
     c.drawString( 2.5*cm, 23.3*cm, 'Ottenser Hauptstraße 54')
     c.drawString( 2.5*cm, 22.9*cm, '22765 Hamburg')
 
@@ -188,23 +188,25 @@ def createpdf (filename, daten):
     if ausland:
         c.setFont(schriftart, 10)
         c.drawString( 2.5*cm,  (9.4-offset)*cm, 'Land:')
-        c.drawString( 2.5*cm,  (8.9-offset)*cm, 'USt-IdNr:')
+        c.drawString( 2.5*cm,  (8.9-offset)*cm, 'USt-IdNr/VAT:')
         c.setFont(schriftart, 12)
         c.drawString( 4.5*cm,  (9.4-offset)*cm, daten['Land'])
-        c.drawString( 4.5*cm,  (8.9-offset)*cm, daten['Ustid'])
+        c.drawString( 5.5*cm,  (8.9-offset)*cm, daten['Ustid'])
         offset += 1.0
 
     if daten['Abwadr']:
         c.setFont(schriftartfett, 12)
         c.drawString( 2.5*cm, (8.9-offset)*cm, 'Abweichende Lieferanschrift:')
         c.setFont(schriftart, 10)
-        c.drawString( 2.5*cm, (8.3-offset)*cm, 'Name:')
-        c.drawString( 2.5*cm, (7.8-offset)*cm, 'Straße:')
-        c.drawString( 2.5*cm, (7.3-offset)*cm, 'Plz/Ort:')
+        c.drawString( 2.5*cm, (8.3-offset)*cm, 'Firma:')
+        c.drawString( 2.5*cm, (7.8-offset)*cm, 'Name:')
+        c.drawString( 2.5*cm, (7.3-offset)*cm, 'Straße:')
+        c.drawString( 2.5*cm, (6.8-offset)*cm, 'Plz/Ort:')
         c.setFont(schriftart, 12)
-        c.drawString( 4.5*cm, (8.3-offset)*cm, daten['ALVornameName'])
-        c.drawString( 4.5*cm, (7.8-offset)*cm, daten['ALStrasse'])
-        c.drawString( 4.5*cm, (7.3-offset)*cm, daten['ALPlzOrt'])
+        c.drawString( 4.5*cm, (8.3-offset)*cm, daten['ALFirma'])
+        c.drawString( 4.5*cm, (7.8-offset)*cm, daten['ALVornameName'])
+        c.drawString( 4.5*cm, (7.3-offset)*cm, daten['ALStrasse'])
+        c.drawString( 4.5*cm, (6.8-offset)*cm, daten['ALPlzOrt'])
         offset += 2.6
 
     c.setFont(schriftartfett, 12)

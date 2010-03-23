@@ -304,8 +304,7 @@ class pdf(grok.View):
         plone = getToolByName(self.context, 'portal_url').getPortalObject()
         if id:
             if temp:
-                ORDERS = TEMPORDERS 
-                orders = plone[ORDERS]
+                orders = plone[TEMPORDERS]
                 order = orders.get(id)
             else:
                 orders = plone[ORDERS]

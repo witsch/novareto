@@ -17,7 +17,7 @@ class IOrderForm(Interface):
     telefon = TextLine(title=u"Telefon", required=False)
     telefax = TextLine(title=u"Telefax", required=False)
     land = TextLine(title=u"Land", required=False)
-    ustid = TextLine(title=u"USt-IdNr.", required=False)
+    ustid = TextLine(title=u"USt-IdNr./VAT", required=False)
 
     lieferadresse = Bool(title=u"Abweichende Lieferadresse",
                          description=u"Wenn Sie eine abweichende Lieferadresse haben klicken Sie bitte hier.", required=False)

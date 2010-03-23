@@ -54,7 +54,8 @@
    <fieldset>
      <ul> 
       <li tal:condition="context/is_member" i18n:translate="">Mitgliedsbetrieb der BG Verkehr</li>
-      <li i18n:translate=""> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
+      <li i18n:translate="" tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
+      <li i18n:translate="" tal:condition="context/is_member"> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getMemberPrice())"/> zugl. MwST und Versand </li> 
      </ul> 
 
 
@@ -78,12 +79,12 @@
 			 tal:attributes="href item/url" />
 		    </td>
 		    <td>
-			<span tal:content="item/price" />
+			<span tal:content="python: context.fF(item.basic_price)" />
 		    </td>
 		    <td> 
 			<span class="quantity" tal:content="item/quantity" />
 		    </td>    
-		    <td tal:content="item/total_price" />
+		    <td tal:content="python: context.fF(item.total_price)" />
 		  </tr>
 		</tal:loop>
 	      </tbody>
@@ -153,7 +154,7 @@
     </div>
  <br> 
      <p>
-       <strong> Hinweis: </strong> Bei Klick auf 'Bestellung senden' erfolgt Ihre Bestellung per E-Mail an die BG Verkehr. Sie erhalten in diesem Fall eine Versandbestätigung ebenfalls per E-Mail Bei Klick 'Bestellung drucken' erfolgt hingegen keine Benachrichtigung der Berufsgenossenschaft. In diesem Fall müssten Sie uns das ausgefüllte Formular noch per Fax oder Brief zusenden.
+       <strong> Hinweis: </strong> Bei Klick auf <i>'Bestellung senden'</i> erfolgt Ihre Bestellung per E-Mail an die BG Verkehr. Sie erhalten in diesem Fall eine Versandbestätigung ebenfalls per E-Mail. Bei Klick <i>'Bestellung drucken'</i> erfolgt hingegen keine Benachrichtigung der Berufsgenossenschaft. In diesem Fall müssten Sie uns das ausgefüllte Formular noch per Fax oder Brief zusenden.
      </p>
     </fieldset>
     </div>

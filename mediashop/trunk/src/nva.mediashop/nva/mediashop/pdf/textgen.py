@@ -24,10 +24,10 @@ def createtext(daten):
     text += ' Name:     ' + daten['VornameName'] + '\n'
     text += ' Firma:    ' + daten['Firma']   + '\n'
     text += ' Straße:   ' + daten['Strasse'] + '\n'
-    text += ' Plz/Ort:  ' + daten['PlzOrt']  + '\n'
+    text += ' Plz/Ort:  ' + daten['PlzOrt']  + '\n\n'
     if ausland:
-        text += ' Land:     ' + daten['Land'] + '\n'
-	text += ' USt-IdNr: ' + daten['Ustid'] + '\n\n'
+        text += ' Land:         ' + daten['Land'] + '\n'
+	text += ' USt-IdNr/VAT: ' + daten['Ustid'] + '\n\n'
     text += ' Telefon:  ' + daten['Telefon'] + '\n'
     text += ' Telefax:  ' + daten['Telefax'] + '\n'
     text += ' E-Mail:   ' + daten['Email']   + '\n\n'

@@ -15,7 +15,7 @@
 	     /><span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr
              </span>
            <span align="right"> 
-            <strong i18n:translate=""> Geesamtbestellwert: EUR
+            <strong i18n:translate=""> Gesamtbestellwert: EUR
                     <span tal:replace="python: context.fF(handler.getMemberPrice())" tal:condition="context/is_member" /> 
                     <span tal:replace="python: context.fF(handler.getTotalPrice())" tal:condition="not: context/is_member" /> 
             </strong>
@@ -73,12 +73,20 @@
       <li> <a href="medienshop-der-bg-verkehr" i18n:translate=""> zurück </a> </li>
     </ul>
    -->
-     <form action="++cart++/checkout">
-       <input type="submit" class="context" value="zum Bestellformular" />
-     </form>
-     <form action="medienshop-der-bg-verkehr">
-       <input type="submit" class="context" value="zurück" />
-     </form>
+   <table>
+    <tr>
+     <td>
+       <form action="medienshop-der-bg-verkehr">
+         <input type="submit" class="context" value="zurück" />
+       </form>
+     </td>
+     <td>
+       <form action="++cart++/checkout">
+         <input type="submit" class="context" value="zum Bestellformular" />
+       </form>
+     </td>
+    </tr>
+   </table>
     </fieldset>
 
   </div>

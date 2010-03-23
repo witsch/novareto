@@ -14,11 +14,12 @@
      <p i18n:translate=""> Sie können sich das Bestellformular jetzt herunterladen oder ausdrucken. </p>
 
      <p i18n:translate=""> Bitte vergessen Sie nicht, uns das ausgefüllte Formular noch per Fax oder Brief
-                           zukommen zu lassen. Vielen Danke. </p>
+                           zukommen zu lassen. Vielen Dank. </p>
 
-     <p i18n:translate=""> Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF -
-     Symbol </p>
-      <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}&temp=1"> Download </a>
+     <p i18n:translate=""> Um das Bestellformular auszudrucken klicken Sie bitte
+      <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}&temp=1"> hier </a>
+     </p>
+   
     </metal:main>
   </body>
 </html>
