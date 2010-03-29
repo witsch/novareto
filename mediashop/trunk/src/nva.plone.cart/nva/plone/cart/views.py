@@ -204,7 +204,7 @@ class Checkout(CartNamespace, grok.Form):
         self.widgets['plz'].displayWidth = 5 
         self.widgets['lplz'].displayWidth = 5 
 
-    @form.action(_(u'Zurück zum Warenkorb'), validator=null_validator)
+    @form.action(_(u'Zurueck zum Warenkorb'), validator=null_validator)
     def handle_cancel(self, action, data):
         self.request.response.redirect(self.portal_url+'/++cart++')
 

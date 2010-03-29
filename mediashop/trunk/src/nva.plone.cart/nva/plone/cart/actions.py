@@ -14,10 +14,12 @@ class CartItemMember(grok.View):
 
     def update(self):
         if IMemberCart.providedBy(self.context.cart):
+            print "SWITCH OFF"
             noLongerProvides(self.context.cart, IMemberCart)
             for item in self.context.cart.values():
                 noLongerProvides(item, IDiscountedCartItem)
         else:
+            print "SWITCH ON"
             directlyProvides(self.context.cart, IMemberCart)
             for item in self.context.cart.values():
                 item.discount_factor = 0.5

@@ -45,6 +45,8 @@ class SessionCart(Item):
 
     @property
     def is_member(self):
+        print self.cart
+        print "Check is Member", IMemberCart.providedBy(self.cart)
         return not IMemberCart.providedBy(self.cart)
 
     @property
