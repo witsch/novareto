@@ -20,6 +20,12 @@
         This is the message view of the content object
     </p>
 
+    <p>
+      <metal:field use-macro="python:here.widget('text', mode='view')">
+        Details
+      </metal:field>
+    </p>
+
     <div tal:condition="not: results">                                
         <h3> Bitte wählen Sie aus einer der folgenden Rubriken </h3>                        
 

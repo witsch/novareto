@@ -10,6 +10,9 @@
   </div>
   <div tal:condition="items">
     <fieldset>
+    DEBUG: <br>
+      <span tal:content="nocall: context"/> <br>
+     <span tal:content="context/is_member"/> <br>
       <input type="checkbox" id="cart-member"
 	     tal:attributes="checked context/is_member"
 	     /><span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr

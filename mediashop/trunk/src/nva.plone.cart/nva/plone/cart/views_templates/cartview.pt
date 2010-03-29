@@ -14,6 +14,7 @@
           var base_url = jq("link[rel=kss-base-url]").attr('href');
 
 	  jq('#cart-member').live("click", function(e){
+             console.log('CLICK-ACTioN');
 	      jq.ajax({
 	        type: "GET",
 	        url: base_url + "/++cart++/membership",
@@ -34,6 +35,7 @@
 	  jq('a.cart-action').live("click", function(e) {
              e.preventDefault();
 	     var url = jq(this).attr('href');
+             console.log('CART-ACTioN');
 	     jq.ajax({
 	       type: "GET",
 	       url: url,

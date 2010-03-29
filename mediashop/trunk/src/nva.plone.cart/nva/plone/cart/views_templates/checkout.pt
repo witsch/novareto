@@ -13,7 +13,7 @@
        var lf = jq('input#form_lieferadresse').attr('checked');
        if (lf != true)
            jq('#lieferadresse').hide();
-       jq('#form_lieferadresse').click(function() {
+       jq('input#form_lieferadresse').click(function() {
           /*var val = jq('input#form_lieferadresse').attr("checked");*/
            jq('#lieferadresse').toggle()
          });
