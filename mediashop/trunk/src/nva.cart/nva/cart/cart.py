@@ -39,7 +39,9 @@ class CartHandler(object):
         return self.cart.get(code)
 
     def getItems(self):
-        return self.cart.values()
+        for value in self.cart.values():
+            if ICartItem.providedBy(value):
+                yield value
 
     def delItem(self, code):
         if code in self.cart:
