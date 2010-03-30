@@ -53,6 +53,11 @@
 
    <fieldset>
      <ul> 
+     <li> <input type="checkbox" id="cart-member"
+             tal:attributes="checked context/is_member"
+             /><span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr
+             </span> </li>
+
       <li tal:condition="context/is_member" i18n:translate="">Mitgliedsbetrieb der BG Verkehr</li>
       <li i18n:translate="" tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
       <li i18n:translate="" tal:condition="context/is_member"> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getMemberPrice())"/> zugl. MwST und Versand </li> 
