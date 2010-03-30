@@ -13,18 +13,10 @@ class CartItemMember(grok.View):
     grok.context(ISessionCart)
 
     def update(self):
-        if IMemberCart.providedBy(self.context.cart):
-            print "SWITCH OFF"
-            noLongerProvides(self.context.cart, IMemberCart)
-            for item in self.context.cart.values():
-                noLongerProvides(item, IDiscountedCartItem)
+        if self.context._member is True:
+            self.context._member = False
         else:
-            print "SWITCH ON"
-            directlyProvides(self.context.cart, IMemberCart)
-            for item in self.context.cart.values():
-                item.discount_factor = 0.5
-                item.discount = u"Membership"
-                directlyProvides(item, IDiscountedCartItem)            
+            self.context._member = True
             
     def render(self):
         portal_url = getToolByName(self.context, 'portal_url')()

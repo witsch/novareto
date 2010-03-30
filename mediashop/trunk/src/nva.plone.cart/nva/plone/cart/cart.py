@@ -43,11 +43,17 @@ class SessionCart(Item):
         self.cart = cart
         self.id = id
 
+    @apply
+    def _member():
+        def pget(self):
+            return bool(self.cart.get('__member__'))
+        def pset(self, value):
+            self.cart['__member__'] = bool(value)
+        return property(pget, pset)
+
     @property
     def is_member(self):
-        print self.cart
-        print "Check is Member", IMemberCart.providedBy(self.cart)
-        return not IMemberCart.providedBy(self.cart)
+        return self._member
 
     @property
     def handler(self):
