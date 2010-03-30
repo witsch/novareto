@@ -23,6 +23,22 @@ class CartItemMember(grok.View):
         self.redirect(portal_url + "/++cart++/summary")
 
 
+class CheckoutMembership(grok.View):
+    grok.name('membership_final')
+    grok.context(ISessionCart)
+    
+    def render(self):
+        if self.context._member is True:
+            self.context._member = False
+            price = self.context.handler.getTotalPrice()
+        else:
+            self.context._member = True
+            price = self.context.handler.getMemberPrice()
+
+        return "[{'membership': %s, 'price': '%s'}]" % (
+            str(self.context._member).lower(), str(price))
+
+
 class CartItemDelete(grok.View):
     grok.name("delete")
     grok.context(ISessionCart)

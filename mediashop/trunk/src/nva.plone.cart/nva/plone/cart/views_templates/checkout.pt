@@ -17,7 +17,35 @@
           /*var val = jq('input#form_lieferadresse').attr("checked");*/
            jq('#lieferadresse').toggle()
          });
-       });
+
+          jq.ajaxSetup({cache: false});
+          var base_url = jq("link[rel=kss-base-url]").attr('href');
+
+	  jq('#cart-member').click(function(e){
+	      jq.ajax({
+	        type: "GET",
+		dataType: 'json',
+	        url: base_url + "/++cart++/membership_final",
+	        async: false,
+	        success: function(result) {
+		    jq('#price').animate({
+		      'opacity' : 'toggle',
+		    });
+	            if (result[0].membership == true) {
+		      jq(this).attr("checked", true);
+		      jq('#price').html(result[0].price);
+		    }
+		    else {
+		      jq(this).attr("checked", false);
+		      jq('#price').html(result[0].price);
+		    }
+		    jq('#price').animate({
+		      'opacity' : 'toggle',
+		    });
+		 }
+	      });
+	    });
+	  });
   </script>
   <div metal:define-macro="form">
 
@@ -52,15 +80,16 @@
     <p tal:content="view/description|nothing" i18n:translate="">Description</p>
 
    <fieldset>
-     <ul> 
-     <li> <input type="checkbox" id="cart-member"
-             tal:attributes="checked context/is_member"
-             /><span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr
-             </span> </li>
+     <ul>
+     <li>
+       <input type="checkbox" id="cart-member"
+	      tal:attributes="checked context/is_member" />
+       <span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr</span>
+     </li>
 
       <li tal:condition="context/is_member" i18n:translate="">Mitgliedsbetrieb der BG Verkehr</li>
-      <li i18n:translate="" tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
-      <li i18n:translate="" tal:condition="context/is_member"> Gesamtbestellwert: EUR <span tal:replace="python: context.fF(handler.getMemberPrice())"/> zugl. MwST und Versand </li> 
+      <li i18n:translate="" tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
+      <li i18n:translate="" tal:condition="context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> zugl. MwST und Versand </li> 
      </ul> 
 
 
