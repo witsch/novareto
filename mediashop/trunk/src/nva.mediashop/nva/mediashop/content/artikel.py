@@ -227,7 +227,6 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         self.non_member_price = float(context.preis_non_member) 
         self.price_info = context.preisinfo
         self.max_quantity = context.quantity
-        directlyProvides(self, IDiscountedCartItem)
 
     @property
     def discount_price(self):
@@ -247,13 +246,13 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         
     @property
     def total_price(self):
-        if IDiscountedCartItem.providedBy(self):
+        if not IDiscountedCartItem.providedBy(self):
             return self.discount_price * self.calculate_quantity
         return self.non_member_price * self.quantity
 
     @property
     def basic_price(self):
-        if IDiscountedCartItem.providedBy(self):
+        if not IDiscountedCartItem.providedBy(self):
             return self.discount_price 
         return self.non_member_price
 
