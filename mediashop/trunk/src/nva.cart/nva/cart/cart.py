@@ -20,6 +20,7 @@ class CartHandler(object):
 
     def __init__(self, cart):
         self.cart = cart
+        self.__member__ =  True
 
     def addItem(self, item):
         if not ICartAddable.providedBy(item):

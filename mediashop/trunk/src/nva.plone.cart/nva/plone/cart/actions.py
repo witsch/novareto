@@ -15,8 +15,18 @@ class CartItemMember(grok.View):
     def update(self):
         if self.context._member is True:
             self.context._member = False
+            for item in self.context.cart.values():
+                if item == True or item == False:
+                    print "??"
+                else:
+                    noLongerProvides(item, IDiscountedCartItem)
         else:
             self.context._member = True
+            for item in self.context.cart.values():
+                if item == True or item == False:
+                    print "??"
+                else:
+                    directlyProvides(item, IDiscountedCartItem)
             
     def render(self):
         portal_url = getToolByName(self.context, 'portal_url')()

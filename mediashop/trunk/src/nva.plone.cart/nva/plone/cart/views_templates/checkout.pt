@@ -10,6 +10,10 @@
  <metal:main fill-slot="body">
   <script type="text/javascript">
    jq(document).ready(function() {
+       var cm = jq('#cart-member').attr('checked');
+       if (cm != true)
+           jq('#form_mitgliedsnummer').hide();
+
        var lf = jq('input#form_lieferadresse').attr('checked');
        if (lf != true)
            jq('#lieferadresse').hide();
@@ -22,6 +26,7 @@
           var base_url = jq("link[rel=kss-base-url]").attr('href');
 
 	  jq('#cart-member').click(function(e){
+              jq('#form_mitgliedsnummer').toggle()
 	      jq.ajax({
 	        type: "GET",
 		dataType: 'json',
@@ -87,44 +92,9 @@
        <span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr</span>
      </li>
 
-      <li tal:condition="context/is_member" i18n:translate="">Mitgliedsbetrieb der BG Verkehr</li>
       <li i18n:translate="" tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
       <li i18n:translate="" tal:condition="context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> zugl. MwST und Versand </li> 
      </ul> 
-
-
-    <dl id="beschreibung" class="collapsible collapsedOnLoad">          
-       <dt class="collapsibleHeader">Warenkorb anzeigen</dt>
-        <dd class="collapsibleContent">
-	    <table class="listing nosort" tal:define="items handler/getItems">
-	      <thead>
-		<tr>
-		  <th i18n:translate="">Titel der Broschuere</th>
-		  <th i18n:translate="">Einzelpreis</th>
-		  <th i18n:translate="">Anzahl</th>
-		  <th i18n:translate="">Gesamtpreis</th>
-		</tr>
-	      </thead>
-	      <tbody>
-		<tal:loop repeat="item items">
-		  <tr tal:attributes="id string:item-${item/code}">
-		    <td>
-		      <a href="" tal:content="item/title"
-			 tal:attributes="href item/url" />
-		    </td>
-		    <td>
-			<span tal:content="python: context.fF(item.basic_price)" />
-		    </td>
-		    <td> 
-			<span class="quantity" tal:content="item/quantity" />
-		    </td>    
-		    <td tal:content="python: context.fF(item.total_price)" />
-		  </tr>
-		</tal:loop>
-	      </tbody>
-	    </table>
-        </dd>
-    </dl>
 
 
    <h3 i18n:translate=""> Bestellformular </h3>
@@ -154,7 +124,7 @@
                        datenschutz python: view.widgets['datenschutz'];
                        land python: view.widgets['land']">
 
-        <div tal:replace="structure python: view.renderField(mnr)" tal:condition="context/is_member" />
+        <div tal:replace="structure python: view.renderField(mnr)" />
         <div tal:replace="structure python: view.renderField(firma)"/>
         <div tal:replace="structure python: view.renderField(name, vorname)"/>
         <div tal:replace="structure python: view.renderField(strasse)"/>

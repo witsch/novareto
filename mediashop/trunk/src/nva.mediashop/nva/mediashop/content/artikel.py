@@ -210,6 +210,8 @@ class Artikel(base.ATCTContent):
 
 atapi.registerType(Artikel, PROJECTNAME)
 
+from nva.cart import IDiscountedCartItem
+from zope.interface import directlyProvides
 
 class BuyableContentAdapter(CartItem, grok.Adapter):
     """A cart item adapter
@@ -217,6 +219,7 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
     grok.context(IArtikel)
    
     def __init__(self, context):
+        print "ININ"
         self.title = unicode(context.Title(), 'utf-8')
         self.url = context.absolute_url()
         self.code = context.code
@@ -224,6 +227,7 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         self.non_member_price = float(context.preis_non_member) 
         self.price_info = context.preisinfo
         self.max_quantity = context.quantity
+        directlyProvides(self, IDiscountedCartItem)
 
     @property
     def discount_price(self):
@@ -243,13 +247,13 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         
     @property
     def total_price(self):
-        if not IDiscountedCartItem.providedBy(self):
+        if IDiscountedCartItem.providedBy(self):
             return self.discount_price * self.calculate_quantity
         return self.non_member_price * self.quantity
 
     @property
     def basic_price(self):
-        if not IDiscountedCartItem.providedBy(self):
+        if IDiscountedCartItem.providedBy(self):
             return self.discount_price 
         return self.non_member_price
 

@@ -42,6 +42,7 @@ class SessionCart(Item):
         Item.__init__(self, id=id)
         self.cart = cart
         self.id = id
+        import pdb; pdb.set_trace()
 
     @apply
     def _member():
