@@ -16,7 +16,7 @@
      <p i18n:translate=""> Bitte vergessen Sie nicht, uns das ausgefüllte Formular noch per Fax oder Brief
                            zukommen zu lassen. Vielen Dank. </p>
 
-     <p i18n:translate=""> Um das Bestellformular auszudrucken klicken Sie bitte
+     <p> Um das Bestellformular auszudrucken klicken Sie bitte
       <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}&temp=1"> hier </a>
      </p>
    

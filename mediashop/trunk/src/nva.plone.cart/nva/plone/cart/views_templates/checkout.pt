@@ -92,8 +92,8 @@
        <span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr</span>
      </li>
 
-      <li i18n:translate="" tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/> zugl. MwST und Versand </li> 
-      <li i18n:translate="" tal:condition="context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> zugl. MwST und Versand </li> 
+      <li tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/> zzgl. MwST und Versand </li> 
+      <li tal:condition="context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> zzgl. MwST und Versand </li> 
      </ul> 
 
 
