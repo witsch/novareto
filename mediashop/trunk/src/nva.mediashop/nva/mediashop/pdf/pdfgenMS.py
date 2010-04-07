@@ -85,7 +85,8 @@ def createpdf (filename, daten):
 
     # Betreff
     c.setFont(schriftartfett, 12)
-    c.drawString( 2.5*cm, 19.0*cm, 'Medienbestellung bei der BG Verkehr')
+    text = 'Medienbestellung von ' + daten['VornameName'] + ' bei der BG Verkehr'
+    c.drawString( 2.5*cm, 19.0*cm, text)
 
     # Anschreiben
     c.setFont(schriftart,12)
