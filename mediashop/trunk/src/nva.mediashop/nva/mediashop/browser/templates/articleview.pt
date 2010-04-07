@@ -21,6 +21,7 @@
 -->
     <div class="article-image" style="float:right"
 	 tal:condition="context/image">
+      <br>
       <metal:field use-macro="python:here.widget('image', mode='view')">
 	Image
       </metal:field>
@@ -61,24 +62,26 @@
       </metal:field>
     </div>
     <br>
-    <strong i18n:translate="Preis fuer Mitglieder">Preis fuer Mitglieder</strong>
-    <br>
-    <span>
+    <p>
+      <strong i18n:translate="Preis fuer Mitglieder">Preis fuer Mitglieder</strong>
+      <br>
       <metal:field use-macro="python:here.widget('preis', mode='view')">
 	Price
       </metal:field> Euro
-    </span>
-    <p i18n:translate="" tal:condition="here/preisinfo">
-       Mitglieder erhalten 3 Exemplare kostenlos.
+      <br>
+      <span i18n:translate="" tal:condition="here/preisinfo">
+        Mitglieder erhalten 3 Exemplare kostenlos.
+      </span>
     </p>
-    <p tal:condition="not: here/preisinfo"> &nbsp; </p>
     <br>
-    <strong i18n:translate="Preis fuer Nicht-Mitglieder">Preis fuer Nicht-Mitglieder</strong>
-    <p>                                                                                                                                                          
+    <p>                                                                                
+      <strong i18n:translate="Preis fuer Nicht-Mitglieder">Preis fuer Nicht-Mitglieder</strong>
+      <br>
       <metal:field use-macro="python:here.widget('preis_non_member', mode='view')">
         Price
       </metal:field> Euro
     </p>
+    <br>
     <p>
       <metal:field use-macro="python:here.widget('tax', mode='view')">
 	Taxes
@@ -91,7 +94,7 @@
       </metal:field>
     </tal:file>
 
-     <br>
+    <br><br>
     <div tal:replace="structure provider:plone.belowcontentbody" />
 
 <!--    <a href="" tal:attributes="href view/getParentUrl" i18n:translate=""> Back </a> -->
