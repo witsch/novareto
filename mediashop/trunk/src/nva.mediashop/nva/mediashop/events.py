@@ -31,10 +31,11 @@ def printMessage(obj, event):
 	       filename="Bestellung.pdf")
     except:
         pass
-    sMail(to="ulrike.roth@bg-verkehr.de",
+    # Mail an  GSV GmbH
+    sMail(to="christian.hanf@bg-verkehr.de",
           sender="medienversand@bg-verkehr.de",
           cc="",
-          subject="Neue Bestellung",
+          subject="Medienshop: Neue Bestellung",
           text=textmail,
           path=filename,
           filename="Bestellung.pdf")

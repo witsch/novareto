@@ -11,13 +11,19 @@
 
      <h1 i18n:translate=""> Vielen Dank fuer Ihren Einkauf im Medienshop der BG-Verkehr </h1>
 
-     <p i18n:translate=""> Ihre Bestellung ist erfolgreich bei uns eingegangen </p>
+     <p i18n:translate=""> Ihre Bestellung ist erfolgreich bei uns eingegangen. Sie erhalten in Kuerze Ihre Ware. </p>
+     <br>
 
-     <p i18n:translate=""> Sie erhalten in Kuerze Ihre Ware </p>
+     <p i18n:translate=""> Um sich die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </p>
+     <br><br>
 
-     <p i18n:translate=""> Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF -
-     Symbol </p>
+     <p align="center">
+       <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.gif; title string:Bestellung ausdrucken"/></a>
+     </p>
+
+<!--
       <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}"> Download </a>
+-->
     </metal:main>
   </body>
 </html>

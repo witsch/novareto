@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-04-07 10:11+0000\n"
+"POT-Creation-Date: 2010-04-08 11:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Anzahl"
 msgstr ""
 
 #: ./views_templates/print.pt:12
-msgid "Ausdruck Ihrer Bestellung über den Medienkatalog der BG-Verkehr"
+msgid "Ausdruck Ihrer Bestellung ueber den Medienkatalog der BG-Verkehr"
 msgstr ""
 
 #: ./views.py:145
@@ -59,7 +59,7 @@ msgid "Bitte geben Sie alle Werte ein."
 msgstr ""
 
 #: ./views_templates/print.pt:16
-msgid "Bitte vergessen Sie nicht, uns das ausgefüllte Formular noch per Fax oder Brief zukommen zu lassen. Vielen Dank."
+msgid "Bitte vergessen Sie nicht, uns das ausgefuellte Formular noch per Fax oder Brief zukommen zu lassen. Vielen Dank."
 msgstr ""
 
 #: ./views_templates/print.pt:7
@@ -96,7 +96,7 @@ msgid "Gesamtpreis"
 msgstr ""
 
 #: ./views_templates/thanks.pt:14
-msgid "Ihre Bestellung ist erfolgreich bei uns eingegangen"
+msgid "Ihre Bestellung ist erfolgreich bei uns eingegangen. Sie erhalten in Kuerze Ihre Ware."
 msgstr ""
 
 #: ./views_templates/checkout.pt:74
@@ -128,20 +128,20 @@ msgstr ""
 msgid "Shopping Cart"
 msgstr ""
 
-#: ./views_templates/thanks.pt:16
-msgid "Sie erhalten in Kuerze Ihre Ware"
-msgstr ""
-
 #: ./views_templates/print.pt:14
-msgid "Sie können sich das Bestellformular jetzt herunterladen oder ausdrucken."
+msgid "Sie koennen sich das Bestellformular jetzt herunterladen oder ausdrucken."
 msgstr ""
 
 #: ./views_templates/cartcontent.pt:28
 msgid "Titel"
 msgstr ""
 
-#: ./views_templates/thanks.pt:18
-msgid "Um sich die Rechung auszudrucken. Klicken Sie bitte auf das PDF - Symbol"
+#: ./views_templates/print.pt:19
+msgid "Um das Bestellformular auszudrucken klicken Sie bitte auf das PDF-Symbol."
+msgstr ""
+
+#: ./views_templates/thanks.pt:17
+msgid "Um sich die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol."
 msgstr ""
 
 #: ./views_templates/thanks.pt:12
