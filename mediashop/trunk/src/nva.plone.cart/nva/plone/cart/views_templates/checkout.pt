@@ -13,20 +13,18 @@
        var cm = jq('#cart-member').attr('checked');
        if (cm != true)
            jq('#form_mitgliedsnummer').hide();
-
        var lf = jq('input#form_lieferadresse').attr('checked');
        if (lf != true)
            jq('#lieferadresse').hide();
-       jq('input#form_lieferadresse').click(function() {
-          /*var val = jq('input#form_lieferadresse').attr("checked");*/
-           jq('#lieferadresse').toggle()
+       jq('#form_lieferadresse').click(function() {
+           jq('#lieferadresse').toggle();
          });
 
           jq.ajaxSetup({cache: false});
           var base_url = jq("link[rel=kss-base-url]").attr('href');
 
 	  jq('#cart-member').click(function(e){
-              jq('#form_mitgliedsnummer').toggle()
+              jq('#form_mitgliedsnummer').toggle();
 	      jq.ajax({
 	        type: "GET",
 		dataType: 'json',
@@ -34,7 +32,7 @@
 	        async: false,
 	        success: function(result) {
 		    jq('#price').animate({
-		      'opacity' : 'toggle',
+		      'opacity' : 'toggle'
 		    });
 	            if (result[0].membership == true) {
 		      jq(this).attr("checked", true);
@@ -45,11 +43,11 @@
 		      jq('#price').html(result[0].price);
 		    }
 		    jq('#price').animate({
-		      'opacity' : 'toggle',
+		      'opacity' : 'toggle'
 		    });
 		 }
 	      });
-	    });
+	    }); 
 	  });
   </script>
   <div metal:define-macro="form">
@@ -88,12 +86,12 @@
      <ul>
      <li>
        <input type="checkbox" id="cart-member"
-	      tal:attributes="checked context/is_member" />
+	      tal:attributes="checked not: context/is_member" />
        <span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr</span>
      </li>
 
-      <li tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/> zzgl. MwST und Versand </li> 
-      <li tal:condition="context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> zzgl. MwST und Versand </li> 
+      <li tal:condition="context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/> zzgl. MwST und Versand </li> 
+      <li tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> zzgl. MwST und Versand </li> 
      </ul> 
 
 

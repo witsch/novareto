@@ -36,15 +36,18 @@ class CartItemMember(grok.View):
 class CheckoutMembership(grok.View):
     grok.name('membership_final')
     grok.context(ISessionCart)
-    
+   
+    def fF(self, value):
+        return "%.2f" %float(value)
+ 
     def render(self):
         if self.context._member is True:
             self.context._member = False
-            price = self.context.handler.getTotalPrice()
+            price = self.context.handler.getMemberPrice()
         else:
             self.context._member = True
-            price = self.context.handler.getMemberPrice()
-
+            price = self.context.handler.getTotalPrice()
+        price = self.fF(price)
         return "[{'membership': %s, 'price': '%s'}]" % (
             str(self.context._member).lower(), str(price))
 
