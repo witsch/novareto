@@ -244,15 +244,15 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
                 return self.quantity - 3 
         return self.quantity
         
-    @property
-    def total_price(self):
-        if not IDiscountedCartItem.providedBy(self):
+    def total_price(self, member=True):
+        #if not IDiscountedCartItem.providedBy(self) or not member:
+        if not member:
             return self.discount_price * self.calculate_quantity
         return self.non_member_price * self.quantity
 
-    @property
-    def basic_price(self):
-        if not IDiscountedCartItem.providedBy(self):
+    def basic_price(self, member=True):
+        #if not IDiscountedCartItem.providedBy(self):
+        if not member:
             return self.discount_price 
         return self.non_member_price
 
