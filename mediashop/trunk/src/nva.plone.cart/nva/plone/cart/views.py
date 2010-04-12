@@ -155,14 +155,14 @@ class Checkout(CartNamespace, grok.Form):
             datenschutz = self.widgets.get('datenschutz')
             datenschutz._error = err = WidgetInputError(field_name='datenschutz',
                                            widget_title=u'Datenschutz', 
-                                           errors=_(u'Bitte das Feld DS ank.'))
+                                           errors=_(u'Bitte das Feld Datenschutzvereinbarung bestätigen.'))
             errors.append(err) 
-
-        if self.context.is_member and data.get('mitgliedsnummer') == None:
+        
+        if not self.context.is_member and data.get('mitgliedsnummer') == None:
             mnr = self.widgets.get('mitgliedsnummer')
             mnr._error = err = WidgetInputError(field_name='mitgliedsnummer',
                                                 widget_title=u'Mitgliedsnummer', 
-                                                errors=_(u'MitgliedsnummerFehler'))
+                                                errors=_(u'Bitte Mitgliedsnummer prüfen'))
             errors.append(err) 
 
         if data.get('lieferadresse'):
@@ -204,7 +204,7 @@ class Checkout(CartNamespace, grok.Form):
         self.widgets['plz'].displayWidth = 5 
         self.widgets['lplz'].displayWidth = 5 
 
-    @form.action(_(u'Zurueck zum Warenkorb'), validator=null_validator)
+    @form.action(_(u'Zurück zum Warenkorb'), validator=null_validator)
     def handle_cancel(self, action, data):
         self.request.response.redirect(self.portal_url+'/++cart++')
 

@@ -89,12 +89,17 @@ class Order(Item):
 
     def getData(self):
         si = self.shipping_information
+        ivalues = []
         artikel = []
-        for item in self.cart.itervalues():
+        for i in self.cart.itervalues():
+            if i != True and i != False:
+                ivalues.append(i)
+        print ivalues
+        for item in ivalues:
             bestellung = {}
             bestellung['Anzahl']  = item.quantity
             bestellung['Artikel'] = item.title
-            bestellung['Preis']   = item.total_price
+            bestellung['Preis']   = item.total_price(self.is_member)
             artikel.append(bestellung)
 
         daten = {}

@@ -10,17 +10,20 @@
   </div>
   <div tal:condition="items">
     <fieldset>
+      <br>
       <input type="checkbox" id="cart-member"
 	     tal:attributes="checked not: context/is_member"
 	     /><span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr
              </span>
-           <span align="right"> 
+  
+           <!--<span align="right"> -->
+            <br>
             <strong i18n:translate=""> Gesamtbestellwert: EUR
                     <span tal:replace="python: context.fF(handler.getMemberPrice())" tal:condition="not: context/is_member" /> 
                     <span tal:replace="python: context.fF(handler.getTotalPrice())" tal:condition="context/is_member" /> 
             </strong>
             <span i18n:translate=""> zzgl. MwST. und Versand </span> 
-           </span>
+           <!--</span> -->
             
     <table class="listing nosort">
       <thead>
@@ -40,7 +43,7 @@
 		 tal:attributes="href item/url" />
 	    </td>
 	    <td>
-                <span tal:content="python: context.fF(item.basic_price)" />
+                <span tal:content="python: context.fF(item.basic_price(member=context.is_member))" />
             </td>
 	    <td nowrap> 
                 <span class="quantity" tal:content="item/quantity" /> &nbsp;
@@ -55,7 +58,7 @@
                      tal:attributes="href string:${cart_url}/minus/${item/code}"
                      > <img src="" tal:attributes="src string:pfeil-unten-2.gif"></a>
             </td>    
-	    <td tal:content="python: context.fF(item.total_price)" />
+	    <td tal:content="python: context.fF(item.total_price(member=context.is_member))" />
 	    <td>
 	      <a href=""
 		 class="cart-action"

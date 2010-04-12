@@ -82,25 +82,29 @@
 -->
     <p tal:content="view/description|nothing" i18n:translate="">Description</p>
 
-   <fieldset>
-     <ul>
-     <li>
+    <fieldset>
+     <br>
        <input type="checkbox" id="cart-member"
-	      tal:attributes="checked not: context/is_member" />
-       <span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr</span>
-     </li>
+              tal:attributes="checked not: context/is_member" />
+              <span i18n:translate=""> Mitgliedsbetrieb der BG Verkehr</span>
 
-      <li tal:condition="context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/> zzgl. MwST und Versand </li> 
-      <li tal:condition="not: context/is_member"> Gesamtbestellwert: EUR <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> zzgl. MwST und Versand </li> 
-     </ul> 
-
+      <p tal:condition="context/is_member"> 
+        <strong i18n:translate=""> Gesamtbestellwert: EUR 
+          <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/>
+        </strong> 
+        <span i18n:translate=""> zzgl. MwST und Versand </span>
+      </p>
+      <p tal:condition="not: context/is_member"> 
+        <strong i18n:translate=""> Gesamtbestellwert: EUR 
+          <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> 
+        </strong> 
+        <span i18n:translate=""> zzgl. MwST und Versand </span>
+      </p>
 
    <h3 i18n:translate=""> Bestellformular </h3>
 
     <div metal:define-slot="extra_info" tal:replace="nothing">
     </div>
-
-
 
       <div tal:define="mnr python: view.widgets['mitgliedsnummer'];
                        firma python: view.widgets['firma'];
