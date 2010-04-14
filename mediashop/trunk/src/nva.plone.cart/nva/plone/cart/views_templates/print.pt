@@ -9,11 +9,11 @@
     <metal:main fill-slot="main">
 
 
-     <h1 i18n:translate=""> Ausdruck Ihrer Bestellung ueber den Medienkatalog der BG-Verkehr </h1>
+     <h1 i18n:translate=""> Ausdruck Ihrer Bestellung </h1>
 
-     <p i18n:translate=""> Sie können sich das Bestellformular jetzt herunterladen oder ausdrucken. </p>
+     <p i18n:translate=""> Sie koennen sich das Bestellformular jetzt herunterladen oder ausdrucken. </p>
 
-     <p i18n:translate=""> Bitte vergessen Sie nicht, uns das ausgefüllte Formular noch per Fax oder Brief
+     <p i18n:translate=""> Bitte vergessen Sie nicht, uns das ausgefuellte Formular noch per Fax oder Brief
                            zukommen zu lassen. Vielen Dank. </p>
      <br>
      <p i18n:translate=""> Um das Bestellformular auszudrucken klicken Sie bitte auf das PDF-Symbol. </p>

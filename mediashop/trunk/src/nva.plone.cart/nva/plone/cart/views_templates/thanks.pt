@@ -9,12 +9,12 @@
     <metal:main fill-slot="main">
 
 
-     <h1 i18n:translate=""> Vielen Dank fuer Ihren Einkauf im Medienshop der BG-Verkehr </h1>
+     <h1 i18n:translate=""> Vielen Dank fuer Ihre Bestellung </h1>
 
-     <p i18n:translate=""> Ihre Bestellung ist erfolgreich bei uns eingegangen. Sie erhalten in Kuerze Ihre Ware. </p>
+     <p i18n:translate=""> Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kuerze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse. </p>
      <br>
 
-     <p i18n:translate=""> Um sich die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </p>
+     <p i18n:translate=""> Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </p>
      <br><br>
 
      <p align="center">

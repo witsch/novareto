@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-04-08 11:39+0000\n"
+"POT-Creation-Date: 2010-04-14 08:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,16 +25,16 @@ msgstr ""
 msgid "Abbrechen"
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:30
+#: ./views_templates/cartcontent.pt:33
 msgid "Anzahl"
 msgstr ""
 
 #: ./views_templates/print.pt:12
-msgid "Ausdruck Ihrer Bestellung ueber den Medienkatalog der BG-Verkehr"
+msgid "Ausdruck Ihrer Bestellung"
 msgstr ""
 
 #: ./views.py:145
-#: ./views_templates/checkout.pt:100
+#: ./views_templates/checkout.pt:104
 msgid "Bestellformular"
 msgstr ""
 
@@ -46,8 +46,12 @@ msgstr ""
 msgid "Bestellung senden"
 msgstr ""
 
+#: ./views.py:165
+msgid "Bitte Mitgliedsnummer prÃ¼fen"
+msgstr ""
+
 #: ./views.py:158
-msgid "Bitte das Feld DS ank."
+msgid "Bitte das Feld Datenschutzvereinbarung bestÃ¤tigen."
 msgstr ""
 
 #: ./views.py:174
@@ -79,27 +83,31 @@ msgstr ""
 msgid "Der maximale Bestellmenge dieses Artikel ist erreicht."
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:29
+#: ./views_templates/cartcontent.pt:32
 msgid "Einzelpreis"
 msgstr ""
 
-#: ./views_templates/checkout.pt:69
+#: ./views_templates/checkout.pt:67
 msgid "Error"
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:20
+#: ./views_templates/cartcontent.pt:23
 msgid "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT} ${DYNAMIC_CONTENT}"
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:31
+#: ./views_templates/checkout.pt:93
+msgid "Gesamtbestellwert: EUR <span id="price">${DYNAMIC_CONTENT}</span>"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:34
 msgid "Gesamtpreis"
 msgstr ""
 
 #: ./views_templates/thanks.pt:14
-msgid "Ihre Bestellung ist erfolgreich bei uns eingegangen. Sie erhalten in Kuerze Ihre Ware."
+msgid "Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kuerze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse."
 msgstr ""
 
-#: ./views_templates/checkout.pt:74
+#: ./views_templates/checkout.pt:72
 msgid "Info"
 msgstr ""
 
@@ -107,13 +115,9 @@ msgstr ""
 msgid "Keine Artikel im Warenkorb."
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:15
-#: ./views_templates/checkout.pt:92
+#: ./views_templates/cartcontent.pt:16
+#: ./views_templates/checkout.pt:89
 msgid "Mitgliedsbetrieb der BG Verkehr"
-msgstr ""
-
-#: ./views.py:165
-msgid "MitgliedsnummerFehler"
 msgstr ""
 
 #: ./profiles/default/types/Order.xml
@@ -132,20 +136,20 @@ msgstr ""
 msgid "Sie koennen sich das Bestellformular jetzt herunterladen oder ausdrucken."
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:28
+#: ./views_templates/cartcontent.pt:31
 msgid "Titel"
+msgstr ""
+
+#: ./views_templates/thanks.pt:17
+msgid "Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol."
 msgstr ""
 
 #: ./views_templates/print.pt:19
 msgid "Um das Bestellformular auszudrucken klicken Sie bitte auf das PDF-Symbol."
 msgstr ""
 
-#: ./views_templates/thanks.pt:17
-msgid "Um sich die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol."
-msgstr ""
-
 #: ./views_templates/thanks.pt:12
-msgid "Vielen Dank fuer Ihren Einkauf im Medienshop der BG-Verkehr"
+msgid "Vielen Dank fuer Ihre Bestellung"
 msgstr ""
 
 #: ./views_templates/cartcontent.pt:3
@@ -153,10 +157,10 @@ msgid "Warenkorb"
 msgstr ""
 
 #: ./views.py:207
-msgid "Zurueck zum Warenkorb"
+msgid "ZurÃ¼ck zum Warenkorb"
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:63
+#: ./views_templates/cartcontent.pt:66
 msgid "aus dem Warenkorb entfernen"
 msgstr ""
 
@@ -179,7 +183,11 @@ msgstr ""
 msgid "zurück"
 msgstr ""
 
-#: ./views_templates/cartcontent.pt:22
+#: ./views_templates/checkout.pt:95
+msgid "zzgl. MwST und Versand"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:25
 msgid "zzgl. MwST. und Versand"
 msgstr ""
 
