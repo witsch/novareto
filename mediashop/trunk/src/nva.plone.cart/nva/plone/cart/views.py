@@ -166,6 +166,15 @@ class Checkout(CartNamespace, grok.Form):
             errors.append(err) 
 
         if data.get('lieferadresse'):
+
+            lfirma = data.get('lfirma')
+            if not lfirma:
+		field = self.widgets.get('lfirma')
+		field._error = err = WidgetInputError(field_name='Firma',
+							widget_title=u'Firma', 
+							errors=_(u'Bitte dieses Feld bearbeiten.'))
+		errors.append(err) 
+
             lname = data.get('lname')
             if not lname:
 		field = self.widgets.get('lname')
@@ -274,7 +283,7 @@ class Checkout(CartNamespace, grok.Form):
             if field.error():
                 error += "%s " %field.error()
             input += "%s " %field().replace('id="form.', 'id="form_')    
-            id = field.name.replace('.', '_')
+            id = "field_" + field.name.replace('.', '_')
             css_class += "%s_" %field.name
         if len(error.strip()) > 0:
             css_class = css_class + ' error'
