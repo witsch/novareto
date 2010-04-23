@@ -35,8 +35,8 @@ def printMessage(obj, event):
         pass
 
     # Mail an  GSV GmbH
-    #sMail(to="medienversand@bg-verkehr.de",
-    sMail(to="christian.hanf@bg-verkehr.de",
+    #sMail(to="christian.hanf@bg-verkehr.de",
+    sMail(to="medienversand@bg-verkehr.de",
           sender=besteller,
           cc="",
           subject="Medienshop: Neue Bestellung",
