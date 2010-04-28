@@ -24,6 +24,10 @@ table.listing th, .stx table th {
         width:100%;
 }
 
-.section-medienshop-der-bg-verkehr img {
-border: 1px solid #ccc;
+#shop img {
+ border: 1px solid #ccc;
+}
+
+#portlet-cart table.listing {
+ width: 100%;
 }
