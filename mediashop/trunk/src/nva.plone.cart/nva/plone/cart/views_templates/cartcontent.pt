@@ -5,7 +5,7 @@
    
     <span i18n:translate=""> Keine Artikel im Warenkorb. </span>
     <ul>
-      <li> <a href="medien/mediakatalog" i18n:translate=""> zurück </a> </li>
+      <li> <a href="medien/medienkatalog" i18n:translate=""> zurück </a> </li>
     </ul>
   </div>
   <div tal:condition="items">
@@ -79,7 +79,7 @@
    <table>
     <tr>
      <td>
-       <form action="medien/mediakatalog">
+       <form action="medien/medienkatalog">
          <input type="submit" class="context" value="zurück" />
        </form>
      </td>
