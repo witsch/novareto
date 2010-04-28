@@ -27,4 +27,11 @@
     description="Tabellenansicht Kategorien"
     />
 
+  <browser:menuItem
+    for="..interfaces.medienshop.IMedienShop"
+    menu="plone_displayviews"
+    title="Medienshop"
+    action="@@index"
+    description="Ansicht Medienshop"
+    />
 </configure>
