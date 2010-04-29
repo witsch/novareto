@@ -80,7 +80,7 @@
     <tr>
      <td>
        <form action="medien/medienkatalog">
-         <input type="submit" class="context" value="zurück" />
+         <input type="submit" class="context" value="weitere Artikel auswählen" />
        </form>
      </td>
      <td>
