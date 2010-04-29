@@ -19,7 +19,7 @@
      <p i18n:translate=""> Um das Bestellformular auszudrucken klicken Sie bitte auf das PDF-Symbol. </p>
      <br><br>
      <p align="center">
-       <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}&temp=1"><img src="" title="" tal:attributes="src string:pdf.gif; title string:Bestellung ausdrucken"/></a>
+       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}&temp=1"><img src="" title="" tal:attributes="src string:pdf.gif; title string:Bestellung ausdrucken"/></a>
      </p>
    
     </metal:main>

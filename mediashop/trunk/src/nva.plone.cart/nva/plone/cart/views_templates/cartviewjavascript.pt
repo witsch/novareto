@@ -6,7 +6,7 @@ jq(document).ready(function() {
    jq("#cart-member").change(function() {
      jq.ajax({
        type: "GET",
-       url: base_url + "++cart++/membership",
+       url: base_url + "/medien/medienkatalog/++cart++/membership",
      });
    });
 

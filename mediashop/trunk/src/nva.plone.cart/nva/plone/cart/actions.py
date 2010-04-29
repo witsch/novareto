@@ -30,7 +30,7 @@ class CartItemMember(grok.View):
             
     def render(self):
         portal_url = getToolByName(self.context, 'portal_url')()
-        self.redirect(portal_url + "/++cart++/summary")
+        self.redirect(portal_url + "/medien/medienkatalog/++cart++/summary")
 
 
 class CheckoutMembership(grok.View):
@@ -67,7 +67,7 @@ class CartItemDelete(grok.View):
             utils.flash(self.request, u"Item %r removed from cart." % name)
 
         portal_url = getToolByName(self.context, 'portal_url')()
-        self.redirect(portal_url + "/++cart++/summary")
+        self.redirect(portal_url + "/medien/medienkatalog/++cart++/summary")
         
 
 class CartAction(grok.View):
@@ -97,7 +97,7 @@ class CartItemPlus(CartAction):
             
         utils.flash(self.request, status % name)
         portal_url = getToolByName(self.context, 'portal_url')()
-        self.redirect(portal_url + "/++cart++/summary")
+        self.redirect(portal_url + "/medien/medienkatalog/++cart++/summary")
 
 
 class CartItemMinus(CartAction):
@@ -115,4 +115,4 @@ class CartItemMinus(CartAction):
 
         utils.flash(self.request, status % name)
         portal_url = getToolByName(self.context, 'portal_url')()
-        self.redirect(portal_url + "/++cart++/summary")
+        self.redirect(portal_url + "/medien/medienkatalog/++cart++/summary")

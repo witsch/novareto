@@ -16,12 +16,12 @@
 	  jq('#cart-member').live("click", function(e){
 	      jq.ajax({
 	        type: "GET",
-	        url: base_url + "/++cart++/membership",
+	        url: base_url + "/medien/medienkatalog/++cart++/membership",
 	        async: false,
 	        success: function() {
 	          jq.ajax({
 	            type: "GET",
-		    url: base_url + "/++cart++/cartcontent",
+		    url: base_url + "/medien/medienkatalog/++cart++/cartcontent",
 		    async: false,
 		    success: function(html){
 	              jq("#cart-content").html(html);
@@ -41,7 +41,7 @@
 	       success: function() {
 	         jq.ajax({
 	           type: "GET",
-		   url: base_url + "/++cart++/cartcontent",
+		   url: base_url + "/medien/medienkatalog/++cart++/cartcontent",
 		   async: false,
 		   success: function(html){
 	             jq("#cart-content").html(html);

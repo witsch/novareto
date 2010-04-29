@@ -18,11 +18,11 @@
      <br><br>
 
      <p align="center">
-       <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.gif; title string:Bestellung ausdrucken"/></a>
+       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.gif; title string:Bestellung ausdrucken"/></a>
      </p>
 
 <!--
-      <a href="pdf" tal:attributes="href string:++cart++/pdf?id=${request/id}"> Download </a>
+      <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"> Download </a>
 -->
     </metal:main>
   </body>
