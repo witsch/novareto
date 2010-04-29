@@ -17,7 +17,7 @@ class Index(grok.Form):
 
     def update(self):
         self.categories = [dict(title=x.Title, url=x.getURL()) for x in self.context.getFolderContents()] 
-        self.categories.append(dict(title='Alle Artikel', url=self.url(self.context, 'all')))
+        #self.categories.append(dict(title='Alle Artikel', url=self.url(self.context, 'all')))
 
     @grok.action('Suchen')
     def handle_search(self, **kw):
@@ -43,7 +43,8 @@ class All(grok.View):
         tmp_results = []
         for rubrik in self.context.values():
             for artikel in rubrik.values():
-                tmp_results.append(artikel) 
+                if not artikel.index_html == None:
+                    tmp_results.append(artikel) 
         self.results = tmp_results 
 
     @grok.action('Suchen')
