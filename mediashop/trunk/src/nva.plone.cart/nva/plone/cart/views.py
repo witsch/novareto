@@ -221,7 +221,7 @@ class Checkout(CartNamespace, grok.Form):
     def handle_cancel(self, action, data):
         self.context.cart.clear()        
         utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
-        self.request.response.redirect(self.portal_url+'/medienshop-der-bg-verkehr')
+        self.request.response.redirect(self.portal_url+'/medien/medienkatalog/')
 
     @form.action(_(u'Bestellung drucken'), validator=validate_checkout)
     def handle_print(self, action, data):
