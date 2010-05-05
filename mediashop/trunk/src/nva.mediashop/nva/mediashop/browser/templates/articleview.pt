@@ -88,13 +88,13 @@
       </metal:field>
     </p>
     <p id="download">
-    <strong i18n:translate="Download">Download:</strong><br />
-    <span>Dieses Medium steht zum Herunterladen bereit.</span>
+    <strong i18n:translate="Download">Download:</strong>
     <tal:file condition="context/file/getSize">
       <metal:field use-macro="python:here.widget('file', mode='view')">
 	Download file
       </metal:field>
     </tal:file>
+    <br /><span>Dieses Medium steht zum Herunterladen bereit.</span>
     </p>
 
     <br><br>
