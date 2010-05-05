@@ -144,14 +144,14 @@ msgstr ""
 
 #: ./views_templates/print.pt:14
 msgid "Sie koennen sich das Bestellformular jetzt herunterladen oder ausdrucken."
-msgstr "Sie können sich das Bestellformular jetzt herunterladen oder ausdrucken."
+msgstr "Sie können sich das Bestellformular jetzt herunterladen und ausdrucken."
 
 #: ./views_templates/cartcontent.pt:31
 msgid "Titel"
 msgstr ""
 
 #: ./views_templates/thanks.pt:17
-msgid "Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol."
+msgid "Um Ihre die Bestellung auszudrucken, klicken Sie bitte auf das PDF - Symbol."
 msgstr ""
 
 #: ./views_templates/print.pt:19
