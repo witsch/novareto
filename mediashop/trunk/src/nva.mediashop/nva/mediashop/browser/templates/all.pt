@@ -54,7 +54,7 @@
                   bestellen
                 </a>
            </td>
-           <td>
+           <td align="center">
               <tal:file condition="art/file/getSize">
                   <metal:field use-macro="python:art.widget('file', mode='view')">
                    Download file
