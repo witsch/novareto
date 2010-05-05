@@ -17,10 +17,7 @@
                            zukommen zu lassen. Vielen Dank. </p>
      <br>
      <p i18n:translate=""> Um das Bestellformular auszudrucken klicken Sie bitte auf das PDF-Symbol. </p>
-     <br><br>
-     <p>
        <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}&temp=1"><img src="" title="" tal:attributes="src string:pdf.png; title string:Bestellung ausdrucken"/></a>
-     </p>
    
     </metal:main>
   </body>
