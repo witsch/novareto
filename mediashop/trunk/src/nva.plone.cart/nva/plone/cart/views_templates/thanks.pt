@@ -14,12 +14,8 @@
      <p i18n:translate=""> Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kuerze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse. </p>
      <br>
 
-     <p i18n:translate=""> Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </p>
-     <br><br>
-
-     <p align="center">
-       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.gif; title string:Bestellung ausdrucken"/></a>
-     </p>
+     <span i18n:translate=""> Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </span>
+       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.png; title string:Bestellung ausdrucken"/></a>
 
 <!--
       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"> Download </a>
