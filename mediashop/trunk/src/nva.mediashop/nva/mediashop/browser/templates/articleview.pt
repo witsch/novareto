@@ -87,7 +87,7 @@
 	Taxes
       </metal:field>
     </p>
-
+    <strong i18n:translate="Download">Download</strong><br />
     <tal:file condition="context/file/getSize">
       <metal:field use-macro="python:here.widget('file', mode='view')">
 	Download file
