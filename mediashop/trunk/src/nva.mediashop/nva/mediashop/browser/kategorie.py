@@ -30,7 +30,7 @@ class Index(grok.Form):
         artikel = self.request.get('form.artikel', None)
         if artikel:
             if not artikel[-1] == '*':
-                artikel + '*'
+                artikel += '*'
             path = '/'.join(self.context.getPhysicalPath())[1:]
             self.results = [x.getObject() for x in self.portal_catalog(
                   portal_type="Artikel", 
