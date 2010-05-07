@@ -35,9 +35,9 @@ class Index(grok.Form):
     @property
     def showDownload(self):
         show = False
-        for artikel in self.results:
-            artikel = artikel.getObject()
-            if artikel.file.get_size() > 0:
+        for article in self.results:
+            article = article.getObject()
+            if article.file.get_size() > 0:
                 show = True
         return show
 
@@ -78,6 +78,14 @@ class All(grok.View):
             self.redirect(self.url(self.context))
 
     @property
+    def showDownload(self):
+        show = False
+        for article in self.results:
+            article = article.getObject()
+            if article.file.get_size() > 0:
+                show = True
+        return show
+
     def showDownload(self):
         show = False
         for artikel in self.results:
