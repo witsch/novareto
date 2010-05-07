@@ -40,31 +40,33 @@
            <th i18n:translate=""> Title </th>
            <th i18n:translate=""> Stand </th>
            <th i18n:translate=""> Broschuere </th>
-           <th i18n:translate="" tal:condition="view/showDownload"> Download </th>
+           <th i18n:translate=""> Download </th>
          </tr>
         </thead>
         <tbody>
-         <tr tal:repeat="art results">
+         <tr tal:repeat="arti results">
+           <html:def tal:define="art arti/getObject">
            <td> <span tal:content="art/title"/> <br> <a href=""
                       tal:attributes="href art/absolute_url"> Artikel anzeigen </a> </td>
            <td> <span tal:content="art/stand"/> </td>
            <td>
                 <span tal:content="art/status"/> <br>
-                <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add"
-                           tal:condition="python: art.status == 'lieferbar'">
+                <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add">
                   bestellen
                 </a>
            </td>
-           <td align="center" tal:condition="view/showDownload">
+           <td>
               <tal:file condition="art/file/getSize">
                   <metal:field use-macro="python:art.widget('file', mode='view')">
                    Download file
                   </metal:field>
               </tal:file>
            </td>
+           </html:def>
          </tr>
         </tbody>
        </table>
+
      </div>
 
 
