@@ -31,6 +31,16 @@ class Index(grok.Form):
             message="Bitte geben Sie einen Suchbegriff ein" 
          
         IStatusMessage(self.request).addStatusMessage(message, type="info")
+
+    @property
+    def showDownload(self):
+        show = False
+        for artikel in self.results:
+            artikel = artikel.getObject()
+            if artikel.file.get_size() > 0:
+                show = True
+        return show
+
         
 
 class All(grok.View):
@@ -66,3 +76,13 @@ class All(grok.View):
         IStatusMessage(self.request).addStatusMessage(message, type="info")
         if r:
             self.redirect(self.url(self.context))
+
+    @property
+    def showDownload(self):
+        show = False
+        for artikel in self.results:
+            artikel = artikel.getObject()
+            if artikel.file.get_size() > 0:
+                show = True
+        return show
+
