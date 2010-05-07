@@ -81,16 +81,8 @@ class All(grok.View):
     def showDownload(self):
         show = False
         for article in self.results:
-            article = article.getObject()
+            import pdb; pdb.set_trace()
             if article.file.get_size() > 0:
-                show = True
-        return show
-
-    def showDownload(self):
-        show = False
-        for artikel in self.results:
-            artikel = artikel.getObject()
-            if artikel.file.get_size() > 0:
                 show = True
         return show
 
