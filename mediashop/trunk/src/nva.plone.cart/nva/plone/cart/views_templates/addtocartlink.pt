@@ -13,5 +13,5 @@
 </ul>
 <ul i18n:domain="nva.plone.cart"
     tal:condition="python: context.status != 'lieferbar'">
-  <li> Dieser Artikel ist derzeit vergriffen. </li>
+  <li> Dieser Artikel ist derzeit nicht lieferbar. </li>
 </ul>
