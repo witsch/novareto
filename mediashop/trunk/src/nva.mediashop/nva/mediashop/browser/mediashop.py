@@ -25,7 +25,6 @@ class Index(grok.Form):
         if artikel:
             if not artikel[-1] == '*':
                 artikel += '*'
-            print ar
             self.results = self.portal_catalog(portal_type="Artikel", SearchableText=artikel)
             message = "Es wurden %s Ergebnisse gefunden" %len(self.results)
         else:
