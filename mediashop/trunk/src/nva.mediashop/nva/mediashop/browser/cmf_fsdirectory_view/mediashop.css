@@ -56,4 +56,19 @@ margin-top: 14px;
 margin-top: 16px;
 }
 
+#shop #form_mitgliedsnummer,
+#shop #form_firma,
+#shop #form_strasse,
+#shop #form_email {
+width: 240px;
+}
+
+#shop #form_name,
+#shop #form_vorname,
+#shop #form_telefon,
+#shop #form_telefax,
+#shop #form_ort {
+width: 160px;
+}
+
 

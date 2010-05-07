@@ -79,8 +79,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         default = '1',
         vocabulary=(
-              ('1', 'Preisangaben verstehen sich zzgl. MwSt. und Versandkosten.'),
-              ('2', 'Preisangaben verstehen sich zzgl. Mwst. .')), 
+              ('1', 'Preisangaben verstehen sich zzgl. gesetzl. MwSt. und Versandkosten.'),
+              ('2', 'Preisangaben verstehen sich zzgl. gesetzl. Mwst. .')), 
         widget=atapi.SelectionWidget(
             label=_(u"Mwst Informationen"),
         ),
@@ -140,7 +140,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         default = 'lieferbar',
         vocabulary =  ( 'lieferbar',
-                        'vergriffen' ),
+                        'nicht lieferbar' ),
         widget=atapi.SelectionWidget(
             label=_(u"Status"),
             description=_(u"Ist dieser Artikel momentan Lieferbar?"),
