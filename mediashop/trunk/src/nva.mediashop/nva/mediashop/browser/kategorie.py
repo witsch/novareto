@@ -29,7 +29,7 @@ class Index(grok.Form):
     def handle_search(self, **kw):
         artikel = self.request.get('form.artikel', None)
         if artikel:
-            if not a[-1] == '*':
+            if not artikel[-1] == '*':
                 artikel + '*'
             path = '/'.join(self.context.getPhysicalPath())[1:]
             self.results = [x.getObject() for x in self.portal_catalog(

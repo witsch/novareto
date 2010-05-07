@@ -23,7 +23,7 @@ class Index(grok.Form):
     def handle_search(self, **kw):
         artikel = self.request.get('form.artikel', None)
         if artikel:
-            if not a[-1] == '*':
+            if not artikel[-1] == '*':
                 artikel + '*'
             self.results = self.portal_catalog(portal_type="Artikel", SearchableText=artikel)
             message = "Es wurden %s Ergebnisse gefunden" %len(self.results)
@@ -54,7 +54,7 @@ class All(grok.View):
         r = False
         artikel = self.request.get('form.artikel', None)
         if artikel:
-            if not a[-1] == '*':
+            if not artikel[-1] == '*':
                 artikel + '*'
 
             self.results = [x.getObject() for x in self.portal_catalog(portal_type="Artikel", SearchableText=artikel)]
