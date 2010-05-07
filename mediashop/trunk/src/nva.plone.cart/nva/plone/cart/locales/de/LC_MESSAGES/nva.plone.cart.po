@@ -196,11 +196,11 @@ msgid "zurück"
 msgstr ""
 
 #: ./views_templates/checkout.pt:95
-msgid "zzgl. MwST und Versand"
+msgid "zzgl. gesetzl. MwSt und Versand"
 msgstr ""
 
 #. Default: "zzgl. MwST. und Versand"
 #: ./views_templates/cartcontent.pt:25
-msgid "zzgl. MwST. und Versand"
+msgid "zzgl. gesetzl. MwSt. und Versand"
 msgstr ""
 
