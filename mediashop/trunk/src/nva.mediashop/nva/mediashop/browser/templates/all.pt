@@ -11,6 +11,7 @@
                    searchterm request/artikel|nothing">
 
     <tal:main-macro metal:define-macro="main">
+    <div id="shop">
     <h1 class="documentFirstHeading">Alle Artikel</h1>
     <p class="documentDescription" tal:content="context/description">
        This is the message view of the content object</p>
@@ -70,6 +71,7 @@
 
 
     <div tal:replace="structure provider:plone.belowcontentbody" />
+    </div>
     </tal:main-macro>
 </metal:main>
 </body>
