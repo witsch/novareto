@@ -56,19 +56,24 @@ margin-top: 14px;
 margin-top: 16px;
 }
 
-#shop #form_mitgliedsnummer,
-#shop #form_firma,
-#shop #form_strasse,
-#shop #form_email {
+.section-medien #form_mitgliedsnummer,
+.section-medien #form_firma,
+.section-medien #form_strasse {
 width: 240px;
 }
 
-#shop #form_name,
-#shop #form_vorname,
-#shop #form_telefon,
-#shop #form_telefax,
-#shop #form_ort {
+.section-medien #form_email {
+width: 300px;
+}
+
+.section-medien #shop #form_name,
+.section-medien #form_vorname,
+.section-medien #form_telefon,
+.section-medien #form_telefax,
+.section-medien #form_ort {
 width: 160px;
 }
+
+
 
 
