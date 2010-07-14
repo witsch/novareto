@@ -16,6 +16,15 @@
                  tal:define="dummy python:request.set('disable_border',1)" />
     <metal:block fill-slot="column_one_slot" />
     <metal:block fill-slot="column_two_slot" />
+
+    <metal:js fill-slot="javascript_head_slot">
+      <script type="text/javascript" src=""
+              tal:attributes="src string:${portal_url}/++resource++collective.showmore.js">
+      </script>
+      <script type="text/javascript" src=""
+              tal:attributes="src string:${portal_url}/++resource++collective.solr.resources/scripts.js">
+      </script>
+    </metal:js>
 </head>
 
 <body>
@@ -28,8 +37,7 @@
                  desc_length site_properties/search_results_description_length;
                  desc_ellipsis site_properties/ellipsis;
                  searchterm request/SearchableText|nothing;
-                 use_view_action site_properties/typesUseViewActionInListings|python:();
-                 facets python: here.hasFacets(results)">
+                 use_view_action site_properties/typesUseViewActionInListings|python:();">
 
     <form name="searchform" 
           action="search"
@@ -57,23 +65,14 @@
         </span>
         to refine your search.
         </p>
+
+        <div tal:define="view nocall: context/@@search-facets | nothing"
+             tal:condition="python: view"
+             tal:replace="structure view/hiddenfields" />
+
     </form>
-<!--
-    <dl id="document-toc" class="portlet toc" style="display: block;" 
-              tal:condition="facets"
-              tal:define="searchabletext request/SearchableText|nothing;
-	                  purl string:${portal_url}">
-       <dt class="portletHeader"> Resultate </dt>
-          <dt class="portletItem">
-	      <ul class="TOC1Digit"
-	           tal:repeat="facet facets/facets"> 
-		     <li tal:repeat="link python: facets.getLinkGroup(facet, purl, searchabletext)">
-		         <span tal:content="structure link"/>
-		     </li>
-	      </ul>	     
-	  </dt>    
-    </dl>
--->
+
+
     <h1 class="documentFirstHeading">
         <span i18n:translate="heading_search_results">
             Search results
@@ -103,10 +102,14 @@
     <div tal:condition="results"
           tal:define="batch python:Batch(results, b_size, int(b_start), orphan=1);">
 
+        <div tal:define="view nocall: context/@@search-facets | nothing"
+             tal:condition="python: view"
+             tal:replace="structure python: view(results=results)" />
+
         <dl class="searchResults">
         <tal:results repeat="result batch">
-        <tal:entry define="result_url result/uri;
-	                   old_url result/getURL;
+         <!--<span tal:content="result/uri"/>-->
+        <tal:entry define="result_url result/getURL;
                            result_type result/portal_type;
                            item_icon python:plone_view.getIcon(result);
                            url python:'%s?searchterm=%s'%(test(result_type in use_view_action, result_url+'/view', result_url+'/'), searchterm);">
@@ -183,7 +186,7 @@
         </tal:entry>
         </tal:results>
         </dl>
-         
+
         <div metal:use-macro="here/batch_macros/macros/navigation" />
 
     </div>
@@ -191,3 +194,4 @@
 </div>
 </body>
 </html>
+
