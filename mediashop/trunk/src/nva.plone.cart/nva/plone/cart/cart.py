@@ -151,5 +151,5 @@ class CartTraverser(grok.MultiAdapter):
         self.request = request
 
     def traverse(self, name, ignore):
-        cart = ICartRetriever(self.request.SESSION)
+        cart = ICartRetriever(self.request)
         return SessionCart(cart).__of__(self.context)

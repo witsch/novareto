@@ -39,7 +39,7 @@ class Renderer(base.Renderer):
 
     @CachedProperty
     def cart(self):
-        return ICartRetriever(self.request.SESSION)
+        return ICartRetriever(self.request)
 
     def update(self):
         self.portal = self.context.portal_url()

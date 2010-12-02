@@ -59,7 +59,7 @@ class AddToCart(grok.View):
     grok.context(ICartAddable)
 
     def update(self, redirect=0):
-        self.cart = ICartRetriever(self.request.SESSION)
+        self.cart = ICartRetriever(self.request)
         self.redirect = redirect
 
     def render(self):
