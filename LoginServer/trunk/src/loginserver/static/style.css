@@ -1,4 +1,101 @@
-/* This is a silly style sheet solely used for demonstrating fanstatic. */
+/* -=[ --------- BASE --------- ]=- */
+
+* {
+margin: 0;
+padding: 0;
+}
+
 body {
-  background-color: #eee;
+font-family: Arial;
+font-size: 11px;
+color: #666;
+background-color: #eee;
+}
+
+ul {
+list-style-type: none;
+}
+
+li {
+margin-bottom: 10px;
+}
+
+input.user, input.passwd {
+border-bottom: 1px inset #bbb;
+}
+
+input.submit {
+width: 90px;
+}
+
+h2 {
+margin: 12px 0;
+font-size: 16px;
+color:#004994;
+}
+
+#container {
+width: 999px;
+margin:0 auto 0 auto;
+}
+
+#head {
+background-color: #fff;
+height: 87px;
+}
+
+#logo {
+background-image: url(bglogo.gif);
+background-repeat: no-repeat;
+height: 65px;
+width: 204px;
+margin: 10px 0 0 25px;
+float: left;
+}
+
+#titelbild {
+background-image: url(titelbild.jpg);
+height: 87px;
+width: 750px;
+float: right;
+}
+
+#bar {
+background-color: #cccccc;
+height: 26px;
+border-bottom: 5px solid #f6f7f2;
+}
+#content {
+background: #fff;
+}
+
+#content-middle {
+margin: 0 auto;
+width: 500px;
+padding-top: 15px;
+padding-bottom: 100px;
+}
+
+#box {
+background-color: #f6f7f2;
+width: 400px;
+padding: 10px;
+margin-top: 5px;
+}
+
+.formtext {
+display: inline;
+font-weight: bold;
+margin-left: 5px;
+}
+
+.pwd {
+color: #f00;
+margin: 0 170px 5px 0;
+font-weight: bold;
+}
+
+.hwtext {
+color: #f00;
+margin: 0 170px 5px 0;
 }

@@ -1,0 +1,56 @@
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml"><head>
+
+<meta content="text/html; charset=iso-8859-1" http-equiv="content-type">
+<meta content="de" name="language">
+    <link rel="stylesheet" type="text/css" href="style.css" tal:attributes="href static/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="#" tal:attributes="href static/favicon.ico" />
+
+<title>Extranet der Berufsgenossenschaft Handel und Warendistribution</title>
+</head><body>
+  <div id="container">
+    <div id="header">
+        <div id="head">
+            <div id="titelbild"></div>
+        <div id="logo"></div>
+        </div>
+        <div id="bar"></div>    
+    <!-- header --> </div>
+    <div id="content">
+        <div id="content-middle">
+            <h2>Willkommen im Extranet der Berufsgenossenschaft<br>Handel und Warendistribution</h2>
+                <p class="pwd" tal:repeat="mes view/messages">
+                    <span tal:replace="mes/type"/>
+                    <span tal:replace="mes/message"/>
+                </p>
+        <p class="hwtext"> </p>
+            <div id="box">
+                <div id="loginform">
+                    <form method="post" action=".">
+                        <ul>
+                            <li id="user">
+                                <input type="text" name="login" class="user"><p class="formtext">Benutzername</p>
+                            </li>
+                <li id="passwd">
+                    <input type="password" name="password" class="passwd"><p class="formtext">Passwort</p>
+                            </li>
+                            <li>Bitte Groß- und Kleinschreibung beachten!</li>
+                <li id="submit">
+                  <input type="submit" value="Anmelden" class="submit" name="anmelden"> 
+                </li>
+                            <br>
+                <li>
+                                <b> Passwort vergessen?</b>
+                                <p>&nbsp;</p>
+                                <ul>
+                    <li><a href="index_pw_bge">Hier</a> klicken für Benutzer der Sparte Einzelhandel.</li>
+                    <li><a href="index_pw_g">Hier</a> klicken für Benutzer der Sparte Großhandel und Lagerei.</li>
+                                </ul>
+                </li>
+                        </ul>
+                    </form>
+                <!-- loginform --> </div>
+            <!-- box --> </div>
+        <!-- content-middle --> </div>
+    <!-- content --> </div>
+  <!-- container --> </div>
+</body></html>
