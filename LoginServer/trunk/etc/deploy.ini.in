@@ -54,8 +54,8 @@ propagate = 0
 keys = eventlog, accesslog
 
 [handler_eventlog]
-class = FileHandler
-args = (os.path.join(r'${buildout:directory}', 'log', 'event.log'), 'a')
+class = StreamHandler
+args = (sys.stderr,)
 level = NOTSET
 formatter = generic
 
