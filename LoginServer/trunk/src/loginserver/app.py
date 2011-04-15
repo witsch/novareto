@@ -40,14 +40,15 @@ class Index(grok.View):
         ticket = auth_pubtkt.create_ticket(
             privkey, login, validuntil, tokens=['su'])
         request.response.setHeader(
-            'Set-Cookie:',
-            'auth_pubtkt=%s;domain=%s;path=/' % (
+            'Set-Cookie',
+            'auth_pubtkt=%s;domain=%s;path=/; Secure' % (
             quote(ticket),
             config.get('cookie_domain')))
         request.response.setCookie(
             'dolmen.authcookie',
             quote(val),
             path="/",
+            secure=True,
             domain=config.get('cookie_domain'))
         return request.response.redirect(config.get('backurl'), trusted=True)
 

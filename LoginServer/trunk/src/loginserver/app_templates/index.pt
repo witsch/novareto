@@ -18,11 +18,15 @@
     <div id="content">
         <div id="content-middle">
             <h2>Willkommen im Extranet der Berufsgenossenschaft<br>Handel und Warendistribution</h2>
-                <p class="pwd" tal:repeat="mes view/messages">
-                    <span tal:replace="mes/type"/>
-                    <span tal:replace="mes/message"/>
-                </p>
-        <p class="hwtext"> </p>
+              <div>  
+                <dl class="" 
+                    tal:attributes="class string:info-${mes/type}"
+                    tal:repeat="mes view/messages">
+                    <dt tal:content="mes/type"/>
+                    <dd tal:content="mes/message"/>
+                </dl>
+              </div>
+              <br>
             <div id="box">
                 <div id="loginform">
                     <form method="post" action=".">
