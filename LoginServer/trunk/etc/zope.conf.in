@@ -36,3 +36,12 @@ devmode ${devmode}
 # Extra configuration lines can be added to zope_conf's extra option. Put for
 # instance productconf sections in here.
 ${zope_conf:extra}
+
+
+<product-config loginserver>
+    private_key_path ${settings:private_key_path}
+    wrong_credentials ${settings:wrong_credentials}
+    cookie_domain ${settings:cookie_domain}
+    backurl ${settings:backurl}
+</product-config>
+
