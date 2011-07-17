@@ -1,0 +1,5 @@
+<div class="header">
+  <a id="logo" class="logotype" href="http://localhost:8088/app"> </a>
+  <span id="top-bg"> </span>
+</div>
+<div class="clear" />

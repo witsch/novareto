@@ -1,0 +1,199 @@
+[buildout]
+extends = http://grok.zope.org/releaseinfo/1.3.2/versions.cfg
+versions = versions
+
+[dolmen]
+version = 0.5.4
+included =
+  dolmen.app.authentication
+  dolmen.app.breadcrumbs
+  dolmen.app.container
+  dolmen.app.content
+  dolmen.app.layout
+  dolmen.app.search
+  dolmen.app.security
+  dolmen.app.site
+  dolmen.app.viewselector
+  dolmen.authentication
+  dolmen.beaker
+  dolmen.blob
+  dolmen.builtins
+  dolmen.content
+  dolmen.field
+  dolmen.file
+  dolmen.forms.base
+  dolmen.forms.crud
+  dolmen.menu
+  dolmen.relations
+  dolmen.storage
+  dolmen.thumbnailer
+  dolmen.widget.file
+  dolmen.widget.image
+  dolmen.widget.tinymce
+
+  menhir.contenttype.document
+  menhir.contenttype.file
+  menhir.contenttype.folder
+  menhir.contenttype.image
+
+unmaintained =
+  dolmen.app.clipboard
+  dolmen.app.metadatas
+  menhir.library.tablesorter
+  menhir.simple.comments
+  menhir.simple.livesearch
+  menhir.simple.navtree
+  menhir.simple.tag
+
+under-review =
+  dolmen.queue
+  dolmen.workflow
+  menhir.contenttype.rstdocument
+  menhir.contenttype.user
+  menhir.skin.lightblue
+
+packages =
+  ${dolmen:included}
+
+[versions]
+
+# JS Libs
+js.galleriffic = 2.0.1-1
+js.jquery = 1.4.4
+js.jquery-metadata = 2.1
+js.jquery-slimbox = 2.04-1
+js.jquery-tablesorter = 2.0.5
+js.jquery_tablesorter = 2.0.5
+js.tinymce = 3.3.9.3
+
+# hard dependencies
+fanstatic = 0.10
+megrok.chameleon = 0.5.2
+megrok.pagetemplate = 0.7
+megrok.resourceviewlet = 0.2
+megrok.z3ctable = 1.5.0
+
+# zeam stack
+zeam.form.base = 1.1
+zeam.form.ztk = 1.0
+zeam.form.layout = 0.2
+zeam.form.composed = 1.2
+
+# Dolmen
+dolmen.app.authentication = 1.0b3
+dolmen.app.breadcrumbs = 1.0b2
+dolmen.app.container = 1.0b1
+dolmen.app.content = 1.0a3
+dolmen.app.layout = 1.0b2
+dolmen.app.search = 0.4
+dolmen.app.security = 0.1
+dolmen.app.site = 0.1
+dolmen.app.viewselector = 1.0a1
+dolmen.authentication = 0.2
+dolmen.beaker = 0.1
+dolmen.blob = 0.5.0
+dolmen.builtins = 0.3.1
+dolmen.content = 0.6.2
+dolmen.field = 0.3
+dolmen.file = 0.6
+dolmen.forms.base = 1.0b3
+dolmen.forms.crud = 1.0b1
+dolmen.menu = 0.5
+dolmen.security.policies = 0.2
+dolmen.storage = 0.4
+dolmen.thumbnailer = 0.3
+dolmen.widget.file = 1.0b2
+dolmen.widget.image = 1.0b1
+dolmen.widget.tinymce = 1.0b3
+
+# Menhir
+menhir.contenttype.document = 0.1
+menhir.contenttype.file = 0.2
+menhir.contenttype.folder = 0.2
+menhir.contenttype.image = 0.3
+menhir.contenttype.photoalbum = 0.3
+
+# Other dependencies
+Chameleon = 1.2.13
+PIL = 1.1.7
+Twisted = 8.2.0
+Unidecode = 0.04.1
+argparse = 1.1
+beaker = 1.5.4
+html2text = 2.38
+lovely.tag = 1.1.1
+mr.developer = 1.16
+repoze.profile = 1.2
+rwproperty = 1.0
+uuid = 1.30
+z3c.batching = 1.1.0
+z3c.table = 0.9.0
+zc.async = 1.5.3
+zc.blist = 1.0b2
+zc.dict = 1.3b1
+zc.monitor = 0.1.2
+zc.ngi = 1.1.3
+zc.queue = 1.1
+zc.relation = 1.0
+zc.twist = 1.3
+zodbupdate = 0.5
+zope.file = 0.6.0
+zope.bforest = 1.2
+
+# recipes
+collective.recipe.modwsgi = 1.2
+collective.recipe.omelette = 0.10
+
+[sources]
+dolmen.app.authentication      = git git://devel.dolmen-project.org/dolmen.app.authentication.git
+dolmen.app.breadcrumbs         = git git://devel.dolmen-project.org/dolmen.app.breadcrumbs.git
+dolmen.app.clipboard           = git git://devel.dolmen-project.org/dolmen.app.clipboard.git
+dolmen.app.container           = git git://devel.dolmen-project.org/dolmen.app.container.git
+dolmen.app.content             = git git://devel.dolmen-project.org/dolmen.app.content.git
+dolmen.app.layout              = git git://devel.dolmen-project.org/dolmen.app.layout.git
+dolmen.app.metadatas           = git git://devel.dolmen-project.org/dolmen.app.metadatas.git
+dolmen.app.search              = git git://devel.dolmen-project.org/dolmen.app.search.git
+dolmen.app.security            = git git://devel.dolmen-project.org/dolmen.app.security.git
+dolmen.app.site                = git git://devel.dolmen-project.org/dolmen.app.site.git
+dolmen.app.viewselector        = git git://devel.dolmen-project.org/dolmen.app.viewselector.git
+dolmen.authentication          = git git://devel.dolmen-project.org/dolmen.authentication.git
+dolmen.beaker                  = git git://devel.dolmen-project.org/dolmen.beaker.git
+dolmen.blob                    = git git://devel.dolmen-project.org/dolmen.blob.git
+dolmen.builtins                = git git://devel.dolmen-project.org/dolmen.builtins.git
+dolmen.content                 = git git://devel.dolmen-project.org/dolmen.content.git
+dolmen.emailer                 = git git://devel.dolmen-project.org/dolmen.emailer.git
+dolmen.field                   = git git://devel.dolmen-project.org/dolmen.field.git
+dolmen.file                    = git git://devel.dolmen-project.org/dolmen.file.git
+dolmen.forms.base              = git git://devel.dolmen-project.org/dolmen.forms.base.git
+dolmen.forms.crud              = git git://devel.dolmen-project.org/dolmen.forms.crud.git
+dolmen.forms.wizard 	       = git git://devel.dolmen-project.org/dolmen.forms.wizard.git
+dolmen.menu                    = git git://devel.dolmen-project.org/dolmen.menu.git
+dolmen.queue                   = git git://devel.dolmen-project.org/dolmen.queue.git
+dolmen.relations               = git git://devel.dolmen-project.org/dolmen.relations.git
+dolmen.security.policies       = git git://devel.dolmen-project.org/dolmen.security.policies.git
+dolmen.storage                 = git git://devel.dolmen-project.org/dolmen.storage.git
+dolmen.thumbnailer             = git git://devel.dolmen-project.org/dolmen.thumbnailer.git
+dolmen.widget.file             = git git://devel.dolmen-project.org/dolmen.widget.file.git
+dolmen.widget.image            = git git://devel.dolmen-project.org/dolmen.widget.image.git
+dolmen.widget.tinymce          = git git://devel.dolmen-project.org/dolmen.widget.tinymce.git
+dolmen.workflow                = git git://devel.dolmen-project.org/dolmen.workflow.git
+megrok.pagetemplate	       = git git://devel.dolmen-project.org/megrok.pagetemplate.git
+megrok.z3ctable                = svn http://svn.zope.org/repos/main/megrok.z3ctable/trunk/
+menhir.contenttype.document    = git git://devel.dolmen-project.org/menhir.contenttype.document.git
+menhir.contenttype.file        = git git://devel.dolmen-project.org/menhir.contenttype.file.git
+menhir.contenttype.folder      = git git://devel.dolmen-project.org/menhir.contenttype.folder.git
+menhir.contenttype.image       = git git://devel.dolmen-project.org/menhir.contenttype.image.git
+menhir.contenttype.photoalbum  = git git://devel.dolmen-project.org/menhir.contenttype.photoalbum.git
+menhir.contenttype.rstdocument = git git://devel.dolmen-project.org/menhir.contenttype.rstdocument.git
+menhir.contenttype.user        = git git://devel.dolmen-project.org/menhir.contenttype.user.git
+menhir.simple.comments         = git git://devel.dolmen-project.org/menhir.simple.comments.git
+menhir.simple.livesearch       = git git://devel.dolmen-project.org/menhir.simple.livesearch.git
+menhir.simple.navtree          = git git://devel.dolmen-project.org/menhir.simple.navtree.git
+menhir.simple.tag              = git git://devel.dolmen-project.org/menhir.simple.tag.git
+menhir.skin.lightblue          = git git://devel.dolmen-project.org/menhir.skin.lightblue.git
+zeam.form.base                 = git git://github.com/thefunny42/Zeam-Form.git
+zeam.form.ztk                  = git git://github.com/thefunny42/Zeam-Form-ZTK.git
+zeam.form.layout               = git git://github.com/thefunny42/Zeam-Form-Layout.git
+zeam.form.table                = git git://github.com/thefunny42/Zeam-Form-Table.git
+zeam.form.composed             = git git://github.com/thefunny42/Zeam-Form-Composed.git
+zeam.form.viewlet              = git git://github.com/thefunny42/Zeam-Form-Viewlet.git

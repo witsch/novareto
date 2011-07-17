@@ -1,0 +1,5 @@
+<ul tal:attributes="id viewlet/id" class="footer">
+  <li tal:repeat="menu viewlet/menus">
+    <a href="" tal:attributes="href menu/action" tal:content="menu/title"/>
+  </li>
+</ul>
