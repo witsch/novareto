@@ -14,7 +14,7 @@ from megrok.menu import menuitem
 from uvc.layout.slots.menus import GlobalMenu
 from megrok import menu
 from z3c.saconfig import Session
-from database_setup import mitik, mitik2
+from database_setup import mitik, mitik2, users
 from sqlalchemy.sql import select, and_
 from zeam.form.base import NO_VALUE
 
@@ -82,7 +82,15 @@ class ChangePassword(ApplicationForm):
 
     @action(u'Speichern')
     def handle_save(self):
-        pass
+        data, errors = self.extractData()
+        if errors:
+            return 
+        if data.get('best_pw') != data.get('passwort'):
+            self.flash(u'Passwort und Bestätigung sind nicht identisch')
+            return
+        upd = users.update().where(users.c.oid=='oid').values(passwort=data.get('passwort')) 
+        session = Session()
+        #session.execute(upd)
 
     @action(u'Abbrechen')
     def handle_cancel(self):
