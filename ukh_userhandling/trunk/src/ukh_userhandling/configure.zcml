@@ -2,8 +2,9 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            xmlns:grok="http://namespaces.zope.org/grok">
   <include package="grok" />
-  <grok:grok package="uvc.layout.slots.menus"/>
   <includeDependencies package="." />
+
   <browser:defaultSkin name="uvcskin" />
+
   <grok:grok package="." />
 </configure>

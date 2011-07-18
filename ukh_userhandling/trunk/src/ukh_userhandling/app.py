@@ -12,6 +12,7 @@ from ukh_userhandling import resource
 import megrok.pagetemplate as pt
 from megrok.menu import menuitem
 from uvc.layout.slots.menus import GlobalMenu
+from megrok import menu
 
 
 grok.templatedir('templates')
@@ -24,15 +25,14 @@ class Ukh_userhandling(grok.Application, grok.Container):
 from zope.interface import Interface
 
 class Index(ApplicationForm):
-    grok.context(Interface)
     grok.title(u'Benutzer Verwaltung')
-    grok.description(u'BLA BLA')
     label = u"Benutzerverwaltung"
     description = u"Hier können Sie Benuzterdaten verwalten"
     legend = u"Bitte die Suchkriterien eingeben"
-    menuitem('oter')
+    menu.menuitem('globalmenu')
 
     fields = Fields(IBenutzer)
+    results = []
 
     @action(u'Suchen')
     def handel_search(self):
@@ -43,8 +43,9 @@ class Index(ApplicationForm):
 
 
 
-class FormTemplate(pt.PageTemplate):
-    """Template for a layout aware form.
-    """
-    pt.view(ApplicationForm)
+class AsPdf(grok.View):
+    grok.name('pdf')
+    menu.menuitem('documentactions', icon="fanstatic/example/icons/pdf.png")
 
+    def render(self):
+        return "I Should BE A PDF"

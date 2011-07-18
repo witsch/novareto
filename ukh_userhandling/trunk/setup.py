@@ -26,6 +26,7 @@ setup(name='ukh_userhandling',
                         'grokcore.startup',
                         'uvc.layout',
                         'megrok.menu',
+                        'zope.browsermenu',
                         # Add extra requirements here
                         ],
       entry_points={
