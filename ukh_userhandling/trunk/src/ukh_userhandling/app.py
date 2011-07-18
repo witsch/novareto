@@ -61,10 +61,24 @@ class Index(ApplicationForm):
         self.results = session.execute(sql).fetchall()
 
 
-class ChangeUser(ApplicationForm):
+class ChangePassword(ApplicationForm):
     grok.name('changeuser')
+    label = u"Benutzerverwaltung"
+    description = u"Bitte geben Sie hier ihr neues Passwort ein."
+    legend = "Bitte das neue Passwort eingeben."
 
     fields = Fields(IChangePassword)
+    obj = None
+    oid = None
+
+    def update(self):
+        self.oid = self.request.get('oid')
+        if self.oid:
+            sql = select([mitik, mitik2],
+                and_(mitik.c.iknr==mitik2.c.trgiknr,
+                     mitik2.c.trgrcd==self.oid))
+            session = Session()
+            self.obj = session.execute(sql).fetchone()
 
     @action(u'Speichern')
     def handle_save(self):
