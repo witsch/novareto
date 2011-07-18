@@ -9,7 +9,7 @@ from z3c.saconfig import EngineFactory, GloballyScopedSession
 from sqlalchemy import Table, MetaData, create_engine
 from z3c.saconfig.interfaces import IEngineCreatedEvent
 
-DSN = 'ibm_db_sa://smartimp:smart09ukh@10.64.2.1:446/S65D4DBA'
+DSN = 'ibm_db_sa://smartimp:XXXXXXukh@10.64.2.1:446/S65D4DBA'
 
 engine_factory = EngineFactory(DSN, echo=False)
 scoped_session = GloballyScopedSession()
