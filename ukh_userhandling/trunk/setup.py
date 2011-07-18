@@ -27,6 +27,8 @@ setup(name='ukh_userhandling',
                         'uvc.layout',
                         'megrok.menu',
                         'zope.browsermenu',
+                        'z3c.saconfig',
+                        'ibm_db_sa',
                         # Add extra requirements here
                         ],
       entry_points={

@@ -9,20 +9,34 @@ from zope.interface import Interface
 
 class IBenutzer(Interface):
 
-    login = TextLine(
-            title = u"Login",
-            description = u"Bitte geben Sie den Login-Namen ein.",
-            required = True,
-            )
-
     name1 = TextLine(
             title = u"Name",
             description = u"Bitte geben Sie den Firmennamen ein.",
-            required = True,
+            required = False,
             )
 
     plz = TextLine(
             title = u"PLZ",
             description = u"Bitte geben Sie die Postleitzahl ein.",
-            required = True,
+            required = False,
+            )
+
+    ort = TextLine(
+            title = u"Ort",
+            description = u"Bitte geben Sie den Ort des Unternehmens ein.",
+            required = False,
+            )
+
+
+
+class IChangePassword(Interface):
+
+    passwort = TextLine(
+            title = u"Passwort",
+            description = u"Bitte geben Sie das neue Passwort ein."
+            )
+
+    best_pw = TextLine(
+            title = u"Bestätigung",
+            description = u"Bitte wiederholen Sie das Passwort hier."
             )

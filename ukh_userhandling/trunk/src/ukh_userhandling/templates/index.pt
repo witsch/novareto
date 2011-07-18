@@ -2,8 +2,7 @@
   <body>
     <div metal:use-macro="macro:editform">
     </div>
-<!--
-    <table class="tablesorter myTable" tal:define="results view/getResults" tal:condition="results">
+    <table class="tablesorter myTable" tal:define="results view/results" tal:condition="results">
       <thead>
       <tr>
         <th> Mitgliedsnummer </th>
@@ -16,18 +15,17 @@
       <tbody>
       <tr tal:repeat="result results"
           tal:attributes="class python: repeat['result'].odd() and 'odd' or 'even'">
-        <td tal:content="result/mnr" />
+        <td tal:content="result/iknr" />
         <td>
-           <a href="#" tal:attributes="href python: view.url(result)">
-             <span tal:content="result/name" />
+           <a href="#" tal:attributes="href string:${view/application_url}/changeuser?oid=${result/trgrcd}">
+             <span tal:content="result/iknam1" />
            </a>
          </td>
-         <td tal:content="result/str"/>
-         <td tal:content="result/plz"/>
-         <td tal:content="result/ort"/>
+         <td tal:content="result/ikstr"/>
+         <td tal:content="result/ikhplz"/>
+         <td tal:content="result/ikhort"/>
        </tr>
        </tbody>
     </table>  
--->
   </body>
 </html>

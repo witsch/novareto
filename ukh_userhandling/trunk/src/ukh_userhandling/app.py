@@ -7,12 +7,16 @@ import grok
 from megrok.layout import Page
 from zeam.form.base import action
 from dolmen.forms.base import ApplicationForm, Fields
-from interfaces import IBenutzer
+from interfaces import IBenutzer, IChangePassword
 from ukh_userhandling import resource
 import megrok.pagetemplate as pt
 from megrok.menu import menuitem
 from uvc.layout.slots.menus import GlobalMenu
 from megrok import menu
+from z3c.saconfig import Session
+from database_setup import mitik, mitik2
+from sqlalchemy.sql import select, and_
+from zeam.form.base import NO_VALUE
 
 
 grok.templatedir('templates')
@@ -21,8 +25,6 @@ grok.templatedir('templates')
 class Ukh_userhandling(grok.Application, grok.Container):
     pass
 
-
-from zope.interface import Interface
 
 class Index(ApplicationForm):
     grok.title(u'Benutzer Verwaltung')
@@ -36,11 +38,42 @@ class Index(ApplicationForm):
 
     @action(u'Suchen')
     def handel_search(self):
+        v = False
         data, errors = self.extractData()
         if errors:
             return errors
-        print "BLA"
+        sql = select([mitik, mitik2],
+            and_(mitik.c.iknr==mitik2.c.trgiknr))
+        
+        if data.get('name1') != NO_VALUE:
+            sql = sql.where(mitik.c.iknam1 == data.get('name1')) 
+            v = True 
+        if data.get('plz') != NO_VALUE:
+            sql = sql.where(mitik.c.ikhplz == data.get('plz')) 
+            v = True 
+        if data.get('ort') != NO_VALUE:
+            sql = sql.where(mitik.c.ikhort == data.get('ort')) 
+            v = True 
+        if not v: 
+            self.flash(u'Bitte geben Sie die Suchkriterien ein.') 
+            return 
+        session = Session()
+        self.results = session.execute(sql).fetchall()
 
+
+class ChangeUser(ApplicationForm):
+    grok.name('changeuser')
+
+    fields = Fields(IChangePassword)
+
+    @action(u'Speichern')
+    def handle_save(self):
+        pass
+
+    @action(u'Abbrechen')
+    def handle_cancel(self):
+        self.flash(u'Aktion abgebrochen')
+        self.redirect(self.application_url())
 
 
 class AsPdf(grok.View):
