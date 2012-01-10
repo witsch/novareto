@@ -9,15 +9,28 @@ from zope.interface import Interface
 
 class IBenutzer(Interface):
 
+    mnr = TextLine(
+            title = u"Mitgliedsnummer",
+            description = u"Bitte geben Sie die Mitgliedsnummer ein.",
+            required = False,
+            )
+    
+    login = TextLine(
+            title = u"Login",
+            description = u"Bitte geben Sie den Anmeldenamen ein.",
+            required = False,
+            )
+    
+    
     name1 = TextLine(
             title = u"Name",
             description = u"Bitte geben Sie den Firmennamen ein.",
             required = False,
             )
 
-    plz = TextLine(
-            title = u"PLZ",
-            description = u"Bitte geben Sie die Postleitzahl ein.",
+    strasse = TextLine(
+            title = u"Strasse",
+            description = u"Bitte geben Sie die Strasse ein.",
             required = False,
             )
 
@@ -31,12 +44,39 @@ class IBenutzer(Interface):
 
 class IChangePassword(Interface):
 
-    passwort = TextLine(
-            title = u"Passwort",
-            description = u"Bitte geben Sie das neue Passwort ein."
+    oid = TextLine(
+            title = u"OID",
             )
 
-    best_pw = TextLine(
-            title = u"Bestätigung",
-            description = u"Bitte wiederholen Sie das Passwort hier."
+    login = TextLine(
+            title = u"Anmeldename",
+            )
+    
+    az = TextLine(
+            title = u"Mitbenutzer",
+            description = u"Aktenzeichen des Mitbenutzer. ('00' Bei Hauptbenutzer.)",
+            )
+    
+    passwort = TextLine(
+            title = u"Passwort",
+            )
+    
+    email = TextLine(
+            title = u"EMAIL",
+            )
+
+    vname = TextLine(
+            title = u"Ansprechpartner Vorname"
+            )
+    
+    nname = TextLine(
+            title = u"Ansprechpartner Name"
+            )
+    
+    vwhl = TextLine(
+            title = u"Ansprechpartner Vorwahl"
+            )
+    
+    tlnr = TextLine(
+            title = u"Ansprechpartner Nummer"
             )

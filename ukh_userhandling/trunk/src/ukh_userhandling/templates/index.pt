@@ -5,6 +5,7 @@
     <table class="tablesorter myTable" tal:define="results view/results" tal:condition="results">
       <thead>
       <tr>
+        <th> Benutzer </th>
         <th> Mitgliedsnummer </th>
         <th> Name </th>
         <th> Strasse </th>
@@ -15,9 +16,10 @@
       <tbody>
       <tr tal:repeat="result results"
           tal:attributes="class python: repeat['result'].odd() and 'odd' or 'even'">
-        <td tal:content="result/iknr" />
+        <td> <span tal:content="python: view.formatHU(result)">10000-02"</span> </td>
+        <td tal:content="result/trgmnr" />
         <td>
-           <a href="#" tal:attributes="href string:${view/application_url}/changeuser?oid=${result/trgrcd}">
+          <a href="#" tal:attributes="href string:${view/application_url}/changeuser?oid=${result/trgrcd}&az=${result/az}">
              <span tal:content="result/iknam1" />
            </a>
          </td>
