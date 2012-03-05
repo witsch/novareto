@@ -1,4 +1,5 @@
 <configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="guv">
 
   <include package="uvcsite" />
@@ -19,4 +20,6 @@
       <grant role="zope.Manager"
              principal="zope.manager" />
    </configure>
+   <browser:defaultSkin name="${settings:skin}" />
+
 </configure>
