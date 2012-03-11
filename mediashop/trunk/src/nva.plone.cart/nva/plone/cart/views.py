@@ -90,7 +90,7 @@ class CartNamespace(object):
     def default_namespace(self):
         namespace = grok.View.default_namespace(self)
         namespace['cart'] = self.context.cart
-        namespace['cart_url'] = self.portal_url + '/medien/medienkatalog/++cart++'
+        namespace['cart_url'] = self.portal_url + '/medien-shop/++cart++'
         namespace['handler'] = self.context.handler
         return namespace
 

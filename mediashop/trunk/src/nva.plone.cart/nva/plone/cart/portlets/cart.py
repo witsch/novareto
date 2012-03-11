@@ -47,6 +47,6 @@ class Renderer(base.Renderer):
         self.handler = ICartHandler(self.cart)
 
     @property
-    def available(self):
+    def iavailable(self):
         return (bool(len(self.cart)) and
                 not ISessionCart.providedBy(self.context))
