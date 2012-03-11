@@ -23,7 +23,7 @@ def createtext(daten):
     text +=  ' Absender: \n\n'
     text += ' Name:     ' + daten['VornameName'] + '\n'
     text += ' Firma:    ' + daten['Firma']   + '\n'
-    text += ' Straße:   ' + daten['Strasse'] + '\n'
+    text += ' Strasse:   ' + daten['Strasse'] + '\n'
     text += ' Plz/Ort:  ' + daten['PlzOrt']  + '\n\n'
     if ausland:
         text += ' Land:         ' + daten['Land'] + '\n'
@@ -34,7 +34,7 @@ def createtext(daten):
     if daten['Abwadr']:
         text += ' Abweichende Lieferanschrift: \n\n'
         text += ' Name:     ' + daten['ALVornameName'] + '\n'
-        text += ' Straße:   ' + daten['ALStrasse'] + '\n'
+        text += ' Strasse:   ' + daten['ALStrasse'] + '\n'
         text += ' Plz/Ort:  ' + daten['ALPlzOrt'] + '\n\n'
 
     # Bestellung

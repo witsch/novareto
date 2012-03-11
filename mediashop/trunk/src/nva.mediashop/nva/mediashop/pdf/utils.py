@@ -8,7 +8,6 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEImage import MIMEImage
 from email.MIMEText import MIMEText
 import string
-import whrandom
 
 mailserver='10.33.176.4'
 

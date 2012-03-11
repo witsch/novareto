@@ -55,6 +55,8 @@ setup(name='nva.mediashop',
       zip_safe=False,
       install_requires=['setuptools',
                         'five.grok',
+                        'reportlab',
+                        'collective.beaker [Zope2.10]',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,
