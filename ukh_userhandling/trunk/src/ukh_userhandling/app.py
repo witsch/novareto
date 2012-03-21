@@ -4,26 +4,58 @@
 
 
 import grok
+import megrok.pagetemplate as pt
+
+
 from megrok.layout import Page
 from zeam.form.base import action
-from dolmen.forms.base import ApplicationForm, Fields
+from dolmen.forms.base import ApplicationForm, Fields, DISPLAY
 from interfaces import IBenutzer, IChangePassword
 from ukh_userhandling import resource
-import megrok.pagetemplate as pt
-from megrok.menu import menuitem
+from ukh_userhandling.mail import send_mail
 from uvc.layout.slots.menus import GlobalMenu
 from megrok import menu
 from z3c.saconfig import Session
-from database_setup import mitik, mitik2, users
+from database_setup import users, z1ext1ab
 from sqlalchemy.sql import select, and_
 from zeam.form.base import NO_VALUE, DictDataManager
+from zope.interface import Interface
+from uvc.layout import MenuItem, IGlobalMenu
 
 
 grok.templatedir('templates')
 
+MT = u"""
+Guten Tag,
+
+Danke für Ihr Interesse am Mitgliederportal der Unfallkasse Hessen (UKH).
+
+Ihr Login: %s
+Ihr Kennwort: %s 
+
+Bitte achten Sie bei der Eingabe auf die Groß-/Kleinschreibung.
+Nach erfolgreicher Anmeldung können Sie ihr Passwort über den Menüpunkt "Meine Einstellungen" selbst ändern.
+
+Ihre Fragen beantworten die Mitarbeiter unseres Servicetelefons sehr gern.
+Wir freuen uns außerdem über Ihr Feedback zu unserem neuen Mitgliederservice!
+
+Eine unfallfreie Zeit wünscht
+Ihre Unfallkasse Hessen
+"""
+
+
 
 class Ukh_userhandling(grok.Application, grok.Container):
     pass
+
+
+class BVMenuItem(MenuItem):
+    grok.title(u'Benutzer Verwaltung')
+    grok.context(Interface)
+    grok.viewletmanager(IGlobalMenu)
+    
+    action = "index"
+
 
 
 class Index(ApplicationForm):
@@ -31,16 +63,15 @@ class Index(ApplicationForm):
     label = u"Benutzerverwaltung"
     description = u"Hier können Sie Benuzterdaten verwalten"
     legend = u"Bitte die Suchkriterien eingeben"
-    menu.menuitem('globalmenu')
 
     fields = Fields(IBenutzer)
     results = []
 
     def formatHU(self, result):
         az = ""
-        if result.az != "00":
-            az = "-%s" % result.az
-        return "%s%s" %(result.login, az)
+        if result.UKHINTERN_Z1EXT1AA_az != "00":
+            az = "-%s" % result.UKHINTERN_Z1EXT1AA_az 
+        return "%s%s" %(result.UKHINTERN_Z1EXT1AA_login, az)
 
     @action(u'Suchen')
     def handel_search(self):
@@ -48,20 +79,19 @@ class Index(ApplicationForm):
         data, errors = self.extractData()
         if errors:
             return errors
-        sql = select([mitik, mitik2, users],
-            and_(mitik.c.iknr==mitik2.c.trgiknr, 
-                 mitik2.c.trgrcd==users.c.oid))
+        sql = select([z1ext1ab, users],
+            and_(z1ext1ab.c.trgrcd==users.c.oid), use_labels=True)
         if data.get('mnr') != NO_VALUE:
-            sql = sql.where(mitik2.c.trgmnr == data.get('mnr')) 
+            sql = sql.where(z1ext1ab.c.trgmnr == data.get('mnr')) 
             v = True 
         if data.get('name1') != NO_VALUE:
-            sql = sql.where(mitik.c.iknam1.like(data.get('name1')+'%')) 
+            sql = sql.where(z1extiab.c.iknam1.like(data.get('name1')+'%')) 
             v = True 
         if data.get('strasse') != NO_VALUE:
-            sql = sql.where(mitik.c.ikstr.like(data.get('strasse')+'%')) 
+            sql = sql.where(z1ext1ab.c.ikstr.like(data.get('strasse')+'%')) 
             v = True 
         if data.get('ort') != NO_VALUE:
-            sql = sql.where(mitik.c.ikhort.like(data.get('ort')+'%')) 
+            sql = sql.where(z1ext1ab.c.ikhort.like(data.get('ort')+'%')) 
             v = True 
         if data.get('login') != NO_VALUE:
             sql = sql.where(users.c.login.like(data.get('login')+'%')) 
@@ -72,6 +102,63 @@ class Index(ApplicationForm):
         session = Session()
         self.results = session.execute(sql).fetchall()
 
+
+class DisplayUser(ApplicationForm):
+    label = "Benutzerverwaltung"
+    description = u"Übersicht"
+    legend = "Hier sehen Sie die Details zum Benutzer"
+    mode = DISPLAY
+
+    fields = Fields(IChangePassword)
+    fields['oid'].mode = "hiddendisplay"
+    fields['az'].mode = "hiddendisplay"
+    fields['login'].mode = "hiddendisplay"
+    fields['passwort'].mode = "hiddendisplay"
+    fields['email'].mode = "hiddendisplay"
+    ignoreContent = False
+    obj = None
+    
+    def update(self):
+        self.oid = self.request.get('oid')
+        self.az = self.request.get('az')
+        if self.oid:
+            sql = select([z1ext1ab],
+                and_(z1ext1ab.c.trgrcd==self.oid,
+                     z1ext1ab.c.az == self.az,
+                     ))
+            session = Session()
+            self.obj = session.execute(sql).fetchone()
+
+    def getContentData(self):
+        if not self.obj:
+            return DictDataManager({})
+        return DictDataManager(dict(
+            passwort = self.obj.passwort.strip(),
+            email = self.obj.email.strip(),
+            login = self.obj.login.strip(),
+            az = self.obj.az.strip(),
+            vname = self.obj.vname.strip(),
+            nname = self.obj.nname.strip(),
+            vwhl = self.obj.vwhl.strip(),
+            tlnr = self.obj.tlnr.strip(),
+            oid = self.obj.oid,
+            merkmal = self.obj.merkmal.strip(),
+            ))
+        
+    @action(u'Senden des Passworts')
+    def handle_send(self):
+        data, errors = self.extractData()
+        sender = "ukh@ukh.de"
+        recipient = [data.get('email'), ]
+        subject = "Neue Anmeldeinformationen für das Extranet"
+        login = data.get('login')
+        if data.get('az') != '00':
+            login = "%s-%s" % (login, data.get('az'))
+        body = MT %(login, data['passwort'])
+        send_mail(sender, recipient, subject, body, file=None)
+        self.flash(u'Die Mail wurde an das Mitglied versand')
+        self.redirect(self.url(self.context, 'index'))
+        
 
 class ChangePassword(ApplicationForm):
     grok.name('changeuser')
@@ -93,11 +180,10 @@ class ChangePassword(ApplicationForm):
         self.oid = self.request.get('oid')
         self.az = self.request.get('az')
         if self.oid:
-            sql = select([mitik, mitik2, users],
-                and_(mitik.c.iknr==mitik2.c.trgiknr,
-                     mitik2.c.trgrcd==self.oid,
-                     users.c.az == self.az,
-                     mitik2.c.trgrcd==users.c.oid))
+            sql = select([z1ext1ab],
+                and_(z1ext1ab.c.trgrcd==self.oid,
+                     z1ext1ab.c.az == self.az,
+                     ))
             session = Session()
             self.obj = session.execute(sql).fetchone()
 
@@ -128,9 +214,8 @@ class ChangePassword(ApplicationForm):
                 tlnr=data.get('tlnr'), 
                 email=data.get('email',)) 
         session = Session()
-        print upd
         session.execute(upd)
-        self.redirect(self.application_url())
+        self.redirect(self.url(self.context, 'displayuser', dict(oid=data.get('oid'), az=data.get('az'))))
 
     @action(u'Abbrechen')
     def handle_cancel(self):
@@ -140,7 +225,6 @@ class ChangePassword(ApplicationForm):
 
 class AsPdf(grok.View):
     grok.name('pdf')
-    menu.menuitem('documentactions', icon="fanstatic/example/icons/pdf.png")
 
     def render(self):
         return "I Should BE A PDF"
