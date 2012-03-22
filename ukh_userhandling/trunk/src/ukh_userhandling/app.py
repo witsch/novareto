@@ -69,9 +69,9 @@ class Index(ApplicationForm):
 
     def formatHU(self, result):
         az = ""
-        if result.UKHINTERN_Z1EXT1AA_az != "00":
-            az = "-%s" % result.UKHINTERN_Z1EXT1AA_az 
-        return "%s%s" %(result.UKHINTERN_Z1EXT1AA_login, az)
+        if result.AZ != "00":
+            az = "-%s" % result.AZ 
+        return "%s%s" %(result.LOGIN, az)
 
     @action(u'Suchen')
     def handel_search(self):
@@ -79,8 +79,8 @@ class Index(ApplicationForm):
         data, errors = self.extractData()
         if errors:
             return errors
-        sql = select([z1ext1ab, users],
-            and_(z1ext1ab.c.trgrcd==users.c.oid), use_labels=True)
+        sql = select([z1ext1ab])
+            #and_(z1ext1ab.c.trgrcd==users.c.oid), use_labels=False)
         if data.get('mnr') != NO_VALUE:
             sql = sql.where(z1ext1ab.c.trgmnr == data.get('mnr')) 
             v = True 
@@ -94,13 +94,14 @@ class Index(ApplicationForm):
             sql = sql.where(z1ext1ab.c.ikhort.like(data.get('ort')+'%')) 
             v = True 
         if data.get('login') != NO_VALUE:
-            sql = sql.where(users.c.login.like(data.get('login')+'%')) 
+            sql = sql.where(z1ext1ab.c.login.like(data.get('login')+'%')) 
             v = True 
         if not v: 
             self.flash(u'Bitte geben Sie die Suchkriterien ein.') 
             return 
         session = Session()
         self.results = session.execute(sql).fetchall()
+        print self.results
 
 
 class DisplayUser(ApplicationForm):
@@ -212,7 +213,11 @@ class ChangePassword(ApplicationForm):
                 nname=data.get('nname'), 
                 vwhl=data.get('vwhl'), 
                 tlnr=data.get('tlnr'), 
+                funktion=data.get('funktion'),
+                titel=data.get('titel'),
+                anr=data.get('anr'),
                 email=data.get('email',)) 
+                
         session = Session()
         session.execute(upd)
         self.redirect(self.url(self.context, 'displayuser', dict(oid=data.get('oid'), az=data.get('az'))))

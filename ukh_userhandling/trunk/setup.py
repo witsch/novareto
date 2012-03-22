@@ -29,6 +29,12 @@ setup(name='ukh_userhandling',
                         'zope.browsermenu',
                         'z3c.saconfig',
                         'ibm_db_sa',
+                        'dolmen.forms.wizard',
+                        'megrok.layout',
+                        'ukh.newskin',
+                        'uvc.widgets',
+                        'zope.sendmail',
+                        'js.jquery_tablesorter',
                         # Add extra requirements here
                         ],
       entry_points={

@@ -65,6 +65,20 @@ class IChangePassword(Interface):
             title = u"EMAIL",
             )
 
+    anr = Choice(
+            title = u"Anrede",
+            values = ('Herr', 'Frau'),
+            )
+
+    titel = TextLine(
+            title = u"Titel",
+            required = False,
+            )
+
+    funktion = TextLine(
+            title = u"Funktion",
+            )
+    
     vname = TextLine(
             title = u"Ansprechpartner Vorname"
             )

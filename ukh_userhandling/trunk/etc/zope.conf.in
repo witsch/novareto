@@ -28,9 +28,10 @@ site-definition ${site_zcml:output}
 </zodb>
 
 <eventlog>
-# This section is intentionally left empty as acces logging and error
-# logging are handled by paster. In other words, Grok itself is setup not
-# to do logging. Logfiles are setup in the debug.ini and deploy.ini files.
+  <logfile>
+    path STDOUT
+    formatter zope.exceptions.log.Formatter
+  </logfile>
 </eventlog>
 
 devmode ${devmode}
@@ -38,3 +39,9 @@ devmode ${devmode}
 # Extra configuration lines can be added to zope_conf's extra option. Put for
 # instance productconf sections in here.
 ${zope_conf:extra}
+
+<product-config database>
+    dsn ${settings:dsn}
+    users ${settings:users}
+    z1ext1ab ${settings:z1ext1ab}
+</product-config>
