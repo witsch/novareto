@@ -44,4 +44,5 @@ ${zope_conf:extra}
     dsn ${settings:dsn}
     users ${settings:users}
     z1ext1ab ${settings:z1ext1ab}
+    z1ext1ac ${settings:z1ext1ac}
 </product-config>
