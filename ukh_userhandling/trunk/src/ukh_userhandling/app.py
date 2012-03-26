@@ -16,7 +16,7 @@ from ukh_userhandling.mail import send_mail
 from uvc.layout.slots.menus import GlobalMenu
 from megrok import menu
 from z3c.saconfig import Session
-from database_setup import users, z1ext1ab
+from database_setup import users, z1ext1ab, z1ext1ac
 from sqlalchemy.sql import select, and_
 from zeam.form.base import NO_VALUE, DictDataManager
 from zope.interface import Interface
@@ -65,7 +65,8 @@ class Index(ApplicationForm):
     legend = u"Bitte die Suchkriterien eingeben"
 
     fields = Fields(IBenutzer)
-    results = []
+    mitglieder = []
+    einrichtungen = []
 
     def formatHU(self, result):
         az = ""
@@ -100,8 +101,29 @@ class Index(ApplicationForm):
             self.flash(u'Bitte geben Sie die Suchkriterien ein.') 
             return 
         session = Session()
-        self.results = session.execute(sql).fetchall()
-        print self.results
+        self.mitglieder = session.execute(sql).fetchall()
+        sql = select([z1ext1ac])
+            #and_(z1ext1ab.c.trgrcd==users.c.oid), use_labels=False)
+        if data.get('mnr') != NO_VALUE:
+            sql = sql.where(z1ext1ac.c.trgmnr == data.get('mnr')) 
+            v = True 
+        if data.get('name1') != NO_VALUE:
+            sql = sql.where(z1extiac.c.iknam1.like(data.get('name1')+'%')) 
+            v = True 
+        if data.get('strasse') != NO_VALUE:
+            sql = sql.where(z1ext1ac.c.ikstr.like(data.get('strasse')+'%')) 
+            v = True 
+        if data.get('ort') != NO_VALUE:
+            sql = sql.where(z1ext1ac.c.ikhort.like(data.get('ort')+'%')) 
+            v = True 
+        if data.get('login') != NO_VALUE:
+            sql = sql.where(z1ext1ac.c.login.like(data.get('login')+'%')) 
+            v = True 
+        if not v: 
+            self.flash(u'Bitte geben Sie die Suchkriterien ein.') 
+            return 
+        session = Session()
+        self.einrichtungen = session.execute(sql).fetchall()
 
 
 class DisplayUser(ApplicationForm):
@@ -122,10 +144,18 @@ class DisplayUser(ApplicationForm):
     def update(self):
         self.oid = self.request.get('oid')
         self.az = self.request.get('az')
-        if self.oid:
+        e = self.request.get('e', 'm')
+        if self.oid and e == 'm':
             sql = select([z1ext1ab],
                 and_(z1ext1ab.c.trgrcd==self.oid,
                      z1ext1ab.c.az == self.az,
+                     ))
+            session = Session()
+            self.obj = session.execute(sql).fetchone()
+        if self.oid and e == 'e':
+            sql = select([z1ext1ac],
+                and_(z1ext1ac.c.oid==self.oid,
+                     z1ext1ac.c.az == self.az,
                      ))
             session = Session()
             self.obj = session.execute(sql).fetchone()
@@ -139,6 +169,9 @@ class DisplayUser(ApplicationForm):
             login = self.obj.login.strip(),
             az = self.obj.az.strip(),
             vname = self.obj.vname.strip(),
+            funktion = self.obj.funktion,
+            anr = self.obj.anr,
+            titel = self.obj.titel,
             nname = self.obj.nname.strip(),
             vwhl = self.obj.vwhl.strip(),
             tlnr = self.obj.tlnr.strip(),
@@ -180,10 +213,18 @@ class ChangePassword(ApplicationForm):
     def update(self):
         self.oid = self.request.get('oid')
         self.az = self.request.get('az')
-        if self.oid:
+        e = self.request.get('e', 'm')
+        if self.oid and e == 'm':
             sql = select([z1ext1ab],
                 and_(z1ext1ab.c.trgrcd==self.oid,
                      z1ext1ab.c.az == self.az,
+                     ))
+            session = Session()
+            self.obj = session.execute(sql).fetchone()
+        if self.oid and e == 'e':
+            sql = select([z1ext1ac],
+                and_(z1ext1ac.c.oid==self.oid,
+                     z1ext1ac.c.az == self.az,
                      ))
             session = Session()
             self.obj = session.execute(sql).fetchone()
@@ -199,6 +240,9 @@ class ChangePassword(ApplicationForm):
             vwhl = self.obj.vwhl.strip(),
             tlnr = self.obj.tlnr.strip(),
             oid = self.obj.oid,
+            funktion = self.obj.funktion,
+            anr = self.obj.anr,
+            titel = self.obj.titel,
             merkmal = self.obj.merkmal.strip(),
             ))
 
@@ -220,16 +264,12 @@ class ChangePassword(ApplicationForm):
                 
         session = Session()
         session.execute(upd)
-        self.redirect(self.url(self.context, 'displayuser', dict(oid=data.get('oid'), az=data.get('az'))))
+        e="m"
+        if self.request.get('HTTP_REFERER', '').endswith('&e=e'):
+            e="e"
+        self.redirect(self.url(self.context, 'displayuser', dict(oid=data.get('oid'), az=data.get('az'), e=e)))
 
     @action(u'Abbrechen')
     def handle_cancel(self):
         self.flash(u'Aktion abgebrochen')
         self.redirect(self.application_url())
-
-
-class AsPdf(grok.View):
-    grok.name('pdf')
-
-    def render(self):
-        return "I Should BE A PDF"

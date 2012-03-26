@@ -26,3 +26,4 @@ metadata = MetaData(bind=engine)
 
 users = Table(config['users'], metadata, schema="UKHINTERN", autoload=True, autoload_with=engine)
 z1ext1ab = Table(config['z1ext1ab'], metadata, schema="UKHINTERN", autoload=True, autoload_with=engine)
+z1ext1ac = Table(config['z1ext1ac'], metadata, schema="UKHINTERN", autoload=True, autoload_with=engine)
