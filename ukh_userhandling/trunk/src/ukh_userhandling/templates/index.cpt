@@ -2,7 +2,7 @@
   <body>
       <div metal:use-macro="path: context/@@formmacros/template/macros/editform">
     </div>
-    <table class="tablesorter zebra-striped" tal:define="results view.mitglieder" tal:condition="results">
+    <table class="tablesorter table table-striped table-bordered table-condensed" tal:define="results view.mitglieder" tal:condition="results">
       <thead>
       <tr>
         <th> Benutzer </th>
@@ -29,7 +29,7 @@
        </tr>
        </tbody>
     </table>  
-    <table class="tablesorter zebra-striped" tal:define="results view.einrichtungen" tal:condition="results">
+    <table class="tablesorter table table-striped table-bordered table-condensed" tal:define="results view.einrichtungen" tal:condition="results">
       <thead>
       <tr>
         <th> Benutzer </th>

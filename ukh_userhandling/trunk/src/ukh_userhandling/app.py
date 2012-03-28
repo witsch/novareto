@@ -86,7 +86,7 @@ class Index(ApplicationForm):
             sql = sql.where(z1ext1ab.c.trgmnr == data.get('mnr')) 
             v = True 
         if data.get('name1') != NO_VALUE:
-            sql = sql.where(z1extiab.c.iknam1.like(data.get('name1')+'%')) 
+            sql = sql.where(z1ext1ab.c.iknam1.like(data.get('name1')+'%')) 
             v = True 
         if data.get('strasse') != NO_VALUE:
             sql = sql.where(z1ext1ab.c.ikstr.like(data.get('strasse')+'%')) 
@@ -105,10 +105,10 @@ class Index(ApplicationForm):
         sql = select([z1ext1ac])
             #and_(z1ext1ab.c.trgrcd==users.c.oid), use_labels=False)
         if data.get('mnr') != NO_VALUE:
-            sql = sql.where(z1ext1ac.c.trgmnr == data.get('mnr')) 
+            sql = sql.where(z1ext1ac.c.ikfax == data.get('mnr')) 
             v = True 
         if data.get('name1') != NO_VALUE:
-            sql = sql.where(z1extiac.c.iknam1.like(data.get('name1')+'%')) 
+            sql = sql.where(z1ext1ac.c.iknam1.like(data.get('name1')+'%')) 
             v = True 
         if data.get('strasse') != NO_VALUE:
             sql = sql.where(z1ext1ac.c.ikstr.like(data.get('strasse')+'%')) 
@@ -183,8 +183,8 @@ class DisplayUser(ApplicationForm):
     def handle_send(self):
         data, errors = self.extractData()
         sender = "ukh@ukh.de"
-        recipient = [data.get('email'), ]
-        subject = "Neue Anmeldeinformationen für das Extranet"
+        recipient = [data.get('email'), 'ck@novareto.de']
+        subject = "Neue Anmeldeinformationen für das Mitgliederportal"
         login = data.get('login')
         if data.get('az') != '00':
             login = "%s-%s" % (login, data.get('az'))
@@ -192,6 +192,11 @@ class DisplayUser(ApplicationForm):
         send_mail(sender, recipient, subject, body, file=None)
         self.flash(u'Die Mail wurde an das Mitglied versand')
         self.redirect(self.url(self.context, 'index'))
+
+    @action(u'Abbrechen')
+    def handle_cancel(self):
+        self.flash(u'Aktion abgebrochen')
+        self.redirect(self.application_url())
         
 
 class ChangePassword(ApplicationForm):
@@ -251,6 +256,9 @@ class ChangePassword(ApplicationForm):
         data, errors = self.extractData()
         if errors:
             return 
+        for x in ['titel', 'funktion']:
+            if data[x] is NO_VALUE:
+                data[x] = u''
         upd = users.update().where(and_(users.c.oid==data.get('oid'), users.c.az==data.get('az'))).values(
                 passwort=data.get('passwort'), 
                 vname=data.get('vname'), 
