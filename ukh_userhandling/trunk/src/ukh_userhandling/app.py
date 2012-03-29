@@ -216,6 +216,7 @@ class ChangePassword(ApplicationForm):
     oid = None
 
     def update(self):
+        resource.js.need()
         self.oid = self.request.get('oid')
         self.az = self.request.get('az')
         e = self.request.get('e', 'm')
@@ -245,9 +246,9 @@ class ChangePassword(ApplicationForm):
             vwhl = self.obj.vwhl.strip(),
             tlnr = self.obj.tlnr.strip(),
             oid = self.obj.oid,
-            funktion = self.obj.funktion,
-            anr = self.obj.anr,
-            titel = self.obj.titel,
+            funktion = self.obj.funktion.strip(),
+            anr = self.obj.anr.strip(),
+            titel = self.obj.titel.strip(),
             merkmal = self.obj.merkmal.strip(),
             ))
 

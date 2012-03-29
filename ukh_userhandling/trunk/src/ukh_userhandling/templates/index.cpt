@@ -33,7 +33,6 @@
       <thead>
       <tr>
         <th> Benutzer </th>
-        <th> Mitgliedsnummer </th>
         <th> Name </th>
         <th> Strasse </th>
         <th> Plz </th>
@@ -44,7 +43,6 @@
       <tr tal:repeat="result results"
           tal:attributes="class repeat['result'].odd() and 'odd' or 'even'">
         <td> <span tal:content="view.formatHU(result)">10000-02"</span> </td>
-        <td tal:content="result['ENROID']" />
         <td>
           <a href="#" tal:attributes="href view.application_url() +'/changeuser?oid=' + str(result['OID']) + '&az=' + result['AZ'] + '&e=e'">
             <span tal:content="result['IKNAM1']" />

@@ -75,10 +75,6 @@ class IChangePassword(Interface):
             required = False,
             )
 
-    funktion = TextLine(
-            title = u"Funktion",
-            )
-    
     vname = TextLine(
             title = u"Ansprechpartner Vorname"
             )
@@ -94,3 +90,8 @@ class IChangePassword(Interface):
     tlnr = TextLine(
             title = u"Ansprechpartner Nummer"
             )
+
+    funktion = TextLine(
+            title = u"Funktion",
+            )
+    
