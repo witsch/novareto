@@ -1,4 +1,4 @@
-from Products.CMFPlone import utils
+from Products.Five import BrowserView
 from nva.docplone.interfaces import IDocZeichenView
 from zope.interface import implements
 from zope.component import getUtility
@@ -10,7 +10,7 @@ null = DisplayList((
     ('', ''),
     ))
 
-class DocZeichenView(utils.BrowserView):
+class DocZeichenView(BrowserView):
     implements(IDocZeichenView)
 
     def getVocabs(self):

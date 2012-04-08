@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from zope.component import adapts
 from zope.interface import implements
 from archetypes.schemaextender.interfaces import ISchemaExtender
@@ -16,7 +17,7 @@ class PageExtender(object):
         DocPloneField("doczeichen",
         schemata="categorization",
         widget = DocPloneWidget(
-            label="Vergabe von DOK-Zeichen für den Artikel",
+            label=u"Vergabe von DOK-Zeichen für den Artikel",
             label_msgid='label_doczeichen',
             i18n_domain='nva.docplone',)),
             ]
