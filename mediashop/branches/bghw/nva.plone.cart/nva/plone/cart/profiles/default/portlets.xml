@@ -1,0 +1,7 @@
+<portlets>
+  <portlet
+      addview="nva.plone.cart"
+      title="Cart portlet"
+      description="A portlet displaying a shopping cart"
+      />
+</portlets>

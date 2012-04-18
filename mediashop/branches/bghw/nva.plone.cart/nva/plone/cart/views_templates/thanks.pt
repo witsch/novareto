@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.plone.cart">
+  <head><title i18n:translate="">Cart view</title></head>
+  <body>
+    <metal:main fill-slot="main">
+
+
+     <h1 i18n:translate=""> Vielen Dank fuer Ihre Bestellung </h1>
+
+     <p i18n:translate=""> Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kuerze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse. </p>
+     <br>
+
+     <span i18n:translate=""> Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </span>
+       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.png; title string:Bestellung ausdrucken"/></a>
+
+<!--
+      <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"> Download </a>
+-->
+    </metal:main>
+  </body>
+</html>

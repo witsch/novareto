@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master">
+  <head><title>Cart view</title></head>
+  <body>
+    <metal:main fill-slot="main">
+
+      <script type="text/javascript">
+	jq(document).ready(function() {
+	
+          jq.ajaxSetup({cache: false});
+          var base_url = jq("link[rel=kss-base-url]").attr('href');
+
+	  jq('#cart-member').live("click", function(e){
+	      jq.ajax({
+	        type: "GET",
+	        url: base_url + "/medien/medienkatalog/++cart++/membership",
+	        async: false,
+	        success: function() {
+	          jq.ajax({
+	            type: "GET",
+		    url: base_url + "/medien/medienkatalog/++cart++/cartcontent",
+		    async: false,
+		    success: function(html){
+	              jq("#cart-content").html(html);
+		    }
+		 });
+	       }
+	    });
+	  });
+
+	  jq('a.cart-action').live("click", function(e) {
+             e.preventDefault();
+	     var url = jq(this).attr('href');
+	     jq.ajax({
+	       type: "GET",
+	       url: url,
+	       async: false,
+	       success: function() {
+	         jq.ajax({
+	           type: "GET",
+		   url: base_url + "/medien/medienkatalog/++cart++/cartcontent",
+		   async: false,
+		   success: function(html){
+	             jq("#cart-content").html(html);
+		   }
+                 });
+	       }
+	     });
+	   });
+
+        });
+      </script>
+
+      <div id="cart-content" 
+	  tal:content="structure view/content" />
+
+    </metal:main>
+  </body>
+</html>

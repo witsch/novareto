@@ -1,0 +1,55 @@
+<div xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:metal="http://xml.zope.org/namespaces/metal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     i18n:domain="nva.plone.cart"
+     metal:define-macro="portlet">
+
+    <dl class="portlet" id="portlet-cart">
+
+        <dt class="portletHeader">
+            <span class="portletTopLeft"></span>
+            <span class="portletTopMiddle"
+		  i18n:translate="cart">Einkaufswagen</span>
+            <span class="portletTopRight"></span>
+        </dt>
+
+	<dd class="portletItem">
+	  <table class="listing">
+	    <tr>
+	      <th>Name</th>
+	      <th>Anzahl</th>
+	    </tr>
+	    <tr tal:repeat="item view/handler/getItems">
+	      <td>
+		<a href="" tal:content="item/title"
+		   tal:attributes="href item/url" />
+	      </td>
+	      <td tal:content="item/quantity" />
+	    </tr>
+	  </table>
+	</dd>
+
+	<dd i18n:translate="" class="portletItem odd">
+	  <h3> Preis für: </h3>
+          <ul>
+            <li> Mitglieder : <span tal:content="python: context.fF(view.handler.getMemberPrice())" /> Euro </li>
+	    <li> Nicht-Mitglieder : <span tal:content="python: context.fF(view.handler.getTotalPrice())" /> Euro </li>
+          </ul>
+	</dd>
+
+        <dd class="portletFooter">
+            <a href="" i18n:translate="manage_cart"
+	       tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/summary">
+              Zum Einkaufswagen 
+            </a>
+        </dd>
+        <dd class="portletFooter">
+            <a href="" i18n:translate="checkout_cart"
+	       tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/checkout">
+              Zur Kasse gehen 
+            </a>
+            <span class="portletBottomLeft"></span>
+            <span class="portletBottomRight"></span>
+        </dd>
+    </dl>
+</div>

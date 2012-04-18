@@ -1,0 +1,193 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-04-14 08:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: nva.plone.cart\n"
+
+#: ./portlets/templates/cart.pt:36
+msgid "<h3> Preis für: </h3> <ul> <li> Mitglieder : <span>${DYNAMIC_CONTENT}</span> Euro </li> <li> Nicht-Mitglieder : <span>${DYNAMIC_CONTENT}</span> Euro </li> </ul>"
+msgstr ""
+
+#: ./views.py:211
+msgid "Abbrechen"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:33
+msgid "Anzahl"
+msgstr ""
+
+#: ./views_templates/print.pt:12
+msgid "Ausdruck Ihrer Bestellung"
+msgstr ""
+
+#: ./views.py:145
+#: ./views_templates/checkout.pt:104
+msgid "Bestellformular"
+msgstr ""
+
+#: ./views.py:217
+msgid "Bestellung drucken"
+msgstr ""
+
+#: ./views.py:231
+msgid "Bestellung senden"
+msgstr ""
+
+#: ./views.py:165
+msgid "Bitte Mitgliedsnummer prÃ¼fen"
+msgstr ""
+
+#: ./views.py:158
+msgid "Bitte das Feld Datenschutzvereinbarung bestÃ¤tigen."
+msgstr ""
+
+#: ./views.py:174
+msgid "Bitte dieses Feld bearbeiten."
+msgstr ""
+
+#: ./views.py:146
+msgid "Bitte geben Sie alle Werte ein."
+msgstr ""
+
+#: ./views_templates/print.pt:16
+msgid "Bitte vergessen Sie nicht, uns das ausgefuellte Formular noch per Fax oder Brief zukommen zu lassen. Vielen Dank."
+msgstr ""
+
+#: ./views_templates/print.pt:7
+#: ./views_templates/thanks.pt:7
+msgid "Cart view"
+msgstr ""
+
+#: ./views.py:261
+msgid "Der Bestellvorgang ist bei uns eingegangen."
+msgstr ""
+
+#: ./views.py:214
+msgid "Der Bestellvorgang wurde abgebrochen."
+msgstr ""
+
+#: ./views.py:75
+msgid "Der maximale Bestellmenge dieses Artikel ist erreicht."
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:32
+msgid "Einzelpreis"
+msgstr ""
+
+#: ./views_templates/checkout.pt:67
+msgid "Error"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:23
+msgid "Gesamtbestellwert: EUR ${DYNAMIC_CONTENT} ${DYNAMIC_CONTENT}"
+msgstr ""
+
+#: ./views_templates/checkout.pt:93
+msgid "Gesamtbestellwert: EUR <span id="price">${DYNAMIC_CONTENT}</span>"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:34
+msgid "Gesamtpreis"
+msgstr ""
+
+#: ./views_templates/thanks.pt:14
+msgid "Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kuerze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse."
+msgstr ""
+
+#: ./views_templates/checkout.pt:72
+msgid "Info"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:6
+msgid "Keine Artikel im Warenkorb."
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:16
+#: ./views_templates/checkout.pt:89
+msgid "Mitgliedsbetrieb der BGHW"
+msgstr ""
+
+#: ./profiles/default/types/Order.xml
+msgid "Order"
+msgstr ""
+
+#: ./profiles/default/types/OrderFolder.xml
+msgid "Order Folder"
+msgstr ""
+
+#: ./portlets/cart.py:28
+msgid "Shopping Cart"
+msgstr ""
+
+#: ./views_templates/print.pt:14
+msgid "Sie koennen sich das Bestellformular jetzt herunterladen oder ausdrucken."
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:31
+msgid "Titel"
+msgstr ""
+
+#: ./views_templates/thanks.pt:17
+msgid "Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol."
+msgstr ""
+
+#: ./views_templates/print.pt:19
+msgid "Um das Bestellformular auszudrucken klicken Sie bitte auf das PDF-Symbol."
+msgstr ""
+
+#: ./views_templates/thanks.pt:12
+msgid "Vielen Dank fuer Ihre Bestellung"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:3
+msgid "Warenkorb"
+msgstr ""
+
+#: ./views.py:207
+msgid "ZurÃ¼ck zum Warenkorb"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:66
+msgid "aus dem Warenkorb entfernen"
+msgstr ""
+
+#. Default: "Einkaufswagen"
+#: ./portlets/templates/cart.pt:11
+msgid "cart"
+msgstr ""
+
+#. Default: "Zur Kasse gehen"
+#: ./portlets/templates/cart.pt:47
+msgid "checkout_cart"
+msgstr ""
+
+#. Default: "Zum Einkaufswagen"
+#: ./portlets/templates/cart.pt:41
+msgid "manage_cart"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:8
+msgid "zurück"
+msgstr ""
+
+#: ./views_templates/checkout.pt:95
+msgid "zzgl. MwST und Versand"
+msgstr ""
+
+#: ./views_templates/cartcontent.pt:25
+msgid "zzgl. MwST. und Versand"
+msgstr ""
+

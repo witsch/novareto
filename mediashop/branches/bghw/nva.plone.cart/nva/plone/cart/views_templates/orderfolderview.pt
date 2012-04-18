@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master">
+  <head><title>Order view</title></head>
+  <body>
+    <metal:main fill-slot="main">
+      <div id="orders">
+	<table class="listing">
+	  <thead>
+	    <tr>
+	      <th>Date</th>
+	      <th>Reference</th>
+	      <th>Number of items</th>
+	      <th>Price</th>
+	    </tr>
+	  </thead>
+	  <tbody tal:define="url context/absolute_url">
+	    <tr tal:repeat="order view/orders">
+	      <td tal:content="order/date" />
+	      <td>
+		<a tal:attributes="href string:${url}/${order/ref}"
+		   tal:content="order/ref"/>
+	      </td>
+	      <td tal:content="order/len" />
+	      <td tal:content="order/price" />
+	    </tr>
+	  </tbody>
+	</table>
+      </div>
+    </metal:main>
+  </body>
+</html>

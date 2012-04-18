@@ -1,0 +1,96 @@
+<tal:content define="items handler/getItems"
+  i18n:domain="nva.plone.cart">
+  <h1 i18n:translate="">Warenkorb</h1>
+  <div tal:condition="not: items">
+   
+    <span i18n:translate=""> Keine Artikel im Warenkorb. </span>
+    <ul>
+      <li> <a href="medien/medienkatalog" i18n:translate=""> zurück </a> </li>
+    </ul>
+  </div>
+  <div tal:condition="items">
+    <fieldset>
+      <br>
+      <input type="checkbox" id="cart-member"
+	     tal:attributes="checked not: context/is_member"
+	     /><span i18n:translate=""> Mitgliedsbetrieb der BGHW
+             </span>
+  
+           <!--<span align="right"> -->
+            <br>
+            <strong i18n:translate=""> Gesamtbestellwert: EUR
+                    <span tal:replace="python: context.fF(handler.getMemberPrice())" tal:condition="not: context/is_member" /> 
+                    <span tal:replace="python: context.fF(handler.getTotalPrice())" tal:condition="context/is_member" /> 
+            </strong>
+            <span i18n:translate=""> zzgl. MwST. und Versand </span> 
+           <!--</span> -->
+            
+    <table class="listing nosort">
+      <thead>
+	<tr>
+	  <th i18n:translate="">Titel</th>
+	  <th i18n:translate="">Einzelpreis</th>
+	  <th i18n:translate="" nowrap>Anzahl</th>
+	  <th i18n:translate="">Gesamtpreis</th>
+	  <th colspan="3" i18n:translate=""></th>
+	</tr>
+      </thead>
+      <tbody>
+	<tal:loop repeat="item items">
+	  <tr tal:attributes="id string:item-${item/code}">
+	    <td>
+	      <a href="" tal:content="item/title"
+		 tal:attributes="href item/url" />
+	    </td>
+	    <td>
+                <span tal:content="python: context.fF(item.basic_price(member=context.is_member))" />
+            </td>
+	    <td nowrap> 
+                <span class="quantity" tal:content="item/quantity" /> &nbsp;
+                  <a href=""
+                     class="cart-action"
+		     tal:condition="python: item.quantity < item.max_quantity"
+                     tal:attributes="href string:${cart_url}/plus/${item/code}"
+                     > <img src="" tal:attributes="src string:pfeil-oben-2.gif"/></a> &nbsp;
+                  <a href=""
+                     class="cart-action"
+		     tal:condition="item/quantity"
+                     tal:attributes="href string:${cart_url}/minus/${item/code}"
+                     > <img src="" tal:attributes="src string:pfeil-unten-2.gif"></a>
+            </td>    
+	    <td tal:content="python: context.fF(item.total_price(member=context.is_member))" />
+	    <td>
+	      <a href=""
+		 class="cart-action"
+		 tal:attributes="href string:${cart_url}/delete/${item/code}"> 
+                 <span i18n:translate=""> aus dem Warenkorb entfernen </span>
+                 </a>
+	    </td>
+	  </tr>
+	</tal:loop>
+      </tbody>
+    </table>
+  <!--
+    <ul>
+      <li> <a href="/medien/medienkatalog/++cart++/checkout"><span i18n:translate=""> zum Bestellformular </span></a></li>
+      <li> <a href="/medien/medienkatalog/" i18n:translate=""> zurück </a> </li>
+    </ul>
+   -->
+   <table>
+    <tr>
+     <td>
+       <form action="medien/medienkatalog">
+         <input type="submit" class="context" value="weitere Artikel auswählen" />
+       </form>
+     </td>
+     <td>
+       <form action="/medien/medienkatalog/++cart++/checkout">
+         <input type="submit" class="context" value="zum Bestellformular" />
+       </form>
+     </td>
+    </tr>
+   </table>
+    </fieldset>
+
+  </div>
+</tal:content>

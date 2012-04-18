@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master">
+  <head><title>Order view</title></head>
+  <body>
+    <metal:main fill-slot="main">
+      <div id="order-content">
+	<h1>Order</h1>
+	<h3>Order sent the <span tal:content="view/date" /></h3>
+	<p tal:condition="context/is_member">
+	  Mitgliedsbetrieb der BGF 
+	</p>
+	<table class="listing nosort">
+	  <thead>
+	    <tr>
+	      <th>Product name</th>
+	      <th>Code</th>
+	      <th>Unit price</th>
+	      <th>Quantity</th>
+	      <th>Price</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tal:loop repeat="item view/ordered_items">
+	      <tr tal:attributes="id string:item-${item/code}">
+		<td>
+		  <a href="" tal:content="item/title"
+		     tal:attributes="href item/url" />
+		</td>
+		<td tal:content="item/code" />
+		<td tal:content="item/price" />
+		<td class="quantity" tal:content="item/quantity" />
+		<td tal:content="item/total_price" />
+	      </tr>
+	      <tr>
+		<td colspan="4" style="text-align: right;">Total</td>
+		<td tal:content="view/total_price" />
+	      </tr>
+	    </tal:loop>
+	  </tbody>
+	</table>
+      </div>
+    </metal:main>
+  </body>
+</html>

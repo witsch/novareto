@@ -1,0 +1,186 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.plone.cart">
+<head>
+</head>
+<body>
+ <metal:main fill-slot="body">
+  <script type="text/javascript">
+
+
+    function stopRKey(evt) { 
+      var evt = (evt) ? evt : ((event) ? event : null); 
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+      if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+    } 
+
+    document.onkeypress = stopRKey; 
+
+
+
+   jq(document).ready(function() {
+       var cm = jq('#cart-member').attr('checked');
+       if (cm != true)
+           jq('#form_mitgliedsnummer').hide();
+       var lf = jq('input#form_lieferadresse').attr('checked');
+       if (lf != true)
+           jq('#lieferadresse').hide();
+       jq('#form_lieferadresse').click(function() {
+           jq('#lieferadresse').toggle();
+         });
+
+          jq.ajaxSetup({cache: false});
+          var base_url = jq("link[rel=kss-base-url]").attr('href');
+
+	  jq('#cart-member').click(function(e){
+              jq('#form_mitgliedsnummer').toggle();
+	      jq.ajax({
+	        type: "GET",
+		dataType: 'json',
+	        url: base_url + "/medien/medienkatalog/++cart++/membership_final",
+	        async: false,
+	        success: function(result) {
+		    jq('#price').animate({
+		      'opacity' : 'toggle'
+		    });
+	            if (result[0].membership == true) {
+		      jq(this).attr("checked", true);
+		      jq('#price').html(result[0].price);
+		    }
+		    else {
+		      jq(this).attr("checked", false);
+		      jq('#price').html(result[0].price);
+		    }
+		    jq('#price').animate({
+		      'opacity' : 'toggle'
+		    });
+		 }
+	      });
+	    }); 
+	  });
+  </script>
+  <div metal:define-macro="form">
+
+    <form action="." metal:define-macro="master"
+          tal:attributes="action request/URL;
+                          class string:kssattr-formname-${view/__name__}"
+          method="post"
+          enctype="multipart/form-data"
+          id="zc.page.browser_form">
+
+     <div id="viewspace" metal:define-slot="viewspace">
+
+    <tal:status define="status view/status" condition="status">
+      <dl class="portalMessage error"
+               tal:condition="view/errors">
+         <dt i18n:translate=""> Error </dt>
+         <dd tal:content="status" />
+      </dl>
+
+      <dl class="portalMessage info" tal:condition="not: view/errors">
+         <dt i18n:translate=""> Info </dt>
+         <dd tal:content="status" />
+      </dl>
+    </tal:status>
+<!--
+    <h1 class="documentFirstHeading"
+        i18n:translate=""
+        tal:condition="view/label"
+        tal:content="view/label"
+        metal:define-slot="heading">Do something</h1>
+-->
+    <p tal:content="view/description|nothing" i18n:translate="">Description</p>
+
+    <fieldset>
+     <br>
+       <input type="checkbox" id="cart-member"
+              tal:attributes="checked not: context/is_member" />
+              <span i18n:translate=""> Mitgliedsbetrieb der BGHW</span>
+
+      <p tal:condition="context/is_member"> 
+        <strong i18n:translate=""> Gesamtbestellwert: EUR 
+          <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/>
+        </strong> 
+        <span i18n:translate=""> zzgl. MwST und Versand </span>
+      </p>
+      <p tal:condition="not: context/is_member"> 
+        <strong i18n:translate=""> Gesamtbestellwert: EUR 
+          <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> 
+        </strong> 
+        <span i18n:translate=""> zzgl. MwST und Versand </span>
+      </p>
+
+   <h3 i18n:translate=""> Bestellformular </h3>
+
+    <div metal:define-slot="extra_info" tal:replace="nothing">
+    </div>
+
+      <div tal:define="mnr python: view.widgets['mitgliedsnummer'];
+                       firma python: view.widgets['firma'];
+                       name python: view.widgets['name'];
+                       vorname python: view.widgets['vorname'];
+                       strasse python: view.widgets['strasse'];
+                       plz python: view.widgets['plz'];
+                       ort python: view.widgets['ort'];
+                       email python: view.widgets['email'];
+                       telefax python: view.widgets['telefax'];
+                       telefon python: view.widgets['telefon'];
+                       ustid python: view.widgets['ustid'];
+                       lieferadresse python: view.widgets['lieferadresse'];
+                       lfirma python: view.widgets['lfirma'];
+                       lname python: view.widgets['lname'];
+                       lstrasse python: view.widgets['lstrasse'];
+                       lplz python: view.widgets['lplz'];
+                       lort python: view.widgets['lort'];
+                       datenschutz python: view.widgets['datenschutz'];
+                       land python: view.widgets['land']">
+
+        <div tal:replace="structure python: view.renderField(mnr)" />
+        <div tal:replace="structure python: view.renderField(firma)"/>
+        <div tal:replace="structure python: view.renderField(name, vorname)"/>
+        <div tal:replace="structure python: view.renderField(strasse)"/>
+        <div tal:replace="structure python: view.renderField(plz, ort)"/>
+        <div tal:replace="structure python: view.renderField(telefon, telefax)"/>
+        <div tal:replace="structure python: view.renderField(email)"/>
+        <div tal:replace="structure python: view.renderField(lieferadresse)"/>
+        <div id="lieferadresse">
+           <div tal:replace="structure python: view.renderField(lfirma)"/>
+           <div tal:replace="structure python: view.renderField(lname)"/>
+           <div tal:replace="structure python: view.renderField(lstrasse)"/>
+           <div tal:replace="structure python: view.renderField(lplz, lort)"/>
+        </div>
+        <hr>
+
+        Bei EU-Auslandsbestellung
+        <div tal:replace="structure python: view.renderField(land)"/>
+        <div tal:replace="structure python: view.renderField(ustid)"/>
+        <div tal:replace="structure python: view.renderField(datenschutz)"/>
+        
+      </div>
+
+    <metal:block define-slot="above_buttons" />
+    <div id="actionsView">
+     <span class="actionButtons"
+           tal:condition="view/availableActions"
+           metal:define-slot="bottom_buttons">
+            <input tal:repeat="action view/actions"
+                   tal:replace="structure action/render" />
+     </span>
+    </div>
+ <br> 
+     <p>
+       <strong> Hinweis: </strong> Bei Klick auf <i>'E-Mail-Bestellung'</i> erfolgt Ihre Bestellung online an die BGHW. Sie erhalten in diesem Fall eine Versandbestätigung ebenfalls per E-Mail. Bei Klick auf <i>'Fax-Bestellung'</i> erfolgt hingegen keine Benachrichtigung der Berufsgenossenschaft. In diesem Fall müssten Sie uns das ausgefüllte Formular noch per Fax oder Brief zusenden.
+     </p>
+    </fieldset>
+    </div>
+    </form>
+
+
+</div>
+
+</metal:main>
+</body>
+</html>

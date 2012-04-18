@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.plone.cart">
+  <head><title i18n:translate="">Cart view</title></head>
+  <body>
+    <metal:main fill-slot="main">
+
+
+     <h1 i18n:translate=""> Ausdruck Ihrer Bestellung </h1>
+
+     <p i18n:translate=""> Sie koennen sich das Bestellformular jetzt herunterladen oder ausdrucken. </p>
+
+     <p i18n:translate=""> Bitte vergessen Sie nicht, uns das ausgefuellte Formular noch per Fax oder Brief
+                           zukommen zu lassen. Vielen Dank. </p>
+     <br>
+     <span i18n:translate=""> Um das Bestellformular auszudrucken klicken Sie bitte auf das PDF-Symbol. </span>
+       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}&temp=1"><img src="" title="" tal:attributes="src string:pdf.png; title string:Bestellung ausdrucken"/></a>
+   
+    </metal:main>
+  </body>
+</html>
