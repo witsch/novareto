@@ -1,0 +1,182 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-12-16 08:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: nva.mediashop\n"
+
+#: ./interfaces/artikel.py:35
+msgid "Article description"
+msgstr ""
+
+#: ./interfaces/artikel.py:15
+msgid "Article status"
+msgstr ""
+
+#. Default: "Artikel"
+#: ./profiles/default/types/Artikel.xml
+msgid "Artikel"
+msgstr ""
+
+#: ./content/artikel.py:35
+msgid "Artikel Nummer"
+msgstr ""
+
+#: ./interfaces/artikel.py:17
+msgid "Availability of the article"
+msgstr ""
+
+#. Default: "Back"
+#: ./browser/templates/articleview.pt:86
+msgid "Back"
+msgstr "Zurück"
+
+#: ./content/artikel.py:53
+msgid "Bild"
+msgstr ""
+
+#: ./content/artikel.py:54
+msgid "Bild des Artikels."
+msgstr ""
+
+#: ./content/artikel.py:81
+msgid "Bitte geben Sie hier den Preis an, der fuer Mitglieder gilt."
+msgstr "Bitte geben Sie hier den Preis an, der für Mitglieder gilt"
+
+#: ./content/artikel.py:100
+msgid "Bitte geben Sie hier den Preis an, der fuer Nicht-Mitglieder gilt."
+msgstr "Bitte geben Sie hier den Preis an, der für Nicht-Mitglieder gilt."
+
+#: ./content/artikel.py:111
+msgid "Bitte hier die Broschure uploaden."
+msgstr ""
+
+#: ./content/artikel.py:194
+msgid "Bitte nur Werte zwischen 1 und 99 eintragen"
+msgstr ""
+
+#: ./content/artikel.py:192
+msgid "Bitte nur ganze Zahlen eingeben"
+msgstr ""
+
+#. Default: "Broschuere"
+#: ./browser/templates/kategorie_view.pt:21
+msgid "Broschuere"
+msgstr "Broschüre"
+
+#. Default: "Download"
+#: ./browser/templates/kategorie_view.pt:22
+msgid "Download"
+msgstr ""
+
+#: ./content/artikel.py:26
+msgid "Field description"
+msgstr ""
+
+#: ./interfaces/artikel.py:60
+msgid "File"
+msgstr ""
+
+#: ./interfaces/artikel.py:55
+msgid "Image"
+msgstr ""
+
+#: ./content/artikel.py:133
+msgid "Ist dieser Artikel momentan Lieferbar?"
+msgstr ""
+
+#. Default: "Kategorie"
+#: ./profiles/default/types/Kategorie.xml
+msgid "Kategorie"
+msgstr ""
+
+#: ./content/artikel.py:121
+msgid "Maximum quantity"
+msgstr ""
+
+#. Default: "MedienShop"
+#: ./profiles/default/types/MedienShop.xml
+msgid "MedienShop"
+msgstr ""
+
+#. Default: "Mitglieder erhalten 3 Exemplare kostenlos."
+#: ./browser/templates/articleview.pt:62
+msgid "Mitglieder erhalten 3 Exemplare kostenlos."
+msgstr ""
+
+#: ./content/artikel.py:72
+msgid "Mwst Informationen"
+msgstr ""
+
+#: ./interfaces/artikel.py:21
+msgid "Preis"
+msgstr ""
+
+#: ./content/artikel.py:90
+msgid "Preis Information / Member"
+msgstr "Zusätzliche Preisinformation für Mitglieder"
+
+#. Default: "Preis fuer Mitglieder"
+#: ./browser/templates/articleview.pt:56
+msgid "Preis fuer Mitglieder"
+msgstr "Preis für Mitglieder:"
+
+#. Default: "Preis fuer Nicht-Mitglieder"
+#: ./browser/templates/articleview.pt:65
+msgid "Preis fuer Nicht-Mitglieder"
+msgstr "Preis für Nicht-Mitglieder:"
+
+#: ./interfaces/artikel.py:27
+msgid "Preisinfo"
+msgstr ""
+
+#: ./interfaces/artikel.py:23
+msgid "Price"
+msgstr ""
+
+#: ./interfaces/artikel.py:29
+msgid "Priceinfo"
+msgstr ""
+
+#: ./interfaces/artikel.py:50
+msgid "Quantity"
+msgstr ""
+
+#. Default: "Stand"
+#: ./browser/templates/kategorie_view.pt:20
+msgid "Stand"
+msgstr ""
+
+#: ./content/artikel.py:132
+msgid "Status"
+msgstr ""
+
+#: ./interfaces/artikel.py:39
+msgid "Tax"
+msgstr ""
+
+#: ./interfaces/artikel.py:41
+msgid "Tax information"
+msgstr ""
+
+#: ./content/artikel.py:25
+msgid "Text"
+msgstr ""
+
+#. Default: "Title"
+#: ./browser/templates/kategorie_view.pt:19
+msgid "Title"
+msgstr "Titel"
+

@@ -1,0 +1,37 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.mediashop">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- Skin layer -->
+  <interface
+      interface=".interfaces.IMediashopLayer"
+      type="zope.publisher.interfaces.browser.IBrowserSkinType"
+      name="nva.mediashop.skin"
+      />
+
+  <!-- Stylesheets & JS-->
+  <browser:resourceDirectory
+      name="mediashop"
+      directory="resources"
+      layer=".interfaces.IMediashopLayer"
+      />
+
+  <browser:menuItem
+    for="..interfaces.kategorie.IKategorie"
+    menu="plone_displayviews"
+    title="Kategorien"
+    action="@@index"
+    description="Tabellenansicht Kategorien"
+    />
+
+  <browser:menuItem
+    for="..interfaces.medienshop.IMedienShop"
+    menu="plone_displayviews"
+    title="Medienshop"
+    action="@@index"
+    description="Ansicht Medienshop"
+    />
+</configure>

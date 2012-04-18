@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.mediashop">
+
+<body>
+
+<div metal:fill-slot="main" id="shop">
+  <metal:main_macro
+      define-macro="main"
+      tal:define="kssClassesView context/@@kss_field_decorator_view;
+		  getKC nocall:kssClassesView/getKssClassesInlineEditable;">
+
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
+<!--
+    <h1 class="article-code">
+      <metal:field use-macro="python:here.widget('code', mode='view')">
+	Code
+      </metal:field>
+    </h1>
+-->
+    <div class="article-image" style="float:right"
+	 tal:condition="context/image">
+      <br>
+      <metal:field use-macro="python:here.widget('image', mode='view')">
+	Image
+      </metal:field>
+    </div>
+    
+
+    <h2 class="article-title">
+      <metal:field use-macro="python:here.widget('title', mode='view')">
+	Title
+      </metal:field>
+    </h2>
+
+    <p>
+      <metal:field use-macro="python:here.widget('description', mode='view')">
+	Description
+      </metal:field>
+    </p>
+    <br>
+    <p>
+      <metal:field use-macro="python:here.widget('text', mode='view')">
+	Details
+      </metal:field>
+    </p>
+    <dl id="beschreibung" class="collapsible collapsedOnLoad" tal:condition="context/beschreibung"> 
+       <dt class="collapsibleHeader">Weitere Informationen</dt>
+        <dd class="collapsibleContent">
+	      <metal:field use-macro="python:here.widget('beschreibung', mode='view')">
+		Details
+	      </metal:field>
+        </dd>
+    </dl>
+    <br>
+    <div class="article-stand"
+	 tal:condition="context/stand">
+      <strong>Stand:</strong>
+      <metal:field use-macro="python:here.widget('stand', mode='view')">
+	Description
+      </metal:field>
+    </div>
+    <br>
+    <p>
+      <strong i18n:translate="Preis fuer Mitglieder">Preis fuer Mitglieder</strong>
+      <br>
+      <metal:field use-macro="python:here.widget('preis', mode='view')">
+	Price
+      </metal:field> Euro
+      <br>
+      <span i18n:translate="" tal:condition="here/preisinfo">
+        Mitglieder erhalten 3 Exemplare kostenlos.
+      </span>
+    </p>
+    <br>
+    <p>                                                                                
+      <strong i18n:translate="Preis fuer Nicht-Mitglieder">Preis fuer Nicht-Mitglieder</strong>
+      <br>
+      <metal:field use-macro="python:here.widget('preis_non_member', mode='view')">
+        Price
+      </metal:field> Euro
+    </p>
+    <br>
+    <p>
+      <metal:field use-macro="python:here.widget('tax', mode='view')">
+	Taxes
+      </metal:field>
+    </p>
+    <p id="download" tal:condition="context/file/getSize">
+    <strong i18n:translate="Download">Download:</strong>
+    <tal:file condition="context/file/getSize">
+      <metal:field use-macro="python:here.widget('file', mode='view')">
+	Download file
+      </metal:field>
+    </tal:file>
+    <br /><span>Dieses Medium steht zum Herunterladen bereit.</span>
+    </p>
+
+    <br><br>
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+
+<!--    <a href="" tal:attributes="href view/getParentUrl" i18n:translate=""> Back </a> -->
+
+</metal:main_macro>
+</div>
+
+</body>
+
+</html>

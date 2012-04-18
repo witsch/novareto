@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="nva.mediashop">
+
+  <!-- configure your content components here -->
+  
+  <!-- -*- extra stuff goes here -*- -->
+  <class class=".kategorie.Kategorie">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IKategorie"
+        />
+    <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.IKategorie"
+        />
+  </class>
+  <class class=".artikel.Artikel">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IArtikel"
+        />
+    <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.IArtikel"
+        />
+  </class>
+  <class class=".medienshop.MedienShop">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IMedienShop"
+        />
+    <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.IMedienShop"
+        />
+  </class>
+
+</configure>

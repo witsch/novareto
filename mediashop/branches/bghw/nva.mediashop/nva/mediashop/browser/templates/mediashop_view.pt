@@ -1,0 +1,190 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="example.conference">
+<body>
+<metal:main fill-slot="main"
+       tal:define="results view/results;
+                   searchterm request/artikel|nothing;
+                   Batch python:modules['Products.CMFPlone'].Batch;
+                   b_size python:30;b_start python:0;b_start request/b_start | b_start;
+                   desc_length site_properties/search_results_description_length;
+                   desc_ellipsis site_properties/ellipsis;" >
+
+<tal:main-macro metal:define-macro="main">
+   <h1 class="documentFirstHeading"><span tal:content="context/title"/></h1>
+   <p class="documentDescription" tal:content="context/description">
+        This is the message view of the content object
+    </p>
+
+    <p>
+      <metal:field use-macro="python:here.widget('text', mode='view')">
+        Details
+      </metal:field>
+    </p>
+
+    <div tal:condition="not: results">                                
+        <h3> Bitte wählen Sie aus einer der folgenden Rubriken </h3>                        
+
+        <ul tal:repeat="kategorie view/categories">
+           <li>
+             <a href="" tal:attributes="href kategorie/url" > <span tal:content="kategorie/title"/> </a>
+           </li>
+        </ul>
+    </div>
+<br>
+
+   <form action="." method="POST">
+   Artikelsuche <input type="text" 
+                       value="" 
+                       name="form.artikel"
+                       tal:attributes="value request/form.artikel|nothing"/> 
+
+        <span class="actionButtons">
+          <input type="submit" 
+                 id="form.actions.suchen" 
+                 name="form.actions.suchen" 
+                 value="Suchen" 
+                 class="context" />
+        </span>
+     </form>
+
+     <div tal:condition="results">
+
+
+       <table class="grid listing fix">
+        <thead>
+         <tr>
+           <th i18n:translate=""> Title </th>
+           <th i18n:translate=""> Stand </th>
+           <th i18n:translate=""> Broschuere </th>
+           <th i18n:translate="" tal:condition="view/showDownload"> Download </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr tal:repeat="arti results">
+           <html:def tal:define="art arti/getObject">
+           <td> <span tal:content="art/title"/> <br> <a href=""
+                      tal:attributes="href art/absolute_url"> Artikel anzeigen </a> </td>
+           <td> <span tal:content="art/stand"/> </td>
+           <td>
+                <span tal:content="art/status"/> <br>
+                <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add"
+                           tal:condition="python: art.status == 'lieferbar'">
+                  bestellen
+                </a>
+           </td>
+           <td align="center" tal:condition="view/showDownload">
+              <tal:file condition="art/file/getSize">
+                  <metal:field use-macro="python:art.widget('file', mode='view')">
+                   Download file
+                  </metal:field>
+              </tal:file>
+           </td>
+           </html:def>
+         </tr>
+        </tbody>
+       </table>
+
+
+<!--
+    <div tal:condition="results"
+          tal:define="batch python:Batch(results, b_size, int(b_start), orphan=1);">
+
+        <dl class="searchResults">
+        <tal:results repeat="result batch">
+        <tal:entry define="result_url result/getURL;
+                           result_type result/portal_type;
+                           item_icon python:plone_view.getIcon(result);
+                           url python:'%s?searchterm=%s'%(result_url+'/view', searchterm);">
+            <dt tal:define="item_wf_state_class string:state-${result/review_state};"
+                tal:attributes="class python:'contenttype-' + normalizeString(result.portal_type)">
+              <img tal:replace="structure item_icon/html_tag" />
+               <a
+                 href="#" 
+                 tal:attributes="href url;
+                                 class string:$item_wf_state_class"
+                 tal:content="result/pretty_title_or_id" />
+            </dt>
+            
+            <dd>
+                <span tal:replace="python:plone_view.cropText(result.Description, desc_length, desc_ellipsis)">
+                    Cropped description
+                </span>
+
+            <span class="documentByLine"
+                  tal:condition="python:not isAnon or site_properties.allowAnonymousViewAbout">
+                <span class="documentAuthor"
+                    i18n:translate="label_by_author">
+                by
+                <a href="#"
+                   tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/author/${result/Creator}"
+                   tal:content="result/Creator"
+                   tal:omit-tag="not:result/Creator"
+                   i18n:name="author">
+                Bob Dobalina
+                </a>
+
+                </span>
+
+                <span class="documentModified">
+                  &mdash;
+                    <span i18n:translate="box_last_modified">
+                    last modified
+                    </span>
+                    <span tal:replace="python:toLocalizedTime(result.ModificationDate, long_format=1)">
+                    August 16, 2001 at 23:35:59
+                    </span>
+                </span>
+
+
+                <span tal:define="categories result/Subject|nothing"
+                      tal:condition="categories">
+                    &mdash;
+                    <tal:filedunder i18n:translate="label_filed_under">filed under:</tal:filedunder>
+                        <span tal:repeat="category categories">
+                            <a href=""
+                               class="link-category"
+                               rel="tag"
+                               tal:content="category"
+                               tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/search?Subject%3Alist=${category}">
+                               Category
+                            </a><tal:separator condition="not: repeat/category/end">,</tal:separator>
+                        </span>
+                </span>    
+
+                <span class="relevance" 
+                      tal:condition="result/data_record_normalized_score_">
+                    &mdash;
+                    <tal:relevance i18n:translate="label_relevance_percentage">
+                    Relevance:
+                        <span tal:content="result/data_record_normalized_score_"
+                               tal:omit-tag=""
+                               i18n:name="percentage">23</span>%
+                    </tal:relevance>
+                </span>
+            </span>
+
+            </dd>
+
+        </tal:entry>
+        </tal:results>
+        </dl>
+         
+        <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+    </div>
+-->
+
+
+     </div>
+
+
+
+    </tal:main-macro>
+</metal:main>
+</body>
+</html>

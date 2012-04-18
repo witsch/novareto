@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="de"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.mediashop">
+<body>
+<metal:main fill-slot="main"
+       tal:define="results view/results;
+                   searchterm request/artikel|nothing">
+
+    <tal:main-macro metal:define-macro="main">
+    <div id="shop">
+    <h1 class="documentFirstHeading">Alle Artikel</h1>
+    <p class="documentDescription" tal:content="context/description">
+       This is the message view of the content object</p>
+
+
+
+   <form action="." method="POST">
+      Artikelsuche 
+                <input type="text" 
+                       value="" 
+                       name="form.artikel"
+                       tal:attributes="value request/form.artikel|nothing"/> 
+
+        <span class="actionButtons">
+          <input type="submit" 
+                 id="form.actions.suchen" 
+                 name="form.actions.suchen" 
+                 value="Suchen" 
+                 class="context" />
+        </span>
+     </form>
+
+     <div tal:condition="results">
+       <table class="grid listing fix">
+        <thead>
+         <tr>
+           <th i18n:translate=""> Title </th>
+           <th i18n:translate=""> Stand </th>
+           <th i18n:translate=""> Broschuere </th>
+           <th i18n:translate="" tal:condition="view/showDownload"> Download </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr tal:repeat="art results">
+           <td> <span tal:content="art/title"/> <br> <a href=""
+                      tal:attributes="href art/absolute_url"> Artikel anzeigen </a> </td>
+           <td> <span tal:content="art/stand"/> </td>
+           <td>
+                <span tal:content="art/status"/> <br>
+                <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add"
+                           tal:condition="python: art.status == 'lieferbar'">
+                  bestellen
+                </a>
+           </td>
+           <td align="center" tal:condition="view/showDownload">
+              <tal:file condition="art/file/getSize">
+                  <metal:field use-macro="python:art.widget('file', mode='view')">
+                   Download file
+                  </metal:field>
+              </tal:file>
+           </td>
+         </tr>
+        </tbody>
+       </table>
+     </div>
+
+
+
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+    </div>
+    </tal:main-macro>
+</metal:main>
+</body>
+</html>

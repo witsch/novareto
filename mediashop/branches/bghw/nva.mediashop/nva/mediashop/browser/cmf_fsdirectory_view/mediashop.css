@@ -1,0 +1,79 @@
+.fix {
+    width: 100%;
+}
+
+dl.collapsible {
+    width: 350px;
+}
+
+#center {
+    text-align: center;
+}
+
+table.listing th, .stx table th {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#DEE7EC none repeat scroll 0 0;
+	border-bottom:1px solid #004994;
+	border-right:1px solid #004994;
+	border-top:1px solid #004994;
+	font-weight:normal;
+	padding:0.25em 0.5em;
+	text-transform:none;
+        width:100%;
+}
+
+#shop img {
+ border: 1px solid #ccc;
+}
+
+#portlet-cart table.listing {
+ width: 100%;
+}
+
+#shop img {
+margin-left: 10px;
+}
+
+#shop .article-stand {
+margin-bottom: 10px;
+}
+
+#shop #download {
+margin-top: 18px;
+}
+
+#shop #download img {
+border: 0;
+}
+
+#shop dl#beschreibung {
+margin-top: 14px;
+}
+
+#shop dd.collapsibleContent {
+margin-top: 16px;
+}
+
+.section-medien #form_mitgliedsnummer,
+.section-medien #form_firma,
+.section-medien #form_strasse {
+width: 240px;
+}
+
+.section-medien #form_email {
+width: 300px;
+}
+
+.section-medien #shop #form_name,
+.section-medien #form_vorname,
+.section-medien #form_telefon,
+.section-medien #form_telefax,
+.section-medien #form_ort {
+width: 160px;
+}
+
+
+
+

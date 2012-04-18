@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+ <object name="nva.mediashop" meta_type="Filesystem Directory View"
+    directory="nva.mediashop.browser:cmf_fsdirectory_view"/>
+ <skin-path name="*">
+  <layer name="nva.mediashop"
+         insert-after="custom"/>
+ </skin-path>
+</object>
