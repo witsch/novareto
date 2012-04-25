@@ -51,7 +51,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
     atapi.StringField(
-        'ean-code',
+        'ean_code',
         required=False,
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
