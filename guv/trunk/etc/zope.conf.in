@@ -55,3 +55,7 @@ ${zope_conf:extra}
     username ${settings:mailer_username}
     password ${settings:mailer_password}
 </product-config>
+
+<product-config database>
+    dsn ${settings:dsn}
+</product-config>
