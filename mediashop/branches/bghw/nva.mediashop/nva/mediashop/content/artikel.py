@@ -181,6 +181,7 @@ class Artikel(base.ATCTContent):
     description = atapi.ATFieldProperty('description')
 
     code = atapi.ATFieldProperty('code')
+    ean_code = atapi.ATFieldProperty('ean_code')
     file = atapi.ATFieldProperty('file')
     image = atapi.ATFieldProperty('image')
     preis = atapi.ATFieldProperty('preis')
@@ -235,6 +236,7 @@ class BuyableContentAdapter(CartItem, grok.Adapter):
         self.title = unicode(context.Title(), 'utf-8')
         self.url = context.absolute_url()
         self.code = context.code
+        self.ean_code = context.ean_code
         self.price = float(context.preis)
         self.non_member_price = float(context.preis_non_member) 
         self.price_info = context.preisinfo
