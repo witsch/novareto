@@ -15,10 +15,10 @@
      <br>
 
      <span i18n:translate=""> Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </span>
-       <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.png; title string:Bestellung ausdrucken"/></a>
+       <a href="pdf" tal:attributes="href string:/shop/medien/medienkatalog/++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.png; title string:Bestellung ausdrucken"/></a>
 
 <!--
-      <a href="pdf" tal:attributes="href string:/medien/medienkatalog/++cart++/pdf?id=${request/id}"> Download </a>
+      <a href="pdf" tal:attributes="href string:/shop/medien/medienkatalog/++cart++/pdf?id=${request/id}"> Download </a>
 -->
     </metal:main>
   </body>

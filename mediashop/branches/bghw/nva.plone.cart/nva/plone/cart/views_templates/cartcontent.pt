@@ -5,7 +5,7 @@
    
     <span i18n:translate=""> Keine Artikel im Warenkorb. </span>
     <ul>
-      <li> <a href="medien/medienkatalog" i18n:translate=""> zurück </a> </li>
+      <li> <a href="/shop/medien/medienkatalog" i18n:translate=""> zurück </a> </li>
     </ul>
   </div>
   <div tal:condition="items">
@@ -79,12 +79,12 @@
    <table>
     <tr>
      <td>
-       <form action="medien/medienkatalog">
+       <form action="/shop/medien/medienkatalog">
          <input type="submit" class="context" value="weitere Artikel auswählen" />
        </form>
      </td>
      <td>
-       <form action="/medien/medienkatalog/++cart++/checkout">
+       <form action="/shop/medien/medienkatalog/++cart++/checkout">
          <input type="submit" class="context" value="zum Bestellformular" />
        </form>
      </td>

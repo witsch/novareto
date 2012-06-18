@@ -90,7 +90,7 @@ class CartNamespace(object):
     def default_namespace(self):
         namespace = grok.View.default_namespace(self)
         namespace['cart'] = self.context.cart
-        namespace['cart_url'] = self.portal_url + '/medien-shop/++cart++'
+        namespace['cart_url'] = self.portal_url + '/medien/medienkatalog/++cart++'
         namespace['handler'] = self.context.handler
         return namespace
 
@@ -145,19 +145,28 @@ class Checkout(CartNamespace, grok.Form):
     label = _(u"Bestellformular")
     form_name = _(u"Bitte geben Sie alle Werte ein.")
     form_fields = grok.Fields(IOrderForm)
+    form_fields['agb'].custom_widget = CheckBoxWidget
     form_fields['datenschutz'].custom_widget = CheckBoxWidget
     form_fields['lieferadresse'].custom_widget = CheckBoxWidget 
 
     def validate_checkout(self, action, data):
         errors = self.validate(action, data)
-        err = None 
+        err = None
+ 
+        if data.get('agb') == False:
+            agb = self.widgets.get('agb')
+            agb._error = err = WidgetInputError(field_name='agb',
+                                           widget_title=u'AGB', 
+                                           errors=_(u'Bitte bestätigen Sie Ihr Einverständnis mit den AGB der BGHW.'))
+            errors.append(err) 
+        
         if data.get('datenschutz') == False:
             datenschutz = self.widgets.get('datenschutz')
             datenschutz._error = err = WidgetInputError(field_name='datenschutz',
                                            widget_title=u'Datenschutz', 
                                            errors=_(u'Bitte das Feld Datenschutzvereinbarung bestätigen.'))
-            errors.append(err) 
-        
+            errors.append(err)
+ 
         if not self.context.is_member and data.get('mitgliedsnummer') == None:
             mnr = self.widgets.get('mitgliedsnummer')
             mnr._error = err = WidgetInputError(field_name='mitgliedsnummer',

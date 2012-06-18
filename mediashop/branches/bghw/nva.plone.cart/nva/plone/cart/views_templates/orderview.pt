@@ -10,7 +10,7 @@
 	<h1>Order</h1>
 	<h3>Order sent the <span tal:content="view/date" /></h3>
 	<p tal:condition="context/is_member">
-	  Mitgliedsbetrieb der BGF 
+	  Mitgliedsbetrieb der BGHW
 	</p>
 	<table class="listing nosort">
 	  <thead>

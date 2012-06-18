@@ -8,10 +8,10 @@
     </li>
 -->
       <form action="" tal:attributes="action string:${context/absolute_url}/@@cart.add">
-        <input type="submit" value="Bestellen" class="context">
+        <input type="submit" value="in den Warenkorb" class="context">
       </form>
 </ul>
-<ul i18n:domain="nva.plone.cart"
-    tal:condition="python: context.status != 'lieferbar'">
-  <li> Dieser Artikel ist derzeit nicht lieferbar. </li>
+<ul i18n:domain="nva.plone.cart">
+  <li tal:condition="python: context.status == 'nicht lieferbar'"> Dieser Artikel ist derzeit nicht lieferbar. </li>
+  <li tal:condition="python: context.status == 'nur Download'"> Dieser Artikel steht nur als Datei zum Download zur Verfügung. </li>
 </ul>

@@ -136,6 +136,7 @@
                        lplz python: view.widgets['lplz'];
                        lort python: view.widgets['lort'];
                        datenschutz python: view.widgets['datenschutz'];
+                       agb python: view.widgets['agb'];
                        land python: view.widgets['land']">
 
         <div tal:replace="structure python: view.renderField(mnr)" />
@@ -157,6 +158,9 @@
         Bei EU-Auslandsbestellung
         <div tal:replace="structure python: view.renderField(land)"/>
         <div tal:replace="structure python: view.renderField(ustid)"/>
+        <div><span tal:replace="structure python: view.renderField(agb)"/>
+              <a target="_blank" href="http://www.bghw.de/impressum">Zu den AGB der BGHW.</a></div>
+        <div>&nbsp; </div>
         <div tal:replace="structure python: view.renderField(datenschutz)"/>
         
       </div>
