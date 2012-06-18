@@ -9,7 +9,7 @@ from email.MIMEImage import MIMEImage
 from email.MIMEText import MIMEText
 import string
 
-mailserver='10.33.176.4'
+mailserver='mail.bghw.de'
 
 
 def sMail(to,sender,cc,subject,text,path,filename):

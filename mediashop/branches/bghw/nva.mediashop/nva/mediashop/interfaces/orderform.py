@@ -26,7 +26,9 @@ class IOrderForm(Interface):
     lstrasse = TextLine(title=u"Straße", required=False)
     lplz = TextLine(title=u"Postleitzahl", required=False)
     lort = TextLine(title=u"Ort", required=False)
-
+    agb = Bool(title=u"Allgemeine Geschäftsbedingungen (AGB) der BGHW",
+                       description=u"Die AGB der BGHW habe ich gelesen und erkläre mich damit einverstanden.",
+                       required = True)
     datenschutz = Bool(title=u"Datenschutzvereinbarung", 
                        description=u"Mit der Übermittlung meiner Adressdaten an das von der BGHW"
                                    u" beauftragte Versandunternehmen erkläre ich mich einverstanden."

@@ -68,15 +68,6 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         ),
     ),
 
-    atapi.BooleanField(
-        'eshipping',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.BooleanWidget(
-            label=_(u"Elektronischer Bereitstellung"),
-            description=_(u"Hier klicken, wenn der Artikel nur elektronisch bereitgestellt wird."),
-        ),
-    ),
-
    atapi.ImageField(
         'image',
         storage=atapi.AnnotationStorage(),
@@ -160,7 +151,8 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         default = 'lieferbar',
         vocabulary =  ( 'lieferbar',
-                        'nicht lieferbar' ),
+                        'nicht lieferbar',
+                        'nur Download'),
         widget=atapi.SelectionWidget(
             label=_(u"Status"),
             description=_(u"Ist dieser Artikel momentan Lieferbar?"),
