@@ -99,6 +99,7 @@ class Order(Item):
             bestellung = {}
             bestellung['Anzahl']  = item.quantity
             bestellung['Artikel'] = item.title
+            bestellung['PseudoEan'] = item.ean_code
             bestellung['Preis']   = item.total_price(self.is_member)
             artikel.append(bestellung)
 
