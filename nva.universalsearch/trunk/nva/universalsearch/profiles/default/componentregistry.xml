@@ -4,7 +4,9 @@
   <utilities>
   <utility
      interface="collective.solr.interfaces.ISolrIndexQueueProcessor"
+     id="universal_search_queue_processor"
      name="solr"
-     factory="nva.universalsearch.indexer.UniversalSearchQueueProcessor"/>
+     factory="nva.universalsearch.indexer.UniversalSearchQueueProcessor"
+     />
  </utilities>
 </componentregistry>

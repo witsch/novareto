@@ -3,8 +3,15 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="nva.universalsearch">
 
-  <utility
-      factory="nva.universalsearch.search.UniversalSearch"
-      provides=".interfaces.ISearch" />
+    <utility
+        factory="nva.universalsearch.search.UniversalSearch"
+        provides="collective.solr.interfaces.ISearch"
+        />
+
+    <utility
+        provides="collective.solr.interfaces.ISolrIndexQueueProcessor"
+        name="solr"
+        factory="nva.universalsearch.indexer.UniversalSearchQueueProcessor"
+        />
 
 </configure>
