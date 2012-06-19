@@ -42,9 +42,12 @@ class Renderer(base.Renderer):
         return ICartRetriever(self.request)
 
     def update(self):
+        self.itemmarker = True
         self.portal = self.context.portal_url()
         self.url = self.context.absolute_url()
         self.handler = ICartHandler(self.cart)
+        if len([i for i in self.handler.getItems()]) == 0:
+            self.itemmarker = False
 
     @property
     def iavailable(self):

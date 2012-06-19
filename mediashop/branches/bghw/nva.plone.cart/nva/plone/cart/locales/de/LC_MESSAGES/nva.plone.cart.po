@@ -111,7 +111,7 @@ msgstr ""
 
 #: ./views_templates/thanks.pt:14
 msgid "Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kuerze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse."
-msgstr "Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kürze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse."
+msgstr "In Kürze erhalten Sie eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse."
 
 #. Default: "Info"
 #: ./views_templates/checkout.pt:72

@@ -22,6 +22,7 @@
 
 
    jq(document).ready(function() {
+
        var cm = jq('#cart-member').attr('checked');
        if (cm != true)
            jq('#form_mitgliedsnummer').hide();
@@ -158,9 +159,7 @@
         Bei EU-Auslandsbestellung
         <div tal:replace="structure python: view.renderField(land)"/>
         <div tal:replace="structure python: view.renderField(ustid)"/>
-        <div><span tal:replace="structure python: view.renderField(agb)"/>
-              <a target="_blank" href="http://www.bghw.de/impressum">Zu den AGB der BGHW.</a></div>
-        <div>&nbsp; </div>
+        <div tal:replace="structure python: view.renderField(agb)"/>
         <div tal:replace="structure python: view.renderField(datenschutz)"/>
         
       </div>
@@ -176,7 +175,11 @@
     </div>
  <br> 
      <p>
-       <strong> Hinweis: </strong> Bei Klick auf <i>'E-Mail-Bestellung'</i> erfolgt Ihre Bestellung online an die BGHW. Sie erhalten in diesem Fall eine Versandbestätigung ebenfalls per E-Mail. Bei Klick auf <i>'Fax-Bestellung'</i> erfolgt hingegen keine Benachrichtigung der Berufsgenossenschaft. In diesem Fall müssten Sie uns das ausgefüllte Formular noch per Fax oder Brief zusenden.
+       <strong> Hinweis: </strong> Bei Klick auf <i>'E-Mail-Bestellung'</i> erfolgt Ihre Bestellung online an die BGHW.
+       Sie können dann Ihr Bestellformular im PDF-Format drucken oder lokal speichern. Zusätzlich wird eine Kopie Ihrer 
+       Bestellung als pdf-Datei an die von Ihnen oben angegebene(n) E-Mail-Adresse(n) versandt. 
+       Bei Klick auf <i>'Fax-Bestellung'</i> erfolgt hingegen keine Benachrichtigung der Berufsgenossenschaft. In diesem 
+       Fall müssten Sie uns das ausgefüllte Formular noch per Fax oder Brief zusenden.
      </p>
     </fieldset>
     </div>
