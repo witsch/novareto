@@ -58,9 +58,9 @@
        <table class="grid listing fix">
         <thead>
          <tr>
-           <th i18n:translate=""> Title </th>
-           <th i18n:translate=""> Stand </th>
-           <th i18n:translate=""> Broschuere </th>
+           <th i18n:translate=""> Titel </th>
+           <!--<th i18n:translate=""> Stand </th>-->
+           <th i18n:translate=""> Broschüre </th>
            <th i18n:translate="" tal:condition="view/showDownload"> Download </th>
          </tr>
         </thead>
@@ -69,7 +69,7 @@
            <html:def tal:define="art arti/getObject">
            <td> <span tal:content="art/title"/> <br> <a href=""
                       tal:attributes="href art/absolute_url"> Artikel anzeigen </a> </td>
-           <td> <span tal:content="art/stand"/> </td>
+           <!--<td> <span tal:content="art/stand"/> </td>-->
            <td>
                 <span tal:content="art/status"/> <br>
                 <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add"

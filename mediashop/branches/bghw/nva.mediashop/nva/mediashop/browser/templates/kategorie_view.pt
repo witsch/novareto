@@ -68,42 +68,6 @@
     </tbody>
    </table> 
 
-<!--
-     <div tal:condition="results">
-       <table class="grid listing fix">
-        <thead>
-         <tr>
-           <th i18n:translate=""> Title </th>
-           <th i18n:translate=""> Stand </th>
-           <th i18n:translate=""> Broschuere </th>
-           <th i18n:translate=""> Download </th>
-         </tr>
-        </thead>
-        <tbody>
-         <tr tal:repeat="arti results">
-           <html:def tal:define="art arti/getObject">
-           <td> <span tal:content="art/title"/> <br> <a href=""
-                      tal:attributes="href art/absolute_url"> ...weiter </a> </td>
-           <td> <span tal:content="art/stand"/> </td>
-           <td>
-                <span tal:content="art/status"/> <br>
-                <a href="" tal:attributes="href string:${art/absolute_url}/@@cart.add">
-                  bestellen
-                </a>
-           </td>
-           <td>
-              <tal:file condition="art/file/getSize">
-                  <metal:field use-macro="python:art.widget('file', mode='view')">
-                   Download file
-                  </metal:field>
-              </tal:file>
-           </td>
-           </html:def>
-         </tr>
-        </tbody>
-       </table>
-     </div>
--->
     <div tal:replace="structure provider:plone.belowcontentbody" />
     </tal:main-macro>
 </metal:main>

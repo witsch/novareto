@@ -34,4 +34,10 @@
     action="@@index"
     description="Ansicht Medienshop"
     />
+
+  <browser:resource
+    name="shopcustoms.js"
+    file="shopcustoms.js"
+    />
+
 </configure>
