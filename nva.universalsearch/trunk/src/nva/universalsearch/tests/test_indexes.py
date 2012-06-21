@@ -91,6 +91,18 @@ class SolrServerTests(SolrTestCase):
         self.assertEqual(sorted([(r.Title, r.system) for r in results]),
             [('Foo', 'Plone site')])
 
+    def testOtherSystemsCannotBeSearchedViaRequestParameters(self):
+        self.folder.processForm(values={'title': 'Foo'})
+        commit()                        # indexing happens on commit
+        indexForDifferentSystem(self.folder)
+        config = getUtility(IUniversalSearchConfig)
+        config.systems = ['Plone site']
+        # explicitly setting another 'system' mustn't yield results
+        request = dict(SearchableText='[* TO *]', system='Other')
+        results = solrSearchResults(request)
+        self.assertEqual(sorted([(r.Title, r.system) for r in results]),
+            [('Foo', 'Plone site')])
+
 
 def test_suite():
     return defaultTestLoader.loadTestsFromName(__name__)

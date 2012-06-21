@@ -11,6 +11,6 @@ class UniversalSearch(Search):
     def buildQuery(self, default=None, **args):
         """ extend default by adding query param for 'systems' """
         config = getUtility(IUniversalSearchConfig)
-        if config.systems and 'system' not in args:
+        if config.systems:
             args['system'] = config.systems
         return super(UniversalSearch, self).buildQuery(default, **args)
