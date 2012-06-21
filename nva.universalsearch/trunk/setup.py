@@ -55,10 +55,10 @@ setup(name='nva.universalsearch',
       namespace_packages=['nva', ],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['setuptools',
-                        # -*- Extra requirements: -*-
-                        ],
-      tests_require=tests_require,
+      install_requires=[
+        'setuptools',
+        'collective.solr',
+      ],
       extras_require=dict(tests=tests_require),
       entry_points="""
       """,
