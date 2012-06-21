@@ -8,4 +8,7 @@
         provides="collective.solr.interfaces.ISearch"
         />
 
+    <adapter
+        factory=".flare.PloneFlare" />
+
 </configure>
