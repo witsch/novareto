@@ -26,4 +26,8 @@
       class=".configlet.ControlPanel"
       permission="cmf.ManagePortal" />
 
+  <utility
+      factory=".vocabularies.Systems"
+      name="nva.universalsearch.systems" />
+
 </configure>

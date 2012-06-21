@@ -3,6 +3,7 @@ from nva.universalsearch.tests.base import SolrTestCase
 
 from transaction import abort, commit
 from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 from collective.solr.interfaces import ISolrConnectionConfig
 from collective.solr.interfaces import ISearch
 from collective.solr.utils import activate
@@ -56,6 +57,14 @@ class SolrServerTests(SolrTestCase):
         commit()                        # indexing happens on commit
         self.assertEqual([r.uri for r in self.search('*:*')],
             [self.folder.absolute_url()])
+
+    def testSystemsVocabulary(self):
+        self.folder.processForm(values={'title': 'Foo'})
+        commit()                        # indexing happens on commit
+        indexForDifferentSystem(self.folder)
+        vocab = getUtility(IVocabularyFactory, name='nva.universalsearch.systems')
+        self.assertEqual([i.token for i in vocab(self.portal)],
+            ['Other', 'Plone site'])
 
 
 def test_suite():
