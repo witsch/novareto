@@ -32,7 +32,6 @@ long_description = (
     '********\n'
     )
 
-tests_require=['zope.testing']
 
 setup(name='nva.universalsearch',
       version=version,
@@ -59,7 +58,9 @@ setup(name='nva.universalsearch',
         'setuptools',
         'collective.solr',
       ],
-      extras_require=dict(tests=tests_require),
+      extras_require=dict(test=[
+        'collective.testcaselayer'
+      ]),
       entry_points="""
         [z3c.autoinclude.plugin]
         target = plone
