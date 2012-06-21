@@ -1,6 +1,8 @@
 from zope.interface import Interface
-from zope.component import getMultiAdapter
+from zope.component import getMultiAdapter, getUtility
 from plone.indexer import indexer
+from Products.CMFCore.utils import getToolByName
+from nva.universalsearch.interfaces import IUniversalSearchConfig
 
 
 @indexer(Interface)
@@ -13,4 +15,9 @@ def system(obj, **kwargs):
 @indexer(Interface)
 def uri(obj, **kwargs):
     """ return absolute url """
-    return obj.absolute_url()
+    site_url = getUtility(IUniversalSearchConfig).site_url
+    if site_url is None:
+        return obj.absolute_url()
+    else:
+        url = getToolByName(obj, 'portal_url').getRelativeContentURL(obj)
+        return site_url.rstrip('/') + '/' + url

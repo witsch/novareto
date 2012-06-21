@@ -7,6 +7,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from collective.solr.interfaces import ISolrConnectionConfig
 from collective.solr.interfaces import ISearch
 from collective.solr.utils import activate
+from nva.universalsearch.interfaces import IUniversalSearchConfig
 
 
 def indexForDifferentSystem(obj, system='Other'):
@@ -57,6 +58,14 @@ class SolrServerTests(SolrTestCase):
         commit()                        # indexing happens on commit
         self.assertEqual([r.uri for r in self.search('*:*')],
             [self.folder.absolute_url()])
+
+    def testFullCustomizedUriIsStoredInSolr(self):
+        config = getUtility(IUniversalSearchConfig)
+        config.site_url = 'http://foo.com'
+        self.folder.processForm(values={'title': 'Foo'})
+        commit()                        # indexing happens on commit
+        self.assertEqual([r.uri for r in self.search('*:*')],
+            ['http://foo.com/Members/' + self.folder.getId()])
 
     def testSystemsVocabulary(self):
         self.folder.processForm(values={'title': 'Foo'})
