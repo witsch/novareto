@@ -26,6 +26,12 @@
       class=".configlet.ControlPanel"
       permission="cmf.ManagePortal" />
 
+  <browser:page
+      name="solr-active"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".browser.active.SolrActiveView"
+      permission="cmf.ManagePortal" />
+
   <utility
       factory=".vocabularies.Systems"
       name="nva.universalsearch.systems" />
