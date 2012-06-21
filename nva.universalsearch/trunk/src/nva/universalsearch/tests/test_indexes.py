@@ -8,6 +8,22 @@ from collective.solr.interfaces import ISearch
 from collective.solr.utils import activate
 
 
+def indexForDifferentSystem(obj, system='Other'):
+    from collective.solr.indexer import SolrIndexProcessor
+    original = SolrIndexProcessor.getData
+
+    def getData(self, obj, attributes=None):
+        data, missing = original(self, obj, attributes)
+        data['UID'] = system + '.' + data['UID']    # uid needs to be unique
+        data['system'] = system
+        return data, missing
+
+    SolrIndexProcessor.getData = getData
+    obj.processForm()
+    commit()
+    SolrIndexProcessor.getData = original
+
+
 class SolrServerTests(SolrTestCase):
 
     def afterSetUp(self):
@@ -29,8 +45,11 @@ class SolrServerTests(SolrTestCase):
     def testObjectCanBeSearchedViaSystemIndex(self):
         self.folder.processForm(values={'title': 'Foo'})
         commit()                        # indexing happens on commit
+        indexForDifferentSystem(self.folder)
         system = self.portal.Title()
         self.assertEqual(len(self.search('+system:"%s"' % system)), 1)
+        # without specifying the 'system' we should get two results
+        self.assertEqual(len(self.search('+system:*')), 2)
 
     def testFullUriIsStoredInSolr(self):
         self.folder.processForm(values={'title': 'Foo'})
