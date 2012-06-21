@@ -1,6 +1,7 @@
 from unittest import defaultTestLoader
 from nva.universalsearch.tests.base import SolrTestCase
 
+from os import environ
 from transaction import abort, commit
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
@@ -32,9 +33,11 @@ class SolrServerTests(SolrTestCase):
     def afterSetUp(self):
         activate()
         self.portal.REQUEST.RESPONSE.write = lambda x: x    # ignore output
+        self.config = getUtility(ISolrConnectionConfig)
+        if 'SOLR_PORT' in environ:
+            self.config.port = int(environ['SOLR_PORT'])
         self.maintenance = self.portal.unrestrictedTraverse('solr-maintenance')
         self.maintenance.clear()
-        self.config = getUtility(ISolrConnectionConfig)
         self.search = getUtility(ISearch)
 
     def beforeTearDown(self):
