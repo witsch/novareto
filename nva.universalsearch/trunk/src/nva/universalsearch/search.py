@@ -12,5 +12,13 @@ class UniversalSearch(Search):
         """ extend default by adding query param for 'systems' """
         config = getUtility(IUniversalSearchConfig)
         if config.systems:
-            args['system'] = config.systems
+            systems = set(config.systems)
+            if 'system' in args:
+                system = args['system']
+                if isinstance(system, basestring):
+                    system = [system]
+                common = systems.intersection(system)
+                if common:
+                    systems = common
+            args['system'] = list(systems)
         return super(UniversalSearch, self).buildQuery(default, **args)
