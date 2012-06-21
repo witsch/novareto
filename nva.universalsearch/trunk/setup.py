@@ -61,5 +61,7 @@ setup(name='nva.universalsearch',
       ],
       extras_require=dict(tests=tests_require),
       entry_points="""
+        [z3c.autoinclude.plugin]
+        target = plone
       """,
       )
