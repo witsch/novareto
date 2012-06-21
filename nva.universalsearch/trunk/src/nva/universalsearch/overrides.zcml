@@ -8,10 +8,4 @@
         provides="collective.solr.interfaces.ISearch"
         />
 
-    <utility
-        provides="collective.solr.interfaces.ISolrIndexQueueProcessor"
-        name="solr"
-        factory="nva.universalsearch.indexer.UniversalSearchQueueProcessor"
-        />
-
 </configure>
