@@ -5,6 +5,7 @@ from transaction import abort, commit
 from zope.component import getUtility
 from collective.solr.interfaces import ISolrConnectionConfig
 from collective.solr.interfaces import ISolrConnectionManager
+from collective.solr.interfaces import ISearch
 from collective.solr.utils import activate
 from collective.solr.tests.utils import numFound
 
@@ -17,6 +18,7 @@ class SolrServerTests(SolrTestCase):
         self.maintenance = self.portal.unrestrictedTraverse('solr-maintenance')
         self.maintenance.clear()
         self.config = getUtility(ISolrConnectionConfig)
+        self.search = getUtility(ISearch)
 
     def beforeTearDown(self):
         # due to the `commit()` in the tests below the activation of the
@@ -33,6 +35,12 @@ class SolrServerTests(SolrTestCase):
         system = self.portal.Title()
         result = connection.search(q='+system:"%s"' % system).read()
         self.assertEqual(numFound(result), 1)
+
+    def testFullUriIsStoredInSolr(self):
+        self.folder.processForm(values={'title': 'Foo'})
+        commit()                        # indexing happens on commit
+        self.assertEqual([r.uri for r in self.search('*:*')],
+            [self.folder.absolute_url()])
 
 
 def test_suite():
