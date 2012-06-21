@@ -21,7 +21,7 @@ long_description = (
     'Detailed Documentation\n'
     '**********************\n'
     + '\n' +
-    read('nva', 'universalsearch', 'README.txt')
+    read('src', 'nva', 'universalsearch', 'README.txt')
     + '\n' +
     'Contributors\n'
     '************\n'
@@ -50,7 +50,8 @@ setup(name='nva.universalsearch',
       author_email='plone-developers@lists.sourceforge.net',
       url='http://svn.plone.org/svn/plone/plone.example',
       license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
+      packages=find_packages('src'),
+      package_dir={'': 'src'},
       namespace_packages=['nva', ],
       include_package_data=True,
       zip_safe=False,
