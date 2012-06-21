@@ -16,7 +16,6 @@ class UniversalSearchQueueProcessor(SolrIndexProcessor):
     implements(IUniversalSearchQueueProcessor)
 
     def index(self, obj, attributes=None):
-        import pdb; pdb.set_trace()
         conn = self.getConnection()
         if conn is not None and indexable(obj):
             data, missing = self.getData(obj, attributes)
@@ -27,7 +26,6 @@ class UniversalSearchQueueProcessor(SolrIndexProcessor):
             data['uri'] = obj.absolute_url()
             prepareData(data)
             schema = self.manager.getSchema()
-            #import pdb;pdb.set_trace()
             if schema is None:
                 logger.warning('unable to fetch schema, skipping indexing of %r', obj)
                 return
