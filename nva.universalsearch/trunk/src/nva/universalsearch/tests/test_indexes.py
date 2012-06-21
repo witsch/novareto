@@ -6,6 +6,7 @@ from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from collective.solr.interfaces import ISolrConnectionConfig
 from collective.solr.interfaces import ISearch
+from collective.solr.dispatcher import solrSearchResults
 from collective.solr.utils import activate
 from nva.universalsearch.interfaces import IUniversalSearchConfig
 
@@ -74,6 +75,21 @@ class SolrServerTests(SolrTestCase):
         vocab = getUtility(IVocabularyFactory, name='nva.universalsearch.systems')
         self.assertEqual([i.token for i in vocab(self.portal)],
             ['Other', 'Plone site'])
+
+    def testSearchResultsAreFilteredBySystems(self):
+        self.folder.processForm(values={'title': 'Foo'})
+        commit()                        # indexing happens on commit
+        indexForDifferentSystem(self.folder)
+        # by default 'systems' isn't set and we're getting all results
+        results = solrSearchResults(SearchableText='Foo')
+        self.assertEqual(sorted([(r.Title, r.system) for r in results]),
+            [('Foo', 'Other'), ('Foo', 'Plone site')])
+        # after setting 'systems' we only get results for those...
+        config = getUtility(IUniversalSearchConfig)
+        config.systems = ['Plone site']
+        results = solrSearchResults(SearchableText='Foo')
+        self.assertEqual(sorted([(r.Title, r.system) for r in results]),
+            [('Foo', 'Plone site')])
 
 
 def test_suite():
