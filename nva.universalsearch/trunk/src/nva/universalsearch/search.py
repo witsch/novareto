@@ -8,17 +8,16 @@ from nva.universalsearch.interfaces import IUniversalSearchConfig
 class UniversalSearch(Search):
     implements(ISearch)
 
-    def buildQuery(self, default=None, **args):
+    def buildQuery(self, default=None, system=None, **args):
         """ extend default by adding query param for 'systems' """
         config = getUtility(IUniversalSearchConfig)
         if config.systems:
             systems = set(config.systems)
-            if 'system' in args:
-                system = args['system']
+            if system is not None:
                 if isinstance(system, basestring):
                     system = [system]
                 common = systems.intersection(system)
                 if common:
                     systems = common
-            args['system'] = list(systems)
-        return super(UniversalSearch, self).buildQuery(default, **args)
+            system = list(systems)
+        return super(UniversalSearch, self).buildQuery(default, system=system, **args)
