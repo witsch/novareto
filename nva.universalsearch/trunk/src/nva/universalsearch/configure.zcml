@@ -10,7 +10,7 @@
 
   <include file="profiles.zcml" />
 
-  <cmf:registerDirectory name="uni_facet_search" />
+  <!-- <cmf:registerDirectory name="uni_facet_search" /> -->
 
   <adapter name="system" factory=".attributes.system" />
   <adapter name="uri" factory=".attributes.uri" />
