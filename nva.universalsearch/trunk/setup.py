@@ -57,7 +57,8 @@ setup(name='nva.universalsearch',
         'collective.solr',
       ],
       extras_require=dict(test=[
-        'collective.testcaselayer'
+        'collective.testcaselayer',
+        'mr.laforge',
       ]),
       entry_points="""
         [z3c.autoinclude.plugin]
