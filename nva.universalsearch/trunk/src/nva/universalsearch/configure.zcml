@@ -16,4 +16,14 @@
   <adapter name="system" factory=".attributes.system" />
   <adapter name="uri" factory=".attributes.uri" />
 
+  <adapter factory=".configlet.ControlPanelAdapter" />
+
+  <include package="Products.CMFCore" file="permissions.zcml" />
+
+  <browser:page
+      name="universalsearch-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".configlet.ControlPanel"
+      permission="cmf.ManagePortal" />
+
 </configure>
