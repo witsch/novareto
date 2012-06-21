@@ -14,6 +14,17 @@ class ControlPanelAdapter(SchemaAdapterBase):
     adapts(IPloneSiteRoot)
     implements(IUniversalSearchSchema)
 
+    def getSiteURL(self):
+        util = queryUtility(IUniversalSearchConfig)
+        return getattr(util, 'site_url', '')
+
+    def setSiteURL(self, value):
+        util = queryUtility(IUniversalSearchConfig)
+        if util is not None:
+            util.site_url = value
+
+    site_url = property(getSiteURL, setSiteURL)
+
     def getSystems(self):
         util = queryUtility(IUniversalSearchConfig)
         return getattr(util, 'systems', '')

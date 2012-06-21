@@ -13,6 +13,7 @@ class UniversalSearchConfig(Persistent):
     implements(IUniversalSearchConfig)
 
     def __init__(self):
+        self.site_url = None
         self.systems = []
 
     def getId(self):
