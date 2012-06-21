@@ -3,12 +3,6 @@ from zope.interface import implements
 from nva.universalsearch.interfaces import IUniversalSearchConfig
 
 
-SYSTEM = "intranet"
-MULTIPLESITES = True
-FACETEDFIELDS = ["system", "portal_type", "review_state"]
-ROOTS = ["/bghwintranet",] 
-
-
 class UniversalSearchConfig(Persistent):
     implements(IUniversalSearchConfig)
 

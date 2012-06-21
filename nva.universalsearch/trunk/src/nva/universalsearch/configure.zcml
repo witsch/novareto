@@ -7,10 +7,9 @@
     i18n_domain="nva.universalsearch">
 
   <five:registerPackage package="." />
-  <include file="profiles.zcml" /> 
-<!--
-  <include package=".browser" />
--->
+
+  <include file="profiles.zcml" />
+
   <cmf:registerDirectory name="uni_facet_search" />
 
   <adapter name="system" factory=".attributes.system" />
@@ -29,7 +28,7 @@
   <browser:page
       name="solr-active"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".browser.active.SolrActiveView"
+      class=".browser.SolrActiveView"
       permission="cmf.ManagePortal" />
 
   <utility

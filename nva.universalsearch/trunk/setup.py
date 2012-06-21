@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-This module contains the tool of nva.universalsearch
-"""
-import os
+
+from os.path import join, dirname
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    return open(join(dirname(__file__), *rnames)).read()
 
 version = '1.0'
 
@@ -35,9 +34,8 @@ long_description = (
 
 setup(name='nva.universalsearch',
       version=version,
-      description="",
+      description="Search multiple Plone sites via Solr",
       long_description=long_description,
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         'Framework :: Plone',
         'Intended Audience :: Developers',
@@ -51,7 +49,7 @@ setup(name='nva.universalsearch',
       license='GPL',
       packages=find_packages('src'),
       package_dir={'': 'src'},
-      namespace_packages=['nva', ],
+      namespace_packages=['nva'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[

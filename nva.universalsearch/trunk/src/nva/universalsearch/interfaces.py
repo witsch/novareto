@@ -1,11 +1,6 @@
 from zope.interface import Interface
 from zope.schema import TextLine, Choice, List
-from collective.indexing.interfaces import IIndexQueueProcessor
 from nva.universalsearch import MessageFactory as _
-
-
-class IUniversalSearchQueueProcessor(IIndexQueueProcessor):
-    pass
 
 
 class IUniversalSearchSchema(Interface):
