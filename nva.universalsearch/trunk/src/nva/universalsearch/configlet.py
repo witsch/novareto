@@ -16,7 +16,7 @@ class ControlPanelAdapter(SchemaAdapterBase):
 
     def getSiteURL(self):
         util = queryUtility(IUniversalSearchConfig)
-        return getattr(util, 'site_url', '')
+        return getattr(util, 'site_url', self.context.absolute_url())
 
     def setSiteURL(self, value):
         util = queryUtility(IUniversalSearchConfig)
