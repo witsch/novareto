@@ -20,6 +20,7 @@ from nva.cart import IDiscountedCartItem
 from nva.plone.cart import utils
 from nva.plone.cart import ISessionCart
 from nva.plone.cart import IOrder, IOrderFolder, OrderFolder, Order
+from nva.plone.cart.mnrtest import mnrtest
 
 from nva.plone.cart import ploneCartFactory as _
 
@@ -173,6 +174,14 @@ class Checkout(CartNamespace, grok.Form):
                                                 widget_title=u'Mitgliedsnummer', 
                                                 errors=_(u'Bitte Mitgliedsnummer prüfen'))
             errors.append(err) 
+
+        if not self.context.is_member and data.get('mitgliedsnummer'):
+            if not mnrtest(data.get('mitgliedsnummer').replace('-','')):
+                mnr = self.widgets.get('mitgliedsnummer')
+                mnr._error = err = WidgetInputError(field_name='mitgliedsnummer',
+                                                    widget_title=u'Mitgliedsnummer',
+                                                    errors=_(u'Ungültiges Format der Mitgliedsnummer'))
+                errors.append(err)
 
         if data.get('lieferadresse'):
 

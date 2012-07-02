@@ -14,7 +14,7 @@
      <p i18n:translate=""> Ihre Bestellung ist bei uns eingegangen und wird bearbeitet. In Kuerze erhalten Sie zudem eine E-Mail mit Ihrer Bestellung an die von Ihnen angegebene Adresse. </p>
      <br>
 
-     <span i18n:translate=""> Um Ihre die Bestellung auszudrucken klicken Sie bitte auf das PDF - Symbol. </span>
+     <span i18n:translate=""> Um Ihre Bestellung auszudrucken, klicken Sie bitte auf das PDF - Symbol. </span>
        <a href="pdf" tal:attributes="href string:/shop/medien/medienkatalog/++cart++/pdf?id=${request/id}"><img src="" title="" tal:attributes="src string:pdf.png; title string:Bestellung ausdrucken"/></a>
 
      <p>Bei Fragen wenden Sie sich bitte an die Medienverwaltung (<a href="mailto:medien@bghw.de">

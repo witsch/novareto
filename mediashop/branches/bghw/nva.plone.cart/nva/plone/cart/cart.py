@@ -98,6 +98,7 @@ class Order(Item):
         for item in ivalues:
             bestellung = {}
             bestellung['Anzahl']  = item.quantity
+            bestellung['Artikelnummer'] = item.code
             bestellung['Artikel'] = item.title
             bestellung['PseudoEan'] = item.ean_code
             bestellung['Preis']   = item.total_price(self.is_member)
