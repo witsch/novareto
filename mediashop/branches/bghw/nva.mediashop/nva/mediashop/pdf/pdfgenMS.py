@@ -130,8 +130,8 @@ def createpdf (filename, daten):
         c.setFont(courier, 10) #Proportionalschrift
 
         #Noch steht nicht fest welcher Barcode verwendet werden soll.
-        bc = Code128(value = artikel['PseudoEan'].replace(' ',''), barWidth = 1.0, barHeight = 12, lquiet = 5, rquiet = 5)
-        #bc = Standard39("123", barWidth = 1.0, barHeight = 12)
+        #bc = Code128(value = artikel['PseudoEan'].replace(' ',''), barWidth = 1.0, barHeight = 12, lquiet = 5, rquiet = 5)
+        bc = Standard39(artikel['Artikelnummer'], barWidth = 1.0, barHeight = 12)
 
         bc.drawOn(c, 2*cm, (16.6-offset)*cm)
         c.drawString(13.5*cm, (16.7-offset)*cm, str(artikel['Anzahl']).rjust(2))
