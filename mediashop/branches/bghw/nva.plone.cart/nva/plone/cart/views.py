@@ -265,19 +265,19 @@ class Checkout(CartNamespace, grok.Form):
                     _(u"Der Bestellvorgang ist bei uns eingegangen."))
         self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++/thanks?id=%s' % cid)
 
-    @form.action(_(u'Fax-Bestellung'), validator=validate_checkout)
-    def handle_print(self, action, data):
-        plone = getToolByName(self.context, 'portal_url').getPortalObject()
-        cid = str(uuid.uuid4())
-        cart = copy.deepcopy(self.context.cart)
-        shipping_information = ShippingInformation(id='shipping_information')
-        utils.writeChanges(shipping_information, self.form_fields, data)
-        order = Order(cart, shipping_information, id=cid)
-        order.total_price = self.context.handler.getTotalPrice()
-        order.is_member = bool(self.context.is_member)
-        plone[TEMPORDERS][cid] = order
-        self.context.cart.clear()        
-        self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++/print?id=%s' % cid)
+    #@form.action(_(u'Fax-Bestellung'), validator=validate_checkout)
+    #def handle_print(self, action, data):
+    #    plone = getToolByName(self.context, 'portal_url').getPortalObject()
+    #    cid = str(uuid.uuid4())
+    #    cart = copy.deepcopy(self.context.cart)
+    #    shipping_information = ShippingInformation(id='shipping_information')
+    #    utils.writeChanges(shipping_information, self.form_fields, data)
+    #    order = Order(cart, shipping_information, id=cid)
+    #    order.total_price = self.context.handler.getTotalPrice()
+    #    order.is_member = bool(self.context.is_member)
+    #    plone[TEMPORDERS][cid] = order
+    #    self.context.cart.clear()        
+    #    self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++/print?id=%s' % cid)
 
     def renderField(self, *args):
         label = required = description = error = input = "" 
