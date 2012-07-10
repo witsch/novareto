@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.formworker">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="myFormWorker"
+      class=".formworkerview.formworkerView"
+      allowed_interface=".formworkerview.IformworkerView"
+      permission="zope.Public"
+      />
+
+
+</configure>
