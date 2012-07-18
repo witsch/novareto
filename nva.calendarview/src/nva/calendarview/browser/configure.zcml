@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.calendarview">
+
+  <include package="plone.app.contentmenu" />
+
+  <browser:page
+      name="nva_calendarview"
+      for="Products.ATContentTypes.interface.IATFolder"
+      class=".calendarview.CalendarView"
+      permission="zope2.View"
+      />
+
+  <browser:menuItem
+      for="Products.ATContentTypes.interface.IATFolder"
+      menu="plone_displayviews"
+      title="Calendar View"
+      action="@@nva_calendarview"
+      description="A calendar by year"
+      />
+
+</configure>
