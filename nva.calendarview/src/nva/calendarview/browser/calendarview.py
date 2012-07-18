@@ -2,6 +2,7 @@
 
 import datetime
 import DateTime
+import calendar
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
@@ -29,6 +30,10 @@ class CalendarView(BrowserView):
             review_state='published',
             path={'query': folder_path, 'depth': 1}):
             yield brain
+
+    @staticmethod
+    def get_month_name(month):
+        return calendar.month_name[month]
 
     def sort_time(self, year, today):
         events = {}
