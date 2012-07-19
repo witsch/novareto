@@ -34,7 +34,8 @@
 		    tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;">
 
 	  <h3 i18n:translate=""
-	      i18n:domain="plonelocales"
+        i18n:domain="plonelocales"
+        tal:condition="python: view.events[month]"
 	      tal:content="python: 'month_%s' % view.get_month_name(month).lower()[:3]" />
 
 	  <metal:block tal:repeat="event python:view.events[month]">
@@ -46,48 +47,54 @@
 			   resultObject result/getObject;
 			   creator result/Creator;
 			   resulturl resultObject/absolute_url;">
-                <h4>
-                    <a href="/view"
-                       tal:attributes="href resulturl"
-                       tal:content="result/pretty_title_or_id">
-                        Event headline
-                    </a>
-                </h4>
-		<p>
-		  <a href="#"
-		     tal:attributes="href string:$resulturl/ics_view"
-		     title="Download this event in iCal format"
-		     i18n:attributes="title title_add_to_ical;">
-		    <img tal:replace="structure portal/icon_export_ical.png"
-			 src="" alt="" />
-		  <span i18n:translate="label_add_to_ical">iCal</span></a>
-		</p>
-                <div class="newsContent">
-                    <p tal:content="result/Description">
-                        Description
-                    </p>
-                    <ul class="newsAbout">
-                        <li tal:define="subject resultObject/Subject"
-                            tal:condition="subject">
-			  <span tal:replace="python:modules['string'].join(subject, ' ')">Conference</span>
-                        </li>
-			<li tal:content="status" />
-                        <li>
-			  <span tal:replace="python:toLocalizedTime(resultObject.start(), long_format=1)">Start Date Time</span>
-			  <span i18n:translate="event_and">to</span>
-			  <span tal:replace="python:toLocalizedTime(resultObject.end(), long_format=1)">End Date Time</span>.
-                        </li>
-                    </ul>
-		    
-                    <ul class="newsFooter">
-		      <li>
-			<a href="/view" tal:attributes="href resulturl" i18n:translate="read_more">
-			  <span class="hiddenStructure"><span tal:replace="result/pretty_title_or_id" /> - </span>
-			  <span i18n:translate="read_more">Read More&hellip;</span>
-			</a>
-		      </li>
+      <h4>
+        <a href="/view"
+           tal:condition="python: status == 'current'"
+           tal:attributes="href resulturl"
+           tal:content="string: heute: ${result/pretty_title_or_id}">
+           Event headline
+        </a>
+        <a href="/view"
+           tal:condition="python: status != 'current'"
+           tal:attributes="href resulturl"
+           tal:content="python:toLocalizedTime(resultObject.start()) + ': ' + result.Title">
+           Event headline
+         </a>
+         <span class="discreet">( 
+        <a class="discreet" href="#"
+          tal:attributes="href string:$resulturl/ics_view"
+          title="Download this event in iCal format"
+          i18n:attributes="title title_add_to_ical;">
+           <img tal:replace="structure portal/icon_export_ical.png"
+           src="" alt="" />
+           <span i18n:translate="label_add_to_ical">iCal</span>
+       </a>)</span>
+      </h4>
 
-                    </ul>
+    <div class="newsDescription">
+      <p tal:content="result/Description">
+        Description
+      </p>  
+    </div>              
+
+    <div class="newsContent">
+      <ul class="newsAbout">
+        <li tal:define="subject resultObject/Subject"
+            tal:condition="subject">
+            <span i18n:translate="">what: </span>
+			      <span tal:content="python:modules['string'].join(subject, ' ')">Conference</span>
+        </li>
+        <li tal:condition="result/location">
+          <span i18n:translate="">where: </span><span tal:content="result/location" />
+        </li>
+        <li>
+          <span i18n:translate="">when: </span>
+			    <span tal:replace="python:toLocalizedTime(resultObject.start(), long_format=1)">Start Date Time</span>
+			    <span i18n:translate="event_and">to</span>
+			    <span tal:replace="python:toLocalizedTime(resultObject.end(), long_format=1)">End Date Time</span>.
+        </li>
+      </ul>
+		    
                 </div>
             </div>
         </metal:block>

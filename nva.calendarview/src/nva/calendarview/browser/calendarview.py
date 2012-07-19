@@ -51,11 +51,13 @@ class CalendarView(BrowserView):
             events_list = events.setdefault(month, [])
             if event_start > today:
                 struct = ('upcoming', event)
+                events_list.append(struct)
             elif event_end < today:
                 struct = ('finished', event)
+                # dont write it in event list because its finished
             elif event_start <= today <= event_end:
                 struct = ('current', event)
-            events_list.append(struct)
+                events_list.append(struct)
         return events
 
     def update(self):
