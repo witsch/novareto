@@ -19,8 +19,16 @@ class MyVisitorActionsViewlet(ViewletBase):
 
         self.context_state = getMultiAdapter((self.context, self.request),
                                              name=u'plone_context_state')
-        self.hasRightRoles = True
         self.sent = self.context.mailsent
+
+    def hasRightRoles(self):
+        pm = getToolByName(self.context, 'portal_membership')
+        userRoles = pm.getAuthenticatedMember().getRoles()
+        rightRoles = ['Manager', 'Owner', 'Editor']
+        compare = set(userRoles) & set(rightRoles)
+        if compare:
+            return True
+        return False
 
 
     def toLocalizedTime(self, time, long_format=None, time_only = None):

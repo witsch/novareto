@@ -9,10 +9,20 @@
       <fieldset>
         <legend i18n:translate="">Ueber den Besuchstermin benachrichtigen</legend>
         <form action = "formworker_view" tal:attributes="action python: view.context.absolute_url()+'/formworker_view'">
-                <input name="button.senden" tal:condition="not: view/sent" class="standalone" type="submit" value="Termin senden">
-                <input name="button.cancel" tal:condition="view/sent" class="standalone" type="submit" value="Termin zurueckziehen">
-              </form>
-            </fieldset>
+          <input name="button.senden" 
+                 tal:condition="not: view/sent" 
+                 class="standalone" 
+                 type="submit" 
+                 value="Termin senden"
+                 i18n:attributes="value;">
+          <input name="button.cancel" 
+                 tal:condition="view/sent" 
+                 class="standalone" 
+                 type="submit" 
+                 value="Termin zurueckziehen"
+                 i18n:attributes="value;">
+        </form>
+      </fieldset>
 
     </div>
 

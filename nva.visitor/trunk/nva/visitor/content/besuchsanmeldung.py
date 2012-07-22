@@ -282,7 +282,17 @@ class Besuchsanmeldung(base.ATCTContent):
         mailtuple=tuple(results)
         return DisplayList(mailtuple)
 
+    def Besuchsbeginn(self):
+        """Methode zum indizieren des Besuchsbeginns"""
+        return self.getStartdate()
 
+    def Besuchsende(self):
+        """Methode zum indizieren des Besuchsendes"""
+        return self.getEnddate()
+
+    def Ort(self):
+        """Methode zum indizieren des besuchten Ortes"""
+        return self.getMylocation()
 
 
 atapi.registerType(Besuchsanmeldung, PROJECTNAME)

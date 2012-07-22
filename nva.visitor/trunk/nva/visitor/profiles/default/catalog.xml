@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="Besuchsbeginn" meta_type="DateIndex">
+    <indexed_attr value="Besuchsbeginn"/>
+  </index>
+  <index name="Besuchsende" meta_type="DateIndex">
+    <indexed_attr value="Besuchsende"/>
+  </index>
+  <index name="Ort" meta_type="FieldIndex">
+    <indexed_attr value="Ort"/>
+  </index>
+  <column value="Besuchsbeginn"/>
+  <column value="Besuchsende"/>
+  <column value="Ort"/>
+</object>

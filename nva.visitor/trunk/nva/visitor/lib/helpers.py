@@ -15,6 +15,7 @@ from email.MIMEImage import MIMEImage
 from email.MIMEText import MIMEText
 from os import system
 from App.config import getConfiguration
+from nva.visitor import visitorMessageFactory as _
 
 config = getConfiguration()
 try:

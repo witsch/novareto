@@ -1,0 +1,209 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-07-22 17:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: nva.visitor\n"
+
+#: ./content/besuchsanmeldung.py:77
+#: ./interfaces/besuchsanmeldung.py:44
+msgid "Ansprechpartner"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:66
+#: ./interfaces/besuchsanmeldung.py:40
+msgid "Auswahl der Art der Geschaeftsbeziehung"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:54
+#: ./interfaces/besuchsanmeldung.py:34
+msgid "Auswahl der Branche / Aktivitaeten des Besuchers"
+msgstr ""
+
+#: ./profiles/default/types/Besuchsanmeldung.xml
+msgid "Besuchsanmeldung"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:101
+#: ./interfaces/besuchsanmeldung.py:62
+msgid "Besuchsbeginn (Termin)"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:114
+#: ./interfaces/besuchsanmeldung.py:56
+msgid "Besuchsende (Termin)"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:53
+#: ./interfaces/besuchsanmeldung.py:32
+msgid "Branche"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:29
+#: ./interfaces/besuchsanmeldung.py:20
+msgid "Firma"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:30
+#: ./interfaces/besuchsanmeldung.py:22
+msgid "Firmenname des Besuchers"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:89
+#: ./interfaces/besuchsanmeldung.py:50
+msgid "Funktion"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:90
+#: ./interfaces/besuchsanmeldung.py:52
+msgid "Funktion des Besuchers / Ansprechpartners"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:65
+#: ./interfaces/besuchsanmeldung.py:38
+msgid "Geschaeftsbeziehung"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:149
+#: ./interfaces/besuchsanmeldung.py:80
+msgid "Grund"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:150
+#: ./interfaces/besuchsanmeldung.py:82
+msgid "Grund des Besuches"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:42
+#: ./interfaces/besuchsanmeldung.py:28
+msgid "Herkunft des Besuchers (Ort/Land)"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:205
+#: ./interfaces/besuchsanmeldung.py:112
+msgid "Hier koennen Empfaenger ausgewaehlt werden, die per E-Mail ueber den Termin benachrichtigt werden sollen. Mitglieder der Geschaeftsfuehrung und die Pforte werden immer informiert."
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:182
+#: ./interfaces/besuchsanmeldung.py:98
+msgid "Kontakt Telefon"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:172
+#: ./interfaces/besuchsanmeldung.py:92
+msgid "Kontaktperson"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:173
+#: ./interfaces/besuchsanmeldung.py:94
+msgid "Kontaktperson bei Pfister"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:162
+#: ./interfaces/besuchsanmeldung.py:88
+msgid "Kurze Darstellung der Gespraechsthemen"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:128
+#: ./interfaces/besuchsanmeldung.py:70
+msgid "Kurze Darstellung des zeitlichen Ablaufs."
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:214
+#: ./interfaces/besuchsanmeldung.py:14
+msgid "Mailinformation"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:78
+#: ./interfaces/besuchsanmeldung.py:46
+msgid "Name des Besuchers / Ansprechpartners"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:194
+#: ./interfaces/besuchsanmeldung.py:106
+msgid "Namen der Gespraechsteilnehmer"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:137
+#: ./interfaces/besuchsanmeldung.py:74
+msgid "Ort"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:138
+#: ./interfaces/besuchsanmeldung.py:76
+msgid "Ort des Besuches"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:41
+#: ./interfaces/besuchsanmeldung.py:26
+msgid "Ort/Land"
+msgstr ""
+
+#: ./profiles/default/types/Besuchsanmeldung.xml
+msgid "Spezielle Form eines Termins zur Anmeldung von Besuchern im Intranet."
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:193
+#: ./interfaces/besuchsanmeldung.py:104
+msgid "Teilnehmer am Gespraech"
+msgstr ""
+
+#: ./browser/visitor_actions.pt:12
+msgid "Termin senden"
+msgstr ""
+
+#: ./browser/visitor_actions.pt:18
+msgid "Termin zurueckziehen"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:161
+#: ./interfaces/besuchsanmeldung.py:86
+msgid "Themen"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:115
+#: ./interfaces/besuchsanmeldung.py:58
+msgid "Tragen Sie das vereinbarte Besuchsende ein oder klicken Sie auf das Kalender-Icon und treffen eine Auswahl."
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:102
+#: ./interfaces/besuchsanmeldung.py:64
+msgid "Tragen Sie den vereinbarten Bessuchsbeginn ein oder klicken Sie auf das Kalender-Icon und treffen eine Auswahl."
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:183
+#: ./interfaces/besuchsanmeldung.py:100
+msgid "Tragen Sie hier eine Telefonnummer ein, unter der man weitere Informationen anfordern oder buchen kann."
+msgstr ""
+
+#: ./browser/visitor_actions.pt:10
+msgid "Ueber den Besuchstermin benachrichtigen"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:215
+#: ./interfaces/besuchsanmeldung.py:16
+msgid "Ueber die Besuchsanmeldung wurde per Mail informiert."
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:127
+#: ./interfaces/besuchsanmeldung.py:68
+msgid "zeitlicher Ablauf des Besuches"
+msgstr ""
+
+#: ./content/besuchsanmeldung.py:204
+#: ./interfaces/besuchsanmeldung.py:110
+msgid "zusaetzlich per E-Mail informieren"
+msgstr ""
+
