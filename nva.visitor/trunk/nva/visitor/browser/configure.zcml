@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.visitor">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="formworker_view"
+      class=".formworkerview.formworkerView"
+      allowed_interface=".formworkerview.IformworkerView"
+      permission="zope2.View"
+      />
+
+  <browser:viewlet
+      for="nva.visitor.interfaces.IBesuchsanmeldung"
+      name="visitor.visitoractions"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+      class=".viewlets.MyVisitorActionsViewlet"
+      permission="zope2.View"
+      />
+
+</configure>

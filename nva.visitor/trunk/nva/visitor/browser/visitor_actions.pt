@@ -1,0 +1,19 @@
+<div tal:omit-tag=""
+     tal:condition="view/hasRightRoles"
+     i18n:domain="nva.visitor">
+
+    <div class="visualClear"><!-- --></div>
+
+    <div class="visitoractions">
+      
+      <fieldset>
+        <legend i18n:translate="">Ueber den Besuchstermin benachrichtigen</legend>
+        <form action = "formworker_view" tal:attributes="action python: view.context.absolute_url()+'/formworker_view'">
+                <input name="button.senden" tal:condition="not: view/sent" class="standalone" type="submit" value="Termin senden">
+                <input name="button.cancel" tal:condition="view/sent" class="standalone" type="submit" value="Termin zurueckziehen">
+              </form>
+            </fieldset>
+
+    </div>
+
+</div>
