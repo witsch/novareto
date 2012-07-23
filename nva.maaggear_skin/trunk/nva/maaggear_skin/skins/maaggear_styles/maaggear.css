@@ -1,0 +1,332 @@
+/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+
+/* --- ---=[ BASE ]= --- --- */
+
+/* --- ---=[ CENTERING ]=--- --- */
+
+body {
+padding-top: 0px !important;
+text-align: center;
+background-color: #B8B8BC;
+
+}
+
+#visual-portal-wrapper {
+margin-left: auto !important;
+margin-right: auto !important;
+padding: 0 ;
+width: 943px !important;
+text-align: left;
+background-color: white;
+border: 1px solid #000;
+}
+
+*html #visual-portal-wrapper {
+width: 943px !important;
+width /**/: 923px !important;
+}
+
+body.documentContent {
+text-align: left !important;
+}
+
+
+/* --- ---=[ TOP ]=--- --- */
+
+#portal-top {
+position:relative;
+}
+
+*html #portal-top {
+height: 1%;
+}
+
+
+/* --- ---=[ logo ]=--- --- */
+
+#portal-logo {
+margin-top: 0px !important;
+margin-left: 10px;
+margin-bottom: 73px;
+}
+
+#portal-logo img {
+margin: 0px;
+}
+
+/* --- ---=[ siteactions ]=--- --- */
+
+
+#portal-siteactions li a,
+#portal-siteactions li a:hover {
+color: #676767 !important;
+background: none;
+border: 0;
+}
+
+/* --- ---=[ globalnav ]=--- --- */
+
+#portal-globalnav {
+height:26px;
+padding-left:10px;
+font-size: &dtml-tabFontSize;;
+line-height:20px;
+background: #fff url(global_bg.gif) repeat-x;
+white-space:nowrap !important;
+border-bottom: 5px solid #fff;
+}
+
+*html #portal-globalnav {
+height /**/:/**/26px;
+}
+
+#portal-globalnav li a {
+color: #fff;
+}
+
+#portal-globalnav li.selected a,
+#portal-globalnav li a,
+#portal-globalnav li a:hover {
+float:left;
+margin-left: 2px;
+xcolor: #fff !important;
+text-transform:none;
+border:none;
+white-space:nowrap !important;
+border-top: 2px solid #678AA5;
+}
+
+
+*html #portal-globalnav li.selected a,
+*html #portal-globalnav li a,
+*html #portal-globalnav li a:hover {
+float /**/:/**/none;
+}
+
+#portal-globalnav li a:hover,
+#portal-globalnav li.selected a,
+#portal-globalnav li.selected a:hover {
+background-color: #fff !important;
+color: &dtml-tabFontColorHover; !important;
+padding-bottom: 4px;
+}
+
+*html #portal-globalnav li a,
+*html #portal-globalnav li a:hover,
+*html #portal-globalnav li.selected a,
+*html #portal-globalnav li.selected a:hover {
+padding-top /**/:0;
+padding-bottom /**/:0;
+line-height /**/:26px;
+}
+
+/* --- ---=[ personaltools ]=--- --- */
+
+#portal-personaltools {
+float:right;
+background: none;
+border: none;
+margin-top: -4px;
+padding-right: 6px;
+}
+
+#portal-personaltools li,
+#portal-personaltools li a {
+color: #676767 !important;
+}
+
+/* --- ---=[ breadcrumbs ]=--- --- */
+
+#portal-breadcrumbs {
+color: #676767 !important;
+text-transform: none;
+border: none;
+margin-top: -4px;
+padding-left: 1em;
+}
+
+#portal-breadcrumbs a {
+color: #676767 !important;
+}
+
+/* --- ---=[ searchbox ]=--- --- */
+
+#portal-searchbox {
+display: none;
+position: absolute;
+top: 101px;
+right: 16px;
+padding-right: 0;
+width: 190px;
+height: 30px;
+}
+
+
+.searchSection {
+display: none;
+}
+
+/* --- ---=[ CONTENT ]=--- --- */
+
+#portal-columns {
+margin-top: 2px;
+}
+
+#content {
+padding-top: 0 !important;
+padding-right: 0 !important;
+}
+
+*html .error {
+padding-left: 0.5em;
+padding-right: 0.5em;
+}
+
+#portal-columns {
+height: 1%;
+}
+
+#portal-column-content,
+#portal-column-one,
+#portal-column-two {
+border-top: 1px solid #e0e9f0;
+}
+
+#portal-column-one .visualPadding,
+#portal-column-two .visualPadding {
+padding: 0;
+padding-top: 0px;
+}
+
+#portal-column-one,
+#portal-column-two {
+background-color: #e0e9f0;
+}
+
+.documentContent p a,
+.documentContent li a {
+border-bottom: 1px solid #006699 !important;
+}
+
+.documentContent .documentActions a {
+border: none !important;
+}
+
+*html .contentActions li {
+padding-left /**/:/**/0.5em !important;
+padding-right /**/:/**/0.5em !important;
+}
+
+/* --- ---=[ fixes contentViews border and positioning in IE5 ]=--- --- */
+*html .contentViews li a {
+height /**/:/**/1em;
+margin-bottom /**/:/**/-4px;
+}
+
+#login_form {
+padding-top: 1em;
+background-color: #E5EEF6;
+}
+
+#login_form fieldset {
+border: none;
+}
+
+#login_form legend {
+display: none;
+}
+
+/* --- ---=[ PORTLET ]=--- --- */
+.portlet {
+margin-top: 4px;
+background: #e0e9f0;
+border-bottom: none;
+}
+
+.portletHeader {
+background: transparent url(header_bg.gif) repeat-x left top;
+border: none;
+line-height: 1.8em;
+height: 21px;
+color: #fff;
+font-weight: bold;
+}
+
+.portletHeader a {
+color: #fff;
+font-weight: bold;
+}
+
+.portletItem,
+.portletItem even,
+.portletItem odd {
+border: none;
+background: none;
+color: #000 !important;
+}
+
+.portletItem a {
+color: #000 !important;
+}
+
+.portletItem a:hover {
+color: #ef8e42 !important;
+}
+
+.portletItem .tile {
+background: transparent url(arrow_right.gif) no-repeat left 4px;
+padding-left: 10px;
+}
+
+.portletFooter {
+border-style: dotted none none;
+background: #e0e9f0;
+}
+
+/* --- ---=[ CALENDAR ]=--- --- */
+.portletCalendar dt {
+font-weight: bold;
+}
+
+/* --- ---=[ NAVIGATION ]=--- --- */
+dd.portletItem .navTreeItem a,
+dd.portletItem .navTreeItem a:hover,
+dd.portletItem .navTreeItem .navTreeCurrentItem {
+background: transparent url(arrow_right.gif) no-repeat left 7px;
+padding-left: 10px;
+border: none !important;
+}
+
+dd.portletItem .navTreeItem a {
+color: #000 !important;
+}
+
+dd.portletItem .navTreeItem a:hover,
+dd.portletItem .navTreeItem .navTreeCurrentItem {
+color: #EF8E42 !important;
+}
+
+
+/* --- ---=[ FOOTER ]=--- --- */
+
+#portal-footer {
+background: #e0e9f0;
+margin: 2px 0;
+border: 0;
+height: 16px;
+}
+
+#portal-siteactions {
+float: none;
+}
+
+#portal-siteactions li a {
+color: black !important;
+}
+
+#portal-siteactions li a:hover {
+color: black !important;
+}
+

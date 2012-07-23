@@ -1,0 +1,13 @@
+/* --- ---=[ Default Picture ]=--- --- */
+#portal-header {
+background: #fff url(MAAG_default.jpg) right top no-repeat;
+}
+
+
+/* ---=[ Picture for ID - news ]=--- */
+.section-news #portal-header {
+background: #fff url(MAAG_news.jpg) right top no-repeat;
+}
+
+
+

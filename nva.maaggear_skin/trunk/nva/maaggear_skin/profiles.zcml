@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="nva.maaggear_skin">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Maag Gear Skin"
+      directory="profiles/default"
+      description='Extension profile for the "Maag Gear Skin" Plone theme.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="nva.maaggear_skin.various"
+      title="Maag Gear Skin: miscellaneous import steps"
+      description="Various import steps that are not handled by GS import/export handlers."
+      handler="nva.maaggear_skin.setuphandlers.setupVarious">
+    <depends name="skins"/>
+  </genericsetup:importStep>
+
+</configure>
