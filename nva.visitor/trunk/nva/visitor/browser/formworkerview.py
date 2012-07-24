@@ -81,11 +81,15 @@ class formworkerView(BrowserView):
 
         firma=self.context.getFirma()
         ortland=self.context.getOrtland()
-        brancheakt=self.context.getBrancheaktivitaeten()
-        geschaeft=self.context.getGbeziehung()
         apart=self.context.getAnsprechpartner()
         grund=self.context.getGrund()
         gespraecht=str(self.context.getGespraechsteilnehmer()).replace('\x0D', ',').replace('\x0A', ' ')
+
+        #Unterschied zwischen Besucher und Bewerber(1)
+        if self.context.portal_type() == "Besuchsanmeldung":
+            brancheakt=self.context.getBrancheaktivitaeten()
+            geschaeft=self.context.getGbeziehung()
+            
 
         msg = u'Zeit: von %s bis %s\\n' %(startdate,enddate)
         msg = msg + u'  Ort: %s\\n' %location
@@ -93,14 +97,21 @@ class formworkerView(BrowserView):
         msg = msg + u'  Link zum Besuchstermin im Intranet: %s\\n\\n' %url
         msg = msg + u'  Firma des Besuchers: %s\\n' %firma
         msg = msg + u'  Ort/Land des Besuchers: %s\\n' %ortland
-        msg = msg + u'  Branche/Aktivitäten: %s\\n' %brancheakt
-        msg = msg + u'  Geschäftsbeziehung: %s\\n' %geschaeft
         msg = msg + u'  Ansprechpartner: %s\\n' %apart
         msg = msg + u'  Grund des Besuches: %s\\n' %grund
+
+        #Unterschied zwischen Besucher und Bewerber(2)
+        if self.context.portal_type == "Besuchsanmeldung":
+            msg = msg + u'  Branche/Aktivitäten: %s\\n' %brancheakt
+            msg = msg + u'  Geschäftsbeziehung: %s\\n' %geschaeft
+
         if gespraecht is not None:
                 msg = msg + u'  Gesprächsteilnehmer: %s\\n' %gespraecht
 
-        a=self.context.setExpirationDate(self.context.getEnddate() + 1)
+        #Unterschied zwischen Besucher und Bewerber(3)
+        if self.context.portal_type == "Besuchsanmeldung":
+            a=self.context.setExpirationDate(self.context.getEnddate() + 1)
+
         subject=' %s' %title
         if sender != '':
                 if vliste != []:
@@ -138,11 +149,14 @@ class formworkerView(BrowserView):
 
         firma=self.context.getFirma()
         ortland=self.context.getOrtland()
-        brancheakt=self.context.getBrancheaktivitaeten()
-        geschaeft=self.context.getGbeziehung()
         apart=self.context.getAnsprechpartner()
         grund=self.context.getGrund()
         gespraecht=str(self.context.getGespraechsteilnehmer()).replace('\x0D', ',').replace('\x0A', ' ')
+
+        #Unterschied zwischen Besucher und Bewerber(1)
+        if self.context.portal_type() == "Besuchsanmeldung":
+            brancheakt=self.context.getBrancheaktivitaeten()
+            geschaeft=self.context.getGbeziehung()
 
         msg = u'Zeit: von %s bis %s\\n' %(startdate,enddate)
         msg = msg + u'  Ort: %s\\n' %location
@@ -150,10 +164,14 @@ class formworkerView(BrowserView):
         msg = msg + u'  Link zum Besuchstermin im Intranet: %s\\n\\n' %url
         msg = msg + u'  Firma des Besuchers: %s\\n' %firma
         msg = msg + u'  Ort/Land des Besuchers: %s\\n' %ortland
-        msg = msg + u'  Branche/Aktivitäten: %s\\n' %brancheakt
-        msg = msg + u'  Geschäftsbeziehung: %s\\n' %geschaeft
         msg = msg + u'  Ansprechpartner: %s\\n' %apart
         msg = msg + u'  Grund des Besuches: %s\\n' %grund
+
+        #Unterschied zwischen Besucher und Bewerber(2)
+        if self.context.portal_type == "Besuchsanmeldung":
+            msg = msg + u'  Branche/Aktivitäten: %s\\n' %brancheakt
+            msg = msg + u'  Geschäftsbeziehung: %s\\n' %geschaeft
+
         if gespraecht is not None:
                 msg = msg + u'  Gesprächsteilnehmer: %s\\n' %gespraecht
 

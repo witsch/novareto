@@ -6,6 +6,12 @@
   <!-- configure your content components here -->
   
   <!-- -*- extra stuff goes here -*- -->
+  <class class=".bewerber.Bewerber">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IBewerber"
+        />
+  </class>
   <class class=".besuchsanmeldung.Besuchsanmeldung">
     <require
         permission="zope2.View"

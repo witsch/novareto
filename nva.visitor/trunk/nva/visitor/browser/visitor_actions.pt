@@ -1,5 +1,5 @@
 <div tal:omit-tag=""
-     tal:condition="view/hasRightRoles"
+     tal:condition="python: view.hasRightRoles() and view.hasRightTypes()"
      i18n:domain="nva.visitor">
 
     <div class="visualClear"><!-- --></div>

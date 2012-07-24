@@ -7,6 +7,7 @@ PROJECTNAME = 'nva.visitor'
 
 ADD_PERMISSIONS = {
     # -*- extra stuff goes here -*-
+    'Bewerber': 'nva.visitor: Add Bewerber',
     'Besuchsanmeldung': 'nva.visitor: Add Besuchsanmeldung',
 }
 

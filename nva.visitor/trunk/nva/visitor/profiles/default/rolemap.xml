@@ -2,6 +2,10 @@
 <rolemap>
   <permissions>
     <!-- -*- extra stuff goes here -*- -->
+    <permission name="nva.visitor: Add Bewerber" acquire="False">
+      <role name="Manager" />
+      <role name="Contributor" />
+    </permission>
     <permission name="nva.visitor: Add Besuchsanmeldung" acquire="False">
       <role name="Manager" />
       <role name="Contributor" />

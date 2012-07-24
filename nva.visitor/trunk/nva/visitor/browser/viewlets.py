@@ -12,14 +12,17 @@ class MyVisitorActionsViewlet(ViewletBase):
     def update(self):
         super(MyVisitorActionsViewlet, self).update()
     
-        mytype = False
-        if self.context.portal_type == "Besuchsanmeldung":
-            mytype = True
-        self.hasRightType = mytype
-
         self.context_state = getMultiAdapter((self.context, self.request),
                                              name=u'plone_context_state')
         self.sent = self.context.mailsent
+
+
+    def hasRightTypes(self):
+        mytype = False
+        if self.context.portal_type in ["Bewerber", "Besuchsanmeldung"]:
+            mytype = True
+        return mytype
+
 
     def hasRightRoles(self):
         pm = getToolByName(self.context, 'portal_membership')
