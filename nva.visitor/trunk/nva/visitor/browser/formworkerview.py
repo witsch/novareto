@@ -86,7 +86,7 @@ class formworkerView(BrowserView):
         gespraecht=str(self.context.getGespraechsteilnehmer()).replace('\x0D', ',').replace('\x0A', ' ')
 
         #Unterschied zwischen Besucher und Bewerber(1)
-        if self.context.portal_type() == "Besuchsanmeldung":
+        if self.context.portal_type == "Besuchsanmeldung":
             brancheakt=self.context.getBrancheaktivitaeten()
             geschaeft=self.context.getGbeziehung()
             
@@ -154,7 +154,7 @@ class formworkerView(BrowserView):
         gespraecht=str(self.context.getGespraechsteilnehmer()).replace('\x0D', ',').replace('\x0A', ' ')
 
         #Unterschied zwischen Besucher und Bewerber(1)
-        if self.context.portal_type() == "Besuchsanmeldung":
+        if self.context.portal_type == "Besuchsanmeldung":
             brancheakt=self.context.getBrancheaktivitaeten()
             geschaeft=self.context.getGbeziehung()
 

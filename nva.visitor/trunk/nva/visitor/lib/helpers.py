@@ -47,6 +47,18 @@ def ldapsearch(sfilter=None):
     return res
 
 
+def usermail(name):
+    """sucht die Mailadresse eines Benutzers aus LDAP"""
+    sfilter = "(sn=%s)" %name
+    res = ldapsearch(sfilter)
+    ldapmail = 'intranetmaster@pfister.de'
+    if res:
+        for entry in res:
+            if entry[1].has_key('mail'):
+                ldapmail = entry[1].get('mail')[0]
+    return ldapmail
+
+
 def sMail(to,sender,subject,text,url):
     """SEND A MAIL"""
 
