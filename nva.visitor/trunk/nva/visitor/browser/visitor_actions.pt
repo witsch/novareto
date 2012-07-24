@@ -8,6 +8,8 @@
       
       <fieldset>
         <legend i18n:translate="">Ueber den Besuchstermin benachrichtigen</legend>
+        <p i18n:translate=""><b>Bitte beachten Sie, dass eine Mailbenachrichtigung nur nach
+                             Klick auf die folgende Schaltfl&auml;che erfolgt.</b></p>  
         <form action = "formworker_view" tal:attributes="action python: view.context.absolute_url()+'/formworker_view'">
           <input name="button.senden" 
                  tal:condition="not: view/sent" 

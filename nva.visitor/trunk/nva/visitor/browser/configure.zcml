@@ -18,7 +18,7 @@
   <browser:viewlet
       for="nva.visitor.interfaces.IBesuchsanmeldung"
       name="visitor.visitoractions"
-      manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
       class=".viewlets.MyVisitorActionsViewlet"
       permission="zope2.View"
       />

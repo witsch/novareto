@@ -41,7 +41,6 @@ class formworkerView(BrowserView):
 
     def usermail(self, name):
         """sucht die Mailadresse eines Benutzers aus LDAP"""
-        return "rudi.cerne@zdf.de"
         sfilter = "(sn=%s)" %name
         res = ldapsearch(sfilter)
         ldapmail = 'intranetmaster@pfister.de'
@@ -70,6 +69,7 @@ class formworkerView(BrowserView):
 
         to=vliste
         cc_str='verteilerbesucher@FLSmidthPfister.com'
+        cc_str='wmanz@pfister.de'
         cc=[]
         cc.append(cc_str)
 
@@ -126,6 +126,7 @@ class formworkerView(BrowserView):
 
         to=vliste
         cc_str='verteilerbesucher@FLSmidthPfister.com'
+        cc_str='wmanz@pfister.de'
         cc=[]
         cc.append(cc_str)
 

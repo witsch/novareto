@@ -40,7 +40,10 @@ def ldapsearch(sfilter=None):
     l = ldap.open(ldapserver)
     l.protocol_version = ldap.VERSION3
     l.simple_bind_s(ldapadmin,ldappassw)
-    res = l.search_s(basedn, ldap.SCOPE_SUBTREE, sfilter)
+    if sfilter:
+        res = l.search_s(basedn, ldap.SCOPE_SUBTREE, sfilter)
+    else:
+        res = l.search_s(basedn, ldap.SCOPE_SUBTREE)
     return res
 
 
@@ -138,9 +141,9 @@ def iCalFile(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips):
     outer.attach(msg)
     MailHost=mailserver
     s=smtplib.SMTP()
-    #s.connect(MailHost)
-    #s.sendmail(mailfrom, mailto, outer.as_string())
-    #s.close()
+    s.connect(MailHost)
+    s.sendmail(mailfrom, mailto, outer.as_string())
+    s.close()
     befehl='del %s' %dateiname
     system(befehl)
 
@@ -163,7 +166,7 @@ def iCalCancel(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips
     outer.epilogue = ''
     MailHost=mailserver
     s = smtplib.SMTP()
-    #s.connect(MailHost)
-    #s.sendmail(mailfrom, mailto, outer.as_string())
-    #s.close()
+    s.connect(MailHost)
+    s.sendmail(mailfrom, mailto, outer.as_string())
+    s.close()
 

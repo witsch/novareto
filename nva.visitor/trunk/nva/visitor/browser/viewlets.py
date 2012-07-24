@@ -24,7 +24,7 @@ class MyVisitorActionsViewlet(ViewletBase):
     def hasRightRoles(self):
         pm = getToolByName(self.context, 'portal_membership')
         userRoles = pm.getAuthenticatedMember().getRoles()
-        rightRoles = ['Manager', 'Owner', 'Editor']
+        rightRoles = ['Manager', 'Owner']
         compare = set(userRoles) & set(rightRoles)
         if compare:
             return True
