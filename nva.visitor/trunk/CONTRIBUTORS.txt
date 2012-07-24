@@ -1,2 +1,2 @@
-"", Author
+"Lars Walther, lwalther@novareto.de", Author
 

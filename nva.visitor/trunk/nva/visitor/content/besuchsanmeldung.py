@@ -260,7 +260,10 @@ class Besuchsanmeldung(base.ATCTContent):
 
     def adsearchliste(self):
         """ Suche im AD-Verzeichnis"""
-        res = ldapsearch()
+        try:
+            res = ldapsearch()
+        except:
+            return DisplayList((('lwalther@novareto.de', 'Lars Walther'),))
         liste=[]
         if res:
             for entry in res:

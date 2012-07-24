@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0 (xxxx-xx-xx)
+1.0 (2012-07-22)
 ----------------
 
-- Created recipe with ZopeSkel
+- Upgrade der alten Version der Besuchanmeldung
   [""]

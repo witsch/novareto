@@ -1,8 +1,10 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="nva.visitor">
 
   <i18n:registerTranslations directory="locales" />
@@ -13,7 +15,38 @@
   <include package=".browser" />
   <include package=".content" />
   <include package=".portlets" />
-  
+
+  <include package="plone.contentrules" />
+  <include package="plone.contentrules" file="meta.zcml" />
+
+  <adapter factory=".visitoraction.VisitorSendActionExecutor" />
+
+  <browser:page 
+    for="plone.app.contentrules.browser.interfaces.IRuleActionAdding"
+    name="nva.visitor.visitoraction"
+    class=".visitoraction.VisitorSendActionAddForm"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page 
+    for="nva.visitor.visitoraction.IVisitorSendAction"
+    name="edit"
+    class=".visitoraction.VisitorSendActionEditForm"
+    permission="cmf.ManagePortal"
+    />
+
+  <plone:ruleAction
+      name="nva.visitor.visitoraction"
+      title="Sendet Mails mit Informationen von Besucherterminen via Content-Regel."
+      description="Sendet eine Mail mit iCal File zu Liste mit Empfaengern."
+      for="*"
+      event="zope.component.interfaces.IObjectEvent"
+      addview="nva.visitor.visitoraction"
+      editview="edit"
+      schema=".visitoraction.IVisitorSendAction"
+      factory=".visitoraction.VisitorSendAction"
+      />
+
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"
@@ -27,5 +60,4 @@
 
   <include package=".browser" />
   
-
 </configure>
