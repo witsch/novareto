@@ -25,12 +25,14 @@ try:
     ldappassw = configuration.get('ldappassw')
     basedn = configuration.get('basedn')
     mailserver = configuration.get('mailserver')
+    tmpfile = configuration.get('tmpfile')
 except:
     ldapserver = 'rs-aug-bendc-01.pfister.de'
     ldapadmin = "cn=svc-agb-plonedummy,ou=systemkonten,dc=pfister,dc=de"
     ldappassw = "xxxxxxxxxx"
     basedn = "ou=user,ou=Pfister GmbH,dc=pfister,dc=de"
     mailserver = 'rs-aug-appsv-01'
+    tmpfile = '/tmp'
 
 def ldapsearch(sfilter=None):
     """Sucht im ActiveDirectory der Firma Pfister"""
@@ -74,10 +76,8 @@ def iCalFile(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips):
     msg1 = msg1 + u'Link zum Besuchstermin im Intranet: %s' %url
 
     timestamp=strftime("%Y%m%dT%H%M%S")
-    dateiname = "/tmp/Besuchstermin"
+    dateiname = "%sBesuchstermin" %tmpfile
     dateiname = dateiname+timestamp+".ics"
-    dateiname1 = 'D:\\tmp\Besuchstermin'
-    dateiname1 = dateiname1+timestamp+'.ics'
       
     start=startdate[0:4]+startdate[5:7]+startdate[8:10]+'T'+startdate[11:13]+startdate[14:16]+startdate[17:19]
     end=enddate[0:4]+enddate[5:7]+enddate[8:10]+'T'+enddate[11:13]+enddate[14:16]+enddate[17:19]
