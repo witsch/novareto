@@ -28,8 +28,12 @@ nva/visitor/interfaces/__init__.py
 nva/visitor/interfaces/besuchsanmeldung.py
 nva/visitor/lib/__init__.py
 nva/visitor/lib/helpers.py
+nva/visitor/locales/nva.visitor.pot
+nva/visitor/locales/de/LC_MESSAGES/nva.visitor.mo
+nva/visitor/locales/de/LC_MESSAGES/nva.visitor.po
 nva/visitor/portlets/__init__.py
 nva/visitor/portlets/configure.zcml
+nva/visitor/profiles/default/catalog.xml
 nva/visitor/profiles/default/factorytool.xml
 nva/visitor/profiles/default/metadata.xml
 nva/visitor/profiles/default/portlets.xml

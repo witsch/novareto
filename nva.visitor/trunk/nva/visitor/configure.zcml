@@ -19,6 +19,8 @@
   <include package="plone.contentrules" />
   <include package="plone.contentrules" file="meta.zcml" />
 
+  <include package="Products.CMFCore" />
+
   <adapter factory=".visitoraction.VisitorSendActionExecutor" />
 
   <browser:page 
