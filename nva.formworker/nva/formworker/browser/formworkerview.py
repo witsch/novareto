@@ -1,4 +1,6 @@
 import string
+from datetime import datetime, date
+from time import strftime
 from zope.interface import implements, Interface
 
 from Products.Five import BrowserView
@@ -46,17 +48,33 @@ class formworkerView(BrowserView):
         return getToolByName(self.context, 'portal_url')
 
     def __call__(self):
+        normals = [str, int, float]
         mypath = '%s/%s.csv' %(csvbasepath,self.context.title)
         file = open(mypath, 'a')
         formcontent = self.context.listFolderContents()
         formfields=[]
         for i in formcontent:
             if i.__provides__(IPloneFormGenField):
-                formfields.append(self.request.get(i.id, ''))
-        myline = "%s\r\n" %(string.join(formfields, ';'))
+                fieldcontent = self.request.get(i.id, '')
+                #Behandlung unterschiedlicher Arten von Feldtypen aus dem Formgenerator
+                if fieldcontent.__class__ in normals:
+                    formfields.append(self.request.get(i.id, ''))
+                elif fieldcontent.__class__ == list:
+                    formfields.append(string.join(fieldcontent, ', '))
+                elif fieldcontent.__class__ == bool:
+                    if fieldcontent == True:
+                        formfields.append('ja')
+                    else:
+                        formfields.append('nein')
+                elif fieldcontent.__class__ == date:
+                    formfields.append(fieldcontent.strftime("%d.%m.%Y"))
+                elif fieldcontent.__class__ == datetime:
+                    formfields.append(fieldcontent.strftime("%d.%m.%Y %H:%M"))
+        myline = "%s\r\n" %(string.join(formfields, '\t'))
+        myline = myline.decode('utf-8')
+        myline = myline.encode('utf-16')
         file.write(myline)
         file.close()
         myredirect = self.context.getThanksPageOverride()
         myurl = "%s/%s" %(self.portal.absolute_url(), myredirect)
         return self.request.response.redirect(myurl)    
-
