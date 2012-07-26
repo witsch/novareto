@@ -308,6 +308,17 @@ dd.portletItem .navTreeItem .navTreeCurrentItem {
 color: #EF8E42 !important;
 }
 
+dd.portletItem .navTreeItem a.state-private {
+       color: red !important;
+}
+
+dd.portletItem .navTreeItem a.state-internal {
+       color: green !important;
+}
+
+dd.portletItem .navTreeItem a.state-pending {
+       color: orange !important;
+}
 
 /* --- ---=[ FOOTER ]=--- --- */
 
