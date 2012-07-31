@@ -266,16 +266,23 @@ class Bewerber(base.ATCTContent):
         return DisplayList(mailtuple)
 
     def Besuchsbeginn(self):
-        """Methode zum indizieren des Besuchsbeginns"""
+        """Methode zum Indizieren des Besuchsbeginns"""
         return self.getStartdate()
 
     def Besuchsende(self):
-        """Methode zum indizieren des Besuchsendes"""
+        """Methode zum Indizieren des Besuchsendes"""
         return self.getEnddate()
 
     def Ort(self):
-        """Methode zum indizieren des besuchten Ortes"""
+        """Methode zum Indizieren des besuchten Ortes"""
         return self.getMylocation()
 
+    def Besucher(self):
+        """Methode zum Indizieren des Besuchers"""
+        return self.getAnsprechpartner()
+
+    def Firma(self):
+        """Methode zum Indizieren der Firma"""
+        return self.getFirma()
 
 atapi.registerType(Bewerber, PROJECTNAME)

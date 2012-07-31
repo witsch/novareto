@@ -9,7 +9,15 @@
   <index name="Ort" meta_type="FieldIndex">
     <indexed_attr value="Ort"/>
   </index>
+  <index name="Besucher" meta_type="FieldIndex">
+    <indexed_attr value="Besucher"/>
+  </index>
+  <index name="Firma" meta_type="FieldIndex">
+    <indexed_attr value="Firma"/>
+  </index>
   <column value="Besuchsbeginn"/>
   <column value="Besuchsende"/>
   <column value="Ort"/>
+  <column value="Besucher"/>
+  <column value="Firma"/>
 </object>
