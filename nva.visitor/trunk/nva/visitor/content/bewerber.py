@@ -2,7 +2,7 @@
 """
 
 from zope.interface import implements
-
+from Products.Archetypes.public import DisplayList
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
@@ -241,7 +241,10 @@ class Bewerber(base.ATCTContent):
 
     def adsearchliste(self):
         """ Suche im AD-Verzeichnis"""
-        res = ldapsearch()
+        try:
+            res = ldapsearch()
+        except:
+            return DisplayList((('lwalther@novareto.de', 'Lars Walther'),))
         liste=[]
         if res:
             for entry in res:
