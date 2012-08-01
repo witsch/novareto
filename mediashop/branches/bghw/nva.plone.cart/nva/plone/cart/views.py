@@ -3,7 +3,7 @@
 import copy
 import datetime
 from five import grok
-from Acquisition import aq_base
+from Acquisition import aq_base, aq_inner, aq_parent
 
 import uuid
 from zope.formlib import form
@@ -14,6 +14,7 @@ from Products.CMFPlone.utils import _createObjectByType
 
 from nva.mediashop.interfaces import IOrderForm
 from nva.mediashop.content import ShippingInformation
+from nva.cart import Cart
 from nva.cart import ICartAddable, ICartRetriever, ICartHandler
 from nva.cart import IDiscountedCartItem
 
@@ -23,6 +24,7 @@ from nva.plone.cart import IOrder, IOrderFolder, OrderFolder, Order
 from nva.plone.cart.mnrtest import mnrtest
 
 from nva.plone.cart import ploneCartFactory as _
+from collective.beaker.interfaces import ISession
 
 from zope.app.form.interfaces import WidgetInputError
 from zope.formlib.form import setUpWidgets
@@ -51,6 +53,23 @@ def null_validator(*args, **kwargs):
 class AddToCartLink(grok.Viewlet):
     grok.viewletmanager(IBelowContentBody)
     grok.context(ICartAddable)
+
+
+class DeleteFromCart(grok.View):
+    """Delete all Items from Card"""
+    grok.context(ISessionCart)
+    grok.name('delall')
+
+    def update(self):
+        session = ISession(self.request)
+        session = self.request.SESSION
+        cart = session['nva.cart'] = Cart()
+        return cart
+
+    def render(self):
+        self.update()
+        url = self.context.aq_inner.aq_parent.absolute_url()
+        return self.request.response.redirect(url)
 
 
 class AddToCart(grok.View):

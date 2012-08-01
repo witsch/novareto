@@ -9,10 +9,24 @@
 
       <script type="text/javascript">
 	jq(document).ready(function() {
-	
+ 
+          /*
+          jq('#notBghwMitglied').hide();
+
+          var cm = jq('#cart-member').attr('checked');
+          if (cm != true){
+            jq('#allCardContent').hide();
+            jq('#notBghwMitglied').show();}
+
+          jq('#cart-member').click(function(e){
+              jq('#allCardContent').toggle();
+              jq('#notBghwMitglied').toggle();})
+          */
+          
           jq.ajaxSetup({cache: false});
           var base_url = jq("link[rel=kss-base-url]").attr('href');
 
+          /*
 	  jq('#cart-member').live("click", function(e){
 	      jq.ajax({
 	        type: "GET",
@@ -30,6 +44,7 @@
 	       }
 	    });
 	  });
+          */
 
 	  jq('a.cart-action').live("click", function(e) {
              e.preventDefault();

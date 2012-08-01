@@ -10,7 +10,6 @@
  <metal:main fill-slot="body">
   <script type="text/javascript">
 
-
     function stopRKey(evt) { 
       var evt = (evt) ? evt : ((event) ? event : null); 
       var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
@@ -19,13 +18,15 @@
 
     document.onkeypress = stopRKey; 
 
-
-
    jq(document).ready(function() {
 
+       jq('#notBghwMitglied').hide();
+
        var cm = jq('#cart-member').attr('checked');
-       if (cm != true)
-           jq('#form_mitgliedsnummer').hide();
+       if (cm != true){
+           jq('#allOrderingFields').hide();
+           jq('#notBghwMitglied').show();}
+
        var lf = jq('input#form_lieferadresse').attr('checked');
        if (lf != true)
            jq('#lieferadresse').hide();
@@ -38,6 +39,8 @@
 
 	  jq('#cart-member').click(function(e){
               jq('#form_mitgliedsnummer').toggle();
+              jq('#allOrderingFields').toggle();
+              jq('#notBghwMitglied').toggle();
 	      jq.ajax({
 	        type: "GET",
 		dataType: 'json',
@@ -86,13 +89,9 @@
          <dd tal:content="status" />
       </dl>
     </tal:status>
-<!--
-    <h1 class="documentFirstHeading"
-        i18n:translate=""
-        tal:condition="view/label"
-        tal:content="view/label"
-        metal:define-slot="heading">Do something</h1>
--->
+
+
+    <h1 i18n:translate="">Bestellformular</h1>
     <p tal:content="view/description|nothing" i18n:translate="">Description</p>
 
     <fieldset>
@@ -100,6 +99,27 @@
        <input type="checkbox" id="cart-member"
               tal:attributes="checked not: context/is_member" />
               <span i18n:translate=""> Mitgliedsbetrieb der BGHW</span>
+
+
+      <div id="notBghwMitglied">
+      <p>&nbsp;</p>
+      <p>Sehr geehrte Nutzerin, sehr geehrter Nutzer,</p>
+
+      <p>der Bezug von Medien über den Webshop ist derzeit nur für Mitgliedsunternehmen möglich. 
+         Andere Interessenten wenden sich bitte an:</p>
+
+      <p>Berufsgenossenschaft Handel und Warendistribution<br/> 
+         Prävention<br/> 
+         Postfach 1208<br/> 
+         53002 Bonn<br/> 
+         <a href="mailto: medien@bghw.de">E-Mail: medien@bghw.de </a><br/>
+         Fax: 0228 5406 5899</p>
+
+      <p>oder nutzen Sie die Möglichkeit, sich die Medien als pdf-Datei aus dem Shop herunterzuladen.</p>
+      </div>
+
+
+      <div id="allOrderingFields">
 
       <p tal:condition="context/is_member"> 
         <strong i18n:translate=""> Gesamtbestellwert: EUR 
@@ -113,8 +133,6 @@
         </strong> 
         <span i18n:translate=""> zzgl. MwST und Versand </span>
       </p>
-
-   <h3 i18n:translate=""> Bestellformular </h3>
 
     <div metal:define-slot="extra_info" tal:replace="nothing">
     </div>
@@ -179,6 +197,9 @@
        Sie können dann Ihr Bestellformular im PDF-Format drucken oder lokal speichern. Zusätzlich wird eine Kopie Ihrer 
        Bestellung als pdf-Datei an die von Ihnen oben angegebene(n) E-Mail-Adresse(n) versandt. 
      </p>
+
+    </div>
+
     </fieldset>
     </div>
     </form>

@@ -1,8 +1,29 @@
+<html>
+ <body>
+      <script type="text/javascript">
+        jq(document).ready(function() {
+
+          jq('#notBghwMitglied').hide();
+
+          var cm = jq('#cart-member').attr('checked');
+          if (cm != true){
+            jq('#allCardContent').hide();
+            jq('#notBghwMitglied').show();}
+
+
+          jq('#cart-member').live("click",function(e){
+              jq('#allCardContent').toggle();
+              jq('#notBghwMitglied').toggle();})
+           
+        });
+      </script>
+
 <tal:content define="items handler/getItems"
   i18n:domain="nva.plone.cart">
   <h1 i18n:translate="">Warenkorb</h1>
   <div tal:condition="not: items">
-   
+
+
     <span i18n:translate=""> Keine Artikel im Warenkorb. </span>
     <ul>
       <li> <a href="/shop/medien/medienkatalog" i18n:translate=""> zurück </a> </li>
@@ -15,6 +36,27 @@
 	     tal:attributes="checked not: context/is_member"
 	     /><span i18n:translate=""> Mitgliedsbetrieb der BGHW
              </span>
+
+
+      <div id="notBghwMitglied">
+      <p>&nbsp;</p>
+      <p>Sehr geehrte Nutzerin, sehr geehrter Nutzer,</p>
+
+      <p>der Bezug von Medien über den Webshop ist derzeit nur für Mitgliedsunternehmen möglich.
+         Andere Interessenten wenden sich bitte an:</p>
+
+      <p>Berufsgenossenschaft Handel und Warendistribution<br/>
+         Prävention<br/>
+         Postfach 1208<br/>
+         53002 Bonn<br/>
+         <a href="mailto: medien@bghw.de">E-Mail: medien@bghw.de </a><br/>
+         Fax: 0228 5406 5899</p>
+
+      <p>oder nutzen Sie die Möglichkeit, sich die Medien als pdf-Datei aus dem Shop herunterzuladen.</p>
+      </div>
+
+
+      <div id="allCardContent">
   
            <!--<span align="right"> -->
             <br>
@@ -90,7 +132,12 @@
      </td>
     </tr>
    </table>
+
+   </div>
+
     </fieldset>
 
   </div>
 </tal:content>
+</body>
+</html>

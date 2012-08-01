@@ -114,7 +114,10 @@ class Order(Item):
         daten['PlzOrt']      = si.plz + ' ' + si.ort
         daten['Telefon']     = nN(si.telefon)
         daten['Telefax']     = nN(si.telefax)
-        daten['Email']       = si.email
+        mymail = si.email
+        if not mymail:
+            mymail = ''
+        daten['Email']       = mymail
         daten['Land']        = nN(si.land)
         daten['Ustid']       = nN(si.ustid)
         daten['Abwadr']      = si.lieferadresse

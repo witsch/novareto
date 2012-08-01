@@ -1,3 +1,15 @@
+<html>
+<body>
+
+      <script type="text/javascript">
+        jq(document).ready(function() {
+
+          jq('#cart-member').live("click",function(e){
+              jq('.myorder').toggle();})
+
+        });
+      </script>
+
 <div xmlns:tal="http://xml.zope.org/namespaces/tal"
      xmlns:metal="http://xml.zope.org/namespaces/metal"
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
@@ -28,29 +40,43 @@
 	      <td tal:content="item/quantity" />
 	    </tr>
 	  </table>
+          <a href = "" tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/delall">
+             <span i18n:translate="">Warenkorb löschen</span></a>
 	</dd>
 
-	<dd i18n:translate="" class="portletItem odd">
+	<dd i18n:translate="" class="portletItem even">
 	  <h3> Preis für: </h3>
           <ul>
             <li> Mitglieder : <span tal:content="python: context.fF(view.handler.getMemberPrice())" /> Euro </li>
-	    <li> Nicht-Mitglieder : <span tal:content="python: context.fF(view.handler.getTotalPrice())" /> Euro </li>
+	    <!--<li> Nicht-Mitglieder : <span tal:content="python: context.fF(view.handler.getTotalPrice())" /> Euro </li>-->
           </ul>
 	</dd>
 
-        <dd class="portletFooter">
+        <dd class="myorder portletItem odd">
             <a href="" i18n:translate="manage_cart"
 	       tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/summary">
               Zum Einkaufswagen 
-            </a>
+            </a><br/>
         </dd>
-        <dd class="portletFooter">
+
+        <dd class="myorder portletItem even">
             <a href="" i18n:translate="checkout_cart"
 	       tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/checkout">
-              Zur Kasse gehen 
-            </a>
+              Zur Kasse gehen
+            </a><br/>
+        </dd>
+
+        <dd class="portletFooter odd">
+            <a href="" i18n:translate="checkout_agb"
+	       tal:attributes="href string: allgemeine AGB">
+              AGB der BGHW
+            </a><br/> 
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>
         </dd>
+
     </dl>
 </div>
+
+</body>
+</html>
