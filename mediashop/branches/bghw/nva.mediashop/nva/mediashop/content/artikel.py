@@ -217,8 +217,8 @@ class Artikel(base.ATCTContent):
     def validate_quantity(self, value):
         if not value.isdigit():
             return _(u"Bitte nur ganze Zahlen eingeben")
-        if int(value) <= 0 or int(value) >= 100:
-            return _(u"Bitte nur Werte zwischen 1 und 99 eintragen")
+        if int(value) <= 0 or int(value) >= 1000:
+            return _(u"Bitte nur Werte zwischen 1 und 999 eintragen")
 
 
 atapi.registerType(Artikel, PROJECTNAME)

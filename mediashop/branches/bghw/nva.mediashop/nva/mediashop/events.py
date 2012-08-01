@@ -20,7 +20,9 @@ def printMessage(obj, event):
 
     filename  = "/tmp/order-%s.pdf" %obj.id
     besteller = obj.shipping_information.email 
-   
+    if not besteller:
+        besteller = 'bghwportal@bghw.de'  
+ 
     # Mail an Besteller
     try:
         to = obj.shipping_information.email 

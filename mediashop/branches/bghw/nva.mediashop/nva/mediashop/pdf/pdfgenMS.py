@@ -215,7 +215,10 @@ def createpdf (filename, daten):
 
     c.drawString(13.0*cm, (12.9-offset)*cm, daten['Telefon'])
     c.drawString(13.0*cm, (12.4-offset)*cm, daten['Telefax'])
-    c.drawString(13.0*cm,  (11.9-offset)*cm, daten['Email'])
+    email = daten['Email']
+    if not email:
+        email=''
+    c.drawString(13.0*cm,  (11.9-offset)*cm, email)
         
     if ausland:
         c.setFont(schriftart, 10)

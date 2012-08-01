@@ -14,7 +14,7 @@ class IOrderForm(Interface):
     plz = TextLine(title=u"Postleitzahl")
     ort = TextLine(title=u"Ort")
     email = TextLine(title=u"E-Mail", required=True)
-    telefon = TextLine(title=u"Telefon", required=False)
+    telefon = TextLine(title=u"Telefon", description=u"Diese Angaben sind freiwillig. Sie erleichtern uns damit die Kontaktaufnahme bei Rückfragen.", required=False)
     telefax = TextLine(title=u"Telefax", required=False)
     land = TextLine(title=u"Land", required=False)
     ustid = TextLine(title=u"USt-IdNr./VAT", required=False)
