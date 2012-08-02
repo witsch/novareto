@@ -6,8 +6,8 @@
   <index name="Besuchsende" meta_type="DateIndex">
     <indexed_attr value="Besuchsende"/>
   </index>
-  <index name="Ort" meta_type="FieldIndex">
-    <indexed_attr value="Ort"/>
+  <index name="Lokation" meta_type="FieldIndex">
+    <indexed_attr value="Lokation"/>
   </index>
   <index name="Besucher" meta_type="FieldIndex">
     <indexed_attr value="Besucher"/>
@@ -17,7 +17,7 @@
   </index>
   <column value="Besuchsbeginn"/>
   <column value="Besuchsende"/>
-  <column value="Ort"/>
+  <column value="Lokation"/>
   <column value="Besucher"/>
   <column value="Firma"/>
 </object>

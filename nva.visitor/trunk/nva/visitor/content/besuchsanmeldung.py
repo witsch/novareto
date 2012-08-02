@@ -292,7 +292,7 @@ class Besuchsanmeldung(base.ATCTContent):
         """Methode zum Indizieren des Besuchsendes"""
         return self.getEnddate()
 
-    def Ort(self):
+    def Lokation(self):
         """Methode zum Indizieren des besuchten Ortes"""
         return self.getMylocation()
 
