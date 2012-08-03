@@ -17,7 +17,7 @@
 		tal:define="portal context/@@plone_portal_state/portal;">
       <h1 class="documentFirstHeading" tal:content="context/Title" />
       <div tal:condition="not: view/overflow">
-	<h2>Rendering events for <span tal:content="view/current_year" /></h2>
+	<h1><span tal:content="view/current_year" /></h1>
 	<p>
 	  <a href=""
 	     tal:condition="view/previous_year"
@@ -33,14 +33,20 @@
 	<tal:events tal:repeat="month python:sorted(view.events.keys())"
 		    tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;">
 
-	  <h3 i18n:translate=""
+	  <!--<h3 i18n:translate=""
         i18n:domain="plonelocales"
         tal:condition="python: view.events[month]"
-	      tal:content="python: 'month_%s' % view.get_month_name(month).lower()[:3]" />
+	      tal:content="python: 'month_%s' % view.get_month_name(month).lower()[:3]" />-->
+
+          <h2 i18n:translate=""
+              tal:condition="python: view.events[month]"
+              tal:content="python: view.get_month_name(month)" />
+
+
 
 	  <metal:block tal:repeat="event python:view.events[month]">
 
-	  <div class="newsItem"
+	  <div class="inewsItem"
 	       metal:define-macro="listitem"
 	       tal:define="result python:event[1];
 			   status python:event[0];
@@ -57,9 +63,10 @@
         <a href="/view"
            tal:condition="python: status != 'current'"
            tal:attributes="href resulturl"
-           tal:content="python:toLocalizedTime(resultObject.start()) + ': ' + result.Title">
+           tal:content="python:toLocalizedTime(resultObject.start()) + ': ' + resultObject.title">
            Event headline
          </a>
+<!--
          <span class="discreet">( 
         <a class="discreet" href="#"
           tal:attributes="href string:$resulturl/ics_view"
@@ -69,33 +76,52 @@
            src="" alt="" />
            <span i18n:translate="label_add_to_ical">iCal</span>
        </a>)</span>
+-->
       </h4>
 
-    <div class="newsDescription">
+    <div class="nvaEventContent"
+         tal:define="compare_from python: toLocalizedTime(resultObject.start(), long_format=False);
+                     compare_to python: toLocalizedTime(resultObject.end(), long_format=False);
+                     compare_dates python: compare_from == compare_to">
+      <p class="discreet">
+        <span tal:define="subject resultObject/Subject"
+            tal:condition="subject">
+            <span i18n:translate="">Was: </span>
+                              <span tal:content="python:modules['string'].join(subject, ' ')">Conference</span>
+        </span>
+        <span tal:condition="result/location">
+          <span tal:content="result/location" />,
+        </span>
+
+        <span tal:condition="not: compare_dates">
+         <span tal:replace="python:toLocalizedTime(resultObject.start(), long_format=False)">Start Date Time</span>
+           <span i18n:translate="event_and">bis</span>
+         <span tal:replace="python:toLocalizedTime(resultObject.end(), long_format=False)">End Date Time</span>,
+        </span>
+
+        <span tal:condition="compare_dates">
+         <span tal:replace="python:toLocalizedTime(resultObject.start(), long_format=False)">Start Date Time</span>,
+        </span>
+
+        <span> 
+        <a href="#"
+          tal:attributes="href string:$resulturl/ics_view"
+          title="Download this event in iCal format"
+          i18n:attributes="title title_add_to_ical;">
+           <img tal:replace="structure portal/icon_export_ical.png"
+           src="" alt="" />
+           <span i18n:translate="label_add_to_ical">iCal</span>
+       </a></span>
+
+      </p>
+    </div>
+
+    <div class="nvaEventDescription">
       <p tal:content="result/Description">
         Description
       </p>  
     </div>              
 
-    <div class="newsContent">
-      <ul class="newsAbout">
-        <li tal:define="subject resultObject/Subject"
-            tal:condition="subject">
-            <span i18n:translate="">what: </span>
-			      <span tal:content="python:modules['string'].join(subject, ' ')">Conference</span>
-        </li>
-        <li tal:condition="result/location">
-          <span i18n:translate="">where: </span><span tal:content="result/location" />
-        </li>
-        <li>
-          <span i18n:translate="">when: </span>
-			    <span tal:replace="python:toLocalizedTime(resultObject.start(), long_format=1)">Start Date Time</span>
-			    <span i18n:translate="event_and">to</span>
-			    <span tal:replace="python:toLocalizedTime(resultObject.end(), long_format=1)">End Date Time</span>.
-        </li>
-      </ul>
-		    
-                </div>
             </div>
         </metal:block>
 	</tal:events>
