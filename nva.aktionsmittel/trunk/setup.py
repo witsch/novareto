@@ -66,5 +66,5 @@ setup(name='nva.aktionsmittel',
       target = plone
       """,
       setup_requires=["PasteScript"],
-      paster_plugins=["templer.localcommands"],
+      paster_plugins=["ZopeSkel"],
       )
