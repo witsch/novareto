@@ -1,2 +1,0 @@
-recursive-include nva *
-global-exclude *pyc
