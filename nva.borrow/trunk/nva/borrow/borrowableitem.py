@@ -20,6 +20,13 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from nva.borrow import MessageFactory as _
 
+from five import grok
+from zope import schema
+
+from plone.directives import form, dexterity
+
+from plone.app.textfield import RichText
+from plone.namedfile.field import NamedImage
 
 # Interface class; used to define content-type schema.
 
@@ -34,7 +41,21 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
     # models/borrowableitem.xml to define the content type
     # and add directives here as necessary.
     
-    form.model("models/borrowableitem.xml")
+#    form.model("models/borrowableitem.xml")
+    
+    itemsAvailable = schema.Int(
+        title=_(u'Items available'),
+        description=_(u'Items available'),
+        required=True,
+        min=1,
+        max=10,
+        default=1)   
+ 
+    image = NamedImage(
+            title=_(u"Bild"),
+            description=_(u"Bild des Aktionsmittels"),
+            required=True,
+        )
 
 
 # Custom content-type class; objects created for this content type will
@@ -42,11 +63,12 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
 # methods and properties. Put methods that are mainly useful for rendering
 # in separate view classes.
 
+
 class BorrowableItem(dexterity.Item):
     grok.implements(IBorrowableItem)
     
     # Add your class methods and properties here
-
+                                
 
 # View class
 # The view will automatically use a similarly named template in
