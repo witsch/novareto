@@ -20,6 +20,22 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from nva.borrow import MessageFactory as _
 
+from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.vocabulary import SimpleVocabulary
+
+from z3c.relationfield.schema import RelationChoice
+from plone.formwidget.contenttree import ObjPathSourceBinder
+
+from borrowableitem import IBorrowableItem
+
+@grok.provider(IContextSourceBinder)
+def borrowableItems(context):
+    items = list()
+    items.append(SimpleVocabulary.createTerm(u'a', u'b'))
+    items.append(SimpleVocabulary.createTerm(u'c', u'd'))
+    return SimpleVocabulary(items)
+
+
 
 # Interface class; used to define content-type schema.
 
@@ -70,6 +86,17 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
         title=_(u'Borrow to'),
         required=True,
         default=None)
+
+    borrowItems = schema.Choice(
+        title=_(u'Items to borrow'),
+        source=borrowableItems,
+            )
+
+    borrowItems2 = RelationChoice(
+        title=_(u'Items to borrow'),
+        source=ObjPathSourceBinder(object_provides=IBorrowableItem.__identifier__)
+            )
+
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
