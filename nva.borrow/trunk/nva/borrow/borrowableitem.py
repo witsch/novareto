@@ -109,6 +109,44 @@ class BorrowableItem(dexterity.Item):
         bookings.sort(lambda x,y: cmp(x['fromDate'], y['fromDate']))
         return bookings
 
+    def getBookingCalendar(self):
+        """ return a booking calendar data structure """
+
+        import calendar
+        from datetime import datetime, date, timedelta
+
+        booking_requests = self.getBorrowRequests()
+
+        result = list()
+        now = datetime.now().replace(day=15)
+        for num in range(0, 12):
+            next_first = (now + timedelta(days=30*num)).replace(day=1)
+            days_in_month = calendar.monthrange(next_first.year, next_first.month)[1]
+            print next_first, days_in_month
+            d = dict(year=next_first.year, month=next_first.month, days=[])
+            for day in range(1, days_in_month+1):
+                current_day = date(next_first.year, next_first.month, day)
+
+
+                # default status
+                status = 'free'
+                # check against booking requests
+                for request in booking_requests:
+                    if request.borrowFrom <= current_day and current_day <= request.borrowTo:
+                        status = 'blocked'
+                        break
+
+
+
+                if current_day.weekday() in [5,6]:
+                    status = 'weekend'
+                d['days'].append(dict(day=current_day.day, 
+                                      weekday=current_day.weekday(),
+                                      status=status))
+            result.append(d)
+
+        return result
+
 # View class
 # The view will automatically use a similarly named template in
 # borrowableitem_templates.

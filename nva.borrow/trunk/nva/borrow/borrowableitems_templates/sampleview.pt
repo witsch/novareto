@@ -11,6 +11,7 @@
   <metal:content-core define-macro="content-core">
 
     <img class="set-image"
+          tal:condition="python: context.image is not None"
          tal:define="scales context/@@images"
          tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
 
@@ -25,10 +26,12 @@
                 <a tal:attributes="href item/absolute_url"  tal:content="item/Title" />
             </h2>
             <div tal:content="item/Description" />
-            <img class="set-image"
-                 tal:define="scales item/@@images"
-                 tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
-                </div>
+            <tal:if condition="python: item.image is not None">
+                <img class="set-image"
+                     tal:define="scales item/@@images"
+                     tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
+             </tal:if>
+        </div>
     </div>
             
   </metal:content-core>

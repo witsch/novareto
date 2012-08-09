@@ -10,6 +10,18 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
+      <style type="text/css">
+          .item-status-free {
+            background-color: green;
+          }
+          .item-status-weekend {
+            background-color: #ddd;
+          }
+          .item-status-blocked {
+            background-color: red;
+          }
+    </style>
+
     <img class="item-image"
          tal:define="scales context/@@images"
          tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
@@ -31,6 +43,33 @@
                 <span tal:content="booking/toDate" /> 
             </li>
         </ul>
+    </div>
+
+    <div class="booking-calendar" tal:define="result context/getBookingCalendar">
+        <label>Booking calendar</label>:
+        <div class="booking-month" tal:repeat="d result">
+            <span tal:content="string:${d/month}/${d/year}" />            
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <td style="background: #ddd; width: 25px;text-align: center" tal:repeat="item d/days">
+                            <span tal:content="python: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'][item['weekday']]" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25px;text-align: center" tal:repeat="item d/days">
+                            <span tal:content="item/day" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tal:repeat="item d/days"
+                            tal:attributes="class string:item-status-${item/status}">&nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
     
   </metal:content-core>
