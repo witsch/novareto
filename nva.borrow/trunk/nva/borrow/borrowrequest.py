@@ -87,14 +87,16 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
         required=True,
         default=None)
 
-    borrowItems = schema.Choice(
-        title=_(u'Items to borrow'),
-        source=borrowableItems,
-            )
+#    borrowItems = schema.Choice(
+#        title=_(u'Items to borrow'),
+#        source=borrowableItems,
+#            )
 
-    borrowItems2 = RelationChoice(
+    borrowItems = RelationList(
         title=_(u'Items to borrow'),
-        source=ObjPathSourceBinder(object_provides=IBorrowableItem.__identifier__)
+        default=[],
+        value_type=RelationChoice(title=_(u'Related'),
+                                  source=ObjPathSourceBinder(object_provides=IBorrowableItem.__identifier__))
             )
 
 
