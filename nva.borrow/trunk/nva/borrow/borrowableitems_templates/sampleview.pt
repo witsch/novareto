@@ -21,7 +21,9 @@
     <hr/>
     <div class="items-in-set">
         <div tal:repeat="item python: context.getFolderContents({'portal_type' : 'nva.borrow.borrowableitem'}, full_objects=True)">
-            <h2 tal:content="item/Title" />
+            <h2>
+                <a tal:attributes="href item/absolute_url"  tal:content="item/Title" />
+            </h2>
             <div tal:content="item/Description" />
             <img class="set-image"
                  tal:define="scales item/@@images"
