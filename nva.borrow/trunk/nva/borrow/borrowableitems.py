@@ -34,8 +34,17 @@ class IBorrowableItems(form.Schema, IImageScaleTraversable):
     # models/borrowableitems.xml to define the content type
     # and add directives here as necessary.
     
-    form.model("models/borrowableitems.xml")
 
+    image = NamedImage(
+            title=_(u"Image"),
+            description=_(u"Image of the set"),
+            required=True,
+        )
+
+    text = RichText(
+            title=_(u'Text'),
+            description=_(u'Verbose description of the set'),
+            required=True)
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
@@ -62,4 +71,4 @@ class SampleView(grok.View):
     grok.context(IBorrowableItems)
     grok.require('zope2.View')
     
-    # grok.name('view')
+    grok.name('view')

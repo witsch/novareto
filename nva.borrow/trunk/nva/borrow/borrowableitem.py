@@ -52,8 +52,8 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
         default=1)   
  
     image = NamedImage(
-            title=_(u"Bild"),
-            description=_(u"Bild des Aktionsmittels"),
+            title=_(u"Image"),
+            description=_(u"Image of the item"),
             required=True,
         )
 
