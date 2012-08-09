@@ -10,13 +10,25 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-      <img class="set-image"
-           tal:define="scales context/@@images"
-           tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
+    <img class="set-image"
+         tal:define="scales context/@@images"
+         tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
 
-      <div class="set-text" 
-           tal:condition="context/text"
-           tal:content="structure context/text/output" />
+    <div class="set-text" 
+         tal:condition="context/text"
+         tal:content="structure context/text/output" />
+
+    <hr/>
+    <div class="items-in-set">
+        <div tal:repeat="item python: context.getFolderContents({'portal_type' : 'nva.borrow.borrowableitem'}, full_objects=True)">
+            <h2 tal:content="item/Title" />
+            <div tal:content="item/Description" />
+            <img class="set-image"
+                 tal:define="scales item/@@images"
+                 tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
+                </div>
+    </div>
+            
   </metal:content-core>
 </metal:main>
 
