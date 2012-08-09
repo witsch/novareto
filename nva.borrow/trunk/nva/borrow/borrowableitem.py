@@ -68,6 +68,46 @@ class BorrowableItem(dexterity.Item):
     
     # Add your class methods and properties here
                                 
+    def getBorrowRequests(self):
+        """ Return all borrow requests referencing the curret item"""
+        from Acquisition import aq_inner
+        from zope.component import getUtility
+        from zope.intid.interfaces import IIntIds
+        from zope.security import checkPermission
+        from zc.relation.interfaces import ICatalog
+
+        catalog = getUtility(ICatalog)
+        intids = getUtility(IIntIds)
+        result = []
+        for rel in catalog.findRelations(
+                                dict(to_id=intids.getId(aq_inner(self)),
+                                     )
+                                ):
+            obj = intids.queryObject(rel.from_id)
+            if obj is not None and checkPermission('zope2.View', obj):
+                result.append(obj)
+        return result 
+
+    def isBorrowable(self, start=None, end=None):
+        """ Is current item borrowable from start-end ?"""
+        from datetime import date
+        start = date(2012,8,10)
+        end = date(2012,8,17)
+        conflicting_requests = list()
+        for request in self.getBorrowRequests():
+            print request.borrowFrom, request.borrowTo
+            if request.borrowFrom > end or request.borrowTo < start:
+                continue
+            conflicting_requests.append(request)
+        return self.itemsAvailable > len(conflicting_requests)
+
+    def getBookingDates(self):
+        """ Return all booking dates for this particular item """
+        bookings = [dict(fromDate=request.borrowFrom.strftime('%d.%m.%Y'), 
+                         toDate=request.borrowTo.strftime('%d.%m.%Y'))
+                    for request in self.getBorrowRequests()]
+        bookings.sort(lambda x,y: cmp(x['fromDate'], y['fromDate']))
+        return bookings
 
 # View class
 # The view will automatically use a similarly named template in

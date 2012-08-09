@@ -99,6 +99,11 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
                                   source=ObjPathSourceBinder(object_provides=IBorrowableItem.__identifier__))
             )
 
+    @invariant
+    def validateStartEnd(data):
+        if data.borrowFrom is not None and data.borrowTo is not None:
+            if data.borrowFrom > data.borrowTo:
+                raise Invalid(_(u"The start date must be before the end date."))
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific

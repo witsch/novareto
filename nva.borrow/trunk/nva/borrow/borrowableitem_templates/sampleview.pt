@@ -17,6 +17,21 @@
     <div class="item-text" 
          tal:condition="context/text"
          tal:content="structure context/text/output" />
+
+    <div class="item-max-items">
+        <label>Available items</label>:
+        <span tal:content="context/itemsAvailable" />
+    </div>
+
+    <div class="booking-dates">
+        <label>Booking dates</label>:
+        <ul>
+            <li tal:repeat="booking context/getBookingDates">
+                <span tal:content="booking/fromDate" /> -
+                <span tal:content="booking/toDate" /> 
+            </li>
+        </ul>
+    </div>
     
   </metal:content-core>
 </metal:main>
