@@ -18,7 +18,7 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-    <div>
+    <div class="row">
         <div class="set-image">  
             <img class="set-image"
                   tal:condition="python: context.image is not None"
@@ -30,9 +30,14 @@
              tal:content="structure context/text/output" />
     </div>
 
+    <div class="row"> 
+        <a tal:attributes="href string:${context/absolute_url}/@@createBookingRequest">
+            <img src="++resource++nva.borrow/booknow.png" />
+        </a>
+    </div>
 
-    <div class="items-in-set" style="clear: both">
-        <div class="item-in-set" tal:repeat="item python: context.getFolderContents({'portal_type' : 'nva.borrow.borrowableitem'}, full_objects=True)">
+    <div class="items-in-set">
+        <div class="item-in-set row" tal:repeat="item python: context.getFolderContents({'portal_type' : 'nva.borrow.borrowableitem'}, full_objects=True)">
             <div class="set-image" condition="python: item.image is not None">
                 <img tal:define="scales item/@@images"
                      tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
@@ -42,6 +47,11 @@
                     <a tal:attributes="href item/absolute_url"  tal:content="item/Title" />
                 </h2>
                 <div class="description" tal:content="item/Description" />
+            </div>
+            <div class="row" tal:condition="context/individualItemBooking">
+                <a tal:attributes="href string:${context/absolute_url}/@@createBookingRequest">
+                    <img src="++resource++nva.borrow/booknow.png" />
+                </a>
             </div>
         </div>
     </div>

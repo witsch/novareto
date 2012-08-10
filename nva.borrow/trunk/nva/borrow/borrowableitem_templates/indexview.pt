@@ -31,6 +31,12 @@
              tal:content="structure context/text/output" />
     </div>
 
+    <div class="row" tal:condition="context/individualItemBooking">
+        <a tal:attributes="href string:${context/absolute_url}/@@createBookingRequest">
+            <img src="++resource++nva.borrow/booknow.png" />
+        </a>
+    </div>
+
     <div class="row">
         <label>Max items available</label>:
         <span tal:content="context/itemsAvailable" />

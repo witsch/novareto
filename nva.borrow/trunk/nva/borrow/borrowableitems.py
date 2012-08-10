@@ -39,6 +39,12 @@ class IBorrowableItems(form.Schema, IImageScaleTraversable):
             description=_(u'Verbose description of the set'),
             required=True)
 
+    individualItemBooking = schema.Bool(
+            title=_(u'Individual item booking possible'),
+            description=_(u'Allow booking of individual items or only as set'),
+            required=True,
+            default=False)
+
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
 # methods and properties. Put methods that are mainly useful for rendering

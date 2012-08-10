@@ -34,3 +34,8 @@
     float: left;
     margin-left: 1em;
 }
+
+.row {
+    clear: both;
+    margin-bottom: 1em;
+}
