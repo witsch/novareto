@@ -43,14 +43,6 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
     """
     Request to borrow items
     """
-    
-    # If you want a schema-defined interface, delete the form.model
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/borrowrequest.xml to define the content type
-    # and add directives here as necessary.
-    
-#    form.model("models/borrowrequest.xml")
 
     firstName = schema.TextLine(
         title=_(u'First name'),
@@ -77,6 +69,22 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
         required=True,
         default=u'')   
 
+    phone = schema.TextLine(
+        title=_(u'Phone'),
+        required=False,
+        default=u'')   
+
+    email = schema.TextLine(
+        title=_(u'Email'),
+        required=False,
+        default=u'')   
+
+    memberId= schema.TextLine(
+        title=_(u'Member id'),
+        description=_(u'Member ID'),
+        required=True,
+        default=u'00000')   
+
     borrowFrom = schema.Date(
         title=_(u'Borrow from'),
         required=True,
@@ -87,17 +95,18 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
         required=True,
         default=None)
 
-#    borrowItems = schema.Choice(
-#        title=_(u'Items to borrow'),
-#        source=borrowableItems,
-#            )
-
     borrowItems = RelationList(
         title=_(u'Items to borrow'),
         default=[],
         value_type=RelationChoice(title=_(u'Related'),
                                   source=ObjPathSourceBinder(object_provides=IBorrowableItem.__identifier__))
             )
+
+    comment = schema.Text(
+        title=_(u'Comment'),
+        description=_(u'Comment'),
+        required=False,
+        default=u'')   
 
     @invariant
     def validateStartEnd(data):

@@ -40,14 +40,11 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
     """
     Borrowable item
     """
-    
-    # If you want a schema-defined interface, delete the form.model
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/borrowableitem.xml to define the content type
-    # and add directives here as necessary.
-    
-#    form.model("models/borrowableitem.xml")
+
+    text = RichText(
+            title=_(u'Text'),
+            description=_(u'Verbose description of the set'),
+            required=True)
     
     itemsAvailable = schema.Int(
         title=_(u'Items available'),
@@ -63,10 +60,6 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
             required=True,
         )
 
-    text = RichText(
-            title=_(u'Text'),
-            description=_(u'Verbose description of the set'),
-            required=True)
 
 
 class BorrowableItem(dexterity.Item):

@@ -20,7 +20,7 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-    <div>      
+    <div class="row">      
         <div class="item-image">  
             <img tal:define="scales context/@@images"
                  tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
@@ -31,7 +31,22 @@
              tal:content="structure context/text/output" />
     </div>
 
-    <div class="booking-calendar">
+    <div class="row">
+        <label>Max items available</label>:
+        <span tal:content="context/itemsAvailable" />
+    </div>
+
+    <div clas="row">    
+        <label>Booking requests</label>:
+        <ul>
+            <li tal:repeat="request context/getBookingDates">
+                <span tal:content="request/fromDate" />-
+                <span tal:content="request/toDate" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="booking-calendar row">
         <h2>Booking calendar</h2>
         <div tal:repeat="d context/getBookingCalendar">
             <span class="month-year" tal:content="string:${d/month_name} ${d/year}" />            
