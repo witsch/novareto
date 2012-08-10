@@ -18,6 +18,10 @@
     margin-left: 1em;
 }
 
+.booking-calendar {
+    clear: both;
+}
+
 .booking-calendar td {
     width: 25px;
     text-align: center;
