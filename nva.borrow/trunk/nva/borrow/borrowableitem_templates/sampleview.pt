@@ -5,59 +5,42 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="nva.borrow">
+
+<head>
+    <metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css" 
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/++resource++nva.borrow/borrowableitem-styles.css"
+            />
+    </metal:block>
+</head>
+
 <body>
 
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-      <style type="text/css">
-          .item-status-free {
-            background-color: green;
-          }
-          .item-status-weekend {
-            background-color: #ddd;
-          }
-          .item-status-blocked {
-            background-color: red;
-          }
-    </style>
+    <div>      
+        <div class="item-image">  
+            <img tal:define="scales context/@@images"
+                 tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
+        </div>
 
-    <img class="item-image"
-         tal:define="scales context/@@images"
-         tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
-
-    <div class="item-text" 
-         tal:condition="context/text"
-         tal:content="structure context/text/output" />
-
-    <div class="item-max-items">
-        <label>Available items</label>:
-        <span tal:content="context/itemsAvailable" />
+        <div class="item-text" 
+             tal:condition="context/text"
+             tal:content="structure context/text/output" />
     </div>
 
-    <div class="booking-dates">
-        <label>Booking dates</label>:
-        <ul>
-            <li tal:repeat="booking context/getBookingDates">
-                <span tal:content="booking/fromDate" /> -
-                <span tal:content="booking/toDate" /> 
-            </li>
-        </ul>
-    </div>
-
-    <div class="booking-calendar" tal:define="result context/getBookingCalendar">
-        <label>Booking calendar</label>:
-        <div class="booking-month" tal:repeat="d result">
-            <span tal:content="string:${d/month}/${d/year}" />            
+ tal:content="string:${d/month_name} ${d/year}" />            
             <table border="1">
                 <tbody>
                     <tr>
-                        <td style="background: #ddd; width: 25px;text-align: center" tal:repeat="item d/days">
+                        <td class="day-name" tal:repeat="item d/days">
                             <span tal:content="python: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'][item['weekday']]" />
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 25px;text-align: center" tal:repeat="item d/days">
+                        <td tal:repeat="item d/days">
                             <span tal:content="item/day" />
                         </td>
                     </tr>
@@ -69,7 +52,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
     
   </metal:content-core>

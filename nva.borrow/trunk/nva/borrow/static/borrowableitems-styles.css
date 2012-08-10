@@ -1,0 +1,36 @@
+.set-image {
+    float: left;
+    max-width: 400px;
+}
+
+.set-text {
+    float: left;
+    max-width: 600px;
+    margin-left: 1em;
+}
+
+.items-in-set {
+    clear: both;
+    border-top: 1px solid #ddd;
+    padding-top: 1em;
+}
+
+.items-in-set .set-image {
+    float: left;
+    max-width: 300px;
+    width: 300px;
+}
+
+.items-in-set .set-image img {
+    max-width: 300px;
+    width: 300px;
+}
+
+.items-in-set h2 {
+    float: left;
+}
+
+.items-in-set .set-description {
+    float: left;
+    margin-left: 1em;
+}

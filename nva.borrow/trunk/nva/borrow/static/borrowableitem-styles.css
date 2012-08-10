@@ -1,0 +1,34 @@
+
+.item-status-free {
+    background-color: green;
+}
+.item-status-weekend {
+    background-color: #ddd;
+}
+.item-status-blocked {
+    background-color: red;
+}
+
+.item-image {
+    float: left;
+}
+
+.item-text {
+    float: left;
+    margin-left: 1em;
+}
+
+.booking-calendar td {
+    width: 25px;
+    text-align: center;
+}
+
+.booking-calendar td.day-name {
+    background: #ddd;
+}
+
+.booking-calendar .month-year {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+

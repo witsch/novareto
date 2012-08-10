@@ -1,3 +1,6 @@
+# -*- coding: iso-8859-1 -*-
+
+import time
 from five import grok
 from plone.directives import dexterity, form
 
@@ -29,6 +32,9 @@ from plone.app.textfield import RichText
 from plone.namedfile.field import NamedImage
 
 # Interface class; used to define content-type schema.
+
+MONTH_NAMES = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 
+               'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
 
 class IBorrowableItem(form.Schema, IImageScaleTraversable):
     """
@@ -106,7 +112,8 @@ class BorrowableItem(dexterity.Item):
         bookings = [dict(fromDate=request.borrowFrom.strftime('%d.%m.%Y'), 
                          toDate=request.borrowTo.strftime('%d.%m.%Y'))
                     for request in self.getBorrowRequests()]
-        bookings.sort(lambda x,y: cmp(x['fromDate'], y['fromDate']))
+        bookings.sort(lambda x,y: cmp(time.strptime(x['fromDate'], '%d.%m.%Y'),
+                                      time.strptime(y['fromDate'], '%d.%m.%Y')))
         return bookings
 
     def getBookingCalendar(self):
@@ -123,7 +130,7 @@ class BorrowableItem(dexterity.Item):
             next_first = (now + timedelta(days=30*num)).replace(day=1)
             days_in_month = calendar.monthrange(next_first.year, next_first.month)[1]
             print next_first, days_in_month
-            d = dict(year=next_first.year, month=next_first.month, days=[])
+            d = dict(year=next_first.year, month=next_first.month, month_name=MONTH_NAMES[next_first.month-1], days=[])
             for day in range(1, days_in_month+1):
                 current_day = date(next_first.year, next_first.month, day)
 
@@ -135,8 +142,6 @@ class BorrowableItem(dexterity.Item):
                     if request.borrowFrom <= current_day and current_day <= request.borrowTo:
                         status = 'blocked'
                         break
-
-
 
                 if current_day.weekday() in [5,6]:
                     status = 'weekend'
