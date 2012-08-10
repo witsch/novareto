@@ -15,6 +15,7 @@
 
 .item-text {
     float: left;
+    max-width: 600px;
     margin-left: 1em;
 }
 

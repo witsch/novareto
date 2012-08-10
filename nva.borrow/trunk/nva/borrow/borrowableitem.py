@@ -94,7 +94,6 @@ class BorrowableItem(dexterity.Item):
         end = date(2012,8,17)
         conflicting_requests = list()
         for request in self.getBorrowRequests():
-            print request.borrowFrom, request.borrowTo
             if request.borrowFrom > end or request.borrowTo < start:
                 continue
             conflicting_requests.append(request)
@@ -130,14 +129,19 @@ class BorrowableItem(dexterity.Item):
 
                 # default status
                 status = 'free'
-                # check against booking requests
-                for request in booking_requests:
-                    if request.borrowFrom <= current_day and current_day <= request.borrowTo:
-                        status = 'blocked'
-                        break
 
+                # weekend
                 if current_day.weekday() in [5,6]:
                     status = 'weekend'
+
+                # check against booking requests
+                relevant_requests = [r
+                                     for r in booking_requests
+                                     if r.borrowFrom <= current_day and current_day <= r.borrowTo]
+
+                if len(relevant_requests) >= self.itemsAvailable:
+                    status = 'blocked'
+
                 d['days'].append(dict(day=current_day.day, 
                                       weekday=current_day.weekday(),
                                       status=status))

@@ -48,6 +48,13 @@
 
     <div class="booking-calendar row">
         <h2>Booking calendar</h2>
+
+        <div class="legend">
+            <span class="item-status-free" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item bookable
+            <span class="item-status-weekend" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item not bookable (weekend)
+            <span class="item-status-blocked" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item not bookable
+        </div>
+
         <div tal:repeat="d context/getBookingCalendar">
             <span class="month-year" tal:content="string:${d/month_name} ${d/year}" />            
             <table border="1">
