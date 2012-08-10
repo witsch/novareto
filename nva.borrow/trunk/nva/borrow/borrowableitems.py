@@ -67,7 +67,7 @@ class BorrowableItems(dexterity.Container):
 # of this type by uncommenting the grok.name line below or by
 # changing the view class name and template filename to View / view.pt.
 
-class SampleView(grok.View):
+class IndexView(grok.View):
     grok.context(IBorrowableItems)
     grok.require('zope2.View')
     
