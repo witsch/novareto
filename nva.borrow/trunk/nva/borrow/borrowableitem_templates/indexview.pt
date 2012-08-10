@@ -30,8 +30,9 @@
              tal:condition="context/text"
              tal:content="structure context/text/output" />
     </div>
-
- tal:content="string:${d/month_name} ${d/year}" />            
+    <div class="booking-calendar">
+        <div tal:repeat="d context/getBookingCalendar">
+            <span tal:content="string:${d/month_name} ${d/year}" />            
             <table border="1">
                 <tbody>
                     <tr>
