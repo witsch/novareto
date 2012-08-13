@@ -26,6 +26,7 @@ setup(name='nva.borrow',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'python-dateutil',
           'plone.app.dexterity',
           'plone.namedfile [blobs]',
           # -*- Extra requirements: -*-
