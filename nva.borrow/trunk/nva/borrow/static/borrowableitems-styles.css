@@ -27,12 +27,12 @@
 }
 
 .items-in-set h2 {
-    float: left;
 }
 
 .items-in-set .set-description {
     float: left;
     margin-left: 1em;
+    width: 600px;
 }
 
 .row {

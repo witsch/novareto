@@ -1,10 +1,40 @@
 import os
+import loremipsum
+import urllib2
 from DateTime.DateTime import DateTime
 from Products.Five.browser import BrowserView
 from plone.namedfile import NamedImage
 
-def makeNamedImage(filename):
+def makeNamedImage(filename, data=None):
     return NamedImage(file(os.path.join(os.path.dirname(__file__), 'data', filename), 'rb').read())
+
+def makeNamedImageFromData(data=None):
+    return NamedImage(data)
+
+
+def _invokeFactory(context, portal_type, id, **kw):
+    context.invokeFactory(portal_type, id=id, **kw)
+    obj = context[id]
+    if not 'title' in kw:
+        obj.title = gen_sentence(80)
+    if not 'description' in kw:
+        obj.description = gen_sentences(2)
+    return obj
+
+def gen_sentence(max_words=None):
+    text = loremipsum.Generator().generate_sentence()[-1]
+    if max_words:
+        return u' '.join(text.split(' ')[:max_words])
+    return text
+
+def random_image(width, height):
+    url = 'http://lorempixel.com/%d/%d/' % (width, height)
+    return urllib2.urlopen(url).read()
+
+
+def gen_sentences(length=80):
+    return u' '.join([s[2] for s in loremipsum.Generator().generate_sentences(length)])
+
 
 class Setup(BrowserView):
 
@@ -16,21 +46,18 @@ class Setup(BrowserView):
         if not 'Dexterity Content Adapter' in allowed:
             self.context.portal_types.FormFolder.allowed_content_types = tuple(list(allowed) + ['Dexterity Content Adapter'])
 
-        self.context.invokeFactory('Folder', id='buchungen', title='Buchungen')
-        buchungen = self.context['buchungen']
+        buchungen = _invokeFactory(self.context, 'Folder', id='buchungen', title='Buchungen')
 
         if not id_:
             id_ = 'bestellformular-%s' % DateTime().strftime('%Y%m%dT%H%M%S')
         if id_ in self.context.objectIds():
             self.context.manage_delObjects(id_)
 
-        self.context.invokeFactory('FormFolder', id=id_, title='Bestellformular')
-        form = self.context[id_]                                                    
+        form = _invokeFactory(self.context, 'FormFolder', id=id_, title='Bestellformular')
         form.manage_delObjects(['replyto', 'topic', 'comments'])
 
         # content adapter
-        form.invokeFactory('Dexterity Content Adapter', id='dexterity-adapter', title='Dexterity Adapter')
-        adapter = form['dexterity-adapter']
+        adapter = _invokeFactory(form, 'Dexterity Content Adapter', id='dexterity-adapter', title='Dexterity Adapter')
         adapter.setCreatedType('nva.borrow.borrowrequest')
         adapter.setTargetFolder(buchungen)
         adapter.setFieldMapping([dict(form='vorname', content='firstName'),
@@ -45,17 +72,17 @@ class Setup(BrowserView):
                                  dict(form='kommentar', content='comment'),
             ])
 
-        form.invokeFactory('FormStringField', id='vorname', title='Vorname', required=True)
-        form.invokeFactory('FormStringField', id='nachname', title='Nachname', required=True)
-        form.invokeFactory('FormStringField', id='adresse', title='Adresse', required=True)
-        form.invokeFactory('FormStringField', id='plz', title='Postleitzahl')
-        form.invokeFactory('FormStringField', id='stadt', title='Stadt')
-        form.invokeFactory('FormStringField', id='telefon', title='Telefon')
-        form.invokeFactory('FormStringField', id='email', title='E-Mail Adresse')
-        form.invokeFactory('FormStringField', id='mitgliedsnr', title='Mitgliedsnummer')
-        form.invokeFactory('FormDateField', id='buchungStart', title='Buchen von', required=True)
-        form.invokeFactory('FormDateField', id='buchungEnde', title='Buchen bis', required=True)
-        form.invokeFactory('FormTextField', id='kommentar', title='Kommentar')
+        _invokeFactory(form, 'FormStringField', id='vorname', title='Vorname', required=True)
+        _invokeFactory(form, 'FormStringField', id='nachname', title='Nachname', required=True)
+        _invokeFactory(form, 'FormStringField', id='adresse', title='Adresse', required=True)
+        _invokeFactory(form, 'FormStringField', id='plz', title='Postleitzahl')
+        _invokeFactory(form, 'FormStringField', id='stadt', title='Stadt')
+        _invokeFactory(form, 'FormStringField', id='telefon', title='Telefon')
+        _invokeFactory(form, 'FormStringField', id='email', title='E-Mail Adresse')
+        _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer')
+        _invokeFactory(form, 'FormDateField', id='buchungStart', title='Buchen von', required=True)
+        _invokeFactory(form, 'FormDateField', id='buchungEnde', title='Buchen bis', required=True)
+        _invokeFactory(form, 'FormTextField', id='kommentar', title='Kommentar')
 
         self.request.response.redirect(form.absolute_url())
 
@@ -64,18 +91,21 @@ class Setup(BrowserView):
         if 'aktionsmittel-demo' in self.context.contentIds():
             self.context.manage_delObjects('aktionsmittel-demo')
 
-        self.context.invokeFactory('Folder', id='aktionsmittel-demo', title='Aktionsmittel Demo')
-        demo = self.context['aktionsmittel-demo']
+        demo = _invokeFactory(self.context, 'Folder', id='aktionsmittel-demo', title='Aktionsmittel Demo')
 
         demo.restrictedTraverse('@@setupPFG')()
 
-        demo.invokeFactory('nva.borrow.borrowableitems', id='sicherheit-druckmaschinen', title='Sicherheit bei Druckmaschinen')
-        druck = demo['sicherheit-druckmaschinen']
+        druck = _invokeFactory(demo, 'nva.borrow.borrowableitems', id='sicherheit-druckmaschinen', title='Sicherheit bei Druckmaschinen')
         druck.image = makeNamedImage('druckmaschine.png')
+        for i in range (3):
+            item = _invokeFactory(druck, 'nva.borrow.borrowableitem', str(i))
+            item.image = makeNamedImageFromData(random_image(200, 200))
 
-        demo.invokeFactory('nva.borrow.borrowableitems', id='sicherheit-atomkraftwerk', title='Sicherheit in Atomkraftwerken')
-        atom = demo['sicherheit-atomkraftwerk']
+        atom = _invokeFactory(demo, 'nva.borrow.borrowableitems', id='sicherheit-atomkraftwerk', title='Sicherheit in Atomkraftwerken')
         atom.image = makeNamedImage('atom.png')
+        for i in range (3):
+            item = _invokeFactory(atom, 'nva.borrow.borrowableitem', str(i))
+            item.image = makeNamedImageFromData(random_image(200, 200))
 
         self.request.response.redirect(demo.absolute_url())
 
