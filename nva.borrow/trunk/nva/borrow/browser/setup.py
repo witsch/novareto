@@ -42,6 +42,7 @@ class Setup(BrowserView):
                                  dict(form='email', content='email'),
                                  dict(form='buchungStart', content='borrowFrom'),
                                  dict(form='buchungEnde', content='borrowTo'),
+                                 dict(form='kommentar', content='comment'),
             ])
 
         form.invokeFactory('FormStringField', id='vorname', title='Vorname', required=True)
