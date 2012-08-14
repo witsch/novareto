@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="weishaupt.policy">
+  
+  <browser:page
+    name="@@setPFG"
+    permission="cmf.ManagePortal"
+    class=".setup.Setup"
+    attribute="setupPFG"
+    for="*"
+   />
+
+</configure>
