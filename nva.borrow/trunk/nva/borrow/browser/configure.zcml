@@ -4,6 +4,14 @@
     i18n_domain="weishaupt.policy">
   
   <browser:page
+    name="demo"
+    permission="cmf.ManagePortal"
+    class=".setup.Setup"
+    attribute="demo"
+    for="*"
+   />
+  
+  <browser:page
     name="setupPFG"
     permission="cmf.ManagePortal"
     class=".setup.Setup"
