@@ -18,6 +18,7 @@ from zope.component import getUtility
 
 import nva.borrow
 import Products.PloneFormGen
+import Products.PFGDataGrid
 import collective.pfg.dexterity
 
 os.environ['TESTING'] = '1'
@@ -28,11 +29,17 @@ class PolicyFixture(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
 
-        for mod in (nva.borrow, Products.PloneFormGen, collective.pfg.dexterity): 
+        for mod in (nva.borrow, 
+                    Products.PloneFormGen, 
+                    Products.DataGridField, 
+                    Products.PFGDataGrid, 
+                    collective.pfg.dexterity): 
             xmlconfig.file('configure.zcml', mod, context=configurationContext)
-        z2.installProduct(app, 'Products.PloneFormGen')
-        z2.installProduct(app, 'collective.pfg.dexterity')
         z2.installProduct(app, 'nva.borrow')
+        z2.installProduct(app, 'Products.PloneFormGen')
+        z2.installProduct(app, 'Products.DataGridField')
+        z2.installProduct(app, 'Products.PFGDataGrid')
+        z2.installProduct(app, 'collective.pfg.dexterity')
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
