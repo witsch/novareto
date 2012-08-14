@@ -17,6 +17,8 @@ from AccessControl.SecurityManagement import newSecurityManager
 from zope.component import getUtility
 
 import nva.borrow
+import Products.PloneFormGen
+import collective.pfg.dexterity
 
 os.environ['TESTING'] = '1'
 
@@ -26,8 +28,10 @@ class PolicyFixture(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
 
-        for mod in (nva.borrow,): 
+        for mod in (nva.borrow, Products.PloneFormGen, collective.pfg.dexterity): 
             xmlconfig.file('configure.zcml', mod, context=configurationContext)
+        z2.installProduct(app, 'Products.PloneFormGen')
+        z2.installProduct(app, 'collective.pfg.dexterity')
         z2.installProduct(app, 'nva.borrow')
 
     def setUpPloneSite(self, portal):

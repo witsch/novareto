@@ -4,7 +4,7 @@
     i18n_domain="weishaupt.policy">
   
   <browser:page
-    name="@@setPFG"
+    name="setupPFG"
     permission="cmf.ManagePortal"
     class=".setup.Setup"
     attribute="setupPFG"

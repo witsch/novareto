@@ -20,6 +20,10 @@ class BasicTests(TestBase):
         new_id = self.portal.invokeFactory('nva.borrow.borrowableitem', id='aktionsmittel', title='Aktionsmittel')
         self.assertEqual(self.portal[new_id].portal_type, 'nva.borrow.borrowableitem')
 
+    def testSetupPFG(self):
+        self.login('god')
+        self.portal.restrictedTraverse('@@setupPFG')()
+
 def test_suite():
     from unittest2 import TestSuite, makeSuite
     suite = TestSuite()
