@@ -8,7 +8,7 @@ def makeNamedImage(filename):
 
 class Setup(BrowserView):
 
-    def setupPFG(self):
+    def setupPFG(self, id_=None):
         """ Setup 'Bestellformular' as PFG instance """
 
         # fix allowed_content_types for FormFolder
@@ -16,13 +16,23 @@ class Setup(BrowserView):
         if not 'Dexterity Content Adapter' in allowed:
             self.context.portal_types.FormFolder.allowed_content_types = tuple(list(allowed) + ['Dexterity Content Adapter'])
 
-        id_ = 'bestellformular-%s' % DateTime().strftime('%Y%m%dT%H%M%S')
+        self.context.invokeFactory('Folder', id='buchungen', title='Buchungen')
+        buchungen = self.context['buchungen']
+
+        if not id_:
+            id_ = 'bestellformular-%s' % DateTime().strftime('%Y%m%dT%H%M%S')
+        if id_ in self.context.objectIds():
+            self.context.manage_delObjects(id_)
+
         self.context.invokeFactory('FormFolder', id=id_, title='Bestellformular')
         form = self.context[id_]                                                    
         form.manage_delObjects(['replyto', 'topic', 'comments'])
 
         # content adapter
         form.invokeFactory('Dexterity Content Adapter', id='dexterity-adapter', title='Dexterity Adapter')
+        adapter = form['dexterity-adapter']
+        adapter.setCreatedType('nva.borrow.borrowrequest')
+        adapter.setTargetFolder(buchungen)
 
         form.invokeFactory('FormStringField', id='vorname', title='Vorname')
         form.invokeFactory('FormStringField', id='nachname', title='Nachname')
@@ -46,7 +56,6 @@ class Setup(BrowserView):
         self.context.invokeFactory('Folder', id='aktionsmittel-demo', title='Aktionsmittel Demo')
         demo = self.context['aktionsmittel-demo']
 
-        demo.invokeFactory('Folder', id='buchungen', title='Buchungen')
         demo.restrictedTraverse('@@setupPFG')()
 
         demo.invokeFactory('nva.borrow.borrowableitems', id='sicherheit-druckmaschinen', title='Sicherheit bei Druckmaschinen')
@@ -59,3 +68,8 @@ class Setup(BrowserView):
 
         self.request.response.redirect(demo.absolute_url())
 
+
+    def createBookingRequest(self):
+
+        form_folder = self.context.portal_catalog(portal_type='FormFolder')[0].getObject()
+        self.request.response.redirect(form_folder.absolute_url())
