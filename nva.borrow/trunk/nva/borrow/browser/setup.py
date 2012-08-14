@@ -1,5 +1,10 @@
+import os
 from DateTime.DateTime import DateTime
 from Products.Five.browser import BrowserView
+from plone.namedfile import NamedImage
+
+def makeNamedImage(filename):
+    return NamedImage(file(os.path.join(os.path.dirname(__file__), 'data', filename), 'rb').read())
 
 class Setup(BrowserView):
 
@@ -35,13 +40,22 @@ class Setup(BrowserView):
 
     def demo(self):
 
+        if 'aktionsmittel-demo' in self.context.contentIds():
+            self.context.manage_delObjects('aktionsmittel-demo')
+
         self.context.invokeFactory('Folder', id='aktionsmittel-demo', title='Aktionsmittel Demo')
         demo = self.context['aktionsmittel-demo']
 
         demo.invokeFactory('Folder', id='buchungen', title='Buchungen')
-
         demo.restrictedTraverse('@@setupPFG')()
+
         demo.invokeFactory('nva.borrow.borrowableitems', id='sicherheit-druckmaschinen', title='Sicherheit bei Druckmaschinen')
+        druck = demo['sicherheit-druckmaschinen']
+        druck.image = makeNamedImage('druckmaschine.png')
+
         demo.invokeFactory('nva.borrow.borrowableitems', id='sicherheit-atomkraftwerk', title='Sicherheit in Atomkraftwerken')
+        atom = demo['sicherheit-atomkraftwerk']
+        atom.image = makeNamedImage('atom.png')
+
         self.request.response.redirect(demo.absolute_url())
 
