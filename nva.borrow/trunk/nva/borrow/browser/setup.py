@@ -33,17 +33,27 @@ class Setup(BrowserView):
         adapter = form['dexterity-adapter']
         adapter.setCreatedType('nva.borrow.borrowrequest')
         adapter.setTargetFolder(buchungen)
+        adapter.setFieldMapping([dict(form='vorname', content='firstName'),
+                                 dict(form='nachname', content='lastName'),
+                                 dict(form='adresse', content='address'),
+                                 dict(form='plz', content='zip'),
+                                 dict(form='stadt', content='city'),
+                                 dict(form='telefon', content='phone'),
+                                 dict(form='email', content='email'),
+                                 dict(form='buchungStart', content='borrowFrom'),
+                                 dict(form='buchungEnde', content='borrowTo'),
+            ])
 
-        form.invokeFactory('FormStringField', id='vorname', title='Vorname')
-        form.invokeFactory('FormStringField', id='nachname', title='Nachname')
-        form.invokeFactory('FormStringField', id='adresse', title='Adresse')
+        form.invokeFactory('FormStringField', id='vorname', title='Vorname', required=True)
+        form.invokeFactory('FormStringField', id='nachname', title='Nachname', required=True)
+        form.invokeFactory('FormStringField', id='adresse', title='Adresse', required=True)
         form.invokeFactory('FormStringField', id='plz', title='Postleitzahl')
-        form.invokeFactory('FormStringField', id='city', title='Stadt')
+        form.invokeFactory('FormStringField', id='stadt', title='Stadt')
         form.invokeFactory('FormStringField', id='telefon', title='Telefon')
         form.invokeFactory('FormStringField', id='email', title='E-Mail Adresse')
         form.invokeFactory('FormStringField', id='mitgliedsnr', title='Mitgliedsnummer')
-        form.invokeFactory('FormDateField', id='buchungStart', title='Buchen von')
-        form.invokeFactory('FormDateField', id='buchungEnde', title='Buchen bis')
+        form.invokeFactory('FormDateField', id='buchungStart', title='Buchen von', required=True)
+        form.invokeFactory('FormDateField', id='buchungEnde', title='Buchen bis', required=True)
         form.invokeFactory('FormTextField', id='kommentar', title='Kommentar')
 
         self.request.response.redirect(form.absolute_url())
