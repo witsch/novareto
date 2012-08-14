@@ -75,11 +75,17 @@ class Setup(BrowserView):
         _invokeFactory(form, 'FormStringField', id='vorname', title='Vorname', required=True)
         _invokeFactory(form, 'FormStringField', id='nachname', title='Nachname', required=True)
         _invokeFactory(form, 'FormStringField', id='adresse', title='Adresse', required=True)
-        _invokeFactory(form, 'FormStringField', id='plz', title='Postleitzahl')
-        _invokeFactory(form, 'FormStringField', id='stadt', title='Stadt')
+        _invokeFactory(form, 'FormStringField', id='plz', title='Postleitzahl', required=True)
+        _invokeFactory(form, 'FormStringField', id='stadt', title='Stadt', required=True)
         _invokeFactory(form, 'FormStringField', id='telefon', title='Telefon')
         _invokeFactory(form, 'FormStringField', id='email', title='E-Mail Adresse')
-        _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer')
+        _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer', required=True)
+        booked_items = _invokeFactory(form, 'FormDataGridField', id='buchungen', title='Buchungen', required=True)
+        booked_items.setColumnDefs([
+            {'columnDefault': '0', 'columnType': 'String', 'columnVocab': '', 'columnId': 'numberItems', 'columnTitle': 'Anzahl'},
+            {'columnDefault': '', 'columnType': 'SelectVocabulary', 'columnVocab': ['@@getData'], 'columnId': 'itemId', 'columnTitle': 'ID des zu buchenden Objekts'},
+            ])
+
         _invokeFactory(form, 'FormDateField', id='buchungStart', title='Buchen von', required=True)
         _invokeFactory(form, 'FormDateField', id='buchungEnde', title='Buchen bis', required=True)
         _invokeFactory(form, 'FormTextField', id='kommentar', title='Kommentar')

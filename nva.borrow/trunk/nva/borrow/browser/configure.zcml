@@ -28,5 +28,12 @@
    />
 
 
+  <browser:page
+    name="getData"
+    permission="cmf.ManagePortal"
+    class=".vocabulary.Vocabulary"
+    attribute="getData"
+    for="*"
+   />
 
 </configure>
