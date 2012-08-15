@@ -50,6 +50,7 @@
                     <a tal:attributes="href item/absolute_url"  tal:content="item/Title" />
                 </h2>
                 <div class="description" tal:content="item/Description" />
+                <label tal:content="string:Set contains ${item/itemsAvailable} items" />
             </div>
             <div class="row" tal:condition="context/individualItemBooking">
                 <a tal:attributes="href string:${context/absolute_url}/@@createBookingRequest">

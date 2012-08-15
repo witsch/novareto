@@ -13,7 +13,6 @@ def makeNamedImage(filename, data=None):
 def makeNamedImageFromData(data=None):
     return NamedImage(data)
 
-
 def _invokeFactory(context, portal_type, id, **kw):
     context.invokeFactory(portal_type, id=id, **kw)
     obj = context[id]
@@ -25,6 +24,11 @@ def _invokeFactory(context, portal_type, id, **kw):
     if obj.portal_type in ('nva.borrow.borrowableitems', 'nva.borrow.borrowableitem'):
         if not 'text' in kw:
             obj.text = RichTextValue(gen_sentences(20), 'text/plain', 'text/html')
+
+    try:
+        obj.portal_workflow.doActionFor(obj, 'publish')
+    except:
+        pass
     return obj
 
 def gen_sentence(max_words=None):
