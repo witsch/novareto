@@ -129,8 +129,11 @@ class Setup(BrowserView):
 
         self.request.response.redirect(demo.absolute_url())
 
-
-    def createBookingRequest(self):
-
+    def createBookingRequest(self, intid=None):
         form_folder = self.context.portal_catalog(portal_type='FormFolder')[0].getObject()
-        self.request.response.redirect(form_folder.absolute_url())
+        self.request.response.redirect(form_folder.absolute_url() + '?intid=%s' % intid)
+
+    def getIntId(self):
+        from zope.component import getUtility
+        from zope.intid.interfaces import IIntIds
+        return getUtility(IIntIds).getId(self.context)

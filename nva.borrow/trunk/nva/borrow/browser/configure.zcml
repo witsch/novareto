@@ -27,6 +27,13 @@
     for="*"
    />
 
+  <browser:page
+    name="getIntId"
+    permission="cmf.ManagePortal"
+    class=".setup.Setup"
+    attribute="getIntId"
+    for="*"
+   />
 
   <browser:page
     name="getData"
