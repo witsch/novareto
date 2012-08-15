@@ -36,6 +36,9 @@
         </a>
     </div>
 
+    <h2>This set contains the following items</h2>
+    <h3 style="color: green" tal:condition="context/individualItemBooking">Items can be booked individually</h3>
+    <h3 style="color: red" tal:condition="not: context/individualItemBooking">Items can not be booked individually</h3>
     <div class="items-in-set">
         <div class="item-in-set row" tal:repeat="item python: context.getFolderContents({'portal_type' : 'nva.borrow.borrowableitem'}, full_objects=True)">
             <div class="set-image" condition="python: item.image is not None">

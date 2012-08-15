@@ -1,9 +1,11 @@
 import os
 import loremipsum
+from random import randrange
 import urllib2
 from DateTime.DateTime import DateTime
 from Products.Five.browser import BrowserView
 from plone.namedfile import NamedImage
+from plone.app.textfield.value import RichTextValue
 
 def makeNamedImage(filename, data=None):
     return NamedImage(file(os.path.join(os.path.dirname(__file__), 'data', filename), 'rb').read())
@@ -19,6 +21,10 @@ def _invokeFactory(context, portal_type, id, **kw):
         obj.title = gen_sentence(80)
     if not 'description' in kw:
         obj.description = gen_sentences(2)
+
+    if obj.portal_type in ('nva.borrow.borrowableitems', 'nva.borrow.borrowableitem'):
+        if not 'text' in kw:
+            obj.text = RichTextValue(gen_sentences(20), 'text/plain', 'text/html')
     return obj
 
 def gen_sentence(max_words=None):
@@ -103,15 +109,19 @@ class Setup(BrowserView):
 
         druck = _invokeFactory(demo, 'nva.borrow.borrowableitems', id='sicherheit-druckmaschinen', title='Sicherheit bei Druckmaschinen')
         druck.image = makeNamedImage('druckmaschine.png')
+        druck.individualItemBooking = True
         for i in range (3):
             item = _invokeFactory(druck, 'nva.borrow.borrowableitem', str(i))
             item.image = makeNamedImageFromData(random_image(200, 200))
+            item.itemsAvailable = randrange(1, 5)
 
         atom = _invokeFactory(demo, 'nva.borrow.borrowableitems', id='sicherheit-atomkraftwerk', title='Sicherheit in Atomkraftwerken')
         atom.image = makeNamedImage('atom.png')
+        atom.individualItemBooking = False
         for i in range (3):
             item = _invokeFactory(atom, 'nva.borrow.borrowableitem', str(i))
             item.image = makeNamedImageFromData(random_image(200, 200))
+            item.itemsAvailable = randrange(1, 5)
 
         self.request.response.redirect(demo.absolute_url())
 

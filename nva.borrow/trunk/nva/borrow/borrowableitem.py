@@ -121,7 +121,6 @@ class BorrowableItem(dexterity.Item):
         for num in range(0, 12):
             next_first = (now + timedelta(days=30*num)).replace(day=1)
             days_in_month = calendar.monthrange(next_first.year, next_first.month)[1]
-            print next_first, days_in_month
             d = dict(year=next_first.year, month=next_first.month, month_name=MONTH_NAMES[next_first.month-1], days=[])
             for day in range(1, days_in_month+1):
                 current_day = date(next_first.year, next_first.month, day)
