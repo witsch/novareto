@@ -20,15 +20,32 @@
 	<h1><span tal:content="view/current_year" /></h1>
 	<p>
 	  <a href=""
-	     tal:condition="view/previous_year"
-	     tal:attributes="href string:${context/absolute_url}/?year=${view/previous_year}">&larr; <span i18n:translate="label_previous">previous</span></a>
+	     tal:condition="python: view.current_year > view.this_year"
+	     tal:attributes="href string:${context/absolute_url}/?year=${view/previous_year}">&larr; <span tal:content="view/previous_year"/></a>
+
+          <a href=""
+             tal:condition="python: view.current_year == view.this_year and not view.past"
+             tal:attributes="href string:${context/absolute_url}/?year=${view/current_year}&past=true">&larr; <span tal:content="string: vergangene Termine ${view/current_year}"/></a>
+
+          <a href=""
+             tal:condition="python: view.current_year == view.this_year and view.past"
+             tal:attributes="href string:${context/absolute_url}/?year=${view/previous_year}">&larr; <span tal:content="view/previous_year"/></a>
+
+
 	  <tal:sep condition="python: view.next_year and view.previous_year">
 	    &bull;
 	  </tal:sep>
+
 	  <a href=""
-	     tal:condition="view/next_year"
-	     tal:attributes="href string:${context/absolute_url}/?year=${view/next_year}"><span i18n:translate="label_next">next</span> &rarr;</a>
-	</p>
+	     tal:condition="python: view.next_year and not view.past"
+	     tal:attributes="href string:${context/absolute_url}/?year=${view/next_year}"><span tal:content="view/next_year"></span> &rarr;</a>
+
+          <a href=""
+             tal:condition="python: view.next_year and view.past"
+             tal:attributes="href string:${context/absolute_url}/?year=${view/current_year}"><span tal:content="string: aktuelle Termine ${view/current_year}"></span> &rarr;</a>
+        </p>
+
+        <span tal:condition="not: view/events" i18n:translate="">Für das ausgewählte Jahr sind keine Termine vorhanden.</span>
 
 	<tal:events tal:repeat="month python:sorted(view.events.keys())"
 		    tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;">
@@ -51,14 +68,14 @@
         <div class="nvaEventTitle" tal:condition="python: status == 'current'">
            <div class="nvaEventTitleDate" tal:content="string: heute"/>
            <div class="nvaEventTitleText">
-             <a href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
+             <a class="nvaEventLink" href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
            </div>
         </div>
 
         <div class="nvaEventTitle" tal:condition="python: status != 'current'">
            <div class="nvaEventTitleDate" tal:content="python:toLocalizedTime(resultObject.start())"/>
            <div class="nvaEventTitleText">
-             <a href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
+             <a class="nvaEventLink" href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
            </div>
         </div>
 

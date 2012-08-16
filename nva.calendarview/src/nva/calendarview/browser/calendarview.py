@@ -11,7 +11,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 class CalendarView(BrowserView):
 
-    minmax = 5
+    minmax = 1
 
     index = ViewPageTemplateFile("calendar.pt")
     
@@ -35,14 +35,21 @@ class CalendarView(BrowserView):
     def get_month_name(month):
         return calendar.month_name[month]
 
-    def sort_time(self, year, today):
+    def sort_time(self, year, today, past=False):
         events = {}
-
         today = DateTime.DateTime(today)
-        start = DateTime.DateTime(datetime.datetime(
-            year=year, month=1, day =1))
-        end = DateTime.DateTime(datetime.datetime(
-            year=year, month=12, day=31, hour=23, minute=59, second=59))
+        if past:
+            start = DateTime.DateTime(datetime.datetime(
+                year = today.year(), month=1, day=1))
+            end = today
+        else:
+            if today.year() == year:
+                start = today
+            else:
+                start = DateTime.DateTime(datetime.datetime(
+                    year = year, month=1, day=1))
+            end = DateTime.DateTime(datetime.datetime(
+                year=year, month=12, day=31, hour=23, minute=59, second=59))
 
         for event in self.events(start, end):
             event_start = event['start']
@@ -54,7 +61,7 @@ class CalendarView(BrowserView):
                 events_list.append(struct)
             elif event_end < today:
                 struct = ('finished', event)
-                # dont write it in event list because its finished
+                events_list.append(struct)
             elif event_start <= today <= event_end:
                 struct = ('current', event)
                 events_list.append(struct)
@@ -62,19 +69,30 @@ class CalendarView(BrowserView):
 
     def update(self):
         today = datetime.datetime.now()
-        default = today.year
+        default = self.this_year = today.year
         limit_previous = default - self.minmax
         limit_next = default + self.minmax
         year = int(self.request.form.get('year', default))
-        if not limit_previous <= year <= limit_next:
-            self.overflow = True
-        else:
+        self.past = False
+        past = self.request.form.get('past', False)
+        if year == today.year and past:
             self.overflow = False
-            self.events = self.sort_time(year=year, today=today)
+            self.past = True
+            self.events = self.sort_time(year=year, today=today, past=past)
+            self.current_year = today.year
+            self.next_year = today.year + 1
+            self.previous_year = today.year - 1
+        else:    
+            year = int(self.request.form.get('year', default))
+            if not limit_previous <= year <= limit_next:
+                self.overflow = True
+            else:
+                self.overflow = False
+                self.events = self.sort_time(year=year, today=today)
 
-        self.current_year = year
-        self.next_year = limit_next > year and year + 1 or None
-        self.previous_year = limit_previous < year and year - 1 or None
+            self.current_year = year
+            self.next_year = limit_next > year and year + 1 or None
+            self.previous_year = limit_previous < year and year - 1 or None
 
     def render(self):
         return self.index()
