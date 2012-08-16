@@ -33,16 +33,10 @@
 	<tal:events tal:repeat="month python:sorted(view.events.keys())"
 		    tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;">
 
-	  <!--<h3 i18n:translate=""
-        i18n:domain="plonelocales"
-        tal:condition="python: view.events[month]"
-	      tal:content="python: 'month_%s' % view.get_month_name(month).lower()[:3]" />-->
 
           <h2 i18n:translate=""
               tal:condition="python: view.events[month]"
               tal:content="python: view.get_month_name(month)" />
-
-
 
 	  <metal:block tal:repeat="event python:view.events[month]">
 
@@ -53,31 +47,21 @@
 			   resultObject result/getObject;
 			   creator result/Creator;
 			   resulturl resultObject/absolute_url;">
-      <h4>
-        <a href="/view"
-           tal:condition="python: status == 'current'"
-           tal:attributes="href resulturl"
-           tal:content="string: heute: ${result/pretty_title_or_id}">
-           Event headline
-        </a>
-        <a href="/view"
-           tal:condition="python: status != 'current'"
-           tal:attributes="href resulturl"
-           tal:content="python:toLocalizedTime(resultObject.start()) + ': ' + resultObject.title">
-           Event headline
-         </a>
-<!--
-         <span class="discreet">( 
-        <a class="discreet" href="#"
-          tal:attributes="href string:$resulturl/ics_view"
-          title="Download this event in iCal format"
-          i18n:attributes="title title_add_to_ical;">
-           <img tal:replace="structure portal/icon_export_ical.png"
-           src="" alt="" />
-           <span i18n:translate="label_add_to_ical">iCal</span>
-       </a>)</span>
--->
-      </h4>
+
+        <div class="nvaEventTitle" tal:condition="python: status == 'current'">
+           <div class="nvaEventTitleDate" tal:content="string: heute"/>
+           <div class="nvaEventTitleText">
+             <a href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
+           </div>
+        </div>
+
+        <div class="nvaEventTitle" tal:condition="python: status != 'current'">
+           <div class="nvaEventTitleDate" tal:content="python:toLocalizedTime(resultObject.start())"/>
+           <div class="nvaEventTitleText">
+             <a href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
+           </div>
+        </div>
+
 
     <div class="nvaEventContent"
          tal:define="compare_from python: toLocalizedTime(resultObject.start(), long_format=False);
