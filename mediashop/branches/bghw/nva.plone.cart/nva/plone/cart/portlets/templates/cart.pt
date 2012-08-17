@@ -67,9 +67,9 @@
         </dd>
 
         <dd class="portletFooter odd">
-            <a href="" i18n:translate="checkout_agb"
-	       tal:attributes="href string: allgemeine AGB">
-              AGB der BGHW
+            <a href="" i18n:translate="checkout_agb" target="_blank"
+	       tal:attributes="href string: http://www.bghw.de/medienangebot/allgemeine-geschaeftsbedingungen-agb">
+             Hinweise zur Bestellung&nbsp;&nbsp;&nbsp;<br/> und Nutzung 
             </a><br/> 
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>
