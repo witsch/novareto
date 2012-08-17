@@ -252,7 +252,7 @@ class Checkout(CartNamespace, grok.Form):
 
     @form.action(_(u'Zurück zum Warenkorb'), validator=null_validator)
     def handle_cancel(self, action, data):
-        self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++')
+        self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++/summary')
 
     @form.action(_(u'Abbrechen'), validator=null_validator)
     def handle_cancel(self, action, data):
