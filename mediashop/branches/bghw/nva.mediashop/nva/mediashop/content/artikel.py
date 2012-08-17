@@ -99,6 +99,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     atapi.FixedPointField(
         'preis',
+        required=True,
         storage=atapi.AnnotationStorage(),
         widget=atapi.DecimalWidget(
             label=_(u"Preis fuer Mitglieder"),
@@ -118,6 +119,7 @@ ArtikelSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     atapi.FixedPointField(
         'preis_non_member',
+        required=True,
         storage=atapi.AnnotationStorage(),
         widget=atapi.DecimalWidget(
             label=_(u"Preis fuer Nicht-Mitglieder"),
