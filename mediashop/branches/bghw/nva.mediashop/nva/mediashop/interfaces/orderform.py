@@ -6,7 +6,7 @@ from zope.schema import *
 class IOrderForm(Interface):
     """ OrderForm"""
 
-    mitgliedsnummer = TextLine(title=u"Mitgliedsnummer", required=False)
+    mitgliedsnummer = TextLine(title=u"Mitgliedsnummer", required=True)
     name = TextLine(title=u"Name")
     vorname = TextLine(title=u"Vorname")
     firma = TextLine(title=u"Firma")
