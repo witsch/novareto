@@ -5,13 +5,11 @@ import random
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
-from time import gmtime, strftime
+from time import gmtime, localtime, strftime
 from reportlab.lib.colors import gray
 from reportlab.platypus.frames import Frame
 from reportlab.platypus import Table
-from reportlab.graphics.barcode.code128 import Code128
 from reportlab.graphics.barcode.code39 import Standard39
-from reportlab.graphics.barcode.code39 import Extended39
 from reportlab.platypus.paragraph import Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.styles import ParagraphStyle
@@ -22,8 +20,6 @@ schriftart = "Helvetica"
 courier = "Courier"
 courierfett = "Courier-Bold"
 schriftartfett = "Helvetica-Bold"
-datum = strftime("%d.%m.%Y",gmtime())
-
 
 def splitline (line):
     """ Wenn Zeile groesser 45 Char, aufsplitten in 2 Zeilen """
@@ -51,6 +47,9 @@ def kopf (c, count=0):
 
     Achtung: Pfad fuer 'Logo' anpassen
     '''
+
+    datum = strftime("%d.%m.%Y",localtime())
+
     bcp = '/'.join(__file__.split('/')[:-1])+"/bghwlogo_bearbeitet.jpg"
     
     c.drawImage(bcp,13*cm,26.7*cm,width=3.74*cm,height=1.55*cm)
@@ -70,8 +69,7 @@ def kopf (c, count=0):
     c.drawString(12.3*cm, 24.1*cm, 'Kontakt:')
     c.setFont(schriftart, 12)
     c.drawString(12.3*cm, 23.6*cm, 'E-Mail: %s' %'medien@bghw.de')
-    c.drawString(12.3*cm, 23.1*cm, 'Telefon: %s' %'0228-')
-    c.drawString(12.3*cm, 22.6*cm, 'Telefax: %s' %'0228-')
+    c.drawString(12.3*cm, 23.1*cm, 'Telefax: %s' %'0228-5406 5899')
 
     # Betreff
     c.setFont(schriftartfett, 12)
@@ -116,7 +114,7 @@ def createpdf (filename, daten):
     gesamtpreis = 0.0
     c.setFont(schriftartfett, 10)
     c.drawString( 2.2*cm, 17.5*cm, u'Artikel-Code')
-    c.drawString( 6.2*cm, 17.5*cm, u'Artikel')
+    c.drawString( 5.6*cm, 17.5*cm, u'Artikel')
     c.drawString( 13.5*cm, 17.5*cm, u'Menge')
     c.drawString( 14.9*cm, 17.5*cm, u'Einzelpreis(EUR)')
     c.drawString(18.1*cm, 17.5*cm, u'Preis(EUR)')
@@ -129,11 +127,9 @@ def createpdf (filename, daten):
         offset += 0.6
         c.setFont(courier, 10) #Proportionalschrift
 
-        #Noch steht nicht fest welcher Barcode verwendet werden soll.
-        #bc = Code128(value = artikel['PseudoEan'].replace(' ',''), barWidth = 1.0, barHeight = 12, lquiet = 5, rquiet = 5)
         bc = Standard39(artikel['Artikelnummer'], barWidth = 1.0, barHeight = 12, checksum = 0)
 
-        bc.drawOn(c, 2*cm, (16.6-offset)*cm)
+        bc.drawOn(c, 1.6*cm, (16.6-offset)*cm)
         c.drawString(13.5*cm, (16.7-offset)*cm, str(artikel['Anzahl']).rjust(2))
         einzelpreis = artikel['Preis'] / artikel['Anzahl']
         c.drawString(15.1*cm, (16.7-offset)*cm, str('%8.2f' %einzelpreis))
@@ -151,7 +147,7 @@ def createpdf (filename, daten):
         offset_text = 0.0
         for zeile in text_artikel:
             offset += offset_text
-            c.drawString( 6.2*cm, (16.7-offset)*cm, zeile)
+            c.drawString( 5.6*cm, (16.7-offset)*cm, zeile)
             offset_text = 0.4
    
         c.setLineWidth (0.5) 
@@ -162,7 +158,7 @@ def createpdf (filename, daten):
             count+=1
             c.showPage()
             kopf(c, count)
-            offset = -11.5
+            offset = 0
 
     c.setFont(schriftart, 12)
     c.drawString( 2.2*cm, (15.5-offset)*cm, 'Gesamtbestellwert:')
@@ -170,7 +166,7 @@ def createpdf (filename, daten):
     c.drawString( 6.5*cm, (15.5-offset)*cm, 'EUR')
     c.drawString( 7.5*cm, (15.5-offset)*cm, str('%8.2f' % gesamtpreis))
     c.setFont(schriftart, 12)
-    c.drawString( 9.3*cm, (15.5-offset)*cm, daten['Mwst'])
+    #c.drawString( 9.3*cm, (15.5-offset)*cm, daten['Mwst'])
 
     # Passt Anschrift noch auf Seite? Sonst neue Seite.
     neueSeite = False
@@ -189,7 +185,7 @@ def createpdf (filename, daten):
         c.drawString(11.5*cm, 2.0*cm, 'Absender/Lieferadresse auf Folgeseite.')
         c.showPage()
         kopf(c, count)
-        offset = -11.0
+        offset = 0
 
     # Angaben zum Besteller. 
     c.setFont(schriftartfett, 12)
