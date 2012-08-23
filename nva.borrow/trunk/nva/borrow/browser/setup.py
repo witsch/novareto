@@ -93,7 +93,7 @@ class Setup(BrowserView):
         booked_items = _invokeFactory(form, 'FormDataGridField', id='buchungen', title='Buchungen', required=True)
         booked_items.setColumnDefs([
             {'columnDefault': '0', 'columnType': 'String', 'columnVocab': '', 'columnId': 'numberItems', 'columnTitle': 'Anzahl'},
-            {'columnDefault': '', 'columnType': 'SelectVocabulary', 'columnVocab': ['@@getData'], 'columnId': 'itemId', 'columnTitle': 'ID des zu buchenden Objekts'},
+            {'columnDefault': '', 'columnType': 'DynamicVocabulary', 'columnVocab': ['@@getData'], 'columnId': 'itemId', 'columnTitle': 'ID des zu buchenden Objekts'},
             ])
 
         _invokeFactory(form, 'FormDateField', id='buchungStart', title='Buchen von', required=True)
