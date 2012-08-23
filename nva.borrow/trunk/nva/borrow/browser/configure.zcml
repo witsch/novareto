@@ -37,7 +37,7 @@
 
   <browser:page
     name="getData"
-    permission="cmf.ManagePortal"
+    permission="zope2.View"
     class=".vocabulary.Vocabulary"
     attribute="getData"
     for="*"
