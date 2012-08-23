@@ -9,6 +9,6 @@ class Vocabulary(BrowserView):
         catalog = getToolByName(self.context, 'portal_catalog')
         dl = atapi.DisplayList()
         for brain in catalog({'portal_type' : ['nva.borrow.borrowableitem', 'nva.borrow.borrowableitems']}):
-            dl.add(brain.getId, brain.Title)
+            dl.add(brain.UID, brain.Title)
         return dl
 
