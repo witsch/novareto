@@ -32,7 +32,7 @@
     </div>
 
     <div class="row" tal:condition="context/individualItemBooking">
-        <a tal:attributes="href string:${context/absolute_url}/@@createBookingRequest">
+        <a tal:attributes="href string:${context/absolute_url}/@@createBookingRequest?intid=${context/getIntId}">
             <img src="++resource++nva.borrow/booknow.png" />
         </a>
     </div>
