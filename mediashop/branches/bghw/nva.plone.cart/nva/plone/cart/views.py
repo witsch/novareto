@@ -110,7 +110,7 @@ class CartNamespace(object):
     def default_namespace(self):
         namespace = grok.View.default_namespace(self)
         namespace['cart'] = self.context.cart
-        namespace['cart_url'] = self.portal_url + '/medien/medienkatalog/++cart++'
+        namespace['cart_url'] = self.portal_url + '/medienangebot/medienshop/++cart++'
         namespace['handler'] = self.context.handler
         return namespace
 
@@ -252,13 +252,13 @@ class Checkout(CartNamespace, grok.Form):
 
     @form.action(_(u'Zurück zum Warenkorb'), validator=null_validator)
     def handle_cancel(self, action, data):
-        self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++/summary')
+        self.request.response.redirect(self.portal_url+'/medienangebot/medienshop/++cart++/summary')
 
     @form.action(_(u'Abbrechen'), validator=null_validator)
     def handle_cancel(self, action, data):
         self.context.cart.clear()        
         utils.flash(self.request, _(u"Der Bestellvorgang wurde abgebrochen."))
-        self.request.response.redirect(self.portal_url+'/medien/medienkatalog/')
+        self.request.response.redirect(self.portal_url+'/medienangebot/medienshop/')
 
     @form.action(_(u'E-Mail-Bestellung'), validator=validate_checkout)
     def handle_order(self, action, data):
@@ -291,7 +291,7 @@ class Checkout(CartNamespace, grok.Form):
         self.context.cart.clear()        
         utils.flash(self.request,
                     _(u"Der Bestellvorgang ist bei uns eingegangen."))
-        self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++/thanks?id=%s' % cid)
+        self.request.response.redirect(self.portal_url+'/medienangebot/medienshop/++cart++/thanks?id=%s' % cid)
 
     #@form.action(_(u'Fax-Bestellung'), validator=validate_checkout)
     #def handle_print(self, action, data):
@@ -305,7 +305,7 @@ class Checkout(CartNamespace, grok.Form):
     #    order.is_member = bool(self.context.is_member)
     #    plone[TEMPORDERS][cid] = order
     #    self.context.cart.clear()        
-    #    self.request.response.redirect(self.portal_url+'/medien/medienkatalog/++cart++/print?id=%s' % cid)
+    #    self.request.response.redirect(self.portal_url+'/medienangebot/medienshop/++cart++/print?id=%s' % cid)
 
     def renderField(self, *args):
         label = required = description = error = input = "" 

@@ -40,7 +40,7 @@
 	      <td tal:content="item/quantity" />
 	    </tr>
 	  </table>
-          <a href = "" tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/delall">
+          <a href = "" tal:attributes="href string:${view/portal}/medienangebot/medienshop/++cart++/delall">
              <span i18n:translate="">Warenkorb löschen</span></a>
 	</dd>
 
@@ -54,14 +54,14 @@
 
         <dd class="myorder portletItem odd">
             <a href="" i18n:translate="manage_cart"
-	       tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/summary">
+	       tal:attributes="href string:${view/portal}/medienangebot/medienshop/++cart++/summary">
               Zum Einkaufswagen 
             </a><br/>
         </dd>
 
         <dd class="myorder portletItem even">
             <a href="" i18n:translate="checkout_cart"
-	       tal:attributes="href string:${view/portal}/medien/medienkatalog/++cart++/checkout">
+	       tal:attributes="href string:${view/portal}/medienangebot/medienshop/++cart++/checkout">
               Zur Kasse gehen
             </a><br/>
         </dd>
