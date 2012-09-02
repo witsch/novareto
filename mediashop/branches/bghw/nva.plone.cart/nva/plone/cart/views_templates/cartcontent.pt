@@ -26,7 +26,7 @@
 
     <span i18n:translate=""> Keine Artikel im Warenkorb. </span>
     <ul>
-      <li> <a href="/shop/medien/medienkatalog" i18n:translate=""> zurück </a> </li>
+      <li> <a href="/bghwportal/medienangebot/medienshop" i18n:translate=""> zurück </a> </li>
     </ul>
   </div>
   <div tal:condition="items">
@@ -121,12 +121,12 @@
    <table>
     <tr>
      <td>
-       <form action="/shop/medien/medienkatalog">
+       <form action="/bghwportal/medienangebot/medienshop">
          <input type="submit" class="context" value="weitere Artikel auswählen" />
        </form>
      </td>
      <td>
-       <form action="/shop/medien/medienkatalog/++cart++/checkout">
+       <form action="/bghwportal/medienangebot/medienshop/++cart++/checkout">
          <input type="submit" class="context" value="zum Bestellformular" />
        </form>
      </td>

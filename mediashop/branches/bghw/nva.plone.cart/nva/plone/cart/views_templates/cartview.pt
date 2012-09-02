@@ -30,12 +30,12 @@
 	  jq('#cart-member').live("click", function(e){
 	      jq.ajax({
 	        type: "GET",
-	        url: base_url + "/shop/medien/medienkatalog/++cart++/membership",
+	        url: base_url + "/bghwportal/medienangebot/medienshop/++cart++/membership",
 	        async: false,
 	        success: function() {
 	          jq.ajax({
 	            type: "GET",
-		    url: base_url + "/shop/medien/medienkatalog/++cart++/cartcontent",
+		    url: base_url + "/bghwportal/medienangebot/medienshop/++cart++/cartcontent",
 		    async: false,
 		    success: function(html){
 	              jq("#cart-content").html(html);
@@ -56,7 +56,7 @@
 	       success: function() {
 	         jq.ajax({
 	           type: "GET",
-		   url: base_url + "/shop/medien/medienkatalog/++cart++/cartcontent",
+		   url: base_url + "/bghwportal/medienangebot/medienshop/++cart++/cartcontent",
 		   async: false,
 		   success: function(html){
 	             jq("#cart-content").html(html);
