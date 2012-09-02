@@ -44,7 +44,7 @@
 	      jq.ajax({
 	        type: "GET",
 		dataType: 'json',
-	        url: base_url + "/medien/medienkatalog/++cart++/membership_final",
+	        url: base_url + "/medienangebot/medienshop/++cart++/membership_final",
 	        async: false,
 	        success: function(result) {
 		    jq('#price').animate({
