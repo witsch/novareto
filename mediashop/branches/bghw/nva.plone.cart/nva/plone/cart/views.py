@@ -62,8 +62,9 @@ class DeleteFromCart(grok.View):
 
     def update(self):
         session = ISession(self.request)
-        session = self.request.SESSION
+        #session = self.request.SESSION
         cart = session['nva.cart'] = Cart()
+        session.save()
         return cart
 
     def render(self):

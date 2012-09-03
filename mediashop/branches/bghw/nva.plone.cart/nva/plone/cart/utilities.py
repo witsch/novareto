@@ -14,8 +14,9 @@ def session_cart_retriever(request):
     """Get the current cart.
     """
     session = ISession(request)
-    session = request.SESSION
+    #session = request.SESSION
     cart = session.get('nva.cart', None)
     if cart is None:
         cart = session['nva.cart'] = Cart()
+        session.save()
     return cart
