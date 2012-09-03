@@ -36,7 +36,7 @@ def printMessage(obj, event):
     except:
         pass
 
-    sMail(to="a.lill@bghw.de",
+    sMail(to="medien@bghw.de",
           sender=besteller,
           cc="",
           subject="Medienshop: Neue Bestellung",
