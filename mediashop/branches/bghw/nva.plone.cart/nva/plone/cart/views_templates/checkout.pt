@@ -123,13 +123,13 @@
 
       <p tal:condition="context/is_member"> 
         <strong i18n:translate=""> Gesamtbestellwert: EUR 
-          <span id="price" tal:content="python: context.fF(handler.getTotalPrice())"/>
+          <span id="price" tal:content="python: handler.getTotalPrice()"/>
         </strong> 
         <span i18n:translate=""> zzgl. MwST und Versand </span>
       </p>
       <p tal:condition="not: context/is_member"> 
         <strong i18n:translate=""> Gesamtbestellwert: EUR 
-          <span id="price" tal:content="python: context.fF(handler.getMemberPrice())"/> 
+          <span id="price" tal:content="python: handler.getMemberPrice()"/> 
         </strong> 
         <span i18n:translate=""> zzgl. MwST und Versand </span>
       </p>
