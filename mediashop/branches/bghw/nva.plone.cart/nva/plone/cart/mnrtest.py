@@ -3,7 +3,7 @@ from suds.sudsobject import asdict
 
 def mnrtest(mnr):
     print "Test der Validierung von Mitgliedsnummern"
-    sc = Client('http://10.30.0.86/services/Service757/Service757.asmx?WSDL')
+    sc = Client('https://bghwwebservices.bg-kooperation.de/services/Service757/Service757.asmx?WSDL')
     result = sc.service.S757(mnr,'00')
     print result
     if not result:
@@ -12,3 +12,6 @@ def mnrtest(mnr):
         if result.RESPONSE.VORHANDEN == "1":
             return True
     return False
+
+if __name__ == "__main__":
+    print mnrtest('000000025')
