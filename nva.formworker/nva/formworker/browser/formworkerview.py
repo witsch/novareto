@@ -49,7 +49,7 @@ class formworkerView(BrowserView):
 
     def __call__(self):
         normals = [str, int, float]
-        mypath = '%s/%s.csv' %(csvbasepath,self.context.title)
+        mypath = '%s/%s.csv' %(csvbasepath,self.context.id)
         file = open(mypath, 'a')
         formcontent = self.context.listFolderContents()
         formfields=[]
