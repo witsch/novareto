@@ -36,10 +36,19 @@ def printMessage(obj, event):
     except:
         pass
 
-    sMail(to="medien@bghw.de",
-          sender=besteller,
-          cc="",
-          subject="Medienshop: Neue Bestellung",
-          text=textmail,
-          path=filename,
-          filename="Bestellung.pdf")
+    try:
+        sMail(to="medien@bghw.de",
+              sender=besteller,
+              cc="",
+              subject="Medienshop: Neue Bestellung",
+              text=textmail,
+              path=filename,
+              filename="Bestellung.pdf")
+    except:
+        sMail(to="medien@bghw.de",
+              sender="bghw-portal.bghw.de",
+              cc="",
+              subject="Medienshop: Neue Bestellung",
+              text=textmail,
+              path=filename,
+              filename="Bestellung.pdf")
