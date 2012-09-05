@@ -48,7 +48,7 @@ class formworkerView(BrowserView):
         return getToolByName(self.context, 'portal_url')
 
     def __call__(self):
-        normals = [str, int, float]
+        decimals = [int, float]
         mypath = '%s/%s.csv' %(csvbasepath,self.context.id)
         file = open(mypath, 'a')
         formcontent = self.context.listFolderContents()
@@ -57,8 +57,13 @@ class formworkerView(BrowserView):
             if i.__provides__(IPloneFormGenField):
                 fieldcontent = self.request.get(i.id, '')
                 #Behandlung unterschiedlicher Arten von Feldtypen aus dem Formgenerator
-                if fieldcontent.__class__ in normals:
-                    formfields.append(self.request.get(i.id, ''))
+                if fieldcontent.__class__ in decimals:
+                    formfields.append(fieldcontent)
+                elif fieldcontent.__class__ == str:
+                    fieldcontent = fieldcontent.replace('\r\n', ' ')
+                    fieldcontent = fieldcontent.replace('\n', ' ')
+                    fieldcontent = fieldcontent.replace('\r', ' ')
+                    formfields.append(fieldcontent)
                 elif fieldcontent.__class__ == list:
                     formfields.append(string.join(fieldcontent, ', '))
                 elif fieldcontent.__class__ == bool:
