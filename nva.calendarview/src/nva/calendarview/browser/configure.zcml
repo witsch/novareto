@@ -20,4 +20,9 @@
       description="A calendar by year"
       />
 
+  <browser:resource
+      name="nva.calendar.css"
+      file="calendar.css"
+      /> 
+
 </configure>

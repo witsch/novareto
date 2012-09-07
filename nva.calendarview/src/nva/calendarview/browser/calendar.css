@@ -1,0 +1,36 @@
+/* --- ---=[ EVENTS ]=--- --- */
+
+.nvaEventContent {
+  margin-left: 75px;
+}
+
+.nvaEventDescription {
+  margin-left: 75px;
+}
+
+.nvaEventTitle {
+  font-weight: bold;
+  font-size: 110%;
+}
+
+.nvaEventTitleText {
+  margin-left: 75px;
+  display: block;
+}
+
+.nvaEventTitleDate {
+  float: left;
+  color: #004994;
+  display: block;
+}
+
+.nvaEventLink {
+  text-decoration: none;
+  color: black;
+}
+
+.nvaCurrentYear {
+  font-size: 130%;
+  font-weight: bold;
+}
+
