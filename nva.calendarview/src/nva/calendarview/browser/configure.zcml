@@ -15,7 +15,7 @@
   <browser:menuItem
       for="Products.ATContentTypes.interface.IATFolder"
       menu="plone_displayviews"
-      title="Calendar View"
+      title="Kalender Ansicht"
       action="@@nva_calendarview"
       description="A calendar by year"
       />
