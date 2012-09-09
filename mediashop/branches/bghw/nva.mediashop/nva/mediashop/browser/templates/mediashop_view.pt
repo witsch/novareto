@@ -37,7 +37,7 @@
     </div>
 <br>
 
-   <form action="." method="POST">
+   <form action="./@@index" method="POST">
    Artikelsuche <input type="text" 
                        value="" 
                        name="form.artikel"
