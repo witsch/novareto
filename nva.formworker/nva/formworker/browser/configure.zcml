@@ -15,5 +15,12 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="myReportWorker"
+      class=".reportworkerview.reportworkerView"
+      allowed_interface=".reportworkerview.IreportworkerView"
+      permission="zope.Public"
+      />
 
 </configure>
