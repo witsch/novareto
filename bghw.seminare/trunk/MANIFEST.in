@@ -1,0 +1,2 @@
+recursive-include bghw *
+global-exclude *pyc
