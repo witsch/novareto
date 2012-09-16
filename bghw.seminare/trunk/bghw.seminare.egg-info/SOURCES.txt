@@ -1,3 +1,5 @@
+CHANGES.txt
+CONTRIBUTORS.txt
 MANIFEST.in
 README.txt
 setup.cfg
@@ -20,13 +22,21 @@ bghw/seminare/browser/__init__.py
 bghw/seminare/browser/configure.zcml
 bghw/seminare/content/__init__.py
 bghw/seminare/content/configure.zcml
+bghw/seminare/content/seminar.py
 bghw/seminare/interfaces/__init__.py
+bghw/seminare/interfaces/seminar.py
 bghw/seminare/portlets/__init__.py
 bghw/seminare/portlets/configure.zcml
 bghw/seminare/profiles/default/factorytool.xml
 bghw/seminare/profiles/default/metadata.xml
 bghw/seminare/profiles/default/portlets.xml
+bghw/seminare/profiles/default/rolemap.xml
 bghw/seminare/profiles/default/types.xml
+bghw/seminare/profiles/default/types/Seminar.xml
 bghw/seminare/tests/__init__.py
 bghw/seminare/tests/base.py
 bghw/seminare/tests/test_doctest.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt

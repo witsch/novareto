@@ -7,4 +7,14 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <browser:page
+      for="*"
+      name="seminar_view"
+      class=".seminarview.seminarView"
+      template="seminarview.pt"
+      allowed_interface=".seminarview.IseminarView"
+      permission="zope.Public"
+      />
+
+
 </configure>
