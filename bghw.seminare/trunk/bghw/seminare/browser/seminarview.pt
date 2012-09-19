@@ -6,10 +6,67 @@
     <div metal:fill-slot="main">
         <tal:main-macro metal:define-macro="main"
                         tal:define="testview view/test;
-                                    data view/getTableData;
-                                    ">
+                        formdata view/getViewData;
+                        marker formdata/marker;
+                        seminare formdata/seminare;
+                        plzform formdata/plzform;
+                        ">
 
-            <span tal:content="testview/dummy">test</span>
+          <h1 tal:content="context/title"/>
+
+          <div style="float: right">
+          <table class="grid listing" width="200px">
+            <tr><th>Ansprechpartner</th><td tal:content="context/contactName"/></tr>
+            <tr><th>E-Mail</th><td><a href="" tal:attributes="href string:mailto:${context/contactEmail}" 
+                  tal:content="context/contactEmail">E-Mail</a></td></tr>
+            <tr><th>Telefon</th><td tal:content="context/contactPhone"/></tr>
+            <tr tal:condition="context/contactFax"><th>Telefax</th><td tal:content="context/contactFax"/></tr>
+          </table>
+          </div>
+
+          <p class="description" tal:content="context/description"/>  
+
+          <p class="haupttext" tal:content="structure context/text"/>
+
+          <span tal:condition="context/prerequisites">
+          <fieldset>
+            <legend>Bitte beachten Sie folgende Teilnahmevoraussetzungen.</legend>
+            <p class="voraussetzungen" tal:content="structure context/prerequisites"/>
+          </fieldset>  
+          </span>
+
+          <span tal:condition="plzform">
+            <p>Bitte geben Sie hier die Postleitzahl Ihres Unternehmens ein, um passende Seminartermine zu finden.</p>
+            <p>  
+            <form action="" tal:attributes="action python:context.absolute_url()+'/seminar_view'">
+            <input name="plz" type="text" size="5" maxlength="5" value="" tal:attributes="value request/plz|nothing">
+            <input type="submit" value="Seminare suchen" class="standalone">
+          </form></p> 
+          </span>
+           
+          <span tal:condition="python: not seminare and plzform and request.get('plz', '')">
+            <p>Zu der von Ihnen angegebenen Postleitzahl konnten keine Seminartermine gefunden werden. Bitte prüfen Sie
+               Ihre Eingabe.</p>
+             </span>     
+
+          <table tal:condition="seminare" id="seminartermine" class="grid listing">
+            <tr>
+              <th>Seminarbeginn</th>
+              <th>Seminarende</th>
+              <th>Seminarort</th>
+              <th tal:condition="marker">Folgetermin(e)</th>
+              <th>Buchung</th>
+            </tr>
+            <tr tal:repeat="seminar seminare">
+              <td tal:content="seminar/von"/>
+              <td tal:content="seminar/bis"/>  
+              <td tal:content="seminar/sort"/>
+              <td tal:condition="marker"><span tal:condition="seminar/folge1" tal:content="seminar/folge1"/>
+                  <span tal:condition="seminar/folge2"><br/><span tal:content="seminar/folge2"/></span></td>
+              <td><a href="" tal:condition="not: seminar/ausgebucht" tal:attributes="href seminar/url">anmelden</a>
+                  <a href="" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">vormerken</a></td>
+            </tr>   
+          </table>            
 
         </tal:main-macro>
     </div>

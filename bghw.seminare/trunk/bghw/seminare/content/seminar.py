@@ -33,7 +33,7 @@ SeminarSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
 
     atapi.ReferenceField(
-        'anmeldeformular',
+        'aform',
         storage=atapi.AnnotationStorage(),
         widget=ReferenceBrowserWidget(
             label=_(u"Auswahl des Anmeldeformulars"),

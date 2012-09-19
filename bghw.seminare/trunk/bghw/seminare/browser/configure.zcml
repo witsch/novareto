@@ -8,7 +8,7 @@
   <!-- -*- extra stuff goes here -*- -->
 
   <browser:page
-      for="*"
+      for="..interfaces.seminar.ISeminar"
       name="seminar_view"
       class=".seminarview.seminarView"
       template="seminarview.pt"
@@ -16,5 +16,12 @@
       permission="zope.Public"
       />
 
+  <browser:menuItem
+    for="..interfaces.seminar.ISeminar"
+    menu="plone_displayviews"
+    title="Seminaransicht"
+    action="@@seminar_view"
+    description="Zeigt die Ansicht zur Buchung von Seminaren."
+    />
 
 </configure>
