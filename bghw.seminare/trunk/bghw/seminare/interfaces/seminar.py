@@ -16,7 +16,7 @@ class ISeminar(Interface):
         description=_(u"Bitte beschreiben Sie hier aausfuehrlich das angebotene Seminar."),
     )
 #
-    anmeldeformular = schema.Object(
+    aform = schema.Object(
         title=_(u"Auswahl des Anmeldeformulars"),
         required=False,
         description=_(u"Bitte waehlen Sie hier aus, welches Anmeldeformular verwendet werden soll."),

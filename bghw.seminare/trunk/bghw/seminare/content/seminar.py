@@ -185,7 +185,7 @@ class Seminar(base.ATCTContent):
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
     text = atapi.ATFieldProperty('text')
 
-    anmeldeformular = atapi.ATReferenceFieldProperty('anmeldeformular')
+    aform = atapi.ATReferenceFieldProperty('aform')
 
     prerequisites = atapi.ATFieldProperty('prerequisites')
 
