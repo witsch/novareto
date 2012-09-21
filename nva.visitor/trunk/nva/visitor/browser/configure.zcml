@@ -23,4 +23,12 @@
       permission="zope2.View"
       />
 
+  <browser:viewlet
+      for="nva.visitor.interfaces.IBewerber"
+      name="visitor.bewerberactions"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+      class=".viewlets.MyVisitorActionsViewlet"
+      permission="zope2.View"
+      />
+
 </configure>

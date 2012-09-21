@@ -20,71 +20,30 @@ BewerberSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
 
-    atapi.StringField(
-        'firma',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.StringWidget(
-            label=_(u"Firma"),
-            description=_(u"Firmenname des Besuchers"),
-            size = 60,
-        ),
-        required=True,
-    ),
 
     atapi.StringField(
         'ortland',
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
             label=_(u"Ort/Land"),
-            description=_(u"Herkunft des Besuchers (Ort/Land)"),
+            description=_(u"Herkunft des Bewerbers (Ort/Land)"),
             size = 60,
         ),
         required=True,
     ),
 
-    atapi.LinesField(
-        'brancheaktivitaeten',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.MultiSelectionWidget(
-            label=_(u"Branche"),
-            description=_(u"Auswahl der Branche / Aktivitaeten des Besuchers"),
-        ),
-        required=True,
-        vocabulary = branche,
-    ),
-
-    atapi.LinesField(
-        'gbeziehung',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.SelectionWidget(
-            label=_(u"Geschaeftsbeziehung"),
-            description=_(u"Auswahl der Art der Geschaeftsbeziehung"),
-        ),
-        required=True,
-        vocabulary = beziehung,
-    ),
 
     atapi.StringField(
         'ansprechpartner',
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
-            label=_(u"Ansprechpartner"),
-            description=_(u"Name des Besuchers / Ansprechpartners"),
+            label=_(u"Wer"),
+            description=_(u"Name des Bewerbers"),
             size = 60,
         ),
         required=True,
     ),
 
-    atapi.StringField(
-        'funktion',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.StringWidget(
-            label=_(u"Funktion"),
-            description=_(u"Funktion des Besuchers / Ansprechpartners"),
-            size = 60,
-        ),
-        required=True,
-    ),
 
     atapi.DateTimeField(
         'startdate',
@@ -178,22 +137,13 @@ BewerberSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         required=True,
     ),
 
-    atapi.StringField(
-        'mailing',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.MultiSelectionWidget(
-            label=_(u"zusaetzlich per E-Mail informieren"),
-            description=_(u"Hier koennen Empfaenger ausgewaehlt werden, die per E-Mail ueber den Termin benachrichtigt werden sollen. Mitglieder der Geschaeftsfuehrung und die Pforte werden immer informiert."),
-        ),
-        vocabulary="adsearchliste",
-    ),
 
     atapi.BooleanField(
         'mailsent',
         storage=atapi.AnnotationStorage(),
         widget=atapi.BooleanWidget(
             label=_(u"Mailinformation"),
-            description=_(u"Ueber die Besuchsanmeldung wurde per Mail informiert."),
+            description=_(u"Ueber die Bewerberanmeldung wurde per Mail informiert."),
             visible = {'edit': False, 'view': False}
         ),
     ),
@@ -222,12 +172,8 @@ class Bewerber(base.ATCTContent):
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
     mailsent = atapi.ATFieldProperty('mailsent')
-    firma = atapi.ATFieldProperty('firma')
     ortland = atapi.ATFieldProperty('ortland')
-    brancheaktivitaeten = atapi.ATFieldProperty('brancheaktivitaeten')
-    gbeziehung = atapi.ATFieldProperty('gbeziehung')
     ansprechpartner = atapi.ATFieldProperty('ansprechpartner')
-    funktion = atapi.ATFieldProperty('funktion')
     enddate = atapi.ATFieldProperty('enddate')
     startdate = atapi.ATFieldProperty('startdate')
     ablauf = atapi.ATFieldProperty('ablauf')
@@ -237,33 +183,7 @@ class Bewerber(base.ATCTContent):
     contactname = atapi.ATFieldProperty('contactname')
     contactphone = atapi.ATFieldProperty('contactphone')
     gespraechsteilnehmer = atapi.ATFieldProperty('gespraechsteilnehmer')
-    mailing = atapi.ATFieldProperty('mailing')
 
-    def adsearchliste(self):
-        """ Suche im AD-Verzeichnis"""
-        try:
-            res = ldapsearch()
-        except:
-            return DisplayList((('lwalther@novareto.de', 'Lars Walther'),))
-        liste=[]
-        if res:
-            for entry in res:
-                attr = entry[1]
-                if attr.has_key('mail'):
-                    if attr.has_key('msExchHideFromAddressLists'):
-                        verstecken=attr['msExchHideFromAddressLists']
-                        if verstecken == ['FALSE']:
-                            eintrag=[attr['name'][0],attr['mail'][0]]
-                            liste.append(eintrag)
-                        else:
-                            eintrag=[attr['name'][0],attr['mail'][0]]
-                            liste.append(eintrag)
-        liste.sort()
-        results=[]
-        for x in liste:
-                results.append([x[1],x[0]])
-        mailtuple=tuple(results)
-        return DisplayList(mailtuple)
 
     def Besuchsbeginn(self):
         """Methode zum Indizieren des Besuchsbeginns"""
@@ -281,8 +201,6 @@ class Bewerber(base.ATCTContent):
         """Methode zum Indizieren des Besuchers"""
         return self.getAnsprechpartner()
 
-    def Firma(self):
-        """Methode zum Indizieren der Firma"""
-        return self.getFirma()
+
 
 atapi.registerType(Bewerber, PROJECTNAME)

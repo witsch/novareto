@@ -19,6 +19,7 @@ class MyVisitorActionsViewlet(ViewletBase):
 
     def hasRightTypes(self):
         mytype = False
+        print self.context.portal_type
         if self.context.portal_type in ["Bewerber", "Besuchsanmeldung"]:
             mytype = True
         return mytype
@@ -30,6 +31,8 @@ class MyVisitorActionsViewlet(ViewletBase):
         rightRoles = ['Manager', 'Owner']
         compare = set(userRoles) & set(rightRoles)
         if compare:
+            return True
+        if pm.getAuthenticatedMember().id == self.context.Creator():
             return True
         return False
 

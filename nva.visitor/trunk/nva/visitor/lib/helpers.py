@@ -27,12 +27,13 @@ try:
     mailserver = configuration.get('mailserver')
     tmpfile = configuration.get('tmpfile')
 except:
-    ldapserver = 'rs-aug-bendc-01.pfister.de'
-    ldapadmin = "cn=svc-agb-plonedummy,ou=systemkonten,dc=pfister,dc=de"
-    ldappassw = "xxxxxxxxxx"
-    basedn = "ou=user,ou=Pfister GmbH,dc=pfister,dc=de"
+    ldapserver = 'agb-ad-rodc02'
+    ldapadmin = "cn=svc-agb-plonedummy,ou=AGB,ou=Service Accounts,ou=Users,ou=IT,dc=dk,dc=flsmidth,dc=net"
+    ldappassw = "Yoo6raek"
+    basedn = "ou=AGB,ou=users,ou=FLS,dc=dk,dc=flsmidth,dc=net"
     mailserver = 'rs-aug-appsv-01'
     tmpfile = '/tmp'
+    
 
 def ldapsearch(sfilter=None):
     """Sucht im ActiveDirectory der Firma Pfister"""

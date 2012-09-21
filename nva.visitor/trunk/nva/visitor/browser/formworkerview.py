@@ -59,13 +59,14 @@ class formworkerView(BrowserView):
         vliste=[]
         vstrng=''
 
-        for i in self.context.getMailing():
-            if i:
-                vliste.append(i)
-                if vstrng:
-                    vstrng=vstrng + ', <' + i + '>'
-                else:
-                    vstrng=vstrng + '<' + i + '>'
+        if self.context.portal_type == "Besuchsanmeldung":
+            for i in self.context.getMailing():
+                if i:
+                    vliste.append(i)
+                    if vstrng:
+                        vstrng=vstrng + ', <' + i + '>'
+                    else:
+                        vstrng=vstrng + '<' + i + '>'
 
         to=vliste
         cc_str='verteilerbesucher@FLSmidthPfister.com'

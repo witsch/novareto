@@ -203,6 +203,7 @@ BesuchsanmeldungSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         widget=atapi.MultiSelectionWidget(
             label=_(u"zusaetzlich per E-Mail informieren"),
             description=_(u"Hier koennen Empfaenger ausgewaehlt werden, die per E-Mail ueber den Termin benachrichtigt werden sollen. Mitglieder der Geschaeftsfuehrung und die Pforte werden immer informiert."),
+            size = 20,
         ),
         vocabulary="adsearchliste",
     ),
@@ -274,9 +275,9 @@ class Besuchsanmeldung(base.ATCTContent):
                         if verstecken == ['FALSE']:
                             eintrag=[attr['name'][0],attr['mail'][0]]
                             liste.append(eintrag)
-                        else:
-                            eintrag=[attr['name'][0],attr['mail'][0]]
-                            liste.append(eintrag)
+                    else:
+                        eintrag=[attr['name'][0],attr['mail'][0]]
+                        liste.append(eintrag)
         liste.sort()
         results=[]
         for x in liste:
