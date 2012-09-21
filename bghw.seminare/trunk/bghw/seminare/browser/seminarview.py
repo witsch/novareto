@@ -138,8 +138,9 @@ class seminarView(BrowserView):
                     formurl = self.context.absolute_url()
                     if aform:
                         formurl = aform.absolute_url()
+
                     data['url'] = "%s?titel=%s&ort=%s&von=%s&bis=%s&nacht=%s&gebucht=%s" %(formurl,
-                                                                                           self.context.title,
+                                                                                           self.context.title.decode('utf-8'),
                                                                                            data['sort'],
                                                                                            data['von'],
                                                                                            data['bis'],
