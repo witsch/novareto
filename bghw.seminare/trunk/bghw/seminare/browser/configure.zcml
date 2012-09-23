@@ -24,4 +24,12 @@
     description="Zeigt die Ansicht zur Buchung von Seminaren."
     />
 
+  <browser:viewlet
+     for="Products.PloneFormGen.interfaces.IPloneFormGenForm"
+     name="bghwseminare.seminarmetaviewlet"
+     manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+     class=".formviewlets.SeminarMetaViewlet"
+     permission="zope2.View"
+     />
+
 </configure>

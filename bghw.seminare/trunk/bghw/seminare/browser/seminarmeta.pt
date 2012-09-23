@@ -1,0 +1,9 @@
+<div tal:omit-tag=""
+     i18n:domain="bghw.seminare"
+     tal:define="seminarort view/sort">
+
+     <fieldset>
+       <legend>Daten zu ihrem Termin</legend>
+       <p><b>Seminarort:</b><span tal:content="seminarort"/></p>
+     </fieldset>
+</div>   
