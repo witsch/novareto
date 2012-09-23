@@ -80,7 +80,7 @@ class ISeminar(Interface):
 #
     datefile = schema.Bytes(
         title=_(u"Termindatei"),
-        required=False,
+        required=True,
         description=_(u"Hier koennen Sie eine Datei mit Seminarterminen hochladen."),
     )
 #

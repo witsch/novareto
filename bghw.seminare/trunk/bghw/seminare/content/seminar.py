@@ -158,6 +158,7 @@ SeminarSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             description=_(u"Hier koennen Sie eine Datei mit Seminarterminen hochladen."),
         ),
         validators=('isNonEmptyFile'),
+        required = True,
     ),
 
 
