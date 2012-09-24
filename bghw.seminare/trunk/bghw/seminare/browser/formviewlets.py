@@ -12,8 +12,10 @@ class SeminarMetaViewlet(ViewletBase):
             self.sort = self.request.get('sort', self.context.sort.get(self.context))
             self.von = self.request.get('von', self.context.von.get(self.context))
             self.bis = self.request.get('bis', self.context.bis.get(self.context))
+            self.ausgebucht = self.request.get('ausgebucht', self.context.ausgebucht.get(self.context))
         except:
             self.titel = ''
             self.sort = ''
             self.von = ''
             self.bis = ''
+            self.ausgebucht = ''

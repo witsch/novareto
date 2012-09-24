@@ -97,8 +97,10 @@
                 <span tal:condition="context/prerequisites" class="linact" style="color:#666666;" >anmelden</span>
                 </span>
                 <span tal:condition="seminar/ausgebucht">
-                <a href="" class="lact" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">vormerken</a>
-                <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">vormerken</span>
+                  <a href="" class="lact" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">ausgebucht<br/>
+                    bitte vormerken</a>
+                  <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">ausgebucht<br/>
+                    bitte vormerken</span>
                 </span>
               </td>  
             </tr>   

@@ -3,13 +3,16 @@
      tal:define="seminartitel view/titel;
                  seminarort view/sort;
                  von view/von;
-                 bis view/bis;">
+                 bis view/bis;
+                 ausgebucht view/ausgebucht">
 
      <fieldset tal:condition = "seminartitel">
        <legend>Anmeldung zu einem Seminar</legend>
        <h1 tal:content="seminartitel"/>
          <p><b>Sie melden sich zu folgendem Seminartermin an:</b></p>
          <p><b>Seminarort:</b> <span tal:content="seminarort"/></p>
-           <p><b>Datum:</b> <span tal:content="von"/> bis <span tal:content="bis"/></p>
+         <p><b>Datum:</b> <span tal:content="von"/> bis <span tal:content="bis"/></p>
+         <p tal:condition="python: ausgebucht=='True'">
+           <b>Hinweis:</b> Das Seminar ist derzeit ausgebucht. Mit dieser Anmeldung registrieren wir Ihre Vormerkung.</p>
      </fieldset>
 </div>   
