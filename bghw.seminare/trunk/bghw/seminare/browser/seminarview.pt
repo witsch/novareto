@@ -69,11 +69,13 @@
              </span>     
 
           <div tal:condition="seminare">
-          <h2>Seminartermine</h2>
-          <label for="voraussetzungen">Erfüllung der Voraussetzungen</label>
-          <p><input type="checkbox" name="voraussetzungen"/>
-          Bitte bestätigen Sie durch Anklicken, dass Sie die dargestellten Voraussetzungen 
-          für die Teilnahme am Seminar erfüllen.</p>
+            <h2>Seminartermine</h2>
+            <span tal:condition="context/prerequisites">  
+              <label for="voraussetzungen">Erfüllung der Voraussetzungen</label>
+                <p><input type="checkbox" name="voraussetzungen"/>
+                Bitte bestätigen Sie durch Anklicken, dass Sie die dargestellten Voraussetzungen 
+                für die Teilnahme am Seminar erfüllen.</p>
+              </span>    
 
           <table id="seminartermine" class="grid listing">
             <tr>
@@ -90,10 +92,15 @@
               <td tal:condition="marker"><span tal:condition="seminar/folge1" tal:content="seminar/folge1"/>
                   <span tal:condition="seminar/folge2"><br/><span tal:content="seminar/folge2"/></span></td>
               <td>
+                <span tal:condition="not: seminar/ausgebucht">    
                 <a href="" class="lact" tal:condition="not: seminar/ausgebucht" tal:attributes="href seminar/url">anmelden</a>
-                <span class="linact" style="color:grey;" tal:condition="not: seminar/ausgebucht">anmelden</span>
-                <a href="" class="lact" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">vormerken</a></td>
-              <span class="linact" style="color:grey;" tal:condition="seminar/ausgebucht">vormerken</span>
+                <span tal:condition="context/prerequisites" class="linact" style="color:#666666;" >anmelden</span>
+                </span>
+                <span tal:condition="seminar/ausgebucht">
+                <a href="" class="lact" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">vormerken</a>
+                <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">vormerken</span>
+                </span>
+              </td>  
             </tr>   
           </table>
         </div>
