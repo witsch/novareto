@@ -12,6 +12,25 @@
                         plzform formdata/plzform;
                         ">
 
+          <script type="text/javascript">
+
+            jq(document).ready(function() {
+                if (jq('input[name=voraussetzungen]').length != 0){
+                    if (jq('input[name=voraussetzungen]').attr('checked') == true){
+                    jq('span.linact').hide();}
+                    else {
+                    jq('a.lact').hide();}
+                    }
+
+                jq('input[name=voraussetzungen]').click(function() {
+                  jq('span.linact').toggle();
+                  jq('a.lact').toggle();
+                  });
+             })
+
+          </script>
+
+
           <h1 tal:content="context/title"/>
 
           <div style="float: right">
@@ -49,7 +68,14 @@
                Ihre Eingabe.</p>
              </span>     
 
-          <table tal:condition="seminare" id="seminartermine" class="grid listing">
+          <div tal:condition="seminare">
+          <h2>Seminartermine</h2>
+          <label for="voraussetzungen">Erfüllung der Voraussetzungen</label>
+          <p><input type="checkbox" name="voraussetzungen"/>
+          Bitte bestätigen Sie durch Anklicken, dass Sie die dargestellten Voraussetzungen 
+          für die Teilnahme am Seminar erfüllen.</p>
+
+          <table id="seminartermine" class="grid listing">
             <tr>
               <th>Seminarbeginn</th>
               <th>Seminarende</th>
@@ -63,10 +89,14 @@
               <td tal:content="seminar/sort"/>
               <td tal:condition="marker"><span tal:condition="seminar/folge1" tal:content="seminar/folge1"/>
                   <span tal:condition="seminar/folge2"><br/><span tal:content="seminar/folge2"/></span></td>
-              <td><a href="" tal:condition="not: seminar/ausgebucht" tal:attributes="href seminar/url">anmelden</a>
-                  <a href="" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">vormerken</a></td>
+              <td>
+                <a href="" class="lact" tal:condition="not: seminar/ausgebucht" tal:attributes="href seminar/url">anmelden</a>
+                <span class="linact" style="color:grey;" tal:condition="not: seminar/ausgebucht">anmelden</span>
+                <a href="" class="lact" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">vormerken</a></td>
+              <span class="linact" style="color:grey;" tal:condition="seminar/ausgebucht">vormerken</span>
             </tr>   
-          </table>            
+          </table>
+        </div>
 
         </tal:main-macro>
     </div>

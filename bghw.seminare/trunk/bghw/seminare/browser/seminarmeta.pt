@@ -1,9 +1,15 @@
 <div tal:omit-tag=""
      i18n:domain="bghw.seminare"
-     tal:define="seminarort view/sort">
+     tal:define="seminartitel view/titel;
+                 seminarort view/sort;
+                 von view/von;
+                 bis view/bis;">
 
-     <fieldset>
-       <legend>Daten zu ihrem Termin</legend>
-       <p><b>Seminarort:</b><span tal:content="seminarort"/></p>
+     <fieldset tal:condition = "seminartitel">
+       <legend>Anmeldung zu einem Seminar</legend>
+       <h1 tal:content="seminartitel"/>
+         <p><b>Sie melden sich zu folgendem Seminartermin an:</b></p>
+         <p><b>Seminarort:</b> <span tal:content="seminarort"/></p>
+           <p><b>Datum:</b> <span tal:content="von"/> bis <span tal:content="bis"/></p>
      </fieldset>
 </div>   

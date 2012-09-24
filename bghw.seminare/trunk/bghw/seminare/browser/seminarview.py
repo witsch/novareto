@@ -139,13 +139,13 @@ class seminarView(BrowserView):
                     if aform:
                         formurl = aform.absolute_url()
 
-                    data['url'] = "%s?titel=%s&ort=%s&von=%s&bis=%s&nacht=%s&gebucht=%s" %(formurl,
-                                                                                           self.context.title.decode('utf-8'),
-                                                                                           data['sort'],
-                                                                                           data['von'],
-                                                                                           data['bis'],
-                                                                                           data['nacht'],
-                                                                                           data['ausgebucht'],)
+                    data['url'] = "%s?titel=%s&sort=%s&von=%s&bis=%s&nacht=%s&iausgebucht=%s" %(formurl,
+                                                                                                self.context.title.decode('utf-8'),
+                                                                                                data['sort'],
+                                                                                                data['von'],
+                                                                                                data['bis'],
+                                                                                                data['nacht'],
+                                                                                                data['ausgebucht'],)
 
                     termine.append(data)
         newlist = sorted(termine, key=itemgetter('mysorter'))
