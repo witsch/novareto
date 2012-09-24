@@ -80,6 +80,16 @@ class seminarView(BrowserView):
         """
         Gibt die Seminardaten für ausgewaehlte Orte zurueck
         """
+        aform = self.context.getAform()
+        formurl = self.context.absolute_url()
+        if aform:
+            formurl = aform.absolute_url()
+
+        prerequisites = self.context.getPrerequisites()
+        prepared = False
+        if prerequisites:
+            prepared = True
+
         self.marker = False #Markiert das Vorhandensein von Folgeterminen
         workdict = self.openExcelWorkbook()
         ts = workdict.get('termine', None)
@@ -134,18 +144,16 @@ class seminarView(BrowserView):
                         data['nacht'] = True
                     if ts.cell(i, 16).value:
                         data['ausgebucht'] = True
-                    aform = self.context.getAform()
-                    formurl = self.context.absolute_url()
-                    if aform:
-                        formurl = aform.absolute_url()
 
-                    data['url'] = "%s?titel=%s&sort=%s&von=%s&bis=%s&nacht=%s&iausgebucht=%s" %(formurl,
-                                                                                                self.context.title.decode('utf-8'),
-                                                                                                data['sort'],
-                                                                                                data['von'],
-                                                                                                data['bis'],
-                                                                                                data['nacht'],
-                                                                                                data['ausgebucht'],)
+                    data['url'] = "%s?titel=%s&sort=%s&von=%s&bis=%s&nacht=%s&ausgebucht=%s&voraussetzungen=%s" %(formurl,
+                                                                                               self.context.title.decode('utf-8'),
+                                                                                               data['sort'],
+                                                                                               data['von'],
+                                                                                               data['bis'],
+                                                                                               data['nacht'],
+                                                                                               data['ausgebucht'],
+                                                                                               prepared
+                                                                                               )
 
                     termine.append(data)
         newlist = sorted(termine, key=itemgetter('mysorter'))
