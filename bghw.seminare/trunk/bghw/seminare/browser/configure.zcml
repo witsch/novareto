@@ -46,7 +46,7 @@
   <browser:viewlet
      for="Products.PloneFormGen.interfaces.IPloneFormGenForm"
      name="bghwseminare.seminarmetaviewlet"
-     manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+     manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
      class=".formviewlets.SeminarMetaViewlet"
      permission="zope2.View"
      />
