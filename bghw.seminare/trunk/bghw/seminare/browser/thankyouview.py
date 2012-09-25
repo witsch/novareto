@@ -2,7 +2,7 @@ from zope.interface import implements, Interface
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
-
+from collective.beaker.interfaces import ISession
 from bghw.seminare import seminareMessageFactory as _
 
 
@@ -40,3 +40,11 @@ class thankyouView(BrowserView):
         dummy = _(u'a dummy string')
 
         return {'dummy': dummy}
+    
+    def thanksdata(self):
+        """
+        renders the data for thankyou-page
+        """
+        session = ISession(self.request)
+        formdata = session.get('formdata', {})
+        return formdata

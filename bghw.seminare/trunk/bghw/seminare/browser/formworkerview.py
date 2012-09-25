@@ -78,6 +78,5 @@ class seminarworkerView(BrowserView):
                                    'Hier ist die Anmeldung', mytmpfile, 'seminar.pdf')
 
 
-        myredirect = self.context.getThanksPageOverride()
-        myurl = "%s/%s" %(self.portal.absolute_url(), myredirect)
+        myurl = "%s/%s" %(self.portal.absolute_url(), 'seminaranmeldung_dank')
         return self.request.response.redirect(myurl)    

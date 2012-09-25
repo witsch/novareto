@@ -5,9 +5,18 @@
 <body>
     <div metal:fill-slot="main">
         <tal:main-macro metal:define-macro="main"
-                        tal:define="testview view/test">
+                        tal:define="formdata view/thanksdata">
 
-            <span tal:content="testview/dummy">test</span>
+        <h1>Vielen Dank für Ihre Anmeldung zum Seminar</h1>
+        <h2 tal:content="formdata/titel"/>
+
+        <h3>Daten zu Ihrem Seminar</h3>
+        <table class="grid listing">
+          <tr><th>Seminarort</th><td tal:content="formdata/sort"/></tr>
+          <tr><th>Termin</th><td tal:content="string: ${formdata/von} bis ${formdata/bis}"/></tr>      
+        </table>
+
+        <p>Ihre Anmeldung zum Seminar im PDF-Format können Sie <a href="seminaranmeldung_druck">hier</a> ausdrucken.</p>
 
         </tal:main-macro>
     </div>

@@ -1,8 +1,12 @@
+import tempfile
 from zope.interface import implements, Interface
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 
+from collective.beaker.interfaces import ISession
+from bghw.seminare.lib.helpers import mapper
+from bghw.seminare.lib.pdfgen import createpdf
 from bghw.seminare import seminareMessageFactory as _
 
 
@@ -33,10 +37,18 @@ class printView(BrowserView):
     def portal(self):
         return getToolByName(self.context, 'portal_url').getPortalObject()
 
-    def test(self):
+    def __call__(self):
         """
-        test method
+        sorgt fuer den Ausdruck des PDF-Dokuments
         """
-        dummy = _(u'a dummy string')
+        session = ISession(self.request)
+        formdata = session.get('formdata', {})
+        data = mapper(formdata)
+        mytmpfile = tempfile.TemporaryFile()
+        createpdf(mytmpfile, data)
+        mytmpfile.seek(0)
+        RESPONSE = self.request.response
+        RESPONSE.setHeader('content-type', 'application/pdf')
+        RESPONSE.setHeader('content-disposition', 'attachment; filename=seminaranmeldung.pdf')
+        return mytmpfile.read()
 
-        return {'dummy': dummy}
