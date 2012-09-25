@@ -10,7 +10,6 @@ def mapper(myform):
             uebernachtung = 'j'
         else:
             uebernachtung = 'n'
-
     daten = {'Datum' : myform.get('modification', ''),
              'Seminartyp' : '',
              'S1_Kommtaus': myform.get('funktion-im-betrieb', ''),
