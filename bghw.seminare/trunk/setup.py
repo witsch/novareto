@@ -57,6 +57,8 @@ setup(name='bghw.seminare',
       install_requires=['setuptools',
                         # -*- Extra requirements: -*-
                         'xlrd',
+                        'collective.beaker',
+                        'Products.PloneFormGen',
                         ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),

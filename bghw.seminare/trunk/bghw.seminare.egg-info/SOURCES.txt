@@ -20,6 +20,9 @@ bghw/seminare/config.py
 bghw/seminare/configure.zcml
 bghw/seminare/browser/__init__.py
 bghw/seminare/browser/configure.zcml
+bghw/seminare/browser/formviewlets.py
+bghw/seminare/browser/formworkerview.py
+bghw/seminare/browser/seminarmeta.pt
 bghw/seminare/browser/seminarview.pt
 bghw/seminare/browser/seminarview.py
 bghw/seminare/content/__init__.py
