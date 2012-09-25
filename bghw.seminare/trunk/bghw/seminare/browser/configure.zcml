@@ -32,4 +32,12 @@
      permission="zope2.View"
      />
 
+  <browser:page
+      for="*"
+      name="mySeminarWorker"
+      class=".formworkerview.seminarworkerView"
+      allowed_interface=".formworkerview.IseminarworkerView"
+      permission="zope.Public"
+      />
+
 </configure>

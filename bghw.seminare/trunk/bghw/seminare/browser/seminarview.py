@@ -145,8 +145,9 @@ class seminarView(BrowserView):
                     if ts.cell(i, 16).value:
                         data['ausgebucht'] = True
 
-                    data['url'] = "%s?titel=%s&sort=%s&von=%s&bis=%s&nacht=%s&ausgebucht=%s&voraussetzungen=%s" %(formurl,
+                    data['url'] = "%s?titel=%s&stype=%s&sort=%s&von=%s&bis=%s&nacht=%s&ausgebucht=%s&voraussetzungen=%s" %(formurl,
                                                                                                self.context.title.decode('utf-8'),
+                                                                                               data['stype'],
                                                                                                data['sort'],
                                                                                                data['von'],
                                                                                                data['bis'],
