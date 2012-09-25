@@ -1,7 +1,5 @@
 setuptools
 xlrd
-collective.beaker
-Products.PloneFormGen
 
 [tests]
 zope.testing

@@ -31,6 +31,7 @@ bghw/seminare/content/seminar.py
 bghw/seminare/interfaces/__init__.py
 bghw/seminare/interfaces/seminar.py
 bghw/seminare/lib/__init__.py
+bghw/seminare/lib/helpers.py
 bghw/seminare/lib/locations.py
 bghw/seminare/lib/logo2.jpg
 bghw/seminare/lib/mail.py

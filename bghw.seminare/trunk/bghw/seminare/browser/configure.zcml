@@ -8,6 +8,26 @@
   <!-- -*- extra stuff goes here -*- -->
 
   <browser:page
+      for="*"
+      name="thankyou_view"
+      class=".thankyouview.thankyouView"
+      template="thankyouview.pt"
+      allowed_interface=".thankyouview.IthankyouView"
+      permission="zope.Public"
+      />
+
+
+  <browser:page
+      for="*"
+      name="print_view"
+      class=".printview.printView"
+      template="printview.pt"
+      allowed_interface=".printview.IprintView"
+      permission="zope.Public"
+      />
+
+
+  <browser:page
       for="..interfaces.seminar.ISeminar"
       name="seminar_view"
       class=".seminarview.seminarView"
