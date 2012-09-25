@@ -74,7 +74,7 @@ class seminarworkerView(BrowserView):
         mytmpfile.seek(0)
         #Schreiben von Mails
         mailhost = self.mail_host.smtp_host
-        sendmail = sMail(mailhost, 'lwalthernovareto@gmail.com', 'lwalther@novareto.de', '', 'Seminaranmeldung', 
+        sendmail = sMail(mailhost, 'lwalther@novareto.de', 'bghwportal@bghw.de', '', 'Seminaranmeldung', 
                                    'Hier ist die Anmeldung', mytmpfile, 'seminar.pdf')
 
 
