@@ -51,6 +51,11 @@ class VisitorSendActionExecutor(object):
         self.element = element
         self.event = event
 
+    def mail_host(self):
+        mailhost = getToolByName(self.context, 'MailHost')
+        mailserver = mailhost.smtp_host
+        return mailserver
+
     def __call__(self):
         context = aq_inner(self.event.object)
         ploneutils = getToolByName(self.context, 'plone_utils')
@@ -123,12 +128,12 @@ class VisitorSendActionExecutor(object):
             a=obj.setExpirationDate(obj.getEnddate() + 1)
 
         subject=u' %s' %title
-
+        mailserver = self.mail_host()
         try:
             if sender != '':
                 if vliste != []:
-                    m=iCalFile(msg,subject,url,startdate,enddate,location,sender,vliste,vstrng)
-                m=iCalFile(msg,subject,url,startdate,enddate,location,sender,cc,cc_str)
+                    m=iCalFile(msg,subject,url,startdate,enddate,location,sender,vliste,vstrng, mailserver)
+                m=iCalFile(msg,subject,url,startdate,enddate,location,sender,cc,cc_str, mailserver)
             msg = _(u"Mail mit Termindaten wurde versendet")
 
         except:

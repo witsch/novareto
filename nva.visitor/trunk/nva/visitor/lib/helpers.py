@@ -24,14 +24,14 @@ try:
     ldapadmin = configuration.get('ldapadmin')
     ldappassw = configuration.get('ldappassw')
     basedn = configuration.get('basedn')
-    mailserver = configuration.get('mailserver')
+    default_mailserver = configuration.get('mailserver')
     tmpfile = configuration.get('tmpfile')
 except:
     ldapserver = 'agb-ad-rodc02'
     ldapadmin = "cn=svc-agb-plonedummy,ou=AGB,ou=Service Accounts,ou=Users,ou=IT,dc=dk,dc=flsmidth,dc=net"
     ldappassw = "Yoo6raek"
     basedn = "ou=AGB,ou=users,ou=FLS,dc=dk,dc=flsmidth,dc=net"
-    mailserver = 'rs-aug-appsv-01'
+    default_mailserver = 'rs-aug-appsv-01'
     tmpfile = '/tmp'
     
 
@@ -60,7 +60,7 @@ def usermail(name):
     return ldapmail
 
 
-def sMail(to,sender,subject,text,url):
+def sMail(to,sender,subject,text,url, mailserver=default_mailserver):
     """SEND A MAIL"""
 
     empfaenger=to
@@ -80,7 +80,7 @@ def sMail(to,sender,subject,text,url):
     return
 
 
-def iCalFile(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips):
+def iCalFile(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips,mailserver=default_mailserver):
     """SEND A MAIL WITH VCAL-FILE in ATTACHMENT"""
 
     msg1 = u'Folgender Termin wurde neu im Intranet eingetragen.\n'
@@ -161,7 +161,7 @@ def iCalFile(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips):
     system(befehl)
 
 
-def iCalCancel(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips):
+def iCalCancel(msg,subject,url,startdate,enddate,location,mailfrom,mailto,recips,mailserver=default_mailserver):
     msg1 = u'Bitte löschen Sie bei Bedarf folgenden Termin in Ihrem Kalender:\n\n'
     msg1 = msg1 + u'%s\n\n' %subject
     msg1 = msg1 + u'Zeit: von %s bis %s\n' %(startdate,enddate)

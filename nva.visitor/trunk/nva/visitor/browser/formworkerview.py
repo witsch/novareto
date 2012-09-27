@@ -39,6 +39,12 @@ class formworkerView(BrowserView):
     def portal(self):
         return getToolByName(self.context, 'portal_url').getPortalObject()
 
+    @property
+    def mail_host(self):
+        mailhost = getToolByName(self.context, 'MailHost')
+        mailserver = mailhost.smtp_host
+        return mailserver
+
     def usermail(self, name):
         """sucht die Mailadresse eines Benutzers aus LDAP"""
         sfilter = "(sn=%s)" %name
@@ -114,10 +120,11 @@ class formworkerView(BrowserView):
             a=self.context.setExpirationDate(self.context.getEnddate() + 1)
 
         subject=' %s' %title
+        mailserver = self.mail_host
         if sender != '':
                 if vliste != []:
-                        m=iCalFile(msg,subject,url,startdate,enddate,location,sender,vliste,vstrng)
-                m=iCalFile(msg,subject,url,startdate,enddate,location,sender,cc,cc_str)
+                        m=iCalFile(msg,subject,url,startdate,enddate,location,sender,vliste,vstrng,mailserver)
+                m=iCalFile(msg,subject,url,startdate,enddate,location,sender,cc,cc_str,mailserver)
 
     def pfister_cancel(self):
         """ send Mail """
@@ -177,10 +184,11 @@ class formworkerView(BrowserView):
                 msg = msg + u'  Gesprächsteilnehmer: %s\\n' %gespraecht
 
         subject=' %s' %title
+        mailserver = self.mail_host
         if sender != '':
                 if vliste != []:
-                        m=iCalCancel(msg,subject,url,startdate,enddate,location,sender,vliste,vstrng)
-                m=iCalCancel(msg,subject,url,startdate,enddate,location,sender,cc,cc_str)
+                        m=iCalCancel(msg,subject,url,startdate,enddate,location,sender,vliste,vstrng,mailserver)
+                m=iCalCancel(msg,subject,url,startdate,enddate,location,sender,cc,cc_str,mailserver)
 
 
     def __call__(self):
