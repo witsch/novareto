@@ -1,0 +1,9 @@
+<?xml version="1.0"?>                                                                                                                
+<import-steps>
+ <import-step id="galleryview_various.txt" version="2010-06-22"
+              handler="nva.galleryview.setuphandlers.importVarious"
+              title="galleryview_setup">
+  galleryview setup
+ </import-step>
+</import-steps>
+

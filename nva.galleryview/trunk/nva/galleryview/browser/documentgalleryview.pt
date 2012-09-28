@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.galleryview">
+      <body>
+
+
+    <div metal:fill-slot="main">
+        <tal:main-macro metal:define-macro="main"
+        tal:define="attachments view/mygallery;
+                    images attachments/images;
+                    related attachments/related">
+
+      <script type="text/javascript">
+        jq(document).ready(function() {
+            jq('.ad-gallery').adGallery({display_back_and_forward: false});
+            jq('div.ad-thumbs').hide();
+            jq('div.relatedItems').hide();
+            });
+      </script>
+
+          <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+            <h1 tal:content="view/context/title">titel des documentes</h1>
+
+            <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+        <p><b><span tal:content="view/context/Description">beschreibung des dokuments</span></b></p>
+
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+
+          <div class="ad-gallery">
+          <div class="ad-image-wrapper">
+          </div>
+          <div class="ad-controls">
+          </div>
+          <div class="ad-nav">
+            <div class="ad-thumbs">
+              <ul class="ad-thumb-list">
+                <span tal:repeat="image images">
+                  <li>
+                    <a href="" tal:attributes="href image/myhref">
+                      <img src="" title="" longdesc="" tal:attributes="src image/mythumb; 
+                                                                       title image/mytitle;
+                                                                       longdesc image/mylongdesc">
+                    </a>
+                  </li>
+                </span>
+              </ul>
+              </div>
+          </div>
+        </div>
+
+        <span tal:content="structure python: view.context.getText()">test</span>
+
+        <div id="docRelatedItems" tal:condition="related" style="border-top: 1px solid #8CACBB;">
+          <p style="font-weight: bold; font-size: 110%; margin-top: 5px;">Weitere Informationen zu diesem Dokument</p>
+    <dl id="relatedItemBox"
+              tal:define="ploneview nocall:context/@@plone;
+                          normalizeString nocall:ploneview/normalizeString;
+                          tools nocall:context/@@plone_tools;
+                          wf_tool tools/workflow;
+                          getInfoFor python:wf_tool.getInfoFor;
+                          site_properties context/portal_properties/site_properties;
+                          use_view_action site_properties/typesUseViewActionInListings|python:();">
+        <dt i18n:translate=""></dt>
+        <tal:related repeat="item related">
+            <dd tal:define="
+                    desc                item/Description;
+                    item_icon           python:ploneview.getIcon(item);
+                    item_type           item/portal_type;
+                    item_type_class     python:'contenttype-' + normalizeString(item_type);
+                    item_wf_state       item/review_state|python: getInfoFor(item, 'review_state', '');
+                    item_wf_state_class python: 'state-' + normalizeString(item_wf_state);
+                    item_url            item/getURL|item/absolute_url;
+                    item_url            python:(item_type in use_view_action) and item_url+'/view' or item_url">
+                <span tal:attributes="class item_type_class">
+                    <img tal:replace="structure item_icon/html_tag" />
+                    <a href="" class=""
+                       tal:attributes="href  item_url;
+                                       title desc;
+                                       class string:$item_wf_state_class"
+                       tal:content="item/pretty_title_or_id">
+                        Related Item
+                    </a>
+                </span>
+            </dd>
+        </tal:related>
+      </dl>
+    </div>
+
+      <div tal:replace="structure provider:plone.belowcontentbody" />
+
+        </tal:main-macro>
+    </div>
+</body>
+</html>
+

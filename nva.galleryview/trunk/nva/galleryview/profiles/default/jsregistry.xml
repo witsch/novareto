@@ -1,0 +1,8 @@
+<object name="portal_javascript" meta_type="JavaScripts Registry">
+    <javascript cacheable="False" compression="none" cookable="False"                     
+                enabled="True" expression="" id="jquery.ad-gallery.js"
+                inline="False" insert-after="livesearch.js" />
+    <javascript cacheable="False" compression="none" cookable="False"                     
+                enabled="True" expression="" id="jquery.lightbox-0.5.js"
+                inline="False" insert-after="jquery.ad-gallery.js" />
+</object>

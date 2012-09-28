@@ -1,0 +1,16 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.galleryview">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="Products.ATContentTypes.interfaces.IATDocument"
+      name="documentgallery_view"
+      class=".documentgalleryview.documentgalleryView"
+      template="documentgalleryview.pt"
+      allowed_interface=".documentgalleryview.IdocumentgalleryView"
+      permission="zope.Public"
+      />
+
+</configure>

@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.galleryview">
+
+  <!-- File System Directory Views registration -->
+  <cmf:registerDirectory name="documentgallery_images"/>
+  <cmf:registerDirectory name="documentgallery_styles"/>
+  <cmf:registerDirectory name="documentgallery_scripts"/>
+
+    <browser:menuItems
+        for="*"
+        menu="plone_displayviews">
+        <browser:menuItem
+            title="Dokumentgalerie"
+            action="documentgallery_view"
+            description="Dokumentansicht mit Slideshow und Zoom"
+            />
+    </browser:menuItems>
+
+
+
+</configure>
+
