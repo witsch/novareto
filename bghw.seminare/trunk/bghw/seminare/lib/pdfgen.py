@@ -131,7 +131,7 @@ def createpdf(mytmpfile, daten):
     setcrossfield(c, 10.6, 18.2, schriftart) #SiB
     setcrossfield(c, 12, 18.2, schriftart) #Betriebsrat
     setcrossfield(c, 14.8, 18.2, schriftart) #Sonstiges
-    setsmalltextfield(c,16.8, 18.2, 3.0, daten['S1_Kommtaus1'], schriftart)
+    #setsmalltextfield(c,16.8, 18.2, 3.0, daten['S1_Kommtaus1'], schriftart)
 
     if daten['S1_Kommtaus'] == 'extfasi': #externe Sifa
         setcross(c,1.8,18.2)
@@ -148,7 +148,7 @@ def createpdf(mytmpfile, daten):
     elif daten['S1_Kommtaus'] == 'sib': #SiB
         setcross(c,10.7,18.2)
 
-    elif daten['S1_Kommtaus'] == 'betriebsart':  #Betriebsrat
+    elif daten['S1_Kommtaus'] == 'betriebsrat':  #Betriebsrat
         setcross(c,12.1,18.2)
 
     elif daten['S1_Kommtaus'] == 'sonstiges': #Sonstiges
@@ -162,12 +162,10 @@ def createpdf(mytmpfile, daten):
     c.drawString(7*cm,16.5*cm,'Nachname')
     settextfield(c, 14.5, 16.8, 5, daten['S1_Geburtsdatum'], schriftart)
     c.drawString(14.5*cm,16.5*cm,'Geburtsdatum')
-    settextfield(c,12, 15.5, 4, daten['S1_MitarbeiterVon'], schriftart)
-    c.drawString(1.7*cm,15.5*cm,'Die angemeldete Person ist in unserem Unternehmen beschäftigt seit')
-    settextfield(c,1.7, 14.6, 7.2, daten['S1_Firma'], schriftart)
+    settextfield(c, 7, 15.5, 4, daten['S1_MGLNR'], schriftart)
+    c.drawString(1.7*cm,15.5*cm,'Mitgliedsnummer (falls bekannt)')
+    settextfield(c,1.7, 14.6, 18, daten['S1_Firma'], schriftart)
     c.drawString(1.7*cm,14.3*cm,'Name der Firma/Betriebsstätte (bitte nicht stempeln)')
-    settextfield(c,9.2, 14.6, 10.3, daten['S1_MGLNR'], schriftart)
-    c.drawString(9.2*cm,14.3*cm,'Mitgliedsnummer (falls bekannt)')
     settextfield(c,1.7, 13.4, 7.2, daten['S1_Strasse'], schriftart)
     c.drawString(1.7*cm,13.1*cm,'Straße, Hausnummer')
     settextfield(c,9.2, 13.4, 10.3, daten['S1_PLZ'] + '  ' + daten['S1_Ort'], schriftart)
@@ -188,9 +186,9 @@ def createpdf(mytmpfile, daten):
     c.drawString(10.6*cm,9.9*cm,'Veranstaltungsort aus Ihrem Einzugsgebiet!')
     c.drawString(10.6*cm,8.7*cm,'Bitte Fahrtkostenregelung beachten.')
 
-    if daten['S1_SEM_Veranstalter'] == '0' and daten['S1_SEM_Uebernachtung'] == 'j':
+    if daten['S1_SEM_Uebernachtung'] == 'j':
         c.drawString(10.6*cm, 8.3*cm, 'Die Reservierung einer Übernachtungsmöglichkeit wird erbeten.')
-    elif daten['S1_SEM_Veranstalter'] == '0' and daten['S1_SEM_Uebernachtung'] == 'n':
+    elif daten['S1_SEM_Uebernachtung'] == 'n':
         c.drawString(10.6*cm, 8.3*cm, 'Die Reservierung einer Übernachtungsmöglichkeit ist nicht erwünscht.')
 
     c.drawString(1.7*cm,8.3*cm,'Termin von')

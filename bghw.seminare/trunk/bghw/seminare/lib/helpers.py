@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 
+def formatDate(datetime):
+    date = datetime
+    if datetime:
+        date = "%s.%s.%s" %(datetime[8:10], datetime[5:7], datetime[0:4])
+    return date    
+
+
 def mapper(myform):
     """
     mappt die Daten der Form auf das aktuelle PDF
     """
     uebernachtung = ''
     if myform.get('nacht', 'False') == 'True':
-        if myform.get('uebernachtung-reservieren', 'False') == 'True':
+        if myform.get('reservierung-von-uebernachtungsmoeglichkeiten', 'nein') == 'ja':
             uebernachtung = 'j'
         else:
             uebernachtung = 'n'
@@ -16,7 +23,7 @@ def mapper(myform):
              'S1_Kommtaus1': myform.get('sonstige-funktion-im-betrieb', ''),
              'S1_Vorname': "%s %s %s" %(myform.get('anrede', ''), myform.get('akad_titel', ''), myform.get('vorname', '')),
              'S1_Nachname': myform.get('name', ''),
-             'S1_Geburtsdatum': myform.get('geburtsdatum', ''),
+             'S1_Geburtsdatum': formatDate(myform.get('geburtsdatum', '')),
              'S1_SEM_Uebernachtung' : uebernachtung,
              'S1_MitarbeiterVon': myform.get('datum-der-einstellung', ''),
              'S1_Firma':  myform.get('name-der-firma-betriebsstaette', ''),
@@ -44,7 +51,7 @@ def mapper(myform):
              'S1_SEM_Veranstalter': '',
              'S2_Vorname': myform.get('vorname', ''),
              'S2_Nachname': myform.get('name', ''),
-             'S2_Geburtsdatum': myform.get('geburtsdatum', ''),
+             'S2_Geburtsdatum': formatDate(myform.get('geburtsdatum', '')),
              'S2_Geburtsort': '',
              'S2_Strasse': '',
              'S2_PLZ': '',
