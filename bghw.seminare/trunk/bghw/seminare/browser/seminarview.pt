@@ -36,7 +36,7 @@
 
           <h1 tal:content="context/title"/>
 
-          <div style="float: right">
+          <div style="float: right; position: relative;">
           <table class="grid listing" width="200px">
             <tr><th>Ansprechpartner</th><td tal:content="context/contactName"/></tr>
             <tr><th>E-Mail</th><td><a href="" tal:attributes="href string:mailto:${context/contactEmail}" 
