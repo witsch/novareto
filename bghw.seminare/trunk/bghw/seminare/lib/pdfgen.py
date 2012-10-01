@@ -156,13 +156,13 @@ def createpdf(mytmpfile, daten):
 
     c.setStrokeColorRGB(0.0,0.29,0.58)
     c.line(1.7*cm,17.7*cm,19.5*cm,17.7*cm)
-    settextfield(c, 1.7, 16.8, 5, daten['S1_Vorname'], schriftart)
-    c.drawString(1.7*cm,16.5*cm,'Vorname')
-    settextfield(c, 7, 16.8, 7.2, daten['S1_Nachname'], schriftart)
-    c.drawString(7*cm,16.5*cm,'Nachname')
+    settextfield(c, 1.7, 16.8, 7.2, daten['S1_Nachname'], schriftart)
+    c.drawString(1.7*cm,16.5*cm,'Nachname')
+    settextfield(c, 9.2, 16.8, 5, daten['S1_Vorname'], schriftart)
+    c.drawString(9.2*cm,16.5*cm,'Vorname')
     settextfield(c, 14.5, 16.8, 5, daten['S1_Geburtsdatum'], schriftart)
     c.drawString(14.5*cm,16.5*cm,'Geburtsdatum')
-    settextfield(c, 7, 15.5, 4, daten['S1_MGLNR'], schriftart)
+    settextfield(c, 6.2, 15.5, 4, daten['S1_MGLNR'], schriftart)
     c.drawString(1.7*cm,15.5*cm,'Mitgliedsnummer (falls bekannt)')
     settextfield(c,1.7, 14.6, 18, daten['S1_Firma'], schriftart)
     c.drawString(1.7*cm,14.3*cm,'Name der Firma/Betriebsstätte (bitte nicht stempeln)')
@@ -184,12 +184,21 @@ def createpdf(mytmpfile, daten):
     c.drawString(1.7*cm,9.5*cm,'Seminar-Ort')
     c.drawString(10.6*cm,10.3*cm,'Bitte wählen Sie bei gleichem Ausbildungsangebot einen')
     c.drawString(10.6*cm,9.9*cm,'Veranstaltungsort aus Ihrem Einzugsgebiet!')
-    c.drawString(10.6*cm,8.7*cm,'Bitte Fahrtkostenregelung beachten.')
+    c.drawString(10.6*cm,8.85*cm,'Bitte Fahrtkostenregelung beachten.')
+
+    c.drawString(10.6*cm, 8.3*cm, u'Übernachtung:')
+    setcrossfield(c, 12.8, 8.3, schriftart)
+    c.drawString(13.3*cm, 8.3*cm, u'ja')
+    setcrossfield(c, 14, 8.3, schriftart)
+    c.drawString(14.5*cm, 8.3*cm, u'nein')
+
 
     if daten['S1_SEM_Uebernachtung'] == 'j':
-        c.drawString(10.6*cm, 8.3*cm, 'Die Reservierung einer Übernachtungsmöglichkeit wird erbeten.')
+        #c.drawString(10.6*cm, 8.3*cm, 'Die Reservierung einer Übernachtungsmöglichkeit wird erbeten.')
+        setcross(c, 12.9, 8.3)
     elif daten['S1_SEM_Uebernachtung'] == 'n':
-        c.drawString(10.6*cm, 8.3*cm, 'Die Reservierung einer Übernachtungsmöglichkeit ist nicht erwünscht.')
+        #c.drawString(10.6*cm, 8.3*cm, 'Die Reservierung einer Übernachtungsmöglichkeit ist nicht erwünscht.')
+        setcross(c, 14.1, 8.3)
 
     c.drawString(1.7*cm,8.3*cm,'Termin von')
     settextfield(c,3.9, 8.3, 2.7, daten['S1_SEM_von'], schriftart)
@@ -231,7 +240,7 @@ def createpdf(mytmpfile, daten):
     c.showPage()
 
     #bei allen Nicht-Fasi-Seminaren wird die 2. Seite nicht gedruckt
-    if daten['Seminartyp'] != 'fasi-p1' and daten['Seminartyp'] != 'fasi-p5':
+    if not daten['S2_Strasse'] and not daten['S2_PLZ'] and not daten['S2_Ort']:
         c.save()
         return
 
@@ -255,10 +264,12 @@ def createpdf(mytmpfile, daten):
     c.drawString(12.3*cm,23.4*cm,'die Voraussetzungen erfüllt, daher bitten wir um die')
     c.drawString(12.3*cm,23*cm,'nachstehenden Angaben.')
 
-    settextfield(c, 1.7, 26.5, 9.7, daten['S2_Vorname'], schriftart)
-    c.drawString(1.7*cm,26*cm,'Vorname')
-    settextfield(c, 1.7, 25, 9.7, daten['S2_Nachname'], schriftart)
-    c.drawString(1.7*cm,24.5*cm,'Nachname')
+
+
+    settextfield(c, 1.7, 26.5, 9.7, daten['S2_Nachname'], schriftart)
+    c.drawString(1.7*cm,26*cm,'Nachname')
+    settextfield(c, 1.7, 25, 9.7, daten['S2_Vorname'], schriftart)
+    c.drawString(1.7*cm,24.5*cm,'Vorname')
     settextfield(c, 1.7, 23.5, 9.7, daten['S2_Strasse'], schriftart)
     c.drawString(1.7*cm,23*cm,'privater Wohnort (Straße, PLZ, Ort)')
     settextfield(c, 1.7, 22, 9.7, daten['S2_PLZ']+' '+daten['S2_Ort'], schriftart)
@@ -282,10 +293,10 @@ def createpdf(mytmpfile, daten):
     setcrossfield(c, 14, 17.3, schriftart) #mitarbeiter taetig ja
     setcrossfield(c, 15.5, 17.3, schriftart) #mitarbeiter teaetig nein
 
-    if daten['S2_voraussetzungen_mitarbeiter_taetig'] == 'j':
+    if daten['S2_voraussetzungen_mitarbeiter_taetig'] == 'ja':
         setcross(c,14.1,17.3)
 
-    elif daten['S2_voraussetzungen_mitarbeiter_taetig'] == 'n':
+    elif daten['S2_voraussetzungen_mitarbeiter_taetig'] == 'nein':
         setcross(c,15.7,17.3)
 
     c.drawString(1.7*cm, 16.7*cm, 'Wurde die Anmeldung mit dem zuständigen Technischen Aufsichtsbeamten(TAB) besprochen?')
@@ -294,9 +305,9 @@ def createpdf(mytmpfile, daten):
     setcrossfield(c, 14, 16.7, schriftart) #tab besprochen ja
     setcrossfield(c, 15.5, 16.7, schriftart) #tab besprochen nein
 
-    if daten['S2_tab_besprochen'] == 'j':
+    if daten['S2_tab_besprochen'] == 'ja':
        setcross(c,14.1,16.7)
-    elif daten['S2_tab_besprochen'] == 'n':
+    elif daten['S2_tab_besprochen'] == 'nein':
        setcross(c,15.6,16.7)
 
     #Zeichnen einer Linie
@@ -317,20 +328,26 @@ def createpdf(mytmpfile, daten):
     setcrossfield(c, 7.2, 13.7, schriftart) 
     setcrossfield(c, 10.2, 13.7, schriftart)    
 
-    if daten['S2_job'] == 'i':#Ingeneur
+    if daten['S2_job'] == 'ingenieur':#Ingeneur
         setcross(c,1.8,13.7)
 
-    elif daten['S2_job'] == 't':#Techniker
+    elif daten['S2_job'] == 'techniker':#Techniker
         setcross(c,7.3,13.7)
 
-    elif daten['S2_job'] == 'm':#Meister
+    elif daten['S2_job'] == 'meister':#Meister
         setcross(c,10.3,13.7)
 
     c.drawString(12.7*cm,13.7*cm,'Als solche/r')
-    settextfield(c, 14.7, 13.7, 1, daten['S2_jahre_taetig1'], schriftart) #Als solcher x Jahre tätig
+    if not daten['S2_taetig_als']:
+        settextfield(c, 14.7, 13.7, 1, daten['S2_jahre_taetig1'], schriftart) #Als solcher x Jahre tätig
+    else:    
+        settextfield(c, 14.7, 13.7, 1, '', schriftart) #Als solcher x Jahre tätig
     c.drawString(16*cm,13.7*cm, 'Jahre tätig.')
     c.drawString(1.7*cm,12.7*cm,'Ohne Meisterprüfung als Meister/in oder in gleichwertiger Funktion' )
-    settextfield(c, 10.1, 12.7, 1, daten['S2_jahre_taetig2'], schriftart) #Als solcher x Jahre tätig
+    if daten['S2_taetig_als']:
+        settextfield(c, 10.1, 12.7, 1, daten['S2_jahre_taetig2'], schriftart) #Als solcher x Jahre tätig
+    else:    
+        settextfield(c, 10.1, 12.7, 1, '', schriftart) #Als solcher x Jahre tätig
     c.drawString(11.2*cm,12.7*cm, 'Jahre tätig als:')
     settextfield(c, 13.2, 12.7, 6, daten['S2_taetig_als'], schriftart) #tätig als
     c.setStrokeColorRGB(0.82,0.82,0.83)
@@ -348,9 +365,9 @@ def createpdf(mytmpfile, daten):
     setcrossfield(c, 9.5, 10, schriftart) #Betriebsrat Nein
     setcrossfield(c, 1.7, 9.4, schriftart) #Zur Zeit keine Angabe möglich    
 
-    if daten['S2_betriebsrat'] == 'j':
+    if daten['S2_betriebsrat'] == 'betriebsrat':
         setcross(c,1.8,10)
-    elif daten['S2_betriebsrat'] == 'n':
+    elif daten['S2_betriebsrat'] == 'kein_betriebsrat':
         setcross(c,9.6,10)
     elif daten['S2_betriebsrat'] == 'ka':
         setcross(c,1.8,9.5)
@@ -368,7 +385,7 @@ def createpdf(mytmpfile, daten):
     c.drawString(2*cm,6*cm,'bei der BGHW mit Erfolg teilgenommen.')
     setcrossfield(c, 12.4, 6, schriftart) 
 
-    if daten['S2_sparte'] == 'e' or  daten['S2_sparte'] == 'g':
+    if daten['S2_ausbildung'] == "bghw":
         setcross(c,12.5,6)
 
     c.drawString(2*cm,5*cm,'Die angemeldete Person hat an der Sifa-Ausbildung (inkl. Abschluss von P IV) eines')
@@ -377,10 +394,10 @@ def createpdf(mytmpfile, daten):
     setcrossfield(c, 12.4, 4.5, schriftart)
     setcrossfield(c, 12.4, 3.5, schriftart)
 
-    if daten['S2_teilgenommen'] == 'j':
+    if daten['S2_ausbildung'] == "veranstalter":
         setcross(c,12.5, 4.5)
 
-    if daten['S2_sidienst'] == 'j':
+    if daten['S2_ausbildung'] == "svd":
         setcross(c,12.5, 3.5)
    
     c.setFont(schriftart,10)

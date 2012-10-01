@@ -101,6 +101,7 @@ class seminarView(BrowserView):
                 seminarort = int(ts.cell(i, 0).value)
                 if not orte or seminarort in orte:
 
+                    
                     data['sort'] = locations[int(ts.cell(i, 0).value)]
                     data['stype'] = ts.cell(i, 1).value
 
@@ -112,7 +113,11 @@ class seminarView(BrowserView):
                         parseTime = (0,0,0,int(ts.cell(i, 4).value.split(':')[0]), int(ts.cell(i, 4).value.split(':')[1]), 0)
                     else:
                         parseTime = (0,0,0,12,0,0)
-                    data['mysorter'] = datetime(*(parseDate[0], parseDate[1], parseDate[2], parseTime[3], parseTime[4])) 
+                    old = False    
+                    data['mysorter'] = datetime(*(parseDate[0], parseDate[1], parseDate[2], parseTime[3], parseTime[4]))
+                    if datetime.now() > data['mysorter']:
+                        old = True
+                    data['oldflag'] = old    
                     data['von'] = data['mysorter'].strftime('%d.%m.%Y %H:%M') 
                     parseDate = xldate_as_tuple(ts.cell(i, 3).value, datemode)
                     if ts.cell(i, 5).value and not isinstance(ts.cell(i, 5).value, unicode):

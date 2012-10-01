@@ -26,6 +26,9 @@
                   jq('span.linact').toggle();
                   jq('a.lact').toggle();
                   });
+                jq('span.linact').click(function() {
+                  alert('Bitte bestätigen Sie die Erfüllung der dargestellten Voraussetzungen');
+                  });
              })
 
           </script>
@@ -91,7 +94,7 @@
               <td tal:content="seminar/sort"/>
               <td tal:condition="marker"><span tal:condition="seminar/folge1" tal:content="seminar/folge1"/>
                   <span tal:condition="seminar/folge2"><br/><span tal:content="seminar/folge2"/></span></td>
-              <td>
+              <td tal:condition="not: seminar/oldflag">
                 <span tal:condition="not: seminar/ausgebucht">    
                 <a href="" class="lact" tal:condition="not: seminar/ausgebucht" tal:attributes="href seminar/url">anmelden</a>
                 <span tal:condition="context/prerequisites" class="linact" style="color:#666666;" >anmelden</span>
@@ -102,6 +105,9 @@
                   <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">ausgebucht<br/>
                     bitte vormerken</span>
                 </span>
+              </td>
+              <td tal:condition="seminar/oldflag">
+                abgeschlossen
               </td>  
             </tr>   
           </table>

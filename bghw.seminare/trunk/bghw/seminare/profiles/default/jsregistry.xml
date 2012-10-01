@@ -1,0 +1,8 @@
+<object name="portal_javascript" meta_type="JavaScripts Registry">
+    <javascript cacheable="False" compression="none" cookable="False"
+                enabled="True" expression="" id="++resource++replaceRequired.js"
+                inline="False" insert-before="livesearch.js" />
+    <javascript cacheable="False" compression="none" cookable="False"
+                enabled="True" expression="" id="++resource++customBghwSeminare.js"
+                inline="False" insert-after="++resource++replaceRequired.js" />
+</object>

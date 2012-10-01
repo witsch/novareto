@@ -59,4 +59,14 @@
       permission="zope.Public"
       />
 
+  <browser:resource
+     name="customBghwSeminare.js"
+     file="customBghwSeminare.js"
+     />
+
+  <browser:resource
+     name="replaceRequired.js"
+     file="replaceRequired.js"
+     />
+
 </configure>
