@@ -16,7 +16,13 @@
           <tr><th>Termin</th><td tal:content="string: ${formdata/von} bis ${formdata/bis}"/></tr>      
         </table>
 
-        <p>Ihre Anmeldung zum Seminar im PDF-Format können Sie <a href="seminaranmeldung_druck">hier</a> ausdrucken.</p>
+        <p>Ein Exemplar Ihrer Anmeldung zum Seminar im PDF-Format können Sie <a href="seminaranmeldung_druck">hier</a> 
+           herunterladen oder ausdrucken.</p>
+        <p>Als Beleg für den Eingang Ihrer Anmeldung bei der Berufsgenossenschaft erhalten Sie eine E-Mail an die von 
+           Ihnen angegebene Adresse.</p> 
+        <p><b>Eine endgültige Bestätigung Ihrer Teilnahme am Seminar erhalten Sie von der BGHW auf dem Postweg.</b></p>
+        <p>&nbsp;</p>
+        <p>Ihre Berufsgenossenschaft Handel und Warendistribution</p>
 
         </tal:main-macro>
     </div>

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import string
 import tempfile
 from datetime import datetime, date
@@ -64,6 +65,23 @@ class seminarworkerView(BrowserView):
         #Persistenz fuer Daten
         session = ISession(self.request)
         myform = self.request.form
+        teilnehmer = myform.get('replyto', '')
+        subject = "Anmeldung zum Seminar: %s" %myform.get('titel', '')
+        ehrung = "geehrter"
+        if myform.get('anrede', '') == 'Frau':
+            ehrung = u"geehrte"
+        text_kunde = u"""
+Sehr %s %s %s %s,
+
+vielen Dank für Ihre Seminaranmeldung. Diese E-Mail erhalten Sie als Bestätigung Ihrer Seminaranmeldung bei der BGHW. 
+Bitte beachten Sie, dass Sie eine endgültige Bestätigung Ihrer Teilnahme am Seminar durch die BGHW auf dem Postweg 
+erhalten. Ein Exemplar Ihrer Anmeldung im PDF-Format erhalten Sie als Anlage zur dieser E-Mail.
+
+Mit freundlichen Grüßen
+Ihre Berufsgenossenschaft Handel und Warendistribution
+        """ %(ehrung, myform.get('anrede', ''), myform.get('akad_titel', ''), myform.get('name', ''))
+        text_bghw = u"""Im Anhang zu dieser Mail finden Sie die Seminaranmeldung."""
+
         myform['modification'] = datetime.now().strftime('%d.%m.%Y %H:%M')
         session['formdata'] = myform
         session.save()
@@ -75,9 +93,12 @@ class seminarworkerView(BrowserView):
         pdfdata = mytmpfile.read()
         #Schreiben von Mails
         mailhost = self.mail_host.smtp_host
-        sendmail = sMail(mailhost, 'lwalther@novareto.de', 'bghwportal@bghw.de', '', 'Seminaranmeldung', 
-                                   'Hier ist die Anmeldung', pdfdata, 'seminar.pdf')
+        mailbghw = sMail(mailhost, 'lwalther@novareto.de', 'bghwportal@bghw.de', '', subject, 
+                         text_bghw, pdfdata, 'seminaranmeldung.pdf')
 
+        if teilnehmer:
+            mailkunde = sMail(mailhost, teilnehmer, 'bghwportal@bghw.de', '', subject, 
+                              text_kunde, pdfdata, 'seminaranmeldung.pdf')
 
-        myurl = "%s/%s" %(self.portal.absolute_url(), 'seminaranmeldung_dank')
+        myurl = "%s/%s" %(self.context.absolute_url(), 'seminaranmeldung_dank')
         return self.request.response.redirect(myurl)    
