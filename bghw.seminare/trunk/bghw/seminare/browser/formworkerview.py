@@ -72,10 +72,11 @@ class seminarworkerView(BrowserView):
         daten = mapper(myform)
         pdf = createpdf(mytmpfile, daten)
         mytmpfile.seek(0)
+        pdfdata = mytmpfile.read()
         #Schreiben von Mails
         mailhost = self.mail_host.smtp_host
         sendmail = sMail(mailhost, 'lwalther@novareto.de', 'bghwportal@bghw.de', '', 'Seminaranmeldung', 
-                                   'Hier ist die Anmeldung', mytmpfile, 'seminar.pdf')
+                                   'Hier ist die Anmeldung', pdfdata, 'seminar.pdf')
 
 
         myurl = "%s/%s" %(self.portal.absolute_url(), 'seminaranmeldung_dank')

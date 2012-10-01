@@ -9,7 +9,7 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEImage import MIMEImage
 from email.MIMEText import MIMEText
 
-def sMail(mailserver, to, sender, cc, subject, text, mytmpfile, filename, reply=None):
+def sMail(mailserver, to, sender, cc, subject, text, pdfdata, filename, reply=None):
         """SEND A MAIL TO UNFALLANZEIGE MAILBOX"""
 
         import smtplib
@@ -52,12 +52,13 @@ def sMail(mailserver, to, sender, cc, subject, text, mytmpfile, filename, reply=
         outer.attach(MIMEText(body.encode('utf-8'), _charset='utf-8'))
         outer.preamble='You will not see this in a MIME-aware mail reader.\n'
         outer.epilogue=''
-        ctype, encoding=mimetypes.guess_type(mytmpfile.read())
+        ctype, encoding=mimetypes.guess_type(pdfdata)
         if ctype is None or encoding is not None:
                 ctype='application/octet-stream'
+        print ctype, encoding
         maintype, subtype = ctype.split('/',1)
         msg = MIMEBase(maintype, subtype)
-        msg.set_payload(mytmpfile.read())
+        msg.set_payload(pdfdata)
         Encoders.encode_base64(msg)
         msg.add_header('Content-Disposition','attachement', filename=filename)
         outer.attach(msg)
