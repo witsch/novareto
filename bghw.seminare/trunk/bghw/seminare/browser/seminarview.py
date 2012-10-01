@@ -141,7 +141,7 @@ class seminarView(BrowserView):
                     if ts.cell(i, 11).value:
                         parseVon = xldate_as_tuple(ts.cell(i, 11).value, datemode)
                         parseTo = xldate_as_tuple(ts.cell(i, 12).value, datemode)
-                        data['folge1'] = '%s.%s.%s-%s.%s.%s' %(parseVon[2], parseVon[1], parseVon[0],
+                        data['folge2'] = '%s.%s.%s-%s.%s.%s' %(parseVon[2], parseVon[1], parseVon[0],
                                                                parseTo[2], parseTo[1], parseTo[0],)
                     data['nacht'] = False
                     data['ausgebucht'] = False
