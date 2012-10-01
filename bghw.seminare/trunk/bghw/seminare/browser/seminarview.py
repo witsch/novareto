@@ -84,6 +84,9 @@ class seminarView(BrowserView):
         formurl = self.context.absolute_url()
         if aform:
             formurl = aform.absolute_url()
+            if aform.portal_type == "FormFolder":
+                if aform.forceSSL:
+                    formurl = formurl.replace('http://', 'https://')
 
         prerequisites = self.context.getPrerequisites()
         prepared = False
