@@ -39,7 +39,7 @@ def sMail(mailserver, to, sender, cc, subject, text, pdfdata, filename, reply=No
         if reply:
             msg=msg+"Reply-To: %s\n" %reply
         msg=msg+"Subject: %s\n\n" %betreff
-        msg=msg+text
+        msg = msg.decode('utf-8') + text
 
         body=msg
         outer=MIMEMultipart()
