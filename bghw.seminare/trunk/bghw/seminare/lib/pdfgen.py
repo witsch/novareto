@@ -131,7 +131,8 @@ def createpdf(mytmpfile, daten):
     setcrossfield(c, 10.6, 18.2, schriftart) #SiB
     setcrossfield(c, 12, 18.2, schriftart) #Betriebsrat
     setcrossfield(c, 14.8, 18.2, schriftart) #Sonstiges
-    #setsmalltextfield(c,16.8, 18.2, 3.0, daten['S1_Kommtaus1'], schriftart)
+    if daten['S1_Kommtaus1']:
+        setsmalltextfield(c,16.8, 18.2, 3.0, daten['S1_Kommtaus1'], schriftart)
 
     if daten['S1_Kommtaus'] == 'extfasi': #externe Sifa
         setcross(c,1.8,18.2)
