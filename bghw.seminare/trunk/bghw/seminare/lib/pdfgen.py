@@ -106,7 +106,7 @@ def createpdf(mytmpfile, daten):
     c.drawString(10.9*cm,21.9*cm,'Online-Anmeldung vom %s' %datum_formatiert)
  
     #Bookinginfo
-    if daten['S1_SEM_buchungsinfo']=='False':
+    if daten['S1_SEM_buchungsinfo']=='True':
         c.drawString(10.9*cm,21.3*cm,'Der gewünschte Termin ist ausgebucht.')
         c.drawString(10.9*cm,21.0*cm, 'Sie werden auf die Warteliste gesetzt.')
 
