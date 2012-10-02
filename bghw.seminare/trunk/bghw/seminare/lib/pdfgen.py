@@ -62,7 +62,7 @@ def createpdf(mytmpfile, daten):
     schriftartfett = "Helvetica-Bold"
     datum = strftime("%d.%m.%Y",gmtime())
 
-    bcp='/opt/ww4/test_p4internet/src/bghw.seminare/bghw/seminare/lib/logo2.jpg'
+    bcp='/opt/ww4/prod_p4internet/src/bghw.seminare/bghw/seminare/lib/logo2.jpg'
     c.drawImage(bcp,2.2*cm,25.6*cm)
 
     c.setStrokeColorRGB(0.0,0.29,0.58)

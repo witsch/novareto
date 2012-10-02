@@ -20,9 +20,11 @@ bghw/seminare/config.py
 bghw/seminare/configure.zcml
 bghw/seminare/browser/__init__.py
 bghw/seminare/browser/configure.zcml
+bghw/seminare/browser/customBghwSeminare.js
 bghw/seminare/browser/formviewlets.py
 bghw/seminare/browser/formworkerview.py
 bghw/seminare/browser/printview.py
+bghw/seminare/browser/replaceRequired.js
 bghw/seminare/browser/seminarmeta.pt
 bghw/seminare/browser/seminarview.pt
 bghw/seminare/browser/seminarview.py
@@ -42,6 +44,7 @@ bghw/seminare/lib/pdfgen.py
 bghw/seminare/portlets/__init__.py
 bghw/seminare/portlets/configure.zcml
 bghw/seminare/profiles/default/factorytool.xml
+bghw/seminare/profiles/default/jsregistry.xml
 bghw/seminare/profiles/default/metadata.xml
 bghw/seminare/profiles/default/portlets.xml
 bghw/seminare/profiles/default/rolemap.xml
