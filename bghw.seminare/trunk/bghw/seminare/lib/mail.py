@@ -63,13 +63,10 @@ def sMail(mailserver, to, sender, cc, subject, text, pdfdata, filename, reply=No
         msg.add_header('Content-Disposition','attachement', filename=filename)
         outer.attach(msg)
 
-        try:
-            server = smtplib.SMTP(mailserver)
-            server.sendmail(absender, empfaenger, outer.as_string())
-            if kopie:
-                server.sendmail(absender, kopie, outer.as_string())
-            server.close()
-        except:
-            print 'Mailserver gestoert!'
+        server = smtplib.SMTP(mailserver)
+        server.sendmail(absender, empfaenger, outer.as_string())
+        if kopie:
+            server.sendmail(absender, kopie, outer.as_string())
+        server.close()
 
         return None
