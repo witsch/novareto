@@ -18,7 +18,6 @@
 
             jq(document).ready(function() {
                 if (jq('input#voraussetzungen').length != 0){
-                    alert('keine Voraussetzungen')
                     if (jq('input#voraussetzungen').attr('checked') == true){
                     jq('span.linact').hide();}
                     else {
