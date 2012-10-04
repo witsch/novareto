@@ -193,3 +193,25 @@ class seminarView(BrowserView):
             formdata = self.getSeminarData(orte=False)
             formdata['plzform'] = False
         return formdata
+
+    def getFormUrl(self):
+        """
+        gibt die URL der Form als Action zurück
+        """
+        aform = self.context.getAform()
+        formurl = self.context.absolute_url()
+        if aform:
+            formurl = aform.absolute_url()
+        return formurl
+
+
+    def getPrepared(self):
+        """
+        Gibt des Bool-Wert True zurueck wenn Voraussetzungen notwendig sind.
+        """
+        prerequisites = self.context.getPrerequisites()
+        prepared = False
+        if prerequisites:
+            prepared = True
+        return prepared
+

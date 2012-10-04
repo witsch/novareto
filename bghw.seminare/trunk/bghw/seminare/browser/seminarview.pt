@@ -10,21 +10,24 @@
                         marker formdata/marker;
                         seminare formdata/seminare;
                         plzform formdata/plzform;
+                        formurl view/getFormUrl;
+                        prepared view/getPrepared;
                         ">
 
           <script type="text/javascript">
 
             jq(document).ready(function() {
-                if (jq('input[name=voraussetzungen]').length != 0){
-                    if (jq('input[name=voraussetzungen]').attr('checked') == true){
+                if (jq('input#voraussetzungen').length != 0){
+                    alert('keine Voraussetzungen')
+                    if (jq('input#voraussetzungen').attr('checked') == true){
                     jq('span.linact').hide();}
                     else {
-                    jq('a.lact').hide();}
+                    jq('.lact').hide();}
                     }
 
-                jq('input[name=voraussetzungen]').click(function() {
+                jq('input#voraussetzungen').click(function() {
                   jq('span.linact').toggle();
-                  jq('a.lact').toggle();
+                  jq('.lact').toggle();
                   });
                 jq('span.linact').click(function() {
                   alert('Bitte bestätigen Sie die Erfüllung der dargestellten Voraussetzungen');
@@ -60,7 +63,7 @@
           <span tal:condition="plzform">
             <p>Bitte geben Sie hier die Postleitzahl Ihres Unternehmens ein, um passende Seminartermine zu finden.</p>
             <p>  
-            <form action="" tal:attributes="action python:context.absolute_url()+'/seminar_view'">
+            <form action="." tal:attributes="action python:context.absolute_url()+'/seminar_view'">
             <input name="plz" type="text" size="5" maxlength="5" value="" tal:attributes="value request/plz|nothing">
             <input type="submit" value="Seminare suchen" class="standalone">
           </form></p> 
@@ -75,7 +78,7 @@
             <h2>Seminartermine</h2>
             <span tal:condition="context/prerequisites">  
               <label for="voraussetzungen">Erfüllung der Voraussetzungen<span class="required">*</span></label>
-                <p><input type="checkbox" name="voraussetzungen"/>
+                <p><input type="checkbox" id="voraussetzungen"/>
                 Bitte bestätigen Sie durch Anklicken, dass Sie die dargestellten Voraussetzungen 
                 für die Teilnahme am Seminar erfüllen.</p>
               </span>    
@@ -89,26 +92,37 @@
               <th>Buchung</th>
             </tr>
             <tr tal:repeat="seminar seminare">
-              <td tal:content="seminar/von"/>
+              <form action="" tal:attributes="action formurl" method="post">
+                <input type="hidden" name="titel" value="" tal:attributes="value context/title">
+                <input type="hidden" name="stype" value="" tal:attributes="value seminar/stype">
+                <input type="hidden" name="sort" value="" tal:attributes="value seminar/sort">
+                <input type="hidden" name="von" value="" tal:attributes="value seminar/von">
+                <input type="hidden" name="bis" value="" tal:attributes="value seminar/bis">
+                <input type="hidden" name="nacht" value="" tal:attributes="value seminar/nacht">
+                <input type="hidden" name="ausgebucht" value="" tal:attributes="value seminar/ausgebucht">
+                <input type="hidden" name="voraussetzungen" value="" tal:attributes="value prepared">
+                <input type="hidden" name="folge1" value="" tal:attributes="value seminar/folge1">
+                <input type="hidden" name="folge2" value="" tal:attributes="value seminar/folge2">
+              <td tal:content="seminar/von"/> 
               <td tal:content="seminar/bis"/>  
               <td tal:content="seminar/sort"/>
               <td tal:condition="marker"><span tal:condition="seminar/folge1" tal:content="seminar/folge1"/>
                   <span tal:condition="seminar/folge2"><br/><span tal:content="seminar/folge2"/></span></td>
               <td tal:condition="not: seminar/oldflag">
                 <span tal:condition="not: seminar/ausgebucht">    
-                <a href="" class="lact" tal:condition="not: seminar/ausgebucht" tal:attributes="href seminar/url">anmelden</a>
+                <input type="submit" class="standalone lact" value="anmelden">
                 <span tal:condition="context/prerequisites" class="linact" style="color:#666666;" >anmelden</span>
                 </span>
                 <span tal:condition="seminar/ausgebucht">
-                  <a href="" class="lact" tal:condition="seminar/ausgebucht" tal:attributes="href seminar/url">ausgebucht<br/>
-                    bitte vormerken</a>
-                  <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">ausgebucht<br/>
-                    bitte vormerken</span>
+                  ausgebucht<br/>
+                  <input type="submit" class="standalone lact" value="vormerken">
+                  <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">vormerken</span>
                 </span>
               </td>
               <td tal:condition="seminar/oldflag">
                 abgeschlossen
-              </td>  
+              </td>
+              </form>
             </tr>   
           </table>
         </div>

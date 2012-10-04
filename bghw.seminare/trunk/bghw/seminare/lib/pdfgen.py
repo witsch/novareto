@@ -43,12 +43,6 @@ def createpdf(mytmpfile, daten):
     """
     Schreibt eine PDF-Datei
     """
-    #Tests
-    print daten['S1_SEM_folgetermin']
-    print daten['S1_SEM_folge_von']                                                                           
-    print daten['S1_SEM_folge_bis']
-    #import pdb;pdb.set_trace()
-    #Pfad und Dateiname
 
     timestamp=strftime("%d%m%Y%H%M%S",gmtime()) #Ermitteln der aktuellen Uhrzeit und Formatierung eines Strings mit Zeitstempel
     c = canvas.Canvas(mytmpfile,pagesize=A4)
@@ -62,8 +56,11 @@ def createpdf(mytmpfile, daten):
     schriftartfett = "Helvetica-Bold"
     datum = strftime("%d.%m.%Y",gmtime())
 
-    bcp='/opt/ww4/prod_p4internet/src/bghw.seminare/bghw/seminare/lib/logo2.jpg'
-    c.drawImage(bcp,2.2*cm,25.6*cm)
+    try:
+        bcp='/opt/ww4/prod_p4internet/src/bghw.seminare/bghw/seminare/lib/logo2.jpg'
+        c.drawImage(bcp,2.2*cm,25.6*cm)
+    except:
+        pass
 
     c.setStrokeColorRGB(0.0,0.29,0.58)
     c.rect(1.4*cm,1.2*cm,width=18.1*cm,height=27.2*cm)
@@ -201,17 +198,17 @@ def createpdf(mytmpfile, daten):
         #c.drawString(10.6*cm, 8.3*cm, 'Die Reservierung einer Übernachtungsmöglichkeit ist nicht erwünscht.')
         setcross(c, 14.1, 8.3)
 
-    c.drawString(1.7*cm,8.3*cm,'Termin von')
-    settextfield(c,3.9, 8.3, 2.7, daten['S1_SEM_von'], schriftart)
+    c.drawString(1.7*cm,8.6*cm,'Termin von')
+    settextfield(c,3.9, 8.6, 2.7, daten['S1_SEM_von'], schriftart)
 
-    c.drawString(6.7*cm,8.3*cm,'bis')
-    settextfield(c,7.3, 8.3, 2.9, daten['S1_SEM_bis'], schriftart)
+    c.drawString(6.7*cm,8.6*cm,'bis')
+    settextfield(c,7.3, 8.6, 2.9, daten['S1_SEM_bis'], schriftart)
 
-    if daten['S1_SEM_folgetermin']:
-        c.drawString(1.7*cm,7.3*cm,'Folgetermin von')
-        settextfield(c,3.9, 7.3, 2.7,daten['S1_SEM_folge_von'][:10],schriftart)#[:10]Die ersten 10-Zeichen werden genommen.
-        c.drawString(6.7*cm,7.3*cm, 'bis')
-        settextfield(c,7.3, 7.3, 2.9,daten['S1_SEM_folge_bis'][:10],schriftart)#[:10]Die ersten 10-Zeichen werden genommen. 
+    if daten['S1_SEM_folgetermin1']:
+        c.drawString(1.7*cm,8.1*cm,'Bitte Folgetermin(e) beachten:')
+        settextfield(c,3.9, 7.2, 5,daten['S1_SEM_folgetermin1'],schriftart)
+    if daten['S1_SEM_folgetermin2']:    
+        settextfield(c,3.9, 6.6, 5,daten['S1_SEM_folgetermin2'],schriftart) 
 
     c.setStrokeColorRGB(0.0,0.29,0.58)
     c.line(1.7*cm,6.5*cm,19.5*cm,6.5*cm)

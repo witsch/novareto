@@ -7,15 +7,10 @@ class SeminarMetaViewlet(ViewletBase):
 
     def update(self):
         super(SeminarMetaViewlet, self).update()
-        try:
-            self.titel = self.request.get('titel', self.context.titel.get(self.context))
-            self.sort = self.request.get('sort', self.context.sort.get(self.context))
-            self.von = self.request.get('von', self.context.von.get(self.context))
-            self.bis = self.request.get('bis', self.context.bis.get(self.context))
-            self.ausgebucht = self.request.get('ausgebucht', self.context.ausgebucht.get(self.context))
-        except:
-            self.titel = ''
-            self.sort = ''
-            self.von = ''
-            self.bis = ''
-            self.ausgebucht = ''
+        self.titel = self.request.form.get('titel')
+        self.sort = self.request.form.get('sort')
+        self.von = self.request.form.get('von')
+        self.bis = self.request.form.get('bis')
+        self.ausgebucht = self.request.form.get('ausgebucht')
+        self.folge1 = self.request.form.get('folge1')
+        self.folge2 = self.request.form.get('folge2')
