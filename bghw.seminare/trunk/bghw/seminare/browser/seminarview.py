@@ -3,7 +3,7 @@ from operator import itemgetter
 from datetime import datetime
 from zope.interface import implements, Interface
 from xlrd import open_workbook, xldate_as_tuple
-
+from collective.beaker.interfaces import ISession
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 
@@ -30,6 +30,8 @@ class seminarView(BrowserView):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        session = ISession(self.request)
+        session.invalidate()
 
     @property
     def portal_catalog(self):

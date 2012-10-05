@@ -113,7 +113,7 @@
                 <span tal:condition="context/prerequisites" class="linact" style="color:#666666;" >anmelden</span>
                 </span>
                 <span tal:condition="seminar/ausgebucht">
-                  ausgebucht<br/>
+                  -ausgebucht-<br/>
                   <input type="submit" class="standalone lact" value="vormerken">
                   <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">vormerken</span>
                 </span>

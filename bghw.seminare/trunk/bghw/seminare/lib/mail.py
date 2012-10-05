@@ -23,16 +23,9 @@ def sMail(mailserver, to, sender, cc, subject, text, pdfdata, filename, reply=No
         from email.MIMEText import MIMEText
 
         empfaenger=to
-        print 'mailto: '+empfaenger
-
         absender=sender
-        print 'mailfrom: '+absender
-
         kopie=cc
-        print 'CC: '+kopie
-
         betreff=subject
-        print 'Betreff: ',betreff
 
         msg="To: %s\n" %empfaenger
         msg=msg+"From: %s\n" %absender
@@ -55,7 +48,6 @@ def sMail(mailserver, to, sender, cc, subject, text, pdfdata, filename, reply=No
         ctype, encoding=mimetypes.guess_type(pdfdata)
         if ctype is None or encoding is not None:
                 ctype='application/octet-stream'
-        print ctype, encoding
         maintype, subtype = ctype.split('/',1)
         msg = MIMEBase(maintype, subtype)
         msg.set_payload(pdfdata)
