@@ -107,7 +107,8 @@ Ihre Berufsgenossenschaft Handel und Warendistribution
                          text_bghw, pdfdata, 'seminaranmeldung.pdf')
 
         if teilnehmer:
-            mailkunde = sMail(mailhost, teilnehmer, 'bghwportal@bghw.de', '', subject, 
+            cc = myform.get('e-mail-adresse-der-ansprechperson', '')
+            mailkunde = sMail(mailhost, teilnehmer, 'bghwportal@bghw.de', cc, subject, 
                               text_kunde, pdfdata, 'seminaranmeldung.pdf')
 
         return self.request.response.redirect(myurl)    
