@@ -150,9 +150,9 @@ class seminarView(BrowserView):
                                                                parseTo[2], parseTo[1], parseTo[0],)
                     data['nacht'] = False
                     data['ausgebucht'] = False
-                    if ts.cell(i, 15).value:
+                    if ts.cell(i, 15).value.strip():
                         data['nacht'] = True
-                    if ts.cell(i, 16).value:
+                    if ts.cell(i, 16).value.strip():
                         data['ausgebucht'] = True
 
                     data['url'] = "%s?titel=%s&stype=%s&sort=%s&von=%s&bis=%s&nacht=%s&ausgebucht=%s&voraussetzungen=%s" %(formurl,
