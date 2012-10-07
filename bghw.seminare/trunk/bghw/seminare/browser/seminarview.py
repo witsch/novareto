@@ -201,11 +201,13 @@ class seminarView(BrowserView):
         gibt die URL der Form als Action zurück
         """
         aform = self.context.getAform()
-        formurl = self.context.absolute_url()
+        formurl = self.context.absolute_url() #Default-Wert fuer Anmeldeform
         if aform:
             formurl = aform.absolute_url()
+            if aform.portal_type == "FormFolder":
+                if aform.forceSSL:
+                    formurl = formurl.replace('http://', 'https://')
         return formurl
-
 
     def getPrepared(self):
         """
