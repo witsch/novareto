@@ -30,11 +30,16 @@ from plone.directives import form, dexterity
 
 from plone.app.textfield import RichText
 from plone.namedfile.field import NamedImage
+import config
 
 # Interface class; used to define content-type schema.
 
 MONTH_NAMES = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 
                'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+
+categoryItems = SimpleVocabulary([SimpleVocabulary.createTerm(cat, cat) 
+                                 for cat in config.CATEGORIES])
+
 
 class IBorrowableItem(form.Schema, IImageScaleTraversable):
     """
@@ -60,6 +65,10 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
             required=True,
         )
 
+    categories = schema.List(
+                    title=u'Categories',
+                    value_type=schema.Choice(vocabulary=categoryItems),
+                    required=True)
 
 
 class BorrowableItem(dexterity.Item):

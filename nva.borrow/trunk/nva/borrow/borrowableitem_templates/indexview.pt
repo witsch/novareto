@@ -36,6 +36,11 @@
         <span tal:content="context/itemsAvailable" />
     </div>
 
+    <div class="row">
+        <label>Categories</label>:
+        <span tal:content="python: ',' .join(context.categories)" />
+    </div>
+
     <div clas="row">    
         <label>Booking requests</label>:
         <ul>
