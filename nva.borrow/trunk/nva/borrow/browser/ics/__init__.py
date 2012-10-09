@@ -10,7 +10,7 @@ def getHolidays():
         cal = icalendar.Calendar.from_ical(open(ics,'rb').read())
         for item in cal.walk():
             if isinstance(item, icalendar.cal.Event):
-                desc = item['DESCRIPTION']
+                desc = item['DESCRIPTION'].to_ical()
                 start = item['DTSTART'].dt
                 end = item['DTEND'].dt
                 events[start] = desc
