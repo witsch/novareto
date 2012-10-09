@@ -9,10 +9,22 @@
 <body>
 
 <metal:main fill-slot="content-core">
-  <metal:content-core define-macro="content-core">
-
-    <h2>Categories</h2>      
-  </metal:content-core>
+    <metal:content-core define-macro="content-core">
+        <h2>Categories</h2>      
+        <ul tal:define="categories view/getCategories">
+            <li tal:repeat="category categories">
+                <span tal:replace="category" />
+                <tal:def define="items python: view.itemsWithCategory(category)">
+                    <ul tal:condition="items">
+                        <li tal:repeat="item items">
+                            <a tal:attributes="href item/absolute_url"
+                                tal:content="item/Title" />
+                        </li>
+                    </ul>
+                </tal:def>
+            </li>
+        </ul>
+    </metal:content-core>
 </metal:main>
 
 </body>
