@@ -10,5 +10,4 @@
   <!-- -*- extra stuff goes here -*- -->
   <object name="nva.borrow.borrowrequest" meta_type="Dexterity FTI" />
   <object name="nva.borrow.borrowableitem" meta_type="Dexterity FTI" />
-  <object name="nva.borrow.borrowableitems" meta_type="Dexterity FTI" />
 </object>
