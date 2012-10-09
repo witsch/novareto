@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.borrow">
+
+<head>
+    <metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css" 
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/++resource++nva.borrow/borrowableitem-styles.css"
+            />
+    </metal:block>
+</head>
+
+<body>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+    <div class="row">      
+        <div class="item-image">  
+            <img tal:define="scales context/@@images"
+                 tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
+        </div>
+
+        <div class="item-text" 
+             tal:condition="context/text"
+             tal:content="structure context/text/output" />
+    </div>
+
+    <div class="row" tal:condition="context/individualItemBooking">
+        <a tal:attributes="href string:${context/absolute_url}/@@createBookingRequest?intid=${context/getIntId}">
+            <img src="++resource++nva.borrow/booknow.png" />
+        </a>
+    </div>
+
+    <div class="row">
+        <label>Max items available</label>:
+        <span tal:content="context/itemsAvailable" />
+    </div>
+
+    <div clas="row">    
+        <label>Booking requests</label>:
+        <ul>
+            <li tal:repeat="request context/getBookingDates">
+                <span tal:content="request/fromDate" />-
+                <span tal:content="request/toDate" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="booking-calendar row">
+        <h2>Booking calendar</h2>
+
+        <div class="legend">
+            <span class="item-status-free" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item bookable
+            <span class="item-status-weekend" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item not bookable (weekend)
+            <span class="item-status-blocked" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item not bookable
+        </div>
+
+        <div tal:repeat="d context/getBookingCalendar">
+            <span class="month-year" tal:content="string:${d/month_name} ${d/year}" />            
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <td class="day-name" tal:repeat="item d/days">
+                            <span tal:content="python: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'][item['weekday']]" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tal:repeat="item d/days">
+                            <span tal:content="item/day" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tal:repeat="item d/days"
+                            tal:attributes="class string:item-status-${item/status}">&nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

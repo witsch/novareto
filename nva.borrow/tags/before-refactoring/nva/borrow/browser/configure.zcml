@@ -1,0 +1,46 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="weishaupt.policy">
+  
+  <browser:page
+    name="demo"
+    permission="cmf.ManagePortal"
+    class=".setup.Setup"
+    attribute="demo"
+    for="*"
+   />
+  
+  <browser:page
+    name="setupPFG"
+    permission="cmf.ManagePortal"
+    class=".setup.Setup"
+    attribute="setupPFG"
+    for="*"
+   />
+
+  <browser:page
+    name="createBookingRequest"
+    permission="cmf.ManagePortal"
+    class=".setup.Setup"
+    attribute="createBookingRequest"
+    for="*"
+   />
+
+  <browser:page
+    name="getIntId"
+    permission="cmf.ManagePortal"
+    class=".setup.Setup"
+    attribute="getIntId"
+    for="*"
+   />
+
+  <browser:page
+    name="getData"
+    permission="zope2.View"
+    class=".vocabulary.Vocabulary"
+    attribute="getData"
+    for="*"
+   />
+
+</configure>
