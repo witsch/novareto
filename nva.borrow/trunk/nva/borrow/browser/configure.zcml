@@ -10,6 +10,14 @@
     attribute="demo"
     for="*"
    />
+
+  <browser:page
+    name="view-categories"
+    permission="zope2.View"
+    class=".categories.Categories"
+    template="categories.pt"
+    for="*"
+   />
   
   <browser:page
     name="setupPFG"
