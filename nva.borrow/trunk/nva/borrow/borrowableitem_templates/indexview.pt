@@ -46,7 +46,7 @@
         </ul>
     </div>
 
-    <div class="booking-calendar row">
+    <div class="booking-calendar row" tal:condition="nothing">
         <h2>Booking calendar</h2>
 
         <div class="legend">
