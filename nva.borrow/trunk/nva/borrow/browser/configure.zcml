@@ -18,6 +18,14 @@
     template="categories.pt"
     for="*"
    />
+
+  <browser:page
+    name="order-form"
+    permission="zope2.View"
+    class=".orders.Orders"
+    template="order-form.pt"
+    for="*"
+   />
   
   <browser:page
     name="setupPFG"

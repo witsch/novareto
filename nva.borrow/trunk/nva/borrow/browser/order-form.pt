@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="nva.borrow">
+
+<body>
+
+<metal:main fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
+        <h2>Ordner form</h2>      
+
+        <table id="order-table" tal:define="data python: view.getDateRange(num_days=60)" border="1">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <tal:loop repeat="mmyy data/months">
+                        <th tal:attributes="colspan python: len(data['month_year'][mmyy])"
+                            tal:content="string:${mmyy/monthname} ${mmyy/year}" />
+                    </tal:loop>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td tal:repeat="dt data/dates" style="width: 20px; text-align: center">
+                        <span tal:replace="string: ${dt/weekday_name} ${dt/day}" />
+                        <input type="checkbox" />
+                    </td>
+                </tr>
+                <tr tal:repeat="item view/getItems">
+                    <td>
+                        <a tal:attributes="href item/absolute_url" tal:content="item/Title" />
+                    </td>
+                    <td tal:repeat="dt data/dates">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+
