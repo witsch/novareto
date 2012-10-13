@@ -32,6 +32,7 @@ setup(name='nva.borrow',
           'Products.PFGDataGrid',
           'collective.pfg.dexterity',
           'loremipsum',
+          'iCalendar',
           'plone.namedfile [blobs]',
           # -*- Extra requirements: -*-
       ],
