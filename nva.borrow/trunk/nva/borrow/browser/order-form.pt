@@ -71,6 +71,8 @@
                                         data-items-available item/itemsAvailable;
                                         data-date dt/isoformat;
                                         data-item item/@@getIntId;
+                                        data-items-booked string:0;
+                                        data-active string:0;
                                         id string:item-${item/@@getIntId}-${dt/isoformat}
                                         "
                         tal:content="item/itemsAvailable"
@@ -84,8 +86,8 @@
 
             function clear_grid(date_checked) {
                 $('.item-date-cell').css('background-color', 'white');
+                $('.item-date-cell').attr('data-active', '0');
                 $('.date-selector').attr('checked', false);
-                $('.item-date-cell').attr('data-items-borrowed', 0).attr('data-item-selected', false);
             }
 
             function update_grid(reference_date) {
@@ -96,7 +98,7 @@
                 for (var i=0; i<days; i++) {
                     var current_date = ISO_DATES[date_idx+i];
                     $("td[data-date='" + current_date + "']").css('background-color', '#dddddd');
-                    $("td[data-date='" + current_date + "']").attr('data-item-selected', true);
+                    $("td[data-date='" + current_date + "']").attr('data-active', '1');
                 }
                 $('#date-selector-' + reference_date).attr('checked', true);
             }
@@ -130,6 +132,11 @@
                     var item_id = $(this).attr('data-item-id');
                     console.log(num_items);
                     console.log(item_id);
+                    $('.item-date-cell[data-item="'+item_id+'"]').each(function() {
+                        if ($(this).attr('data-active') == '1') {
+                            $(this).html(num_items);
+                        }
+                    });
                 });
             });
         </script>
