@@ -59,6 +59,14 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
         max=10,
         default=1)   
  
+    maxItemsBorrowable = schema.Int(
+        title=_(u'Max number of items that can be borrowed'),
+        description=_(u'A person can only borrow a max number of items each'),
+        required=True,
+        min=1,
+        max=20,
+        default=1)   
+ 
     image = NamedImage(
             title=_(u"Image"),
             description=_(u"Image of the item"),

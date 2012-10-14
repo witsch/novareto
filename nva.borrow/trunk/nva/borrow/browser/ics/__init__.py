@@ -56,7 +56,10 @@ def firstWorkDayAfter(dt, day_offset=0):
 def getDateRange(dt, num_days=30):
     MM_YY = collections.namedtuple('MMYY', 'month year, monthname')
 
-    result = dict(dates=list(), months=list(), month_year=dict())
+    result = dict(dates=list(), 
+                  dates_iso=list(),
+                  months=list(), 
+                  month_year=dict())
 
     for day in range(num_days):
         current = myDate(dt + timedelta(days=day))
@@ -67,6 +70,7 @@ def getDateRange(dt, num_days=30):
 
         # store date native
         result['dates'].append(current)
+        result['dates_iso'].append(current.isoformat())
 
         mm_yy = MM_YY(month=current.month, year=current.year, monthname=MONTH_NAMES[current.month-1])
         if not mm_yy in result['months']:

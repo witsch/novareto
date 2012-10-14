@@ -10,4 +10,5 @@ class Orders(BrowserView):
 
     def getItems(self):
         catalog = getToolByName(self.context, 'portal_catalog')
-        return catalog({'portal_type' : ['nva.borrow.borrowableitem']}, full_objects=True)
+        brains = catalog({'portal_type' : ['nva.borrow.borrowableitem']})
+        return [brain.getObject() for brain in brains]

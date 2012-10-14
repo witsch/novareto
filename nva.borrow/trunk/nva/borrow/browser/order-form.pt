@@ -6,16 +6,29 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="nva.borrow">
 
+    <metal:slot fill-slot="style_slot">
+        <style type="text/css">
+
+
+        </style>
+
+    </metal:slot>
+
 <body>
 
 <metal:main fill-slot="content-core">
-    <metal:content-core define-macro="content-core">
+    <metal:content-core define-macro="content-core" 
+          tal:define="data python: view.getDateRange(num_days=60)">
+
+        <script type="text/javascript" tal:content="string:ISO_DATES = ${data/dates_iso}"></script>  
         <h2>Ordner form</h2>      
 
-        <table id="order-table" tal:define="data python: view.getDateRange(num_days=60)" border="1">
+        Borrow for how many days: <input type="number" min="1" max="5" id="days" name="days" value="1" />
+        <table id="order-table" border="1">
             <thead>
                 <tr>
                     <th>Item</th>
+                    <th>Number items</th>
                     <tal:loop repeat="mmyy data/months">
                         <th tal:attributes="colspan python: len(data['month_year'][mmyy])"
                             tal:content="string:${mmyy/monthname} ${mmyy/year}" />
@@ -25,20 +38,88 @@
             <tbody>
                 <tr>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                     <td tal:repeat="dt data/dates" style="width: 20px; text-align: center">
                         <span tal:replace="string: ${dt/weekday_name} ${dt/day}" />
-                        <input type="checkbox" />
+                        <input class="date-selector" 
+                            type="checkbox" 
+                            tal:attributes="value dt/isoformat;
+                                            id string:date-selector-${dt/isoformat}" />
                     </td>
                 </tr>
                 <tr tal:repeat="item view/getItems">
                     <td>
                         <a tal:attributes="href item/absolute_url" tal:content="item/Title" />
                     </td>
-                    <td tal:repeat="dt data/dates">
+                    <td>
+                        <input type="number"
+                               min="0"
+                               max="5" 
+                               style="width: 50px"
+                               tal:define="id item/@@getIntId"
+                               tal:attributes="name string:number-items-$id;
+                                               id   string:number-items-$id"
+                               value="0"
+                               maxlength="1"
+                               size="1"
+                        />
+                    </td>
+                    <td tal:repeat="dt data/dates"
+                        tal:attributes="class string:item-date-cell weekday-${dt/weekday_name/lower};
+                                        data-items-available item/itemsAvailable;
+                                        data-date dt/isoformat;
+                                        data-item item/@@getIntId"
+                        tal:content="item/itemsAvailable"
+                        >
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <script type="text/javascript">
+
+            function clear_grid(date_checked) {
+                $('.item-date-cell').css('background-color', 'white');
+                $('.date-selector').attr('checked', false);
+            }
+
+            function update_grid(reference_date) {
+                clear_grid();
+
+                var days = $('#days').val();
+                var date_idx = ISO_DATES.indexOf(reference_date);
+                for (var i=0; i<days; i++) {
+                    var current_date = ISO_DATES[date_idx+i];
+                    $("td[data-date='" + current_date + "']").css('background-color', '#dddddd');
+                }
+                $('#date-selector-' + reference_date).attr('checked', true);
+            }
+
+
+            $(document).ready(function() {
+                $('input.date-selector').bind('click', function() {
+                    var checked = $(this).is(':checked');
+                    var date = $(this).attr('value');
+                    if (checked) {
+                        update_grid(date);
+                    }
+                    else {
+                        clear_grid();
+                    }
+                });
+                
+                $('#days').bind('change', function() {
+                    var days = $(this).val();
+                    // find reference date (with checkbox checked)
+                    var ref_cbs = $('input[type="checkbox"]:checked');
+                    if (ref_cbs.length > 0) {
+                        var ref_date = ref_cbs[0].value;
+                        update_grid(ref_date);
+                    }
+
+                });
+            });
+        </script>
 
 
     </metal:content-core>
