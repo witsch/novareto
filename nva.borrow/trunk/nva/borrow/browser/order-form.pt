@@ -53,12 +53,14 @@
                     </td>
                     <td>
                         <input type="number"
+                               class="item-number-selector"
                                min="0"
                                max="5" 
                                style="width: 50px"
                                tal:define="id item/@@getIntId"
                                tal:attributes="name string:number-items-$id;
-                                               id   string:number-items-$id"
+                                               id   string:number-items-$id;
+                                               data-item-id id"
                                value="0"
                                maxlength="1"
                                size="1"
@@ -68,7 +70,9 @@
                         tal:attributes="class string:item-date-cell weekday-${dt/weekday_name/lower};
                                         data-items-available item/itemsAvailable;
                                         data-date dt/isoformat;
-                                        data-item item/@@getIntId"
+                                        data-item item/@@getIntId;
+                                        id string:item-${item/@@getIntId}-${dt/isoformat}
+                                        "
                         tal:content="item/itemsAvailable"
                         >
                     </td>
@@ -81,6 +85,7 @@
             function clear_grid(date_checked) {
                 $('.item-date-cell').css('background-color', 'white');
                 $('.date-selector').attr('checked', false);
+                $('.item-date-cell').attr('data-items-borrowed', 0).attr('data-item-selected', false);
             }
 
             function update_grid(reference_date) {
@@ -91,6 +96,7 @@
                 for (var i=0; i<days; i++) {
                     var current_date = ISO_DATES[date_idx+i];
                     $("td[data-date='" + current_date + "']").css('background-color', '#dddddd');
+                    $("td[data-date='" + current_date + "']").attr('data-item-selected', true);
                 }
                 $('#date-selector-' + reference_date).attr('checked', true);
             }
@@ -117,6 +123,13 @@
                         update_grid(ref_date);
                     }
 
+                });
+                
+                $('.item-number-selector').bind('change', function() {
+                    var num_items = $(this).val();
+                    var item_id = $(this).attr('data-item-id');
+                    console.log(num_items);
+                    console.log(item_id);
                 });
             });
         </script>
