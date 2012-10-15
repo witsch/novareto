@@ -118,6 +118,8 @@
 
         <input type="button" value="Clear grid" onclick="javascript: clear_grid()" />
         <input type="button" value="Random grid" onclick="javascript: window.location.href = 'order-form?random=1'" />
+        <br/>
+        <input type="button" value="Book now!!!" disabled />
 
         <script type="text/javascript">
 
