@@ -18,7 +18,11 @@ class Orders(BrowserView):
     def getItems(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         brains = catalog({'portal_type' : ['nva.borrow.borrowableitem']})
-        return [brain.getObject() for brain in brains]
+        objs = [brain.getObject() for brain in brains]
+        category = self.request.get('category')
+        if category:
+            objs = [o for o in objs if category in o.categories]
+        return objs
 
     def getItemIds(self):
         return [item.restrictedTraverse('@@getIntId')() for item in self.getItems()]

@@ -34,7 +34,7 @@
             }            
             
             .selected {
-                background-color: #eeeeee;
+                background-color: #cccccc;
             }            
         </style>
 
