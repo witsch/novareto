@@ -18,6 +18,17 @@
                 color: red;
             }
 
+            /* calculated states */
+            .item-available {
+                background-color: green !important;
+                color: black;
+            }
+
+            .item-not-available {
+                background-color: red !important;
+                color: black;
+            }
+            
             .item-date-cell {
                 text-align: center;
             }            
@@ -119,6 +130,37 @@
                 $('#date-selector-' + reference_date).attr('checked', true);
             }
 
+            /* find reference date (with checkbox checked) */
+            function reference_date() {
+                var ref_cbs = $('input[type="checkbox"]:checked');
+                if (ref_cbs.length > 0) 
+                    return ref_cbs[0].value;
+                return null;
+            }
+
+            /* check item availablity */
+            function validate_item_availability(item_id, num_items) {
+
+                if (num_items == 0)
+                    return;
+
+                var ref_date = reference_date;
+                if (! ref_date)
+                    return;
+
+                $('.item-date-cell[data-active="1"][data-item="'+item_id+'"]').each(function() {
+                    var num_avail = $(this).attr('data-items-available');
+                    if (num_avail >= num_items) { 
+                        $(this).addClass('item-available');
+                        $(this).removeClass('item-not-available');
+                    }
+                    else {
+                        $(this).removeClass('item-available');
+                        $(this).addClass('item-not-available');
+                    }
+                });
+            }
+
 
             $(document).ready(function() {
 
@@ -135,23 +177,15 @@
                 
                 $('#days').bind('change', function() {
                     var days = $(this).val();
-                    // find reference date (with checkbox checked)
-                    var ref_cbs = $('input[type="checkbox"]:checked');
-                    if (ref_cbs.length > 0) {
-                        var ref_date = ref_cbs[0].value;
+                    var ref_date = reference_date();
+                    if (ref_date) 
                         update_grid(ref_date);
-                    }
                 });
                 
                 $('.item-number-selector').bind('change', function() {
                     var num_items = $(this).val();
                     var item_id = $(this).attr('data-item-id');
-                    console.log('checking:', num_items, item_id);
-                    $('.item-date-cell[data-item="'+item_id+'"]').each(function() {
-                        if ($(this).attr('data-active') == '1') {
-                            $(this).html(num_items);
-                        }
-                    });
+                    validate_item_availability(item_id, num_items);
                 });
             });
         </script>
