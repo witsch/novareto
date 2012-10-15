@@ -8,8 +8,23 @@
 
     <metal:slot fill-slot="style_slot">
         <style type="text/css">
+            /* initial states items available or not */
+            .items-available {
+                color: green;
+                font-weight: bold;
+            }            
 
+            .no-items-available {
+                color: red;
+            }
 
+            .item-date-cell {
+                text-align: center;
+            }            
+            
+            .selected {
+                background-color: #eeeeee;
+            }            
         </style>
 
     </metal:slot>
@@ -67,7 +82,8 @@
                         />
                     </td>
                     <td tal:repeat="dt data/dates"
-                        tal:attributes="class string:item-date-cell weekday-${dt/weekday_name/lower};
+                        tal:define="cssItemsAvailable python: 'items-available' if item.itemsAvailable >0 else 'no-items-available'"
+                        tal:attributes="class string:item-date-cell $cssItemsAvailable weekday-${dt/weekday_name/lower};
                                         data-items-available item/itemsAvailable;
                                         data-date dt/isoformat;
                                         data-item item/@@getIntId;
@@ -85,7 +101,7 @@
         <script type="text/javascript">
 
             function clear_grid(date_checked) {
-                $('.item-date-cell').css('background-color', 'white');
+                $('.item-date-cell').removeClass('selected');
                 $('.item-date-cell').attr('data-active', '0');
                 $('.date-selector').attr('checked', false);
             }
@@ -97,7 +113,7 @@
                 var date_idx = ISO_DATES.indexOf(reference_date);
                 for (var i=0; i<days; i++) {
                     var current_date = ISO_DATES[date_idx+i];
-                    $("td[data-date='" + current_date + "']").css('background-color', '#dddddd');
+                    $("td[data-date='" + current_date + "']").addClass('selected');
                     $("td[data-date='" + current_date + "']").attr('data-active', '1');
                 }
                 $('#date-selector-' + reference_date).attr('checked', true);
@@ -105,6 +121,7 @@
 
 
             $(document).ready(function() {
+
                 $('input.date-selector').bind('click', function() {
                     var checked = $(this).is(':checked');
                     var date = $(this).attr('value');
@@ -124,14 +141,12 @@
                         var ref_date = ref_cbs[0].value;
                         update_grid(ref_date);
                     }
-
                 });
                 
                 $('.item-number-selector').bind('change', function() {
                     var num_items = $(this).val();
                     var item_id = $(this).attr('data-item-id');
-                    console.log(num_items);
-                    console.log(item_id);
+                    console.log('checking:', num_items, item_id);
                     $('.item-date-cell[data-item="'+item_id+'"]').each(function() {
                         if ($(this).attr('data-active') == '1') {
                             $(this).html(num_items);
