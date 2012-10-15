@@ -47,6 +47,7 @@
           tal:define="data python: view.getDateRange(num_days=60)">
 
         <script type="text/javascript" tal:content="string:ISO_DATES = ${data/dates_iso}"></script>  
+        <script type="text/javascript" tal:content="string:ITEM_IDS = ${view/getItemIds}"></script>  
         <h2>Ordner form</h2>      
 
         Borrow for how many days: <input type="number" min="1" max="5" id="days" name="days" value="1" />
@@ -139,6 +140,15 @@
                 return null;
             }
 
+            /* Revalidate all items of the grid */
+            function revalidate_grid() {
+                $('.item-number-selector').each(function() {
+                    var item_id = $(this).attr('data-item-id');
+                    var num_items = $(this).val();
+                    validate_item_availability(item_id, num_items);
+                });
+            }
+
             /* check item availablity */
             function validate_item_availability(item_id, num_items) {
 
@@ -175,6 +185,8 @@
                     var date = $(this).attr('value');
                     if (checked) {
                         update_grid(date);
+                        revalidate_grid();
+
                     }
                     else {
                         clear_grid();
@@ -184,8 +196,10 @@
                 $('#days').bind('change', function() {
                     var days = $(this).val();
                     var ref_date = reference_date();
-                    if (ref_date) 
+                    if (ref_date) {
                         update_grid(ref_date);
+                        revalidate_grid();
+                    }
                 });
                 
                 $('.item-number-selector').bind('change', function() {
