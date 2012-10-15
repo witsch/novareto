@@ -109,11 +109,12 @@
             </tbody>
         </table>
 
+        <input type="button" value="Clear grid" onclick="javascript: clear_grid()" />
+
         <script type="text/javascript">
 
             function clear_grid(date_checked) {
-                $('.item-date-cell').removeClass('selected');
-                $('.item-date-cell').attr('data-active', '0');
+                $('.item-date-cell').removeClass('selected item-available item-not-available').attr('data-active', '0');
                 $('.date-selector').attr('checked', false);
             }
 
@@ -141,8 +142,13 @@
             /* check item availablity */
             function validate_item_availability(item_id, num_items) {
 
-                if (num_items == 0)
+                if (num_items == 0) {
+
+                    $('.item-date-cell[data-item="'+item_id+'"]').each(function() {
+                        $(this).removeClass('item-available item-not-available');
+                    });
                     return;
+                }
 
                 var ref_date = reference_date;
                 if (! ref_date)
