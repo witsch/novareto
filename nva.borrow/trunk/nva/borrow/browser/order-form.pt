@@ -94,7 +94,8 @@
                         />
                     </td>
                     <td tal:repeat="dt data/dates"
-                        tal:define="cssItemsAvailable python: 'items-available' if item.itemsAvailable >0 else 'no-items-available'"
+                        tal:define="itemsAvailable item/itemsAvailable;
+                                    cssItemsAvailable python: 'items-available' if itemsAvailable >0 else 'no-items-available'"
                         tal:attributes="class string:item-date-cell $cssItemsAvailable weekday-${dt/weekday_name/lower};
                                         data-items-available item/itemsAvailable;
                                         data-date dt/isoformat;
@@ -111,6 +112,7 @@
         </table>
 
         <input type="button" value="Clear grid" onclick="javascript: clear_grid()" />
+        <input type="button" value="Random grid" onclick="javascript: window.location.href = 'order-form?random=1'" />
 
         <script type="text/javascript">
 
