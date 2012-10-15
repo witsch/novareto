@@ -1,4 +1,5 @@
-﻿from Products.Five.browser import BrowserView
+﻿import random
+from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from datetime import datetime, timedelta
 import ics
@@ -21,3 +22,7 @@ class Orders(BrowserView):
 
     def getItemIds(self):
         return [item.restrictedTraverse('@@getIntId')() for item in self.getItems()]
+
+    def random(self, upper=1):
+        print random.randint(0, upper)
+        return random.randint(0, upper)

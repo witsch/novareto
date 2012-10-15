@@ -76,6 +76,9 @@
                 </tr>
                 <tr tal:repeat="item view/getItems">
                     <td>
+                        <img tal:define="scales item/@@images"
+                             tal:replace="structure python: scales.scale('image', width=100, height=100).tag()" />    
+                        <br/>
                         <a tal:attributes="href item/absolute_url" tal:content="item/Title" />
                     </td>
                     <td>
@@ -93,20 +96,22 @@
                                size="1"
                         />
                     </td>
-                    <td tal:repeat="dt data/dates"
-                        tal:define="itemsAvailable item/itemsAvailable;
-                                    cssItemsAvailable python: 'items-available' if itemsAvailable >0 else 'no-items-available'"
-                        tal:attributes="class string:item-date-cell $cssItemsAvailable weekday-${dt/weekday_name/lower};
-                                        data-items-available item/itemsAvailable;
-                                        data-date dt/isoformat;
-                                        data-item item/@@getIntId;
-                                        data-items-booked string:0;
-                                        data-active string:0;
-                                        id string:item-${item/@@getIntId}-${dt/isoformat}
-                                        "
-                        tal:content="item/itemsAvailable"
-                        >
-                    </td>
+                    <tal:loop repeat="dt data/dates">
+                        <td tal:define="itemsAvailable item/itemsAvailable;
+                                        itemsAvailable python: view.random(itemsAvailable) if 'random' in request else itemsAvailable;
+                                        cssItemsAvailable python: 'items-available' if itemsAvailable > 0 else 'no-items-available'"
+                            tal:attributes="class string:item-date-cell $cssItemsAvailable weekday-${dt/weekday_name/lower};
+                                            data-items-available itemsAvailable;
+                                            data-date dt/isoformat;
+                                            data-item item/@@getIntId;
+                                            data-items-booked string:0;
+                                            data-active string:0;
+                                            id string:item-${item/@@getIntId}-${dt/isoformat}
+                                            "
+                            tal:content="itemsAvailable"
+                            >
+                        </td>
+                    </tal:loop>
                 </tr>
             </tbody>
         </table>
