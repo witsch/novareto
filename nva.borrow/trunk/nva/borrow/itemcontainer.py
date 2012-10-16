@@ -37,10 +37,8 @@ class ItemContainer(dexterity.Container):
     def manage_afterAdd(self, container, item):
         if self.getId() != BOOKING_ID and not BOOKING_ID  in container.objectIds():
             self.invokeFactory('nva.borrow.itemcontainer', id=BOOKING_ID, title='Bookings')
-
         if not ORDERFORM_ID in container.objectIds():
             self.restrictedTraverse('@@setupPFG')(ORDERFORM_ID)
-
 
 class SampleView(grok.View):
     grok.context(IItemContainer)

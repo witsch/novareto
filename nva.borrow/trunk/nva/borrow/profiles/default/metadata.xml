@@ -3,8 +3,6 @@
     <dependencies>
         <dependency>profile-plone.app.dexterity:default</dependency>
         <dependency>profile-Products.PloneFormGen:default</dependency>
-        <dependency>profile-Products.DataGridField:default</dependency>
-        <dependency>profile-Products.PFGDataGrid:default</dependency>
         <dependency>profile-collective.pfg.dexterity:default</dependency>
     </dependencies>
 </metadata>
