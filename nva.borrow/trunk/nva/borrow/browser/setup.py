@@ -58,9 +58,12 @@ class Setup(BrowserView):
         _invokeFactory(form, 'FormStringField', id='telefon', title='Telefon')
         _invokeFactory(form, 'FormStringField', id='email', title='E-Mail Adresse')
         _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer', required=True)
-
-        _invokeFactory(form, 'FormDateField', id='buchungStart', title='Buchen von', required=True)
-        _invokeFactory(form, 'FormDateField', id='buchungEnde', title='Buchen bis', required=True)
+        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='Buchen von', required=True)
+        f.setFgTDefault('request/buchungStart|nothing')        
+        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='Buchen von', required=True)
+        f.setFgTDefault('request/buchungEnde|nothing')        
+        f = _invokeFactory(form, 'FormReadonlyStringField', id='formData', title='formData', required=True)
+        f.setFgTDefault('request/formData|nothing')        
         _invokeFactory(form, 'FormTextField', id='kommentar', title='Kommentar')
 
         self.request.response.redirect(form.absolute_url())
