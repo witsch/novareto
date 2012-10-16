@@ -10,8 +10,10 @@
 
 <metal:main fill-slot="content-core">
     <metal:content-core define-macro="content-core">
-        <h2>Categories</h2>      
-        <ul tal:define="categories view/getCategories">
+        <h2>Categories</h2>     
+
+        <!-- by category -->        
+        <ul tal:define="categories view/getCategories" tal:condition="not: request/flat|nothing">
             <li tal:repeat="category categories">
                 <a tal:attributes="href string:${context/absolute_url}/@@order-form?category=$category"
                    tal:content="category" />
@@ -28,6 +30,19 @@
                         </li>
                     </ul>
                 </tal:def>
+            </li>
+        </ul>
+
+        <!-- by flat -->        
+        <ul tal:define="items view/getAllItems" tal:condition="request/flat|nothing">
+            <li tal:repeat="item items">
+                <img class="item-image" tal:define="scales item/@@images"
+                    tal:replace="structure python: scales.scale('image', width=100, height=100).tag()" />    
+                <div>
+                    <a class="item-title" tal:attributes="href item/absolute_url"
+                        tal:content="item/Title" />
+                    <div class="item-description" tal:condition="item/Description" tal:content="item/Description"/>
+                </div>
             </li>
         </ul>
     </metal:content-core>

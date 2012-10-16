@@ -55,7 +55,7 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
         title=_(u'Items available'),
         description=_(u'Items available'),
         required=True,
-        min=1,
+        min=0,
         max=10,
         default=1)   
  

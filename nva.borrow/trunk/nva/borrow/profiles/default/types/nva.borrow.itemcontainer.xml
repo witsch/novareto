@@ -1,22 +1,26 @@
 <?xml version="1.0"?>
-<object name="nva.borrow.borrowrequest"
+<object name="nva.borrow.itemcontainer"
    meta_type="Dexterity FTI"
    i18n:domain="nva.borrow" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">BorrowRequest</property>
+  <property name="title" i18n:translate="">ItemContainer</property>
   <property name="description"
-    i18n:translate="">Request to borrow items</property>
-  <property name="icon_expr">string:${portal_url}/document_icon.png</property>
-  <property name="factory">nva.borrow.borrowrequest</property>
-  <property name="global_allow">False</property>
-  <property name="filter_content_types">False</property>  
-  <property name="allowed_content_types" />
+    i18n:translate="">Container for borrowable items</property>
+  <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
+  <property name="factory">nva.borrow.itemcontainer</property>
+  <property name="global_allow">True</property>
+  <property name="filter_content_types">True</property>  
   <property name="allow_discussion">False</property>
 
+  <property name="allowed_content_types" purge="True">
+    <element value="nva.borrow.borrowableitem"/>
+    <element value="nva.borrow.borrowrequest"/>
+  </property>
+
   <!-- schema and class used for content items -->
-  <property name="schema">nva.borrow.borrowrequest.IBorrowRequest</property> 
-  <property name="klass">nva.borrow.borrowrequest.BorrowRequest</property>
+  <property name="schema">nva.borrow.itemcontainer.IItemContainer</property> 
+  <property name="klass">nva.borrow.itemcontainer.ItemContainer</property>
 
   <property name="behaviors">
      <element value="plone.app.content.interfaces.INameFromTitle" />
@@ -26,9 +30,9 @@
   <!-- View information -->
   <property name="link_target"></property>
   <property name="immediate_view">view</property>
-  <property name="default_view">view</property>
+  <property name="default_view">item-container-view</property>
   <property name="view_methods">
-   <element value="view"/>
+   <element value="item-container-view"/>
   </property>
   <property name="default_view_fallback">False</property>
   <property name="add_permission">cmf.AddPortalContent</property>

@@ -44,14 +44,22 @@
 
 <metal:main fill-slot="content-core">
     <metal:content-core define-macro="content-core" 
-          tal:define="data python: view.getDateRange(num_days=60)">
+        tal:define="data python: view.getDateRange(num_days=60);
+                    items view/getItems">
 
         <script type="text/javascript" tal:content="string:ISO_DATES = ${data/dates_iso}"></script>  
         <script type="text/javascript" tal:content="string:ITEM_IDS = ${view/getItemIds}"></script>  
         <h2>Ordner form</h2>      
 
-        Borrow for how many days: <input type="number" min="1" max="5" id="days" name="days" value="1" />
-        <table id="order-table" border="1">
+
+        <div tal:condition="not: items">
+            There is nothing to be borrowed.
+        </div>
+
+        <tal:if condition="items">
+            Borrow for how many days: <input type="number" min="1" max="5" id="days" name="days" value="1" />
+        </tal:if>
+        <table id="order-table" border="1" tal:condition="items">
             <thead>
                 <tr>
                     <th>Item</th>
@@ -74,7 +82,7 @@
                                             id string:date-selector-${dt/isoformat}" />
                     </td>
                 </tr>
-                <tr tal:repeat="item view/getItems">
+                <tr tal:repeat="item items">
                     <td>
                         <img tal:define="scales item/@@images"
                              tal:replace="structure python: scales.scale('image', width=100, height=100).tag()" />    
@@ -116,10 +124,12 @@
             </tbody>
         </table>
 
-        <input type="button" value="Clear grid" onclick="javascript: clear_grid()" />
-        <input type="button" value="Random grid" onclick="javascript: window.location.href = 'order-form?random=1'" />
-        <br/>
-        <input type="button" value="Book now!!!" disabled />
+        <div id="buttons" tal:condition="items">
+            <input type="button" value="Clear grid" onclick="javascript: clear_grid()" />
+            <input type="button" value="Random grid" onclick="javascript: window.location.href = 'order-form?random=1'" />
+            <br/>
+            <input type="button" value="Book now!!!" disabled />
+        </div>
 
         <script type="text/javascript">
 

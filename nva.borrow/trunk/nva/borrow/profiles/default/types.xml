@@ -8,6 +8,7 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <object name="nva.borrow.itemcontainer" meta_type="Dexterity FTI" />
   <object name="nva.borrow.borrowrequest" meta_type="Dexterity FTI" />
   <object name="nva.borrow.borrowableitem" meta_type="Dexterity FTI" />
 </object>

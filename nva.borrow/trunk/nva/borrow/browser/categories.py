@@ -15,3 +15,7 @@ class Categories(BrowserView):
             if category in item.categories:
                 items.append(item)
         return items
+    
+    def getAllItems(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        return [brain.getObject() for brain in catalog({'portal_type' : 'nva.borrow.borrowableitem'})]
