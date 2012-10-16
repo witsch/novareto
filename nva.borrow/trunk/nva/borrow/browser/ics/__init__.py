@@ -18,6 +18,7 @@ class myDate(date):
         new_dt.weekday_name = DAY_NAMES[new_dt.weekday()]
         new_dt.is_holiday = is_holiday
         new_dt.text = text
+        new_dt.week = new_dt.isocalendar()[1]
         return new_dt
 
 def getHolidays():
@@ -65,7 +66,7 @@ def getDateRange(dt, num_days=30):
 
         text = ''
         if current_.date() in HOLIDAYS:
-            text = HOLIDAYS[current_.date()].rsplit('Alle')[0]
+            text = HOLIDAYS[current_.date()].rsplit('Alle', 1)[0]
         current = myDate(current_, 
                          text=text,
                          is_holiday=(current_.date() in HOLIDAYS))

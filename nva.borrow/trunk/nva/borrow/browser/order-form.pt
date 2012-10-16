@@ -42,7 +42,16 @@
             }
             
             .date-selector-cell {
+                width: 30px;
                 text-align: center;
+            }
+            
+            td.item-number-selector {
+                text-align: center;
+            }
+            
+            input.item-number-selector {
+                width: 30px;
             }
         </style>
 
@@ -65,7 +74,8 @@
         </div>
 
         <tal:if condition="items">
-            Borrow for how many days: <input type="number" min="1" max="5" id="days" name="days" value="1" />
+            Borrow for how many days: <input type="range" min="1" max="5" id="days" name="days" value="1" />
+            <span id="days-value">1</span>
         </tal:if>
         <table id="order-table" border="1" tal:condition="items">
             <thead>
@@ -82,16 +92,19 @@
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td class="date-selector-cell"
-                        tal:repeat="dt data/dates" 
-                        tal:attributes="title dt/text">
-                        <span tal:replace="string: ${dt/weekday_name} ${dt/day}" />
-                        <input class="date-selector" 
-                            type="checkbox" 
-                            tal:attributes="value dt/isoformat;
-                                            DISABLED python: int(dt.is_holiday);
-                                            id string:date-selector-${dt/isoformat}" />
-                    </td>
+                    <tal:loop repeat="dt data/dates">
+                        <td tal:define="evenodd python: 'even' if dt.week  % 2 else 'odd'"
+                            tal:attributes="title dt/text;
+                                            class string:date-selector-cell kw-$evenodd">
+                            <div tal:content="dt/weekday_name" />
+                            <div tal:content="dt/day" />
+                            <input class="date-selector" 
+                                type="checkbox" 
+                                tal:attributes="value dt/isoformat;
+                                                DISABLED python: int(dt.is_holiday);
+                                                id string:date-selector-${dt/isoformat}" />
+                        </td>
+                    </tal:loop>
                 </tr>
                 <tr tal:repeat="item items">
                     <td>
@@ -100,7 +113,7 @@
                         <br/>
                         <a tal:attributes="href item/absolute_url" tal:content="item/Title" />
                     </td>
-                    <td>
+                    <td class="item-number-selector">
                         <input type="number"
                                class="item-number-selector"
                                min="0"
@@ -224,6 +237,7 @@
                 
                 $('#days').bind('change', function() {
                     var days = $(this).val();
+                    $('#days-value').html(days);
                     var ref_date = reference_date();
                     if (ref_date) {
                         update_grid(ref_date);
