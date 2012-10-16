@@ -28,5 +28,9 @@ class Orders(BrowserView):
         return [item.restrictedTraverse('@@getIntId')() for item in self.getItems()]
 
     def random(self, upper=1):
-        print random.randint(0, upper)
         return random.randint(0, upper)
+
+    def processBooking(self):
+        booking_bolder = self.context['bookings']
+        self.request.response.redirect('%s/order-form' % self.context.absolute_url())
+

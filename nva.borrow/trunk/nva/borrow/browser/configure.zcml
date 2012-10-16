@@ -4,19 +4,11 @@
     i18n_domain="weishaupt.policy">
   
   <browser:page
-    name="demo"
-    permission="cmf.ManagePortal"
-    class=".setup.Setup"
-    attribute="demo"
-    for="*"
-   />
-
-  <browser:page
     name="item-container-view"
     permission="zope2.View"
     class=".categories.Categories"
     template="categories.pt"
-    for="*"
+    for="..itemcontainer.IItemContainer"
    />
 
   <browser:page
@@ -24,7 +16,15 @@
     permission="zope2.View"
     class=".orders.Orders"
     template="order-form.pt"
-    for="*"
+    for="..itemcontainer.IItemContainer"
+   />
+
+  <browser:page
+    name="process-booking"
+    permission="zope2.View"
+    class=".orders.Orders"
+    attribute="processBooking"
+    for="..itemcontainer.IItemContainer"
    />
   
   <browser:page
@@ -32,7 +32,7 @@
     permission="cmf.ManagePortal"
     class=".setup.Setup"
     attribute="setupPFG"
-    for="*"
+    for="..itemcontainer.IItemContainer"
    />
 
   <browser:page

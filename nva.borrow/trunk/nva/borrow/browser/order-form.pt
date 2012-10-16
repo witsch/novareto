@@ -127,8 +127,8 @@
         <div id="buttons" tal:condition="items">
             <input type="button" value="Clear grid" onclick="javascript: clear_grid()" />
             <input type="button" value="Random grid" onclick="javascript: window.location.href = 'order-form?random=1'" />
-            <br/>
-            <input type="button" value="Book now!!!" disabled />
+            <br/><br/>
+            <input type="button" value="Book now!!!" style="font-size: 20px" onclick="javascript: book()"/>
         </div>
 
         <script type="text/javascript">
@@ -227,8 +227,41 @@
                     validate_item_availability(item_id, num_items);
                 });
             });
-        </script>
 
+            function book() {
+                var ref_date = reference_date();
+                var date_idx = ISO_DATES.indexOf(ref_date);
+                var days = parseInt($('#days').val())
+                var dates = ISO_DATES.slice(date_idx, date_idx+days);
+                var items = [];
+                $('.item-number-selector').each(function() {
+                    var num_items = $(this).val();
+                    if (num_items > 0) {
+                        items.push({itemid: $(this).attr('data-item-id'), 
+                                    number: num_items});
+                    }
+                });
+
+                if (items.length == 0) {
+                    alert('No items booked');
+                    return;
+                }
+
+                // fiddle query string
+                var qs = 'startdate=' + ref_date;
+                for (i in dates) 
+                    qs += '&dates:list=' + dates[i];
+                for (var i in items) {
+                    qs += '&items.id:records=' + items[i].itemid;
+                    qs += '&items.number:records=' + items[i].number;
+                }                
+
+                var url = '@@process-booking?' + qs;
+                console.log(url);
+                document.location.href = url;
+            }
+
+        </script>
 
     </metal:content-core>
 </metal:main>
