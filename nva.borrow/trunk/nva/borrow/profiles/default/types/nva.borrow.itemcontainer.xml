@@ -14,8 +14,10 @@
   <property name="allow_discussion">False</property>
 
   <property name="allowed_content_types" purge="True">
+    <element value="nva.borrow.itemcontainer"/>
     <element value="nva.borrow.borrowableitem"/>
     <element value="nva.borrow.borrowrequest"/>
+    <element value="FormFolder"/>
   </property>
 
   <!-- schema and class used for content items -->
