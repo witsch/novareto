@@ -36,6 +36,14 @@
             .selected {
                 background-color: #cccccc;
             }            
+
+            #feedback-error {
+                color: red;
+            }
+            
+            .date-selector-cell {
+                text-align: center;
+            }
         </style>
 
     </metal:slot>
@@ -74,11 +82,14 @@
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td tal:repeat="dt data/dates" style="width: 20px; text-align: center">
+                    <td class="date-selector-cell"
+                        tal:repeat="dt data/dates" 
+                        tal:attributes="title dt/text">
                         <span tal:replace="string: ${dt/weekday_name} ${dt/day}" />
                         <input class="date-selector" 
                             type="checkbox" 
                             tal:attributes="value dt/isoformat;
+                                            DISABLED python: int(dt.is_holiday);
                                             id string:date-selector-${dt/isoformat}" />
                     </td>
                 </tr>
@@ -94,7 +105,6 @@
                                class="item-number-selector"
                                min="0"
                                max="5" 
-                               style="width: 50px"
                                tal:define="id item/@@getIntId"
                                tal:attributes="name string:number-items-$id;
                                                id   string:number-items-$id;
@@ -124,10 +134,10 @@
             </tbody>
         </table>
 
+        <div id="feedback-error"></div>
+        <div id="feedback-ok"></div>
+
         <div id="buttons" tal:condition="items">
-            <input type="button" value="Clear grid" onclick="javascript: clear_grid()" />
-            <input type="button" value="Random grid" onclick="javascript: window.location.href = 'order-form?random=1'" />
-            <br/><br/>
             <input type="button" value="Book now!!!" style="font-size: 20px" onclick="javascript: book()"/>
         </div>
 
@@ -242,8 +252,18 @@
                     }
                 });
 
+                if (ref_date == null) {
+                    $('#feedback-error').html('Es wurden keine Buchungszeitraum ausgewählt');
+                    return;
+                }
+
                 if (items.length == 0) {
-                    alert('No items booked');
+                    $('#feedback-error').html('Es wurden keine Aktionsmittel ausgewählt');
+                    return;
+                }
+
+                if (items.length > 3) {
+                    $('#feedback-error').html('Es dürfen maximal drei verschiedene Aktionsmittel ausgewählt werden');
                     return;
                 }
 

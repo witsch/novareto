@@ -13,16 +13,17 @@ DAY_NAMES = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
 
 
 class myDate(date):
-    def __new__(cls, dt):
+    def __new__(cls, dt, is_holiday=False, text=''):
         new_dt = date.__new__(cls, dt.year, dt.month, dt.day)
         new_dt.weekday_name = DAY_NAMES[new_dt.weekday()]
+        new_dt.is_holiday = is_holiday
+        new_dt.text = text
         return new_dt
 
 def getHolidays():
 
     events = dict()
     for ics in glob.glob('%s%s*.ics' % (os.path.dirname(__file__), os.path.sep)):
-        print ics
         cal = icalendar.Calendar.from_ical(open(ics,'rb').read())
         for item in cal.walk():
             if isinstance(item, icalendar.cal.Event):
@@ -48,10 +49,7 @@ def firstWorkDayAfter(dt, day_offset=0):
         # weekend
         if new_dt.isoweekday() in [6,7]:
             continue
-        print new_dt
         return new_dt
-
-
 
 def getDateRange(dt, num_days=30):
     MM_YY = collections.namedtuple('MMYY', 'month year, monthname')
@@ -62,7 +60,15 @@ def getDateRange(dt, num_days=30):
                   month_year=dict())
 
     for day in range(num_days):
-        current = myDate(dt + timedelta(days=day))
+
+        current_ = dt + timedelta(days=day)
+
+        text = ''
+        if current_.date() in HOLIDAYS:
+            text = HOLIDAYS[current_.date()].rsplit('Alle')[0]
+        current = myDate(current_, 
+                         text=text,
+                         is_holiday=(current_.date() in HOLIDAYS))
 
         # weekend
         if current.isoweekday() in [6,7]: 

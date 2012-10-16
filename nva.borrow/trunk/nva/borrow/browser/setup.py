@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*- 
+
 import os
 import loremipsum
 from random import randrange
@@ -16,7 +18,6 @@ def _invokeFactory(context, portal_type, id, **kw):
     except:
         pass
     return obj
-
 
 class Setup(BrowserView):
 
@@ -49,24 +50,32 @@ class Setup(BrowserView):
                                  dict(form='buchungEnde', content='borrowTo'),
                                  dict(form='kommentar', content='comment'),
             ])
+#        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='Buchen von', required=True)
+#        f.setFgTDefault('request/buchungStart|nothing')        
+#        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='Buchen von', required=True)
+#        f.setFgTDefault('request/buchungEnde|nothing')        
+        f=_invokeFactory(form, 'FormRichLabelField', id='bestellung', title='Bestellte Aktionsmittel')
+        f.setFgTDefault('request/bestellung|nothing')        
 
-        _invokeFactory(form, 'FormStringField', id='vorname', title='Vorname', required=True)
-        _invokeFactory(form, 'FormStringField', id='nachname', title='Nachname', required=True)
-        _invokeFactory(form, 'FormStringField', id='adresse', title='Adresse', required=True)
+        _invokeFactory(form, 'FormStringField', id='unternehmen', title='Unternehmen', required=True)
+        _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer bei BGETEM', required=True)
+        _invokeFactory(form, 'FormStringField', id='vorname', title='Vorname (Ansprechpartner)', required=True)
+        _invokeFactory(form, 'FormStringField', id='nachname', title='Nachname (Ansprechpartner)', required=True)
+        _invokeFactory(form, 'FormStringField', id='email', title='E-Mail Adresse (Ansprechpartner)', required=True)
+        _invokeFactory(form, 'FormStringField', id='telefon', title='Telefon (Ansprechpartner)', required=True)
+        _invokeFactory(form, 'FormStringField', id='fax', title='Fax (Ansprechpartner)')
+
+        _invokeFactory(form, 'FormStringField', id='adresse', title='Lieferaddresse (keine Postfach)', required=True)
+        _invokeFactory(form, 'FormStringField', id='adresse2', title='Adresszusatz (Gebäude, Einfahrt, Tor usw.)', required=False)
         _invokeFactory(form, 'FormStringField', id='plz', title='Postleitzahl', required=True)
         _invokeFactory(form, 'FormStringField', id='stadt', title='Stadt', required=True)
-        _invokeFactory(form, 'FormStringField', id='telefon', title='Telefon')
-        _invokeFactory(form, 'FormStringField', id='email', title='E-Mail Adresse')
-        _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer', required=True)
-        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='Buchen von', required=True)
-        f.setFgTDefault('request/buchungStart|nothing')        
-        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='Buchen von', required=True)
-        f.setFgTDefault('request/buchungEnde|nothing')        
+        _invokeFactory(form, 'FormStringField', id='lieferzeit', title='Lieferzeit/Bürozeit (wann ist jemand zu Haus)', required=True)
+        _invokeFactory(form, 'FormStringField', id='thema', title='Thema Aktionstag', required=False)
+        _invokeFactory(form, 'FormStringField', id='besucherzahl', title='Erwartete Besucherzahl', required=False)
+        
         f = _invokeFactory(form, 'FormReadonlyStringField', id='formData', title='formData', required=True)
         f.setFgTDefault('request/formData|nothing')        
-        _invokeFactory(form, 'FormTextField', id='kommentar', title='Kommentar')
 
-        self.request.response.redirect(form.absolute_url())
 
     def createBookingRequest(self, intid=None):
         form_folder = self.context.portal_catalog(portal_type='FormFolder')[0].getObject()

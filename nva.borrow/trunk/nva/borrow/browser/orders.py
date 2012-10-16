@@ -1,8 +1,17 @@
 ﻿import random
+import urllib
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from datetime import datetime, timedelta
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
+
 import ics
+
+def iso2german(s):
+    """ Convert YYYY-MM-DD to DD.MM.YYYY"""
+    fields = s.split('-')
+    return '%s.%s.%s' % (fields[-1], fields[1], fields[0])
 
 class Orders(BrowserView):
 
@@ -31,6 +40,28 @@ class Orders(BrowserView):
         return random.randint(0, upper)
 
     def processBooking(self):
-        booking_bolder = self.context['bookings']
-        self.request.response.redirect('%s/order-form' % self.context.absolute_url())
+        buchungStart = iso2german(self.request.form['dates'][0])
+        buchungEnde = iso2german(self.request.form['dates'][-1])
+
+        html = list()
+        html.append('<h2>Ihre Buchung von Aktionsmitteln</h2>')
+        html.append('<div id="zeitraum">Zeitraum: %s bis %s</div>' % (buchungStart, buchungEnde) )
+
+        intidutil = getUtility(IIntIds)
+        html.append('<ul id="bestellung">')
+        for d in self.request.form.get('items', []):
+            obj = intidutil.getObject(int(d['id']))
+            number = int(d['number'])
+            html.append('<li>%d x %s</li>' % (number, obj.Title()))
+        html.append('</ul>')
+
+
+        # Pass some hidden/read-only parameters to the PFG form
+        params = {'buchungStart' : buchungStart,
+                  'buchungEnde' : buchungEnde,
+                  'bestellung' : u''.join(html),
+                  'formData' : str(self.request.form)    
+                }
+        self.request.response.redirect('%s/order-form?%s' % 
+                                       (self.context.absolute_url(), urllib.urlencode(params)))
 
