@@ -26,7 +26,8 @@ class BasicTests(TestBase):
         self.login('god')
         new_id = self.portal.invokeFactory('nva.borrow.itemcontainer', id='aktionsmittel-set', title='Aktionsmittelset')
         container = self.portal[new_id]
-        container.restrictedTraverse('@@setupPFG')()
+        self.assertTrue('bookings' in container.objectIds())
+        self.assertTrue('order-form' in container.objectIds())
 
 def test_suite():
     from unittest2 import TestSuite, makeSuite
