@@ -22,6 +22,8 @@ class Orders(BrowserView):
         """
         if not start_date:
             start_date = datetime.now() + timedelta(days=start_offset_days)
+        elif isinstance(start_date, str):
+            start_date = datetime.strptime(start_date, '%Y-%m-%d') 
         return ics.getDateRange(start_date, num_days)
 
     def getItems(self):
@@ -35,6 +37,9 @@ class Orders(BrowserView):
 
     def getItemIds(self):
         return [item.restrictedTraverse('@@getIntId')() for item in self.getItems()]
+
+    def nextMonths(self):
+        return ics.nextMonths()
 
     def random(self, upper=1):
         return random.randint(0, upper)

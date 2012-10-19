@@ -43,6 +43,8 @@
             
             .date-selector-cell {
                 width: 30px;
+                min-width: 30px;
+                max-width: 30px;
                 text-align: center;
             }
             
@@ -66,6 +68,12 @@
                 width: 100%;
             }
 
+            ul#month-selection,
+            ul#month-selection li {
+                display: inline;                  
+            }
+
+
         </style>
 
     </metal:slot>
@@ -74,7 +82,8 @@
 
 <metal:main fill-slot="content-core">
     <metal:content-core define-macro="content-core" 
-        tal:define="data python: view.getDateRange(num_days=60);
+        tal:define="date request/date|nothing;
+                    data python: view.getDateRange(start_date=date, num_days=60);
                     items view/getItems">
 
         <script type="text/javascript" tal:content="string:ISO_DATES = ${data/dates_iso}"></script>  
@@ -90,6 +99,13 @@
             Borrow for how many days: <input type="range" min="1" max="5" id="days" name="days" value="1" />
             <span id="days-value">1</span>
         </tal:if>
+
+        <ul id="month-selection">
+            <li tal:repeat="d view/nextMonths">
+                <a tal:attributes="href string:@@order-form?date=${d/date}"
+                   tal:content="string:${d/month_name} ${d/year}"/>
+            </li>
+        </ul>
         <table id="order-table" border="1" tal:condition="items">
             <thead>
                 <tr>
@@ -102,9 +118,17 @@
                 </tr>
             </thead>
             <tbody>
+                <tr tal:condition="nothing">
+                    <td colspan="2">&nbsp;</td>
+                    <tal:loop repeat="dt data/dates">
+                        <td tal:condition="python: dt.weekday_name == 'Mo'" colspan="5">
+                            foo
+                        </td>
+
+                    </tal:loop>
+                </tr>
                 <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td colspan="2">&nbsp;</td>
                     <tal:loop repeat="dt data/dates">
                         <td tal:define="evenodd python: 'even' if dt.week  % 2 else 'odd'"
                             tal:attributes="title dt/text;

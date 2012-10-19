@@ -90,7 +90,19 @@ def getDateRange(dt, num_days=30):
 
     return result
 
+def nextMonths(num_month=12):
+    """ Return a data structure for the next N months """
 
+    now = datetime.now().date().replace(day=1)
+    result = list()
+    for i in range(1, num_month+1):
+        current = (now + timedelta(days=i*28)).replace(day=1)
+        result.append(dict(month=current.month,
+                           year=current.year,
+                           date=current.isoformat(),
+                           month_name=MONTH_NAMES[current.month-1]))
+
+    return result
 
 if __name__ == '__main__':
     print getHolidays()

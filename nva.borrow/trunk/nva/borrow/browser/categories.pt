@@ -18,6 +18,7 @@
                 <a tal:attributes="href string:${context/absolute_url}/@@order-form?category=$category"
                    tal:content="category" />
                 <tal:def define="items python: view.itemsWithCategory(category)">
+                    <span tal:condition="not: items">Keine Aktionsmittel in dieser Kategorie</span>
                     <ul tal:condition="items">
                         <li tal:repeat="item items">
                             <img class="item-image" tal:define="scales item/@@images"
