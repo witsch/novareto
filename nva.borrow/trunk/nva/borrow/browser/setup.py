@@ -34,11 +34,12 @@ class Setup(BrowserView):
 
         form = _invokeFactory(self.context, 'FormFolder', id=id_, title='Bestellformular')
         form.manage_delObjects(['replyto', 'topic', 'comments'])
+        form.setActionAdapter(['dexterity-adapter'])
 
         # content adapter
         adapter = _invokeFactory(form, 'Dexterity Content Adapter', id='dexterity-adapter', title='Dexterity Adapter')
         adapter.setCreatedType('nva.borrow.borrowrequest')
-        adapter.setTargetFolder(self.context)
+        adapter.setTargetFolder(self.context['bookings'])
         fields = ('unternehmen', 'mitgliedsnr', 'vorname', 'nachname', 'email', 
                   'telefon', 'fax', 'adresse', 'adresse2', 'plz', 'stadt', 'lieferzeit', 
                   'thema', 'besucherzahl', 'formData')

@@ -18,6 +18,7 @@
     <element value="nva.borrow.borrowableitem"/>
     <element value="nva.borrow.borrowrequest"/>
     <element value="FormFolder"/>
+    <element value="Folder"/>
   </property>
 
   <!-- schema and class used for content items -->

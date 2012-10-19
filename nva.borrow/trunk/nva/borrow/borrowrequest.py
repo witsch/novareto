@@ -28,62 +28,73 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from borrowableitem import IBorrowableItem
 
-@grok.provider(IContextSourceBinder)
-def borrowableItems(context):
-    items = list()
-    items.append(SimpleVocabulary.createTerm(u'a', u'b'))
-    items.append(SimpleVocabulary.createTerm(u'c', u'd'))
-    return SimpleVocabulary(items)
-
-
-
-# Interface class; used to define content-type schema.
 
 class IBorrowRequest(form.Schema, IImageScaleTraversable):
     """
     Request to borrow items
     """
 
-    firstName = schema.TextLine(
-        title=_(u'First name'),
+    unternehmen = schema.TextLine(
+        title=_(u'Unternehmen'),
         required=True,
         default=u'')   
 
-    lastName = schema.TextLine(
-        title=_(u'Last name'),
+    mitgliedsnr = schema.TextLine(
+        title=_(u'Mitgliedsnummer'),
         required=True,
         default=u'')   
 
-    address = schema.TextLine(
-        title=_(u'Address'),
+    vorname = schema.TextLine(
+        title=_(u'Vorname'),
         required=True,
         default=u'')   
-
-    zip = schema.TextLine(
-        title=_(u'ZIP code'),
+    nachname = schema.TextLine(
+        title=_(u'Nachname'),
         required=True,
         default=u'')   
-
-    city = schema.TextLine(
-        title=_(u'City'),
-        required=True,
-        default=u'')   
-
-    phone = schema.TextLine(
-        title=_(u'Phone'),
-        required=False,
-        default=u'')   
-
     email = schema.TextLine(
         title=_(u'Email'),
-        required=False,
+        required=True,
+        default=u'')   
+    telefon = schema.TextLine(
+        title=_(u'Telefon'),
+        required=True,
+        default=u'')   
+    fax = schema.TextLine(
+        title=_(u'Fax'),
+        required=True,
         default=u'')   
 
-    memberId= schema.TextLine(
-        title=_(u'Member id'),
-        description=_(u'Member ID'),
+    adresse = schema.TextLine(
+        title=_(u'Adresse'),
         required=True,
-        default=u'00000')   
+        default=u'')   
+    adresse2 = schema.TextLine(
+        title=_(u'Adresszusatz'),
+        required=True,
+        default=u'')   
+    plz = schema.TextLine(
+        title=_(u'Stadt'),
+        required=True,
+        default=u'')   
+    lieferzeit = schema.TextLine(
+        title=_(u'Lieferzeit'),
+        required=True,
+        default=u'')   
+    besucherzahl = schema.TextLine(
+        title=_(u'Besucherzahl'),
+        required=True,
+        default=u'')   
+
+    thema = schema.TextLine(
+        title=_(u'Thema'),
+        required=True,
+        default=u'')   
+
+    formData = schema.TextLine(
+        title=_(u'Form data'),
+        required=True,
+        default=u'')   
 
     borrowFrom = schema.Date(
         title=_(u'Borrow from'),
@@ -95,48 +106,17 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
         required=True,
         default=None)
 
-    borrowItems = RelationList(
-        title=_(u'Items to borrow'),
-        default=[],
-        value_type=RelationChoice(title=_(u'Related'),
-                                  source=ObjPathSourceBinder(object_provides=IBorrowableItem.__identifier__))
-            )
-
-    comment = schema.Text(
-        title=_(u'Comment'),
-        description=_(u'Comment'),
-        required=False,
-        default=u'')   
-
     @invariant
     def validateStartEnd(data):
         if data.borrowFrom is not None and data.borrowTo is not None:
             if data.borrowFrom > data.borrowTo:
                 raise Invalid(_(u"The start date must be before the end date."))
 
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
-
 class BorrowRequest(dexterity.Item):
     grok.implements(IBorrowRequest)
     
-    # Add your class methods and properties here
-
-
-# View class
-# The view will automatically use a similarly named template in
-# borrowrequest_templates.
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@sampleview" appended.
-# You may make this the default view for content objects
-# of this type by uncommenting the grok.name line below or by
-# changing the view class name and template filename to View / view.pt.
 
 class SampleView(grok.View):
     grok.context(IBorrowRequest)
     grok.require('zope2.View')
     
-    # grok.name('view')
