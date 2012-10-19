@@ -36,6 +36,14 @@
    />
 
   <browser:page
+    name="showBestellung"
+    permission="zope2.View"
+    class=".orders.Orders"
+    attribute="showBestellung"
+    for="Products.PloneFormGen.content.fields.FGRichLabelField"
+   />
+
+  <browser:page
     name="createBookingRequest"
     permission="cmf.ManagePortal"
     class=".setup.Setup"

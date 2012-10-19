@@ -53,6 +53,19 @@
             input.item-number-selector {
                 width: 30px;
             }
+            
+            .kw-odd {
+                background: #eeeeee;
+            }
+            .kw-even {
+                background: #cccccc;
+            }
+
+            #order-table {
+                table-layout: fixed;
+                width: 100%;
+            }
+
         </style>
 
     </metal:slot>
@@ -80,8 +93,8 @@
         <table id="order-table" border="1" tal:condition="items">
             <thead>
                 <tr>
-                    <th>Item</th>
-                    <th>Number items</th>
+                    <th style="width: 100px">Item</th>
+                    <th style="width: 100px">Number items</th>
                     <tal:loop repeat="mmyy data/months">
                         <th tal:attributes="colspan python: len(data['month_year'][mmyy])"
                             tal:content="string:${mmyy/monthname} ${mmyy/year}" />
@@ -281,7 +294,7 @@
                     return;
                 }
 
-                // fiddle query string
+                // fiddle query string (using ZPublisher deserialization protocol)
                 var qs = 'startdate=' + ref_date;
                 for (i in dates) 
                     qs += '&dates:list=' + dates[i];

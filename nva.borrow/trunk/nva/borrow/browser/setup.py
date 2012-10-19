@@ -55,7 +55,7 @@ class Setup(BrowserView):
 #        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='Buchen von', required=True)
 #        f.setFgTDefault('request/buchungEnde|nothing')        
         f=_invokeFactory(form, 'FormRichLabelField', id='bestellung', title='Bestellte Aktionsmittel')
-        f.setFgTDefault('request/bestellung|nothing')        
+        f.setFgTDefault('context/showBestellung|nothing')        
 
         _invokeFactory(form, 'FormStringField', id='unternehmen', title='Unternehmen', required=True)
         _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer bei BGETEM', required=True)
@@ -74,6 +74,7 @@ class Setup(BrowserView):
         _invokeFactory(form, 'FormStringField', id='besucherzahl', title='Erwartete Besucherzahl', required=False)
         
         f = _invokeFactory(form, 'FormReadonlyStringField', id='formData', title='formData', required=True)
+        f.setHidden(True)
         f.setFgTDefault('request/formData|nothing')        
 
 

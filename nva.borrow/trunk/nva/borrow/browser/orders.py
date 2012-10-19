@@ -39,27 +39,29 @@ class Orders(BrowserView):
     def random(self, upper=1):
         return random.randint(0, upper)
 
-    def processBooking(self):
-        buchungStart = iso2german(self.request.form['dates'][0])
-        buchungEnde = iso2german(self.request.form['dates'][-1])
-
-        html = list()
-        html.append('<h2>Ihre Buchung von Aktionsmitteln</h2>')
-        html.append('<div id="zeitraum">Zeitraum: %s bis %s</div>' % (buchungStart, buchungEnde) )
-
+    def showBestellung(self):
+        """ Return a HTML snippet for request/items to be injected through
+            an PFG overrides configuration inside for the 'bestellung' 
+            RichLabelField.
+        """
         intidutil = getUtility(IIntIds)
+        html = list()
         html.append('<ul id="bestellung">')
-        for d in self.request.form.get('items', []):
+        import pdb; pdb.set_trace() 
+        for d in eval(self.request.form.get('formData', {})).get('items', []):
             obj = intidutil.getObject(int(d['id']))
             number = int(d['number'])
             html.append('<li>%d x %s</li>' % (number, obj.Title()))
         html.append('</ul>')
+        return u''.join(html)
 
+    def processBooking(self):
+        buchungStart = iso2german(self.request.form['dates'][0])
+        buchungEnde = iso2german(self.request.form['dates'][-1])
 
         # Pass some hidden/read-only parameters to the PFG form
         params = {'buchungStart' : buchungStart,
                   'buchungEnde' : buchungEnde,
-                  'bestellung' : u''.join(html),
                   'formData' : str(self.request.form)    
                 }
         self.request.response.redirect('%s/order-form?%s' % 
