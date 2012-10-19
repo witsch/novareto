@@ -11,12 +11,6 @@ from Products.PloneFormGen.interfaces import IPloneFormGenField
 
 from nva.formworker import visitorMessageFactory as _
 
-
-from App.config import getConfiguration
-config = getConfiguration()
-configuration = config.product_config.get('formworker', dict())
-csvbasepath = configuration.get('basepath')
-
 class IreportworkerView(Interface):
     """
     reportworker view interface
