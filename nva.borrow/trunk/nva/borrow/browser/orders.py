@@ -47,8 +47,13 @@ class Orders(BrowserView):
         intidutil = getUtility(IIntIds)
         html = list()
         html.append('<ul id="bestellung">')
-        import pdb; pdb.set_trace() 
-        for d in eval(self.request.form.get('formData', {})).get('items', []):
+
+        try:
+            lst = eval(self.request.form['formData'])['items']
+        except:
+            lst = []
+
+        for d in lst:
             obj = intidutil.getObject(int(d['id']))
             number = int(d['number'])
             html.append('<li>%d x %s</li>' % (number, obj.Title()))

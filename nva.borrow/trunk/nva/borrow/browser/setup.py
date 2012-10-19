@@ -39,23 +39,18 @@ class Setup(BrowserView):
         adapter = _invokeFactory(form, 'Dexterity Content Adapter', id='dexterity-adapter', title='Dexterity Adapter')
         adapter.setCreatedType('nva.borrow.borrowrequest')
 #        adapter.setTargetFolder('bookings')
-        adapter.setFieldMapping([dict(form='vorname', content='firstName'),
-                                 dict(form='nachname', content='lastName'),
-                                 dict(form='adresse', content='address'),
-                                 dict(form='plz', content='zip'),
-                                 dict(form='stadt', content='city'),
-                                 dict(form='telefon', content='phone'),
-                                 dict(form='email', content='email'),
-                                 dict(form='buchungStart', content='borrowFrom'),
-                                 dict(form='buchungEnde', content='borrowTo'),
-                                 dict(form='kommentar', content='comment'),
-            ])
+        fields = ('unternehmen', 'mitgliedsnr', 'vorname', 'nachname', 'email', 
+                  'telefon', 'fax', 'adresse', 'adresse2', 'plz', 'stadt', 'lieferzeit', 
+                  'thema', 'besucherzahl', 'formData')
+        mapping = [dict(form=f, content=f) for f in fields]
+        adapter.setFieldMapping(mapping)
+
 #        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='Buchen von', required=True)
 #        f.setFgTDefault('request/buchungStart|nothing')        
 #        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='Buchen von', required=True)
 #        f.setFgTDefault('request/buchungEnde|nothing')        
         f=_invokeFactory(form, 'FormRichLabelField', id='bestellung', title='Bestellte Aktionsmittel')
-        f.setFgTDefault('context/showBestellung|nothing')        
+        f.setFgTDefault('object/showBestellung | nothing')        
 
         _invokeFactory(form, 'FormStringField', id='unternehmen', title='Unternehmen', required=True)
         _invokeFactory(form, 'FormStringField', id='mitgliedsnr', title='Mitgliedsnummer bei BGETEM', required=True)
