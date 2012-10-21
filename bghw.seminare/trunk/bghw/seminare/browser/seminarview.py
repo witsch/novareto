@@ -31,7 +31,7 @@ class seminarView(BrowserView):
         self.context = context
         self.request = request
         session = ISession(self.request)
-        session.invalidate()
+        session.delete()
 
     @property
     def portal_catalog(self):
