@@ -114,6 +114,10 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
 
 class BorrowRequest(dexterity.Item):
     grok.implements(IBorrowRequest)
+
+    def Title(self):
+        """ Return computed title """
+        return '[Buchung] %s: %s - %s' % (self.unternehmen, self.borrowFrom, self.borrowTo)
     
 
 class SampleView(grok.View):

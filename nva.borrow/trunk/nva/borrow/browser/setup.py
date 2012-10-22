@@ -4,6 +4,8 @@ import os
 import loremipsum
 from random import randrange
 import urllib2
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
 from DateTime.DateTime import DateTime
 from Products.Five.browser import BrowserView
 from plone.namedfile import NamedImage
@@ -46,10 +48,6 @@ class Setup(BrowserView):
         mapping = [dict(form=f, content=f) for f in fields]
         adapter.setFieldMapping(mapping)
 
-#        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='Buchen von', required=True)
-#        f.setFgTDefault('request/buchungStart|nothing')        
-#        f = _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='Buchen von', required=True)
-#        f.setFgTDefault('request/buchungEnde|nothing')        
         f=_invokeFactory(form, 'FormRichLabelField', id='bestellung', title='Bestellte Aktionsmittel')
         f.setFgTDefault('object/showBestellung | nothing')        
 
@@ -79,6 +77,4 @@ class Setup(BrowserView):
         self.request.response.redirect(form_folder.absolute_url() + '?intid=%s' % intid)
 
     def getIntId(self):
-        from zope.component import getUtility
-        from zope.intid.interfaces import IIntIds
         return getUtility(IIntIds).getId(self.context)
