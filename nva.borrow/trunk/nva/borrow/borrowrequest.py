@@ -96,20 +96,20 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
         required=True,
         default=u'')   
 
-    borrowFrom = schema.Date(
-        title=_(u'Borrow from'),
+    buchungStart = schema.Date(
+        title=_(u'Buchung von'),
         required=True,
         default=None)
 
-    borrowTo = schema.Date(
-        title=_(u'Borrow to'),
+    buchungStart = schema.Date(
+        title=_(u'Buchung bis'),
         required=True,
         default=None)
 
     @invariant
     def validateStartEnd(data):
-        if data.borrowFrom is not None and data.borrowTo is not None:
-            if data.borrowFrom > data.borrowTo:
+        if data.buchungStart is not None and data.buchungEnde is not None:
+            if data.buchungStart > data.buchungEnde:
                 raise Invalid(_(u"The start date must be before the end date."))
 
 class BorrowRequest(dexterity.Item):
@@ -117,7 +117,7 @@ class BorrowRequest(dexterity.Item):
 
     def Title(self):
         """ Return computed title """
-        return '[Buchung] %s: %s - %s' % (self.unternehmen, self.borrowFrom, self.borrowTo)
+        return '[Buchung] %s: %s - %s' % (self.unternehmen, self.buchungStart, self.buchungEnde)
     
 
 class SampleView(grok.View):

@@ -304,17 +304,26 @@
                 });
 
                 if (ref_date == null) {
-                    $('#feedback-error').html('Es wurden keine Buchungszeitraum ausgewählt');
+                    $.gritter.add({
+                        title: 'Warnung',
+                        text: 'Es wurden keine Buchungszeitraum ausgewählt'
+                    });
                     return;
                 }
 
                 if (items.length == 0) {
-                    $('#feedback-error').html('Es wurden keine Aktionsmittel ausgewählt');
+                    $.gritter.add({
+                        title: 'Warnung',
+                        text: 'Es wurden keine Aktionsmittel ausgewählt'
+                    });
                     return;
                 }
 
                 if (items.length > 3) {
-                    $('#feedback-error').html('Es dürfen maximal drei verschiedene Aktionsmittel ausgewählt werden');
+                    $.gritter.add({
+                        title: 'Warnung',
+                        text: 'Es dürfen maximal drei verschiedene Aktionsmittel ausgewählt werden'
+                    });
                     return;
                 }
 

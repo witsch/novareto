@@ -51,6 +51,8 @@ class Orders(BrowserView):
         """
         intidutil = getUtility(IIntIds)
         html = list()
+        html.append('Buchungszeitraum: %s bis %s' % 
+                   (self.request.buchungStart, self.request.buchungEnde))
         html.append('<ul id="bestellung">')
 
         try:

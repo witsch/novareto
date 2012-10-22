@@ -44,7 +44,7 @@ class Setup(BrowserView):
         adapter.setTargetFolder(self.context['bookings'])
         fields = ('unternehmen', 'mitgliedsnr', 'vorname', 'nachname', 'email', 
                   'telefon', 'fax', 'adresse', 'adresse2', 'plz', 'stadt', 'lieferzeit', 
-                  'thema', 'besucherzahl', 'formData')
+                  'thema', 'besucherzahl', 'formData', 'buchungStart', 'buchungEnde')
         mapping = [dict(form=f, content=f) for f in fields]
         adapter.setFieldMapping(mapping)
 
@@ -67,6 +67,8 @@ class Setup(BrowserView):
         _invokeFactory(form, 'FormStringField', id='thema', title='Thema Aktionstag', required=False)
         _invokeFactory(form, 'FormStringField', id='besucherzahl', title='Erwartete Besucherzahl', required=False)
         
+        _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='buchungStart', required=True)
+        _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='buchungEnde', required=True)
         f = _invokeFactory(form, 'FormReadonlyStringField', id='formData', title='formData', required=True)
         f.setHidden(True)
         f.setFgTDefault('request/formData|nothing')        

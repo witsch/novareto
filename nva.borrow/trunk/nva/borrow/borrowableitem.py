@@ -111,15 +111,15 @@ class BorrowableItem(dexterity.Item):
         end = date(2012,8,17)
         conflicting_requests = list()
         for request in self.getBorrowRequests():
-            if request.borrowFrom > end or request.borrowTo < start:
+            if request.buchungStart > end or request.buchungEnde < start:
                 continue
             conflicting_requests.append(request)
         return self.itemsAvailable > len(conflicting_requests)
 
     def getBookingDates(self):
         """ Return all booking dates for this particular item """
-        bookings = [dict(fromDate=request.borrowFrom.strftime('%d.%m.%Y'), 
-                         toDate=request.borrowTo.strftime('%d.%m.%Y'))
+        bookings = [dict(fromDate=request.buchungStart.strftime('%d.%m.%Y'), 
+                         toDate=request.buchungEnde.strftime('%d.%m.%Y'))
                     for request in self.getBorrowRequests()]
         bookings.sort(lambda x,y: cmp(time.strptime(x['fromDate'], '%d.%m.%Y'),
                                       time.strptime(y['fromDate'], '%d.%m.%Y')))
@@ -153,7 +153,7 @@ class BorrowableItem(dexterity.Item):
                 # check against booking requests
                 relevant_requests = [r
                                      for r in booking_requests
-                                     if r.borrowFrom <= current_day and current_day <= r.borrowTo]
+                                     if r.buchungStart <= current_day and current_day <= r.buchungEnde]
 
                 if len(relevant_requests) >= self.itemsAvailable:
                     status = 'blocked'
