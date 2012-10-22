@@ -67,8 +67,10 @@ class Setup(BrowserView):
         _invokeFactory(form, 'FormStringField', id='thema', title='Thema Aktionstag', required=False)
         _invokeFactory(form, 'FormStringField', id='besucherzahl', title='Erwartete Besucherzahl', required=False)
         
-        _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='buchungStart', required=True)
-        _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='buchungEnde', required=True)
+        _invokeFactory(form, 'FormReadonlyStringField', id='buchungStart', title='Buchung von', required=True)
+        f.setHidden(True)
+        _invokeFactory(form, 'FormReadonlyStringField', id='buchungEnde', title='Buchung bis', required=True)
+        f.setHidden(True)
         f = _invokeFactory(form, 'FormReadonlyStringField', id='formData', title='formData', required=True)
         f.setHidden(True)
         f.setFgTDefault('request/formData|nothing')        

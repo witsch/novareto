@@ -96,12 +96,12 @@ class IBorrowRequest(form.Schema, IImageScaleTraversable):
         required=True,
         default=u'')   
 
-    buchungStart = schema.Date(
+    buchungStart = schema.TextLine(
         title=_(u'Buchung von'),
         required=True,
         default=None)
 
-    buchungStart = schema.Date(
+    buchungEnde = schema.TextLine(
         title=_(u'Buchung bis'),
         required=True,
         default=None)
