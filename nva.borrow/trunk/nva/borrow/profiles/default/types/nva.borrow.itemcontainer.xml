@@ -4,7 +4,7 @@
    i18n:domain="nva.borrow" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">ItemContainer</property>
+  <property name="title" i18n:translate="">Ordner Aktionsmittel</property>
   <property name="description"
     i18n:translate="">Container for borrowable items</property>
   <property name="icon_expr">string:${portal_url}/folder_icon.png</property>

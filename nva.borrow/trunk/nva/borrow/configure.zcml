@@ -23,7 +23,7 @@
       name="default"
       title="Borrowable Items (nva.borrowable)"
       directory="profiles/default"
-      description="Extension profile for Example Dexterity Product"
+      description="Extension profile for nva.borrow"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
