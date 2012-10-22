@@ -4,6 +4,7 @@
         <dependency>profile-plone.app.dexterity:default</dependency>
         <dependency>profile-Products.PloneFormGen:default</dependency>
         <dependency>profile-collective.pfg.dexterity:default</dependency>
+        <dependency>profile-collective.js.gritter:default</dependency>
         <dependency>profile-quintagroup.ploneformgen.readonlystringfield:default</dependency>
     </dependencies>
 </metadata>

@@ -19,6 +19,7 @@ from zope.component import getUtility
 import nva.borrow
 import Products.PloneFormGen
 import collective.pfg.dexterity
+import collective.js.gritter
 import quintagroup.ploneformgen.readonlystringfield
 
 os.environ['TESTING'] = '1'
@@ -36,6 +37,7 @@ class PolicyFixture(PloneSandboxLayer):
             xmlconfig.file('configure.zcml', mod, context=configurationContext)
         z2.installProduct(app, 'nva.borrow')
         z2.installProduct(app, 'Products.PloneFormGen')
+        z2.installProduct(app, 'collective.js.gritter')
         z2.installProduct(app, 'collective.pfg.dexterity')
         z2.installProduct(app, 'quintagroup.ploneformgen.readonlystringfield')
 
