@@ -53,7 +53,7 @@
 
   <browser:page
     name="getIntId"
-    permission="cmf.ManagePortal"
+    permission="zope2.View"
     class=".setup.Setup"
     attribute="getIntId"
     for="*"
