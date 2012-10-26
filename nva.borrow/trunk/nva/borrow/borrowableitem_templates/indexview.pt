@@ -44,46 +44,17 @@
     <div clas="row">    
         <label>Booking requests</label>:
         <ul>
-            <li tal:repeat="request context/getBookingDates">
-                <span tal:content="request/fromDate" />-
-                <span tal:content="request/toDate" />
+            <li tal:repeat="d context/getBookingDates">
+                <span tal:content="d/numberItems"/> x 
+                <a tal:attributes="href d/url">
+                    <span tal:replace="d/fromDate" />-
+                    <span tal:replace="d/toDate" />
+                </a>
+                (<span tal:replace="d/title" />)
             </li>
         </ul>
     </div>
 
-    <div class="booking-calendar row" tal:condition="nothing">
-        <h2>Booking calendar</h2>
-
-        <div class="legend">
-            <span class="item-status-free" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item bookable
-            <span class="item-status-weekend" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item not bookable (weekend)
-            <span class="item-status-blocked" style="width: 25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Item not bookable
-        </div>
-
-        <div tal:repeat="d context/getBookingCalendar">
-            <span class="month-year" tal:content="string:${d/month_name} ${d/year}" />            
-            <table border="1">
-                <tbody>
-                    <tr>
-                        <td class="day-name" tal:repeat="item d/days">
-                            <span tal:content="python: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'][item['weekday']]" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td tal:repeat="item d/days">
-                            <span tal:content="item/day" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td tal:repeat="item d/days"
-                            tal:attributes="class string:item-status-${item/status}">&nbsp;
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
   </metal:content-core>
 </metal:main>
 
