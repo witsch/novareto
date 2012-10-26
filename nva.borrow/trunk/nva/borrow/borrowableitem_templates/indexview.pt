@@ -21,15 +21,13 @@
   <metal:content-core define-macro="content-core">
 
     <div class="row">      
-        <div class="item-image">  
-            <img tal:define="scales context/@@images"
-                 tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
-        </div>
-        <div tal:repeat="image_ref context/imageReferences"
-             class="item-images" >
-            <img tal:define="image nocall: image_ref/to_object;
-                             scales image/@@images"
-                             tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
+        <div class="item-images" >
+            <tal:loop repeat="image_ref context/imageReferences">
+                <img class="item-image"
+                     tal:define="image nocall: image_ref/to_object;
+                                 scales image/@@images"
+                     tal:replace="structure python: scales.scale('image', width=150, height=150).tag()" />    
+            </tal:loop>
         </div>
 
         <div class="item-text" 

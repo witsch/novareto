@@ -56,16 +56,10 @@ class IBorrowableItem(form.Schema, IImageScaleTraversable):
         max=20,
         default=1)   
  
-    image = NamedImage(
-            title=_(u"Image"),
-            description=_(u"Image of the item"),
-            required=True,
-        )
-
-    imageReference = RelationChoice(
-                title=_(u'Image reference (experimental)'),
-                description=_(u'Image reference (experimental)'),
-                source=ObjPathSourceBinder(object_provides=IImageContent.__identifier__),
+    imageReferences = RelationList(
+                title=_(u'Image references (experimental)'),
+                description=_(u'Image references (experimental)'),
+                value_type=RelationChoice(title=u'Images', source=ObjPathSourceBinder(object_provides=IImageContent.__identifier__)),
                 required=False)
 
     categories = schema.List(
@@ -134,5 +128,4 @@ class BorrowableItem(dexterity.Item):
 class IndexView(grok.View):
     grok.context(IBorrowableItem)
     grok.require('zope2.View')
-    
     grok.name('view')
