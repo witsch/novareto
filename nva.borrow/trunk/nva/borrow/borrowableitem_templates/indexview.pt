@@ -25,6 +25,12 @@
             <img tal:define="scales context/@@images"
                  tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
         </div>
+        <div tal:repeat="image_ref context/imageReferences"
+             class="item-images" >
+            <img tal:define="image nocall: image_ref/to_object;
+                             scales image/@@images"
+                             tal:replace="structure python: scales.scale('image', width=400, height=400).tag()" />    
+        </div>
 
         <div class="item-text" 
              tal:condition="context/text"
