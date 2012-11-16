@@ -191,19 +191,19 @@ def createpdf (filename, daten):
     c.setFont(schriftartfett, 12)
     c.drawString( 2.2*cm, (14.5-offset)*cm, 'Absender:')
     c.setFont(schriftart, 10)
-    if len(daten['Mitglnr']) > 0:
-        c.drawString( 2.2*cm, (13.9-offset)*cm, 'Mitgliedsnummer:')
-    c.drawString( 2.2*cm, (13.4-offset)*cm, 'Name:')
-    c.drawString( 2.2*cm, (12.9-offset)*cm, 'Firma:')
-    c.drawString( 2.2*cm, (12.4-offset)*cm, 'Straße:')
-    c.drawString( 2.2*cm,  (11.9-offset)*cm, 'Plz/Ort:')
+    #if len(daten['Mitglnr']) > 0:
+    #    c.drawString( 2.2*cm, (13.9-offset)*cm, 'Mitgliedsnummer:')
+    #c.drawString( 2.2*cm, (13.4-offset)*cm, 'Name:')
+    #c.drawString( 2.2*cm, (12.9-offset)*cm, 'Firma:')
+    #c.drawString( 2.2*cm, (12.4-offset)*cm, 'Straße:')
+    #c.drawString( 2.2*cm,  (11.9-offset)*cm, 'Plz/Ort:')
 
     c.drawString(11.5*cm, (12.9-offset)*cm, 'Telefon:')
     c.drawString(11.5*cm, (12.4-offset)*cm, 'Telefax:')
     c.drawString(11.5*cm,  (11.9-offset)*cm, 'E-Mail:')
 
     c.setFont(schriftart, 10)
-    c.drawString( 5.5*cm, (13.9-offset)*cm, daten['Mitglnr'])
+    c.drawString( 4.5*cm, (13.9-offset)*cm, daten['Mitglnr'])
     c.drawString( 4.5*cm, (13.4-offset)*cm, daten['VornameName'])
     c.drawString( 4.5*cm, (12.9-offset)*cm, daten['Firma'])
     c.drawString( 4.5*cm, (12.4-offset)*cm, daten['Strasse'])
