@@ -40,4 +40,9 @@
     file="shopcustoms.js"
     />
 
+  <browser:resource
+    name="jquery.numeric.js"
+    file="jquery.numeric.js"
+    />
+
 </configure>
