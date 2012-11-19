@@ -3,4 +3,7 @@
  <javascript cacheable="False" compression="none" cookable="False"
      enabled="True" expression="" id="++resource++shopcustoms.js"
      inline="False" insert-before="livesearch.js" />
+ <javascript cacheable="False" compression="none" cookable="False"
+     enabled="True" expression="" id="++resource++jquery.numeric.js"
+     inline="False" insert-after="++resource++shopcustoms.js" />
 </object>
