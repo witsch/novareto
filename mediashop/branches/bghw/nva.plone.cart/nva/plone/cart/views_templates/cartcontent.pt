@@ -70,10 +70,11 @@
            <!--</span> -->
 
     <p>&nbsp;</p>
+<!--
     <form action="/bghwportal/medienangebot/medienshop">
       <input type="submit" class="context" value="weitere Artikel auswählen" />
     </form>
-            
+-->            
     <form action="/bghwportal/medienangebot/medienshop/++cart++/checkout">
     <table class="listing nosort">
       <thead>
@@ -131,6 +132,12 @@
     </table>
     <input type="submit" class="context" value="zum Bestellformular" />
     </form>
+
+    <p>&nbsp;</p>
+    <form action="/bghwportal/medienangebot/medienshop">
+      <input type="submit" class="context" value="weitere Artikel auswählen" />
+    </form>
+
   <!--
     <ul>
       <li> <a href="/medienangebot/medienshop/++cart++/checkout"><span i18n:translate=""> zum Bestellformular </span></a></li>
