@@ -14,6 +14,8 @@
           jq('#cart-member').live("click",function(e){
               jq('#allCardContent').toggle();
               jq('#notBghwMitglied').toggle();})
+
+          jq(".positive-integer").numeric({ decimal: false, negative: false }, function() { alert("Nur positive Zahlen sind erlaubt"); this.value = ""; this.focus(); });
            
         });
       </script>
@@ -66,7 +68,13 @@
             </strong>
             <span i18n:translate=""> zzgl. MwST. und Versand </span> 
            <!--</span> -->
+
+    <p>&nbsp;</p>
+    <form action="/bghwportal/medienangebot/medienshop">
+      <input type="submit" class="context" value="weitere Artikel auswählen" />
+    </form>
             
+    <form action="/bghwportal/medienangebot/medienshop/++cart++/checkout">
     <table class="listing nosort">
       <thead>
 	<tr>
@@ -87,6 +95,14 @@
 	    <td>
                 <span tal:content="python: item.basic_price(member=context.is_member)" />
             </td>
+            <td nowrap>
+                <span class="quantity">
+                <input class="positive-integer" type="text" name="" style="text-align: right;" size=3 maxlength=3 value="" 
+                       tal:attributes="value item/quantity; name item/code">
+                </span>
+            </td>
+
+            <!--
 	    <td nowrap> 
                 <span class="quantity" tal:content="item/quantity" /> &nbsp;
                   <a href=""
@@ -99,7 +115,8 @@
 		     tal:condition="item/quantity"
                      tal:attributes="href string:${cart_url}/minus/${item/code}"
                      > <img src="" tal:attributes="src string:pfeil-unten-2.gif"></a>
-            </td>    
+            </td>
+            -->    
 	    <td tal:content="python: item.total_price(member=context.is_member)" />
 	    <td>
 	      <a href=""
@@ -112,6 +129,8 @@
 	</tal:loop>
       </tbody>
     </table>
+    <input type="submit" class="context" value="zum Bestellformular" />
+    </form>
   <!--
     <ul>
       <li> <a href="/medienangebot/medienshop/++cart++/checkout"><span i18n:translate=""> zum Bestellformular </span></a></li>
@@ -121,15 +140,16 @@
    <table>
     <tr>
      <td>
-       <form action="/bghwportal/medienangebot/medienshop">
-         <input type="submit" class="context" value="weitere Artikel auswählen" />
-       </form>
      </td>
+     <td>
+     </td>
+     <!--
      <td>
        <form action="/bghwportal/medienangebot/medienshop/++cart++/checkout">
          <input type="submit" class="context" value="zum Bestellformular" />
        </form>
      </td>
+     -->
     </tr>
    </table>
 

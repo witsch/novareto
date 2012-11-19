@@ -168,8 +168,26 @@ class Checkout(CartNamespace, grok.Form):
     form_fields = grok.Fields(IOrderForm)
     form_fields['agb'].custom_widget = CheckBoxWidget
     form_fields['datenschutz'].custom_widget = CheckBoxWidget
-    form_fields['lieferadresse'].custom_widget = CheckBoxWidget 
+    form_fields['lieferadresse'].custom_widget = CheckBoxWidget
 
+    def update(self):
+        orderitems = self.request.form.keys()
+        errormarker = False
+        for i in orderitems:
+            quantity = self.request.form[i]
+            item = self.context.handler.getItem(i)
+            if int(quantity) <= item.max_quantity:
+                item.quantity = int(quantity)
+            else:
+                item.quantity = item.max_quantity
+                errormarker = True
+        portal_url = getToolByName(self.context, 'portal_url')()
+        if errormarker:
+            utils.flash(self.request , u'Die Bestellmenge mindestens eines Artikels wurde auf die Höchstbestellmenge reduziert. Bitte überprüfen Sie selbständig Ihren Warenkorb.')
+            #self.redirect(portal_url + "/medienangebot/medienshop/++cart++/summary")
+        self.portal_url = portal_url
+         
+            
     def validate_checkout(self, action, data):
         errors = self.validate(action, data)
         err = None
