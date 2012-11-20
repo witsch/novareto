@@ -171,17 +171,21 @@ class Checkout(CartNamespace, grok.Form):
     form_fields['lieferadresse'].custom_widget = CheckBoxWidget
 
     def update(self):
+        portal_url = getToolByName(self.context, 'portal_url')()
         orderitems = self.request.form.keys()
         errormarker = False
         for i in orderitems:
             quantity = self.request.form[i]
+            if not quantity or quantity == '0':
+                result = self.context.handler.delItem(i)
+                utils.flash(self.request, "Der Artikel mit der Nummer %s wurde aus dem Warenkorb entfernt." % i)
+                return self.redirect(portal_url + "/medienangebot/medienshop/++cart++/summary")
             item = self.context.handler.getItem(i)
             if int(quantity) <= item.max_quantity:
                 item.quantity = int(quantity)
             else:
                 item.quantity = item.max_quantity
                 errormarker = True
-        portal_url = getToolByName(self.context, 'portal_url')()
         if errormarker:
             utils.flash(self.request , u'Die Bestellmenge mindestens eines Artikels wurde auf die Höchstbestellmenge reduziert. Bitte überprüfen Sie selbständig Ihren Warenkorb.')
             #self.redirect(portal_url + "/medienangebot/medienshop/++cart++/summary")
