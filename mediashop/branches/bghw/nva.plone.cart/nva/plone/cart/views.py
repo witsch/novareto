@@ -177,8 +177,9 @@ class Checkout(CartNamespace, grok.Form):
         for i in orderitems:
             quantity = self.request.form[i]
             if not quantity or quantity == '0':
+                title = self.context.handler.getItem(i).title
                 result = self.context.handler.delItem(i)
-                utils.flash(self.request, "Der Artikel mit der Nummer %s wurde aus dem Warenkorb entfernt." % i)
+                utils.flash(self.request, "Der Artikel %s (Art.-Nr.: %s) wurde aus dem Warenkorb entfernt." % title, i)
                 return self.redirect(portal_url + "/medienangebot/medienshop/++cart++/summary")
             item = self.context.handler.getItem(i)
             if int(quantity) <= item.max_quantity:
