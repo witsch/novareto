@@ -21,10 +21,10 @@ def createtext(daten):
     if len(daten['Mitglnr']) > 0:
         text +=  ' Mitgliedsnummer: ' + daten['Mitglnr'] + '\n\n'
     text +=  ' Absender: \n\n'
-    text += ' Name:     ' + daten['VornameName'] + '\n'
-    text += ' Firma:    ' + daten['Firma']   + '\n'
-    text += ' Strasse:   ' + daten['Strasse'] + '\n'
-    text += ' Plz/Ort:  ' + daten['PlzOrt']  + '\n\n'
+    text += daten['VornameName'] + '\n'
+    text += daten['Firma']   + '\n'
+    text += daten['Strasse'] + '\n'
+    text += daten['PlzOrt']  + '\n\n'
     if ausland:
         text += ' Land:         ' + daten['Land'] + '\n'
 	text += ' USt-IdNr/VAT: ' + daten['Ustid'] + '\n\n'
@@ -33,9 +33,9 @@ def createtext(daten):
     text += ' E-Mail:   ' + daten['Email']   + '\n\n'
     if daten['Abwadr']:
         text += ' Abweichende Lieferanschrift: \n\n'
-        text += ' Name:     ' + daten['ALVornameName'] + '\n'
-        text += ' Strasse:   ' + daten['ALStrasse'] + '\n'
-        text += ' Plz/Ort:  ' + daten['ALPlzOrt'] + '\n\n'
+        text += daten['ALVornameName'] + '\n'
+        text += daten['ALStrasse'] + '\n'
+        text += daten['ALPlzOrt'] + '\n\n'
 
     # Bestellung
     text += ' Anzahl  Artikel\n'
