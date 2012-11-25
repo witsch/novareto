@@ -103,7 +103,7 @@ Ihre Berufsgenossenschaft Handel und Warendistribution
         """ %(ehrung, myform.get('anrede', ''), myform.get('akad_titel', ''), myform.get('name', ''))
         text_bghw = u"""Im Anhang zu dieser Mail finden Sie die Seminaranmeldung."""
         mailhost = self.mail_host.smtp_host
-        cc = 'lwalther@novareto.de'
+        cc = ''
         mailbghw = sMail(mailhost, 'ausbildung@bghw.de', 'bghwportal@bghw.de', cc, subject, 
                          text_bghw, pdfdata, 'seminaranmeldung.pdf')
 
