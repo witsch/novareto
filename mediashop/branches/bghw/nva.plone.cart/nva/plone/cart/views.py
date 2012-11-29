@@ -175,21 +175,21 @@ class Checkout(CartNamespace, grok.Form):
         orderitems = self.request.form.keys()
         errormarker = False
         for i in orderitems:
-            quantity = self.request.form[i]
-            if not quantity or quantity == '0':
-                title = self.context.handler.getItem(i).title
-                result = self.context.handler.delItem(i)
-                utils.flash(self.request, "Der Artikel %s (Art.-Nr.: %s) wurde aus dem Warenkorb entfernt." % title, i)
-                return self.redirect(portal_url + "/medienangebot/medienshop/++cart++/summary")
-            item = self.context.handler.getItem(i)
-            if int(quantity) <= item.max_quantity:
-                item.quantity = int(quantity)
-            else:
-                item.quantity = item.max_quantity
-                errormarker = True
-        if errormarker:
-            utils.flash(self.request , u'Die Bestellmenge mindestens eines Artikels wurde auf die Höchstbestellmenge reduziert. Bitte überprüfen Sie selbständig Ihren Warenkorb.')
-            #self.redirect(portal_url + "/medienangebot/medienshop/++cart++/summary")
+            if self.context.handler.getItem(i):          
+                quantity = self.request.form[i]
+                if not quantity or quantity == '0':
+                    title = self.context.handler.getItem(i).title
+                    result = self.context.handler.delItem(i)
+                    utils.flash(self.request, "Der Artikel %s (Art.-Nr.: %s) wurde aus dem Warenkorb entfernt." % title, i)
+                    return self.redirect(portal_url + "/medienangebot/medienshop/++cart++/summary")
+                item = self.context.handler.getItem(i)
+                if int(quantity) <= item.max_quantity:
+                    item.quantity = int(quantity)
+                else:
+                    item.quantity = item.max_quantity
+                    errormarker = True
+            if errormarker:
+                utils.flash(self.request , u'Die Bestellmenge mindestens eines Artikels wurde auf die Höchstbestellmenge reduziert. Bitte überprüfen Sie selbständig Ihren Warenkorb.')
         self.portal_url = portal_url
          
             
