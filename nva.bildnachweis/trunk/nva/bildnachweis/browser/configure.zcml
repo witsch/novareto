@@ -1,0 +1,26 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.bildnachweis">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="imagessummary_view"
+      class=".imagessummaryview.imagessummaryView"
+      template="imagessummaryview.pt"
+      allowed_interface=".imagessummaryview.IimagessummaryView"
+      permission="zope.Public"
+      />
+
+  <browser:menuItems
+        for="*"
+        menu="plone_displayviews">
+        <browser:menuItem
+            title="Bildnachweis"
+            action="imagessummary_view"
+            description="Zeigt die Rechte an den Bildern des Portals."
+            />
+  </browser:menuItems>
+
+</configure>

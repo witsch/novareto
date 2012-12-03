@@ -1,0 +1,17 @@
+README.txt
+setup.cfg
+setup.py
+nva/__init__.py
+nva.bildnachweis.egg-info/PKG-INFO
+nva.bildnachweis.egg-info/SOURCES.txt
+nva.bildnachweis.egg-info/dependency_links.txt
+nva.bildnachweis.egg-info/entry_points.txt
+nva.bildnachweis.egg-info/namespace_packages.txt
+nva.bildnachweis.egg-info/not-zip-safe
+nva.bildnachweis.egg-info/paster_plugins.txt
+nva.bildnachweis.egg-info/requires.txt
+nva.bildnachweis.egg-info/top_level.txt
+nva/bildnachweis/__init__.py
+nva/bildnachweis/tests.py
+nva/bildnachweis/browser/__init__.py
+nva/bildnachweis/browser/imagessummaryview.py

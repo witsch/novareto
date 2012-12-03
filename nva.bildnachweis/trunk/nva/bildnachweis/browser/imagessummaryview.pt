@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.bildnachweis">
+<body>
+    <div metal:fill-slot="main">
+        <tal:main-macro metal:define-macro="main"
+         tal:define="testview view/test;
+         summary view/getSummary;
+         Batch python:modules['Products.CMFPlone'].Batch;
+         b_size python:10;b_start python:0;b_start request/b_start | b_start;">
+         
+          <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+          <h1 tal:content="context/title" />
+
+          <p class="documentDescription" tal:content="context/description" />
+
+          <div tal:replace="structure provider:plone.abovecontentbody" />
+
+          <div tal:condition="summary"
+               tal:define="batch python:Batch(summary, b_size, int(b_start), orphan=1);">
+
+          <table class="grid listing">
+            <tr>
+              <th rowspan="2">Bild</th>
+              <th>Autor(en) / Fotograf(en)</th>
+              <th rowspan="2">Referenzen auf der Website</th>
+            </tr>  
+            <!--<tr><th>Co-Autoren</th></tr>-->
+            <tr><th>Bildrechte</th></tr>
+            <span tal:repeat="image batch">
+              <tr>
+                <td rowspan="2"><a href="" tal:attributes="href image/url"><span tal:replace="structure image/thumb"/></a>
+                    <p class="discreet" tal:content="image/title"/></td>
+                <td valign="top"><ul tal:repeat="creator image/creators"><li tal:content="creator"/></ul></td>
+                <td rowspan="2" valign="top">
+                  <span tal:repeat="ref image/refs">
+                    <a href="" class="internal-link" target="_blank" tal:attributes="href ref/url" tal:content="ref/title"/>
+                  </span>
+                </td>
+              </tr>
+              <!--<tr><td tal:content="image/contributors"/></tr>-->
+              <tr><td valign="top" tal:content="image/rights"/></tr>
+            </span>
+          </table>
+
+          <div metal:use-macro="here/batch_macros/macros/navigation" />
+          </div>  
+
+          <div tal:replace="structure provider:plone.belowcontentbody" />
+
+        </tal:main-macro>
+    </div>
+</body>
+</html>

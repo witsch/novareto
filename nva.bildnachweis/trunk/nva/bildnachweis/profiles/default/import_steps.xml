@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="bildnachweis-various" version="2012-12-3"
+              handler="nva.bildnachweis.setuphandlers.importVarious"
+              title="nva-bildnachweis setup">
+  nva-bildnachweis setup
+ </import-step>
+</import-steps>
