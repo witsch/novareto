@@ -21,7 +21,8 @@
                     <span tal:condition="not: items">Keine Aktionsmittel in dieser Kategorie</span>
                     <ul tal:condition="items">
                         <li tal:repeat="item items">
-                            <img class="item-image" tal:define="scales item/@@images"
+                            <img  tal:condition="nothing"
+                                  class="item-image" tal:define="scales item/@@images"
                                 tal:replace="structure python: scales.scale('image', width=100, height=100).tag()" />    
                             <div>
                                 <a class="item-title" tal:attributes="href item/absolute_url"

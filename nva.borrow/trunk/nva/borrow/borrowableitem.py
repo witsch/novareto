@@ -23,14 +23,11 @@ from Products.CMFCore.utils import getToolByName
 from nva.borrow import MessageFactory as _
 import config
 
-# Interface class; used to define content-type schema.
-
 MONTH_NAMES = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 
                'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
 
 categoryItems = SimpleVocabulary([SimpleVocabulary.createTerm(cat, cat) 
                                  for cat in config.CATEGORIES])
-
 
 class IBorrowableItem(form.Schema, IImageScaleTraversable):
     """ Borrowable item """
