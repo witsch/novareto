@@ -1,0 +1,22 @@
+<html>
+    <body tal:condition="view/marker">
+       <script src="" type="text/javascript" tal:attributes="src view/googleurl"></script>
+       <script type="text/javascript">
+         jq(document).ready(function() {
+           var trenner = ","
+           var adresse = jq('#plzort').text() + trenner + jq('#strnr').text()
+           jq('#map_canvas1').googleMap({center:adresse, zoomLevel: 13,}).load();
+         }); 
+       </script>
+
+        <div id="googlemaps">
+          <div style="height:300px; width:500px;" id="map_canvas1"> </div>
+          <h3 i18n:translate="">Ihr Weg zu uns</h3>
+          <p i18n:translate="">Bitte geben Sie Ihre Adresse ein und klicken auf Route berechnen</p>
+          <input type="text" size="55" id="start" />
+          <input type="hidden" value="" id="end" tal:attributes="value string: ${view/strnr},${view/plzort}"/>
+          <input type="submit" id="getdirections" value="Route berechnen" />
+          <div id="directions"></div>
+        </div>
+    </body>
+</html>
