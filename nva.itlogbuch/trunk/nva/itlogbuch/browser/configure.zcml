@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.itlogbuch">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="logeintrag_view"
+      class=".logeintragview.logeintragView"
+      template="logeintragview.pt"
+      allowed_interface=".logeintragview.IlogeintragView"
+      permission="zope.Public"
+      />
+
+
+
+
+</configure>

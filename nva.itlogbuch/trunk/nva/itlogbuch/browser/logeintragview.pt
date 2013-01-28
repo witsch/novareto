@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.itlogbuch">
+<body>
+    <div metal:fill-slot="main">
+        <tal:main-macro metal:define-macro="main"
+                        tal:define="data view/data;">
+
+          <h1 tal:content="context/title"/>
+
+          <p><b>Mitarbeiter: <span tal:content="data/mitarbeiter"/></b></p>
+
+          <p><b>Änderungsdatum: <span tal:content="data/aenderungsdatum"/></b></p>
+
+          <ul>  
+           <li>Systemkategorie: <span tal:content="data/systemkategorie"/></li>
+           <li>Änderungskategorie: <span tal:content="data/aenderungskategorie"/></li>
+          </ul>
+
+          <h3>Beschreibung der durchgeführten Änderungen</h3>
+          <p><span tal:content="structure data/aenderungen"/></p>
+
+          <h3>Referenzen</h3>
+          <ul>
+            <li>I-Net-Ticket: <a href="" target="_blank" tal:attributes="href data/ticket_url">
+                              <span tal:content="data/inetticket"/></a></li>
+            <li>Projektnummer: <span tal:content="data/projektnummer"/></li>    
+          </ul>
+
+        </tal:main-macro>
+    </div>
+</body>
+</html>

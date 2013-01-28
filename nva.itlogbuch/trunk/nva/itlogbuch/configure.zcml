@@ -1,0 +1,37 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="nva.itlogbuch">
+    
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <!-- Include the sub-packages that use their own configure.zcml files. -->
+  <include package=".browser" />
+  <include package=".content" />
+  <include package=".portlets" />
+  
+  <!-- Register the installation GenericSetup extension profile -->
+  <genericsetup:registerProfile
+      name="default"
+      title="IT-Logbuch"
+      directory="profiles/default"
+      description="Logbuch fuer die Dokumentation von Aenderungen an den IT-Systemen"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  
+  <!-- -*- extra stuff goes here -*- -->
+
+  <include package=".browser" />
+  
+
+  <utility name="SYSTEMVOCAB"
+           component=".vocabularies.systemvocab"
+           provides="zope.schema.interfaces.IVocabularyFactory"/>
+
+  <utility name="AENDERUNGVOCAB"
+           component=".vocabularies.aenderungvocab"
+           provides="zope.schema.interfaces.IVocabularyFactory"/>
+
+</configure>
