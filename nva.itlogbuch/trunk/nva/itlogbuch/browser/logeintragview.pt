@@ -5,9 +5,14 @@
 <body>
     <div metal:fill-slot="main">
         <tal:main-macro metal:define-macro="main"
-                        tal:define="data view/data;">
+        tal:define="data view/data;">
+
+          <div tal:replace="structure provider:plone.abovecontenttitle" />
 
           <h1 tal:content="context/title"/>
+
+          <div tal:replace="structure provider:plone.belowcontenttitle" />
+          <div tal:replace="structure provider:plone.abovecontentbody" />
 
           <p><b>Mitarbeiter: <span tal:content="data/mitarbeiter"/></b></p>
 
@@ -27,6 +32,8 @@
                               <span tal:content="data/inetticket"/></a></li>
             <li>Projektnummer: <span tal:content="data/projektnummer"/></li>    
           </ul>
+
+          <div tal:replace="structure provider:plone.belowcontentbody" />
 
         </tal:main-macro>
     </div>
