@@ -95,6 +95,7 @@ LogbucheintragSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Inet Ticketnummer"),
             description=_(u"Hier koennen Sie eine Referenz  zu einem INet-Ticket eintragen falls ein solches existiert."),
         ),
+        required=True,
     ),
 
     atapi.StringField(
