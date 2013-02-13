@@ -65,9 +65,11 @@ class Renderer(base.Renderer):
 	    for doczeichen in context.doczeichen:
 
   	        pcat = context.portal_catalog
-	        erg = pcat(doczeichen=doczeichen, sort_on='modified',sort_order='revers')
+	        erg = pcat(doczeichen=doczeichen, 
+                           sort_on='modified',
+                           sort_order='revers', 
+                           portal_type=['PloneArticle', 'Document', 'News Item'])
 	        objlist=[]
-#		print erg
                 
                 vor = ''
 		zurueck = ''
@@ -81,9 +83,6 @@ class Renderer(base.Renderer):
                        ind = objlist.index(context)
                    except:
 		       ind = 0
-		       
-		   print ind
-
 	           try:
 		       if ind > 0:
   	                  zurueck = objlist[ind-1].absolute_url
@@ -91,24 +90,12 @@ class Renderer(base.Renderer):
 		          zurueck = ''
 	           except:
 		       zurueck = ''
-
     	           try:
-#		       if ind > 0:
 	                  vor = objlist[ind+1].absolute_url
-#		       else:
-#		          vor = ''
 	           except:
 		       vor = ''
-		   
-#		print zurueck
-#		print vor   
-		
 		link = doczeichen
-#		print doczeichen
-		
 		title = doczeichen + ' ('+str(ind+1) + '/' + str(len(erg) ) + ') '
-#		print title
-		
 	        d = {'title': title, 'link': link, 'zurueck': zurueck, 'vor': vor}
 	        rc.append(d)
 	except:

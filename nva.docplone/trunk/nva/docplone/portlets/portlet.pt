@@ -44,7 +44,7 @@
       <a href="#"
           class="tile"
           tal:attributes="href string:${url}/edit?fieldset=categorization"
-          i18n:translate="box_f_feed_view">Add New</a>
+          i18n:translate="box_f_feed_view">Neues Dokzeichen</a>
         <span class="portletBottomLeft"></span>
         <span class="portletBottomRight"></span>
     </dd>
