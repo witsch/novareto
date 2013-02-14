@@ -16,7 +16,7 @@ def aenderungvocab(context=None):
     """Dieses Vocabulary dient zur Auswahl der Aenderungskategorie"""
     vocab = SimpleVocabulary([
             SimpleTerm(value='adabas_prod', title=_(u'Adabas')),
-            SimpleTerm(value='dms', title=_(u'DMS')),
+            SimpleTerm(value='uv dms', title=_(u'UV DMS')),
             SimpleTerm(value='extranet', title=_(u'Extranet')),
             SimpleTerm(value='formdesigner', title=_(u'Formdesigner')),
             SimpleTerm(value='host', title=_(u'Host')),
@@ -27,6 +27,7 @@ def aenderungvocab(context=None):
             SimpleTerm(value='natural', title=_(u'Natural')),
             SimpleTerm(value='netzwerk', title=_(u'Netzwerk')),
             SimpleTerm(value='pc-programme', title=_(u'PC-Programme')),
+            SimpleTerm(value='shared services', title=_(u'Shared Services')),
             SimpleTerm(value='sonstige', title=_(u'Sonstige')),
             SimpleTerm(value='sun', title=_(u'Sun')),
             ])

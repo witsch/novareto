@@ -3,10 +3,14 @@
  <index name="systemkategorie" meta_type="FieldIndex">
   <indexed_attr value="getSystemkategorie"/>
  </index>
+ <index name="aenderungskategorie" meta_type="FieldIndex">
+  <indexed_attr value="getAenderungskategorie"/>
+ </index>
  <index name="getAenderungsdatum" meta_type="DateIndex">
   <indexed_attr value="getAenderungsdatum"/>
  </index>
  <column value="getSystemkategorie"/>
+ <column value="getAenderungskategorie"/>
  <column value="getAenderungsdatum"/>
 </object>
 
