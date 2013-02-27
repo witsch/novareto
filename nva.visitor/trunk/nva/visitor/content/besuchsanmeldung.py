@@ -261,10 +261,7 @@ class Besuchsanmeldung(base.ATCTContent):
 
     def adsearchliste(self):
         """ Suche im AD-Verzeichnis"""
-        try:
-            res = ldapsearch()
-        except:
-            return DisplayList((('lwalther@novareto.de', 'Lars Walther'),))
+        res = ldapsearch()
         liste=[]
         if res:
             for entry in res:
@@ -281,7 +278,8 @@ class Besuchsanmeldung(base.ATCTContent):
         liste.sort()
         results=[]
         for x in liste:
-                results.append([x[1],x[0]])
+                if not x[0].startswith('AGB-'):
+                    results.append([x[1],x[0]])
         mailtuple=tuple(results)
         return DisplayList(mailtuple)
 

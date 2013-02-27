@@ -47,13 +47,18 @@ class formworkerView(BrowserView):
 
     def usermail(self, name):
         """sucht die Mailadresse eines Benutzers aus LDAP"""
-        sfilter = "(sn=%s)" %name
-        res = ldapsearch(sfilter)
-        ldapmail = 'intranetmaster@pfister.de'
-        if res:
-            for entry in res:
-                if entry[1].has_key('mail'):
-                    ldapmail = entry[1].get('mail')[0]
+        #sfilter = "(sn=%s)" %name
+        #res = ldapsearch(sfilter)
+        #ldapmail = 'intranetmaster@pfister.de'
+        #if res:
+        #    for entry in res:
+        #        if entry[1].has_key('mail'):
+        #            ldapmail = entry[1].get('mail')[0]
+        pm = getToolByName(self.context, 'portal_membership')
+        member = pm.getAuthenticatedMember()
+        ldapmail = member.getProperty('email')
+        if not ldapmail:
+            ldapmail = 'intranetmaster@pfister.de'
         return ldapmail
 
     def pfister_send(self):
@@ -76,7 +81,7 @@ class formworkerView(BrowserView):
 
         to=vliste
         cc_str='verteilerbesucher@FLSmidthPfister.com'
-        cc_str='wmanz@pfister.de'
+        #cc_str='wmanz@pfister.de'
         cc=[]
         cc.append(cc_str)
 
@@ -145,7 +150,7 @@ class formworkerView(BrowserView):
 
         to=vliste
         cc_str='verteilerbesucher@FLSmidthPfister.com'
-        cc_str='wmanz@pfister.de'
+        #cc_str='wmanz@pfister.de'
         cc=[]
         cc.append(cc_str)
 
