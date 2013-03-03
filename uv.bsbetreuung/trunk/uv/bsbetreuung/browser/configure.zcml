@@ -8,7 +8,7 @@
       name="final.viewlet"
       manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
       class=".viewlets.FinalViewlet"
-      view="nva.onlinehandlungshilfe.interfaces.IFinal"
+      view="nva.bsbetreuung.interfaces.IFinal"
       permission="zope.Public"
       />
 
