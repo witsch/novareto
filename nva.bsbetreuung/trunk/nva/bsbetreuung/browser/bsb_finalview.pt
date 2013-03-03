@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.bsbetreuung">
+
+<body>
+    <div metal:fill-slot="main">
+        <tal:main-macro metal:define-macro="main"
+                        tal:define="formaction view/getFortsetzung">
+
+            <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+            <h1 tal:content="context/title"/>
+
+            <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+            <div class="documentDescription" tal:content="context/description"/>  
+
+            <div tal:replace="structure provider:plone.abovecontentbody" />
+
+            <div id="content-core" tal:content="structure python: context.getText()"/>  
+
+            <form tal:condition="formaction" action="." tal:attributes="action formaction"> 
+              <div id="actionsView">
+                <span class="actionButtons">
+                  <input type="submit" class="context" value="Zurück" name="back">
+                  <input type="submit" class="context" value="Daten löschen" name="erase">
+                </span>
+              </div>
+            </form>  
+
+        </tal:main-macro>
+    </div>
+</body>
+</html>

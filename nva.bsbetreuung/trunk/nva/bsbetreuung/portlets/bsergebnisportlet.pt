@@ -1,0 +1,40 @@
+<dl class="portlet portletBSErgebnisPortlet"
+    tal:condition="view/results"
+    tal:define="results view/results"
+    i18n:domain="nva.bsbetreuung">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span tal:content="results/portlettitle">
+           Ergebnis Portlet
+        </span>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd tal:condition="python: results['mitarbeiter'] > 0" class="portletItem even">
+        <a href="" tal:attributes="href results/link_ma">Beschäftigte im Betrieb</a><br/>
+        <span tal:content="results/mitarbeiter"/> <span i18n:translate="">Beschäftigte</span>
+    </dd>
+
+    <dd tal:condition="results/wz_code" class="portletItem odd">
+        <a href="" tal:attributes="href results/link_gb">Grundbetreuung</a><br>
+        <span i18n:translate="">Einsatzzeitensumme: </span><br/>
+        <span tal:content="results/aufwand_gb"/>&nbsp;<span i18n:translate="">Stunden pro Jahr</span><br/>
+        <span i18n:translate="">WZ-Code: </span>&nbsp;<span tal:content="results/wz_code"/>
+    </dd>
+
+    <dd tal:condition="python: results['aufwand_sb'] != '0,0'" class="portletItem even">
+        <a href="" tal:attributes="href results/link_sb">Betriebsspezifische Betreuung</a><br/>
+        <span i18n:translate="">Zeitaufwand: </span><br/>
+        <span tal:content="results/aufwand_sb"/>&nbsp;<span i18n:translate="">Stunden pro Jahr</span>
+    </dd>
+
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span>
+           <a href="" tal:attributes="href results/moreinfo" i18n:translate="">mehr...</a>
+        </span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

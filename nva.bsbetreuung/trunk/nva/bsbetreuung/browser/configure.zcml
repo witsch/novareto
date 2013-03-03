@@ -1,0 +1,78 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.bsbetreuung">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="bsb_final_view"
+      class=".bsb_finalview.bsb_finalView"
+      template="bsb_finalview.pt"
+      allowed_interface=".bsb_finalview.Ibsb_finalView"
+      permission="zope.Public"
+      />
+
+
+  <browser:page
+      for="*"
+      name="bsb_start_view"
+      class=".bsb_startview.bsb_startView"
+      template="bsb_startview.pt"
+      allowed_interface=".bsb_startview.Ibsb_startView"
+      permission="zope.Public"
+      />
+
+
+  <browser:page
+      for="*"
+      name="aufgabe_view"
+      class=".aufgabeview.aufgabeView"
+      permission="zope.Public"
+      />
+
+
+  <browser:viewlet
+      name="bsprogress.viewlet"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+      class=".viewlets.ProgressViewlet"
+      view="nva.bsbetreuung.interfaces.IProgress"
+      permission="zope.Public"
+      />
+
+  <browser:resource
+      name="bsbetreuung.js"
+      file="bsbetreuung.js"
+      />
+
+
+  <browser:resource
+      name="bs_getparams.js"
+      file="bs_getparams.js"
+      />
+
+  
+  <browser:menuItems
+      for="*"
+      menu="plone_displayviews">
+      <browser:menuItem
+          title="Aufgabe BS-Betreuung"
+          action="aufgabe_view"
+          description="Generierte Form fuer Aufgabe der BS-Betreuung"
+          />
+      <browser:menuItem
+          title="Startseite BS-Betreuung"
+          action="bsb_start_view"
+          description="Ansicht für die Startseite der Betriebsspezifischen Betreuung"
+          />
+      <browser:menuItem
+          title="Finale BS-Betreuung"
+          action="bsb_final_view"
+          description="Ansicht für das Finale der Betriebsspezifischen Betreuung"
+          />
+  </browser:menuItems>
+
+</configure>

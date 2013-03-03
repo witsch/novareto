@@ -1,0 +1,10 @@
+<?xml version="1.0"?> 
+<object name="portal_skins">
+ <object name="nva_bsbetreuung" meta_type="Filesystem Directory View"
+    directory="nva.bsbetreuung:skins/bsbetreuung"/>
+ <skin-path name="*">
+  <layer name="nva_bsbetreuung"
+         insert-after="custom"/>
+ </skin-path>
+</object>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_javascript" meta_type="JavaScripts Registry">
+    <javascript cacheable="False" compression="none" cookable="False"
+                enabled="True" expression="" id="++resource++bsbetreuung.js"
+                inline="False" insert-before="++resource++handlungshilfeP3.js" />
+    <javascript cacheable="False" compression="none" cookable="False"
+                enabled="True" expression="" id="++resource++bs_getparams.js"
+                inline="False" insert-before="++resource++bsbetreuung.js" />
+</object>

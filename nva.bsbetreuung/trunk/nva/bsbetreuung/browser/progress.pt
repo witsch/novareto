@@ -1,0 +1,15 @@
+<div id="wizard-progress"
+     i18n:domain="nva.bsbetreuung">
+
+    <span tal:repeat="ready python: range(view.ready)">
+       <img src="ready.jpg" title="fertig"/> 
+    </span> 
+    <span tal:repeat="todo python: range(view.rest)">
+       <img src="todo.jpg" title="offen"/> 
+    </span>
+
+    <span style="text-align: right;" class="discreet"><span i18n:translate="webcode_for_content">Seite:</span>
+        <span tal:content="view/ready"/> von: <span tal:content="view/all"/>
+    </span>
+
+</div>
