@@ -33,8 +33,8 @@ FragestellungSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'faktor',
         storage=atapi.AnnotationStorage(),
         widget=atapi.DecimalWidget(
-            label=_(u"Faktor"),            description=_(u"Bitte tragen Sie hier einen Faktor fuer die Berechnung des Betreuungsaufwandes ein. Sind keine Antwortoptionen angegeben, gilt dieser Faktor fuer diese Fragestellung; die Fra
-ge wird dann nicht eingeblendet. Sind dagegen Antwortoptionen angegeben, kann dieser Faktor als zusaetzlicher Gewichtungsfaktor genutzt werden."),
+            label=_(u"Faktor"),            
+            description=_(u"Bitte tragen Sie hier einen Faktor fuer die Berechnung des Betreuungsaufwandes ein. Sind keine Antwortoptionen angegeben, gilt dieser Faktor fuer diese Fragestellung; die Frage wird dann nicht eingeblendet. Sind dagegen Antwortoptionen angegeben, kann dieser Faktor als zusaetzlicher Gewichtungsfaktor genutzt werden."),
         ),
         required=True,
         default=_(u"1.0"),
@@ -63,8 +63,7 @@ ge wird dann nicht eingeblendet. Sind dagegen Antwortoptionen angegeben, kann di
         storage=atapi.AnnotationStorage(),
         widget=atapi.LinesWidget(
             label=_(u"Optionen"),
-            description=_(u"Bitte beschreiben Sie hier die Optionen fuer dieses Feld. Es gilt folgende Syntax: value|text. Beispiel: 1.0|mehr als 50% der Beschaeftigten. Bei Auswahl von Textfeld werden 
-die Optionen ignoriert."),
+            description=_(u"Bitte beschreiben Sie hier die Optionen fuer dieses Feld. Es gilt folgende Syntax: value|text. Beispiel: 1.0|mehr als 50% der Beschaeftigten. Bei Auswahl von Textfeld werden die Optionen ignoriert."),
         ),
     ),
 
