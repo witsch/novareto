@@ -1,0 +1,15 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="uv.bsbetreuung">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <browser:viewlet
+      name="final.viewlet"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
+      class=".viewlets.FinalViewlet"
+      view="nva.onlinehandlungshilfe.interfaces.IFinal"
+      permission="zope.Public"
+      />
+
+</configure>

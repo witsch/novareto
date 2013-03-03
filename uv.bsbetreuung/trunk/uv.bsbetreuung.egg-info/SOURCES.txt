@@ -1,0 +1,15 @@
+README.txt
+setup.cfg
+setup.py
+uv/__init__.py
+uv.bsbetreuung.egg-info/PKG-INFO
+uv.bsbetreuung.egg-info/SOURCES.txt
+uv.bsbetreuung.egg-info/dependency_links.txt
+uv.bsbetreuung.egg-info/entry_points.txt
+uv.bsbetreuung.egg-info/namespace_packages.txt
+uv.bsbetreuung.egg-info/not-zip-safe
+uv.bsbetreuung.egg-info/paster_plugins.txt
+uv.bsbetreuung.egg-info/requires.txt
+uv.bsbetreuung.egg-info/top_level.txt
+uv/bsbetreuung/__init__.py
+uv/bsbetreuung/tests.py
