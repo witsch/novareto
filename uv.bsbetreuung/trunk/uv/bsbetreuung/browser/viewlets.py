@@ -47,27 +47,33 @@ class FinalViewlet(ViewletBase):
         return aufgaben    
 
     def genTable(self, sb):
+        if not sb:
+            return ""
         fragen = self.formatFragen
         aufgaben = self.formatAufgaben
         table = '<table class="grid listing"><tr><th>%s</th>' % _(u'Aufgabenfelder')
         for i in sb.get('sbvalues'):
-            table += "<th>%s</th>" % fragen.get(i).get('title')
+            entry = fragen.get(i).get('title').decode('utf-8')
+            table += "<th>%s</th>" % entry
         table += "<th>%s</th></tr>" % _(u'Stunden pro Jahr')
         for i in sb.get('steps'):
-            table += "<tr><td>%s</td>" % i + ' ' + aufgaben.get(i)
-            for k in sb.get('sbvalues'):
+            entry = aufgaben.get(i).decode('utf-8')
+            table += "<tr><td>%s</td>" % i + ' ' + entry
+            for k in sb.get('sbvalues', []):
                 if k in sb['stepdata'][i]['valuedata']:
                     auswahl_eintrag = sb['stepdata'][i]['data'][k]
                     print fragen
                     print i, k, auswahl_eintrag
                     if fragen[k]['fieldtype'] == 'choice':
-                        table += "<td>%s</td>" % fragen[k]['optionen'][auswahl_eintrag]
+                        entry = fragen[k]['optionen'][auswahl_eintrag].decode('utf-8')
+                        table += "<td>%s</td>" % entry
                     else:
                         table += "<td>%s</td>" % auswahl_eintrag
                 else:
                     table += "<td></td>"
-            if sb['stepdata'][i]['alt']:       
-                table += "<th>%s</th></tr>" % sb['stepdata'][i]['alt']
+            if sb['stepdata'][i]['alt']:
+                entry = sb['stepdata'][i]['alt'].decode('utf-8')       
+                table += "<th>%s</th></tr>" % entry
             else:    
                 table += "<th>%s</th></tr>" % sb['stepdata'][i]['stepvalue']    
         colspan = 1 + len(sb.get('sbvalues'))
@@ -79,8 +85,8 @@ class FinalViewlet(ViewletBase):
 
     def update(self):
         session = self.getSessionCookie
-        self.ma = session.get('start')
-        self.gb = session.get('gb')
-        sb = session.get('sb')
+        self.ma = session.get('start', {})
+        self.gb = session.get('gb', {})
+        sb = session.get('sb', {})
         self.table = self.genTable(sb)
 

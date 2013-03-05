@@ -34,7 +34,7 @@
   </div>
 
   <div class="bsbetreuung"
-       tal:condition"view/table"
+       tal:condition="view/table"
        tal:define="table view/table">
     <h1 i18n:translate="">2. Betriebsspezfische Betreuung</h1>    
       <span tal:replace="structure table"/>
