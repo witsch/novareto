@@ -34,7 +34,10 @@ FragestellungSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         widget=atapi.DecimalWidget(
             label=_(u"Faktor"),            
-            description=_(u"Bitte tragen Sie hier einen Faktor fuer die Berechnung des Betreuungsaufwandes ein. Sind keine Antwortoptionen angegeben, gilt dieser Faktor fuer diese Fragestellung; die Frage wird dann nicht eingeblendet. Sind dagegen Antwortoptionen angegeben, kann dieser Faktor als zusaetzlicher Gewichtungsfaktor genutzt werden."),
+            description=_(u'Bitte tragen Sie hier einen Faktor fuer die Berechnung des Betreuungsaufwandes ein. Sind \
+                            keine Antwortoptionen angegeben, gilt dieser Faktor fuer diese Fragestellung; die Frage wird \
+                            dann nicht eingeblendet. Sind dagegen Antwortoptionen angegeben, kann dieser Faktor als \
+                            zusaetzlicher Gewichtungsfaktor genutzt werden.'),
         ),
         required=True,
         default=_(u"1.0"),
@@ -47,9 +50,9 @@ FragestellungSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         widget=atapi.SelectionWidget(
             label=_(u"Feldtyp"),
-            description=_(u'Bitte wählen Sie hier die Art des Feldes aus. Bitte beachten Sie dabei, dass zur Berechnung des \
-                            Betreuungsaufwandes nur Werte aus den Feldtypen "Auswahlfeld" und "Gleitkommazahl" berücksichtigt \
-                            werden können. Die Feldtypen "Textzeile" und "Textblock" dienen der Kommentierung durch den \
+            description=_(u'Bitte waehlen Sie hier die Art des Feldes aus. Bitte beachten Sie dabei, dass zur Berechnung des \
+                            Betreuungsaufwandes nur Werte aus den Feldtypen "Auswahlfeld" und "Gleitkommazahl" beruecksichtigt \
+                            werden koennen. Die Feldtypen "Textzeile" und "Textblock" dienen der Kommentierung durch den \
                             Benutzer'),
         ),
         required=True,
@@ -63,7 +66,9 @@ FragestellungSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         widget=atapi.LinesWidget(
             label=_(u"Optionen"),
-            description=_(u"Bitte beschreiben Sie hier die Optionen fuer dieses Feld. Es gilt folgende Syntax: value|text. Beispiel: 1.0|mehr als 50% der Beschaeftigten. Bei Auswahl von Textfeld werden die Optionen ignoriert."),
+            description=_(u"Bitte beschreiben Sie hier die Optionen fuer dieses Feld. Es gilt folgende Syntax: value|text. \
+                            Beispiel: 1.0|mehr als 50% der Beschaeftigten. Bei Auswahl von Textfeld werden die Optionen \
+                            ignoriert."),
         ),
     ),
 

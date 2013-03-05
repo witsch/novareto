@@ -4,6 +4,7 @@ from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 
+from nva.bsbetreuung.wizard import delSbFromSession
 from nva.bsbetreuung.interfaces import IProgress, IFinal
 from nva.bsbetreuung import bsbetreuungMessageFactory as _
 
@@ -46,6 +47,7 @@ class bsb_finalView(BrowserView):
         if self.request.get('back', ''):
             return self.request.response.redirect(fortsetzung)
         if self.request.get('erase', ''):
+            delSbFromSession(self.context)
             url = self.context.aq_inner.aq_parent.absolute_url()
             return self.request.response.redirect(url)
         return formaction

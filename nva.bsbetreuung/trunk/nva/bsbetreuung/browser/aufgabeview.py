@@ -52,7 +52,7 @@ class aufgabeView(FieldsetsInputForm):
         basisset = FormFieldsets(IBasis)
         basisset.label = u'Bitte treffen Sie eine Auswahl'
         basisset.id = u'hh_basis'
-        comp_fields = self.context.getFragen()
+        comp_fields = self.getFragenInOrder()
         myfields = []
         self.faktoren = {}
         self.field_help = {}
@@ -78,6 +78,14 @@ class aufgabeView(FieldsetsInputForm):
             self.form_fields = FormFieldsets(basisset)
         self.form_fields['mybool'].custom_widget = RadioWidget
 
+    def getFragenInOrder(self):
+        """Funktion wird aktuell gebraucht weil die Fragen aus dem Attribut nicht geordnet kommen"""
+        fragen = []
+        if self.context.portal_type == 'Aufgabe':
+            fragen = self.context.getFragen()
+            references_order = self.context.getRefs()
+            fragen = [i for i in references_order if i in fragen]
+        return fragen
 
     def validate(self, action, data):
         """ Validation-Hook wegen der besonderen Bedeutung der Vorauswahl 
@@ -102,11 +110,7 @@ class aufgabeView(FieldsetsInputForm):
                 doclist.append(i)
         next = getStep(doclist, self.context, 'backward')
         if next == 'redir':
-            obj = self.context.startend
-            url = self.context.absolute_url()
-            if obj:
-                url = obj.absolute_url()
-            return self.request.response.redirect(url)
+            return self.request.response.redirect(self.getStartFinalPage())
         return self.request.response.redirect(doclist[next].absolute_url())
 
 
@@ -130,10 +134,21 @@ class aufgabeView(FieldsetsInputForm):
                 doclist.append(i)
         next = getStep(doclist, self.context, 'forward')
         if next == 'redir':
-            obj = self.context.startend
-            url = self.context.absolute_url()
-            if obj:
-                url = obj.absolute_url()
-            return self.request.response.redirect(url)
+            return self.request.response.redirect(self.getStartFinalPage())
         return self.request.response.redirect(doclist[next].absolute_url())
 
+    def getStartFinalPage(self):
+        """
+        Ermittelt die Weiterleitung zu einer Start- bzw. Abschlussseite
+        und gibt diese an die Action zurueck
+        """
+        obj = self.context.startend
+        url = self.context.absolute_url()
+        if obj:
+            if isinstance(obj, list):
+                url = obj[0].absolute_url()
+            else:
+                url = obj.absolute_url()
+        return url
+
+ 

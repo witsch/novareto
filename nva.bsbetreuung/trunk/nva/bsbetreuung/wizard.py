@@ -40,6 +40,8 @@ def getSessionCookie(context):
     cookie = session.get('sb', sb_default)
     data_startseite = session.get('start', {})
     mitarbeiter = data_startseite.get('mitarbeiter', 0.0)
+    if isinstance(mitarbeiter, str) or isinstance(mitarbeiter, unicode):
+        mitarbeiter = float(str(mitarbeiter).replace(',','.'))
     return (cookie, mitarbeiter)
 
 
@@ -55,9 +57,9 @@ def calculateStep(context, valuedata, data, basis, min, max):
     """
     Der Betreuungsaufwand der Aufgabe wird berechnet
     """
-    cookie, mitarbeiter = getSessionCookie(context)
-    personalaufwand = float(mitarbeiter.replace(',','.')) #Lesen des Personalaufwandes aus dem Session-Cookie
-    faktor = personalaufwand * float(basis)
+    cookie, personalaufwand = getSessionCookie(context)
+    print cookie, personalaufwand
+    faktor = float(personalaufwand) * float(basis)
     for i in valuedata:
         faktor = faktor * float(data.get(i))
     stepvalue = faktor
@@ -74,10 +76,8 @@ def delSbFromSession(context):
     """
     Loescht die Daten der BS-Betreuung aus dem Session-Cookie
     """
-    cookie, mitarbeiter = getSessionCookie(context)
-    if cookie.has_key('sb'):
-        del cookie['sb']
-    setSessionCookie(context, cookie)
+    sb_default = {'sbsum':0.0, 'sbvalues':[], 'steps':[], 'stepdata':{}}
+    setSessionCookie(context, sb_default)
 
 
 def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt):

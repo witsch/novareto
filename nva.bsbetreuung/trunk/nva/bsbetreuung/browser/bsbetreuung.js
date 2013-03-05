@@ -1,5 +1,7 @@
 jq(document).bind('ready', function() {
 
+    jq('span.required').empty();
+
     if (jq('dl.portlet.portletErgebnisPortlet').length !=0) {
         var fixedwidth = jq('dl.portlet.portletDGUV2Help').width();
     }

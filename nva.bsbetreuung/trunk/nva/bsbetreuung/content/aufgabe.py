@@ -107,7 +107,6 @@ AufgabeSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Fragestellungen"),
             description=_(u"Bitte waehlen Sie aus, welche Fragestellungen Ihrer Aufgabe zugeordnet werdenn  sollen."),
             allow_search=True,
-            allow_sorting=True,
         ),
         relationship='aufgabe_fragen',
         allowed_types=('Fragestellung',), # specify portal type names here ('Example Type',)
@@ -120,11 +119,11 @@ AufgabeSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         storage=atapi.AnnotationStorage(),
         widget=ReferenceBrowserWidget(
             label=_(u"Weiterleitung"),
-            description=_(u"Auf der ersten Seite des Wizards bitte hier auf die Einleitung referenzieren, auf der letzten Seite des Wizards auf die Seite mit der Ergebnisuebersicht"),
+            description=_(u"Auf der ersten Seite des Wizards bitte hier auf die Einleitung referenzieren, auf der \
+                            letzten Seite des Wizards auf die Seite mit der Ergebnisuebersicht"),
         ),
         relationship='aufgabe_startend',
-        allowed_types=('Document',), # specify portal type names here ('Example Type',)
-        multiValued=False,
+        multiValued=True,
     ),
 
 
@@ -150,8 +149,6 @@ class Aufgabe(base.ATCTContent):
     description = atapi.ATFieldProperty('description')
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
-    startend = atapi.ATReferenceFieldProperty('startend')
-
     nummer = atapi.ATFieldProperty('nummer')
 
     aufgabentext = atapi.ATFieldProperty('aufgabentext')
@@ -168,5 +165,6 @@ class Aufgabe(base.ATCTContent):
 
     fragen = atapi.ATReferenceFieldProperty('fragen')
 
+    startend = atapi.ATReferenceFieldProperty('startend')
 
 atapi.registerType(Aufgabe, PROJECTNAME)

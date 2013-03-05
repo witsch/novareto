@@ -11,7 +11,7 @@ class IFragestellung(Interface):
     fieldtype = schema.Text(
         title=_(u"Feldtyp"),
         required=True,
-        description=_(u"Bitte wählen Sie hier die Art des Feldes aus."),
+        description=_(u"Bitte waehlen Sie hier die Art des Feldes aus."),
     )
 #
     hilfe = schema.SourceText(
