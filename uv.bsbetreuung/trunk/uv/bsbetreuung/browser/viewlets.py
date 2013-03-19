@@ -4,6 +4,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
+from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben
 from uv.bsbetreuung import bsbetreuungMessageFactory as _
 
 class FinalViewlet(ViewletBase):
@@ -18,39 +19,11 @@ class FinalViewlet(ViewletBase):
     def portal_catalog(self):
         return getToolByName(self.context, 'portal_catalog')
 
-    @property
-    def formatFragen(self):
-        pcat = self.portal_catalog
-        brains = pcat(portal_type = 'Fragestellung', review_state='published', show_inactive=True)
-        fragen = {}
-        for i in brains:
-            mydict = {}
-            frage = i.getObject()
-            mydict['title'] = frage.title
-            mydict['fieldtype'] = frage.fieldtype
-            optionen = {}
-            for j in frage.optionen:
-                option = j.split('|')
-                optionen[option[0]] = option[1]
-            mydict['optionen'] = optionen
-            fragen[frage.id] = mydict
-        return fragen    
-    
-    @property
-    def formatAufgaben(self):
-        pcat = self.portal_catalog
-        brains = pcat(portal_type = 'Aufgabe', review_state='published', show_inactive=True)
-        aufgaben = {}
-        for i in brains:
-            aufgabe = i.getObject()
-            aufgaben[aufgabe.nummer] = aufgabe.title
-        return aufgaben    
-
     def genTable(self, sb):
         if not sb:
             return ""
-        fragen = self.formatFragen
-        aufgaben = self.formatAufgaben
+        fragen = formatFragen(self.context)
+        aufgaben = formatAufgaben(self.context)
         table = '<table class="grid listing"><tr><th>%s</th>' % _(u'Aufgabenfelder')
         for i in sb.get('sbvalues'):
             entry = fragen.get(i).get('title').decode('utf-8')
