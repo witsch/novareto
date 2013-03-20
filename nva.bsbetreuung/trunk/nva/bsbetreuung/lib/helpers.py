@@ -16,10 +16,10 @@ def formatFragen(context):
     for i in brains:
         mydict = {}
         frage = i.getObject()
-        mydict['title'] = frage.title
-        mydict['fieldtype'] = frage.fieldtype
+        mydict['title'] = frage.Title()
+        mydict['fieldtype'] = frage.getFieldtype()
         optionen = {}
-        for j in frage.optionen:
+        for j in frage.getOptionen():
             option = j.split('|')
             optionen[option[0]] = option[1]
         mydict['optionen'] = optionen
@@ -33,6 +33,6 @@ def formatAufgaben(context):
     aufgaben = {}
     for i in brains:
         aufgabe = i.getObject()
-        aufgaben[aufgabe.nummer] = aufgabe.title
+        aufgaben[aufgabe.getNummer()] = aufgabe.Title()
     return aufgaben
 
