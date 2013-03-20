@@ -8,7 +8,6 @@
       for="*"
       name="bsbprint_view"
       class=".bsbprintview.bsbprintView"
-      template="bsbprintview.pt"
       allowed_interface=".bsbprintview.IbsbprintView"
       permission="zope.Public"
       />

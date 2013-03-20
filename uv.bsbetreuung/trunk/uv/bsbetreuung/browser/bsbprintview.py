@@ -49,7 +49,9 @@ class bsbprintView(BrowserView):
         gb = session.get('gb', {})
         sb = session.get('sb', {})
 
-        if not ma or not gb or not sb:
+        import pdb;pdb.set_trace()
+
+        if not ma or not sb:
             self.context.plone_utils.addPortalMessage(_(u'Leider sind Ihre Angaben zur Online-Handlungshilfe nicht mehr gueltig, bitte versuchen Sie es erneut.'), 'error')
             return self.request.response.redirect(self.portal.absolute_url())
 
