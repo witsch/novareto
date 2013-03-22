@@ -36,3 +36,7 @@ def formatAufgaben(context):
         aufgaben[aufgabe.getNummer()] = aufgabe.Title()
     return aufgaben
 
+def formatFloat(value):
+    valuestring = "%.1f" %value
+    valuestring = valuestring.replace('.',',')
+    return valuestring
