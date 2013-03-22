@@ -53,22 +53,23 @@ def setSessionCookie(context, cookie):
     session.set('sb', cookie)
 
 
-def calculateStep(context, valuedata, data, basis, min, max):
+def calculateStep(context, valuedata, data, basis, sbmin, sbmax):
     """
     Der Betreuungsaufwand der Aufgabe wird berechnet
     """
+    if not valuedata:
+        return 0.0
     cookie, personalaufwand = getSessionCookie(context)
-    print cookie, personalaufwand
     faktor = float(personalaufwand) * float(basis)
     for i in valuedata:
         faktor = faktor * float(data.get(i))
     stepvalue = faktor
-    if min:
-        if stepvalue < float(min):
-            stepvalue = float(min)
-    if max:
-        if stepvalue > float(max):
-            stepvalue = float(max)
+    if sbmin:
+        if stepvalue < float(sbmin):
+            stepvalue = float(sbmin)
+    if sbmax:
+        if stepvalue > float(sbmax):
+            stepvalue = float(sbmax)
     return stepvalue
 
 
