@@ -101,7 +101,6 @@ class aufgabeView(FieldsetsInputForm):
     def actionSubmit(self, action, data):
         stepnr = self.context.nummer
         cookie = eraseStepData(self.context, stepnr)
-        print cookie
         folder = self.context.aq_inner.aq_parent
         objects = folder.listFolderContents()
         doclist = []
@@ -125,7 +124,6 @@ class aufgabeView(FieldsetsInputForm):
             valuedata, commentdata = prepareData(self.context.fragen)
             stepvalue = calculateStep(self.context, valuedata, data, basis, min, max)
             cookie = saveStepData(self.context, stepnr, valuedata, commentdata, data, stepvalue, alt)
-            print cookie
         folder = self.context.aq_inner.aq_parent
         objects = folder.listFolderContents()
         doclist = []
