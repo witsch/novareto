@@ -24,6 +24,7 @@
               <div id="actionsView">
                 <span class="actionButtons">
                   <input type="submit" class="context" value="Zurück" name="back">
+                  <input type="submit" class="context" value="Daten drucken" name="print">
                   <input type="submit" class="context" value="Daten löschen" name="erase">
                 </span>
               </div>

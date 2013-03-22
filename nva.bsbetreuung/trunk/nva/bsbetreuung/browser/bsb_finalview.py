@@ -42,13 +42,17 @@ class bsb_finalView(BrowserView):
         """
         refs = self.context.getReferences()
         formaction = fortsetzung = self.context.id
+        printurl = self.context.absolute_url() + '/bsbprint_view'
         if refs:
             fortsetzung = refs[0].absolute_url()
         if self.request.get('back', ''):
             return self.request.response.redirect(fortsetzung)
+        if self.request.get('print', ''):
+            return self.request.response.redirect(printurl)
         if self.request.get('erase', ''):
             delSbFromSession(self.context)
             url = self.context.aq_inner.aq_parent.absolute_url()
             return self.request.response.redirect(url)
         return formaction
+
 
