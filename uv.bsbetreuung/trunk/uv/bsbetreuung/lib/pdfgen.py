@@ -19,7 +19,7 @@ from reportlab.lib.enums import TA_RIGHT as _r
 from reportlab.platypus.doctemplate import PageTemplate, BaseDocTemplate
 
 from nva.onlinehandlungshilfe.lib.helpers import valuegetter
-from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben
+from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben, formatFloat
 from uv.bsbetreuung import bsbetreuungMessageFactory as _
 
 
@@ -134,14 +134,15 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
             zeile.append(Paragraph(fussnote, style_value))
             fussnote += '*'
         else:
-            value = sb['stepdata'][i]['stepvalue']
-            zeile.append(Paragraph(unicode(value), style_valuer))
+            value = formatFloat(sb['stepdata'][i]['stepvalue'])
+            zeile.append(Paragraph(value, style_valuer))
         bstable.append(zeile)
 
     ergebnis = [Paragraph(translate(_(u'Summe der relevanten Aufgabenfelder'), target_language=langvar), style_value),]
     for i in range(valuecols): 
         ergebnis.append(Paragraph(u'', style_value))
-    ergebnis.append(Paragraph(str(sb.get("sbsum")), style_valuer))
+    summe = formatFloat(sb.get("sbsum"))
+    ergebnis.append(Paragraph(summe, style_valuer))
 
     bstable.append(ergebnis)
 

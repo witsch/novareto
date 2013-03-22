@@ -4,7 +4,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
-from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben
+from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben, formatFloat
 from uv.bsbetreuung import bsbetreuungMessageFactory as _
 
 class FinalViewlet(ViewletBase):
@@ -35,23 +35,26 @@ class FinalViewlet(ViewletBase):
             for k in sb.get('sbvalues', []):
                 if k in sb['stepdata'][i]['valuedata']:
                     auswahl_eintrag = sb['stepdata'][i]['data'][k]
-                    print fragen
-                    print i, k, auswahl_eintrag
                     if fragen[k]['fieldtype'] == 'choice':
                         entry = fragen[k]['optionen'][auswahl_eintrag].decode('utf-8')
                         table += "<td>%s</td>" % entry
                     else:
                         table += "<td>%s</td>" % auswahl_eintrag
+                elif k not in sb['stepdata'][i]['valuedata'] and sb['stepdata'][i]['alt']:
+                    pass
                 else:
                     table += "<td></td>"
             if sb['stepdata'][i]['alt']:
+                colspan = 1 + len(sb.get('sbvalues'))
                 entry = sb['stepdata'][i]['alt'].decode('utf-8')       
-                table += "<th>%s</th></tr>" % entry
-            else:    
-                table += "<th>%s</th></tr>" % sb['stepdata'][i]['stepvalue']    
+                table += '<td colspan="%s">%s</td></tr>' % (colspan, entry)
+            else:
+                value = formatFloat(sb['stepdata'][i]['stepvalue'])    
+                table += '<th style="text-align:right;">%s</th></tr>' % value  
         colspan = 1 + len(sb.get('sbvalues'))
+        summe = formatFloat(sb.get("sbsum"))
         abschluss = _(u"Geschätzter Betreuungsaufwand für die betriebsspezifische Betreuung (ohne arbeitsmedizinische Vorsorge)")
-        table += '<tr><th colspan="%s">%s</td><td>%s</td></tr>' % (colspan, abschluss, sb.get("sbsum"))
+        table += '<tr><th colspan="%s">%s</td><th style="text-align:right;">%s</th></tr>' % (colspan, abschluss, summe)
         table += "</table>"
         return table
 
