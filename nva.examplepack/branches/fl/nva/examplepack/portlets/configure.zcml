@@ -1,0 +1,22 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="nva.examplepack">
+  <!-- Ensure Plone's portlets ZCML has already been processed; without
+       this, we may get a permission lookup error
+  -->
+  <include package="plone.app.portlets" />
+  <!-- -*- extra stuff goes here -*- -->
+
+  <plone:portlet
+      name="nva.examplepack.portlets.BeispielPortlet"
+      interface=".beispielportlet.IBeispielPortlet"
+      assignment=".beispielportlet.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".beispielportlet.Renderer"
+      addview=".beispielportlet.AddForm"
+      editview=".beispielportlet.EditForm"
+      />
+
+</configure>

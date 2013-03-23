@@ -1,0 +1,23 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.examplepack">
+    <!-- -*- extra stuff goes here -*- -->
+    
+    <browser:page
+        for="*"
+        name="myform"
+        class=".myform.myform"
+        permission="zope.Public" />
+
+
+  <browser:page
+      for="*"
+      name="mypage_view"
+      class=".mypageview.mypageView"
+      template="mypageview.pt"
+      allowed_interface=".mypageview.ImypageView"
+      permission="zope.Public"
+      />
+
+</configure>
