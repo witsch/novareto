@@ -13,7 +13,7 @@
       interface=".beispielportlet.IBeispielPortlet"
       assignment=".beispielportlet.Assignment"
       view_permission="zope2.View"
-      edit_permission="cmf.ManagePortal"
+      edit_permission="plone.app.portlets.ManagePortlets"
       renderer=".beispielportlet.Renderer"
       addview=".beispielportlet.AddForm"
       editview=".beispielportlet.EditForm"
