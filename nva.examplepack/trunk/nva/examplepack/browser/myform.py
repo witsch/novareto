@@ -1,11 +1,15 @@
 from zope import interface, schema
 from zope.formlib import form
-from Products.Five.formlib import formbase
+try:
+    from five.formlib import formbase
+except:    
+    from Products.Five.formlib import formbase
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from nva.examplepack import examplepackMessageFactory as _
 
 class ImyformSchema(interface.Interface):
+    """ Definition der Schema-Felder """
     # -*- extra stuff goes here -*-
 
 
