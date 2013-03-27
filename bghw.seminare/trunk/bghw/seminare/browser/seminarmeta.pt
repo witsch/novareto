@@ -1,14 +1,5 @@
 <html>
 <body>
-<script type="text/javascript">
- jq(document).ready(function() {
-   var test = jq.cookie('beaker.session')
-   if (test != null) {
-       alert('Eine Bedienung über die Browsertasten ist nicht erlaubt. Sie werden jetzt in den Bereich Seminare weitergeleitet.');
-       window.location.replace("/ausbildung/seminare");
-       }
- })
-</script>
 
 <div tal:omit-tag=""
      i18n:domain="bghw.seminare"
