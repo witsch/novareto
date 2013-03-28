@@ -1,14 +1,36 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+﻿<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="nva.examplepack">
 <body>
     <div metal:fill-slot="main">
         <tal:main-macro metal:define-macro="main"
-                        tal:define="testview view/test">
+                        tal:define="testview view/test;
+                                    familie view/meinefamilie;
+                                    daten view/meinedaten">
 
-            <span tal:content="testview/dummy">test</span>
+         <h1>Das ist die Testseite von Franz Lampe</h1>
 
+         <h2>1. Arbeit mit Listen</h2>
+         
+         <span tal:content="familie"/>
+         <ul tal:repeat="mitglied familie">
+            <li tal:content="mitglied"/>
+         </ul>
+
+         <h2>2. Arbeit mit Dictionaries</h2>
+
+         <span tal:content="daten"/>
+         <span tal:define="franz daten/franz">
+            <h3>Franz Lampe</h3>
+            <ul>
+              <li>Grösse: <span tal:content="franz/groesse"/></li>
+              <li>Alter: <span tal:content="franz/alter"/></li>
+              <li>Klasse: <span tal:content="franz/klasse"/></li>
+              <li>Ort: <span tal:content="franz/ort"/></li>
+            </ul>
+         </span>            
+                  
         </tal:main-macro>
     </div>
 </body>

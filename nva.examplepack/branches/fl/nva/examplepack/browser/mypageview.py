@@ -1,4 +1,4 @@
-from zope.interface import implements, Interface
+﻿from zope.interface import implements, Interface
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
@@ -40,3 +40,17 @@ class mypageView(BrowserView):
         dummy = _(u'a dummy string')
 
         return {'dummy': dummy}
+    
+    def meinefamilie(self):
+        """
+        gibt eine Liste an den Browser
+        """
+        meinefamilie = ['Anke', 'Axel', 'Franz', 'Luisa']
+        return meinefamilie
+        
+    def meinedaten(self):
+        """
+        gibt ein Dictionary an den Browser
+        """
+        meinedaten = {'franz':{'groesse':1.75, 'alter':15, 'klasse':9, 'ort':'Wilhermsdorf'}}
+        return meinedaten        
