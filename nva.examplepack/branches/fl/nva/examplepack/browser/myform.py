@@ -1,4 +1,4 @@
-from zope import interface, schema
+﻿from zope import interface, schema
 from zope.formlib import form
 try:
     from five.formlib import formbase
@@ -11,6 +11,8 @@ from nva.examplepack import examplepackMessageFactory as _
 class ImyformSchema(interface.Interface):
     """ Definition der Schema-Felder """
     # -*- extra stuff goes here -*-
+    name = schema.TextLine(title=u"Name", description=u"Bitte Namen eingeben.")
+    ort = schema.TextLine(title=u"Ort", description=u"Bitte geben Sie den Ort ein.")
 
 
 class myform(formbase.PageForm):
