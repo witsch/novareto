@@ -18,7 +18,6 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_RIGHT as _r
 from reportlab.platypus.doctemplate import PageTemplate, BaseDocTemplate
 
-from nva.onlinehandlungshilfe.lib.helpers import valuegetter
 from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben, formatFloat
 from uv.bsbetreuung import bsbetreuungMessageFactory as _
 
