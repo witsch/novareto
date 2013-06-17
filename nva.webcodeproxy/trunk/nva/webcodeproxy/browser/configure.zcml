@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.webcodeproxy">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="getwebcodexml_view"
+      class=".getwebcodexmlview.getwebcodexmlView"
+      template="getwebcodexmlview.pt"
+      allowed_interface=".getwebcodexmlview.IgetwebcodexmlView"
+      permission="zope.Public"
+      />
+
+
+  <browser:page
+      for="nva.webcodeproxy.interfaces.IWebcodeproxy"
+      name="getwebcode"
+      class=".getwebcodeview.getwebcodeView"
+      allowed_interface=".getwebcodeview.IgetwebcodeView"
+      permission="zope.Public"
+      />
+
+</configure>

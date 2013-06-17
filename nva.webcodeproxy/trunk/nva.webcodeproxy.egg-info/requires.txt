@@ -1,0 +1,5 @@
+setuptools
+jsonlib2
+
+[tests]
+zope.testing
