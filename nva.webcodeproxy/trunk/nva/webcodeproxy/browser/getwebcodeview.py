@@ -94,7 +94,7 @@ class getwebcodeView(BrowserView):
         """Generiert einen JSON-Payload fuer die Rueckgabe an den Client"""
         dict = {'status':status,
                 'errormessage':error,
-                'webcodes':(code,)
+                'webcodes':[code]
                }
         payload = jsonlib2.write(dict)
         return payload
@@ -106,13 +106,13 @@ class getwebcodeView(BrowserView):
         error = ""
         code = ""
         if not system or not self.checkSystem(system):
-            error = u"Error: System-ID fehlt oder ist nicht korrekt."
+            error = u"Error-01: System-ID fehlt oder ist nicht korrekt."
             status = u"error"
         try:
             code = self.genWebcode
             self.writeCodeToProxyObject(code)
         except:
-            error = u"Error: Fehler beim Generieren des Webcodes."
+            error = u"Error-03: Fehler beim Generieren des Webcodes."
             status = u"error"
 
         if format == 'xml':
@@ -135,4 +135,4 @@ class getwebcodeView(BrowserView):
         if not format and status == "success":
             return code
 
-        return u"Error: Angabe zum Format ist nicht gueltig."
+        return u"Error-02: Angabe zum Format ist nicht gueltig."
