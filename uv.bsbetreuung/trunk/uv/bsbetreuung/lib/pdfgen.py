@@ -18,7 +18,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_RIGHT as _r
 from reportlab.platypus.doctemplate import PageTemplate, BaseDocTemplate
 
-from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben, formatFloat
+from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben, formatFloat, getFragenInOrder
 from uv.bsbetreuung import bsbetreuungMessageFactory as _
 
 
@@ -72,9 +72,9 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
     story.append(Paragraph(translate(_(u'1.Grundbetreuung'), target_language=langvar), h2))
   
     if gb.has_key('wzcodenr'):
-        tabledata = [[Paragraph(translate(_(u'Ihr WZ-Kode:'), target_language=langvar), style_norm), Paragraph(str(gb.get('wzcodenr', '')), style_value)],
-                     [Paragraph(translate(_(u'Betriebsart:'), target_language=langvar), style_norm), Paragraph(str(gb.get('wzcodetext', '')), style_value)],
-                     [Paragraph(translate(_(u'Betreuungsgruppe:'), target_language=langvar), style_norm), Paragraph(str(gb.get('bgruppe', '')), style_value)],
+        tabledata = [[Paragraph(translate(_(u'Ihr WZ-Kode:'), target_language=langvar), style_norm), Paragraph(gb.get('wzcodenr', ''), style_value)],
+                     [Paragraph(translate(_(u'Betriebsart:'), target_language=langvar), style_norm), Paragraph(gb.get('wzcodetext', ''), style_value)],
+                     [Paragraph(translate(_(u'Betreuungsgruppe:'), target_language=langvar), style_norm), Paragraph(gb.get('bgruppe', ''), style_value)],
                      [Paragraph(translate(_(u'Einsatzzeitensumme für Betriebsarzt und Fachkraft für Arbeitssicherheit:'), target_language=langvar), style_norm), 
                          Paragraph(str(gb.get('gb_data', '')) + translate(_(u' Stunden pro Jahr'), target_language=langvar), style_value)],
                      [Paragraph(translate(_(u'Mindestanteil für Betriebsarzt bzw. Fachkraft für Arbeitssicherheit:'), target_language=langvar), style_norm),
@@ -88,8 +88,12 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
     else:
     	story.append(Paragraph(translate(_(u'Das Modul Grundbetreuung wurde nicht von Ihnen bearbeitet.'), target_language=langvar), bt))
 
+
+    #Daten zur Betriebsspezifischen Betreuung
     fragen = formatFragen(context)
     aufgaben = formatAufgaben(context)
+    sortedFragen = getFragenInOrder(context)
+    sortedValues = [i.id for i in sortedFragen if i.id in sb.get('sbvalues')]
 
     story.append(Paragraph(translate(_(u'2. Betriebsspezifische Betreuung'), target_language=langvar), h2))
     story.append(Paragraph(translate(_(u'Relevante Aufgabenfelder für Ihren Betrieb und geschätzter Betreuungsumfang'), target_language=langvar), bt))
@@ -105,10 +109,11 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
 
     bstable = []
     tableheader = [Paragraph(translate(_(u'Aufgabenfelder'), target_language=langvar), style_value),]
-    for i in sb.get('sbvalues'):
-        ueberschrift = fragen.get(i).get('title').decode('utf-8')
-        tableheader.append(Paragraph(ueberschrift ,style_value))
-    tableheader.append(Paragraph(translate(_(u'Stunden pro Jahr'), target_language=langvar), style_value))
+    for i in sortedFragen:
+        if i.id in sb.get('sbvalues'):
+            ueberschrift = i.title.decode('utf-8')
+            tableheader.append(Paragraph(ueberschrift ,style_value))
+    tableheader.append(Paragraph(translate(_(u'Std. pro Jahr'), target_language=langvar), style_value))
     bstable.append(tableheader)
 
     fussnote = u'*'
@@ -117,7 +122,7 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
         zeile = []
         entry = "%s %s" % (i, aufgaben.get(i).decode('utf-8'))
         zeile.append(Paragraph(entry, style_value))
-        for k in sb.get('sbvalues', []):
+        for k in sortedValues:
             if k in sb['stepdata'][i]['valuedata']:
                 auswahl_eintrag = sb['stepdata'][i]['data'][k]
                 if fragen[k]['fieldtype'] == 'choice':

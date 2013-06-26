@@ -4,7 +4,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
-from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben, formatFloat
+from nva.bsbetreuung.lib.helpers import formatFragen, formatAufgaben, formatFloat, getFragenInOrder
 from uv.bsbetreuung import bsbetreuungMessageFactory as _
 
 class FinalViewlet(ViewletBase):
@@ -25,14 +25,16 @@ class FinalViewlet(ViewletBase):
         fragen = formatFragen(self.context)
         aufgaben = formatAufgaben(self.context)
         table = '<table class="grid listing"><tr><th>%s</th>' % _(u'Aufgabenfelder')
-        for i in sb.get('sbvalues'):
-            entry = fragen.get(i).get('title').decode('utf-8')
-            table += "<th>%s</th>" % entry
+        sortedFragen = getFragenInOrder(self.context)
+        sortedValues = [i.id for i in sortedFragen if i.id in sb.get('sbvalues')]
+        for i in sortedFragen:
+            if i.id in sb.get('sbvalues'):
+                table += "<th>%s</th>" % i.title.decode('utf-8')
         table += "<th>%s</th></tr>" % _(u'Stunden pro Jahr')
         for i in sb.get('steps'):
             entry = aufgaben.get(i).decode('utf-8')
             table += "<tr><td>%s</td>" % i + ' ' + entry
-            for k in sb.get('sbvalues', []):
+            for k in sortedValues:
                 if k in sb['stepdata'][i]['valuedata']:
                     auswahl_eintrag = sb['stepdata'][i]['data'][k]
                     if fragen[k]['fieldtype'] == 'choice':
