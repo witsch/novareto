@@ -8,10 +8,17 @@ from uv.bsbetreuung import bsbetreuungMessageFactory as _
 def portal_catalog(context):
     return getToolByName(context, 'portal_catalog')
 
+def getFragenInOrder(context):
+    pcat = portal_catalog(context)
+    brains = pcat(portal_type = 'Fragestellung', review_state='published', show_inactive=True)
+    objects = [x.getObject() for x in brains]
+    objects.sort(key=lambda x: x.getOrder(), reverse=False)
+    return objects
 
 def formatFragen(context):
     pcat = portal_catalog(context)
     brains = pcat(portal_type = 'Fragestellung', review_state='published', show_inactive=True)
+    #objects = [x.getObject() for x in brains]
     fragen = {}
     for i in brains:
         mydict = {}
