@@ -12,7 +12,8 @@ from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner, aq_parent
-from nva.bsbetreuung.wizard import getStep, prepareData, calculateStep, saveStepData, eraseStepData
+from nva.bsbetreuung.wizard import getStep, prepareData, calculateStep, saveStepData, checkStepData
+from nva.bsbetreuung.wizard import getSessionCookie
 from nva.bsbetreuung.interfaces import IProgress
 from nva.bsbetreuung import bsbetreuungMessageFactory as _
 
@@ -83,8 +84,7 @@ class aufgabeView(FieldsetsInputForm):
         fragen = []
         if self.context.portal_type == 'Aufgabe':
             fragen = self.context.getFragen()
-            references_order = self.context.getRefs()
-            fragen = [i for i in references_order if i in fragen]
+            fragen.sort(key=lambda x: x.getOrder(), reverse=False)
         return fragen
 
     def validate(self, action, data):
@@ -97,16 +97,31 @@ class aufgabeView(FieldsetsInputForm):
         return (form.getWidgetsData(self.widgets, self.prefix, data) +
                 form.checkInvariants(self.form_fields, data))
 
+    def getDoclist(self):
+        folder = self.context.aq_inner.aq_parent
+        return folder.listFolderContents(contentFilter={"portal_type" : "Aufgabe"})
+
+
+    def setUpWidgets(self, ignore_request=False):
+        """ Vorbelegung von Feldern des Wizards """
+        fieldnames = [x.__name__ for x in self.form_fields]
+        doclist = self.getDoclist()
+        step = self.context.getNummer()
+        cookie = getSessionCookie(self.context)[0]
+        self.adapters = {}
+        data = {}
+        if step in cookie.get('steps', []):
+            data = cookie['stepdata'][step]['data']
+        
+        self.widgets = form.setUpWidgets(
+            self.form_fields, self.prefix, self.context, self.request,
+            form=self, adapters=self.adapters, ignore_request=ignore_request,
+            data=data)
+
+
     @form.action(u'Zurück')
     def actionSubmit(self, action, data):
-        stepnr = self.context.nummer
-        cookie = eraseStepData(self.context, stepnr)
-        folder = self.context.aq_inner.aq_parent
-        objects = folder.listFolderContents()
-        doclist = []
-        for i in objects:
-            if i.portal_type == 'Aufgabe':
-                doclist.append(i)
+        doclist = self.getDoclist()
         next = getStep(doclist, self.context, 'backward')
         if next == 'redir':
             return self.request.response.redirect(self.getStartFinalPage())
@@ -115,7 +130,7 @@ class aufgabeView(FieldsetsInputForm):
 
     @form.action(u'Weiter')
     def actionSubmit(self, action, data):
-        stepnr = self.context.nummer
+        stepnr = self.context.getNummer()
         basis = self.context.basiszeitfaktor
         min = self.context.minimum
         max = self.context.maximum
@@ -124,12 +139,9 @@ class aufgabeView(FieldsetsInputForm):
             valuedata, commentdata = prepareData(self.context.fragen)
             stepvalue = calculateStep(self.context, valuedata, data, basis, min, max)
             cookie = saveStepData(self.context, stepnr, valuedata, commentdata, data, stepvalue, alt)
-        folder = self.context.aq_inner.aq_parent
-        objects = folder.listFolderContents()
-        doclist = []
-        for i in objects:
-            if i.portal_type == 'Aufgabe':
-                doclist.append(i)
+        else:
+            checkStepData(self.context, stepnr)
+        doclist = self.getDoclist()
         next = getStep(doclist, self.context, 'forward')
         if next == 'redir':
             return self.request.response.redirect(self.getStartFinalPage())
@@ -148,5 +160,6 @@ class aufgabeView(FieldsetsInputForm):
             else:
                 url = obj.absolute_url()
         return url
+
 
  

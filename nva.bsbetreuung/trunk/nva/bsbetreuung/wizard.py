@@ -86,6 +86,9 @@ def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt):
     Schreibt die Daten des Steps in die Session
     """
     cookie, mitarbeiter = getSessionCookie(context)
+    if stepnr in cookie['steps']:
+        cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr]['stepvalue']
+        cookie['steps'].pop(cookie['steps'].index(stepnr))
     cookie['sbsum'] = cookie['sbsum'] + stepvalue
     cookie['sbvalues'] = list(set(cookie['sbvalues'] + valuedata))
     cookie['steps'].append(stepnr)
@@ -98,7 +101,7 @@ def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt):
     return cookie
 
 
-def eraseStepData(context, stepnr):
+def checkStepData(context, stepnr):
     """
     Loescht die Daten des aktuellen Steps aus dem Cookie im Falle von Steuerung Zurueck
     """

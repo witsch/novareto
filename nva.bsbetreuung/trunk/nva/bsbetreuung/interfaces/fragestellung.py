@@ -32,4 +32,8 @@ class IFragestellung(Interface):
         description=_(u"Bitte beschreiben Sie hier die Optionen fuer dieses Feld. Es gilt folgende Syntax: value|text. Beispiel: 1.0|mehr als 50% der Beschaeftigten."),
     )
 #
-    
+    optionen = schema.Int(
+        title=_(u"Reihenfolge"),
+        required=True,
+        description=_(u"Festlegung der Sortierreihenfolge"),
+    )

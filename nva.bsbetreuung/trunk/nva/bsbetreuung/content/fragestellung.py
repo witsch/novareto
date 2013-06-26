@@ -72,6 +72,17 @@ FragestellungSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         ),
     ),
 
+    atapi.IntegerField(
+        'order',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.IntegerWidget(
+            label=_(u"Reihenfolge"),
+            description=_(u"Bitte geben Sie hier die Reihenfolge der Sortierung an. Die Sortierung wird angewendet innerhalb \
+                            der Aufgbenfelder und beim Druck der Abschlusstabelle."),
+            size=2,
+        ),
+    ),
+
 
 ))
 
@@ -102,5 +113,7 @@ class Fragestellung(base.ATCTContent):
     faktor = atapi.ATFieldProperty('faktor')
 
     optionen = atapi.ATFieldProperty('optionen')
+
+    order = atapi.ATFieldProperty('order')
 
 atapi.registerType(Fragestellung, PROJECTNAME)
