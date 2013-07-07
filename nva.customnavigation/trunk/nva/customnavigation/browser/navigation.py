@@ -27,7 +27,7 @@ class MyNavRenderer(Renderer):
             ob es sich beim Context um die Standardansicht eines Ordners
             handelt. """
         context = self.context.aq_inner
-        if not IFolderish.providedBy(context):
+        if not IFolderish.providedBy(context) or context.portal_type == 'Topic':
             if hasattr(context.aq_parent, 'default_page'):
                 if context.id == context.aq_parent.default_page:
                     return True
@@ -55,6 +55,7 @@ class MyNavRenderer(Renderer):
         if IFolderish.providedBy(context):
             if back.portal_type == 'Plone Site':
                 self.back_name = u'Startseite'
+                return self._template()
         
         #Sonderfall-2: Pruefung, ob es sich beim Contextobjekt um eine Standard-
         #              ansicht eines Ordners handelt.
