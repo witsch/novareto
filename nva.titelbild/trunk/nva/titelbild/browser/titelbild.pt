@@ -1,0 +1,20 @@
+<div class="folderimage" tal:condition="view/imagelist"
+  tal:define="images view/imagelist;
+              imagepath view/imagepath;
+              videopath view/videopath;">
+
+      <div tal:condition="python: len(images) == 1" class="etemtitelbild">
+        <span tal:replace="structure python: images[0]"/>
+          <div tal:condition="python: imagepath or videopath" class="mediapath">
+            <a tal:condition="imagepath" href="" tal:attributes="href imagepath">
+              <img src="imagelink.png" tal:attributes="src view/imagebutton" alt="imagelink" title="Link zur Bildergalerie"/></a>
+            <a tal:condition="videopath" href="" tal:attributes="href videopath">
+              <img src="videolink.png" tal:attributes="src view/videobutton" alt="videolink" title="Link zum Video"/></a>
+          </div>
+      </div>
+    
+      <div tal:condition="python: len(images) > 1" class="myetemslider">
+          <span tal:repeat="item images" tal:replace="structure item"/>
+      </div>
+
+</div>

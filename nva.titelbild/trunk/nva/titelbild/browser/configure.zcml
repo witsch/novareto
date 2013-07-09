@@ -1,0 +1,15 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.titelbild">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <browser:viewlet
+     for="*"
+     name="nvatitelbild.titleimage"
+     manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+     class=".titelbildviewlet.TitleImageViewlet"
+     permission="zope2.View"
+     />
+
+</configure>
