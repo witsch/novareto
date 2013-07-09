@@ -1,11 +1,10 @@
 /* --- ---=[ EVENTS ]=--- --- */
 
 .nvaEventContent {
-  margin-left: 75px;
+  font-style:italic;
 }
 
 .nvaEventDescription {
-  margin-left: 75px;
 }
 
 .nvaEventTitle {
@@ -14,19 +13,18 @@
 }
 
 .nvaEventTitleText {
-  margin-left: 75px;
   display: block;
 }
 
 .nvaEventTitleDate {
   float: left;
-  color: #004994;
   display: block;
+  color: #333;
 }
 
 .nvaEventLink {
   text-decoration: none;
-  color: black;
+  color: #004994;
 }
 
 .nvaCurrentYear {

@@ -30,20 +30,20 @@
 
           <a href=""
              tal:condition="python: view.current_year == view.this_year and not view.past"
-             tal:attributes="href string:${context/absolute_url}/?year=${view/current_year}&past=true">&larr; <span tal:content="string: vergangene Termine ${view/current_year}"/></a>
+             tal:attributes="href string:${context/absolute_url}/?year=${view/current_year}&past=true"><span tal:content="string: vergangene Termine ${view/current_year}"/></a>
 
           <a href=""
              tal:condition="python: view.current_year == view.this_year and view.past"
-             tal:attributes="href string:${context/absolute_url}/?year=${view/previous_year}">&larr; <span tal:content="view/previous_year"/></a>
+             tal:attributes="href string:${context/absolute_url}/?year=${view/previous_year}"><span tal:content="view/previous_year"/></a>
 
 
 	  <tal:sep condition="python: view.next_year and view.previous_year">
-	    &bull;
+	    &#124;
 	  </tal:sep>
 
 	  <a href=""
 	     tal:condition="python: view.next_year and not view.past"
-	     tal:attributes="href string:${context/absolute_url}/?year=${view/next_year}"><span tal:content="view/next_year"></span> &rarr;</a>
+	     tal:attributes="href string:${context/absolute_url}/?year=${view/next_year}"><span tal:content="view/next_year"></span></a>
 
           <a href=""
              tal:condition="python: view.next_year and view.past"
@@ -55,18 +55,17 @@
 
 
         <span tal:condition="not: view/events" i18n:translate="">Für das ausgewählte Jahr sind keine Termine vorhanden.</span>
-
 	<tal:events tal:repeat="month python:sorted(view.events.keys())"
 		    tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;">
 
 
-          <h2 i18n:translate=""
+          <h2 class="headline" i18n:translate=""
               tal:condition="python: view.events[month]"
               tal:content="python: view.get_month_name(month)" />
 
 	  <metal:block tal:repeat="event python:view.events[month]">
 
-	  <div class="inewsItem"
+	  <div class="span16 newsItem"
 	       metal:define-macro="listitem"
 	       tal:define="result python:event[1];
 			   status python:event[0];
@@ -75,25 +74,25 @@
 			   resulturl resultObject/absolute_url;">
 
         <div class="nvaEventTitle" tal:condition="python: status == 'current'">
-           <div class="nvaEventTitleDate" tal:content="string: heute"/>
-           <div class="nvaEventTitleText">
+           <div class="nvaEventTitleDate span2" tal:content="string: heute"/>
+           <div class="span14  nvaEventTitleText">
              <a class="nvaEventLink" href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
            </div>
         </div>
 
         <div class="nvaEventTitle" tal:condition="python: status != 'current'">
-           <div class="nvaEventTitleDate" tal:content="python:toLocalizedTime(resultObject.start())"/>
-           <div class="nvaEventTitleText">
+           <div class="nvaEventTitleDate span2" tal:content="python:toLocalizedTime(resultObject.start())"/>
+           <div class="nvaEventTitleText span14">
              <a class="nvaEventLink" href="/view" tal:attributes="href resulturl" tal:content="python: resultObject.title"/>
            </div>
         </div>
 
 
-    <div class="nvaEventContent"
+    <div class="nvaEventContent span14 offset2"
          tal:define="compare_from python: toLocalizedTime(resultObject.start(), long_format=False);
                      compare_to python: toLocalizedTime(resultObject.end(), long_format=False);
                      compare_dates python: compare_from == compare_to">
-      <p class="discreet">
+      <p>
         <span tal:define="subject resultObject/Subject"
             tal:condition="subject">
             <span i18n:translate="">Was: </span>
@@ -126,7 +125,7 @@
       </p>
     </div>
 
-    <div class="nvaEventDescription">
+    <div tal:condition="result/Description" class="nvaEventDescription span14 offset2">
       <p tal:content="result/Description">
         Description
       </p>  
