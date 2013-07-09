@@ -1,0 +1,9 @@
+<?xml version="1.0"?> 
+<import-steps>
+ <import-step id="zweispalten-various" version="2010-06-22"
+              handler="nva.zweispalten.setuphandlers.importVarious"
+              title="zweispalten_view setup">
+  zweispalten_view setup
+ </import-step>
+</import-steps>
+

@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="nva.zweispalten">
+<body>
+    <div metal:fill-slot="main">
+        <tal:main-macro metal:define-macro="main"
+                        tal:define="testview    view/test;
+                                    folderitems view/folderitems;
+                                    fo          folderitems/folderobjects">
+
+          <!--<div tal:replace="structure provider:plone.abovecontenttitle" />-->
+          <h1><span tal:content="folderitems/tit"/></h1>
+          <div tal:replace="structure provider:plone.belowcontenttitle" />
+          <div tal:replace="structure provider:plone.abovecontentbody" />
+
+            <table cellspacing="10" class="plaintext twocols">
+              <colgroup>
+                <col width="220">
+                <col width="340">
+              </colgroup>
+              <tr tal:condition="python: folderitems['top'] or folderitems['desc']">
+                <td valign="top"><span tal:replace="structure folderitems/top"/><br/>
+                <span tal:condition="folderitems/topcaption" class="discreet" tal:content="folderitems/topcaption"/></td>
+                <td valign="top"><span tal:content="folderitems/desc"/></td>
+              </tr>
+                <tr tal:repeat="ob fo">
+                  <td valign="top"><span tal:repeat="img ob/images">
+                      <br/>
+                      <span tal:replace="structure img"/>
+                      </span><br/>
+                      <span tal:condition="ob/imagecaption" class="discreet" tal:content="ob/imagecaption"/><br/>
+                  </td>
+                  <td valign="top">
+                    <br/>
+                    <a class="internal-link" href="" tal:attributes="href ob/url"><span tal:content="ob/tit"/></a><br>
+                    <span tal:content="ob/desc"/>
+                  </td>
+                </tr>
+            </table>
+
+            <!--<span tal:content="testview/dummy">test</span>-->
+
+          <div tal:replace="structure provider:plone.belowcontentbody" />
+
+        </tal:main-macro>
+    </div>
+</body>
+</html>
