@@ -1,6 +1,10 @@
 README.txt
 setup.cfg
 setup.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
 nva/__init__.py
 nva.titelbild.egg-info/PKG-INFO
 nva.titelbild.egg-info/SOURCES.txt
@@ -12,7 +16,11 @@ nva.titelbild.egg-info/paster_plugins.txt
 nva.titelbild.egg-info/requires.txt
 nva.titelbild.egg-info/top_level.txt
 nva/titelbild/__init__.py
+nva/titelbild/configure.zcml
 nva/titelbild/extender.py
 nva/titelbild/tests.py
 nva/titelbild/browser/__init__.py
+nva/titelbild/browser/configure.zcml
+nva/titelbild/browser/titelbild.pt
 nva/titelbild/browser/titelbildviewlet.py
+nva/titelbild/profiles/default/metadata.xml

@@ -14,12 +14,6 @@ from plone.memoize import ram
 
 from nva.titelbild import titelbildMessageFactory as _
 
-def getMediaButtons(background):
-    if background[0] == 'light':
-        return ('button_imagelink_light.png', 'button_videolink_light.png')
-    else:
-        return ('button_imagelink_dark.png', 'button_videolink_dark.png')
-
 class TitleImageViewlet(ViewletBase):
     render = ViewPageTemplateFile('titelbild.pt')
 
@@ -31,22 +25,32 @@ class TitleImageViewlet(ViewletBase):
             if getattr(self.context, 'anzeige', False):
                 titelbilder = self.context.getReferences('rel_titleimages')
                 if titelbilder:
+                    to = len(titelbilder)
                     if getattr(self.context, 'zufall', False):
-                        to = len(titelbilder)
                         imageindex = random.randint(0, to-1)
                         randimage = titelbilder[imageindex]
-                        self.imagelist.append(randimage.getField('image').tag(randimage))
-                        if self.context.getReferences('rel_videopath'):
-                            self.videopath = self.context.getReferences('rel_videopath')[0].absolute_url()
-                            self.videobutton = getMediaButtons(getattr(self.context, 'background'))[1]
-                        if self.context.getReferences('rel_imagepath'):
-                            self.imagepath = self.context.getReferences('rel_imagepath')[0].absolute_url()
-                            self.imagebutton = getMediaButtons(getattr(self.context, 'background'))[0]
+                        image = {'img':randimage.getField('image').tag(randimage),
+                                 'image-caption':randimage.title}
+                        self.imagelist.append(image)
                     else:
-                        for i in titelbilder:
-                            self.imagelist.append(i.getField('image').tag(i))
-        #elif self.context.portal_type in ['GeoLocation',]:
-        #    if getattr(self.context, 'anzeige', False):
-        #        if getattr(self.context, 'folderimage', None):
-        #            self.imagelist.append(str(self.context.folderimage))
+                        for i in range(to):
+                            if i == 0:
+                                image = {'data-slide':i, 
+                                         'class':'active', 
+                                         'item-class':'item active', 
+                                         'img':titelbilder[i].getField('image').tag(titelbilder[i]),
+                                         'image-caption':titelbilder[i].title}
+                                self.imagelist.append(image)
+                            else:
+                                image = {'data-slide':i, 
+                                         'class':'', 
+                                         'item-class':'item', 
+                                         'img':titelbilder[i].getField('image').tag(titelbilder[i]),
+                                         'image-caption':titelbilder[i].title}
+                                self.imagelist.append(image)
+                    if self.context.getReferences('rel_videopath'):
+                        self.videopath = self.context.getReferences('rel_videopath')[0].absolute_url()
+                    if self.context.getReferences('rel_imagepath'):
+                        self.imagepath = self.context.getReferences('rel_imagepath')[0].absolute_url()
+
         return

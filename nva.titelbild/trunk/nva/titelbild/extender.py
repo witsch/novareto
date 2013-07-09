@@ -4,7 +4,7 @@
 from zope.component import adapts
 from zope.interface import implements
 from archetypes.schemaextender.interfaces import ISchemaExtender
-from Products.Archetypes.public import StringWidget, SelectionWidget, ImageWidget, BooleanWidget
+from Products.Archetypes.public import StringWidget, SelectionWidget, ImageWidget, BooleanWidget, ReferenceWidget
 from Products.Archetypes.atapi import StringField, ReferenceField, ImageField, BooleanField, LinesField
 from Products.Archetypes.atapi import DisplayList
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
@@ -72,35 +72,23 @@ extension_fields = [
                schemata='Medien',
                relationship='rel_videopath',
                multiValued=False,
-               widget = ReferenceBrowserWidget(
+               widget = ReferenceWidget(
                            label = _(u"Pfad zum Video"),
                            description = _(u"Bitte waehlen Sie aus, mit welchem Videoobjekt das Titelbild verlinkt werden soll."),
-                           startup_directory = '/',
-                           force_close_on_insert = True,
+                           #startup_directory = '/',
+                           #force_close_on_insert = True,
                            ),                  ),
                CustomReferenceField('imagepath',
                schemata='Medien',
                relationship='rel_imagepath',
                multiValued=False,
-               widget = ReferenceBrowserWidget(
+               widget = ReferenceWidget(
                            label = _(u"Pfad zur Bildergalerie"),
                            description = _(u"Bitte waehlen Sie aus, mit welcher Bildergalerie das Titelbild verlinkt werden soll."),
-                           startup_directory = '/',
-                           force_close_on_insert = True,
+                           #startup_directory = '/',
+                           #force_close_on_insert = True,
                            ),
-                  ),
-               CustomLinesField('background',
-                       schemata='Medien',
-                       required=True,
-                       vocabulary = DisplayList((('light',_(u'hell')), ('dark',_(u'dunkel')))),
-                       default='light',
-                       widget=SelectionWidget(
-                           label = _(u"Bildhintergrund"),
-                           description = _(u"Bitte waehlen Sie aus, ob das Titelbild in der rechten unteren Ecke eher dunkel oder \
-                                             eher hell ist."),
-                           format = 'radio',
-                           ),
-                   ),]
+                  ),]
 
 
 

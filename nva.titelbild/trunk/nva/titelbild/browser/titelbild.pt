@@ -4,17 +4,32 @@
               videopath view/videopath;">
 
       <div tal:condition="python: len(images) == 1" class="etemtitelbild">
-        <span tal:replace="structure python: images[0]"/>
-          <div tal:condition="python: imagepath or videopath" class="mediapath">
-            <a tal:condition="imagepath" href="" tal:attributes="href imagepath">
-              <img src="imagelink.png" tal:attributes="src view/imagebutton" alt="imagelink" title="Link zur Bildergalerie"/></a>
-            <a tal:condition="videopath" href="" tal:attributes="href videopath">
-              <img src="videolink.png" tal:attributes="src view/videobutton" alt="videolink" title="Link zum Video"/></a>
-          </div>
+        <span tal:replace="structure python: images[0]['img']"/>
+        <div class="medialinks">
+           <a tal:condition="imagepath" class="btn" href="" tal:attributes="href imagepath">Bilder</a>
+           <a tal:condition="videopath" class="btn" href="" tal:attributes="href videopath">Video</a>
+        </div>
+        <div class="image-caption"><p tal:content="python: images[0]['image-caption']"></p></div>
       </div>
     
-      <div tal:condition="python: len(images) > 1" class="myetemslider">
-          <span tal:repeat="item images" tal:replace="structure item"/>
+      <div id="myCarousel" tal:condition="python: len(images) > 1" class="carousel slide">
+          <ol class="carousel-indicators">
+            <li tal:repeat="item images" data-target="#myCarousel" data-slide-to="" class="" 
+                tal:attributes="data-slide-to item/data-slide; class item/class"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div tal:repeat="item images" class="" tal:attributes="class item/item-class">
+              <span tal:replace="structure item/img"/>
+              <div class="carousel-caption">
+                <p tal:content="item/image-caption"></p>
+              </div>
+            </div>
+          </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+          <div class="medialinks">
+            <a tal:condition="imagepath" class="btn" href="" tal:attributes="href imagepath">Bilder</a>
+            <a tal:condition="videopath" class="btn" href="" tal:attributes="href videopath">Video</a>
+          </div>
       </div>
-
 </div>
