@@ -16,9 +16,10 @@
     <dd class="portletItem lastItem backLinkItem"
         tal:condition="view/back_name">
       <ul class="navTree">
-        <li><a href="#" tal:attributes="href view/back_url">
-            <img src="arrow_left_blue_round.png">&nbsp;
+        <li class=navMenu><a href="#" tal:attributes="href view/back_url">
+            <!--img src="arrow_left_blue_round.png"-->
             <span tal:content="view/back_name"/>
+	    <span class="naviTopRight"/>
           </a>
         </li>
       </ul>    
