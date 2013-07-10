@@ -5,43 +5,35 @@
 <body>
     <div metal:fill-slot="main">
         <tal:main-macro metal:define-macro="main"
-                        tal:define="testview    view/test;
-                                    folderitems view/folderitems;
-                                    fo          folderitems/folderobjects">
+                        tal:define="fo view/folderitems;">
 
-          <!--<div tal:replace="structure provider:plone.abovecontenttitle" />-->
-          <h1><span tal:content="folderitems/tit"/></h1>
-          <div tal:replace="structure provider:plone.belowcontenttitle" />
-          <div tal:replace="structure provider:plone.abovecontentbody" />
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+        <h1><span tal:content="context/title"/></h1>
 
-            <table cellspacing="10" class="plaintext twocols">
-              <colgroup>
-                <col width="220">
-                <col width="340">
-              </colgroup>
-              <tr tal:condition="python: folderitems['top'] or folderitems['desc']">
-                <td valign="top"><span tal:replace="structure folderitems/top"/><br/>
-                <span tal:condition="folderitems/topcaption" class="discreet" tal:content="folderitems/topcaption"/></td>
-                <td valign="top"><span tal:content="folderitems/desc"/></td>
-              </tr>
-                <tr tal:repeat="ob fo">
-                  <td valign="top"><span tal:repeat="img ob/images">
-                      <br/>
-                      <span tal:replace="structure img"/>
-                      </span><br/>
-                      <span tal:condition="ob/imagecaption" class="discreet" tal:content="ob/imagecaption"/><br/>
-                  </td>
-                  <td valign="top">
-                    <br/>
-                    <a class="internal-link" href="" tal:attributes="href ob/url"><span tal:content="ob/tit"/></a><br>
-                    <span tal:content="ob/desc"/>
-                  </td>
-                </tr>
-            </table>
+        <p tal:condition="context/Description" class="documentDescription"><span tal:content="context/Description"/></p>
 
-            <!--<span tal:content="testview/dummy">test</span>-->
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+        <div tal:replace="structure provider:plone.abovecontentbody" />
 
-          <div tal:replace="structure provider:plone.belowcontentbody" />
+
+        <div tal:repeat="ob fo" class="media">
+        <div class="pull-left">
+          <span tal:repeat="img ob/images">
+            <span tal:replace="structure img"/><br/>
+            <span tal:condition="ob/imagecaption" class="discreet" tal:content="ob/imagecaption"/><br/>
+          </span>
+        </div>
+        <div class="media-body">
+          <p class="newsDescription">
+            <a class="summary url" href="" tal:attributes="href ob/url"><span tal:content="ob/tit"/></a>
+          </p>
+          <p class="tileBody">
+            <span class="bgetem_folder_description" tal:content="ob/desc"/>
+          </p>
+        </div>
+        </div>
+
+        <div tal:replace="structure provider:plone.belowcontentbody" />
 
         </tal:main-macro>
     </div>

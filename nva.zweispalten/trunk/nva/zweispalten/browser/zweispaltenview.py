@@ -3,6 +3,10 @@ from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 
+from Products.ATContentTypes.interface import IATTopic
+from plone.app.collection.interfaces import ICollection
+from Products.CMFCore.interfaces import IFolderish
+
 from nva.zweispalten import zweispaltenMessageFactory as _
 
 
@@ -46,20 +50,6 @@ class zweispaltenView(BrowserView):
     def folderitems(self):
         """ method to query the folder contents """
 
-        topimage = None
-        titelbilder = self.context.getReferences('rel_titleimages')
-        if getattr(self.context, 'anzeige', False):
-            if titelbilder:
-                topimage = titelbilder[0].getField('folderimage').tag(self.context, scale='mini')
-            #if getattr(self.context, 'imageCaption', None):
-            #    imagecaption = self.context.getField('imageCaption').get(self.context)
-
-        ret = {'top':topimage,
-               'tit':self.context.Title(),
-               'desc':self.context.Description(),
-               'topcaption':'',
-              }
-       
         content = [item.getObject() for item in self.query] 
         objlist = []
         for obj in content:
@@ -73,14 +63,8 @@ class zweispaltenView(BrowserView):
             item['images'] = imagelist
             item['url'] = obj.absolute_url()
             item['tit'] = obj.title
-            item['desc'] = brain.Description
+            item['desc'] = obj.Description
             item['imagecaption'] = ''
             objlist.append(item)
-            #if brain.portal_type != 'Folder':
-            #    objlist.append(item)
-            #elif brain.portal_type == 'Folder':
-            #    if not getattr(brain.aq_explicit, 'exclude_from_nav'):
-            #        objlist.append(item)
     
-        ret['folderobjects'] = objlist
-        return ret
+        return objlist
