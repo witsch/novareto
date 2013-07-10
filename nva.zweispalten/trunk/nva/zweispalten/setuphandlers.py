@@ -5,7 +5,6 @@ def setupView(portal, out):
 
     typesTool = getToolByName(portal, 'portal_types')
 
-    # install abc folder listing view for folders
     typefolder = typesTool['Folder']
     viewlist = typefolder.getProperty('view_methods', d=None)
     if 'zweispalten_view' not in viewlist:
