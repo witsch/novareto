@@ -1,0 +1,38 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="nva.portlet.blueline">
+
+    <five:registerPackage package="." initialize=".initialize" />
+
+    <include package="plone.app.portlets" />
+
+    <genericsetup:registerProfile
+       name="default"
+       title="BlueLine Portlet"
+       directory="profiles/default"
+       description="DGUV BlueLine-Portlet"
+       provides="Products.GenericSetup.interfaces.EXTENSION"
+       />
+
+     <!-- Register the portlet -->
+
+     <!-- If the portlet has no configurable parameters, you can remove
+          the EditForm declaration in bluelineportlet.py and delete
+          the 'editview' attribute from this statement.
+       -->
+
+     <plone:portlet
+         name="nva.portlet.blueline.BlueLinePortlet"
+         interface=".bluelineportlet.IBlueLinePortlet"
+         assignment=".bluelineportlet.Assignment"
+         view_permission="zope2.View"
+         edit_permission="plone.app.portlets.ManagePortlets"
+         renderer=".bluelineportlet.Renderer"
+         addview=".bluelineportlet.AddForm"
+         editview=".bluelineportlet.EditForm"
+         />
+
+</configure>

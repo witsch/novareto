@@ -1,0 +1,38 @@
+<dl class="portlet portletBlueLinePortlet"
+    i18n:domain="nva.ploneviewcollection"
+    tal:define="portletcontent view/portletcontent"
+    tal:condition="portletcontent/contents">
+
+    <dt class="portletHeader bl-portletHeader"
+        tal:condition="portletcontent/title">
+        <span class="portletTopLeft"></span>
+        <span tal:content="portletcontent/title">
+           Header
+        </span>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <div tal:repeat="item portletcontent/contents">
+    <dd class="portletItem bl-portletItem">
+            <a tal:condition="python: item[1].startswith('http')"
+               target="_blank" href="" tal:attributes="href python: item[1]"><span tal:replace="python: item[0]"/></a>
+            <a tal:condition="python: not item[1].startswith('http')"
+               href="" tal:attributes="href python: item[1]"><span tal:replace="python: item[0]"/></a>
+    </dd>
+    </div>
+    <dd class="portletFooter bl-portletFooter"
+        tal:define="footerurl portletcontent/footerurl"
+        tal:condition="portletcontent/footer">
+        <span class="portletBottomLeft"></span>
+        <span tal:condition="footerurl">
+           <span tal:condition="python: footerurl.startswith('http:')">
+             <a target="_blank" href="" tal:attributes="href footerurl"><span tal:replace="portletcontent/footer"/></a>
+           </span>
+           <span tal:condition="python: not footerurl.startswith('http:')">
+             <a href="" tal:attributes="href footerurl"><span tal:replace="portletcontent/footer"/></a>
+           </span>
+        </span>
+        <span tal:condition="not: footerurl" tal:replace="portletcontent/footer"/>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
