@@ -1,0 +1,9 @@
+<?xml version="1.0"?> 
+<import-steps>
+ <import-step id="kurzfassung-various" version="2013-07-28"
+              handler="nva.kurzfassung.setuphandlers.importVarious"
+              title="enhanced_folder_summaryview setup">
+  enhanced_folder_summaryview setup
+ </import-step>
+</import-steps>
+

@@ -1,0 +1,28 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.kurzfassung">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <include package="plone.app.contentmenu" />
+
+  <browser:page
+      for="*"
+      name="enhanced_folder_summary_view"
+      class=".enhanced_folder_summaryview.enhanced_folder_summaryView"
+      template="enhanced_folder_summaryview.pt"
+      allowed_interface=".enhanced_folder_summaryview.Ienhanced_folder_summaryView"
+      permission="zope.Public"
+      />
+
+    <browser:menuItems
+        for="*"
+        menu="plone_displayviews">
+        <browser:menuItem
+            title="Erweiterte Kurzfassung"
+            action="enhanced_folder_summary_view"
+            description="Erweiterte Kurzfassung fuer Plone"
+            />
+    </browser:menuItems>
+
+</configure>
