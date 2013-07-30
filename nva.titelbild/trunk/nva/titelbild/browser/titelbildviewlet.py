@@ -30,7 +30,7 @@ class TitleImageViewlet(ViewletBase):
                         imageindex = random.randint(0, to-1)
                         randimage = titelbilder[imageindex]
                         image = {'img':randimage.getField('image').tag(randimage),
-                                 'image-caption':randimage.title}
+                                 'img-caption':randimage.title}
                         self.imagelist.append(image)
                     else:
                         for i in range(to):
@@ -42,7 +42,7 @@ class TitleImageViewlet(ViewletBase):
                                          'class':'active', 
                                          'item-class':'item active', 
                                          'img':titelbilder[i].getField('image').tag(titelbilder[i]),
-                                         'image-caption':titelbilder[i].title,
+                                         'img-caption':titelbilder[i].title,
                                          'img-url': refurl}
                                 self.imagelist.append(image)
                             else:

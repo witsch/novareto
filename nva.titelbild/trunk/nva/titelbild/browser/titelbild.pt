@@ -22,7 +22,7 @@
           <div class="carousel-inner">
             <div tal:repeat="item images" class="" tal:attributes="class item/item-class">
               <a tal:condition="item/img-url" href="" tal:attributes="href item/img-url"><span tal:replace="structure item/img"/></a>
-              <span tal:condition="not: img/img-url" tal:replace="structure item/img"/>
+              <span tal:condition="not: item/img-url" tal:replace="structure item/img"/>
               <div class="carousel-caption">
                 <p tal:content="item/img-caption"></p>
               </div>
