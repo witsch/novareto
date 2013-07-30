@@ -4,12 +4,14 @@
               videopath view/videopath;">
 
       <div tal:condition="python: len(images) == 1" class="etemtitelbild">
-        <span tal:replace="structure python: images[0]['img']"/>
+        <a tal:condition="python: images[0]['img-url']" href="" tal:attributes="href python: images[0]['img-url']">
+                                                       <span tal:replace="structure python: images[0]['img']"/></a>
+        <span tal:condition="python: not images[0]['img-url']" tal:replace="structure python: images[0]['img']"/>
         <div class="medialinks">
            <a tal:condition="imagepath" class="btn" href="" tal:attributes="href imagepath">Bilder</a>
            <a tal:condition="videopath" class="btn" href="" tal:attributes="href videopath">Video</a>
         </div>
-        <div class="image-caption"><p tal:content="python: images[0]['image-caption']"></p></div>
+        <div class="img-caption"><p tal:content="python: images[0]['img-caption']"></p></div>
       </div>
     
       <div id="myCarousel" tal:condition="python: len(images) > 1" class="carousel slide">
@@ -19,9 +21,10 @@
           </ol>
           <div class="carousel-inner">
             <div tal:repeat="item images" class="" tal:attributes="class item/item-class">
-              <span tal:replace="structure item/img"/>
+              <a tal:condition="item/img-url" href="" tal:attributes="href item/img-url"><span tal:replace="structure item/img"/></a>
+              <span tal:condition="not: img/img-url" tal:replace="structure item/img"/>
               <div class="carousel-caption">
-                <p tal:content="item/image-caption"></p>
+                <p tal:content="item/img-caption"></p>
               </div>
             </div>
           </div>

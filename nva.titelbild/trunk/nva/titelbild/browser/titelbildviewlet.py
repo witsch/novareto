@@ -43,15 +43,15 @@ class TitleImageViewlet(ViewletBase):
                                          'item-class':'item active', 
                                          'img':titelbilder[i].getField('image').tag(titelbilder[i]),
                                          'image-caption':titelbilder[i].title,
-                                         'image-url': refurl}
+                                         'img-url': refurl}
                                 self.imagelist.append(image)
                             else:
                                 image = {'data-slide':i, 
                                          'class':'', 
                                          'item-class':'item', 
                                          'img':titelbilder[i].getField('image').tag(titelbilder[i]),
-                                         'image-caption':titelbilder[i].title,
-                                         'image-url': refurl}
+                                         'img-caption':titelbilder[i].title,
+                                         'img-url': refurl}
                                 self.imagelist.append(image)
                     if self.context.getReferences('rel_videopath'):
                         self.videopath = self.context.getReferences('rel_videopath')[0].absolute_url()
