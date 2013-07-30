@@ -34,19 +34,24 @@ class TitleImageViewlet(ViewletBase):
                         self.imagelist.append(image)
                     else:
                         for i in range(to):
+                            refurl = ''
+                            if titelbilder[i].getReferences():
+                                refurl = titelbilder[i].getReferences()[0].absolute_url()
                             if i == 0:
                                 image = {'data-slide':i, 
                                          'class':'active', 
                                          'item-class':'item active', 
                                          'img':titelbilder[i].getField('image').tag(titelbilder[i]),
-                                         'image-caption':titelbilder[i].title}
+                                         'image-caption':titelbilder[i].title,
+                                         'image-url': refurl}
                                 self.imagelist.append(image)
                             else:
                                 image = {'data-slide':i, 
                                          'class':'', 
                                          'item-class':'item', 
                                          'img':titelbilder[i].getField('image').tag(titelbilder[i]),
-                                         'image-caption':titelbilder[i].title}
+                                         'image-caption':titelbilder[i].title,
+                                         'image-url': refurl}
                                 self.imagelist.append(image)
                     if self.context.getReferences('rel_videopath'):
                         self.videopath = self.context.getReferences('rel_videopath')[0].absolute_url()
