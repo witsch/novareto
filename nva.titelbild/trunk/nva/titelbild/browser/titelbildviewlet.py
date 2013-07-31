@@ -30,7 +30,7 @@ class TitleImageViewlet(ViewletBase):
                         imageindex = random.randint(0, to-1)
                         randimage = titelbilder[imageindex]
                         refurl = ''
-                        if randimage.getReferences()
+                        if randimage.getReferences():
                             refurl = randimage.getReferences()[0].absolute_url()
                         image = {'img':randimage.getField('image').tag(randimage),
                                  'img-caption':randimage.title,
