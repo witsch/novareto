@@ -29,8 +29,12 @@ class TitleImageViewlet(ViewletBase):
                     if getattr(self.context, 'zufall', False):
                         imageindex = random.randint(0, to-1)
                         randimage = titelbilder[imageindex]
+                        refurl = ''
+                        if randimage.getReferences()
+                            refurl = randimage.getReferences()[0].absolute_url()
                         image = {'img':randimage.getField('image').tag(randimage),
-                                 'img-caption':randimage.title}
+                                 'img-caption':randimage.title,
+                                 'img-url': refurl}
                         self.imagelist.append(image)
                     else:
                         for i in range(to):
