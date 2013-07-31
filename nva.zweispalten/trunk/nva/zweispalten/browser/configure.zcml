@@ -13,4 +13,12 @@
       permission="zope.Public"
       />
 
+  <browser:menuItem
+        for="*"
+        menu="plone_displayviews"
+        title="Zweispalten Ansicht"
+        action="@@zweispalten_view"
+        description="Shows folder-contents in two columns"
+        />
+
 </configure>
