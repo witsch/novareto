@@ -7,7 +7,7 @@ from archetypes.schemaextender.interfaces import ISchemaExtender
 from Products.Archetypes.public import StringWidget, SelectionWidget, ImageWidget, BooleanWidget, ReferenceWidget
 from Products.Archetypes.atapi import StringField, ReferenceField, ImageField, BooleanField, LinesField
 from Products.Archetypes.atapi import DisplayList
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.ATContentTypes.content.base import ATCTMixin
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.content.topic import ATTopic
@@ -60,6 +60,15 @@ extension_fields = [
                                         das Bild in einem darueber liegenden Ordner angezeigt",
                         ),
                  ),
+               CustomBooleanField('spalte',
+               schemata='Medien',
+                   default = False,
+                   widget = BooleanWidget(
+                        label = u"Anzeige in der linken Spalte?",
+                        description = u"Auswahl wenn das Bild (die Bilder) in der linken Spalte der zweispaltigen Ordneransicht \
+                                        angezeigt werden soll(en)",
+                        ),
+                 ),
                CustomBooleanField('zufall',
                schemata='Medien',
                    default = True,
@@ -71,27 +80,24 @@ extension_fields = [
                CustomReferenceField('videopath',
                schemata='Medien',
                relationship='rel_videopath',
-               multiValued=False,
-               widget = ReferenceWidget(
+               multiValued=True,
+               widget = ReferenceBrowserWidget(
                            label = _(u"Pfad zum Video"),
                            description = _(u"Bitte waehlen Sie aus, mit welchem Videoobjekt das Titelbild verlinkt werden soll."),
-                           #startup_directory = '/',
-                           #force_close_on_insert = True,
+                           startup_directory = '/',
+                           force_close_on_insert = True,
                            ),                  ),
                CustomReferenceField('imagepath',
                schemata='Medien',
                relationship='rel_imagepath',
-               multiValued=False,
-               widget = ReferenceWidget(
+               multiValued=True,
+               widget = ReferenceBrowserWidget(
                            label = _(u"Pfad zur Bildergalerie"),
                            description = _(u"Bitte waehlen Sie aus, mit welcher Bildergalerie das Titelbild verlinkt werden soll."),
-                           #startup_directory = '/',
-                           #force_close_on_insert = True,
+                           startup_directory = '/',
+                           force_close_on_insert = True,
                            ),
                   ),]
-
-
-
 
 class FolderImageExtender(object):
     adapts(ATFolder)
@@ -119,17 +125,7 @@ class TopicImageExtender(object):
 class DocumentImageExtender(object):
     adapts(ATDocument)
     implements(ISchemaExtender)
-    fields = extension_fields + [
-
-               CustomBooleanField('spalte',
-               schemata='Medien',
-                   default = False,
-                   widget = BooleanWidget(
-                        label = u"Anzeige in der linken Spalte?",
-                        description = u"Auswahl wenn das Bild (die Bilder) in der linken Spalte der zweispaltigen Ordneransicht \
-                                        angezeigt werden soll(en)",
-                        ),
-                 ),]
+    fields = extension_fields
 
     def __init__(self, context):
          self.context = context
