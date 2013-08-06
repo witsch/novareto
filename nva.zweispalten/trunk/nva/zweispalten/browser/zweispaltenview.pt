@@ -16,16 +16,16 @@
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
 
-        <div tal:repeat="ob fo" class="media">
-        <div class="pull-left">
-          <span tal:repeat="img ob/images">
-            <span tal:replace="structure img"/><br/>
-            <span tal:condition="ob/imagecaption" class="discreet" tal:content="ob/imagecaption"/><br/>
+        <div tal:repeat="ob fo" class="media span16">
+        <div class="span4 media-object">
+          <span class="media-img" tal:repeat="img ob/images">
+            <span tal:replace="structure img"/>
+            <span tal:condition="ob/imagecaption" class="discreet" tal:content="ob/imagecaption"/>
           </span>
         </div>
-        <div class="media-body">
+        <div class="span12 media-body">
           <p class="newsDescription">
-            <a class="summary url" href="" tal:attributes="href ob/url"><span tal:content="ob/tit"/></a>
+            <a class="internal-link brand-primary" href="" tal:attributes="href ob/url"><span tal:content="ob/tit"/></a>
           </p>
           <p class="tileBody">
             <span class="bgetem_folder_description" tal:content="ob/desc"/>
