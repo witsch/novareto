@@ -1,0 +1,15 @@
+README.txt
+setup.cfg
+setup.py
+nva/__init__.py
+nva.docgallery.egg-info/PKG-INFO
+nva.docgallery.egg-info/SOURCES.txt
+nva.docgallery.egg-info/dependency_links.txt
+nva.docgallery.egg-info/entry_points.txt
+nva.docgallery.egg-info/namespace_packages.txt
+nva.docgallery.egg-info/not-zip-safe
+nva.docgallery.egg-info/paster_plugins.txt
+nva.docgallery.egg-info/requires.txt
+nva.docgallery.egg-info/top_level.txt
+nva/docgallery/__init__.py
+nva/docgallery/tests.py

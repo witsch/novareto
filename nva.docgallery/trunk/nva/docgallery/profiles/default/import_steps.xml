@@ -1,0 +1,8 @@
+<?xml version="1.0"?>                                                                                                               <import-steps>
+ <import-step id="docgallery-various" version="2013-08-19"
+              handler="nva.docgallery.setuphandlers.importVarious"
+              title="nvadocgallery setup">
+  nvadocgallery setup
+ </import-step>
+</import-steps>
+

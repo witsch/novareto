@@ -1,0 +1,32 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.docgallery">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="docgallery_view"
+      class=".docgalleryview.DocGalleryView"
+      template="docgalleryview.pt"
+      allowed_interface=".docgalleryview.IDocGalleryView"
+      permission="zope.Public"
+      />
+
+  <browser:resource
+     name="jquery.ad-gallery.js"
+     file="jquery.ad-gallery.js"
+     />
+
+  <browser:menuItems
+     for="*"
+     menu="plone_displayviews">
+     <browser:menuItem
+         title="Galerie Ansicht"
+         action="docgallery_view"
+         description="Dokumentansicht mit Slideshow und Zoom"
+         />
+  </browser:menuItems>
+
+
+</configure>
