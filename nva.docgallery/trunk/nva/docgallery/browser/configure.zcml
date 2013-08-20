@@ -18,6 +18,11 @@
      file="jquery.ad-gallery.js"
      />
 
+  <browser:resource
+     name="jquery.lightbox-0.5.js"
+     file="jquery.lightbox-0.5.js"
+     />
+
   <browser:menuItems
      for="*"
      menu="plone_displayviews">

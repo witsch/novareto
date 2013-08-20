@@ -2,4 +2,7 @@
     <javascript cacheable="False" compression="none" cookable="False"
                 enabled="True" expression="" id="++resource++jquery.ad-gallery.js"
                 inline="False" insert-after="jquery-integration.js" />
+    <javascript cacheable="False" compression="none" cookable="False"
+                enabled="True" expression="" id="++resource++jquery.lightbox-0.5.js"
+                inline="False" insert-before="++resource++jquery.ad-gallery.js" />
 </object>
