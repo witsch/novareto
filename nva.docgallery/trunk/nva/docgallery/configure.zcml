@@ -17,6 +17,7 @@
   <!-- -*- extra stuff goes here -*- -->
 
   <include package=".browser" />
-  
+
+  <include file="skins.zcml" />  
   
 </configure>

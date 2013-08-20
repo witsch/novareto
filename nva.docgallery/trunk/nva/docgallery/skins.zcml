@@ -1,0 +1,11 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nva.docgallery">
+
+  <!-- File System Directory Views registration -->
+  <cmf:registerDirectory name="docgallery_images"/>
+  <cmf:registerDirectory name="docgallery_styles"/>
+</configure>
+
