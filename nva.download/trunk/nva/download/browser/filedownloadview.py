@@ -97,9 +97,8 @@ class filedownloadView(BrowserView):
         if obj.getFile().size > 0:
             icon = obj.getFile().content_type.split('/')[1]
             kuerzel = icon.upper()
-            filedownload = """<a class="%s href="%s/at_download/file">
-                              <span class="discreet">(%s, %s KByte)</span></a>""" % (icon,
-                                                                                     obj.absolute_url(),
+            filedownload = """<a class="download-link" href="%s/at_download/file">
+                              <span class="discreet">(%s, %s KByte)</span></a>""" % (obj.absolute_url(),
                                                                                      kuerzel,
                                                                                      obj.getFile().size/1000,)
             download += filedownload
