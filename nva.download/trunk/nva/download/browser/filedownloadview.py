@@ -95,11 +95,13 @@ class filedownloadView(BrowserView):
 
         download = '<td align="left" class="%s">' %tdclass
         if obj.getFile().size > 0:
-            icon = self.icons(obj.getFile().content_type)
-            filedownload = """<a href="%s/at_download/file">
-                              <img src="%s"><br><p class="discreet">%s KByte</p></a>""" % (obj.absolute_url(),
-                                                                                           icon,
-                                                                                           obj.getFile().size/1000,)
+            icon = obj.getFile().content_type.split('/')[1]
+            kuerzel = icon.upper()
+            filedownload = """<a class="%s href="%s/at_download/file">
+                              <span class="discreet">(%s, %s KByte)</span></a>""" % (icon,
+                                                                                     obj.absolute_url(),
+                                                                                     kuerzel,
+                                                                                     obj.getFile().size/1000,)
             download += filedownload
         download += '</td>\r\n'
         row += download
@@ -116,14 +118,17 @@ class filedownloadView(BrowserView):
         tableclass = 'table table-striped'
         table = '<table class="%s">\r\n' %tableclass
         theader =  """
-                   <tr>
+                   <thead>
+		   <tr>
                    <th>Titel</th>
                    <th></th>
                    <th>Download</th>
                    </tr>
+		   </thead>
                    """
         if self.__name__ == 'filedownload_view':
             theader =  """
+		       <thead>
                        <tr>
                        <th></th>
                        <th>Nr.</th>
@@ -131,8 +136,10 @@ class filedownloadView(BrowserView):
                        <th></th>
                        <th>Download</th>
                        </tr>
+		       </thead>
                        """
         table += theader
+        table += '<tbody>'
         orderbutton = []
         for i in brains:
             if not i.restrictedTraverse('@@plone').isStructuralFolder():
@@ -159,6 +166,7 @@ class filedownloadView(BrowserView):
                                 orderbutton.append('1')
                             table += self.createZeileFromMF(x, 'sub', 'sub')
 
+        table += '</tbody>'
         table += '</table>'
         orderable = False
         if orderbutton and self.__name__ == 'filedownload_view':
