@@ -1,0 +1,17 @@
+README.txt
+setup.cfg
+setup.py
+nva/__init__.py
+nva.userdata.egg-info/PKG-INFO
+nva.userdata.egg-info/SOURCES.txt
+nva.userdata.egg-info/dependency_links.txt
+nva.userdata.egg-info/entry_points.txt
+nva.userdata.egg-info/namespace_packages.txt
+nva.userdata.egg-info/not-zip-safe
+nva.userdata.egg-info/paster_plugins.txt
+nva.userdata.egg-info/requires.txt
+nva.userdata.egg-info/top_level.txt
+nva/userdata/__init__.py
+nva/userdata/adapter.py
+nva/userdata/tests.py
+nva/userdata/userdataschema.py
