@@ -1,0 +1,14 @@
+README.txt
+setup.py
+nva/__init__.py
+nva.searchviewlet.egg-info/PKG-INFO
+nva.searchviewlet.egg-info/SOURCES.txt
+nva.searchviewlet.egg-info/dependency_links.txt
+nva.searchviewlet.egg-info/entry_points.txt
+nva.searchviewlet.egg-info/namespace_packages.txt
+nva.searchviewlet.egg-info/not-zip-safe
+nva.searchviewlet.egg-info/requires.txt
+nva.searchviewlet.egg-info/top_level.txt
+nva/searchviewlet/__init__.py
+nva/searchviewlet/resources.py
+nva/searchviewlet/tests.py

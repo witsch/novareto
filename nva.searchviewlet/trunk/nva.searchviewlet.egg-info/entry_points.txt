@@ -1,0 +1,6 @@
+[z3c.autoinclude.plugin]
+target=uvcsite
+
+[fanstatic.libraries]
+nva.searchviewlet = nva.searchviewlet.resources:library
+
