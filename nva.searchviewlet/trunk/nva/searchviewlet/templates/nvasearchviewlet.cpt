@@ -1,5 +1,14 @@
-<form id="nvasearch" action="@@nvasearch">
-    <input type="text" placeholder="Begriff/Webcode" name="SearchableText" size="18"
-           tile="Begriff/Webcode">
-    <input type="submit" value="Suche">
-</form>
+<div id="portal-searchbox">
+  <form id="nvasearch" action="@@nvasearch">
+    <div class="LSBox">
+      <input id="searchGadget" class="searchField" type="text" accesskey="4" placeholder="Suchbegriff / Webcode" 
+           name="SearchableText" size="18" tile="Begriff/Webcode" autocomplete="off">
+      <input class="searchButton" type="submit" value="Suche">
+    </div>
+    <div class="searchSection">
+       <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" value="" name="path"
+              tal:attributes="value context.getPhysicalPath()">
+       <label style="cursor: pointer" for="searchbox_currentfolder_only">nur im aktuellen Bereich</label>
+    </div>
+  </form>
+</div>
