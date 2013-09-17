@@ -1,0 +1,5 @@
+<form id="nvasearch" action="@@nvasearch">
+    <input type="text" placeholder="Begriff/Webcode" name="SearchableText" size="18"
+           tile="Begriff/Webcode">
+    <input type="submit" value="Suche">
+</form>

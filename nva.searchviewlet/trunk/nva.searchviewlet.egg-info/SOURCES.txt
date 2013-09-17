@@ -1,5 +1,6 @@
 README.txt
 setup.py
+docs/HISTORY.txt
 nva/__init__.py
 nva.searchviewlet.egg-info/PKG-INFO
 nva.searchviewlet.egg-info/SOURCES.txt
@@ -9,6 +10,10 @@ nva.searchviewlet.egg-info/namespace_packages.txt
 nva.searchviewlet.egg-info/not-zip-safe
 nva.searchviewlet.egg-info/requires.txt
 nva.searchviewlet.egg-info/top_level.txt
+nva/searchviewlet/README.txt
 nva/searchviewlet/__init__.py
-nva/searchviewlet/resources.py
+nva/searchviewlet/app.py
+nva/searchviewlet/configure.zcml
+nva/searchviewlet/ftesting.zcml
 nva/searchviewlet/tests.py
+nva/searchviewlet/static/main.css
