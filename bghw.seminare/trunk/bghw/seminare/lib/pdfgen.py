@@ -57,7 +57,7 @@ def createpdf(mytmpfile, daten):
     datum = strftime("%d.%m.%Y",gmtime())
 
     try:
-        bcp='/opt/ww4/prod_p4internet/src/bghw.seminare/bghw/seminare/lib/logo2.jpg'
+        bcp='/opt/ww4/test_p4internet/src/bghw.seminare/bghw/seminare/lib/logo2.jpg'
         c.drawImage(bcp,2.2*cm,25.6*cm)
     except:
         pass
@@ -160,18 +160,29 @@ def createpdf(mytmpfile, daten):
     c.drawString(9.2*cm,16.5*cm,'Vorname')
     settextfield(c, 14.5, 16.8, 5, daten['S1_Geburtsdatum'], schriftart)
     c.drawString(14.5*cm,16.5*cm,'Geburtsdatum')
-    settextfield(c, 6.2, 15.5, 4, daten['S1_MGLNR'], schriftart)
-    c.drawString(1.7*cm,15.5*cm,'Mitgliedsnummer (falls bekannt)')
+
+    c.drawString(1.7*cm,15.5*cm,'Versichert bei der BGHW?')
+    setcrossfield(c, 6.2, 15.5, schriftart) #mitarbeiter taetig ja
+    setcrossfield(c, 8, 15.5, schriftart) #mitarbeiter teaetig nein
+    if daten['S1_versichert_bghw'] == 'ja':
+        setcross(c,6.3,15.5)
+    elif daten['S1_versichert_bghw'] == 'nein':
+        setcross(c,8.1,15.5)
+    c.drawString(6.9*cm, 15.5*cm, u'ja')
+    c.drawString(8.7*cm, 15.5*cm, u'nein')
+
+    settextfield(c, 15.8, 15.5, 4, daten['S1_MGLNR'], schriftart)
+    c.drawString(11.3*cm,15.5*cm,'Mitgliedsnummer (falls bekannt)')
     settextfield(c,1.7, 14.6, 18, daten['S1_Firma'], schriftart)
     c.drawString(1.7*cm,14.3*cm,'Name der Firma/Betriebsstätte (bitte nicht stempeln)')
     settextfield(c,1.7, 13.4, 7.2, daten['S1_Strasse'], schriftart)
-    c.drawString(1.7*cm,13.1*cm,'Straße, Hausnummer')
+    c.drawString(1.7*cm,13.1*cm,'Straße, Hausnummer (Betriebsstätte)')
     settextfield(c,9.2, 13.4, 10.3, daten['S1_PLZ'] + '  ' + daten['S1_Ort'], schriftart)
-    c.drawString(9.2*cm,13.1*cm,'PLZ, Ort')
+    c.drawString(9.2*cm,13.1*cm,'PLZ, Ort (Betriebsstätte)')
     settextfield(c,1.7, 12.2, 7.2, daten['S1_Telefon'], schriftart)
-    c.drawString(1.7*cm,11.9*cm,'Telefon, Telefax')
+    c.drawString(1.7*cm,11.9*cm,'Telefon, Telefax (Betriebsstätte)')
     settextfield(c,9.2, 12.2, 10.3, daten['S1_EMail'], schriftart)
-    c.drawString(9.2*cm,11.9*cm,'E-Mail')
+    c.drawString(9.2*cm,11.9*cm,'E-Mail (Betriebsstätte)')
 
     c.setStrokeColorRGB(0.0,0.29,0.58)
     c.line(1.7*cm,11.8*cm,19.5*cm,11.8*cm)
@@ -219,13 +230,13 @@ def createpdf(mytmpfile, daten):
     settextfield(c,9.2, 5.2, 10.3, daten['S1_AP_Nachname'], schriftart)
     c.drawString(9.2*cm,4.9*cm,'Nachname')
     settextfield(c,1.7, 4.0, 7.2, daten['S1_AP_Strasse'], schriftart)
-    c.drawString(1.7*cm,3.7*cm,'Straße, Hausnummer')
+    c.drawString(1.7*cm,3.7*cm,'Straße, Hausnummer (Betriebsstätte)')
     settextfield(c,9.2, 4.0, 10.3, daten['S1_AP_Ort'], schriftart)
-    c.drawString(9.2*cm,3.7*cm,'PLZ, Ort')
+    c.drawString(9.2*cm,3.7*cm,'PLZ, Ort (Betriebsstätte)')
     settextfield(c,1.7, 2.8, 7.2, daten['S1_AP_Telefax'], schriftart)
-    c.drawString(1.7*cm,2.5*cm,'Telefon, Telefax')
+    c.drawString(1.7*cm,2.5*cm,'Telefon, Telefax (Betriebsstätte)')
     settextfield(c,9.2, 2.8, 10.3, daten['S1_AP_EMail'], schriftart)
-    c.drawString(9.2*cm,2.5*cm,'E-Mail')
+    c.drawString(9.2*cm,2.5*cm,'E-Mail (Betriebsstätte)')
 
     c.setStrokeColorRGB(0.0,0.29,0.58)
     c.line(1.7*cm,2.4*cm,19.5*cm,2.4*cm)
@@ -297,7 +308,7 @@ def createpdf(mytmpfile, daten):
     elif daten['S2_voraussetzungen_mitarbeiter_taetig'] == 'nein':
         setcross(c,15.7,17.3)
 
-    c.drawString(1.7*cm, 16.7*cm, 'Wurde die Anmeldung mit dem zuständigen Technischen Aufsichtsbeamten(TAB) besprochen?')
+    c.drawString(1.7*cm, 16.7*cm, 'Wurde die Anmeldung mit der zuständigen Technischen Aufsichtsperson (TAB) besprochen?')
     c.drawString(14.5*cm,16.7*cm,'ja')
     c.drawString(16*cm,16.7*cm,'nein')
     setcrossfield(c, 14, 16.7, schriftart) #tab besprochen ja

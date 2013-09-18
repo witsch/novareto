@@ -20,6 +20,7 @@ def mapper(myform):
 
     daten = {'Datum' : myform.get('modification', ''),
              'Seminartyp' : '',
+             'S1_versichert_bghw': myform.get('versichert-bei-der-bghw', ''),
              'S1_Kommtaus': myform.get('funktion-im-betrieb', ''),
              'S1_Kommtaus1': myform.get('sonstige-funktion-im-betrieb', ''),
              'S1_Vorname': myform.get('vorname', ''),
