@@ -43,6 +43,8 @@ class MyNavRenderer(Renderer):
         back = self.context.aq_inner.aq_parent
         context = self.context.aq_inner
 
+        self.heading_link_target = ""
+
         #In der Wurzel des Plone-Portals soll kein Backlink erscheinen
         if self.isportalcontext:
             self.back_name = ''
