@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from plone.app.portlets.portlets.navigation import Renderer
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import IFolderish
+from Acquisition import aq_inner, aq_base, aq_parent
 
 class MyNavRenderer(Renderer):
 
@@ -31,8 +31,26 @@ class MyNavRenderer(Renderer):
             if hasattr(context.aq_parent, 'default_page'):
                 if context.id == context.aq_parent.default_page:
                     return True
-        return False        
+        return False
 
+    @property
+    def available(self):
+        """ Realisiert die Verfuegbarkeit des Backlinks fuer den Fall,
+            dass nur ein Ordner mit Startseite angelegt wurde. """
+        rootpath = self.getNavRootPath()
+        if rootpath is None:
+            return False
+
+        if self.data.bottomLevel < 0:
+            return True
+
+        tree = self.getNavTree()
+        retval =  len(tree['children']) > 0
+        if self.isdefaultpage:
+            folder = aq_inner(self.context).aq_parent
+            if len(folder.getFolderContents()) == 1:
+                retval = True
+        return retval
 
     def render(self):
         """ Ueberschreibt den Standard-Renderer fuer das Navigations-
@@ -58,7 +76,7 @@ class MyNavRenderer(Renderer):
             if back.portal_type == 'Plone Site':
                 self.back_name = u'Startseite'
                 return self._template()
-        
+
         #Sonderfall-2: Pruefung, ob es sich beim Contextobjekt um eine Standard-
         #              ansicht eines Ordners handelt.
         if self.isdefaultpage:
@@ -66,7 +84,7 @@ class MyNavRenderer(Renderer):
             if back.aq_parent.portal_type == 'Plone Site':
                 self.back_name = 'Startseite'
                 self.back_url = back.aq_parent.absolute_url()
-            #Variante-2b: Contextobjekt ist Standardansicht eines Ordners beliebiger Ebene.   
+            #Variante-2b: Contextobjekt ist Standardansicht eines Ordners beliebiger Ebene.
             else:
                 self.back_name = back.aq_parent.title
                 self.back_url = back.aq_parent.absolute_url()
