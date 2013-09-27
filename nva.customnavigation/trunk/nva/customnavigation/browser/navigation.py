@@ -46,10 +46,8 @@ class MyNavRenderer(Renderer):
 
         tree = self.getNavTree()
         retval =  len(tree['children']) > 0
-        if self.isdefaultpage:
-            folder = aq_inner(self.context).aq_parent
-            if len(folder.getFolderContents()) == 1:
-                retval = True
+        if not self.isportalcontext:
+            retval = True
         return retval
 
     def render(self):
