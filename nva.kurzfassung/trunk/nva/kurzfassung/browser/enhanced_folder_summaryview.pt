@@ -7,7 +7,14 @@
         <tal:main-macro metal:define-macro="main"
                         tal:define="normalizeString nocall:context/@@plone/normalizeString;">
 
-	<div tal:replace="structure provider:plone.abovecontenttitle" />
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <div tal:condition="view/haupttext">
+           <h1 tal:content="context/title"/>
+            <div tal:replace="structure provider:plone.belowcontenttitle" />
+             <p class="documentDescription" tal:content="context/Description"/>
+             <span tal:replace="structure view/haupttext"/>
+        </div>
 
         <metal:listingmacro define-macro="listing">
         <tal:foldercontents define="contentFilter contentFilter|request/contentFilter|nothing;
@@ -111,14 +118,16 @@
 
             <!-- Navigation -->
 
-        </tal:listing>
+            </tal:listing>
+        <!--    
         <metal:empty metal:define-slot="no_items_in_listing">
             <p class="discreet"
                tal:condition="not: folderContents"
                i18n:translate="description_no_items_in_folder">
                 There are currently no items in this folder.
             </p>
-        </metal:empty>
+            </metal:empty>
+            -->    
 
         </tal:foldercontents>
         </metal:listingmacro>

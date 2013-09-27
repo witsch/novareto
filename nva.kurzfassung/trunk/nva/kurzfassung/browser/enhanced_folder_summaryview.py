@@ -11,8 +11,8 @@ class Ienhanced_folder_summaryView(Interface):
     enhanced_folder_summary view interface
     """
 
-    def test():
-        """ test method"""
+    def haupttext():
+        """ Gibt den Haupttext des Ordners zurueck falls vorhanden """
 
 
 class enhanced_folder_summaryView(BrowserView):
@@ -33,10 +33,11 @@ class enhanced_folder_summaryView(BrowserView):
     def portal(self):
         return getToolByName(self.context, 'portal_url').getPortalObject()
 
-    def test(self):
+    def haupttext(self):
         """
-        test method
+        Gibt den Haupttext des Ordners zurueck falls vorhanden
         """
-        dummy = _(u'a dummy string')
+        if self.context.getField('text'):
+            return self.context.getField('text').get(self.context)
+        return None
 
-        return {'dummy': dummy}
