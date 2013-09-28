@@ -3,6 +3,10 @@ from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 
+from Products.ATContentTypes.interface import IATTopic
+from plone.app.collection.interfaces import ICollection
+from Products.CMFCore.interfaces import IFolderish
+
 from nva.download import downloadMessageFactory as _
 
 
@@ -32,6 +36,16 @@ class filedownloadView(BrowserView):
     @property
     def portal(self):
         return getToolByName(self.context, 'portal_url').getPortalObject()
+
+    @property
+    def query(self):
+        """ 
+        Make catalog query for the folder listing.
+        """
+        if IATTopic.providedBy(self.context) or ICollection.providedBy(self.context):
+            return self.context.queryCatalog(batch=False)
+        elif IFolderish.providedBy(self.context):
+            return self.context.getFolderContents(batch=False)
 
     def test(self):
         """
@@ -113,7 +127,8 @@ class filedownloadView(BrowserView):
            Render a table with
            filedata from localfolders.
         """
-        brains = self.context.listFolderContents()
+        #brains = self.context.listFolderContents()
+        brains = self.query
         tableclass = 'table table-striped'
         table = '<table class="%s">\r\n' %tableclass
         theader =  """
@@ -141,23 +156,26 @@ class filedownloadView(BrowserView):
         table += '<tbody>'
         orderbutton = []
         for i in brains:
-            if not i.restrictedTraverse('@@plone').isStructuralFolder():
+            i = i.getObject()
+            if not IFolderish.providedBy(i):
                 if i.portal_type == 'MediaFile':
                     if i.getOrderable():
                         orderbutton.append('1')
                     table += self.createZeileFromMF(i, 'normal', 'normal')
                 else:
                     row = """<tr><td class="normal"><p><b>%s</b></p><p class="discreet">%s</p></td> 
-                             <td class="normal"></td><td class="normal"><a href="%s">Hinweise</a></td></tr>""" % (i.Title(), 
-                                                                                                                 i.Description(),
-                                                                                                                 i.absolute_url(),)
+                             <td class="normal"></td><td class="normal">
+                             <a class="download-link href="%s">Dokument</a></td></tr>""" % (i.Title(), 
+                                                                                            i.Description(),
+                                                                                            i.absolute_url(),)
                     if self.__name__ == 'filedownload_view':
                         row = """<tr><td class="normal"></td><td class="normal">%s</td>
                                  <td class="normal"><p><b>%s</b></p><p class="discreet">%s</p></td> 
-                                 <td class="normal"></td><td class="normal"><a href="%s">Hinweise</a></td></tr>""" % (i.id,
-                                                                                                                 i.Title(), 
-                                                                                                                 i.Description(),
-                                                                                                                 i.absolute_url(),)
+                                 <td class="normal"></td><td class="download-link">
+                                 <a class="download-link" href="%s">Dokument</a></td></tr>""" % (i.id,
+                                                                                                 i.Title(), 
+                                                                                                 i.Description(),
+                                                                                                 i.absolute_url(),)
                     table += row
                     for x in i.getReferences():
                         if x.portal_type == "MediaFile":
