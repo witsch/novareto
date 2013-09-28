@@ -68,7 +68,8 @@ class zweispaltenView(BrowserView):
             if obj.portal_type in ['Folder', 'Document', 'Topic', 'Collection'] and getattr(obj, 'spalte', False):
                refs = obj.getReferences('rel_titleimages')
                for ref in refs:
-                   imagelist.append(ref.getField('image').tag(ref, scale='mini'))
+                   if ref.getField('image'):
+                       imagelist.append(ref.getField('image').tag(ref, scale='mini'))
             item['images'] = imagelist
             item['url'] = obj.absolute_url()
             item['tit'] = obj.title
