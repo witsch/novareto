@@ -18,6 +18,8 @@ class IzweispaltenView(Interface):
     def folderitems():
         """ method to query the folder contents """
 
+    def haupttext():
+        """ Gibt den Haupttext des Ordners zurueck falls vorhanden """
 
 class zweispaltenView(BrowserView):
     """
@@ -47,9 +49,16 @@ class zweispaltenView(BrowserView):
         elif IFolderish.providedBy(self.context):
             return self.context.getFolderContents(batch=False)
 
+    def haupttext(self):
+        """
+        Gibt den Haupttext des Ordners zurueck falls vorhanden
+        """
+        if self.context.getField('text'):
+            return self.context.getField('text').get(self.context)
+        return None
+
     def folderitems(self):
         """ method to query the folder contents """
-
         content = [item.getObject() for item in self.query] 
         objlist = []
         for obj in content:
@@ -66,5 +75,4 @@ class zweispaltenView(BrowserView):
             item['desc'] = obj.Description
             item['imagecaption'] = ''
             objlist.append(item)
-    
         return objlist
