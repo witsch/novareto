@@ -30,33 +30,39 @@ class TitleImageViewlet(ViewletBase):
                         imageindex = random.randint(0, to-1)
                         randimage = titelbilder[imageindex]
                         refurl = ''
+                        #Verlinkung des Titelbildes mit einem Inhalt
                         if randimage.getReferences():
                             refurl = randimage.getReferences()[0].absolute_url()
-                        image = {'img':randimage.getField('image').tag(randimage),
-                                 'img-caption':randimage.title,
-                                 'img-url': refurl}
-                        self.imagelist.append(image)
+                        #Lesen des Titelbildes
+                        if randimage.getField('image'):
+                            image = {'img':randimage.getField('image').tag(randimage),
+                                     'img-caption':randimage.title,
+                                     'img-url': refurl}
+                            self.imagelist.append(image)
                     else:
                         for i in range(to):
                             refurl = ''
+                            #Verlinkung des Titelbildes mit einem Inhalt
                             if titelbilder[i].getReferences():
                                 refurl = titelbilder[i].getReferences()[0].absolute_url()
                             if i == 0:
-                                image = {'data-slide':i, 
-                                         'class':'active', 
-                                         'item-class':'item active', 
-                                         'img':titelbilder[i].getField('image').tag(titelbilder[i]),
-                                         'img-caption':titelbilder[i].title,
-                                         'img-url': refurl}
-                                self.imagelist.append(image)
+                                if titelbilder[i].getField('image'):
+                                    image = {'data-slide':i, 
+                                             'class':'active', 
+                                             'item-class':'item active', 
+                                             'img':titelbilder[i].getField('image').tag(titelbilder[i]),
+                                             'img-caption':titelbilder[i].title,
+                                             'img-url': refurl}
+                                    self.imagelist.append(image)
                             else:
-                                image = {'data-slide':i, 
-                                         'class':'', 
-                                         'item-class':'item', 
-                                         'img':titelbilder[i].getField('image').tag(titelbilder[i]),
-                                         'img-caption':titelbilder[i].title,
-                                         'img-url': refurl}
-                                self.imagelist.append(image)
+                                if titelbilder[i].getField('image'):
+                                    image = {'data-slide':i, 
+                                             'class':'', 
+                                             'item-class':'item', 
+                                             'img':titelbilder[i].getField('image').tag(titelbilder[i]),
+                                             'img-caption':titelbilder[i].title,
+                                             'img-url': refurl}
+                                    self.imagelist.append(image)
                     if self.context.getReferences('rel_videopath'):
                         self.videopath = self.context.getReferences('rel_videopath')[0].absolute_url()
                     if self.context.getReferences('rel_imagepath'):
