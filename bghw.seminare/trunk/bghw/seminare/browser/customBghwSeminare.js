@@ -1,6 +1,13 @@
 jq (document).ready(function() {
     jq('fieldset#pfg-fieldsetname-angaben-zur-ansprechperson').hide();
     jq('div#archetypes-fieldname-beschreibung-der-funktion-im-betrieb').hide();
+
+    var boolchecked = jq('input#uebereinstimmung_2').attr('checked');
+
+    if (boolchecked == true) {
+        jq('fieldset#pfg-fieldsetname-angaben-zur-ansprechperson').show();
+    }
+
     jq('input#uebereinstimmung_2').click(function() {
         jq('fieldset#pfg-fieldsetname-angaben-zur-ansprechperson').fadeIn();
     })
