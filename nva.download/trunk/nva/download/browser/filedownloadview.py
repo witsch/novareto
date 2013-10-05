@@ -165,17 +165,17 @@ class filedownloadView(BrowserView):
                 else:
                     row = """<tr><td class="normal"><p><b>%s</b></p><p class="discreet">%s</p></td> 
                              <td class="normal"></td><td class="normal">
-                             <a class="download-link href="%s">Dokument</a></td></tr>""" % (i.Title(), 
-                                                                                            i.Description(),
-                                                                                            i.absolute_url(),)
+                             <a class="download-link" target="_blank" href="%s">Dokument</a></td></tr>""" % (i.Title(), 
+                                                                                                             i.Description(),
+                                                                                                             i.absolute_url(),)
                     if self.__name__ == 'filedownload_view':
                         row = """<tr><td class="normal"></td><td class="normal">%s</td>
                                  <td class="normal"><p><b>%s</b></p><p class="discreet">%s</p></td> 
                                  <td class="normal"></td><td class="download-link">
-                                 <a class="download-link" href="%s">Dokument</a></td></tr>""" % (i.id,
-                                                                                                 i.Title(), 
-                                                                                                 i.Description(),
-                                                                                                 i.absolute_url(),)
+                                 <a class="download-link" target="_blank" href="%s">Dokument</a></td></tr>""" % (i.id,
+                                                                                                                 i.Title(), 
+                                                                                                                 i.Description(),
+                                                                                                                 i.absolute_url(),)
                     table += row
                     for x in i.getReferences():
                         if x.portal_type == "MediaFile":
