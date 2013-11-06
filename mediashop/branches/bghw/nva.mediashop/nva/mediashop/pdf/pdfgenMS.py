@@ -204,8 +204,8 @@ def createpdf (filename, daten):
 
     c.setFont(schriftart, 10)
     c.drawString( 4.5*cm, (13.9-offset)*cm, daten['Mitglnr'])
-    c.drawString( 4.5*cm, (12.9-offset)*cm, daten['Firma'])
-    c.drawString( 4.5*cm, (13.4-offset)*cm, daten['VornameName'])
+    c.drawString( 4.5*cm, (13.4-offset)*cm, daten['Firma'])
+    c.drawString( 4.5*cm, (12.9-offset)*cm, daten['VornameName'])
     c.drawString( 4.5*cm, (12.4-offset)*cm, daten['Strasse'])
     c.drawString( 4.5*cm,  (11.9-offset)*cm, daten['PlzOrt'])
 
