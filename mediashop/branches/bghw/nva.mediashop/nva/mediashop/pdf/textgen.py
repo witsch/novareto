@@ -21,8 +21,8 @@ def createtext(daten):
     if len(daten['Mitglnr']) > 0:
         text +=  ' Mitgliedsnummer: ' + daten['Mitglnr'] + '\n\n'
     text +=  ' Absender: \n\n'
-    text += daten['VornameName'] + '\n'
     text += daten['Firma']   + '\n'
+    text += daten['VornameName'] + '\n'
     text += daten['Strasse'] + '\n'
     text += daten['PlzOrt']  + '\n\n'
     if ausland:
