@@ -1,0 +1,15 @@
+README.txt
+setup.cfg
+setup.py
+nva/__init__.py
+nva.socialroom.egg-info/PKG-INFO
+nva.socialroom.egg-info/SOURCES.txt
+nva.socialroom.egg-info/dependency_links.txt
+nva.socialroom.egg-info/entry_points.txt
+nva.socialroom.egg-info/namespace_packages.txt
+nva.socialroom.egg-info/not-zip-safe
+nva.socialroom.egg-info/paster_plugins.txt
+nva.socialroom.egg-info/requires.txt
+nva.socialroom.egg-info/top_level.txt
+nva/socialroom/__init__.py
+nva/socialroom/tests.py

@@ -1,0 +1,17 @@
+nva.socialroom Installation
+---------------------------
+
+To install nva.socialroom using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, you can do this:
+
+* Add ``nva.socialroom`` to the list of eggs to install, e.g.:
+
+    [buildout]
+    ...
+    eggs =
+        ...
+        nva.socialroom
+       
+* Re-run buildout, e.g. with:
+
+    $ ./bin/buildout
