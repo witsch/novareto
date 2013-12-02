@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/@@standard_macros/page"
+      i18n:domain="nva.tabsuche">
+<head>
+</head>
+
+<body>
+  <div metal:fill-slot="body">
+    <h1 i18n:translate="">Ihre Suche nach einem Ansprechpartner unserer Abteilung Praevention</h1>
+
+    <div tal:condition="not:view/retval">
+        <p i18n:translate="">Die Suche nach den von Ihnen eingegebenen Kriterien verlief ergebnislos.</p>
+        <p>&nbsp;</p>
+        <a href="tabsearchform" i18n:translate="">Neue Suche</a>
+    </div>
+    
+    <div tal:condition="view/retval"
+         tal:define="plzresults view/plzresults;
+                     ortresults view/ortresults">
+
+      <div>
+        <span class="discreet"><b i18n:translate="">Erlaeuterung der Abkuerzungen</b></span>
+        <ul>
+          <li class="discreet" i18n:translate="">TAB - Technische(r) Aufsichtsbeamter / -beamtin</li>
+          <li class="discreet" i18n:translate="">RD - Regionaldirektion</li>
+          <li class="discreet" i18n:translate="">PB - Praeventionsberater / -beraterin</li>
+        </ul>
+      </div>
+
+      <span tal:condition="plzresults">
+        <h2><span i18n:translate="">Ergebnis Ihrer Suche nach Postleitzahl:</span>&nbsp;
+            <span tal:content="string: ${plzresults/plz}"/></h2>
+
+        <table class="grid listing myseminar">
+          <tr>
+            <th><span i18n:translate="">PLZ</span><br><span i18n:translate="">Ort</span></th>
+            <th i18n:translate="">TAB</th>
+            <th i18n:translate="">TAB Kontakt</th>
+            <th i18n:translate="">RD</th>
+            <th i18n:translate="">PB</th>
+            <th><span i18n:translate="">PB</span><br><span i18n:translate="">Kontakt</span></th>
+          </tr>
+          <tr>
+            <td><span tal:content="plzresults/plz"/><br><span tal:content="plzresults/ort"/></td>
+            <td tal:content="plzresults/tab"/>
+            <td><span tal:content="plzresults/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${plzresults/tab-mail}"> 
+                                                            <span tal:content="plzresults/tab-mail"/></a></td>
+            <td><a target="_blank" href="" tal:attributes="href plzresults/rd-url"><span tal:content="plzresults/rd"/></a></td>
+            <td tal:content="plzresults/pb"/>
+            <td><span tal:content="plzresults/pb-tel"/><br><span tal:content="plzresults/pb-mail"/></td>
+          </tr>
+        </table>
+      </span>
+
+      <span tal:condition="ortresults">
+        <h2 i18n:translate="">Ergebnisse Ihrer Suche nach einem Ortsnamen</h2>
+
+        <div tal:define="results view/ortresults;
+                           Batch python:modules['Products.CMFPlone'].Batch;
+                           b_size python:15;b_start python:0;b_start request/b_start | b_start;
+                           batch python:Batch(results, b_size, int(b_start), orphan=1);">
+        <table class="grid listing myseminar">  
+          <tr>
+            <th><span i18n:translate="">PLZ</span><br><span i18n:translate="">Ort</span></th>
+            <th i18n:translate="">TAB</th>
+            <th i18n:translate="">TAB Kontakt</th>
+            <th i18n:translate="">RD</th>
+            <th i18n:translate="">PB</th>
+            <th><span i18n:translate="">PB</span><br><span i18n:translate="">Kontakt</span></th>
+          </tr>
+          <span tal:repeat="result batch">
+          <tr>
+            <td><span tal:content="result/plz"/><br><span tal:content="result/ort"/></td>
+            <td tal:content="result/tab"/>
+            <td><span tal:content="result/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${result/tab-mail}">
+                                                        <span tal:content="result/tab-mail"/></a></td>
+            <td><a target="_blank" href="" tal:attributes="href result/rd-url"><span tal:content="result/rd"/></a></td>
+            <td tal:content="result/pb"/>
+            <td><span tal:content="result/pb-tel"/><br><span tal:content="result/pb-mail"/></td>
+          </tr>
+          </span>
+        </table>
+
+        <div metal:use-macro="here/batch_macros/macros/navigation" />
+        </div>
+      </span>  
+
+      <p>&nbsp;</p>
+      <a href="tabsearchform" i18n:translate="">Neue Suche</a>
+
+    </div>
+  </div>
+</body>
+</html>  

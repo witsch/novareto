@@ -1,0 +1,9 @@
+<?xml version="1.0"?> 
+<import-steps>
+ <import-step id="tabsuche-various" version="2012-12-08"
+              handler="nva.tabsuche.setuphandlers.importVarious"
+              title="nva-tabsuche setup">
+  plone-view-collection setup
+ </import-step>
+</import-steps>
+

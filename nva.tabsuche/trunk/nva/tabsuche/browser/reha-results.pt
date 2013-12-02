@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/@@standard_macros/page"
+      i18n:domain="nva.tabsuche">
+<head>
+</head>
+
+<body>
+  <div metal:fill-slot="body">
+
+    <h1 i18n:translate="">Ihre Suche nach einer Regionaldirektion der BGHW</h1>
+
+    <div tal:condition="view/rd">
+      <div class="bghw-adresse">
+          <h3 i18n:translate="">Ihre zuständige Regionaldirektion</h3>
+          <strong tal:content="view/rd">Regionaldirektion</strong>
+          <p><span id="strnr" tal:content="view/strnr">Strasse und Nummer</span></p>
+          <p><span id="plzort" tal:content="view/plzort">Plz und Ort</span></p>
+          <p>
+            <span i18n:translate="">Telefon:</span>&nbsp;<span tal:content="view/tel"/><br/>
+            <span i18n:translate="">Telefax:</span>&nbsp;<span tal:content="view/fax"/><br/>
+          </p>
+        </div>
+        
+        <div style="margin-bottom:5px;" id="newSearch">
+            <a href="rehasearchform" tal:attributes="href python: context.absolute_url() + '/rehasearchform'" i18n:translate="">Neue Suche</a>
+        </div>
+    </div>
+
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+
+  </div>
+</body>
+</html>  

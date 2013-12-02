@@ -1,0 +1,104 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-10-03 15:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: nva.tabsuche\n"
+
+#: ./browser/tabsearchform.py:50
+msgid "Bitte geben Sie hier eine 5-stellige Postleitzahl ein fuer die Sie einen Berater unserer Praevention suchen."
+msgstr ""
+
+#: ./browser/tab-results.pt:15
+msgid "Die Suche nach den von Ihnen eingegebenen Kriterien verlief ergebnislos."
+msgstr ""
+
+#: ./browser/tab-results.pt:34
+msgid "Ergebnis Ihrer Suche nach Postleitzahl:"
+msgstr ""
+
+#: ./browser/tab-results.pt:59
+msgid "Ergebnisse Ihrer Suche nach einem Ortsnamen"
+msgstr ""
+
+#: ./browser/tab-results.pt:25
+msgid "Erlaeuterung der Abkuerzungen"
+msgstr ""
+
+#: ./browser/tab-results.pt:12
+msgid "Ihre Suche nach einem Ansprechpartner unserer Abteilung Praevention"
+msgstr ""
+
+#: ./browser/tab-results.pt:44
+msgid "Kontakt"
+msgstr ""
+
+#: ./browser/tab-results.pt:17
+msgid "Neue Suche"
+msgstr ""
+
+#: ./browser/tab-results.pt:39
+#: ./browser/tabsearchform.py:54
+msgid "Ort"
+msgstr ""
+
+#: ./browser/tab-results.pt:43
+msgid "PB"
+msgstr ""
+
+#: ./browser/tab-results.pt:29
+msgid "PB - Praeventionsberater / -beraterin"
+msgstr ""
+
+#: ./browser/tab-results.pt:39
+msgid "PLZ"
+msgstr ""
+
+#: ./browser/tabsearchform.py:49
+msgid "Postleitzahl"
+msgstr ""
+
+#: ./browser/tab-results.pt:42
+msgid "RD"
+msgstr ""
+
+#: ./browser/tab-results.pt:28
+msgid "RD - Regionaldirektion"
+msgstr ""
+
+#: ./browser/tabsearchform.py:55
+msgid "Sollten Sie nicht ueber die Postleitzahl verfuegen, koennen Sie alternativ hier auch nach einem Ortsnamen suchen"
+msgstr ""
+
+#: ./browser/tabsearchform.py:65
+msgid "Suche nach dem Praeventionsmitarbeiter"
+msgstr ""
+
+#: ./browser/tab-results.pt:40
+msgid "TAB"
+msgstr ""
+
+#: ./browser/tab-results.pt:27
+msgid "TAB - Technische(r) Aufsichtsbeamter / -beamtin"
+msgstr ""
+
+#: ./browser/tab-results.pt:41
+msgid "TAB Kontakt"
+msgstr ""
+
+#: ./browser/tabsearchform.py:64
+msgid "TAB-Suche"
+msgstr ""
+

@@ -1,0 +1,30 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="nva.tabsuche">
+    <!-- -*- extra stuff goes here -*- -->
+
+    <include package="plone.app.contentmenu" />       
+    
+    <browser:page
+        for="*"
+        name="tabsearchform"
+        class=".tabsearchform.TABSearchForm"
+        permission="zope.Public" />
+
+    <browser:page
+        for="*"
+        name="rehasearchform"
+        class=".tabsearchform.REHASearchForm"
+        permission="zope.Public" />
+
+    <browser:menuItems
+        for="*"
+        menu="plone_displayviews">
+        <browser:menuItem
+            title="Kontakt Reha/Leistung"
+            action="rehasearchform"
+            description="Anprechpartnersuche Reha/Leistung"
+            />
+    </browser:menuItems>
+
+</configure>
