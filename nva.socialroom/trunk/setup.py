@@ -29,6 +29,7 @@ setup(name='nva.socialroom',
           'plone.app.dexterity [grok]',
           'plone.namedfile [blobs]',
           # -*- Extra requirements: -*-
+          'collective.twitter.accounts',
       ],
       entry_points="""
       # -*- Entry points: -*-

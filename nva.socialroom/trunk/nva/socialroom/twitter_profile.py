@@ -13,9 +13,32 @@ from plone.namedfile.field import NamedImage, NamedFile
 from plone.namedfile.field import NamedBlobImage, NamedBlobFile
 from plone.namedfile.interfaces import IImageScaleTraversable
 
+from plone.registry.interfaces import IRegistry
+from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.interfaces import IContextSourceBinder
+from zope.component import getUtility
+from zope.interface import alsoProvides
 
 from nva.socialroom import MessageFactory as _
 
+def TwitterAccounts(context):
+    registry = getUtility(IRegistry)
+    accounts = registry['collective.twitter.accounts']
+    if accounts:
+        vocab = accounts.keys()
+    else:
+        vocab = []
+    return SimpleVocabulary.fromValues(vocab)
+
+alsoProvides(TwitterAccounts, IContextSourceBinder)
+
+def cache_key_simple(func, var):
+    #let's memoize for 10 minutes or if any value of the portlet is modified
+    timeout = time() // (60 * 10)
+    return (timeout,
+            var.data.tw_account,
+            var.data.tw_user,
+            var.data.max_results)
 
 # Interface class; used to define content-type schema.
 
@@ -24,13 +47,24 @@ class ITwitterProfile(form.Schema, IImageScaleTraversable):
     Read content from twitter account.
     """
 
-    # If you want a schema-defined interface, delete the model.load
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/twitter_profile.xml to define the content type.
+    tw_account = schema.Choice(title=_(u'Twitter account'),
+                               description=_(u"Which twitter account to use."),
+                               required=True,
+                               source=TwitterAccounts)
 
-    form.model("models/twitter_profile.xml")
+    tw_user = schema.TextLine(title=_(u'Twitter user'),
+                              description=_(u"The Twitter user you wish to get feed from (you can include or omit the initial @)."),
+                              required=True)
 
+    max_results = schema.Int(title=_(u'Maximum results'),
+                               description=_(u"The maximum results number."),
+                               required=True,
+                               default=5)
+
+    pretty_date = schema.Bool(title=_(u'Pretty dates'),
+                              description=_(u"Show dates in a pretty format (ie. '4 hours ago')."),
+                              default=True,
+                              required=False)
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific

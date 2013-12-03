@@ -24,12 +24,9 @@ class ISocialNewsroom(form.Schema, IImageScaleTraversable):
     A Folder to accumulate content from social networks.
     """
 
-    # If you want a schema-defined interface, delete the model.load
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/social_newsroom.xml to define the content type.
-
-    form.model("models/social_newsroom.xml")
+    details = RichText(
+            title = _(u'Beschreibung der Details zum Newsroom'),
+            )
 
 
 # Custom content-type class; objects created for this content type will
