@@ -1,7 +1,13 @@
+CHANGES.txt
+CONTRIBUTORS.txt
 MANIFEST.in
 README.txt
 setup.cfg
 setup.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
 nva/__init__.py
 nva.itlogbuch.egg-info/PKG-INFO
 nva.itlogbuch.egg-info/SOURCES.txt
@@ -19,8 +25,8 @@ nva/itlogbuch/configure.zcml
 nva/itlogbuch/vocabularies.py
 nva/itlogbuch/browser/__init__.py
 nva/itlogbuch/browser/configure.zcml
-nva/itlogbuch/browser/itnotizview.pt
-nva/itlogbuch/browser/itnotizview.py
+nva/itlogbuch/browser/logeintragview.pt
+nva/itlogbuch/browser/logeintragview.py
 nva/itlogbuch/content/__init__.py
 nva/itlogbuch/content/configure.zcml
 nva/itlogbuch/content/logbucheintrag.py
@@ -28,6 +34,7 @@ nva/itlogbuch/interfaces/__init__.py
 nva/itlogbuch/interfaces/logbucheintrag.py
 nva/itlogbuch/portlets/__init__.py
 nva/itlogbuch/portlets/configure.zcml
+nva/itlogbuch/profiles/default/catalog.xml
 nva/itlogbuch/profiles/default/factorytool.xml
 nva/itlogbuch/profiles/default/metadata.xml
 nva/itlogbuch/profiles/default/portlets.xml

@@ -45,6 +45,6 @@ class logeintragView(BrowserView):
         data['aenderungskategorie'] = string.join(self.context.getAenderungskategorie(), ',')
         data['aenderungen'] = self.context.getAenderungen()
         data['inetticket'] = self.context.getInetticket()
-        data['ticket_url'] = 'http://debaw2s450/helpdesk/scripts/main.asp?ticketid=%s' % self.context.getInetticket()
+        data['ticket_url'] = 'https://debaw2s450/helpdesk/scripts/main.asp?ticketid=%s' % self.context.getInetticket()
         data['projektnummer'] = self.context.getProjektnummer()
         return data
