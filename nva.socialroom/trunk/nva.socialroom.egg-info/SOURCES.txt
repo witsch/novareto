@@ -12,6 +12,7 @@ nva.socialroom.egg-info/paster_plugins.txt
 nva.socialroom.egg-info/requires.txt
 nva.socialroom.egg-info/top_level.txt
 nva/socialroom/__init__.py
+nva/socialroom/rss_reader.py
 nva/socialroom/social_newsroom.py
 nva/socialroom/tests.py
 nva/socialroom/twitter_profile.py

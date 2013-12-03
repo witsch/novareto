@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
-<object name="nva.socialroom.twitterprofile"
+<object name="nva.socialroom.rssreader"
    meta_type="Dexterity FTI"
    i18n:domain="nva.socialroom" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">Twitter Profile</property>
+  <property name="title" i18n:translate="">RSS Reader</property>
   <property name="description"
-    i18n:translate="">Read content from twitter account.</property>
+    i18n:translate="">A Reader for a Special RSS-Feed.</property>
   <property name="icon_expr">string:${portal_url}/document_icon.png</property>
-  <property name="factory">nva.socialroom.twitterprofile</property>
+  <property name="factory">nva.socialroom.rssreader</property>
   <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types" />
   <property name="allow_discussion">False</property>
 
   <!-- schema and class used for content items -->
-  <property name="schema">nva.socialroom.twitter_profile.ITwitterProfile</property>
-  <property name="klass">nva.socialroom.twitter_profile.TwitterProfile</property>
+  <property name="schema">nva.socialroom.rss_reader.IRSSReader</property>
+  <property name="klass">nva.socialroom.rss_reader.RSSReader</property>
 
   <property name="behaviors">
      <element value="plone.app.content.interfaces.INameFromTitle" />
@@ -25,10 +25,10 @@
 
   <!-- View information -->
   <property name="link_target"></property>
-  <property name="immediate_view">twitterview</property>
-  <property name="default_view">twitterview</property>
+  <property name="immediate_view">rssview</property>
+  <property name="default_view">rssview</property>
   <property name="view_methods">
-   <element value="twitterview"/>
+   <element value="rssview"/>
    <element value="view"/>
   </property>
   <property name="default_view_fallback">False</property>

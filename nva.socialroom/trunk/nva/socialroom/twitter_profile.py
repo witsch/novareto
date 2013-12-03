@@ -18,6 +18,11 @@ from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IContextSourceBinder
 from zope.component import getUtility
 from zope.interface import alsoProvides
+from collective.prettydate.interfaces import IPrettyDate
+import twitter
+import logging
+
+logger = logging.getLogger('nva.socialroom')
 
 from nva.socialroom import MessageFactory as _
 
@@ -87,7 +92,7 @@ class TwitterProfile(Container):
 # of this type by uncommenting the grok.name line below or by
 # changing the view class name and template filename to View / view.pt.
 
-class SampleView(grok.View):
+class TwitterView(grok.View):
     """ sample view class """
 
     grok.context(ITwitterProfile)
@@ -96,3 +101,79 @@ class SampleView(grok.View):
     # grok.name('view')
 
     # Add view methods here
+    def update(self):
+        registry = getUtility(IRegistry)
+        accounts = registry.get('collective.twitter.accounts')
+        account = accounts.get(self.context.tw_account)
+        tw = twitter.Api(consumer_key=account.get('consumer_key'),
+                         consumer_secret=account.get('consumer_secret'),
+                         access_token_key=account.get('oauth_token'),
+                         access_token_secret=account.get('oauth_token_secret'),)
+        tw_user = self.context.tw_user
+        max_results = self.context.max_results
+
+        try:
+            results = tw.GetUserTimeline(tw_user, count=max_results)
+            logger.info("%s results obtained." % len(results))
+        except Exception, e:
+            logger.info("Something went wrong: %s." % e)
+            results = []
+       self.results = results
+        self.pretty_date = self.context.pretty_date
+
+    def getTweet(self, result):
+        # We need to make URLs, hastags and users clickable.
+        URL_TEMPLATE = """ 
+        <a href="%s" target="blank_">%s</a>
+        """
+        HASHTAG_TEMPLATE = """ 
+        <a href="http://twitter.com/#!/search?q=%s" target="blank_">%s</a>
+        """
+        USER_TEMPLATE = """ 
+        <a href="http://twitter.com/#!/%s" target="blank_">%s</a>
+        """
+
+        full_text = result.GetText()
+        split_text = full_text.split(' ')
+
+        # Now, lets fix links, hashtags and users
+        for index, word in enumerate(split_text):
+            if word.startswith('@'):
+                # This is a user
+                split_text[index] = USER_TEMPLATE % (word[1:], word)
+            elif word.startswith('#'):
+                # This is a hashtag
+                split_text[index] = HASHTAG_TEMPLATE % ("%23" + word[1:], word)
+            elif word.startswith('http'):
+                # This is a hashtag
+                split_text[index] = URL_TEMPLATE % (word, word)
+
+        return "<p>%s</p>" % ' '.join(split_text)
+
+    def getTweetUrl(self, result):
+        return "https://twitter.com/%s/status/%s" % \
+            (result.user.screen_name, result.id)
+
+    def getReplyTweetUrl(self, result):
+        return "https://twitter.com/intent/tweet?in_reply_to=%s" % result.id
+
+    def getReTweetUrl(self, result):
+        return "https://twitter.com/intent/retweet?tweet_id=%s" % result.id
+
+    def getFavTweetUrl(self, result):
+        return "https://twitter.com/intent/favorite?tweet_id=%s" % result.id
+
+    def getDate(self, result):
+        if self.context.pretty_date:
+            # Returns human readable date for the tweet
+            date_utility = getUtility(IPrettyDate)
+            date = date_utility.date(result.GetCreatedAt())
+        else:
+            date = DateTime.DateTime(result.GetCreatedAt())
+
+        return date
+
+
+
+
+

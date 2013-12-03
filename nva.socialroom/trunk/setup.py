@@ -30,6 +30,7 @@ setup(name='nva.socialroom',
           'plone.namedfile [blobs]',
           # -*- Extra requirements: -*-
           'collective.twitter.accounts',
+          'collective.prettydate',
       ],
       entry_points="""
       # -*- Entry points: -*-
