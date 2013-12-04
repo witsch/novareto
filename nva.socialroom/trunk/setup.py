@@ -5,7 +5,7 @@ version = '1.0'
 
 setup(name='nva.socialroom',
       version=version,
-      description="ContentTypes tand Views to accumulate Data from social networks.",
+      description="ContentTypes and Views to accumulate Data from social networks.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from

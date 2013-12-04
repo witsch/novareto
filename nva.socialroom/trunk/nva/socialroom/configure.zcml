@@ -26,9 +26,9 @@
        in Plone -->
   <genericsetup:registerProfile
       name="default"
-      title="ContentTypes tand Views to accumulate Data from social networks."
+      title="ContentTypes and Views to accumulate Data from social networks."
       directory="profiles/default"
-      description="Extension profile for ContentTypes tand Views to accumulate Data from social networks."
+      description="Extension profile for ContentTypes and Views to accumulate Data from social networks."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
