@@ -50,12 +50,24 @@ class SocialNewsroom(Container):
 # of this type by uncommenting the grok.name line below or by
 # changing the view class name and template filename to View / view.pt.
 
-class SampleView(grok.View):
+class SocialView(grok.View):
     """ sample view class """
 
     grok.context(ISocialNewsroom)
     grok.require('zope2.View')
 
-    # grok.name('view')
+    def update(self):
+        fc = self.context.listFolderContents()
+        folderobjects = []
+        for i in fc:
+            obj = {}
+            obj['title'] = i.title
+            obj['description'] = i.description
+            obj['socialcontent'] = i.getSocialContent()
+            folderobjects.append(obj)
 
-    # Add view methods here
+        self.folderobjects = folderobjects
+        self.text = self.context.details.output
+
+
+

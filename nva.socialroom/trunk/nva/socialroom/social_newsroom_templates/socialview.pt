@@ -15,13 +15,23 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-    <h2>
-        Rendered from
-        social_newsroom_templates/<span tal:replace="template/id" />
-    </h2>
+
+    <div tal:content="structure view/text">Details inserted here</div>
+
+    <div tal:define="folderobjects view/folderobjects">
+      <span tal:repeat="obj folderobjects">
+        <h2 tal:content="obj/title"/>
+        <p class="documentDescription" tal:content="obj/description"/>
+        
+        <div tal:repeat="sc obj/socialcontent">
+          <a href="" tal:attributes="href sc/url"><h4 tal:content="sc/title"/></a>
+            <p class="documentDescription" tal:content="sc/description"/>
+            <p class="documentDate" tal:content="sc/date"/>
+          </div>
+        </span>
+      </div>
 
 
-    <div tal:content="context/Title">Title inserted here</div>
 
   </metal:content-core>
 </metal:main>

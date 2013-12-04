@@ -13,6 +13,7 @@ from plone.namedfile.field import NamedImage, NamedFile
 from plone.namedfile.field import NamedBlobImage, NamedBlobFile
 from plone.namedfile.interfaces import IImageScaleTraversable
 
+from datetime import datetime
 from plone.registry.interfaces import IRegistry
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IContextSourceBinder
@@ -156,10 +157,10 @@ class TwitterProfile(Container):
         sc = []
         for i in results:
             entry = {}
-            entry['title'] = i.getText()
+            entry['title'] = i.GetText()
             entry['description'] = ''
             entry['url'] = self.getTweetUrl(i)
-            datum = result.getCreatedAt().split(' ')
+            datum = i.GetCreatedAt().split(' ')
             formdatum = '%s %s %s %s' %(datum[2], datum[1], datum[5], datum[3])
             entry['date'] = datetime.strptime(formdatum, '%d %b %Y %H:%M:%S').strftime('%d.%m.%Y %H:%M')
             sc.append(entry)

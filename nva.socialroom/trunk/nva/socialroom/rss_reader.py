@@ -1,5 +1,5 @@
 from five import grok
-
+from datetime import datetime
 from z3c.form import group, field
 from zope import schema
 from zope.interface import invariant, Invalid
@@ -51,6 +51,27 @@ class RSSReader(Container):
 
     # Add your class methods and properties here
 
+    def getFeed(self):
+        """return a feed object but do not update it"""
+        feed = FEED_DATA.get(self.url, None)
+        if feed is None:
+            # create it
+            feed = FEED_DATA[self.url] = RSSFeed(self.url, self.timeout)
+        return feed
+
+    def getSocialContent(self):
+        feed = self.getFeed()
+        feed.update()
+        results = feed.items[:self.count]
+        sc = []
+        for i in results:
+            entry = {}
+            entry['title'] = i.get('title')
+            entry['description'] = i.get('summary')
+            entry['url'] = i.get('url')
+            entry['date'] = i.get('updated').strftime('%d.%m.%Y %H:%M')
+            sc.append(entry)
+        return sc
 
 # View class
 # The view will automatically use a similarly named template in
@@ -89,12 +110,7 @@ class RSSView(grok.View):
         self.deferred_update()
 
     def _getFeed(self):
-        """return a feed object but do not update it"""
-        feed = FEED_DATA.get(self.context.url, None)
-        if feed is None:
-            # create it
-            feed = FEED_DATA[self.context.url] = RSSFeed(self.context.url, self.context.timeout)
-        return feed
+        return self.context.getFeed()
 
     @property
     def url(self):
