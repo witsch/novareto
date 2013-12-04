@@ -81,36 +81,16 @@ class TwitterProfile(Container):
 
     # Add your class methods and properties here
 
-
-# View class
-# The view will automatically use a similarly named template in
-# twitter_profile_templates.
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@sampleview" appended.
-# You may make this the default view for content objects
-# of this type by uncommenting the grok.name line below or by
-# changing the view class name and template filename to View / view.pt.
-
-class TwitterView(grok.View):
-    """ sample view class """
-
-    grok.context(ITwitterProfile)
-    grok.require('zope2.View')
-
-    # grok.name('view')
-
-    # Add view methods here
-    def update(self):
+    def getAllTweets(self):
         registry = getUtility(IRegistry)
         accounts = registry.get('collective.twitter.accounts')
-        account = accounts.get(self.context.tw_account)
+        account = accounts.get(self.tw_account)
         tw = twitter.Api(consumer_key=account.get('consumer_key'),
                          consumer_secret=account.get('consumer_secret'),
                          access_token_key=account.get('oauth_token'),
                          access_token_secret=account.get('oauth_token_secret'),)
-        tw_user = self.context.tw_user
-        max_results = self.context.max_results
+        tw_user = self.tw_user
+        max_results = self.max_results
 
         try:
             results = tw.GetUserTimeline(tw_user, count=max_results)
@@ -118,8 +98,7 @@ class TwitterView(grok.View):
         except Exception, e:
             logger.info("Something went wrong: %s." % e)
             results = []
-       self.results = results
-        self.pretty_date = self.context.pretty_date
+        return results
 
     def getTweet(self, result):
         # We need to make URLs, hastags and users clickable.
@@ -132,7 +111,6 @@ class TwitterView(grok.View):
         USER_TEMPLATE = """ 
         <a href="http://twitter.com/#!/%s" target="blank_">%s</a>
         """
-
         full_text = result.GetText()
         split_text = full_text.split(' ')
 
@@ -164,7 +142,7 @@ class TwitterView(grok.View):
         return "https://twitter.com/intent/favorite?tweet_id=%s" % result.id
 
     def getDate(self, result):
-        if self.context.pretty_date:
+        if self.pretty_date:
             # Returns human readable date for the tweet
             date_utility = getUtility(IPrettyDate)
             date = date_utility.date(result.GetCreatedAt())
@@ -173,7 +151,54 @@ class TwitterView(grok.View):
 
         return date
 
+    def getSocialContent(self):
+        results = self.getAllTweets()
+        sc = []
+        for i in results:
+            entry = {}
+            entry['title'] = i.getText()
+            entry['description'] = ''
+            entry['url'] = self.getTweetUrl(i)
+            datum = result.getCreatedAt().split(' ')
+            formdatum = '%s %s %s %s' %(datum[2], datum[1], datum[5], datum[3])
+            entry['date'] = datetime.strptime(formdatum, '%d %b %Y %H:%M:%S').strftime('%d.%m.%Y %H:%M')
+            sc.append(entry)
+        return sc
 
+# View class
+# The view will automatically use a similarly named template in
+# twitter_profile_templates.
+# Template filenames should be all lower case.
+# The view will render when you request a content object with this
+# interface with "/@@sampleview" appended.
+# You may make this the default view for content objects
+# of this type by uncommenting the grok.name line below or by
+# changing the view class name and template filename to View / view.pt.
 
+class TwitterView(grok.View):
+    """ sample view class """
 
+    grok.context(ITwitterProfile)
+    grok.require('zope2.View')
 
+    def update(self):
+        self.results = self.context.getAllTweets()
+        self.pretty_date = self.context.pretty_date
+
+    def getTweet(self, result):
+        return self.context.getTweet(result)
+
+    def getTweetUrl(self, result):
+        return self.context.getTweetUrl(result)
+
+    def getReplyTweetUrl(self, result):
+        return self.context.getReplyTweetUrl(result)
+
+    def getReTweetUrl(self, result):
+        return self.context.getReTweetUrl(result)
+
+    def getFavTweetUrl(self, result):
+        return self.context.getFavTweetUrl(result)
+
+    def getDate(self, result):
+        return self.context.getDate(result)
