@@ -147,7 +147,10 @@ class TwitterProfile(Container):
             entry['url'] = self.getTweetUrl(i)
             datum = i.GetCreatedAt().split(' ')
             formdatum = '%s %s %s %s' %(datum[2], datum[1], datum[5], datum[3])
-            entry['date'] = datetime.strptime(formdatum, '%d %b %Y %H:%M:%S').strftime('%d.%m.%Y %H:%M')
+	    try:
+                entry['date'] = datetime.strptime(formdatum, '%d %b %Y %H:%M:%S').strftime('%d.%m.%Y %H:%M')
+            except:
+	        entry['date'] = formdatum
             sc.append(entry)
         return sc
 
