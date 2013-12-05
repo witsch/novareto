@@ -19,7 +19,7 @@
 
     <div tal:define="folderobjects view/folderobjects">
       <span tal:repeat="obj folderobjects">
-        <a href="" tal:attributes="href obj/url"><h2 tal:content="obj/title"/></a>
+        <a href="" tal:attributes="href obj/url"><h1 tal:content="obj/title"/></a>
         <p class="documentDescription" tal:content="obj/description"/>
         
         <div tal:repeat="sc obj/socialcontent">
