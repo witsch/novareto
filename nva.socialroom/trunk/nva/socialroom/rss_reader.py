@@ -29,6 +29,7 @@ class IRSSReader(form.Schema, IImageScaleTraversable):
                        description=_(u'How many items to list.'),
                        required=True,
                        default=5)
+
     url = schema.TextLine(title=_(u'URL of RSS feed'),
                         description=_(u'Link of the RSS feed to display.'),
                         required=True,
@@ -58,9 +59,15 @@ class RSSReader(Container):
         for i in results:
             entry = {}
             entry['title'] = i.get('title')
-            entry['description'] = i.get('summary')
+            desctxt = i.get('summary')
+            if len(desctxt) > 160:
+                desctxt = desctxt[:160]
+                cutter = desctxt.rfind(' ')
+                desctxt = desctxt[:cutter] + '...'
+            entry['description'] = desctxt
             entry['url'] = i.get('url')
             entry['date'] = i.get('updated').strftime('%d.%m.%Y %H:%M')
+            entry['thumb'] = ''
             sc.append(entry)
         return sc
 

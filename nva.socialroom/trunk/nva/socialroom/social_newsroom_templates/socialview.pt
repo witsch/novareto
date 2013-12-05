@@ -23,7 +23,9 @@
         <p class="documentDescription" tal:content="obj/description"/>
         
         <div tal:repeat="sc obj/socialcontent">
-          <a href="" tal:attributes="href sc/url"><h4 tal:content="sc/title"/></a>
+            <a href="" tal:attributes="href sc/url">
+            <img style="max-width:128px; max-height:128px" src="" tal:condition="sc/thumb" tal:attributes="src sc/thumb">
+            <h4 tal:content="sc/title"/></a>
             <p class="documentDescription" tal:content="sc/description"/>
             <p class="documentDate" tal:content="sc/date"/>
           </div>

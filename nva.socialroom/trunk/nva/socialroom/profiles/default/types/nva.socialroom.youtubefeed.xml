@@ -1,26 +1,22 @@
 <?xml version="1.0"?>
-<object name="nva.socialroom.socialnewsroom"
+<object name="nva.socialroom.youtubefeed"
    meta_type="Dexterity FTI"
    i18n:domain="nva.socialroom" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">Social Newsroom</property>
+  <property name="title" i18n:translate="">YouTube Feed</property>
   <property name="description"
-    i18n:translate="">A Folder to accumulate content from social networks.</property>
-  <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
-  <property name="factory">nva.socialroom.socialnewsroom</property>
-  <property name="global_allow">True</property>
+    i18n:translate="">A special feed from youtube.</property>
+  <property name="icon_expr">string:${portal_url}/document_icon.png</property>
+  <property name="factory">nva.socialroom.youtubefeed</property>
+  <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
-  <property name="allowed_content_types">
-    <element value="nva.socialroom.twitterprofile"/>
-    <element value="nva.socialroom.rssreader"/>
-    <element value="nva.socialroom.youtubefeed"/>
-  </property>
+  <property name="allowed_content_types" />
   <property name="allow_discussion">False</property>
 
   <!-- schema and class used for content items -->
-  <property name="schema">nva.socialroom.social_newsroom.ISocialNewsroom</property>
-  <property name="klass">nva.socialroom.social_newsroom.SocialNewsroom</property>
+  <property name="schema">nva.socialroom.youtube_feed.IYouTubeFeed</property>
+  <property name="klass">nva.socialroom.youtube_feed.YouTubeFeed</property>
 
   <property name="behaviors">
      <element value="plone.app.content.interfaces.INameFromTitle" />
@@ -29,10 +25,9 @@
 
   <!-- View information -->
   <property name="link_target"></property>
-  <property name="immediate_view">socialview</property>
-  <property name="default_view">socialview</property>
+  <property name="immediate_view">view</property>
+  <property name="default_view">view</property>
   <property name="view_methods">
-   <element value="socialview"/>
    <element value="view"/>
   </property>
   <property name="default_view_fallback">False</property>

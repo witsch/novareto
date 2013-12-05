@@ -31,6 +31,7 @@ setup(name='nva.socialroom',
           # -*- Extra requirements: -*-
           'collective.twitter.accounts',
           'collective.prettydate',
+          'gdata',
       ],
       entry_points="""
       # -*- Entry points: -*-

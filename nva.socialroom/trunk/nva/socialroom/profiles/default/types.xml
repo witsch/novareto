@@ -8,6 +8,7 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <object name="nva.socialroom.youtubefeed" meta_type="Dexterity FTI" />
   <object name="nva.socialroom.rssreader" meta_type="Dexterity FTI" />
   <object name="nva.socialroom.twitterprofile" meta_type="Dexterity FTI" />
   <object name="nva.socialroom.socialnewsroom" meta_type="Dexterity FTI" />

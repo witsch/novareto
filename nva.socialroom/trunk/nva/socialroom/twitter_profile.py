@@ -137,6 +137,9 @@ class TwitterProfile(Container):
 
         return date
 
+    def getAvatar(self, result):
+        return result.GetUser().GetProfileImageUrl()
+
     def getSocialContent(self):
         results = self.getAllTweets()
         sc = []
@@ -147,10 +150,11 @@ class TwitterProfile(Container):
             entry['url'] = self.getTweetUrl(i)
             datum = i.GetCreatedAt().split(' ')
             formdatum = '%s %s %s %s' %(datum[2], datum[1], datum[5], datum[3])
-	    try:
+            try:
                 entry['date'] = datetime.strptime(formdatum, '%d %b %Y %H:%M:%S').strftime('%d.%m.%Y %H:%M')
             except:
-	        entry['date'] = formdatum
+                entry['date'] = formdatum
+            entry['thumb'] = self.getAvatar(i)
             sc.append(entry)
         return sc
 

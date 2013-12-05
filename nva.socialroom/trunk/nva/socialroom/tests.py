@@ -52,6 +52,14 @@ def test_suite():
 
         # -*- extra stuff goes here -*-
 
+        # Integration tests for YouTubeFeed
+        ztc.ZopeDocFileSuite(
+            'YouTubeFeed.txt',
+            package='nva.socialroom',
+            optionflags = OPTION_FLAGS,
+            test_class=TestCase),
+
+
         # Integration tests for RSSReader
         ztc.ZopeDocFileSuite(
             'RSSReader.txt',
