@@ -15,12 +15,11 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-
     <div tal:content="structure view/text">Details inserted here</div>
 
     <div tal:define="folderobjects view/folderobjects">
       <span tal:repeat="obj folderobjects">
-        <h2 tal:content="obj/title"/>
+        <a href="" tal:attributes="href obj/url"><h2 tal:content="obj/title"/></a>
         <p class="documentDescription" tal:content="obj/description"/>
         
         <div tal:repeat="sc obj/socialcontent">
@@ -31,11 +30,8 @@
         </span>
       </div>
 
-
-
   </metal:content-core>
 </metal:main>
 
 </body>
 </html>
-

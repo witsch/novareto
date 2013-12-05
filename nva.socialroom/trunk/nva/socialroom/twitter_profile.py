@@ -46,8 +46,6 @@ def cache_key_simple(func, var):
             var.data.tw_user,
             var.data.max_results)
 
-# Interface class; used to define content-type schema.
-
 class ITwitterProfile(form.Schema, IImageScaleTraversable):
     """
     Read content from twitter account.
@@ -72,15 +70,8 @@ class ITwitterProfile(form.Schema, IImageScaleTraversable):
                               default=True,
                               required=False)
 
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
-
 class TwitterProfile(Container):
     grok.implements(ITwitterProfile)
-
-    # Add your class methods and properties here
 
     def getAllTweets(self):
         registry = getUtility(IRegistry)
@@ -102,7 +93,6 @@ class TwitterProfile(Container):
         return results
 
     def getTweet(self, result):
-        # We need to make URLs, hastags and users clickable.
         URL_TEMPLATE = """ 
         <a href="%s" target="blank_">%s</a>
         """
@@ -115,16 +105,12 @@ class TwitterProfile(Container):
         full_text = result.GetText()
         split_text = full_text.split(' ')
 
-        # Now, lets fix links, hashtags and users
         for index, word in enumerate(split_text):
             if word.startswith('@'):
-                # This is a user
                 split_text[index] = USER_TEMPLATE % (word[1:], word)
             elif word.startswith('#'):
-                # This is a hashtag
                 split_text[index] = HASHTAG_TEMPLATE % ("%23" + word[1:], word)
             elif word.startswith('http'):
-                # This is a hashtag
                 split_text[index] = URL_TEMPLATE % (word, word)
 
         return "<p>%s</p>" % ' '.join(split_text)
@@ -144,7 +130,6 @@ class TwitterProfile(Container):
 
     def getDate(self, result):
         if self.pretty_date:
-            # Returns human readable date for the tweet
             date_utility = getUtility(IPrettyDate)
             date = date_utility.date(result.GetCreatedAt())
         else:
@@ -165,16 +150,6 @@ class TwitterProfile(Container):
             entry['date'] = datetime.strptime(formdatum, '%d %b %Y %H:%M:%S').strftime('%d.%m.%Y %H:%M')
             sc.append(entry)
         return sc
-
-# View class
-# The view will automatically use a similarly named template in
-# twitter_profile_templates.
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@sampleview" appended.
-# You may make this the default view for content objects
-# of this type by uncommenting the grok.name line below or by
-# changing the view class name and template filename to View / view.pt.
 
 class TwitterView(grok.View):
     """ sample view class """
