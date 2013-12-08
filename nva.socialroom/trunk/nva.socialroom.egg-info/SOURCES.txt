@@ -191,10 +191,12 @@ nva/socialroom/SocialNewsroom.txt
 nva/socialroom/TwitterProfile.txt
 nva/socialroom/__init__.py
 nva/socialroom/configure.zcml
+nva/socialroom/facebook_posts.py
 nva/socialroom/rss_reader.py
 nva/socialroom/social_newsroom.py
 nva/socialroom/tests.py
 nva/socialroom/twitter_profile.py
+nva/socialroom/youtube_feed.py
 nva/socialroom/locales/README.txt
 nva/socialroom/models/rss_reader.xml
 nva/socialroom/models/social_newsroom.xml

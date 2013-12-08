@@ -3,3 +3,5 @@ plone.app.dexterity [grok]
 plone.namedfile [blobs]
 collective.twitter.accounts
 collective.prettydate
+gdata
+facepy

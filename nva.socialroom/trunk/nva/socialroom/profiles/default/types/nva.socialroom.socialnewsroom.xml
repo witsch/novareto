@@ -15,6 +15,7 @@
     <element value="nva.socialroom.twitterprofile"/>
     <element value="nva.socialroom.rssreader"/>
     <element value="nva.socialroom.youtubefeed"/>
+    <element value="nva.socialroom.facebookposts"/>
   </property>
   <property name="allow_discussion">False</property>
 

@@ -32,6 +32,7 @@ setup(name='nva.socialroom',
           'collective.twitter.accounts',
           'collective.prettydate',
           'gdata',
+          'facepy',
       ],
       entry_points="""
       # -*- Entry points: -*-
