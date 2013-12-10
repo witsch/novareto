@@ -70,6 +70,11 @@ class ITwitterProfile(form.Schema, IImageScaleTraversable):
                               default=True,
                               required=False)
 
+    linkurl = schema.TextLine(title=_(u'Link-URL'),
+                        description=_(u'URL to Link the object title.'),
+                        required=False,
+                        default=u'')
+
 class TwitterProfile(Container):
     grok.implements(ITwitterProfile)
 
@@ -138,6 +143,9 @@ class TwitterProfile(Container):
         return date
 
     def getAvatar(self, result):
+        if result.GetRetweeted():
+	  retweet = result.GetRetweeted_status()
+	  return retweet.GetUser().GetProfileImageUrl()
         return result.GetUser().GetProfileImageUrl()
 
     def getSocialContent(self):

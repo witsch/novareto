@@ -40,6 +40,11 @@ class IRSSReader(form.Schema, IImageScaleTraversable):
                         required=True,
                         default=100)
 
+    linkurl = schema.TextLine(title=_(u'Link-URL'),
+                        description=_(u'URL to Link the object title.'),
+                        required=False,
+                        default=u'')
+
 class RSSReader(Container):
     grok.implements(IRSSReader)
 

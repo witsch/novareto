@@ -41,7 +41,7 @@ class SocialView(grok.View):
         for i in fc:
             obj = {}
             obj['title'] = i.title
-            obj['url'] = i.absolute_url()
+            obj['url'] = i.linkurl
             obj['description'] = i.description
             obj['socialcontent'] = i.getSocialContent()
             folderobjects.append(obj)

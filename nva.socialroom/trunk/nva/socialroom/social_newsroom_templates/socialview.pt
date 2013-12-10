@@ -19,19 +19,25 @@
 
     <div tal:define="folderobjects view/folderobjects">
       <span tal:repeat="obj folderobjects">
-        <a href="" tal:attributes="href obj/url"><h1 tal:content="obj/title"/></a>
+        <a href="" tal:attributes="href obj/url" target="_blank"><h1 tal:content="obj/title"/></a>
         <p class="documentDescription" tal:content="obj/description"/>
         
-        <div tal:repeat="sc obj/socialcontent">
-            <a href="" tal:attributes="href sc/url">
-            <img style="max-width:128px; max-height:128px" src="" tal:condition="sc/thumb" tal:attributes="src sc/thumb">
-            <h4 tal:condition="sc/title | nothing" tal:content="sc/title"/></a>
-            <p tal:condition="python: not sc.get('type')" class="documentDescription" tal:content="sc/description"/>
-            <p tal:condition="python: sc.get('type') == 'facebook'" class="documentDescription" tal:content="structure sc/description"/>
-            <p class="documentDate" tal:content="sc/date"/>
-          </div>
-        </span>
-      </div>
+	<div class="media span16" tal:repeat="sc obj/socialcontent">
+	  <div tal:condition="sc/thumb" class="span4 media-object">
+            <a href="" target="_blank" tal:attributes="href sc/url">
+	    <img style="max-width:128px; max-height:128px" src="" tal:condition="sc/thumb" tal:attributes="src sc/thumb"></a>
+	  </div>
+	  <div class="span12 media-body">
+            <a href="" target="_blank" tal:attributes="href sc/url">	    
+	      <p class="newsDescription" tal:condition="sc/title | nothing" tal:content="sc/title"/></a>
+            <p class="tileBody" tal:condition="python: not sc.get('type')" tal:content="sc/description"/>
+	    <a href="" tal:condition="python: sc.get('type') == 'facebook'" tal:attributes="href sc/url" target="_blank">
+	      <p class="tileBody" tal:content="structure sc/description"/></a>
+            <p class="tileFooter" tal:content="sc/date"/>
+	  </div>
+	</div>  
+      </span>
+    </div>
 
   </metal:content-core>
 </metal:main>

@@ -39,6 +39,10 @@ class IFacebookPosts(form.Schema, IImageScaleTraversable):
                         required=True,
                         default=u'')
 
+    linkurl = schema.TextLine(title=_(u'Link-URL'),
+                        description=_(u'URL to Link the object title.'),
+                        required=False,
+                        default=u'')
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
