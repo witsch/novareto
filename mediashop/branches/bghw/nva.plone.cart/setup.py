@@ -25,7 +25,8 @@ setup(name='nva.plone.cart',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'suds'
+          'suds',
+          'five.grok [form] >= 1.3.1'
       ],
       entry_points="""
       # -*- Entry points: -*-
