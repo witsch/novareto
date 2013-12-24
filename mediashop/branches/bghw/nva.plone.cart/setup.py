@@ -25,6 +25,7 @@ setup(name='nva.plone.cart',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'suds'
       ],
       entry_points="""
       # -*- Entry points: -*-
