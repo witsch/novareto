@@ -2,8 +2,8 @@
 
 from zope import schema
 from zope.interface import Interface, Attribute
-from zope.app.container.interfaces import IContainer
-from zope.app.container.constraints import contains
+from zope.container.interfaces import IContainer
+from zope.container.constraints import contains
 from nva.cart import cartFactory as _
 
 
