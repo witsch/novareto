@@ -17,6 +17,12 @@ def setupView(portal, out):
         viewlist = viewlist + ('zweispalten_view',)
     typetopic.manage_changeProperties(view_methods = viewlist)
 
+    typecollection = typesTool['Collection']
+    viewlist = typecollection.getProperty('view_methods', d=None)
+    if 'zweispalten_view' not in viewlist:
+        viewlist = viewlist + ('zweispalten_view',)
+    typecollection.manage_changeProperties(view_methods = viewlist)
+
     out.append("Successfully installed nva.zweispalten")
 
 def importVarious(context):
