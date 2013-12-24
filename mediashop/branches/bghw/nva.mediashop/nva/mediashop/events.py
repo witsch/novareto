@@ -1,5 +1,5 @@
 import five.grok as grok
-from zope.app.container.interfaces import IObjectAddedEvent
+from zope.container.interfaces import IObjectAddedEvent
 from nva.mediashop.interfaces.artikel import IArtikel
 from nva.plone.cart import IOrder
 from nva.mediashop.pdf.pdfgenMS import createpdf
