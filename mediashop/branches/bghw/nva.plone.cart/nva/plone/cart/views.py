@@ -30,7 +30,7 @@ from zope.app.form.interfaces import WidgetInputError
 from zope.formlib.form import setUpWidgets
 from zope.app.form.browser.boolwidgets import CheckBoxWidget
 from zope.event import notify
-from zope.app.container.contained import ObjectAddedEvent
+from zope.container.contained import ObjectAddedEvent
 
 ORDERS = "orders"
 TEMPORDERS = "temp_print"
