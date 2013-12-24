@@ -39,7 +39,7 @@
           <h1 tal:content="context/title"/>
 
           <div style="float: right; position: relative;">
-          <table class="grid listing" width="200px">
+          <table class="table table-striped" width="200px">
             <tr><th>Ansprechpartner</th><td tal:content="context/contactName"/></tr>
             <tr><th>E-Mail</th><td><a href="" tal:attributes="href string:mailto:${context/contactEmail}" 
                   tal:content="context/contactEmail">E-Mail</a></td></tr>
@@ -82,7 +82,7 @@
                 für die Teilnahme am Seminar erfüllen.</p>
               </span>    
 
-          <table id="seminartermine" class="grid listing">
+          <table id="seminartermine" class="table table-striped">
             <tr>
               <th>Seminarbeginn</th>
               <th>Seminarende</th>
