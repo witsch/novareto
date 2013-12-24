@@ -2,7 +2,7 @@
 
 from zope.schema import Object, TextLine, Float, Bool
 from zope.interface import Interface, Attribute
-from zope.app.container.constraints import contains
+from zope.container.constraints import contains
 from nva.cart import ICartHandler
 
 
