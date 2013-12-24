@@ -21,6 +21,14 @@ def setupView(portal, out):
         viewlist = viewlist + ('downloadwoid_view',)
     typetopic.manage_changeProperties(view_methods = viewlist)
 
+    typecollection = typesTool['Collection']
+    viewlist = typecollection.getProperty('view_methods', d=None)
+    if 'filedownload_view' not in viewlist:
+        viewlist = viewlist + ('filedownload_view',)
+    if 'downloadwoid_view' not in viewlist:
+        viewlist = viewlist + ('downloadwoid_view',)
+    typecollection.manage_changeProperties(view_methods = viewlist)
+
     out.append("Successfully installed novareto download")
 
 def importVarious(context):
