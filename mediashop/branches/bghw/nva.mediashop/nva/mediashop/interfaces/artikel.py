@@ -2,7 +2,7 @@
 
 from zope import schema
 from zope.interface import Interface
-from zope.app.container.constraints import contains, containers
+from zope.container.constraints import contains, containers
 
 from nva.mediashop import mediashopMessageFactory as _
 
