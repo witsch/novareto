@@ -74,8 +74,11 @@ class FacebookPosts(Container):
         return fb_messages
 
     def getSocialContent(self):
-        return self.getPosts()
-
+        try:
+            msgs = self.getPosts()
+        except:
+            msgs = []
+        return msgs
 
 # View class
 # The view will automatically use a similarly named template in
