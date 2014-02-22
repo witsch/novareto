@@ -1,6 +1,10 @@
 README.txt
 setup.cfg
 setup.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
 nva/__init__.py
 nva.download.egg-info/PKG-INFO
 nva.download.egg-info/SOURCES.txt
@@ -12,7 +16,16 @@ nva.download.egg-info/paster_plugins.txt
 nva.download.egg-info/requires.txt
 nva.download.egg-info/top_level.txt
 nva/download/__init__.py
+nva/download/configure.zcml
 nva/download/setuphandlers.py
 nva/download/tests.py
 nva/download/browser/__init__.py
+nva/download/browser/configure.zcml
+nva/download/browser/filedownloadview.pt
 nva/download/browser/filedownloadview.py
+nva/download/browser/orderingview.pt
+nva/download/browser/orderingview.py
+nva/download/browser/validorderview.py
+nva/download/profiles/default/import_steps.xml
+nva/download/profiles/default/metadata.xml
+nva/download/profiles/default/nva.download_various.txt

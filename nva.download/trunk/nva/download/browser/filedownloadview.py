@@ -81,33 +81,32 @@ class filedownloadView(BrowserView):
         row='<tr class="%s">' %trclass
         if self.__name__ == 'filedownload_view':
             if obj.getOrderable():
-                checkbox = '<td class="%s"><input type="checkbox" name="auswahl" value="%s"</td>' %(tdclass, obj.UID())
+                checkbox = '<td data-title="Hier klicken"><input type="checkbox" name="auswahl" value="%s"</td>' % obj.UID()
             else:
-                checkbox = '<td class="%s"></td>' % tdclass
+                checkbox = '<td></td>'
             row += checkbox
 
         if self.__name__ == 'filedownload_view':
-            nr = '<td class="%s" ><p>%s</p></td>' % (tdclass, obj.id)
+            nr = '<td data-title="Nr."><p>%s</p></td>' % obj.id
             row += nr
 
-        title = '<td class="%s"><p>%s</p>\r\n' % (tdclass, obj.Title())
+        title = '<td data-title="Titel"><p>%s</p>\r\n' % obj.Title()
         description = ''
         if obj.Description():
 	    description = '<p class="discreet">%s</p>\r\n' %obj.Description()
         titdesc=title+description+'</td>'
         row += titdesc
 
-        myimage = '<td class="%s">' %tdclass
+        myimage = '<td data-title="Bild">' 
         if obj.getImage():
 	    url = obj.absolute_url() + '/image/image_view_fullscreen'
             img = obj.tag(width=150, height=150)
-	    #img = obj.getField('image').tag(obj, title=obj.getImageCaption(), css_class='tileImage', width=200, height=200)
 	    image = '<a href="%s">%s</a>\r\n' %(url, img)
 	    myimage += image
         myimage += '</td>\r\n'
         row += myimage
 
-        download = '<td align="left" class="%s">' %tdclass
+        download = '<td data-title="Download" align="left">' 
         if obj.getFile().size > 0:
             icon = obj.getFile().content_type.split('/')[1]
             kuerzel = icon.upper()
