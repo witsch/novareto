@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="nva.customnavigation">
+
+    <interface interface=".interfaces.IMyNavigationMarker" />
+
+    <plone:portletRenderer
+      portlet="plone.app.portlets.portlets.navigation.INavigationPortlet"
+      for="*"
+      class=".navigation.MyNavRenderer"
+    />
+
+</configure>
