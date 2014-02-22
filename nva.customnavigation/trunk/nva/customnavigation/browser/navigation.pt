@@ -13,27 +13,13 @@
         <span class="portletTopRight"></span>
     </dt>
 
-    <dd class="portletItem lastItem backLinkItem"
-        tal:condition="view/back_name">
-      <ul class="navTree">
-        <li class=navMenu><a href="#" tal:attributes="href view/back_url">
-            <!--img src="arrow_left_blue_round.png"-->
-            <span tal:content="view/back_name"/>
-	    <span class="naviTopRight"/>
-          </a>
-        </li>
-      </ul>
-    </dd>
-
     <dd class="portletItem lastItem">
         <ul class="navTree navTreeLevel0">
             <li tal:define="selectedClass view/root_item_class;
                             li_class python:selectedClass and ' navTreeCurrentNode' or '';
-                            normalizeString nocall:context/plone_utils/normalizeString;
-                            section_title root/Title;
-                            section python:normalizeString(section_title);"
+                            normalizeString nocall:context/plone_utils/normalizeString;"
                 tal:condition="view/include_top"
-                tal:attributes="class string:navTreeItem navTreeTopNode${li_class} section-${section}">
+                tal:attributes="class string:navTreeItem navTreeTopNode${li_class}">
                 <div tal:define="rootIsPortal view/root_is_portal;
                                  root_icon view/root_icon;
                                  root_type root/portal_type;
