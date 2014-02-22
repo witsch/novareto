@@ -1,0 +1,17 @@
+README.txt
+setup.cfg
+setup.py
+nva/__init__.py
+nva.customglossary.egg-info/PKG-INFO
+nva.customglossary.egg-info/SOURCES.txt
+nva.customglossary.egg-info/dependency_links.txt
+nva.customglossary.egg-info/entry_points.txt
+nva.customglossary.egg-info/namespace_packages.txt
+nva.customglossary.egg-info/not-zip-safe
+nva.customglossary.egg-info/paster_plugins.txt
+nva.customglossary.egg-info/requires.txt
+nva.customglossary.egg-info/top_level.txt
+nva/customglossary/__init__.py
+nva/customglossary/tests.py
+nva/customglossary/browser/__init__.py
+nva/customglossary/browser/interfaces.py
