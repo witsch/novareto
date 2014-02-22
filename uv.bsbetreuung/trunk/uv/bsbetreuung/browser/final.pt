@@ -16,7 +16,7 @@
        tal:condition="view/gb"
        tal:define="gb view/gb">
     <h1 i18n:translate="">1. Grundbetreuung</h1>
-      <table>
+      <table class="table table-striped">
         <tr>
           <td i18n:translate="">WZ-Kode Ihres Betriebes:</td><td><span tal:content="gb/wzcodenr|nothing"/></td>
         </tr><tr>

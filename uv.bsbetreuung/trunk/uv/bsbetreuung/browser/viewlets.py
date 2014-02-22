@@ -24,7 +24,7 @@ class FinalViewlet(ViewletBase):
             return ""
         fragen = formatFragen(self.context)
         aufgaben = formatAufgaben(self.context)
-        table = '<table class="grid listing"><tr><th>%s</th>' % _(u'Aufgabenfelder')
+        table = '<table class="table table striped"><tr><th>%s</th>' % _(u'Aufgabenfelder')
         sortedFragen = getFragenInOrder(self.context)
         sortedValues = [i.id for i in sortedFragen if i.id in sb.get('sbvalues')]
         for i in sortedFragen:
