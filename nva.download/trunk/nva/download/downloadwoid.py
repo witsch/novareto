@@ -117,7 +117,7 @@ class DownloadWoid_View(uvcsite.Page):
                 if obj.getImage():
                     objectimages = True
             myobjectlist.append(obj)
-        table = '<table class="table table-striped>\r\n'
+        table = '<table class="table table-striped">\r\n'
         table += self.createTableHeader(objectimages)
         table += '<tbody>\r\n'
         for obj in myobjectlist:
