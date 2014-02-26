@@ -1,6 +1,11 @@
 from five import grok
 from uvc.api import api as uvcsite
 from zope.interface import Interface
+from Products.CMFCore.utils import getToolByName
+from Products.ATContentTypes.interface import IATTopic
+from plone.app.collection.interfaces import ICollection
+from Products.CMFCore.interfaces import IFolderish
+
 
 grok.templatedir('templates')
 
@@ -119,14 +124,14 @@ class Filedownload_View(uvcsite.Page):
                 if obj.getImage():
                     objectimages = True
             myobjectlist.append(obj)
-        table = '<table class="table table-striped>\r\n'
+        table = '<table class="table table-striped">\r\n'
         table += self.createTableHeader(objectimages)
         table += '<tbody>\r\n'
         for obj in myobjectlist:
             if obj.portal_type == 'MediaFile':
-                table += self.createTableFromMF(obj, objectimages)
+                table += self.createZeileFromMF(obj, objectimages)
             else:
-                table += self.createTableFromObject(obj, objectimages)
+                table += self.createZeileFromObject(obj, objectimages)
         table += '</tbody>\r\n'
         table += '</table>\r\n'
         self.table = table
