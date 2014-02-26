@@ -1,0 +1,33 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:grok="http://namespaces.zope.org/grok"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <include package="five.grok" />
+  <grok:grok package="." />
+
+  <genericsetup:registerProfile
+                name="default"
+                title="nva.download"
+                directory="profiles/default"
+                description="Installs the download package"
+                provides="Products.GenericSetup.interfaces.EXTENSION"
+  /> 
+
+  <browser:menuItems
+      for="*"
+      menu="plone_displayviews">
+      <browser:menuItem
+          title="Datei-Download"
+          action="filedownload_view"
+          description="A Download-View for Files"
+          />
+      <browser:menuItem
+          title="Datei-Download (ohne ID)"
+          action="downloadwoid_view"
+          description="A Download-View for Files"
+          />
+  </browser:menuItems>
+
+</configure>
+

@@ -1,0 +1,10 @@
+<div tal:define="table view/table">
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
+    <h1 tal:content="context/title"/>
+    <div tal:replace="structure provider:plone.belowcontenttitle" />
+    <p tal:content="context/Description"/>
+    <div tal:replace="structure provider:plone.abovecontentbody" />
+    <span tal:replace="structure table"/>
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+</div>
+

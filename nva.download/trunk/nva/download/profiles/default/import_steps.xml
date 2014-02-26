@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="download-various" version="2014-02-26"
+              handler="nva.download.setuphandlers.importVarious"
+              title="download-view setup">
+  download-view setup
+ </import-step>
+</import-steps>

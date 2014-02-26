@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: nva.download
+Version: 2.0
+Summary: A project to render a download view for folder contents
+Home-page: http://svn.plone.org/svn/collective/
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        2.0 - Unreleased
+        ----------------
+        
+        * Initial release
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
