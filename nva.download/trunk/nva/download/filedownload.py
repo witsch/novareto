@@ -92,14 +92,14 @@ class Filedownload_View(uvcsite.Page):
         if objectimages:
             row = """<tr><td data-title="Nr.">%s</td><td data-title="Titel"><p><b>%s</b></p><p class="discreet">%s</p></td> 
                      <td data-title="Bild">kein Bild vorhanden</td><td data-title="Download">
-                     <a class="download-link" target="_blank" href="%s">Dokument</a></td></tr>""" % (obj.id
+                     <a class="download-link" target="_blank" href="%s">Dokument</a></td></tr>""" % (obj.id,
                                                                                                      obj.Title(),
                                                                                                      obj.Description(),
                                                                                                      obj.absolute_url(),)
         else:
             row = """<tr><td data-title="Nr.">%s</td><td data-title="Titel"><p><b>%s</b></p><p class="discreet">%s</p></td> 
                      <td data-title="Download"> 
-                     <a class="download-link" target="_blank" href="%s">Dokument</a></td></tr>""" % (obj.id
+                     <a class="download-link" target="_blank" href="%s">Dokument</a></td></tr>""" % (obj.id,
                                                                                                      obj.Title(),
                                                                                                      obj.Description(),
                                                                                                      obj.absolute_url(),)
