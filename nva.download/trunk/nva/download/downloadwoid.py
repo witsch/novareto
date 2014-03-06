@@ -85,6 +85,38 @@ class DownloadWoid_View(uvcsite.Page):
         row += '</tr>\r\n'
         return row
 
+    def createZeileFromOrientierung(self, obj, objectimages):
+        """
+        Create an row of Download-Table from an OrientierungssystemObject
+        """
+
+        row='<tr>'
+        title = '<td data-title="Titel"><p>%s</p>\r\n' % obj.title
+        description = ''
+        if obj.Description():
+            description = '<p class="discreet">%s</p>\r\n' %obj.description
+        titdesc=title+description+'</td>'
+        row += titdesc
+
+        if objectimages:
+            myimage = '<td data-title="Bild">'
+            if obj.image:
+                url = obj.absolute_url()
+                img = '<img width="150" src="%s/@@download/image/%s">' % (obj.absolute_url(), obj.image.filename)
+                image = '<a href="%s">%s</a>\r\n' %(url, img)
+                myimage += image
+            myimage += '</td>\r\n'
+            row += myimage
+
+        download = '<td data-title="Download" align="left">'
+        filedownload = """<a class="download-link" href="%s/mypdfdruck">
+                          <span class="discreet">(PDF Papierformat: A1)</span></a>""" % obj.absolute_url()
+        download += filedownload
+        download += '</td>\r\n'
+        row += download
+        row += '</tr>\r\n'
+        return row
+
     def createZeileFromObject(self, obj, objectimages):
         """
         Create a row for Download-View from any other object
@@ -116,6 +148,9 @@ class DownloadWoid_View(uvcsite.Page):
             if obj.portal_type == "MediaFile":
                 if obj.getImage():
                     objectimages = True
+            if obj.portal_type in ['nva.orientierungssystem.richtungsanzeiger',]:
+                if obj.image:
+                    objectimages = True
             myobjectlist.append(obj)
         table = '<table class="table table-striped">\r\n'
         table += self.createTableHeader(objectimages)
@@ -123,6 +158,8 @@ class DownloadWoid_View(uvcsite.Page):
         for obj in myobjectlist:
             if obj.portal_type == 'MediaFile':
                 table += self.createZeileFromMF(obj, objectimages)
+            elif obj.portal_type in ['nva.orientierungssystem.richtungsanzeiger',]:
+                table += self.createZeileFromOrientierung(obj, objectimages)
             else:
                 table += self.createZeileFromObject(obj, objectimages)
         table += '</tbody>\r\n'
