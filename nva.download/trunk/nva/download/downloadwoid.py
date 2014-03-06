@@ -148,7 +148,9 @@ class DownloadWoid_View(uvcsite.Page):
             if obj.portal_type == "MediaFile":
                 if obj.getImage():
                     objectimages = True
-            if obj.portal_type in ['nva.orientierungssystem.richtungsanzeiger',]:
+            if obj.portal_type in ['nva.orientierungssystem.richtungsanzeiger',
+                                   'nva.orientierungssystem.etagenanzeiger',
+                                   'nva.orientierungssystem.standortanzeiger']:
                 if obj.image:
                     objectimages = True
             myobjectlist.append(obj)
@@ -158,7 +160,9 @@ class DownloadWoid_View(uvcsite.Page):
         for obj in myobjectlist:
             if obj.portal_type == 'MediaFile':
                 table += self.createZeileFromMF(obj, objectimages)
-            elif obj.portal_type in ['nva.orientierungssystem.richtungsanzeiger',]:
+            elif obj.portal_type in ['nva.orientierungssystem.richtungsanzeiger',
+                                     'nva.orientierungssystem.etagenanzeiger',
+                                     'nva.orientierungssystem.standortanzeiger']:
                 table += self.createZeileFromOrientierung(obj, objectimages)
             else:
                 table += self.createZeileFromObject(obj, objectimages)

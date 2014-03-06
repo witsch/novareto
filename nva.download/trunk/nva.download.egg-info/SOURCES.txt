@@ -10,3 +10,6 @@ nva.download.egg-info/not-zip-safe
 nva.download.egg-info/requires.txt
 nva.download.egg-info/top_level.txt
 nva/download/__init__.py
+nva/download/downloadwoid.py
+nva/download/filedownload.py
+nva/download/setuphandlers.py
