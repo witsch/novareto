@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: nva.flgdesktop
+Version: 1.0
+Summary: Spezielle Ansichten fuer den Online-Fernlehrgang
+Home-page: http://svn.plone.org/svn/collective/
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        1.0 - Unreleased
+        ----------------
+        
+        * Initial release
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python

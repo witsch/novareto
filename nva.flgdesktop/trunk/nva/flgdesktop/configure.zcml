@@ -1,0 +1,29 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:grok="http://namespaces.zope.org/grok"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <include package="five.grok" />
+  <include package="plone.app.z3cform" />
+  <include package="plone.app.contentmenu" />
+  <grok:grok package="." />
+
+  <genericsetup:registerProfile
+   name="default"
+   title="nva.flgdesktop"
+   directory="profiles/default"
+   description="Installs the flgdesktop package"
+   provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+
+  <browser:menuItems
+   for="*"
+   menu="plone_displayviews">
+   <browser:menuItem
+    title="FLG-Desktop"
+    action="flgdesktop"
+    description="A special Desktop for FLG-Users"
+   />
+  </browser:menuItems>
+
+</configure>

@@ -1,0 +1,4 @@
+<div tal:define="table viewlet/table">
+    <span tal:replace="structure table"/>
+</div>
+

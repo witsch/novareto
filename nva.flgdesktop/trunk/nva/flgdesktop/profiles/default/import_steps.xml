@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="flgdesktop-various" version="2014-03-19"
+              handler="nva.flgdesktop.setuphandlers.importVarious"
+              title="flgdesktop setup">
+  flgdesktop setup
+ </import-step>
+</import-steps>

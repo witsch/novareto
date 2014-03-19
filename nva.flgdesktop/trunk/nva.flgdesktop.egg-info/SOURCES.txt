@@ -1,0 +1,13 @@
+README.txt
+setup.py
+nva/__init__.py
+nva.flgdesktop.egg-info/PKG-INFO
+nva.flgdesktop.egg-info/SOURCES.txt
+nva.flgdesktop.egg-info/dependency_links.txt
+nva.flgdesktop.egg-info/entry_points.txt
+nva.flgdesktop.egg-info/namespace_packages.txt
+nva.flgdesktop.egg-info/not-zip-safe
+nva.flgdesktop.egg-info/requires.txt
+nva.flgdesktop.egg-info/top_level.txt
+nva/flgdesktop/__init__.py
+nva/flgdesktop/app.py
