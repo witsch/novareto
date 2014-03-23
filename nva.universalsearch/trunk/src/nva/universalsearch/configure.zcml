@@ -13,6 +13,10 @@
 
   <include file="profiles.zcml" />
 
+  <include package="z3c.jbot" file="meta.zcml" />
+   
+  <browser:jbot directory="customtemplates" />
+
   <adapter name="system" factory=".attributes.system" />
   <adapter name="uri" factory=".attributes.uri" />
 

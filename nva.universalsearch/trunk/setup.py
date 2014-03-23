@@ -55,6 +55,7 @@ setup(name='nva.universalsearch',
       install_requires=[
         'setuptools',
         'collective.solr',
+        'z3c.jbot',
       ],
       extras_require=dict(test=[
         'collective.testcaselayer',
