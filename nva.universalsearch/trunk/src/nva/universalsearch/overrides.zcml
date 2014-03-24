@@ -11,4 +11,8 @@
     <adapter
         factory=".flare.PloneFlare" />
 
+    <adapter
+        factory=".flare.FlareContentListingObject"
+        for=".flare.PloneFlare" />
+
 </configure>

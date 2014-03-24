@@ -24,6 +24,6 @@ class UniversalSearch(Search):
         if 'path_parents' in args and not 'path_depth' in args:
             portal = getUtility(IPloneSiteRoot)
             portal_path = '/'.join(portal.getPhysicalPath())
-            if args['path_parents'] == portal_path:
+            if args['path_parents'] == '"\\%s"' % portal_path:
                 del args['path_parents']
         return super(UniversalSearch, self).buildQuery(default, system=system, **args)
