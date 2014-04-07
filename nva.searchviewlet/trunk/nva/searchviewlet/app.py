@@ -25,6 +25,7 @@ class NvaSearch(api.Page):
 
     def checkWebcode(self, suchtext, path):
         pcat = self.portal_catalog
+        suchtext = suchtext.decode('utf-8')
         if path:
             brains = self.portal_catalog(Webcode=suchtext, path=path)
         else:

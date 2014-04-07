@@ -17,3 +17,4 @@ nva/searchviewlet/configure.zcml
 nva/searchviewlet/ftesting.zcml
 nva/searchviewlet/tests.py
 nva/searchviewlet/static/main.css
+nva/searchviewlet/templates/nvasearchviewlet.cpt
