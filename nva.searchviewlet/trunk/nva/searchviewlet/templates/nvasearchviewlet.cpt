@@ -1,6 +1,8 @@
 <div id="portal-searchbox">
   <form id="nvasearch" action="@@nvasearch">
     <div class="LSBox">
+      <input type="hidden" name="advanced_search" value="False" />
+      <input type="hidden" name="sort_on" value="" />
       <input id="searchGadget" class="searchField" type="text" accesskey="4" placeholder="Suchbegriff / Webcode" 
            name="SearchableText" size="18" tile="Begriff/Webcode" autocomplete="off">
       <input class="searchButton" type="submit" value="Suche">

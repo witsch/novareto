@@ -48,7 +48,8 @@ class NvaSearch(api.Page):
             webcodeurl = self.checkWebcode(suchtext, path)
             if webcodeurl:
                 return self.request.response.redirect(webcodeurl)
-        url = '%s/@@search?SearchableText=%s' %(self.portal_url, suchtext)
+        searchfacets = '&facet=true&facet.field=portal_type&facet.field=review_state&facet.field=system'
+        url = '%s/@@search?SearchableText=%s%s' %(self.portal_url, suchtext, searchfacets)
         if path:
-            url = '%s/@@search?SearchableText=%s&path=%s' %(self.portal_url, suchtext, path)
+            url = '%s/@@search?SearchableText=%s&path=%s%s' %(self.portal_url, suchtext, path, searchfacets)
         return self.request.response.redirect(url)
