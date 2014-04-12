@@ -1,3 +1,5 @@
+from datetime import datetime
+from DateTime import DateTime
 from collective.solr import flare
 from collective.solr.contentlisting import FlareContentListingObject
 
@@ -14,4 +16,7 @@ class FlareContentListingObject(FlareContentListingObject):
 
 
     def EffectiveDate(self, zone=None):
-        return self.flare.effective
+        date = self.flare.effective
+        if date.year() < 1900:
+            date = DateTime(datetime.now())
+        return date
