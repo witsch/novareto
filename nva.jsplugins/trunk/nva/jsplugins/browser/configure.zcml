@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:resource
+      name="jquery.emailSpamProtection.1.0.js"
+      file="jquery.emailSpamProtection.1.0.js"
+      />
+
+  <browser:resource
+      name="activateSpamProtection.js"
+      file="activateSpamProtection.js"
+      />
+
+</configure>

@@ -1,0 +1,15 @@
+README.txt
+setup.cfg
+setup.py
+nva/__init__.py
+nva.jsplugins.egg-info/PKG-INFO
+nva.jsplugins.egg-info/SOURCES.txt
+nva.jsplugins.egg-info/dependency_links.txt
+nva.jsplugins.egg-info/entry_points.txt
+nva.jsplugins.egg-info/namespace_packages.txt
+nva.jsplugins.egg-info/not-zip-safe
+nva.jsplugins.egg-info/paster_plugins.txt
+nva.jsplugins.egg-info/requires.txt
+nva.jsplugins.egg-info/top_level.txt
+nva/jsplugins/__init__.py
+nva/jsplugins/tests.py
