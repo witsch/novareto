@@ -1,0 +1,17 @@
+README.txt
+setup.py
+bghw/__init__.py
+bghw.portlet.mediashop.egg-info/PKG-INFO
+bghw.portlet.mediashop.egg-info/SOURCES.txt
+bghw.portlet.mediashop.egg-info/dependency_links.txt
+bghw.portlet.mediashop.egg-info/entry_points.txt
+bghw.portlet.mediashop.egg-info/namespace_packages.txt
+bghw.portlet.mediashop.egg-info/not-zip-safe
+bghw.portlet.mediashop.egg-info/requires.txt
+bghw.portlet.mediashop.egg-info/top_level.txt
+bghw/portlet/__init__.py
+bghw/portlet/mediashop/__init__.py
+bghw/portlet/mediashop/mediashopportlet.py
+bghw/portlet/mediashop/tests/__init__.py
+bghw/portlet/mediashop/tests/base.py
+bghw/portlet/mediashop/tests/test_portlet.py

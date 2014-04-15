@@ -1,0 +1,22 @@
+<dl class="portlet portletMediashopPortlet"
+  i18n:domain="bghw.portlet.mediashop"
+  tal:define="artikel view/artikel;
+              url view/shop_url">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span tal:content="string: Warenkorb"/>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem odd">
+    <span tal:content="string: ${artikel} im Warenkorb"/>
+    </dd>
+
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <a href="" tal:attributes="href url">zum Warenkorb</a>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

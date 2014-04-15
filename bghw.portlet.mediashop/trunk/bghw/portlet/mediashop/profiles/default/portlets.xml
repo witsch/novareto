@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<portlets>
+
+ <!-- Portlet type registrations -->
+
+ <portlet
+   addview="bghw.portlet.mediashop.MediashopPortlet"
+   title="Medienshop Portlet"
+   description="Portlet fuer die Anzeige des Bestellstatus im Warenkorb"
+   />
+
+</portlets>
