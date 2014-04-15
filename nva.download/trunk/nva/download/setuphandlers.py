@@ -11,6 +11,8 @@ def setupView(portal, out):
         viewlist = viewlist + ('filedownload_view',)
     if 'downloadwoid_view' not in viewlist:
         viewlist = viewlist + ('downloadwoid_view',)
+    if 'ordering_view' not in viewlist:
+        viewlist = viewlist + ('ordering_view',)
     typefolder.manage_changeProperties(view_methods = viewlist)
 
     typetopic = typesTool['Topic']
@@ -19,6 +21,8 @@ def setupView(portal, out):
         viewlist = viewlist + ('filedownload_view',)
     if 'downloadwoid_view' not in viewlist:
         viewlist = viewlist + ('downloadwoid_view',)
+    if 'ordering_view' not in viewlist:
+        viewlist = viewlist + ('ordering_view',)
     typetopic.manage_changeProperties(view_methods = viewlist)
 
     typecollection = typesTool['Collection']
@@ -27,6 +31,8 @@ def setupView(portal, out):
         viewlist = viewlist + ('filedownload_view',)
     if 'downloadwoid_view' not in viewlist:
         viewlist = viewlist + ('downloadwoid_view',)
+    if 'ordering_view' not in viewlist:
+        viewlist = viewlist + ('ordering_view',)
     typecollection.manage_changeProperties(view_methods = viewlist)
 
     out.append("Successfully installed novareto download")

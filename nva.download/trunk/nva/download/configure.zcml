@@ -29,6 +29,11 @@
           action="downloadwoid_view"
           description="A Download-View for Files"
           />
+      <browser:menuItem
+          title="Bestellansicht Medienshop"
+          action="ordering_view"
+          description="A View for Ordering Artikel"
+          />
   </browser:menuItems>
 
 </configure>
