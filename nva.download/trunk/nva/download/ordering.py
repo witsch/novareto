@@ -125,8 +125,8 @@ class Ordering_View(uvcsite.Page):
                                                                                        obj.fileref.to_object.absolute_url(),
                                                                                        kuerzel,
                                                                                        obj.fileref.to_object.getFile().size()/1000,)
-            warenkorb = '<a href="%s/@@tocard?redirect=%s">In den Warenkorb</a>' % (obj.absolute_url(),
-                                                                                    context.absolute_url(),)
+            warenkorb = '<a class="internal-link" href="%s/@@tocard?redirect=%s">In den Warenkorb</a>' % (obj.absolute_url(),
+                                                                                                          context.absolute_url(),)
             download += filedownload
             download += warenkorb
         download += '</td>\r\n'
