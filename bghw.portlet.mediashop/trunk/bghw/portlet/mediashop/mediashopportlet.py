@@ -45,6 +45,12 @@ class IMediashopPortlet(IPortletDataProvider):
                          source=SearchableTextSourceBinder({'is_folderish': True},
                                                             default_query='path:'))
 
+    nutzungsbedingungen = schema.Choice(title= u"Seite mit Nutzungsbedingungen",
+                         description=u"Bitte waehlen Sie hier die Seite mit den Nutzungsbedingungen fuer den\
+                                       Medienshop aus.",
+                         required=True,
+                         source=SearchableTextSourceBinder({'is_folderish': False},
+                                                            default_query='path:'))
 
 class Assignment(base.Assignment):
     """Portlet assignment.
@@ -61,14 +67,16 @@ class Assignment(base.Assignment):
 
     titel = u"Mein Warenkorb"
     shop = None
+    nutzungsbedingungen = None
 
     # TODO: Add keyword parameters for configurable parameters here
     # def __init__(self, some_field=u""):
     #    self.some_field = some_field
 
-    def __init__(self, titel=u"Mein Warenkorb", shop=None):
+    def __init__(self, titel=u"Mein Warenkorb", shop=None, nutzungsbedingungen=None):
         self.titel = titel
         self.shop = shop
+        self.nutzungsbedingungen = nutzungsbedingungen
 
     @property
     def title(self):
@@ -90,7 +98,13 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return self.context.aq_inner.session_data_manager.hasSessionData()
+        test = self.context.aq_inner.session_data_manager.hasSessionData()
+        if not test:
+            return False
+        korb = len(getSessionCookie(self.context.aq_inner).keys())
+        if korb == 0:
+            return False
+        return True
 
     @property
     def artikel(self):
@@ -98,7 +112,20 @@ class Renderer(base.Renderer):
 
     @property
     def shop_url(self):
-        return self.context.aq_inner.portal_url() + self.data.shop + '/medienbestellung'
+        return self.context.aq_inner.portal_url() + self.data.shop + '/@@medienbestellung'
+
+    @property
+    def portlet_titel(self):
+        return self.data.titel
+
+    @property
+    def bedingungen(self):
+        return self.context.aq_inner.portal_url() + self.data.nutzungsbedingungen
+
+    @property
+    def del_link(self):
+        shopurl = self.context.aq_inner.portal_url() + self.data.shop
+        return shopurl + '/@@delcard?redirect=%s' % shopurl
 
 class AddForm(base.AddForm):
     """Portlet add form.

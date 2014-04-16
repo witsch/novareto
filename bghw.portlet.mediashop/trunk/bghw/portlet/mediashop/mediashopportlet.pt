@@ -1,7 +1,10 @@
 <dl class="portlet portletMediashopPortlet"
   i18n:domain="bghw.portlet.mediashop"
   tal:define="artikel view/artikel;
-              url view/shop_url">
+              url view/shop_url;
+              titel view/portlet_titel;
+              bedingungen view/bedingungen;
+              del_link view/del_link">
 
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
@@ -10,12 +13,17 @@
     </dt>
 
     <dd class="portletItem odd">
-    <span tal:content="string: ${artikel} im Warenkorb"/>
+    <span tal:condition="python: artikel == 1" tal:content="string: Ein Artikel befindet sich im Warenkorb."/>
+    <span tal:condition="python: artikel > 1" tal:content="string: ${artikel} Artikel befinden sich im Warenkorb."/>
     </dd>
 
     <dd class="portletFooter">
-        <span class="portletBottomLeft"></span>
-        <a href="" tal:attributes="href url">zum Warenkorb</a>
+    <span class="portletBottomLeft"></span>
+       <ul>
+         <li><a class="internal-link" href="" tal:attributes="href url">zur Bestellung</a></li>
+         <li><a class="internal-link" href="" tal:attributes="href bedingungen">Nutzungsbedingungen</a></li>
+         <li><a class="internal-link" href "" tal:attributes="href del_link">Warenkorb leeren</a></li>
+       </ul>  
         <span class="portletBottomRight"></span>
     </dd>
 
