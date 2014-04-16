@@ -28,7 +28,6 @@ def setSessionCookie(context, cookie):
     """
     Schreibt das Cookie in die Session
     """
-    print cookie
     session = context.session_data_manager.getSessionData()
     session.set('cart', cookie)
 
@@ -46,6 +45,18 @@ class ToCard(grok.View):
             menge += 1
             cookie[self.context.artikelnummer] = {'artikel':self.context, 'menge':menge}
             setSessionCookie(self.context, cookie)
+
+    def render(self):
+        url = self.request.get('redirect')
+        return self.request.response.redirect(url)
+
+class DelCard(grok.View):
+    """View-Klasse um die Daten des Cookies zu loeschen"""
+    grok.context(Interface)
+
+    def update(self):
+        session = self.context.session_data_manager.getSessionData()
+        del session['cart']
 
     def render(self):
         url = self.request.get('redirect')
@@ -79,11 +90,15 @@ class medienBestellung(uvcsite.Form):
         if not isinstance(aktuell, Marker):
             if self.request.form.get('form.field.bestellung.remove'):
                 artikel = len(data.get('bestellung'))
-                for i in range(artikel):
-                    if self.request.get('form.field.bestellung.checked.%s' %i) == 'on':
-                        delart = self.request.get('form.field.bestellung.field.%s.field.artikel' %i)
+                requestkeys = self.request.keys()
+                for i in requestkeys:
+                    if i.startswith('form.field.bestellung.checked'):
+                        fieldid = i.split('.')[-1]
+                        delart = self.request.get('form.field.bestellung.field.%s.field.artikel' %fieldid)
                         del cookie[delart]
                 setSessionCookie(self.context, cookie)
+                if not cookie:
+                    return self.request.response.redirect(self.context.absolute_url())
         #Default - Belegung des Formularfeldes Bestellung
         self.label = "Bestellformular"
         mydefault = []
