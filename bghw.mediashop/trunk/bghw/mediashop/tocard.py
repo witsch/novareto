@@ -78,7 +78,6 @@ class medienBestellung(uvcsite.Form):
     grok.context(Interface)
     fields = Fields(IBestellung)
     grok.implements(IArtikelListe)
-    #grok.title = "Raumschild drucken"
 
     def update(self):
         #Lesen des Cookies aus der Session
