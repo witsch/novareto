@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from five import grok
 from uvc.api import api as uvcsite
 from zope.interface import Interface
@@ -35,6 +36,12 @@ class Ordering_View(uvcsite.Page):
                        <th>Download</th>
                        </tr>
                        </thead>
+                       <colgroup>
+                       <col width="10%">
+                       <col width="40%">
+                       <col width="20%">
+                       <col width="30%">
+                       </colgroup>
                        """
         else:
             theader =  """
@@ -99,10 +106,10 @@ class Ordering_View(uvcsite.Page):
         nr = '<td data-title="Nr."><p>%s</p></td>' % obj.artikelnummer
         row += nr
 
-        title = '<td data-title="Titel"><p>%s</p>\r\n' % obj.Title()
+        title = '<td data-title="Titel"><p><a class="internal-link" href="%s">%s</a></p>\r\n' % (obj.absolute_url(), obj.title)
         description = ''
         if obj.Description():
-            description = '<p class="discreet">%s</p>\r\n' %obj.Description()
+            description = '<p class="discreet">%s</p>\r\n' %obj.description
         titdesc=title+description+'</td>'
         row += titdesc
 
@@ -110,7 +117,7 @@ class Ordering_View(uvcsite.Page):
             myimage = '<td data-title="Bild">'
             if obj.bild:
                 url = obj.absolute_url() + '/@@download/bild/' + obj.bild.filename
-                img = '<img width="150" src="%s"/>' % url
+                img = '<img width="100" src="%s"/>' % url
                 image = '<a href="%s">%s</a>\r\n' %(url, img)
                 myimage += image
             myimage += '</td>\r\n'
