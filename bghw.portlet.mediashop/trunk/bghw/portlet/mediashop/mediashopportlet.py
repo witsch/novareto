@@ -4,7 +4,7 @@ from zope.interface import implements
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
-from bghw.mediashop.tocard import getSessionCookie
+from bghw.mediashop.card import getSessionCookie
 
 # TODO: If you define any fields for the portlet configuration schema below
 # do not forget to uncomment the following import

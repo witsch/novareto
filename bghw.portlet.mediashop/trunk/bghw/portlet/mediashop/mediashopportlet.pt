@@ -8,21 +8,21 @@
 
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
-        <span tal:content="string: Warenkorb"/>
+        <span tal:content="string: BGHW-Medienshop"/>
         <span class="portletTopRight"></span>
     </dt>
 
     <dd class="portletItem odd">
-    <span tal:condition="python: artikel == 1" tal:content="string: Ein Artikel befindet sich im Warenkorb."/>
-    <span tal:condition="python: artikel > 1" tal:content="string: ${artikel} Artikel befinden sich im Warenkorb."/>
+      <p tal:condition="python: artikel == 1" tal:content="string: ${artikel} Artikel befindet sich im Warenkorb."/>
+      <p tal:condition="python: artikel > 1" tal:content="string: ${artikel} Artikel befinden sich im Warenkorb."/>
     </dd>
 
     <dd class="portletFooter">
     <span class="portletBottomLeft"></span>
        <ul>
-         <li><a class="internal-link" href="" tal:attributes="href url">zur Bestellung</a></li>
-         <li><a class="internal-link" href="" tal:attributes="href bedingungen">Nutzungsbedingungen</a></li>
+         <li><a class="internal-link" href="" tal:attributes="href url">zum Warenkorb</a></li>
          <li><a class="internal-link" href "" tal:attributes="href del_link">Warenkorb leeren</a></li>
+         <li><a class="internal-link" href="" tal:attributes="href bedingungen">Nutzungsbedingungen</a></li>
        </ul>  
         <span class="portletBottomRight"></span>
     </dd>
