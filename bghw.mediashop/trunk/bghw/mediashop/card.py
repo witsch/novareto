@@ -123,7 +123,7 @@ class medienBestellung(uvcsite.Form):
         message = message.encode('utf-8')
         betreff = u'Neue Bestellung aus dem BGHW-Mediashop'
         try:
-            mailhost.send(msg, mto=mailto, mfrom=mailfrom, subject=betreff, charset='utf-8')
+            mailhost.send(message, mto=mailto, mfrom=mailfrom, subject=betreff, charset='utf-8')
         except:
             print 'kein Mailversand'
 
