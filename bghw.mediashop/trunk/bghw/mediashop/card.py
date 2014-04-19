@@ -80,6 +80,7 @@ class medienBestellung(uvcsite.Form):
     """Form fuer die Bestellung"""
     grok.context(Interface)
     fields = Fields(IBestellung)
+    fields['hinweis'].mode = "radio"
     grok.implements(IArtikelListe)
 
     def update(self):
@@ -96,6 +97,13 @@ class medienBestellung(uvcsite.Form):
             setSessionCookie(self.context, cookie)
             if not cookie:
                 return self.request.response.redirect(self.context.absolute_url())
+        #Setzen der Accordion-Klassen
+        self.collapseOne = 'row accordion-body in collapse'
+        self.collapseTwo = 'accordion-body collapse'
+        if self.request.form.get('form.action.bestellen') == 'bestellen':
+            self.collapseOne = 'row accordion-body collapse'
+            self.collapseTwo = 'accordion-body in collapse'
+
         #Default - Belegung des Formularfeldes Bestellung
         self.label = "Bestellformular"
         mydefault = []
@@ -109,6 +117,7 @@ class medienBestellung(uvcsite.Form):
     def handle_send(self):
         data, errors = self.extractData()
         if errors:
+            import pdb;pdb.set_trace()
             return
         print data
         #params = urllib.urlencode(data)
@@ -117,7 +126,3 @@ class medienBestellung(uvcsite.Form):
 
 class My_Fields(grok.View):
     grok.context(Interface)
-
-    def update(self):
-        import pdb;pdb.set_trace()
-

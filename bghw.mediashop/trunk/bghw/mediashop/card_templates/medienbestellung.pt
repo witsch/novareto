@@ -48,7 +48,7 @@
             Ihr Warenkorb
             </a>
           </div>
-          <div id="collapseOne" class="row accordion-body collapse in">
+          <div id="collapseOne" class="" tal:attributes="class view/collapseOne">
             <div class="row">
               <div class="span16" tal:define="widget python: view.fieldWidgets.get('form.field.bestellung')">
                 <div metal:use-macro="context/@@my_fields/myfields"/>
@@ -63,7 +63,7 @@
             Weiter mit Ihrer Bestellung
             </a>
           </div>
-          <div id="collapseTwo" class="accordion-body collapse">
+          <div id="collapseTwo" class="" tal:attributes="class view/collapseTwo">
             <div class="row">
               <div class="field" tal:define="widget python: view.fieldWidgets.get('form.field.mitgliedsnummer')">
                 <div metal:use-macro="context/@@my_fields/myfields"/>

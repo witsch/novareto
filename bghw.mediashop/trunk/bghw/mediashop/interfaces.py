@@ -2,6 +2,40 @@
 from zope import schema
 from zope.interface import Interface
 from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema import ValidationError
+from uvc.validation import validateMail, validatePhone, validatePLZ
+
+class NotValidMnr(ValidationError):
+    u""" keine korrekte Mitgliedsnummer! """
+
+def validateMNR(value):
+    if value:
+        if len(value) != 10:
+            raise NotValidMnr(value)
+        else:
+            if value[4] != '-':
+                raise NotValidMnr(value)
+    return True
+
+class NotValidAnrede(ValidationError):
+    u""" Bitte treffen Sie eine Auswahl 'Herr' oder 'Frau' für die Anrede. """
+
+def validateAnrede(value):
+    if value:
+        if value == u'Auswahl':
+            raise NotValidAnrede(value)
+    return True
+
+class NotValidHinweis(ValidationError):
+    u""" Bitte bestätigen Sie die Nutzungsbedingungen für den BGHW-Medienshop. """
+
+
+def validateHinweis(value):
+    return True
+    if value:
+        if value == u'nein':
+            raise NotValidHinweis(value)
+    return True
 
 class IArtikelListe(Interface):
     """Schema fuer die Artikelliste einer Bestellung"""
@@ -33,14 +67,16 @@ class IBestellung(Interface):
                                       description = u'Die Artikel des Medienshops können nur von\
                                       Mitgliedsbetrieben der BGHW auf diesem Weg bestellt werden.\
                                       Bitte geben Sie hier Ihre Mitgliedsnummer bei der BGHW an.',
-                                      required = True,)
+                                      required = True,
+                                      constraint = validateMNR,)
 
     firma = schema.TextLine(title = u'Firma', required = True)
 
     anrede = schema.Choice(title = u'Anrede',
                            description = u'Bitte treffen Sie eine Auswahl.',
                            vocabulary = SimpleVocabulary.fromValues([u'Auswahl', u'Herr', u'Frau']),
-                           required = True,)
+                           required = True,
+                           constraint = validateAnrede,)
 
     titel = schema.Choice(title = u'Titel',
                           description = u'Bitte treffen Sie eine Auswahl.',
@@ -54,13 +90,13 @@ class IBestellung(Interface):
 
     strhnr = schema.TextLine(title = u'Straße und Hausnummer', required = True)
 
-    plz = schema.TextLine(title = u'Postleitzahl', required = True)
+    plz = schema.TextLine(title = u'Postleitzahl', required = True, constraint=validatePLZ)
 
     ort = schema.TextLine(title = u'Ort', required = True)
 
     telefon = schema.TextLine(title = u'Telefon', required = False)
 
-    email = schema.TextLine(title = u'eMail', required = True)
+    email = schema.TextLine(title = u'eMail', required = True, constraint=validateMail)
 
     lieferung = schema.Bool(title = u'abweichende Lieferadresse',
                             description = u'Bitte hier markieren, wenn eine abweichende Lieferanschrift\
@@ -90,10 +126,11 @@ class IBestellung(Interface):
 
     a_ort = schema.TextLine(title = u'Ort', required = False)
 
-    hinweis = schema.Bool(title = u'Hinweise zur Bestellung',
+    hinweis = schema.Choice(title = u'Hinweise zur Bestellung',
                           description = u'Einverständniserklärung mit den Nutzungsbedingungen der BGHW\
                           die der Benutzer bestätigen muss.',
-                          default = False,
-                          required = True)
+                          vocabulary = SimpleVocabulary.fromValues([u'ja', u'nein']),
+                          required = True,
+                          constraint = validateHinweis,)
 
 

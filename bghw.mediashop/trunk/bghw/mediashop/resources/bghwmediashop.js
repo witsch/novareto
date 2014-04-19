@@ -12,4 +12,5 @@ jq(document).ready(function() {
     jq("#form-field-lieferung").click(function() {
         jq('fieldset#bghw\\.medienshop\\.lieferung').toggle();
     });
+
 });

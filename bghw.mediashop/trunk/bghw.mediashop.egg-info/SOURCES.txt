@@ -185,10 +185,10 @@ bghw/mediashop/Artikel.txt
 bghw/mediashop/INTEGRATION.txt
 bghw/mediashop/__init__.py
 bghw/mediashop/artikel.py
+bghw/mediashop/card.py
 bghw/mediashop/configure.zcml
 bghw/mediashop/interfaces.py
 bghw/mediashop/tests.py
-bghw/mediashop/tocard.py
 bghw/mediashop/artikel_templates/sampleview.pt
 bghw/mediashop/locales/README.txt
 bghw/mediashop/models/artikel.xml
