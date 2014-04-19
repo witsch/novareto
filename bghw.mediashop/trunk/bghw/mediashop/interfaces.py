@@ -43,8 +43,9 @@ class IBestellung(Interface):
                            required = True,)
 
     titel = schema.Choice(title = u'Titel',
-                          description = u'Bitte treffen Sie hier gegebenenfalls eine Auswahl.',
-                          vocabulary = SimpleVocabulary.fromValues([u'Auswahl', u'Dr.', u'Prof.']),
+                          description = u'Bitte treffen Sie eine Auswahl.',
+                          vocabulary = SimpleVocabulary.fromValues([u'kein Titel', u'Dr.', u'Prof.']),
+                          default = u'kein Titel',
                           required = False,)
 
     vorname = schema.TextLine(title = u'Vorname', required = True)
@@ -64,7 +65,7 @@ class IBestellung(Interface):
     lieferung = schema.Bool(title = u'abweichende Lieferadresse',
                             description = u'Bitte hier markieren, wenn eine abweichende Lieferanschrift\
                             gewünscht wird.',
-                            default = True,)
+                            default = False,)
 
     a_firma = schema.TextLine(title = u'Firma', required = False)
 
@@ -74,8 +75,9 @@ class IBestellung(Interface):
                              required = False,)
 
     a_titel = schema.Choice(title = u'Titel',
-                            description = u'Bitte treffen Sie hier gegebenenfalls eine Auswahl.',
-                            vocabulary = SimpleVocabulary.fromValues([u'Auswahl', u'Dr.', u'Prof.']),
+                            description = u'Bitte treffen Sie eine Auswahl.',
+                            vocabulary = SimpleVocabulary.fromValues([u'kein Titel', u'Dr.', u'Prof.']),
+                            default = u'kein Titel',
                             required = False,)
 
     a_vorname = schema.TextLine(title = u'Vorname', required = False)

@@ -14,6 +14,9 @@ from zeam.form.base.markers import Marker
 from plone.dexterity.content import Container
 from bghw.mediashop.interfaces import IArtikelListe, IBestellung
 from zope.component.interfaces import IFactory
+from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+
+grok.templatedir('card_templates')
 
 def getSessionCookie(context):
     """
@@ -83,21 +86,16 @@ class medienBestellung(uvcsite.Form):
         #Lesen des Cookies aus der Session
         cookie = getSessionCookie(self.context)
         #Loeschen von Artikeln in der Session wenn im Formular geloescht wird
-        artikel = 0
-        data =  self.extractData()[0]
-        aktuell = data.get('bestellung')
-        if not isinstance(aktuell, Marker):
-            if self.request.form.get('form.field.bestellung.remove'):
-                artikel = len(data.get('bestellung'))
-                requestkeys = self.request.keys()
-                for i in requestkeys:
-                    if i.startswith('form.field.bestellung.checked'):
-                        fieldid = i.split('.')[-1]
-                        delart = self.request.get('form.field.bestellung.field.%s.field.artikel' %fieldid)
-                        del cookie[delart]
-                setSessionCookie(self.context, cookie)
-                if not cookie:
-                    return self.request.response.redirect(self.context.absolute_url())
+        if self.request.form.get('form.field.bestellung.remove'):
+            requestkeys = self.request.keys()
+            for i in requestkeys:
+                if i.startswith('form.field.bestellung.checked'):
+                    fieldid = i.split('.')[-1]
+                    delart = self.request.get('form.field.bestellung.field.%s.field.artikel' %fieldid)
+                    del cookie[delart]
+            setSessionCookie(self.context, cookie)
+            if not cookie:
+                return self.request.response.redirect(self.context.absolute_url())
         #Default - Belegung des Formularfeldes Bestellung
         self.label = "Bestellformular"
         mydefault = []
@@ -116,4 +114,10 @@ class medienBestellung(uvcsite.Form):
         #params = urllib.urlencode(data)
         #myurl = self.request.getURL() + '?' + params
         #return self.redirect(myurl)
+
+class My_Fields(grok.View):
+    grok.context(Interface)
+
+    def update(self):
+        import pdb;pdb.set_trace()
 
