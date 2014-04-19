@@ -31,7 +31,7 @@ class IArtikel(form.Schema, IImageScaleTraversable):
                        title=u'Artikelbeschreibung',
                        description=u'Bitte formulieren Sie hier eine ausführliche Beschreibung\
                                      für den Artikel.',
-                       required = True,
+                       required = False,
                        )
 
     artikelnummer = schema.TextLine(
