@@ -86,6 +86,7 @@ class medienBestellung(uvcsite.Form):
     def update(self):
         #Lesen des Cookies aus der Session
         cookie = getSessionCookie(self.context)
+
         #Loeschen von Artikeln in der Session wenn im Formular geloescht wird
         if self.request.form.get('form.field.bestellung.remove'):
             requestkeys = self.request.keys()
@@ -97,6 +98,7 @@ class medienBestellung(uvcsite.Form):
             setSessionCookie(self.context, cookie)
             if not cookie:
                 return self.request.response.redirect(self.context.absolute_url())
+
         #Setzen der Accordion-Klassen
         self.collapseOne = 'row accordion-body in collapse'
         self.collapseTwo = 'accordion-body collapse'
@@ -105,7 +107,6 @@ class medienBestellung(uvcsite.Form):
             self.collapseTwo = 'accordion-body in collapse'
 
         #Default - Belegung des Formularfeldes Bestellung
-        self.label = "Bestellformular"
         mydefault = []
         for i in cookie:
             mydefault.append(Order(artikel = i,
@@ -117,7 +118,6 @@ class medienBestellung(uvcsite.Form):
     def handle_send(self):
         data, errors = self.extractData()
         if errors:
-            import pdb;pdb.set_trace()
             return
         print data
         #params = urllib.urlencode(data)
