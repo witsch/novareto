@@ -120,9 +120,17 @@ class medienBestellung(uvcsite.Form):
         if errors:
             return
         print data
+        redirect = self.context.absolute_url() + '/@@thankyouview'
+        url = self.context.absolute_url() + '/@@delcard'
+        url = '%s?redirect=%s' % (url, redirect)
+        return self.request.response.redirect(url)
         #params = urllib.urlencode(data)
         #myurl = self.request.getURL() + '?' + params
         #return self.redirect(myurl)
 
 class My_Fields(grok.View):
     grok.context(Interface)
+
+class ThankYouView(uvcsite.Page):
+    grok.context(Interface)
+
