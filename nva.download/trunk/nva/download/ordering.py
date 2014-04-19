@@ -30,10 +30,10 @@ class Ordering_View(uvcsite.Page):
             theader =  """
                        <thead>
                        <tr>
-                       <th>Nr.</th>
+                       <th>Artikelnr.</th>
                        <th>Titel</th>
                        <th>Bild</th>
-                       <th>Download</th>
+                       <th>Download/Bestellung</th>
                        </tr>
                        </thead>
                        <colgroup>
@@ -47,9 +47,9 @@ class Ordering_View(uvcsite.Page):
             theader =  """
                        <thead>
                        <tr>
-                       <th>Nr.</th>
+                       <th>Artikelnr.</th>
                        <th>Titel</th>
-                       <th>Download</th>
+                       <th>Download/Bestellung</th>
                        </tr>
                        </thead>
                        """
@@ -62,7 +62,7 @@ class Ordering_View(uvcsite.Page):
         """
 
         row='<tr>'
-        nr = '<td data-title="Nr."><p>%s</p></td>' % obj.id
+        nr = '<td data-title="Artikelnr."><p>%s</p></td>' % obj.id
         row += nr
 
         title = '<td data-title="Titel"><p>%s</p>\r\n' % obj.Title()
@@ -82,7 +82,7 @@ class Ordering_View(uvcsite.Page):
             myimage += '</td>\r\n'
             row += myimage
 
-        download = '<td data-title="Download" align="left">'
+        download = '<td data-title="Download/Bestellung" align="left">'
         if obj.getFile().size > 0:
             icon = obj.getFile().content_type.split('/')[1]
             kuerzel = icon.upper()
