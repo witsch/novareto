@@ -45,7 +45,7 @@
 <div class="accordion-group">
 <div class="accordion-heading">
 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-Liste der bestellten Artikel
+Ihr Warenkorb
 </a>
 </div>
       <div id="collapseOne" class="row accordion-body collapse in">
