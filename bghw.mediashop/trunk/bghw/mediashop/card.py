@@ -12,9 +12,10 @@ from zeam.form.plone import Form
 from zeam.form.base import Fields, action
 from zeam.form.base.markers import Marker
 from plone.dexterity.content import Container
-from bghw.mediashop.interfaces import IArtikelListe, IBestellung
 from zope.component.interfaces import IFactory
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+from bghw.mediashop.interfaces import IArtikelListe, IBestellung
+from bghw.mediashop.lib.mailer import createMessage
 
 grok.templatedir('card_templates')
 
@@ -114,12 +115,24 @@ class medienBestellung(uvcsite.Form):
                                    anzahl = cookie[i]['menge']))
         self.fields.get('bestellung').defaultValue = mydefault
 
+    def finalizeOrder(self, data):
+        mailhost = getToolByName(self.context, 'MailHost')
+        mailfrom = 'bghwportal@bghw.de'
+        mailto = data.get('email')
+        message = createMessage(data)
+        message = message.encode('utf-8')
+        betreff = u'Neue Bestellung aus dem BGHW-Mediashop'
+        try:
+            mailhost.send(msg, mto=mailto, mfrom=mailfrom, subject=betreff, charset='utf-8')
+        except:
+            print 'kein Mailversand'
+
     @uvcsite.action('bestellen')
     def handle_send(self):
         data, errors = self.extractData()
         if errors:
             return
-        print data
+        self.finalizeOrder(data)
         redirect = self.context.absolute_url() + '/@@thankyouview'
         url = self.context.absolute_url() + '/@@delcard'
         url = '%s?redirect=%s' % (url, redirect)
