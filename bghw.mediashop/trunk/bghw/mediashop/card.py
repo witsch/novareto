@@ -104,7 +104,7 @@ class medienBestellung(uvcsite.Form):
         self.collapseOne = 'row accordion-body in collapse'
         self.collapseTwo = 'accordion-body collapse'
         if self.request.form.get('form.action.bestellen') == 'bestellen':
-            self.collapseOne = 'row accordion-body collapse'
+            self.collapseOne = 'row accordion-body in collapse'
             self.collapseTwo = 'accordion-body in collapse'
 
         #Default - Belegung des Formularfeldes Bestellung

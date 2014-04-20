@@ -34,12 +34,11 @@
       </p>
       -->
 
-      <div class="form-error"
-           tal:repeat="error view/formErrors"
-           tal:content="error/title">
-        Form error
-      </div>
-
+      <dl class="portalMessage error"
+          tal:repeat="error view/formErrors">
+          <dt tal:content="error/title"/>
+          <dd> Bitte korrigiern Sie die angezeigten Fehler. </dd>
+      </dl>
 
       <div class="accordion" id="accordion2">
         <div class="accordion-group">
