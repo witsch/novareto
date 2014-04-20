@@ -4,6 +4,7 @@ from zope.interface import Interface
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema import ValidationError
 from uvc.validation import validateMail, validatePhone, validatePLZ
+from bghw.mediashop.mnrtest import mnrtest
 
 class NotValidMnr(ValidationError):
     u""" keine korrekte Mitgliedsnummer! """
@@ -15,6 +16,7 @@ def validateMNR(value):
         else:
             if value[4] != '-':
                 raise NotValidMnr(value)
+        erg = mnrtest(value)
     return True
 
 class NotValidAnrede(ValidationError):

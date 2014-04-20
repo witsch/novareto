@@ -29,6 +29,7 @@ setup(name='bghw.mediashop',
           'plone.app.dexterity [grok, relations]',
           'plone.app.relationfield',
           'plone.namedfile [blobs]',
+          'z3c.suds',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
