@@ -2,14 +2,11 @@ from z3c.suds import get_suds_client
 from suds.sudsobject import asdict
 
 def mnrtest(mnr):
-    print "Test der Validierung von Mitgliedsnummern"
     try:
         client = get_suds_client('https://bghwwebservices.bg-kooperation.de/services/Service757/Service757.asmx?WSDL')
     except:
         return True
     result = client.service.S757(mnr,'00')
-    import pdb;pdb.set_trace()
-    print result
     if not result:
         return True
     if result.INFO.RETURNCODE == -1:

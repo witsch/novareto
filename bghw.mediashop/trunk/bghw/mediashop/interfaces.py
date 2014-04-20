@@ -11,12 +11,12 @@ class NotValidMnr(ValidationError):
 
 def validateMNR(value):
     if value:
-        if len(value) != 10:
+        if len(value) == 10:
+            value = value.replace('-', '')
+        if len(value) != 9 or not value.isdigit():
             raise NotValidMnr(value)
-        else:
-            if value[4] != '-':
-                raise NotValidMnr(value)
-        erg = mnrtest(value)
+        if not  mnrtest(value):
+            raise NotValidMnr(value)
     return True
 
 class NotValidAnrede(ValidationError):

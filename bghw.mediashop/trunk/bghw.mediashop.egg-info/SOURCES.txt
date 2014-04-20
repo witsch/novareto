@@ -188,8 +188,14 @@ bghw/mediashop/artikel.py
 bghw/mediashop/card.py
 bghw/mediashop/configure.zcml
 bghw/mediashop/interfaces.py
+bghw/mediashop/mnrtest.py
 bghw/mediashop/tests.py
 bghw/mediashop/artikel_templates/sampleview.pt
+bghw/mediashop/card_templates/medienbestellung.pt
+bghw/mediashop/card_templates/my_fields.pt
+bghw/mediashop/card_templates/thankyouview.pt
+bghw/mediashop/lib/__init__.py
+bghw/mediashop/lib/mailer.py
 bghw/mediashop/locales/README.txt
 bghw/mediashop/models/artikel.xml
 bghw/mediashop/profiles/default/jsregistry.xml
