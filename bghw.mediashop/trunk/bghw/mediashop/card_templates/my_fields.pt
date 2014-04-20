@@ -15,7 +15,7 @@
           </tal:description>
           <tal:error tal:define="error widget/error"
                      tal:condition="error">
-            <span class="field-error"
+            <span class="error"
                   tal:content="error/title">
               Error
             </span>

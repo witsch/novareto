@@ -31,7 +31,6 @@ class NotValidHinweis(ValidationError):
 
 
 def validateHinweis(value):
-    return True
     if value:
         if value == u'nein':
             raise NotValidHinweis(value)
