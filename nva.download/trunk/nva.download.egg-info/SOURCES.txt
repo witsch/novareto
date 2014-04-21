@@ -1,5 +1,6 @@
 README.txt
 setup.py
+docs/HISTORY.txt
 nva/__init__.py
 nva.download.egg-info/PKG-INFO
 nva.download.egg-info/SOURCES.txt

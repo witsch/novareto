@@ -62,8 +62,14 @@ class Filedownload_View(uvcsite.Page):
         description = ''
         if obj.Description():
             description = '<p class="discreet">%s</p>\r\n' %obj.Description()
-        titdesc=title+description+'</td>'
-        row += titdesc
+	refs = ''    
+	if obj.getReferences():
+	  refs = '<p><b>Weitere Informationen:</b></p><ul>'
+	  for i in obj.getReferences():
+	    refs += '<li><a class="internal-link" href="%s">%s</a></li>' % (i.absolute_url(), i.title)
+	  refs += '</ul>'  
+        titdescrefs=title+description+refs+'</td>'
+        row += titdescrefs
 
         if objectimages:
             myimage = '<td data-title="Bild">'
