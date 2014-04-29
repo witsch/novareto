@@ -1,6 +1,10 @@
 README.txt
 setup.cfg
 setup.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
 nva/__init__.py
 nva.customglossary.egg-info/PKG-INFO
 nva.customglossary.egg-info/SOURCES.txt
@@ -12,6 +16,9 @@ nva.customglossary.egg-info/paster_plugins.txt
 nva.customglossary.egg-info/requires.txt
 nva.customglossary.egg-info/top_level.txt
 nva/customglossary/__init__.py
+nva/customglossary/configure.zcml
 nva/customglossary/tests.py
 nva/customglossary/browser/__init__.py
+nva/customglossary/browser/configure.zcml
+nva/customglossary/browser/glossaryportlet.pt
 nva/customglossary/browser/interfaces.py
