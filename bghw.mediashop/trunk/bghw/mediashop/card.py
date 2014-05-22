@@ -16,6 +16,7 @@ from zope.component.interfaces import IFactory
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from bghw.mediashop.interfaces import IArtikelListe, IBestellung
 from bghw.mediashop.lib.mailer import createMessage
+from bghw.mediashop.lib.service import addToWS
 
 grok.templatedir('card_templates')
 
@@ -42,12 +43,12 @@ class ToCard(grok.View):
     def update(self):
         cookie = getSessionCookie(self.context)
         if not cookie.has_key(self.context.artikelnummer):
-            cookie[self.context.artikelnummer] = {'artikel':self.context, 'menge':1}
+            cookie[self.context.artikelnummer] = {'artikel':self.context, 'bestellung':self.context.bestellnummer, 'menge':1}
             setSessionCookie(self.context, cookie)
         else:
             menge = cookie[self.context.artikelnummer]['menge']
             menge += 1
-            cookie[self.context.artikelnummer] = {'artikel':self.context, 'menge':menge}
+            cookie[self.context.artikelnummer] = {'artikel':self.context, 'bestellung': self.context.bestellnummer, 'menge':menge}
             setSessionCookie(self.context, cookie)
 
     def render(self):
@@ -111,21 +112,29 @@ class medienBestellung(uvcsite.Form):
         mydefault = []
         for i in cookie:
             mydefault.append(Order(artikel = i,
+                                   bestellnummer = cookie[i]['bestellung'],
                                    beschreibung = cookie[i]['artikel'].title,
                                    anzahl = cookie[i]['menge']))
         self.fields.get('bestellung').defaultValue = mydefault
 
     def finalizeOrder(self, data):
         mailhost = getToolByName(self.context, 'MailHost')
-        mailfrom = 'bghwportal@bghw.de'
+        mailfrom = 'medien@bghw.de'
         mailto = data.get('email')
-        message = createMessage(data)
+        try:
+            bestellnummer = addToWS(data)
+        except:
+            bestellnummer = None
+        print bestellnummer
+        message = createMessage(data, bestellnummer)
         message = message.encode('utf-8')
         betreff = u'Neue Bestellung aus dem BGHW-Mediashop'
         try:
             mailhost.send(message, mto=mailto, mfrom=mailfrom, subject=betreff, charset='utf-8')
         except:
             print 'kein Mailversand'
+        if not bestellnummer:
+            mailhost.send(message, mto='a.lill@bghw.de', mfrom='bghwportal@bghw.de', subject=betreff, charset='utf-8')
 
     @uvcsite.action('bestellen')
     def handle_send(self):

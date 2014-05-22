@@ -7,7 +7,9 @@ from uvc.validation import validateMail, validatePhone, validatePLZ
 from bghw.mediashop.mnrtest import mnrtest
 
 class NotValidMnr(ValidationError):
-    u""" keine korrekte Mitgliedsnummer! """
+    u""" Für die Bestellung im Medienshop der BGHW ist eine gültige Mitgliedsnummer erforderlich. Sollte Ihnen die 
+         Mitgliedsnummer nicht vorliegen oder Ihr Betrieb kein Mitglied der BGHW sein, wenden Sie sich bitte per E-Mail
+         an: medien@bghw.de. """
 
 def validateMNR(value):
     if value:
@@ -41,11 +43,13 @@ def validateHinweis(value):
 class IArtikelListe(Interface):
     """Schema fuer die Artikelliste einer Bestellung"""
 
-    artikel = schema.TextLine(title = u'Artikelnummer', required = True)
+    artikel = schema.TextLine(title = u'Art.-nr.', required = True)
+
+    bestellnummer = schema.TextLine(title = u'Bestellnummer', required = True)
 
     beschreibung = schema.TextLine(title = u'Beschreibung', required = True)
 
-    anzahl = schema.Int(title = u'Bestellmenge', required = True)
+    anzahl = schema.Int(title = u'Anzahl', required = True)
 
 
 class IBestellung(Interface):
@@ -97,7 +101,7 @@ class IBestellung(Interface):
 
     telefon = schema.TextLine(title = u'Telefon', required = False)
 
-    email = schema.TextLine(title = u'eMail', required = True, constraint=validateMail)
+    email = schema.TextLine(title = u'E-Mail', required = True, constraint=validateMail)
 
     lieferung = schema.Bool(title = u'abweichende Lieferadresse',
                             description = u'Bitte hier markieren, wenn eine abweichende Lieferanschrift\

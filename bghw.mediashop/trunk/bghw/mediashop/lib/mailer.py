@@ -1,30 +1,29 @@
 # -*- coding: utf-8 -*-
 
-def createMessage(data):
-    message = """\
-Das ist die Bestellung des Mitgliedsbetriebes:
-"""
+def createMessage(data, bestellnummer=None):
+    message = u"""\
+Sehr geehrte Dame, sehr geehrter Herr,
+
+Ihre Bestellung im Medienshop der BGHW ist bei uns eingegangen. Sie haben folgende
+Artikel bei uns bestellt:"""
+
     for i in data.get('bestellung'):
-        message += """\
-Artikelnummer:  %s
-Bezeichnung:    %s
-Menge:          %s
+        message += u"""%s %s Bestellmenge: %s""" % (i.artikel, i.beschreibung, i.anzahl)
 
-""" % (i.artikel, i.beschreibung, i.anzahl)
 
-    message += """\
-Mitgliedsnummer:    %s
-Firma:              %s
-Titel:              %s
-Anrede:             %s
-Vorname:            %s
-Name:               %s
+    if bestellnummer:
+        message += u"""\
+Bei Rückfragen wenden Sie sich bitte per E-Mail an: medien@bghw.de und geben dabei bitte 
+stets Ihre Bestellnummer an: %s.""" %bestellnummer
 
-""" % (data.get('mitgliedsnummer'),
-       data.get('firma'),
-       data.get('titel'),
-       data.get('anrede'),
-       data.get('vorname'),
-       data.get('name'),)
-    print message
+    else:
+        message += u"""\
+Bei Rückfragen wenden Sie sich bitte per E-Mail an: medien@bghw.de und geben dabei folgende
+Nummer an: EMail*****%s.""" %data.get('mitgliedsnummer')[-5:]
+        
+    message += u"""\
+Mit freundlichen Grüßen
+
+Ihre BGHW."""
+
     return message

@@ -34,9 +34,16 @@ class IArtikel(form.Schema, IImageScaleTraversable):
                        required = False,
                        )
 
+    bestellnummer = schema.TextLine(
+                       title=u'Bestellnummer',
+                       description=u'Bitte tragen Sie hier die Bestellnummer oder Kurzbezeichnung für den\
+                                     Artikel ein.',
+                       required = True,
+                       )
+
     artikelnummer = schema.TextLine(
                        title=u'Artikelnummer',
-                       description=u'Bitte tragen Sie hier die Artikelnummer ein.',
+                       description=u'Bitte tragen Sie hier die Artikelnummer aus dem Warenwirtschaftssystem ein.',
                        required = True,
                        )
 
