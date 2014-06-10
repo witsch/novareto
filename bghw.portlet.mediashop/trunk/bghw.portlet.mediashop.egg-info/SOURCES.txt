@@ -11,7 +11,16 @@ bghw.portlet.mediashop.egg-info/requires.txt
 bghw.portlet.mediashop.egg-info/top_level.txt
 bghw/portlet/__init__.py
 bghw/portlet/mediashop/__init__.py
+bghw/portlet/mediashop/configure.zcml
+bghw/portlet/mediashop/mediashopportlet.pt
 bghw/portlet/mediashop/mediashopportlet.py
+bghw/portlet/mediashop/version.txt
+bghw/portlet/mediashop/profiles/default/metadata.xml
+bghw/portlet/mediashop/profiles/default/portlets.xml
 bghw/portlet/mediashop/tests/__init__.py
 bghw/portlet/mediashop/tests/base.py
 bghw/portlet/mediashop/tests/test_portlet.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
