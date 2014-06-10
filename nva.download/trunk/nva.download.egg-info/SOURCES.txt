@@ -10,8 +10,15 @@ nva.download.egg-info/namespace_packages.txt
 nva.download.egg-info/not-zip-safe
 nva.download.egg-info/requires.txt
 nva.download.egg-info/top_level.txt
+nva/download/README.txt
 nva/download/__init__.py
+nva/download/configure.zcml
 nva/download/downloadwoid.py
 nva/download/filedownload.py
 nva/download/ordering.py
 nva/download/setuphandlers.py
+nva/download/profiles/default/import_steps.xml
+nva/download/profiles/default/nva.download_various.txt
+nva/download/templates/downloadwoid_view.pt
+nva/download/templates/filedownload_view.pt
+nva/download/templates/ordering_view.pt

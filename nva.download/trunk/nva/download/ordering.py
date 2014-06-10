@@ -30,7 +30,7 @@ class Ordering_View(uvcsite.Page):
             theader =  """
                        <thead>
                        <tr>
-                       <th>Artikelnr.</th>
+                       <th>Bestellnr.</th>
                        <th>Titel</th>
                        <th>Bild</th>
                        <th>Download/Bestellung</th>
@@ -47,7 +47,7 @@ class Ordering_View(uvcsite.Page):
             theader =  """
                        <thead>
                        <tr>
-                       <th>Artikelnr.</th>
+                       <th>Bestellnr.</th>
                        <th>Titel</th>
                        <th>Download/Bestellung</th>
                        </tr>
@@ -62,7 +62,7 @@ class Ordering_View(uvcsite.Page):
         """
 
         row='<tr>'
-        nr = '<td data-title="Artikelnr."><p>%s</p></td>' % obj.id
+        nr = '<td data-title="Bestellnummer."><p>%s</p></td>' % obj.id
         row += nr
 
         title = '<td data-title="Titel"><p>%s</p>\r\n' % obj.Title()
@@ -103,7 +103,7 @@ class Ordering_View(uvcsite.Page):
         """
 
         row='<tr>'
-        nr = '<td data-title="Nr."><p>%s</p></td>' % obj.artikelnummer
+        nr = '<td data-title="Nr."><p>%s</p></td>' % obj.bestellnummer
         row += nr
 
         title = '<td data-title="Titel"><p><a class="internal-link" href="%s">%s</a></p>\r\n' % (obj.absolute_url(), obj.title)
@@ -124,18 +124,25 @@ class Ordering_View(uvcsite.Page):
             row += myimage
 
         download = '<td data-title="Download" align="left">'
-        if obj.fileref:
+        if obj.fileref and obj.status in [u'lieferbar', u'nur Download']:
             icon = obj.fileref.to_object.getFile().content_type.split('/')[1]
             kuerzel = icon.upper()
             filedownload = """<a class="download-link" href="%s/at_download/file">
                               <span class="discreet">(%s, %s KByte)</span></a><br/>""" % (
                                                                                        obj.fileref.to_object.absolute_url(),
                                                                                        kuerzel,
-                                                                                       obj.fileref.to_object.getFile().size()/1000,)
+                                                                                       obj.fileref.to_object.getFile().size/1000,)
+            download += filedownload
+
+        if obj.status == u'lieferbar':
             warenkorb = '<a class="internal-link" href="%s/@@tocard?redirect=%s">In den Warenkorb</a>' % (obj.absolute_url(),
                                                                                                           context.absolute_url(),)
-            download += filedownload
             download += warenkorb
+
+        if obj.status == u'nicht lieferbar':
+            n_lieferbar = """Der Artikel ist im Moment leider nicht lieferbar."""
+            download += n_lieferbar
+
         download += '</td>\r\n'
         row += download
 
@@ -186,7 +193,10 @@ class Ordering_View(uvcsite.Page):
             if obj.portal_type == 'MediaFile':
                 table += self.createZeileFromMF(obj, objectimages)
             elif obj.portal_type == 'bghw.mediashop.artikel':
-                table += self.createZeileFromArtikel(obj, objectimages, self.context)
+                try:
+                    table += self.createZeileFromArtikel(obj, objectimages, self.context)
+                except:
+                    print obj.title
             else:
                 table += self.createZeileFromObject(obj, objectimages)
         table += '</tbody>\r\n'
