@@ -1,6 +1,10 @@
 README.txt
 setup.cfg
 setup.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
 nva/__init__.py
 nva.kurzfassung.egg-info/PKG-INFO
 nva.kurzfassung.egg-info/SOURCES.txt
@@ -12,7 +16,13 @@ nva.kurzfassung.egg-info/paster_plugins.txt
 nva.kurzfassung.egg-info/requires.txt
 nva.kurzfassung.egg-info/top_level.txt
 nva/kurzfassung/__init__.py
+nva/kurzfassung/configure.zcml
 nva/kurzfassung/setuphandlers.py
 nva/kurzfassung/tests.py
 nva/kurzfassung/browser/__init__.py
+nva/kurzfassung/browser/configure.zcml
+nva/kurzfassung/browser/enhanced_folder_summaryview.pt
 nva/kurzfassung/browser/enhanced_folder_summaryview.py
+nva/kurzfassung/profiles/default/import_steps.xml
+nva/kurzfassung/profiles/default/metadata.xml
+nva/kurzfassung/profiles/default/nva.kurzfassung_various.txt
