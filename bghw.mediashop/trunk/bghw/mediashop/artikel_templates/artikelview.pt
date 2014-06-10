@@ -22,7 +22,7 @@
         <p class="tileBody">
           <b>Bestellnummer: </b><span tal:content="context/bestellnummer"/><br/>
           <b>Stand: </b><span tal:content="context/stand"/><br/>
-          <span tal:content="structure python: context.beschreibung.output"/>
+          <span tal:condition="context/beschreibung" tal:content="structure python: context.beschreibung.output"/>
         </p>
         <p class="tileOrdering">
           <a tal:condition="python: context.fileref and context.status in [u'lieferbar', u'nur Download']" class="btn btn-small"
