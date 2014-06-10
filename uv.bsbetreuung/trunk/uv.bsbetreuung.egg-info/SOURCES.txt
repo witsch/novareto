@@ -26,5 +26,6 @@ uv/bsbetreuung/browser/final.pt
 uv/bsbetreuung/browser/viewlets.py
 uv/bsbetreuung/lib/__init__.py
 uv/bsbetreuung/lib/pdfgen.py
+uv/bsbetreuung/lib/pdfgen.sicherung
 uv/bsbetreuung/lib/test.py
 uv/bsbetreuung/profiles/default/metadata.xml
