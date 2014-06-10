@@ -25,9 +25,10 @@
 
   <!-- View information -->
   <property name="link_target"></property>
-  <property name="immediate_view">view</property>
-  <property name="default_view">view</property>
+  <property name="immediate_view">artikelview</property>
+  <property name="default_view">artikelview</property>
   <property name="view_methods">
+   <element value="artikelview"/>
    <element value="view"/>
   </property>
   <property name="default_view_fallback">False</property>

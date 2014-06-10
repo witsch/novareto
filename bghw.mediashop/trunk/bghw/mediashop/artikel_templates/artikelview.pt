@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="bghw.mediashop">
+<body>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+    <div class="media span16"
+         tal:define="picture nocall:context/bild">
+      <a class="span4 media-object">
+          <img class="media-object" tal:condition="picture" 
+               tal:attributes="src string:${context/absolute_url}/@@download/bild/${picture/filename};"/>
+      </a>
+      <div class="span12 media-body">
+        <p class="NewsDescription">
+        </p>
+        <p class="tileBody">
+          <b>Bestellnummer: </b><span tal:content="context/bestellnummer"/><br/>
+          <b>Stand: </b><span tal:content="context/stand"/><br/>
+          <span tal:content="structure python: context.beschreibung.output"/>
+        </p>
+        <p class="tileOrdering">
+          <a tal:condition="python: context.fileref and context.status in [u'lieferbar', u'nur Download']" class="btn btn-small"
+             tal:attributes="href python: context.fileref.to_object.absolute_url()">Download</a>
+          <a tal:condition="python: context.status == u'lieferbar'" class="btn btn-small"
+             tal:attributes="href python: context.absolute_url() + '/@@tocard?redirect=' + context.absolute_url()">In den Warenkorb</a>
+        </p>
+      </div>
+    </div>
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
