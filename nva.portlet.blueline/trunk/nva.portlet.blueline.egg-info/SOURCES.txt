@@ -1,5 +1,9 @@
 README.txt
 setup.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
 nva/__init__.py
 nva.portlet.blueline.egg-info/PKG-INFO
 nva.portlet.blueline.egg-info/SOURCES.txt
@@ -11,7 +15,12 @@ nva.portlet.blueline.egg-info/requires.txt
 nva.portlet.blueline.egg-info/top_level.txt
 nva/portlet/__init__.py
 nva/portlet/blueline/__init__.py
+nva/portlet/blueline/bluelineportlet.pt
 nva/portlet/blueline/bluelineportlet.py
+nva/portlet/blueline/configure.zcml
+nva/portlet/blueline/version.txt
+nva/portlet/blueline/profiles/default/metadata.xml
+nva/portlet/blueline/profiles/default/portlets.xml
 nva/portlet/blueline/tests/__init__.py
 nva/portlet/blueline/tests/base.py
 nva/portlet/blueline/tests/test_portlet.py
