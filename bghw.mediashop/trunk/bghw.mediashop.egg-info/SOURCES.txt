@@ -196,6 +196,7 @@ bghw/mediashop/card_templates/my_fields.pt
 bghw/mediashop/card_templates/thankyouview.pt
 bghw/mediashop/lib/__init__.py
 bghw/mediashop/lib/mailer.py
+bghw/mediashop/lib/service.py
 bghw/mediashop/locales/README.txt
 bghw/mediashop/models/artikel.xml
 bghw/mediashop/profiles/default/jsregistry.xml
