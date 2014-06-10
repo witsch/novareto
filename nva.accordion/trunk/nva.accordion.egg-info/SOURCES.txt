@@ -1,5 +1,6 @@
 README.txt
 setup.py
+docs/HISTORY.txt
 nva/__init__.py
 nva.accordion.egg-info/PKG-INFO
 nva.accordion.egg-info/SOURCES.txt
@@ -9,5 +10,9 @@ nva.accordion.egg-info/namespace_packages.txt
 nva.accordion.egg-info/not-zip-safe
 nva.accordion.egg-info/requires.txt
 nva.accordion.egg-info/top_level.txt
+nva/accordion/README.txt
 nva/accordion/__init__.py
 nva/accordion/app.py
+nva/accordion/configure.zcml
+nva/accordion/setuphandlers.py
+nva/accordion/templates/accordion_view.pt

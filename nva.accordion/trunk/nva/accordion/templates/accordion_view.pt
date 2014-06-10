@@ -7,12 +7,12 @@
 <div class="accordion" id="accordion2">
     <div tal:repeat="object objectlist" class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" 
-           href="" tal:attributes="href string: #${object/marker}" tal:content="object/title">Titel</a>
-        <p style="padding-left: 15px;" tal:content="object/desc">Description</p>
+        <h2><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" 
+           href="" tal:attributes="href string: #${object/marker}" tal:content="object/title">Titel</a></h2>
       </div>
       <div id="" tal:attributes="id object/marker" class="accordion-body collapse">
         <div class="accordion-inner">
+           <p class="documentDescription" tal:content="object/desc">Description</p>
            <span tal:content="structure object/text"/>
         </div>
       </div>

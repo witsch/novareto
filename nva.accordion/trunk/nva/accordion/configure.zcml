@@ -1,6 +1,28 @@
 <configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:grok="http://namespaces.zope.org/grok">
+           xmlns:grok="http://namespaces.zope.org/grok"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
   <include package="five.grok" />
   <grok:grok package="." />
+
+  <genericsetup:registerProfile
+                name="default"
+                title="nva.accordion"
+                directory="profiles/default"
+                description="Installs the accordion package"
+                provides="Products.GenericSetup.interfaces.EXTENSION"
+  /> 
+
+  <browser:menuItems
+      for="*"
+      menu="plone_displayviews">
+      <browser:menuItem
+          title="Akkordion-Ansicht"
+          action="accordion_view"
+          description="Eine Akkordion-Ansicht fuer Objekte"
+          />
+  </browser:menuItems>
+
 </configure>
 
