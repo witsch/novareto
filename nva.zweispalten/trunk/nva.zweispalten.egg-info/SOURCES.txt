@@ -1,6 +1,10 @@
 README.txt
 setup.cfg
 setup.py
+docs/HISTORY.txt
+docs/INSTALL.txt
+docs/LICENSE.GPL
+docs/LICENSE.txt
 nva/__init__.py
 nva.zweispalten.egg-info/PKG-INFO
 nva.zweispalten.egg-info/SOURCES.txt
@@ -12,7 +16,13 @@ nva.zweispalten.egg-info/paster_plugins.txt
 nva.zweispalten.egg-info/requires.txt
 nva.zweispalten.egg-info/top_level.txt
 nva/zweispalten/__init__.py
+nva/zweispalten/configure.zcml
 nva/zweispalten/setuphandlers.py
 nva/zweispalten/tests.py
 nva/zweispalten/browser/__init__.py
+nva/zweispalten/browser/configure.zcml
+nva/zweispalten/browser/zweispaltenview.pt
 nva/zweispalten/browser/zweispaltenview.py
+nva/zweispalten/profiles/default/import_steps.xml
+nva/zweispalten/profiles/default/metadata.xml
+nva/zweispalten/profiles/default/nva.zweispalten_various.txt
