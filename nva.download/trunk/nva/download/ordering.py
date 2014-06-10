@@ -125,13 +125,17 @@ class Ordering_View(uvcsite.Page):
 
         download = '<td data-title="Download" align="left">'
         if obj.fileref and obj.status in [u'lieferbar', u'nur Download']:
+            if obj.fileref.to_object.portal_type == 'File':
+                size = int(float(obj.fileref.to_object.getFile().get_size())/float(1000))
+            else:
+                size = obj.fileref.to_object.getFile().size/1000
             icon = obj.fileref.to_object.getFile().content_type.split('/')[1]
             kuerzel = icon.upper()
             filedownload = """<a class="download-link" href="%s/at_download/file">
                               <span class="discreet">(%s, %s KByte)</span></a><br/>""" % (
                                                                                        obj.fileref.to_object.absolute_url(),
                                                                                        kuerzel,
-                                                                                       obj.fileref.to_object.getFile().size/1000,)
+                                                                                       size)
             download += filedownload
 
         if obj.status == u'lieferbar':
@@ -193,10 +197,7 @@ class Ordering_View(uvcsite.Page):
             if obj.portal_type == 'MediaFile':
                 table += self.createZeileFromMF(obj, objectimages)
             elif obj.portal_type == 'bghw.mediashop.artikel':
-                try:
-                    table += self.createZeileFromArtikel(obj, objectimages, self.context)
-                except:
-                    print obj.title
+                table += self.createZeileFromArtikel(obj, objectimages, self.context)
             else:
                 table += self.createZeileFromObject(obj, objectimages)
         table += '</tbody>\r\n'
