@@ -1,4 +1,4 @@
-Metadata-Version: 1.0
+Metadata-Version: 1.1
 Name: nva.bsbetreuung
 Version: 1.0
 Summary: DGUV-Vorschrift-2 Modul Betriebsspezifische Betreuung
@@ -89,6 +89,252 @@ Description: .. contents::
             >>> browser.open(portal_url)
         
         -*- extra stuff goes here -*-
+        The Fragestellung content type
+        ===============================
+        
+        In this section we are tesing the Fragestellung content type by performing
+        basic operations like adding, updadating and deleting Fragestellung content
+        items.
+        
+        Adding a new Fragestellung content item
+        --------------------------------
+        
+        We use the 'Add new' menu to add a new content item.
+        
+            >>> browser.getLink('Add new').click()
+        
+        Then we select the type of item we want to add. In this case we select
+        'Fragestellung' and click the 'Add' button to get to the add form.
+        
+            >>> browser.getControl('Fragestellung').click()
+            >>> browser.getControl(name='form.button.Add').click()
+            >>> 'Fragestellung' in browser.contents
+            True
+        
+        Now we fill the form and submit it.
+        
+            >>> browser.getControl(name='title').value = 'Fragestellung Sample'
+            >>> browser.getControl('Save').click()
+            >>> 'Changes saved' in browser.contents
+            True
+        
+        And we are done! We added a new 'Fragestellung' content item to the portal.
+        
+        Updating an existing Fragestellung content item
+        ---------------------------------------
+        
+        Let's click on the 'edit' tab and update the object attribute values.
+        
+            >>> browser.getLink('Edit').click()
+            >>> browser.getControl(name='title').value = 'New Fragestellung Sample'
+            >>> browser.getControl('Save').click()
+        
+        We check that the changes were applied.
+        
+            >>> 'Changes saved' in browser.contents
+            True
+            >>> 'New Fragestellung Sample' in browser.contents
+            True
+        
+        Removing a/an Fragestellung content item
+        --------------------------------
+        
+        If we go to the home page, we can see a tab with the 'New Fragestellung
+        Sample' title in the global navigation tabs.
+        
+            >>> browser.open(portal_url)
+            >>> 'New Fragestellung Sample' in browser.contents
+            True
+        
+        Now we are going to delete the 'New Fragestellung Sample' object. First we
+        go to the contents tab and select the 'New Fragestellung Sample' for
+        deletion.
+        
+            >>> browser.getLink('Contents').click()
+            >>> browser.getControl('New Fragestellung Sample').click()
+        
+        We click on the 'Delete' button.
+        
+            >>> browser.getControl('Delete').click()
+            >>> 'Item(s) deleted' in browser.contents
+            True
+        
+        So, if we go back to the home page, there is no longer a 'New Fragestellung
+        Sample' tab.
+        
+            >>> browser.open(portal_url)
+            >>> 'New Fragestellung Sample' in browser.contents
+            False
+        
+        Adding a new Fragestellung content item as contributor
+        ------------------------------------------------
+        
+        Not only site managers are allowed to add Fragestellung content items, but
+        also site contributors.
+        
+        Let's logout and then login as 'contributor', a portal member that has the
+        contributor role assigned.
+        
+            >>> browser.getLink('Log out').click()
+            >>> browser.open(portal_url + '/login_form')
+            >>> browser.getControl(name='__ac_name').value = 'contributor'
+            >>> browser.getControl(name='__ac_password').value = default_password
+            >>> browser.getControl(name='submit').click()
+            >>> browser.open(portal_url)
+        
+        We use the 'Add new' menu to add a new content item.
+        
+            >>> browser.getLink('Add new').click()
+        
+        We select 'Fragestellung' and click the 'Add' button to get to the add form.
+        
+            >>> browser.getControl('Fragestellung').click()
+            >>> browser.getControl(name='form.button.Add').click()
+            >>> 'Fragestellung' in browser.contents
+            True
+        
+        Now we fill the form and submit it.
+        
+            >>> browser.getControl(name='title').value = 'Fragestellung Sample'
+            >>> browser.getControl('Save').click()
+            >>> 'Changes saved' in browser.contents
+            True
+        
+        Done! We added a new Fragestellung content item logged in as contributor.
+        
+        Finally, let's login back as manager.
+        
+            >>> browser.getLink('Log out').click()
+            >>> browser.open(portal_url + '/login_form')
+            >>> browser.getControl(name='__ac_name').value = portal_owner
+            >>> browser.getControl(name='__ac_password').value = default_password
+            >>> browser.getControl(name='submit').click()
+            >>> browser.open(portal_url)
+        
+        
+        The Aufgabe content type
+        ===============================
+        
+        In this section we are tesing the Aufgabe content type by performing
+        basic operations like adding, updadating and deleting Aufgabe content
+        items.
+        
+        Adding a new Aufgabe content item
+        --------------------------------
+        
+        We use the 'Add new' menu to add a new content item.
+        
+            >>> browser.getLink('Add new').click()
+        
+        Then we select the type of item we want to add. In this case we select
+        'Aufgabe' and click the 'Add' button to get to the add form.
+        
+            >>> browser.getControl('Aufgabe').click()
+            >>> browser.getControl(name='form.button.Add').click()
+            >>> 'Aufgabe' in browser.contents
+            True
+        
+        Now we fill the form and submit it.
+        
+            >>> browser.getControl(name='title').value = 'Aufgabe Sample'
+            >>> browser.getControl('Save').click()
+            >>> 'Changes saved' in browser.contents
+            True
+        
+        And we are done! We added a new 'Aufgabe' content item to the portal.
+        
+        Updating an existing Aufgabe content item
+        ---------------------------------------
+        
+        Let's click on the 'edit' tab and update the object attribute values.
+        
+            >>> browser.getLink('Edit').click()
+            >>> browser.getControl(name='title').value = 'New Aufgabe Sample'
+            >>> browser.getControl('Save').click()
+        
+        We check that the changes were applied.
+        
+            >>> 'Changes saved' in browser.contents
+            True
+            >>> 'New Aufgabe Sample' in browser.contents
+            True
+        
+        Removing a/an Aufgabe content item
+        --------------------------------
+        
+        If we go to the home page, we can see a tab with the 'New Aufgabe
+        Sample' title in the global navigation tabs.
+        
+            >>> browser.open(portal_url)
+            >>> 'New Aufgabe Sample' in browser.contents
+            True
+        
+        Now we are going to delete the 'New Aufgabe Sample' object. First we
+        go to the contents tab and select the 'New Aufgabe Sample' for
+        deletion.
+        
+            >>> browser.getLink('Contents').click()
+            >>> browser.getControl('New Aufgabe Sample').click()
+        
+        We click on the 'Delete' button.
+        
+            >>> browser.getControl('Delete').click()
+            >>> 'Item(s) deleted' in browser.contents
+            True
+        
+        So, if we go back to the home page, there is no longer a 'New Aufgabe
+        Sample' tab.
+        
+            >>> browser.open(portal_url)
+            >>> 'New Aufgabe Sample' in browser.contents
+            False
+        
+        Adding a new Aufgabe content item as contributor
+        ------------------------------------------------
+        
+        Not only site managers are allowed to add Aufgabe content items, but
+        also site contributors.
+        
+        Let's logout and then login as 'contributor', a portal member that has the
+        contributor role assigned.
+        
+            >>> browser.getLink('Log out').click()
+            >>> browser.open(portal_url + '/login_form')
+            >>> browser.getControl(name='__ac_name').value = 'contributor'
+            >>> browser.getControl(name='__ac_password').value = default_password
+            >>> browser.getControl(name='submit').click()
+            >>> browser.open(portal_url)
+        
+        We use the 'Add new' menu to add a new content item.
+        
+            >>> browser.getLink('Add new').click()
+        
+        We select 'Aufgabe' and click the 'Add' button to get to the add form.
+        
+            >>> browser.getControl('Aufgabe').click()
+            >>> browser.getControl(name='form.button.Add').click()
+            >>> 'Aufgabe' in browser.contents
+            True
+        
+        Now we fill the form and submit it.
+        
+            >>> browser.getControl(name='title').value = 'Aufgabe Sample'
+            >>> browser.getControl('Save').click()
+            >>> 'Changes saved' in browser.contents
+            True
+        
+        Done! We added a new Aufgabe content item logged in as contributor.
+        
+        Finally, let's login back as manager.
+        
+            >>> browser.getLink('Log out').click()
+            >>> browser.open(portal_url + '/login_form')
+            >>> browser.getControl(name='__ac_name').value = portal_owner
+            >>> browser.getControl(name='__ac_password').value = default_password
+            >>> browser.getControl(name='submit').click()
+            >>> browser.open(portal_url)
+        
+        
         
         
         Contributors
