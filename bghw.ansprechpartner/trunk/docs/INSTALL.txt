@@ -1,0 +1,17 @@
+bghw.ansprechpartner Installation
+---------------------------------
+
+To install bghw.ansprechpartner using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, you can do this:
+
+* Add ``bghw.ansprechpartner`` to the list of eggs to install, e.g.:
+
+    [buildout]
+    ...
+    eggs =
+        ...
+        bghw.ansprechpartner
+       
+* Re-run buildout, e.g. with:
+
+    $ ./bin/buildout

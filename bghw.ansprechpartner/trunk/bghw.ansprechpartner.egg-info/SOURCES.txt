@@ -1,0 +1,15 @@
+README.txt
+setup.cfg
+setup.py
+bghw/__init__.py
+bghw.ansprechpartner.egg-info/PKG-INFO
+bghw.ansprechpartner.egg-info/SOURCES.txt
+bghw.ansprechpartner.egg-info/dependency_links.txt
+bghw.ansprechpartner.egg-info/entry_points.txt
+bghw.ansprechpartner.egg-info/namespace_packages.txt
+bghw.ansprechpartner.egg-info/not-zip-safe
+bghw.ansprechpartner.egg-info/paster_plugins.txt
+bghw.ansprechpartner.egg-info/requires.txt
+bghw.ansprechpartner.egg-info/top_level.txt
+bghw/ansprechpartner/__init__.py
+bghw/ansprechpartner/tests.py
