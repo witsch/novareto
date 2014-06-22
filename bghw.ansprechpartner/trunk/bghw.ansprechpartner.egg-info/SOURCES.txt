@@ -12,4 +12,10 @@ bghw.ansprechpartner.egg-info/paster_plugins.txt
 bghw.ansprechpartner.egg-info/requires.txt
 bghw.ansprechpartner.egg-info/top_level.txt
 bghw/ansprechpartner/__init__.py
+bghw/ansprechpartner/container_ansprechpartner.py
+bghw/ansprechpartner/excel_datenbasis.py
+bghw/ansprechpartner/interfaces.py
 bghw/ansprechpartner/tests.py
+bghw/ansprechpartner/uvcapp.py
+bghw/ansprechpartner/lib/__init__.py
+bghw/ansprechpartner/lib/tabreader.py
