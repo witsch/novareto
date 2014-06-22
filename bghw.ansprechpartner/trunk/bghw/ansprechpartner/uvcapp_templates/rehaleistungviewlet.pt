@@ -1,0 +1,15 @@
+<div tal:condition="viewlet/available">
+    <div tal:condition="viewlet/rd">
+      <h1 i18n:translate="">Ihre Suche nach einer Regionaldirektion der BGHW</h1>
+      <div class="bghw-adresse">
+          <h3 i18n:translate="">Ihre zuständige Regionaldirektion</h3>
+          <strong tal:content="viewlet/rd">Regionaldirektion</strong>
+          <p><span id="strnr" tal:content="viewlet/strnr">Strasse und Nummer</span></p>
+          <p><span id="plzort" tal:content="viewlet/plzort">Plz und Ort</span></p>
+          <p>
+            <span i18n:translate="">Telefon:</span>&nbsp;<span tal:content="viewlet/tel"/><br/>
+            <span i18n:translate="">Telefax:</span>&nbsp;<span tal:content="viewlet/fax"/><br/>
+          </p>
+        </div>
+    </div>
+</div>

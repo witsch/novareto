@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="zeam-form-plone">
+
+  <div metal:fill-slot="top_slot">
+    <tal:border tal:condition="not:view/plonePageBorder">
+      <tal:disable
+         tal:define="dummy python:request.set('disable_border', 1)" />
+    </tal:border>
+  </div>
+
+  <div metal:fill-slot="main">
+
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+    <h1 class="documentFirstHeading"
+        tal:content="context/Title" />
+
+    <div tal:replace="structure provider:plone.belowcontenttitle" />
+    <div class="portalMessage"
+         tal:condition="view/status" tal:content="view/status">
+    </div>
+
+    <form action="." method="post" novalidate="novalidate" tal:attributes="action request/getURL" 
+          class="enableUnloadProtection zeam-form">
+
+      <!--
+      <h2 tal:condition="view/label" tal:content="view/label">
+        Form title
+      </h2>
+
+      <p tal:condition="view/description" tal:content="view/description">
+        Form description
+      </p>
+      -->
+
+      <dl class="portalMessage error"
+          tal:repeat="error view/formErrors">
+          <dt tal:content="error/title"/>
+          <dd> Bitte korrigieren Sie die angezeigten Fehler. </dd>
+      </dl>
+
+      <div class="row">
+        <div class="span16">
+          <div class="span1"/>
+          <div class="span15" tal:define="widget python: view.fieldWidgets.get('form.field.plz')">
+            <div metal:use-macro="context/@@uvcapp_fields/myfields"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span16">
+          <div class="span1"/>
+          <div class="span15" tal:define="widget python: view.fieldWidgets.get('form.field.name')">
+            <div metal:use-macro="context/@@uvcapp_fields/myfields"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <span class="action" tal:repeat="widget view/actionWidgets">
+          <tal:widget tal:content="structure widget/render" />
+        </span>
+      </div>
+
+    </form>
+
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+
+  </div>
+
+</html>

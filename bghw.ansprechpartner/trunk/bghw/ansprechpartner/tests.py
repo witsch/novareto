@@ -52,6 +52,22 @@ def test_suite():
 
         # -*- extra stuff goes here -*-
 
+        # Integration tests for ExcelDatenbasis
+        ztc.ZopeDocFileSuite(
+            'ExcelDatenbasis.txt',
+            package='bghw.ansprechpartner',
+            optionflags = OPTION_FLAGS,
+            test_class=TestCase),
+
+
+        # Integration tests for ContainerAnsprechpartner
+        ztc.ZopeDocFileSuite(
+            'ContainerAnsprechpartner.txt',
+            package='bghw.ansprechpartner',
+            optionflags = OPTION_FLAGS,
+            test_class=TestCase),
+
+
         ])
 
 if __name__ == '__main__':
