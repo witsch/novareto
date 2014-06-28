@@ -12,12 +12,11 @@ class IPlzOrtSuche(Interface):
     plz = schema.TextLine(
             title = u'PLZ',
             description = u'Bitte geben Sie hier die Postleitzahl ein.',
-            required = False,)
+            required = True,)
 
     ort = schema.TextLine(
             title = u'Ort',
-            description = u'Bitte geben Sie hier einen Ortsnamen ein falls Sie die Postleitzahl\
-                    nicht zur Hand haben.',
+            description = u'Optional können Sie hier zusätzlich einen Ortsnamen angeben.',
             required = False,)
 
     name = schema.TextLine(

@@ -19,7 +19,7 @@ class uvcapp_Fields(grok.View):
 class AnsprechpartnerSuche(uvcsite.Form):
     """Form fuer die Suche nach Postleitzahl und Ort."""
     grok.context(IContainerAnsprechpartner)
-    fields = Fields(IPlzOrtSuche)
+    fields = Fields(IPlzOrtSuche).omit('ort')
 
     def update(self):
         self.data = {}
@@ -32,6 +32,7 @@ class AnsprechpartnerSuche(uvcsite.Form):
 
     @uvcsite.action('suchen')
     def handle_search(self):
+        import pdb;pdb.set_trace()
         data, errors = self.extractData()
         if errors:
             return
