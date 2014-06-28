@@ -82,47 +82,51 @@
                 für die Teilnahme am Seminar erfüllen.</p>
               </span>    
 
-          <table id="seminartermine" class="table table-striped">
-            <tr>
-              <th>Seminarbeginn</th>
-              <th>Seminarende</th>
-              <th>Seminarort</th>
-              <th tal:condition="marker">Folgetermin(e)</th>
-              <th>Buchung</th>
-            </tr>
-            <tr tal:repeat="seminar seminare">
-              <form action="" tal:attributes="action formurl" method="post">
-                <input type="hidden" name="titel" value="" tal:attributes="value context/title">
-                <input type="hidden" name="stype" value="" tal:attributes="value seminar/stype">
-                <input type="hidden" name="sort" value="" tal:attributes="value seminar/sort">
-                <input type="hidden" name="von" value="" tal:attributes="value seminar/von">
-                <input type="hidden" name="bis" value="" tal:attributes="value seminar/bis">
-                <input type="hidden" name="nacht" value="" tal:attributes="value seminar/nacht">
-                <input type="hidden" name="ausgebucht" value="" tal:attributes="value seminar/ausgebucht">
-                <input type="hidden" name="voraussetzungen" value="" tal:attributes="value prepared">
-                <input type="hidden" name="folge1" value="" tal:attributes="value seminar/folge1">
-                <input type="hidden" name="folge2" value="" tal:attributes="value seminar/folge2">
-              <td tal:content="seminar/von"/> 
-              <td tal:content="seminar/bis"/>  
-              <td tal:content="seminar/sort"/>
-              <td tal:condition="marker"><span tal:condition="seminar/folge1" tal:content="seminar/folge1"/>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Seminarbeginn</th>
+                <th>Seminarende</th>
+                <th>Seminarort</th>
+                <th tal:condition="marker">Folgetermin(e)</th>
+                <th>Buchung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr tal:repeat="seminar seminare">
+                <form action="" tal:attributes="action formurl" method="post">
+                  <input type="hidden" name="titel" value="" tal:attributes="value context/title">
+                  <input type="hidden" name="stype" value="" tal:attributes="value seminar/stype">
+                  <input type="hidden" name="sort" value="" tal:attributes="value seminar/sort">
+                  <input type="hidden" name="von" value="" tal:attributes="value seminar/von">
+                  <input type="hidden" name="bis" value="" tal:attributes="value seminar/bis">
+                  <input type="hidden" name="nacht" value="" tal:attributes="value seminar/nacht">
+                  <input type="hidden" name="ausgebucht" value="" tal:attributes="value seminar/ausgebucht">
+                  <input type="hidden" name="voraussetzungen" value="" tal:attributes="value prepared">
+                  <input type="hidden" name="folge1" value="" tal:attributes="value seminar/folge1">
+                  <input type="hidden" name="folge2" value="" tal:attributes="value seminar/folge2">
+                <td tal:content="seminar/von"/> 
+                <td tal:content="seminar/bis"/>  
+                <td tal:content="seminar/sort"/>
+                <td tal:condition="marker"><span tal:condition="seminar/folge1" tal:content="seminar/folge1"/>
                   <span tal:condition="seminar/folge2"><br/><span tal:content="seminar/folge2"/></span></td>
-              <td tal:condition="not: seminar/oldflag">
-                <span tal:condition="not: seminar/ausgebucht">    
-                <input type="submit" class="standalone lact" value="anmelden">
-                <span tal:condition="context/prerequisites" class="linact" style="color:#666666;" >anmelden</span>
-                </span>
-                <span tal:condition="seminar/ausgebucht">
-                  -ausgebucht-<br/>
-                  <input type="submit" class="standalone lact" value="vormerken">
-                  <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">vormerken</span>
-                </span>
-              </td>
-              <td tal:condition="seminar/oldflag">
-                abgeschlossen
-              </td>
-              </form>
-            </tr>   
+                <td tal:condition="not: seminar/oldflag">
+                  <span tal:condition="not: seminar/ausgebucht">    
+                  <input type="submit" class="standalone lact" value="anmelden">
+                  <span tal:condition="context/prerequisites" class="linact" style="color:#666666;" >anmelden</span>
+                  </span>
+                  <span tal:condition="seminar/ausgebucht">
+                    -ausgebucht-<br/>
+                    <input type="submit" class="standalone lact" value="vormerken">
+                    <span tal:condition="context/prerequisites" class="linact" style="color:#666666;">vormerken</span>
+                  </span>
+                </td>
+                <td tal:condition="seminar/oldflag">
+                  abgeschlossen
+                </td>
+                </form>
+              </tr>
+            </tbody>
           </table>
         </div>
 
