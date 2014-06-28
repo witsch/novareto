@@ -80,5 +80,5 @@ def findRehaByPlzName(plz, name, data):
             if int(sheet.cell(row,0).value) <= int(plz) <= int(sheet.cell(row,1).value):
                 if sheet.cell(row,2).value.lower() <= name.lower() <= sheet.cell(row,3).value.lower():
                     rdadr = findAdrByNr(sheet.cell(row,4).value, rosheet)
+                    rdadr['webcode'] = sheet.cell(row,5).value
                     return rdadr
-

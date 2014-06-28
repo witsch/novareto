@@ -2,6 +2,7 @@
 from five import grok
 from uvc.api import api as uvcsite
 from zope.interface import Interface
+from Products.CMFCore.utils import getToolByName
 from bghw.ansprechpartner.interfaces import IPlzOrtSuche
 from bghw.ansprechpartner.excel_datenbasis import IExcelDatenbasis
 from bghw.ansprechpartner.container_ansprechpartner import IContainerAnsprechpartner
@@ -32,7 +33,6 @@ class AnsprechpartnerSuche(uvcsite.Form):
 
     @uvcsite.action('suchen')
     def handle_search(self):
-        import pdb;pdb.set_trace()
         data, errors = self.extractData()
         if errors:
             return
@@ -106,6 +106,10 @@ class RehaLeistungViewlet(grok.Viewlet):
     grok.context(IUVCAnsprechpartnersuche)
     grok.viewletmanager(IBelowContentBody)
 
+    @property
+    def portal_catalog(self):
+        return getToolByName(self.context, 'portal_catalog')
+
     def available(self):
         if not hasattr(self.view, 'data'):
             return False
@@ -125,4 +129,17 @@ class RehaLeistungViewlet(grok.Viewlet):
             self.strnr = results.get('strnr', '') 
             self.plzort = "%s %s" % (results.get('plz', ''), results.get('ort', ''))
             self.tel = results.get('tel', '') 
-            self.fax = results.get('fax', '') 
+            self.fax = results.get('fax', '')
+            self.aushang = ''
+            pcat = self.portal_catalog
+            raw_webcode = results.get('webcode')
+            if isinstance(raw_webcode, float):
+                webcode = str(int(raw_webcode))
+            elif isinstance(raw_webcode, int):
+                webcode = str(raw_webcode)
+            else:
+                webcode = raw_webcode
+            brains = pcat(Webcode = webcode)
+            if len(brains) == 1:
+                self.aushang = brains[0].getURL() + '/at_download/file'
+

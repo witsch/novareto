@@ -10,6 +10,8 @@
             <span i18n:translate="">Telefon:</span>&nbsp;<span tal:content="viewlet/tel"/><br/>
             <span i18n:translate="">Telefax:</span>&nbsp;<span tal:content="viewlet/fax"/><br/>
           </p>
-        </div>
+      </div>
+      <a tal:condition="viewlet/aushang" class="btn btn-primary" href="" tal:attributes="href viewlet/aushang"
+        >Download Aushang Mitgliedschaft</a>
     </div>
 </div>

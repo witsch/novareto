@@ -68,8 +68,5 @@
         </table>
         </div>
       </span>
-      <span tal:condition="not: ortresults">
-        <p>Die Ort-Suche nach Ansprechpartnern verlief leider ergebnislos.</p>
-      </span>
     </div>
 </div>
