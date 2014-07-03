@@ -3,13 +3,13 @@
     <div tal:condition="viewlet/retval"
          tal:define="plzresults viewlet/plzresults;
                      ortresults viewlet/ortresults">
-      <h1 i18n:translate="">Ihre Suche nach einem Ansprechpartner unserer Abteilung Praevention</h1>
+      <h1 i18n:translate="">Ihre Suche nach einem Ansprechpartner unserer Abteilung Prävention</h1>
       <div>
-        <span class="discreet"><b i18n:translate="">Erlaeuterung der Abkuerzungen</b></span>
+        <span class="discreet"><b i18n:translate="">Erläuterung der Abkürzungen</b></span>
         <ul>
-          <li class="discreet" i18n:translate="">TAB - Technische(r) Aufsichtsbeamter / -beamtin</li>
+          <li class="discreet" i18n:translate="">AP - Aufsichtsperson</li>
           <li class="discreet" i18n:translate="">RD - Regionaldirektion</li>
-          <li class="discreet" i18n:translate="">PB - Praeventionsberater / -beraterin</li>
+          <li class="discreet" i18n:translate="">PB - Präventionsberater / -beraterin</li>
         </ul>
       </div>
 
@@ -20,8 +20,8 @@
         <table class="table table-striped">
           <tr>
             <th><span i18n:translate="">PLZ</span><br><span i18n:translate="">Ort</span></th>
-            <th i18n:translate="">TAB</th>
-            <th i18n:translate="">TAB Kontakt</th>
+            <th i18n:translate="">AP</th>
+            <th i18n:translate="">AP Kontakt</th>
             <th i18n:translate="">RD</th>
             <th i18n:translate="">PB</th>
             <th><span i18n:translate="">PB</span><br><span i18n:translate="">Kontakt</span></th>
