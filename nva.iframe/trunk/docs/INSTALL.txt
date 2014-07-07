@@ -1,0 +1,17 @@
+nva.iframe Installation
+-----------------------
+
+To install nva.iframe using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, you can do this:
+
+* Add ``nva.iframe`` to the list of eggs to install, e.g.:
+
+    [buildout]
+    ...
+    eggs =
+        ...
+        nva.iframe
+       
+* Re-run buildout, e.g. with:
+
+    $ ./bin/buildout
