@@ -4,7 +4,7 @@
    i18n:domain="nva.iframe" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">iFrame Link</property>
+  <property name="title" i18n:translate="">VEDA iFrame</property>
   <property name="description"
     i18n:translate="">A URL rendered as iFrame</property>
   <property name="icon_expr">string:${portal_url}/document_icon.png</property>

@@ -39,6 +39,18 @@ class IiFrameLink(form.Schema, IImageScaleTraversable):
     height = schema.TextLine(title = u'Höhe des iFrames',
             required = True)
 
+    cssfile = NamedBlobFile(title = u'CSS-File',
+            description = u'Hier können Sie ein CSS-File hochladen, um die Inhalte des iFrames\
+                          optisch anzupassen',
+            required = True)
+
+    parameter = schema.Choice(title = u'Zeichen für die Parameterübergabe',
+            description = u'? wenn das CSS-File als einziger URL-Parameter übergeben wird und & wenn das\
+                            CSS-File als Teil einer Parameterliste übergeben wird',
+            vocabulary = SimpleVocabulary.fromValues([u'?', u'&']),
+            required = True)
+
+
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
 # methods and properties. Put methods that are mainly useful for rendering
