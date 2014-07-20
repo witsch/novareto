@@ -33,6 +33,10 @@ class IiFrameLink(form.Schema, IImageScaleTraversable):
     src = schema.URI(title = u'Quell-URL für den iFrame',
             required = True)
 
+    callid = schema.TextLine(title = u'CallID',
+            description = u'Bitte tragen Sie hier, falls vorhanden, den Wert fuer den Parameter CallID ein',
+            required = False)
+
     width = schema.TextLine(title = u'Breite des iFrames',
             required = True)
 
@@ -42,14 +46,7 @@ class IiFrameLink(form.Schema, IImageScaleTraversable):
     cssfile = NamedBlobFile(title = u'CSS-File',
             description = u'Hier können Sie ein CSS-File hochladen, um die Inhalte des iFrames\
                           optisch anzupassen',
-            required = True)
-
-    parameter = schema.Choice(title = u'Zeichen für die Parameterübergabe',
-            description = u'? wenn das CSS-File als einziger URL-Parameter übergeben wird und & wenn das\
-                            CSS-File als Teil einer Parameterliste übergeben wird',
-            vocabulary = SimpleVocabulary.fromValues([u'?', u'&']),
-            required = True)
-
+            required = False)
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
