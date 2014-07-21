@@ -79,12 +79,31 @@ class PraeventionViewlet(grok.Viewlet):
     grok.context(IUVCAnsprechpartnersuche)
     grok.viewletmanager(IBelowContentBody)
 
+    @property
+    def portal_catalog(self):
+        return getToolByName(self.context, 'portal_catalog')
+
+
     def available(self):
         if not hasattr(self.view, 'data'):
             return False
         if self.view.data.has_key(u'Praevention'):
             return True
         return False
+
+    def getOrtURL(self, results):
+        pcat = self.portal_catalog
+        raw_webcode = results.get('webcode')
+        if isinstance(raw_webcode, float):
+            webcode = str(int(raw_webcode))
+        elif isinstance(raw_webcode, int):
+            webcode = str(raw_webcode)
+        else:
+            webcode = raw_webcode
+        brains = pcat(Webcode = webcode)
+        if len(brains) == 1:
+            return brains[0].getURL()
+        return ''
 
     def update(self):
         self.plzresults = {}
@@ -96,11 +115,14 @@ class PraeventionViewlet(grok.Viewlet):
             plz = self.view.data.get('formdata').get('plz')
             if plz and plz != NO_VALUE:
                 self.plzresults = findTabByPlz(plz, self.view.data.get(u'Praevention'))
+                self.plzresults['orturl'] = self.getOrtURL(self.plzresults)
             ort = self.view.data.get('formdata').get('ort')
             if ort and ort != NO_VALUE:
                 self.ortresults = findTabByOrt(ort, self.view.data.get(u'Praevention'))
+                self.ortresults['orturl'] = self.getOrtURL(self.ortresults)
             if self.plzresults or self.ortresults:
                 self.retval = True
+
 
 class RehaLeistungViewlet(grok.Viewlet):
     grok.context(IUVCAnsprechpartnersuche)

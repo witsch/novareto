@@ -33,6 +33,7 @@ def findTabByPlz(plz, data):
             data['pb'] = sheet.cell(row,7).value
             data['pb-tel'] = sheet.cell(row,8).value
             data['pb-mail'] = sheet.cell(row,9).value
+            data['webcode'] = sheet.cell(row,10).value
             return data
 
 def findTabByOrt(ort, data):
@@ -56,6 +57,7 @@ def findTabByOrt(ort, data):
             data['pb'] = sheet.cell(row,7).value
             data['pb-tel'] = sheet.cell(row,8).value
             data['pb-mail'] = sheet.cell(row,9).value
+            data['webcode'] = sheet.cell(row,10).value
             values.append(data)
     return values
 

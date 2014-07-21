@@ -31,7 +31,7 @@
             <td tal:content="plzresults/tab"/>
             <td><span tal:content="plzresults/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${plzresults/tab-mail}"> 
                                                             <span tal:content="plzresults/tab-mail"/></a></td>
-            <td><a target="_blank" href="" tal:attributes="href plzresults/rd-url"><span tal:content="plzresults/rd"/></a></td>
+            <td><a target="_blank" href="" tal:attributes="href plzresults/orturl"><span tal:content="plzresults/rd"/></a></td>
             <td tal:content="plzresults/pb"/>
             <td><span tal:content="plzresults/pb-tel"/><br><span tal:content="plzresults/pb-mail"/></td>
           </tr>
@@ -60,7 +60,7 @@
             <td tal:content="result/tab"/>
             <td><span tal:content="result/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${result/tab-mail}">
                                                         <span tal:content="result/tab-mail"/></a></td>
-            <td><a target="_blank" href="" tal:attributes="href result/rd-url"><span tal:content="result/rd"/></a></td>
+            <td><a target="_blank" href="" tal:attributes="href result/orturl"><span tal:content="result/rd"/></a></td>
             <td tal:content="result/pb"/>
             <td><span tal:content="result/pb-tel"/><br><span tal:content="result/pb-mail"/></td>
           </tr>
