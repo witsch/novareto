@@ -14,6 +14,29 @@ class Filedownload_View(uvcsite.Page):
     grok.title('Datei-Download')
 
     @property
+    def portal_catalog(self):
+        return getToolByName(self.context, 'portal_catalog')
+
+    def refs(self, obj):
+        """ returns a list of references """
+        refs = obj.getRawRelatedItems()
+        brains = self.portal_catalog(UID=refs)
+        myrefs = []
+        res = []
+        for i in brains:
+            if i.portal_type not in ['Fragebogen']:
+                # build a position dict by iterating over the items once
+                positions = dict([(v, i) for (i, v) in enumerate(refs)])
+                # We need to keep the ordering intact
+                res = list(brains)
+                def _key(brain):
+                    return positions.get(brain.UID, -1)
+                res.sort(key=_key)
+        for k in res:
+            myrefs.append(k.getObject())
+        return myrefs
+
+    @property
     def query(self):
         """ 
         Make catalog query for the folder listing.
@@ -63,9 +86,9 @@ class Filedownload_View(uvcsite.Page):
         if obj.Description():
             description = '<p class="discreet">%s</p>\r\n' %obj.Description()
 	refs = ''    
-	if obj.getReferences():
+	if obj.getReferences('relatesTo'):
 	  refs = '<p><b>Weitere Informationen:</b></p><ul>'
-	  for i in obj.getReferences():
+	  for i in self.refs(obj):
 	    refs += '<li><a class="internal-link" href="%s">%s</a></li>' % (i.absolute_url(), i.title)
 	  refs += '</ul>'  
         titdescrefs=title+description+refs+'</td>'
@@ -137,7 +160,8 @@ class Filedownload_View(uvcsite.Page):
             if obj.portal_type == 'MediaFile':
                 table += self.createZeileFromMF(obj, objectimages)
             else:
-                table += self.createZeileFromObject(obj, objectimages)
+                if obj.portal_type not in ['Folder',]:
+                    table += self.createZeileFromObject(obj, objectimages)
         table += '</tbody>\r\n'
         table += '</table>\r\n'
         self.table = table

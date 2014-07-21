@@ -62,7 +62,7 @@ class Ordering_View(uvcsite.Page):
         """
 
         row='<tr>'
-        nr = '<td data-title="Bestellnummer."><p>%s</p></td>' % obj.id
+        nr = '<td data-title="Bestellnummer"><p>%s</p></td>' % obj.id
         row += nr
 
         title = '<td data-title="Titel"><p>%s</p>\r\n' % obj.Title()
@@ -103,14 +103,22 @@ class Ordering_View(uvcsite.Page):
         """
 
         row='<tr>'
-        nr = '<td data-title="Nr."><p>%s</p></td>' % obj.bestellnummer
+        nr = '<td data-title="Bestell-Nr."><p>%s</p></td>' % obj.bestellnummer
         row += nr
 
-        title = '<td data-title="Titel"><p><a class="internal-link" href="%s">%s</a></p>\r\n' % (obj.absolute_url(), obj.title)
-        description = ''
-        if obj.Description():
-            description = '<p class="discreet">%s</p>\r\n' %obj.description
-        titdesc=title+description+'</td>'
+        try:
+            title = u'<td data-title="Titel"><p><a class="internal-link" href="%s">%s</a></p>\r\n' % (obj.absolute_url(), 
+                                                                                                      obj.title.decode('utf-8'))
+        except:
+            title = u'<td data-title="Titel"><p><a class="internal-link" href="%s">%s</a></p>\r\n' % (obj.absolute_url(), 
+                                                                                                      obj.title)
+        description = u''
+        if obj.description:
+            try:
+                description = u'<p class="discreet">%s</p>\r\n' %obj.description.decode('utf-8')
+            except:
+                description = u'<p class="discreet">%s</p>\r\n' %obj.description
+        titdesc=title + description + u'</td>'
         row += titdesc
 
         if objectimages:
@@ -124,19 +132,24 @@ class Ordering_View(uvcsite.Page):
             row += myimage
 
         download = '<td data-title="Download" align="left">'
+        marker = False
         if obj.fileref and obj.status in [u'lieferbar', u'nur Download']:
-            if obj.fileref.to_object.portal_type == 'File':
-                size = int(float(obj.fileref.to_object.getFile().get_size())/float(1000))
-            else:
-                size = obj.fileref.to_object.getFile().size/1000
-            icon = obj.fileref.to_object.getFile().content_type.split('/')[1]
-            kuerzel = icon.upper()
-            filedownload = """<a class="download-link" href="%s/at_download/file">
-                              <span class="discreet">(%s, %s KByte)</span></a><br/>""" % (
+            if obj.fileref.to_object:
+                if obj.fileref.to_object.portal_type == 'File':
+                    size = int(float(obj.fileref.to_object.getFile().get_size())/float(1000))
+                    marker = True
+                elif obj.fileref.to_object.portal_type == 'MediaFile':
+                    size = obj.fileref.to_object.getFile().size/1000
+                    marker = True
+                if marker:
+                    icon = obj.fileref.to_object.getFile().content_type.split('/')[1]
+                    kuerzel = icon.upper()
+                    filedownload = """<a class="download-link" href="%s/at_download/file">
+                                  <span class="discreet">(%s, %s KByte)</span></a><br/>""" % (
                                                                                        obj.fileref.to_object.absolute_url(),
                                                                                        kuerzel,
                                                                                        size)
-            download += filedownload
+                    download += filedownload
 
         if obj.status == u'lieferbar':
             warenkorb = '<a class="internal-link" href="%s/@@tocard?redirect=%s">In den Warenkorb</a>' % (obj.absolute_url(),
@@ -199,7 +212,8 @@ class Ordering_View(uvcsite.Page):
             elif obj.portal_type == 'bghw.mediashop.artikel':
                 table += self.createZeileFromArtikel(obj, objectimages, self.context)
             else:
-                table += self.createZeileFromObject(obj, objectimages)
+                if obj.portal_type not in ['Folder',]:
+                    table += self.createZeileFromObject(obj, objectimages)
         table += '</tbody>\r\n'
         table += '</table>\r\n'
         self.table = table

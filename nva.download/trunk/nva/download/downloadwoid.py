@@ -14,6 +14,29 @@ class DownloadWoid_View(uvcsite.Page):
     grok.title('Datei-Download (ohne ID)')
 
     @property
+    def portal_catalog(self):
+        return getToolByName(self.context, 'portal_catalog')
+
+    def refs(self, obj):
+        """ returns a list of references """
+        refs = obj.getRawRelatedItems()
+        brains = self.portal_catalog(UID=refs)
+        myrefs = []
+        res = []
+        for i in brains:
+            if i.portal_type not in ['Fragebogen']:
+                # build a position dict by iterating over the items once
+                positions = dict([(v, i) for (i, v) in enumerate(refs)])
+                # We need to keep the ordering intact
+                res = list(brains)
+                def _key(brain):
+                    return positions.get(brain.UID, -1)
+                res.sort(key=_key)
+        for k in res:
+            myrefs.append(k.getObject())
+        return myrefs
+
+    @property
     def query(self):
         """ 
         Make catalog query for the folder listing.
@@ -53,16 +76,16 @@ class DownloadWoid_View(uvcsite.Page):
         """
 
         row='<tr>'
-        title = '<td data-title="Titel"><p>%s</p>\r\n' % obj.Title()
+        title = '<td data-title="Titel"><p><a href="%s">%s</a></p>\r\n' % (obj.absolute_url(), obj.Title())
         description = ''
         if obj.Description():
             description = '<p class="discreet">%s</p>\r\n' %obj.Description()
         refs = ''
-        if obj.getReferences():
-          refs = '<p><b>Weitere Informationen:</b></p><ul>'
-          for i in obj.getReferences():
-            refs += '<li><a class="internal-link" href="%s">%s</a></li>' % (i.absolute_url(), i.title)
-          refs += '</ul>'
+        if obj.getReferences('relatesTo'):
+            refs = '<p><b>Weitere Informationen:</b></p><ul>'
+            for i in self.refs(obj):
+                refs += '<li><a class="internal-link" href="%s">%s</a></li>' % (i.absolute_url(), i.title)
+            refs += '</ul>'
         titdescrefs=title+description+refs+'</td>'
         row += titdescrefs
 
@@ -171,7 +194,8 @@ class DownloadWoid_View(uvcsite.Page):
                                      'nva.orientierungssystem.standortanzeiger']:
                 table += self.createZeileFromOrientierung(obj, objectimages)
             else:
-                table += self.createZeileFromObject(obj, objectimages)
+                if obj.portal_type not in ['Folder',]:
+                    table += self.createZeileFromObject(obj, objectimages)
         table += '</tbody>\r\n'
         table += '</table>\r\n'
         self.table = table
