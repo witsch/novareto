@@ -3,7 +3,6 @@ from zope.interface import Interface
 from uvc.api import api
 from Products.CMFCore.utils import getToolByName
 from plone.app.layout.viewlets.interfaces import IPortalHeader
-from nva.universalsearch.search import UniversalSearch
 
 api.templatedir('templates')
 
