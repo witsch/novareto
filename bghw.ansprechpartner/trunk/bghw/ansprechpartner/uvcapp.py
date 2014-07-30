@@ -25,11 +25,16 @@ class AnsprechpartnerSuche(uvcsite.Form):
     def update(self):
         self.data = {}
         fc = self.context.getFolderContents()
+        texte = []
         for i in fc:
             obj = i.getObject()
-            abteilung = obj.abteilung
-            filedata = obj.excelfile.data
-            self.data[abteilung] = filedata
+            if obj.portal_type == 'Document':
+                texte.append(obj.getText())
+            else:
+                abteilung = obj.abteilung
+                filedata = obj.excelfile.data
+                self.data[abteilung] = filedata
+        self.data['texte'] = texte 
 
     @uvcsite.action('suchen')
     def handle_search(self):
@@ -164,4 +169,25 @@ class RehaLeistungViewlet(grok.Viewlet):
             brains = pcat(Webcode = webcode)
             if len(brains) == 1:
                 self.aushang = brains[0].getURL() + '/at_download/file'
+
+
+class TexteViewlet(grok.Viewlet):
+    grok.context(IUVCAnsprechpartnersuche)
+    grok.viewletmanager(IBelowContentBody)
+
+    @property
+    def portal_catalog(self):
+        return getToolByName(self.context, 'portal_catalog')
+
+    def available(self):
+        if not hasattr(self.view, 'data'):
+            return False
+        if self.view.data.get('formdata') and self.view.__name__ == 'ansprechpartnersuche':
+            return True
+        return False
+
+    def update(self):
+        self.texte = []
+        if hasattr(self.view, 'data'):
+            self.texte = self.view.data.get('texte', [])
 

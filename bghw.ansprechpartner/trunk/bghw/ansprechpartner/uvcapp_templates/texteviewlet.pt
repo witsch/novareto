@@ -1,0 +1,5 @@
+<div tal:condition="viewlet/available">
+    <div tal:repeat="text viewlet/texte">
+        <span tal:replace="structure text"/>
+    </div>
+</div>
