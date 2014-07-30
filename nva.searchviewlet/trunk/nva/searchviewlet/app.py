@@ -1,19 +1,19 @@
 import string
 from zope.interface import Interface
 from uvc.api import api
-from uvc.api.api import grok
 from Products.CMFCore.utils import getToolByName
 from plone.app.layout.viewlets.interfaces import IPortalHeader
+from nva.universalsearch.search import UniversalSearch
 
-grok.templatedir('templates')
+api.templatedir('templates')
 
-class NvaSearchViewlet(grok.Viewlet):
-    grok.context(Interface)
-    grok.viewletmanager(IPortalHeader)
+class NvaSearchViewlet(api.Viewlet):
+    api.context(Interface)
+    api.viewletmanager(IPortalHeader)
 
 class NvaSearch(api.Page):
-    grok.context(Interface)
-    grok.title('Suche')
+    api.context(Interface)
+    api.title('Suche')
 
     @property
     def portal_catalog(self):
@@ -23,6 +23,16 @@ class NvaSearch(api.Page):
     def portal_url(self):
         return getToolByName(self.context, 'portal_url').getPortalObject().absolute_url() 
 
+    def VedaIframe(self, url):
+        """prueft, ob die URL eventuell umgesetzt werden muss, um eine Anzeige der Daten im
+           VEDA-IFrame zu ermoeglichen"""
+        iframeurl = "http://entwicklung-etem.bg-kooperation.de/seminare/vedaseminare"
+        vedaurl = "http://vedaentwicklung-etem.bg-kooperation.de"
+        if vedaurl in url:
+            url = url.replace(vedaurl, iframeurl)
+            url = url.replace(';', '&DetailID=')
+        return url
+        
     def checkWebcode(self, suchtext, path):
         pcat = self.portal_catalog
         suchtext = suchtext.decode('utf-8')
@@ -33,6 +43,7 @@ class NvaSearch(api.Page):
         url = ''
         if len(brains) == 1:
             url = brains[0].getURL()
+            url = self.VedaIframe(url)
         elif len(brains) > 1 and path:
             url = '%s/@@search?Webcode=%s&path=%s' %(self.portal_url, suchtext, path)
         elif len(brains) > 1 and not path:
