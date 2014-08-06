@@ -1,0 +1,24 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="uv.bsbetreuung">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="bsbprint_view"
+      class=".bsbprintview.bsbprintView"
+      allowed_interface=".bsbprintview.IbsbprintView"
+      permission="zope.Public"
+      />
+
+
+  <browser:viewlet
+      name="final.viewlet"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
+      class=".viewlets.FinalViewlet"
+      view="nva.bsbetreuung.interfaces.IFinal"
+      permission="zope.Public"
+      />
+
+</configure>

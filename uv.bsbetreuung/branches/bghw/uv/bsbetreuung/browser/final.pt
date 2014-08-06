@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xml:lang="en" lang="en" 
+      i18n:domain="uv.bsbetreuung">
+
+<body>
+  <div class="mitarbeiter"
+        tal:condition="view/ma"
+        tal:define="ma view/ma">
+    <h1 i18n:translate="">Beschäftigte im Betrieb</h1>
+      <p><span i18n:translate="">Anzahl der Beschäftigten im Betrieb (Ihre Angabe):</span>&nbsp;
+         <strong><span tal:content="ma/mitarbeiter|nothing"></span></strong>
+      </p>
+  </div>
+
+  <div class="grundbetreuung"
+       tal:condition="view/gb"
+       tal:define="gb view/gb">
+    <h1 i18n:translate="">1. Grundbetreuung</h1>
+      <table class="table table-striped">
+        <tr>
+          <td i18n:translate="">WZ-Kode Ihres Betriebes:</td><td><span tal:content="gb/wzcodenr|nothing"/></td>
+        </tr><tr>
+          <td i18n:translate="">Betriebsart:</td><td><span tal:content="gb/wzcodetext|nothing"/></td>
+        </tr><tr>
+          <td i18n:translate="">Betreuungsruppe:</td><td><span tal:content="gb/bgruppe|nothing"/></td>
+        </tr><tr>
+          <td i18n:translate="Einsatzzeitensumme">Einsatzzeitensumme für Betriebsarzt und Sicherheitsfachkraft:</td>
+          <td><span tal:content="gb/gb_data|nothing"/><span i18n:translate=""> Stunden pro Jahr</span></td>
+        </tr><tr>
+          <td i18n:translate="Mindestanteil">Mindestanteil für Betriebsarzt und Sicherheitsfachkraft:</td>
+          <td><span tal:content="gb/min|nothing"/><span i18n:translate=""> Stunden pro Jahr</span></td>
+        </tr>
+      </table>
+  </div>
+
+  <div class="bsbetreuung"
+       tal:condition="view/table"
+       tal:define="table view/table">
+    <h1 i18n:translate="">2. Betriebsspezfische Betreuung</h1>    
+      <span tal:replace="structure table"/>
+  </div>
+</body>
+</html>
