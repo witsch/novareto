@@ -114,6 +114,19 @@ AufgabeSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
 
+    atapi.TextField(
+        'zusatzinformation',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.RichWidget(
+            label=_(u"Zusatzinformation"),
+            description=_(u"Bitte geben Sie hier einen zusaetzlichen Hinweis zur Beantwortung der Fragestellungen."),
+            rows = 5,
+        ),
+        default_output_type='text/html',
+        required = False,
+    ),
+
+
     atapi.ReferenceField(
         'startend',
         storage=atapi.AnnotationStorage(),
@@ -164,6 +177,8 @@ class Aufgabe(base.ATCTContent):
     alternativtext = atapi.ATFieldProperty('alternativtext')
 
     fragen = atapi.ATReferenceFieldProperty('fragen')
+
+    zusatzinformation = atapi.ATFieldProperty('zusatzinformation')
 
     startend = atapi.ATReferenceFieldProperty('startend')
 

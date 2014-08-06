@@ -18,7 +18,6 @@ def getFragenInOrder(context):
 def formatFragen(context):
     pcat = portal_catalog(context)
     brains = pcat(portal_type = 'Fragestellung', review_state='published', show_inactive=True)
-    #objects = [x.getObject() for x in brains]
     fragen = {}
     for i in brains:
         mydict = {}
@@ -26,9 +25,10 @@ def formatFragen(context):
         mydict['title'] = frage.Title()
         mydict['fieldtype'] = frage.getFieldtype()
         optionen = {}
-        for j in frage.getOptionen():
-            option = j.split('|')
-            optionen[option[0]] = option[1]
+        if frage.getFieldtype() == 'choice':
+            for j in frage.getOptionen():
+                option = j.split('|')
+                optionen[option[0]] = option[1]
         mydict['optionen'] = optionen
         fragen[frage.id] = mydict
     return fragen

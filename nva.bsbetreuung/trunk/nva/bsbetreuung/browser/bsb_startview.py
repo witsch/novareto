@@ -41,7 +41,7 @@ class bsb_startView(BrowserView):
         """
         Methode zur Ermittlung der Fortsetzung
         """
-        delSbFromSession(self.context)
+        delSbFromSession(self.context, self.request)
         refs = self.context.getReferences()
         fortsetzung = None
         if refs:

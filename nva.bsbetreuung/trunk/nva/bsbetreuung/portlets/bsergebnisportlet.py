@@ -1,17 +1,15 @@
 from zope.interface import Interface
 from zope.interface import implements
-
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
-
 from zope import schema
 from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from nva.onlinehandlungshilfe.lib.xlsreader import xlsreader
 from nva.onlinehandlungshilfe.lib.calculator import calculate_gb
 from nva.onlinehandlungshilfe.lib.calculator import calculate_sb
 from nva.onlinehandlungshilfe.lib.calculator import calculate_step
+from collective.beaker.interfaces import ISession
 
 from nva.bsbetreuung import bsbetreuungMessageFactory as _
 
@@ -106,8 +104,7 @@ class Renderer(base.Renderer):
     def results(self):
         """returns the actual resultset of online-handlungshilfe"""
 
-        session_manager = self.context.session_data_manager
-        session = session_manager.getSessionData()
+        session = ISession(self.request)
 
         #Daten fuer den Mitarbeiter
         data_startseite = session.get('start', {})
@@ -140,11 +137,13 @@ class Renderer(base.Renderer):
             aufwand_gb = 0.0
 
         #Daten fuer die betriebsspezifische Betreuung
+        print 'Portlet'
+        print session
         data_spezbetreuung = session.get('sb', {})
         summe_sb = data_spezbetreuung.get('sbsum', 0.0)
 
-        if data_spezbetreuung and summe_sb < 2.0:
-            summe_sb = 2.0
+        #if data_spezbetreuung and summe_sb < 2.0:
+        #    summe_sb = 2.0
 
         aufwand_sb = "%.1f" %summe_sb
         aufwand_sb = aufwand_sb.replace('.',',')

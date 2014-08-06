@@ -95,10 +95,12 @@
                                       tal:repeat="myfieldset form_fields/fieldsets">
 
                     <fieldset id="" tal:define="label myfieldset/label;
+                                                description myfieldset/description;
                                                 widgetnames python: [w.__name__ for w in myfieldset]"
                                     tal:attributes="id myfieldset/id | nothing">
 
-                      <legend tal:content="label"/>                    
+                      <legend tal:content="label"/>
+                        <p tal:content="structure description"/>
                         <span tal:repeat="mywidget widgetnames"> 
                         <div class="field"
                           tal:define="widget python: [w for w in view.widgets if w.name=='form.'+mywidget][0];
@@ -110,16 +112,17 @@
                                          error_class python:error and ' error' or ' '"
                              tal:attributes="id string:formfield-${normalized_name};
                                              class string:field ${fieldname_class}${error_class}">
-                              <label tal:condition="widget/label"
+                              <label class="field-label"
+                                     tal:condition="widget/label"
                                      tal:attributes="for widget/name">
                                 <span i18n:translate=""
                                       tal:content="widget/label">label</span>
                               </label>
-                              <span class="required" title="Required"
+                              <span class="field-required" title="Required"
                                     tal:condition="widget/required"
                                     i18n:attributes="title title_required;"
-                                    style="color: #f00;">
-                                &#x25a0;
+                                    >
+                                *
                               </span>
                               <div class="formHelp"
                                    i18n:translate=""

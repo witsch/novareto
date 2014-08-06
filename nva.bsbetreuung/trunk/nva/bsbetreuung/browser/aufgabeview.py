@@ -73,6 +73,7 @@ class aufgabeView(FieldsetsInputForm):
             myfields = form.Fields(*myfields)
             aufgabenset = FormFieldsets(myfields)
             aufgabenset.label = u'Bitte beantworten Sie die Fragen'
+            aufgabenset.description = self.context.getZusatzinformation()
             aufgabenset.id = u'hh_fragen'
             self.form_fields = FormFieldsets(basisset, aufgabenset)
         else:
@@ -101,22 +102,38 @@ class aufgabeView(FieldsetsInputForm):
         folder = self.context.aq_inner.aq_parent
         return folder.listFolderContents(contentFilter={"portal_type" : "Aufgabe"})
 
+    def getDefaults(self, fragen):
+        data = {}
+        for i in fragen:
+            if i.getFieldtype() == 'float':
+                if i.getOptionen():
+                    try:
+                        value = float(i.getOptionen()[0].replace(',','.'))
+                        data[i.id] = value
+                    except:
+                        pass
+        return data
+    
 
     def setUpWidgets(self, ignore_request=False):
         """ Vorbelegung von Feldern des Wizards """
         fieldnames = [x.__name__ for x in self.form_fields]
         doclist = self.getDoclist()
         step = self.context.getNummer()
-        cookie = getSessionCookie(self.context)[0]
+        cookie = getSessionCookie(self.context, self.request)[0]
         self.adapters = {}
         data = {}
         if step in cookie.get('steps', []):
             data = cookie['stepdata'][step]['data']
-        
+        else:
+            data = self.getDefaults(self.context.getFragen())
         self.widgets = form.setUpWidgets(
             self.form_fields, self.prefix, self.context, self.request,
             form=self, adapters=self.adapters, ignore_request=ignore_request,
             data=data)
+
+    
+
 
 
     @form.action(u'Zurück')
@@ -137,10 +154,10 @@ class aufgabeView(FieldsetsInputForm):
         alt = self.context.alternativtext
         if data:
             valuedata, commentdata = prepareData(self.context.fragen)
-            stepvalue = calculateStep(self.context, valuedata, data, basis, min, max)
-            cookie = saveStepData(self.context, stepnr, valuedata, commentdata, data, stepvalue, alt)
+            stepvalue = calculateStep(self.context, valuedata, data, basis, min, max, self.request)
+            cookie = saveStepData(self.context, stepnr, valuedata, commentdata, data, stepvalue, alt, self.request)
         else:
-            checkStepData(self.context, stepnr)
+            checkStepData(self.context, stepnr, self.request)
         doclist = self.getDoclist()
         next = getStep(doclist, self.context, 'forward')
         if next == 'redir':

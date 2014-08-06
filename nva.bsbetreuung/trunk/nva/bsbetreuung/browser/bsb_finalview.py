@@ -50,7 +50,7 @@ class bsb_finalView(BrowserView):
         if self.request.get('print', ''):
             return self.request.response.redirect(printurl)
         if self.request.get('erase', ''):
-            delSbFromSession(self.context)
+            delSbFromSession(self.context, self.request)
             url = self.context.aq_inner.aq_parent.absolute_url()
             return self.request.response.redirect(url)
         return formaction

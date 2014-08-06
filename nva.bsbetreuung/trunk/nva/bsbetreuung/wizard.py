@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.beaker.interfaces import ISession
 
 def getStep(doclist, docid, direction):
     """
@@ -31,11 +32,11 @@ def prepareData(fragen):
     return (valuedata, commentdata)
 
 
-def getSessionCookie(context):
+def getSessionCookie(context, request):
     """
     Liest das SessionCookie
     """
-    session = context.session_data_manager.getSessionData()
+    session = ISession(request)
     sb_default = {'sbsum':0.0, 'sbvalues':[], 'steps':[], 'stepdata':{}}
     cookie = session.get('sb', sb_default)
     data_startseite = session.get('start', {})
@@ -45,25 +46,28 @@ def getSessionCookie(context):
     return (cookie, mitarbeiter)
 
 
-def setSessionCookie(context, cookie):
+def setSessionCookie(context, cookie, request):
     """
     Schreibt das Cookie in die Session
     """
-    session = context.session_data_manager.getSessionData()
-    session.set('sb', cookie)
+    session = ISession(request)
+    print session
+    #import pdb;pdb.set_trace()
+    session['sb'] = cookie
+    session.save()
 
 
-def calculateStep(context, valuedata, data, basis, sbmin, sbmax):
+def calculateStep(context, valuedata, data, basis, sbmin, sbmax, request):
     """
     Der Betreuungsaufwand der Aufgabe wird berechnet
     """
     if not valuedata:
         return 0.0
-    cookie, personalaufwand = getSessionCookie(context)
+    cookie, personalaufwand = getSessionCookie(context, request)
     faktor = float(personalaufwand) * float(basis)
+    stepvalue = 0.0
     for i in valuedata:
-        faktor = faktor * float(data.get(i))
-    stepvalue = faktor
+        stepvalue += faktor * float(data.get(i))
     if sbmin:
         if stepvalue < float(sbmin):
             stepvalue = float(sbmin)
@@ -73,19 +77,22 @@ def calculateStep(context, valuedata, data, basis, sbmin, sbmax):
     return stepvalue
 
 
-def delSbFromSession(context):
+def delSbFromSession(context, request):
     """
     Loescht die Daten der BS-Betreuung aus dem Session-Cookie
     """
     sb_default = {'sbsum':0.0, 'sbvalues':[], 'steps':[], 'stepdata':{}}
-    setSessionCookie(context, sb_default)
+    setSessionCookie(context, sb_default, request)
 
 
-def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt):
+def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt, request):
     """
     Schreibt die Daten des Steps in die Session
     """
-    cookie, mitarbeiter = getSessionCookie(context)
+    print stepnr
+    print valuedata
+    print stepvalue
+    cookie, mitarbeiter = getSessionCookie(context, request)
     if stepnr in cookie['steps']:
         cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr]['stepvalue']
         cookie['steps'].pop(cookie['steps'].index(stepnr))
@@ -97,19 +104,19 @@ def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt):
                                   'commentdata': commentdata,
                                   'stepvalue': stepvalue,
                                   'alt':alt}
-    setSessionCookie(context, cookie)
+    setSessionCookie(context, cookie, request)
     return cookie
 
 
-def checkStepData(context, stepnr):
+def checkStepData(context, stepnr, request):
     """
     Loescht die Daten des aktuellen Steps aus dem Cookie im Falle von Steuerung Zurueck
     """
-    cookie, mitarbeiter = getSessionCookie(context)
+    cookie, mitarbeiter = getSessionCookie(context, request)
     if stepnr in cookie['steps']:
         cookie['steps'].pop(cookie['steps'].index(stepnr))
         cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr]['stepvalue']
         del cookie['stepdata'][stepnr]
-    setSessionCookie(context, cookie)
+    setSessionCookie(context, cookie, request)
     return cookie
 
