@@ -27,7 +27,6 @@ class CalendarView(BrowserView):
             sort_on='start',
             start=date_range_query,
             portal_type='Event',
-            review_state='published',
             path={'query': folder_path, 'depth': 1}):
             yield brain
 
