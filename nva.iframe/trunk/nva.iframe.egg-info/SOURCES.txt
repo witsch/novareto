@@ -199,4 +199,5 @@ nva/iframe/profiles/default/metadata.xml
 nva/iframe/profiles/default/types.xml
 nva/iframe/profiles/default/types/nva.iframe.iframelink.xml
 nva/iframe/resources/README.txt
+nva/iframe/resources/change_url.js
 nva/iframe/templates/iframeview.pt

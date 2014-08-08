@@ -9,8 +9,7 @@ class iFrameView(api.Page):
 
      def update(self):
          callid = self.request.get('CallID', '') + ';' + self.request.get('DetailID', '')
-         print callid
-         if not callid:
+         if not callid or callid == ';':
              callid = self.context.callid
          src = self.context.src
          parameter = self.context.parameter
