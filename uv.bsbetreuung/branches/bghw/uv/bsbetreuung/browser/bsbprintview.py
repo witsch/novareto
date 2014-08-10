@@ -7,7 +7,8 @@ from Products.CMFCore.utils import getToolByName
 from uv.bsbetreuung import bsbetreuungMessageFactory as _
 from uv.bsbetreuung.lib.pdfgen import createpdf
 from collective.beaker.interfaces import ISession
-
+from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 class IbsbprintView(Interface):
     """
@@ -47,7 +48,11 @@ class bsbprintView(BrowserView):
         session = ISession(self.request)
         ma = session.get('start', {})
         gb = session.get('gb', {})
-        sb = session.get('sb', {})
+        mongo_objid = session.get('sb', '')
+        client = MongoClient('localhost', 27017)
+        db = client.bsb_database
+        collection = db.bsb_collection
+        sb = collection.find_one({"_id":ObjectId(mongo_objid)})
 
         if not ma or not sb:
             self.context.plone_utils.addPortalMessage(_(u'Leider sind Ihre Angaben zur Online-Handlungshilfe nicht mehr gueltig, bitte versuchen Sie es erneut.'), 'error')

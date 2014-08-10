@@ -58,6 +58,12 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
     story.append(Spacer(0 * cm, 0.5 * cm)) 
     story.append(Paragraph(translate(_(u'gedruckt, am: '), target_language=langvar) + datum, h3))
 
+    #Beschaeftigte im Betrieb
+    story.append(Spacer(0 * cm, 0.5 *cm))
+    story.append(Paragraph(translate(_(u'Beschäftigte im Betrieb'), target_language=langvar), h2))
+    mitarbeiter = ma.get('mitarbeiter')
+    story.append(Paragraph(translate(_(u'Anzahl der Beschäftigten im Betrieb (Ihre Angaben): %s' %mitarbeiter), target_language=langvar), bt))
+
     #Stylesheet fuer Paragraphen in den Tabellen
     stylesheet = getSampleStyleSheet()
     stylesheet.add(ParagraphStyle(name='normal', fontName='Helvetica', fontSize=9, borderPadding = (5,3,3,5)))
@@ -121,6 +127,7 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
     for i in sb.get('steps'):
         zeile = []
         entry = "%s %s" % (i, aufgaben.get(i).decode('utf-8'))
+        i = i.replace('.', '_')
         zeile.append(Paragraph(entry, style_value))
         for k in sortedValues:
             if k in sb['stepdata'][i]['valuedata']:
@@ -129,11 +136,11 @@ def createpdf(context, tmpfile, ma, gb, sb, langvar='de'):
                     entry = fragen[k]['optionen'][auswahl_eintrag].decode('utf-8')
                     zeile.append(Paragraph(entry, style_value))
                 else:
-                    zeile.append(Paragraph(auswahl_eintrag, style_value))
+                    zeile.append(Paragraph(str(auswahl_eintrag), style_value))
             else:
                 zeile.append(Paragraph(u'', style_value))
         if sb['stepdata'][i]['alt']:
-            entry = sb['stepdata'][i]['alt'].decode('utf-8')
+            entry = sb['stepdata'][i]['alt']
             fussnoten.append((fussnote, entry))
             zeile.append(Paragraph(fussnote, style_value))
             fussnote += '*'
