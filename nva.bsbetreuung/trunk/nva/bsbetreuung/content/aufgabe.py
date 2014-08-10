@@ -114,6 +114,16 @@ AufgabeSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
 
+    atapi.BooleanField(
+        'defaultvalues',
+        storage = atapi.AnnotationStorage(),
+        widget = atapi.BooleanWidget(
+            label = _(u"Default Werte"),
+            description = _(u"Bitte hier markieren wenn in der Aufgabe Default-Werte angezeigt werden sollen."),
+        ),
+    ),
+
+
     atapi.TextField(
         'zusatzinformation',
         storage=atapi.AnnotationStorage(),

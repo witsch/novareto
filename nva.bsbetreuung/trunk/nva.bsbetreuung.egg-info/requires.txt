@@ -1,4 +1,6 @@
 setuptools
+pymongo
+bson
 
 [tests]
 zope.testing

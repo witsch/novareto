@@ -55,6 +55,8 @@ setup(name='nva.bsbetreuung',
       include_package_data=True,
       zip_safe=False,
       install_requires=['setuptools',
+                        'pymongo',
+                        'bson',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,

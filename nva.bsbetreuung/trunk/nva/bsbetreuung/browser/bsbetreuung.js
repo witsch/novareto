@@ -21,7 +21,7 @@ $(document).bind('ready', function() {
 
     var boolchecked = $("input#form\\.mybool\\.0").attr('checked');
 
-    if (boolchecked == true) {
+    if (boolchecked == 'checked') {
             $('fieldset#hh_fragen').show();
             $('dl.portlet.portletDGUV2Help').css({width:fixedwidth, position:"absolute", top:yfieldset, left:xportlet});
     }

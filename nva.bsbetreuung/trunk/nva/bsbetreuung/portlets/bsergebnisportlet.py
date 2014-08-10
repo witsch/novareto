@@ -1,5 +1,7 @@
 from zope.interface import Interface
 from zope.interface import implements
+from pymongo import MongoClient
+from bson.objectid import ObjectId
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
@@ -139,8 +141,14 @@ class Renderer(base.Renderer):
         #Daten fuer die betriebsspezifische Betreuung
         print 'Portlet'
         print session
-        data_spezbetreuung = session.get('sb', {})
-        summe_sb = data_spezbetreuung.get('sbsum', 0.0)
+        client = MongoClient('localhost', 27017)
+        db = client.bsb_database
+        collection = db.bsb_collection
+        mongo_objid = session.get('sb', '')
+        summe_sb = 0.0
+        if mongo_objid:
+            data_spezbetreuung = collection.find_one({"_id":ObjectId(mongo_objid)})
+            summe_sb = data_spezbetreuung.get('sbsum', 0.0)
 
         #if data_spezbetreuung and summe_sb < 2.0:
         #    summe_sb = 2.0

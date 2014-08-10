@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.beaker.interfaces import ISession
+from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 def getStep(doclist, docid, direction):
     """
@@ -37,12 +39,22 @@ def getSessionCookie(context, request):
     Liest das SessionCookie
     """
     session = ISession(request)
+    client = MongoClient('localhost', 27017)
+    db = client.bsb_database
+    collection = db.bsb_collection
     sb_default = {'sbsum':0.0, 'sbvalues':[], 'steps':[], 'stepdata':{}}
-    cookie = session.get('sb', sb_default)
+    mongo_objid = session.get('sb', '')
+    if not mongo_objid:
+        cookie = sb_default
+    else:
+        cookie = collection.find_one({"_id":ObjectId(mongo_objid)})
     data_startseite = session.get('start', {})
     mitarbeiter = data_startseite.get('mitarbeiter', 0.0)
     if isinstance(mitarbeiter, str) or isinstance(mitarbeiter, unicode):
         mitarbeiter = float(str(mitarbeiter).replace(',','.'))
+    print 'Cookie' *9
+    print cookie
+    print 'Cookie' *9
     return (cookie, mitarbeiter)
 
 
@@ -51,11 +63,12 @@ def setSessionCookie(context, cookie, request):
     Schreibt das Cookie in die Session
     """
     session = ISession(request)
-    print session
-    #import pdb;pdb.set_trace()
-    session['sb'] = cookie
+    client = MongoClient('localhost', 27017)
+    db = client.bsb_database
+    collection = db.bsb_collection
+    post_id = collection.save(cookie)
+    session['sb'] = post_id.__str__()
     session.save()
-
 
 def calculateStep(context, valuedata, data, basis, sbmin, sbmax, request):
     """
@@ -94,12 +107,12 @@ def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt, 
     print stepvalue
     cookie, mitarbeiter = getSessionCookie(context, request)
     if stepnr in cookie['steps']:
-        cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr]['stepvalue']
+        cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr.replace('.', '_')]['stepvalue']
         cookie['steps'].pop(cookie['steps'].index(stepnr))
     cookie['sbsum'] = cookie['sbsum'] + stepvalue
     cookie['sbvalues'] = list(set(cookie['sbvalues'] + valuedata))
     cookie['steps'].append(stepnr)
-    cookie['stepdata'][stepnr] = {'data':data,
+    cookie['stepdata'][stepnr.replace('.', '_')] = {'data':data,
                                   'valuedata':valuedata,
                                   'commentdata': commentdata,
                                   'stepvalue': stepvalue,
@@ -115,8 +128,8 @@ def checkStepData(context, stepnr, request):
     cookie, mitarbeiter = getSessionCookie(context, request)
     if stepnr in cookie['steps']:
         cookie['steps'].pop(cookie['steps'].index(stepnr))
-        cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr]['stepvalue']
-        del cookie['stepdata'][stepnr]
+        cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr.replace('.','_')]['stepvalue']
+        del cookie['stepdata'][stepnr.replace('.', '_')]
     setSessionCookie(context, cookie, request)
     return cookie
 

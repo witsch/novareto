@@ -104,6 +104,8 @@ class aufgabeView(FieldsetsInputForm):
 
     def getDefaults(self, fragen):
         data = {}
+        if not self.context.getDefaultvalues():
+            return data
         for i in fragen:
             if i.getFieldtype() == 'float':
                 if i.getOptionen():
@@ -124,7 +126,7 @@ class aufgabeView(FieldsetsInputForm):
         self.adapters = {}
         data = {}
         if step in cookie.get('steps', []):
-            data = cookie['stepdata'][step]['data']
+            data = cookie['stepdata'][step.replace('.', '_')]['data']
         else:
             data = self.getDefaults(self.context.getFragen())
         self.widgets = form.setUpWidgets(
