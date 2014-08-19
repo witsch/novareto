@@ -16,6 +16,7 @@ def addToWS(data):
    factory_order = client.factory.create('objSERVICE763')
    factory_listOfArtikel = client.factory.create('ArrayOfObj763Artikel')
    rc = []
+   print data.get('bestellung')
    for artikel in data.get('bestellung'):
        factory_artikel = client.factory.create('obj763Artikel')
        factory_artikel.ARTIKELNUMMER = artikel.artikel
@@ -49,11 +50,15 @@ def addToWS(data):
    factory_order.ALORT = data.get('a_ort'),
    factory_order.LSTARTIKEL = factory_listOfArtikel,
 
+   print factory_order
 
    ret = client.service.S763(factory_order)
+   print ret
 
    if ret:
+       print ret
        if ret.INFO.RETURNCODE == -1:
+           print ret.RESPONSE.BESTELLNUMMER
            return ret.RESPONSE.BESTELLNUMMER
 
    return None

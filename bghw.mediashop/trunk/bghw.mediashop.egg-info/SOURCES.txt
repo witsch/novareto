@@ -190,7 +190,7 @@ bghw/mediashop/configure.zcml
 bghw/mediashop/interfaces.py
 bghw/mediashop/mnrtest.py
 bghw/mediashop/tests.py
-bghw/mediashop/artikel_templates/sampleview.pt
+bghw/mediashop/artikel_templates/artikelview.pt
 bghw/mediashop/card_templates/medienbestellung.pt
 bghw/mediashop/card_templates/my_fields.pt
 bghw/mediashop/card_templates/thankyouview.pt
