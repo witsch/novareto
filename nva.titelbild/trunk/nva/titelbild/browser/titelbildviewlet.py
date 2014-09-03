@@ -17,13 +17,27 @@ from nva.titelbild import titelbildMessageFactory as _
 class TitleImageViewlet(ViewletBase):
     render = ViewPageTemplateFile('titelbild.pt')
 
+
+    @property
+    def portal_catalog(self):
+        return getToolByName(self.context, 'portal_catalog')
+
+    def refs(self, obj):
+        """ returns a list of references """
+        refs = [i.UID() for i in obj.getReferences('rel_titleimages')]
+        brains = self.portal_catalog.searchResults(UID=refs, sort_on="Webcode")
+        myrefs = []
+        for i in brains:
+            myrefs.append(i.getObject())
+        return myrefs
+
     def update(self):
         self.imagelist = []
         self.videopath = None
         self.imagepath = None
         if self.context.portal_type in ['Folder', 'Document', 'Topic', 'Collection']:
             if getattr(self.context, 'anzeige', False):
-                titelbilder = self.context.getReferences('rel_titleimages')
+                titelbilder = self.refs(self.context)
                 if titelbilder:
                     to = len(titelbilder)
                     if getattr(self.context, 'zufall', False):
