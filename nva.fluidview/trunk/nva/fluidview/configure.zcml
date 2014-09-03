@@ -1,0 +1,20 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:grok="http://namespaces.zope.org/grok"
+           xmlns:browser="http://namespaces.zope.org/browser">
+
+  <include package="five.grok" />
+  <include package="plone.app.contentmenu" />
+
+  <grok:grok package="." />
+
+  <browser:menuItems
+    for="*"
+    menu="plone_displayviews">
+    <browser:menuItem
+      title="Bootstrap-Fluid"
+      action="fluidview"
+      description="A Download-View for Files"
+    />
+  </browser:menuItems>
+
+</configure>
