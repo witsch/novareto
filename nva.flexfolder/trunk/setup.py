@@ -26,8 +26,9 @@ setup(name='nva.flexfolder',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'plone.app.dexterity [grok]',
+          'plone.app.dexterity [grok, relations]',
           'plone.namedfile [blobs]',
+          'plone.app.relationfield',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

@@ -2,6 +2,8 @@
 from five import grok
 
 from z3c.form import group, field
+from z3c.relationfield.schema import RelationChoice, RelationList
+from plone.formwidget.contenttree import ObjPathSourceBinder
 from zope import schema
 from zope.interface import invariant, Invalid
 from zope.schema.interfaces import IContextSourceBinder
@@ -39,6 +41,12 @@ class IFlexfolder(form.Schema, IImageScaleTraversable):
     text = RichText(title=u"Haupttext des Ordners",
                            required = False,)
 
+    titelbilder = RelationList(title=u"Titelbild",
+                           default=[],
+                           value_type=RelationChoice(title=_(u"Related"),
+                                           source=ObjPathSourceBinder()),
+                           required=False,)
+
 class Flexfolder(Container):
     grok.implements(IFlexfolder)
 
@@ -75,13 +83,7 @@ class Flexfolder(Container):
         # Evaluate in catalog context because some containers override queryCatalog
         # with their own unrelated method (Topics)
 
-        webcodes = None
-        for i in self.webcodes:
-            brains = self.portal_catalog(Webcode=i)
-            if brains and not webcodes:
-                webcodes = brains
-            elif brains and webcodes:
-                webcodes = webcodes + brains
+        webcodes = self.portal_catalog(Webcode=self.webcodes)
 
         contents = self.portal_catalog.queryCatalog(contentFilter, show_all=1,
                                                     show_inactive=show_inactive, )
