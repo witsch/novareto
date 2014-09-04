@@ -1,5 +1,6 @@
 README.txt
 setup.py
+docs/HISTORY.txt
 nva/__init__.py
 nva.fluidview.egg-info/PKG-INFO
 nva.fluidview.egg-info/SOURCES.txt
@@ -9,5 +10,8 @@ nva.fluidview.egg-info/namespace_packages.txt
 nva.fluidview.egg-info/not-zip-safe
 nva.fluidview.egg-info/requires.txt
 nva.fluidview.egg-info/top_level.txt
+nva/fluidview/README.txt
 nva/fluidview/__init__.py
+nva/fluidview/configure.zcml
 nva/fluidview/fluid_view.py
+nva/fluidview/templates/fluidview.pt
