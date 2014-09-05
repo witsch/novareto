@@ -29,6 +29,7 @@ setup(name='nva.flexfolder',
           'plone.app.dexterity [grok, relations]',
           'plone.namedfile [blobs]',
           'plone.app.relationfield',
+          'plone.app.referenceablebehavior',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

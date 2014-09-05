@@ -2,3 +2,4 @@ setuptools
 plone.app.dexterity [grok, relations]
 plone.namedfile [blobs]
 plone.app.relationfield
+plone.app.referenceablebehavior
