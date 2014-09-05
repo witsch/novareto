@@ -8,7 +8,7 @@
   <div tal:replace="structure provider:plone.belowcontenttitle" />
   <h2 class="parent-fieldname-description" tal:content="context/description"/>
   <div tal:replace="structure provider:plone.abovecontentbody" />
-  <div><span tal:replace="structure context/text/output"/></div>
+  <div><span tal:replace="structure context/text/output | nothing"/></div>
 
 
   <div tal:condition="not: view/Documentorder" tal:repeat="row view/subList" class="row-fluid">
@@ -20,6 +20,8 @@
         element/text" data-container="body">mehr...</button>
     </div>
   </div>
+
+  <div tal:condition="not: view/Documentorder"><p>&nbsp;</p></div>
 
   <div tal:repeat="folder view/Folders">
     <h6 tal:content="folder/title"></h6>
