@@ -45,4 +45,6 @@ class FluidView(api.Page):
         N = 3 #Anzahl der Spalten im FluidView
         self.subList = [fullcontents[n:n+N] for n in range(0, len(fullcontents), N)]
         self.Folders = folders
-
+        self.Documentorder = True
+        if hasattr(self.context, 'documentorder'):
+            self.Documentorder = self.context.documentorder
