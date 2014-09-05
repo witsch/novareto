@@ -2,8 +2,6 @@
 from five import grok
 
 from z3c.form import group, field
-from z3c.relationfield.schema import RelationChoice, RelationList
-from plone.formwidget.contenttree import ObjPathSourceBinder
 from zope import schema
 from zope.interface import invariant, Invalid
 from zope.schema.interfaces import IContextSourceBinder
@@ -16,6 +14,8 @@ from plone.namedfile.field import NamedImage, NamedFile
 from plone.namedfile.field import NamedBlobImage, NamedBlobFile
 from plone.namedfile.interfaces import IImageScaleTraversable
 
+from z3c.relationfield.schema import RelationChoice, RelationList
+from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from nva.flexfolder import MessageFactory as _
 
@@ -36,6 +36,12 @@ class IFlexfolder(form.Schema, IImageScaleTraversable):
     order = schema.Bool(title=u"Webcocde-Inhalte vor den normalen Ordnerinhalten anzeigen.",
                            description=u"Bei Auswahl werden die Webcode-Inhalte vor dem Ordnerinhalt\
                            im anderen Fall danach.",
+                           required = True,)
+
+    documentorder = schema.Bool(title = u"Ordner vor Dokumenten anzeigen",
+                           description = u"Bei Auswahl werden die ordnerähnlichen Objekte vor normalen\
+                           Objekten (Dokument, Seite) angezeigt, im anderen Fall danach.",
+                           default = True,
                            required = True,)
 
     text = RichText(title=u"Haupttext des Ordners",
