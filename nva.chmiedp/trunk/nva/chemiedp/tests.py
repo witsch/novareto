@@ -52,6 +52,14 @@ def test_suite():
 
         # -*- extra stuff goes here -*-
 
+        # Integration tests for Druckbestaeubungspuder
+        ztc.ZopeDocFileSuite(
+            'Druckbestaeubungspuder.txt',
+            package='nva.chemiedp',
+            optionflags = OPTION_FLAGS,
+            test_class=TestCase),
+
+
         # Integration tests for Produktdatenblatt
         ztc.ZopeDocFileSuite(
             'Produktdatenblatt.txt',

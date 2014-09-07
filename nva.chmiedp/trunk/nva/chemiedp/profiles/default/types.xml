@@ -8,6 +8,7 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <object name="nva.chemiedp.druckbestaeubungspuder" meta_type="Dexterity FTI" />
   <object name="nva.chemiedp.produktdatenblatt" meta_type="Dexterity FTI" />
   <object name="nva.chemiedp.maschine" meta_type="Dexterity FTI" />
   <object name="nva.chemiedp.hersteller" meta_type="Dexterity FTI" />
