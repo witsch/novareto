@@ -30,7 +30,7 @@ setup(name='nva.chemiedp',
           'plone.app.relationfield',
           'plone.namedfile [blobs]',
           'plone.app.referenceablebehavior',
-          'plone.app.multilingual [dexterity]',
+          'plone.app.multilingual[dexterity]',
           'plone.multilingualbehavior',
           # -*- Extra requirements: -*-
       ],

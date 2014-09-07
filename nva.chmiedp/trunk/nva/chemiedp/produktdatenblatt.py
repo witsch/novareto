@@ -27,19 +27,6 @@ class IProduktdatenblatt(form.Schema, IImageScaleTraversable):
     Datenblatt eines Produkts
     """
 
-    # If you want a schema-defined interface, delete the model.load
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/produktdatenblatt.xml to define the content type.
-
-    form.model("models/produktdatenblatt.xml")
-
-
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
-
 class Produktdatenblatt(Container):
     grok.implements(IProduktdatenblatt)
 

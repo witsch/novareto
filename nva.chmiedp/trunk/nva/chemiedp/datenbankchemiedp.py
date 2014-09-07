@@ -27,19 +27,6 @@ class IDatenbankChemieDP(form.Schema, IImageScaleTraversable):
     Datenbank chemie.dp
     """
 
-    # If you want a schema-defined interface, delete the model.load
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/datenbankchemiedp.xml to define the content type.
-
-    form.model("models/datenbankchemiedp.xml")
-
-
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
-
 class DatenbankChemieDP(Container):
     grok.implements(IDatenbankChemieDP)
 
