@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from five import grok
 
 from z3c.form import group, field
@@ -27,18 +28,40 @@ class IHersteller(form.Schema, IImageScaleTraversable):
     Hersteller von Produkten oder Maschinen
     """
 
-    # If you want a schema-defined interface, delete the model.load
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/hersteller.xml to define the content type.
+    anschrift1 = schema.TextLine(title = _(u"Anschrift 1"),
+            description = _(u"Bitte geben Sie hier die Anschrift des Herstellers ein."),
+            required = True,)
 
-    form.model("models/hersteller.xml")
+    anschrift2 = schema.TextLine(title = _(u"Anschrift 2"),
+            description = _(u"Bitte geben Sie hier einen evtl. Adresszusatz des Herstellers ein."),
+            required = False,)
 
+    anschrift3 = schema.TextLine(title = _(u"Anschrift 3"),
+            description = _(u"Bitte geben Sie hier einen evtl. weiteren Adresszusatz des Herstellers ein."),
+            required = False,)
 
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
+    land = schema.TextLine(title = _("Land"),
+            description = _(u"Bitte geben Sie hier das Land des Herstellers ein."),
+            required = True,)
+
+    telefon = schema.TextLine(title = _("Telefonnummer"),
+            description = _(u"Bitte geben Sie hier die vollständige Telefonnummer mit Ländercode ein,\
+                              Beispiel: +49 (0) 30 12345/678"),
+            required = True,)
+
+    telefax = schema.TextLine(title = _("Faxnummer"),
+            description = _(u"Bitte geben Sie hier die vollständige Telefaxnummer mit Ländercode ein,\
+                              Beispiel: +49 (0) 30 12345/777"),
+            required = False,)
+
+    email = schema.TextLine(title = _("E-Mail Adresse"),
+            description = _(u"Bitte geben Sie hier die E-Mailadresse des Herstellers ein."),
+            required = False,)
+
+    homepage = schema.URI(title = _("Hompage"),
+            description = _(u"Bitte geben Sie hier die Internetadresse (http://www.example.de)\
+                              des Herstellers ein."),
+            required = False)
 
 class Hersteller(Container):
     grok.implements(IHersteller)
