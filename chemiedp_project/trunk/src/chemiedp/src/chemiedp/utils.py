@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+import uvclight
 from cromlech.configuration.utils import load_zcml
 from cromlech.i18n import register_allowed_languages
 from cromlech.dawnlight import DawnlightPublisher
@@ -39,8 +39,11 @@ class Application(object):
         allowed = langs.strip().replace(',', ' ').split()
         register_allowed_languages(allowed)
         self.name = name
+        self.session_key = session_key
 
     def __call__(self, environ, start_response):
+        
+        @uvclight.sessionned(self.session_key)
         def publish(environ, start_response):
             request = Request(environ)
             conn = request.environment[KEY]
@@ -48,6 +51,7 @@ class Application(object):
             with Site(site) as site:
                 response = publisher.publish(request, site, handle_errors=True)
             return response(environ, start_response)
+
         return publish(environ, start_response)
 
 def create_db(db):

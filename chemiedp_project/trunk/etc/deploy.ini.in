@@ -1,5 +1,5 @@
 [pipeline:main]
-pipeline = gzip session fanstatic zodb chemiedp
+pipeline = gzip session session fanstatic zodb chemiedp
 
 [filter:fanstatic]
 use = egg:fanstatic#fanstatic
@@ -12,7 +12,6 @@ minified = true
 use = egg:cromlech.wsgistate#file_session
 session_key = session.key
 session_cache = /tmp/ 
-
 
 [filter:gzip]
 use = egg:Paste#gzip
