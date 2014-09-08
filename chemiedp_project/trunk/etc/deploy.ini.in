@@ -1,5 +1,5 @@
 [pipeline:main]
-pipeline = gzip session fanstatic chemiedp
+pipeline = gzip session fanstatic zodb chemiedp
 
 [filter:fanstatic]
 use = egg:fanstatic#fanstatic
@@ -19,6 +19,16 @@ use = egg:Paste#gzip
 
 [filter:locale]
 use = egg:cromlech.i18n#locale
+
+[filter:zodb]
+use = egg:cromlech.zodb#zodb
+initializer = chemiedp.utils:create_db
+configuration =
+    <zodb>
+      <filestorage>
+        path ${storage}/Data.fs
+      </filestorage>
+    </zodb>
 
 [app:chemiedp]
 use = egg:chemiedp#app

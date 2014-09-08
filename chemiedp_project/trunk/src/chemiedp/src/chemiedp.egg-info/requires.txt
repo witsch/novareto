@@ -1,1 +1,2 @@
 uvclight [auth]
+uvclight [zodb]
