@@ -7,6 +7,7 @@ from uvc.content import schematic_bootstrap
 from uvc.api import api
 from chemiedp.interfaces import IHersteller, IDruckbestaeubungspuder
 
+
 class AddHersteller(api.AddForm):
     api.context(uvclight.IRootObject)
     fields = api.Fields(IHersteller)
@@ -21,18 +22,22 @@ class AddHersteller(api.AddForm):
     def nextURL(self):
         return self.url(self.context)
 
+
 class EditHersteller(api.EditForm):
     api.context(IHersteller)
     api.name('edit')
     fields = api.Fields(IHersteller)
+
 
 class ViewHersteller(api.DisplayForm):
     api.context(IHersteller)
     api.name('index')
     fields = api.Fields(IHersteller)
 
+
 class Hersteller(Container):
     schema(IHersteller)
 
     def __init__(self, **kwargs):
+        super(Hersteller, self).__init__()
         schematic_bootstrap(self, **kwargs)
