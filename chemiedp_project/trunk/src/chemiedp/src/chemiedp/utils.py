@@ -15,7 +15,7 @@ from cromlech.dawnlight import ViewLookup
 from cromlech.dawnlight import view_locator, query_view
 from zope.component import getGlobalSiteManager
 from uvclight.backends.zodb import Root
-from cromlech.zodb import get_size, Site
+from cromlech.zodb import get_site, Site
 from cromlech.zodb import initialize_applications
 
 view_lookup = ViewLookup(view_locator(query_view))

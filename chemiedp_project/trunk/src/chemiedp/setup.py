@@ -21,6 +21,7 @@ setup(name='chemiedp',
           # -*- Extra requirements: -*-
           'uvclight [auth]',
           'uvclight [zodb]',
+          'zope.i18nmessageid',
       ],
       entry_points={
          'fanstatic.libraries': [

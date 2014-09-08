@@ -1,2 +1,3 @@
 uvclight [auth]
 uvclight [zodb]
+zope.i18nmessageid
