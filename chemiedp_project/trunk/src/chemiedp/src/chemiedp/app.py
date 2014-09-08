@@ -6,6 +6,7 @@ from uvc.content import schema
 from uvc.content import schematic_bootstrap
 from uvc.api import api
 from chemiedp.interfaces import IHersteller, IDruckbestaeubungspuder
+from uvc.design.canvas.menus import IAddMenu
 
 
 class AddHersteller(api.AddForm):
@@ -21,6 +22,12 @@ class AddHersteller(api.AddForm):
 
     def nextURL(self):
         return self.url(self.context)
+
+
+class AddMenuItem(uvclight.MenuItem):
+    uvclight.menu(IAddMenu)
+    api.name('addhersteller')
+    api.title('Hersteller adden')
 
 
 class EditHersteller(api.EditForm):
