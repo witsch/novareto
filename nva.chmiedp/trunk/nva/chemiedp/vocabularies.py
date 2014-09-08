@@ -13,3 +13,12 @@ ausgangsmaterial = SimpleVocabulary(
      SimpleTerm(value=u'Calciumcarbonat', title=_(u'Calciumkarbonat')),
      SimpleTerm(value=u'Zucker', title=_(u'Zucker'))]
     )
+
+anwendungsgebieteVocab = SimpleVocabulary(
+    [SimpleTerm(value=u'Farbreiniger', title=_(u'Farbreiniger')),
+     SimpleTerm(value=u'Plattenreiniger', title=_(u'Plattenreiniger')),
+     SimpleTerm(value=u'Feuchtwalzenreiniger', title=_(u'Feuchtwalzenreiniger')),
+     SimpleTerm(value=u'Gummituchreiniger', title=_(u'Gummituchreiniger')),
+     SimpleTerm(value=u'Reiniger_Leitstaende_Sensoren', title=_(u'Reiniger für Leitstände, Sensoren')),
+     SimpleTerm(value=u'Klebstoffreiniger', title=_(u'Klebstoffreiniger')),]
+    )

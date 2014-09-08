@@ -1,33 +1,26 @@
 <?xml version="1.0"?>
-<object name="nva.chemiedp.produktordner"
+<object name="nva.chemiedp.reinigungsmittelmanuell"
    meta_type="Dexterity FTI"
    i18n:domain="nva.chemiedp" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">ProduktOrdner</property>
+  <property name="title" i18n:translate="">ReinigungsmittelManuell</property>
   <property name="description"
-    i18n:translate="">Tabelle bzw. Ordner fuer Produktdatenblaetter</property>
-  <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
-  <property name="factory">nva.chemiedp.produktordner</property>
+    i18n:translate="">Description of the Example Type</property>
+  <property name="icon_expr">string:${portal_url}/document_icon.png</property>
+  <property name="factory">nva.chemiedp.reinigungsmittelmanuell</property>
   <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
-  <property name="allowed_content_types">
-    <element value="nva.chemiedp.produktdatenblatt" />
-    <element value="nva.chemiedp.druckbestaeubungspuder" />
-    <element value="nva.chemiedp.reinigungsmittelmanuell" />
-  </property>
+  <property name="allowed_content_types" />
   <property name="allow_discussion">False</property>
 
   <!-- schema and class used for content items -->
-  <property name="schema">nva.chemiedp.produktordner.IProduktOrdner</property>
-  <property name="klass">nva.chemiedp.produktordner.ProduktOrdner</property>
+  <property name="schema">nva.chemiedp.reinigungsmittelmanuell.IReinigungsmittelManuell</property>
+  <property name="klass">nva.chemiedp.reinigungsmittelmanuell.ReinigungsmittelManuell</property>
 
   <property name="behaviors">
      <element value="plone.app.content.interfaces.INameFromTitle" />
      <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
-     <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
-     <element value="plone.app.relationfield.behavior.IRelatedItems" />
-     <element value="plone.multilingualbehavior.interfaces.IDexterityTranslatable" />
    </property>
 
   <!-- View information -->
