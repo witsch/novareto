@@ -1,0 +1,15 @@
+setup.py
+src/chemiedp/__init__.py
+src/chemiedp/resources.py
+src/chemiedp/utils.py
+src/chemiedp/views.py
+src/chemiedp.egg-info/PKG-INFO
+src/chemiedp.egg-info/SOURCES.txt
+src/chemiedp.egg-info/dependency_links.txt
+src/chemiedp.egg-info/entry_points.txt
+src/chemiedp.egg-info/not-zip-safe
+src/chemiedp.egg-info/requires.txt
+src/chemiedp.egg-info/top_level.txt
+src/chemiedp/tests/__init__.py
+src/chemiedp/tests/fixtures.py
+src/chemiedp/tests/test_Base.py
