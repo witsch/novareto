@@ -16,7 +16,7 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 
 from z3c.relationfield.schema import RelationList, RelationChoice
 from plone.formwidget.contenttree import ObjPathSourceBinder
-from nva.chemiedp.vocabularies import einstufungVocab, verwendungszweckVocab
+from nva.chemiedp.vocabularies import einstufungVocab, zweckVocab
 
 from nva.chemiedp import MessageFactory as _
 
@@ -56,7 +56,7 @@ class IReinigungsmittelEtiketten(form.Schema, IImageScaleTraversable):
     verwendungszweck = schema.List(title = _(u"Verwendungszwecke"),
             description = _(u"Bitte wählen Sie die Verwendungszwecke für dieses Reinigungsmittel aus."),
             value_type = schema.Choice(title = _(u"Verwendungszweck"),
-                                       vocabulary = verwendungszweckVocab),
+                                       vocabulary = zweckVocab),
             required = True,)
 
     emissionsgeprueft = schema.Bool(title = _(u"Emissionsarmes Produkt"),
