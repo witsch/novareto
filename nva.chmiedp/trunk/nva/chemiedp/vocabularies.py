@@ -22,3 +22,13 @@ anwendungsgebieteVocab = SimpleVocabulary(
      SimpleTerm(value=u'Reiniger_Leitstaende_Sensoren', title=_(u'Reiniger für Leitstände, Sensoren')),
      SimpleTerm(value=u'Klebstoffreiniger', title=_(u'Klebstoffreiniger')),]
     )
+
+einstufungVocab = SimpleVocabulary(
+    [SimpleTerm(value=u'xi-reizend', title=_(u'Xi; Reizend')),
+     SimpleTerm(value=u'xn-gesundheitsschaedlich', title=_(u'Xn; gesundheitsschädlich')),
+     SimpleTerm(value=u'signalwort-achtung', title=_(u'Signalwort: Achtung')),
+     SimpleTerm(value=u'signalwort-gefahr', title=_(u'Signalwort: Gefahr')),
+     SimpleTerm(value=u'piktogramm-achtung', title=_(u'Piktogramm: Achtung')),
+     SimpleTerm(value=u'piktogramm-aetzend', title=_(u'Piktogramm: Ätzend')),
+     SimpleTerm(value=u'piktogramm-entflammbar', title=_('Piktogramm: Entflammbar')),]
+    )

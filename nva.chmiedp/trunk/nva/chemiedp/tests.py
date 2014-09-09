@@ -52,6 +52,14 @@ def test_suite():
 
         # -*- extra stuff goes here -*-
 
+        # Integration tests for ReinigungsmittelEtiketten
+        ztc.ZopeDocFileSuite(
+            'ReinigungsmittelEtiketten.txt',
+            package='nva.chemiedp',
+            optionflags = OPTION_FLAGS,
+            test_class=TestCase),
+
+
         # Integration tests for ReinigungsmittelManuell
         ztc.ZopeDocFileSuite(
             'ReinigungsmittelManuell.txt',
