@@ -1,0 +1,17 @@
+<h1 tal:content="context/title" />
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Homepage</th>
+      <th>E-Mail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr tal:repeat="item view/objlist">
+      <td data-title="Name"><a href="#" tal:attributes="href item/url" tal:content="item/title"/></td>
+      <td data-title="Homepage"><a href="#" tal:attributes="href item/homepage" tal:content="item/homepage"/></td>
+      <td data-title="E-Mail"><a href="#" tal:attributes="href string:mailto:${item/email}" tal:content="item/email"/>
+    </tr>
+  </tbody>
+</table>
