@@ -32,3 +32,14 @@ einstufungVocab = SimpleVocabulary(
      SimpleTerm(value=u'piktogramm-aetzend', title=_(u'Piktogramm: Ätzend')),
      SimpleTerm(value=u'piktogramm-entflammbar', title=_('Piktogramm: Entflammbar')),]
     )
+
+zweckVocab = SimpleVocabulary(
+    [SimpleTerm(value=u'buchdruck', title=_(u'Buchdruck')),
+     SimpleTerm(value=u'flexodruck', title=_(u'Flexodruck')),
+     SimpleTerm(value=u'siebdruck', title=_(u'Siebdruck')),
+     SimpleTerm(vaule=u'farbreiniger_alle_druckverfahren', title=_(u'Farbreiniger alle Druckverfahren')),
+     SimpleTerm(value=u'offsetdruck', title=_(u'Offsetdruck')),
+     SimpleTerm(value=u'waschanlage', title=_(u'Waschanlage')),
+     SimpleTerm(value=u'tiefdruck', title=_(u'Tiefdruck')),
+     SimpleTerm(value=u'klischeereiniger', title=_(u'Klischeereiniger')),]
+     )
