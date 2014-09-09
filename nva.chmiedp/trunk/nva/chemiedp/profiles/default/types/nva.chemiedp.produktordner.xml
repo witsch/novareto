@@ -15,6 +15,7 @@
     <element value="nva.chemiedp.produktdatenblatt" />
     <element value="nva.chemiedp.druckbestaeubungspuder" />
     <element value="nva.chemiedp.reinigungsmittelmanuell" />
+    <element value="nva.chemiedp.reinigungsmitteletiketten" />
   </property>
   <property name="allow_discussion">False</property>
 

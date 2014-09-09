@@ -19,7 +19,7 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 from nva.chemiedp.vocabularies import einstufungVocab, zweckVocab
 
 from nva.chemiedp import MessageFactory as _
-
+from nva.chemiedp.hersteller import IHersteller
 
 # Interface class; used to define content-type schema.
 
