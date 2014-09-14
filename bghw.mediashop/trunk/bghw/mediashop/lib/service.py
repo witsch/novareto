@@ -6,8 +6,11 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 URL = "http://10.30.4.22/services/service763/service763.asmx?wsdl"
+try:
+    client = Client(URL)
+except:
+    pass
 
-client = Client(URL)
 #logging.getLogger('suds.client').setLevel(logging.DEBUG)
 #logging.getLogger('suds.transport').setLevel(logging.DEBUG)
 #logging.getLogger('suds.xsd.schema').setLevel(logging.DEBUG)

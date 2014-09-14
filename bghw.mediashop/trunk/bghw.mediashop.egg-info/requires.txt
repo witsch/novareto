@@ -3,3 +3,7 @@ plone.app.dexterity [grok, relations]
 plone.app.relationfield
 plone.namedfile [blobs]
 z3c.suds
+z3c.form==3.0.5
+uvc.plone
+uvc.api [plone]
+uvc.validation

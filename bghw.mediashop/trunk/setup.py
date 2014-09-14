@@ -30,7 +30,10 @@ setup(name='bghw.mediashop',
           'plone.app.relationfield',
           'plone.namedfile [blobs]',
           'z3c.suds',
-          # -*- Extra requirements: -*-
+          'z3c.form==3.0.5',
+          'uvc.plone',
+          'uvc.api [plone]',
+          'uvc.validation'
       ],
       entry_points="""
       # -*- Entry points: -*-

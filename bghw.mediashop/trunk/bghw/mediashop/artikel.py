@@ -16,7 +16,7 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 
 from z3c.relationfield.schema import RelationList, RelationChoice
 from plone.formwidget.contenttree import ObjPathSourceBinder
-
+from Products.ATContentTypes.interfaces.interfaces import IATContentType
 
 from bghw.mediashop import MessageFactory as _
 
