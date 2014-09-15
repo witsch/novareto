@@ -48,8 +48,8 @@ class CheckHtml(api.Form):
         data, errors = self.extractData()
         if errors:
             return
-        value = data.get('htmltext', '')
-        moreerrors = self.validateHtml(value)
+        #value = data.get('htmltext', '')
+        #moreerrors = self.validateHtml(value)
         #if moreerrors:
         #    return 
         htmltxt = data.get('htmltext', '').encode('utf-8')

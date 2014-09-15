@@ -1,5 +1,6 @@
 README.txt
 setup.py
+docs/HISTORY.txt
 nva/__init__.py
 nva.tutorial.egg-info/PKG-INFO
 nva.tutorial.egg-info/SOURCES.txt
@@ -9,6 +10,8 @@ nva.tutorial.egg-info/namespace_packages.txt
 nva.tutorial.egg-info/not-zip-safe
 nva.tutorial.egg-info/requires.txt
 nva.tutorial.egg-info/top_level.txt
+nva/tutorial/README.txt
 nva/tutorial/__init__.py
+nva/tutorial/configure.zcml
 nva/tutorial/interfaces.py
 nva/tutorial/views.py
