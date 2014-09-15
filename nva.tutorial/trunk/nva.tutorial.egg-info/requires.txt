@@ -1,0 +1,3 @@
+setuptools
+uvc.api[plone]
+pytidylib
