@@ -21,5 +21,5 @@ class ICheckHtml(Interface):
     htmltext = schema.Text(title=u"HTML-Text",
             description=u"Bitte schreibe Deinen HTML-Code in dieses Feld um zu testen ob er wie gewünscht\
                          funktioniert. Bitte beachte aber, dass Dein Text hier nicht gespeichert bleibt.\
-                         Du kannst Dir das Fenster in der rechten unteren Ecke so groß wie notwenig ziehen.",
+                         Du kannst Dir das Fenster in der rechten unteren Ecke so groß ziehen wie Du es brauchst.",
             )
