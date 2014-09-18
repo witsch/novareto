@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<portlets>
+
+ <!-- Portlet type registrations -->
+
+ <portlet
+   addview="nva.portlet.flgstatus.FlgStatusPortlet"
+   title="FLG Status Portlet"
+   description="zeigt Grafiken entsprechend dem Status eine FLG-Teilnehmers"
+   />
+
+</portlets>

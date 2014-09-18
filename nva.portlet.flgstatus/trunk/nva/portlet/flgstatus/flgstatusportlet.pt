@@ -1,0 +1,28 @@
+<dl class="portlet portletFlgStatusPortlet"
+    tal:define = "results view/getResults"
+    i18n:domain="nva.portlet.flgstatus">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span tal:replace="results/titel"/> 
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem odd">
+        <img class="image-inline" src="" tal:attributes="src results/statusimage"/>
+    </dd>
+
+    <dd class="portletItem even">
+        <p>
+        <a tal:condition="python: results.get('success') == 1" tal:attributes="href results/abschlussurl">
+            <img class="image-inline" tal:attributes="src results/abschlussimage"/></a>
+        <a tal:condition="python: results.get('success') == -1" tal:attributes="href results/abschlussurl">Hinweis</a>
+        </p>
+    </dd>
+
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

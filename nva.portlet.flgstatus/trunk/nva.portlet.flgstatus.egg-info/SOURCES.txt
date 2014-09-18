@@ -1,0 +1,17 @@
+README.txt
+setup.py
+nva/__init__.py
+nva.portlet.flgstatus.egg-info/PKG-INFO
+nva.portlet.flgstatus.egg-info/SOURCES.txt
+nva.portlet.flgstatus.egg-info/dependency_links.txt
+nva.portlet.flgstatus.egg-info/entry_points.txt
+nva.portlet.flgstatus.egg-info/namespace_packages.txt
+nva.portlet.flgstatus.egg-info/not-zip-safe
+nva.portlet.flgstatus.egg-info/requires.txt
+nva.portlet.flgstatus.egg-info/top_level.txt
+nva/portlet/__init__.py
+nva/portlet/flgstatus/__init__.py
+nva/portlet/flgstatus/flgstatusportlet.py
+nva/portlet/flgstatus/tests/__init__.py
+nva/portlet/flgstatus/tests/base.py
+nva/portlet/flgstatus/tests/test_portlet.py
