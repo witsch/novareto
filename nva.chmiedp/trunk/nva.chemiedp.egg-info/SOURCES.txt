@@ -187,6 +187,8 @@ nva.chemiedp.egg-info/requires.txt
 nva.chemiedp.egg-info/top_level.txt
 nva/chemiedp/DatenbankChemieDP.txt
 nva/chemiedp/INTEGRATION.txt
+nva/chemiedp/ReinigungsmittelEtiketten.txt
+nva/chemiedp/ReinigungsmittelManuell.txt
 nva/chemiedp/__init__.py
 nva/chemiedp/configure.zcml
 nva/chemiedp/datenbankchemiedp.py
@@ -197,7 +199,10 @@ nva/chemiedp/maschine.py
 nva/chemiedp/maschinenordner.py
 nva/chemiedp/produktdatenblatt.py
 nva/chemiedp/produktordner.py
+nva/chemiedp/reinigungsmitteletiketten.py
+nva/chemiedp/reinigungsmittelmanuell.py
 nva/chemiedp/tests.py
+nva/chemiedp/views.py
 nva/chemiedp/vocabularies.py
 nva/chemiedp/datenbankchemiedp_templates/sampleview.pt
 nva/chemiedp/druckbestaeubungspuder_templates/sampleview.pt
@@ -218,4 +223,9 @@ nva/chemiedp/profiles/default/types/nva.chemiedp.maschine.xml
 nva/chemiedp/profiles/default/types/nva.chemiedp.maschinenordner.xml
 nva/chemiedp/profiles/default/types/nva.chemiedp.produktdatenblatt.xml
 nva/chemiedp/profiles/default/types/nva.chemiedp.produktordner.xml
+nva/chemiedp/profiles/default/types/nva.chemiedp.reinigungsmitteletiketten.xml
+nva/chemiedp/profiles/default/types/nva.chemiedp.reinigungsmittelmanuell.xml
+nva/chemiedp/reinigungsmitteletiketten_templates/sampleview.pt
+nva/chemiedp/reinigungsmittelmanuell_templates/sampleview.pt
 nva/chemiedp/resources/README.txt
+nva/chemiedp/viewtemplates/herstellerordnerview.pt

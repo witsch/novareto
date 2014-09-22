@@ -15,6 +15,7 @@
   <grok:grok package="." />
 
   <include package="plone.app.relationfield" />
+  <include package="plone.app.contentmenu" />
 
   <!-- Register a resource directory from which we can deploy static
    resource files. -->
@@ -35,5 +36,17 @@
       />
 
   <!-- -*- extra stuff goes here -*- -->
+
+  <browser:menuItems
+    for="*"
+    menu="plone_displayviews">
+    <browser:menuItem
+      title="Hersteller Ansicht"
+      action="herstellerordnerview"
+      description="A View of Productvendors"
+    />
+  </browser:menuItems>
+
+
 
 </configure>

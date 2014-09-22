@@ -1,3 +1,8 @@
+<script type="text/javascript">
+      $(document).ready(function() {
+        $("[data-toggle='popover']").popover();
+        });</script>
+
 <h1 tal:content="context/title" />
 <table class="table table-striped">
   <thead>
@@ -5,13 +10,20 @@
       <th>Name</th>
       <th>Homepage</th>
       <th>E-Mail</th>
+      <th>Produkte</th>
     </tr>
   </thead>
   <tbody>
     <tr tal:repeat="item view/objlist">
-      <td data-title="Name"><a href="#" tal:attributes="href item/url" tal:content="item/title"/></td>
+      <td data-title="Name"><a href="#" tal:attributes="href item/url" tal:content="item/title"/>
+      </td>
       <td data-title="Homepage"><a href="#" tal:attributes="href item/homepage" tal:content="item/homepage"/></td>
       <td data-title="E-Mail"><a href="#" tal:attributes="href string:mailto:${item/email}" tal:content="item/email"/>
+      <td data-title="Produkte">
+      <button tabindex="0" class="btn btn-small" data-toggle="popover" data-trigger="click"
+      data-placement="left" data-html="true" title="Produkte" data-content="#" 
+      tal:attributes="data-content item/backrefs" data-container="body" >zeigen</button>
+      </td>
     </tr>
   </tbody>
 </table>

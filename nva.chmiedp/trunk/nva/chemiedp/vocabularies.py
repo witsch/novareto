@@ -41,5 +41,7 @@ zweckVocab = SimpleVocabulary(
      SimpleTerm(value=u'offsetdruck', title=_(u'Offsetdruck')),
      SimpleTerm(value=u'waschanlage', title=_(u'Waschanlage')),
      SimpleTerm(value=u'tiefdruck', title=_(u'Tiefdruck')),
+     SimpleTerm(value=u'klebstoffreiniger', title=_(u'Klebstoffreiniger')),
+     SimpleTerm(value=u'uv-offsetdruck', title=_(u'UV-Offsetdruck')),
      SimpleTerm(value=u'klischeereiniger', title=_(u'Klischeereiniger')),]
      )
