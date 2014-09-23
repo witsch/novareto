@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from cromlech.browser import IPublicationRoot
 from zope.interface import implements
 from zope.location import Location
@@ -9,10 +8,11 @@ from uvclight.utils import Site
 from uvclight.bricks import Publication  # SecurePublication
 from uvclight.backends.zodb import Root, ZODBPublication
 from uvclight.utils import with_zcml, with_i18n
-
+from uvclight import IRootObject
+from zope.interface import implements
 
 class MyRoot(Root):
-    pass
+    implements(IRootObject)
 
 
 class Application(ZODBPublication):

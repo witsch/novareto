@@ -1,6 +1,7 @@
 setup.py
 src/chemiedp/__init__.py
 src/chemiedp/configure.zcml
+src/chemiedp/interfaces.py
 src/chemiedp/resources.py
 src/chemiedp/utils.py
 src/chemiedp/views.py
