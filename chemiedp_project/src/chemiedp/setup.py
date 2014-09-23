@@ -19,6 +19,7 @@ setup(name='chemiedp',
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
+          'uvclight[zodb]',
       ],
       entry_points={
          'fanstatic.libraries': [
