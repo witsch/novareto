@@ -25,6 +25,17 @@ use = egg:chemiedp#app
 name = chemiedp
 zcml_file = ${zcml:output}
 session_key = session.key
+environ_key = zodb.env
+conf =
+  <zodb test>
+    <blobstorage>
+      blob-dir ${zodb_conf:blobdir}/test
+      <filestorage>
+        path ${zodb_conf:datadir}/test.fs
+      </filestorage>
+    </blobstorage>
+  </zodb>
+
 
 [server:main]
 use = egg:Paste#http
