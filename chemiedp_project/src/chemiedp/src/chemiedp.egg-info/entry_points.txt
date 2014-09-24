@@ -1,9 +1,0 @@
-[fanstatic.libraries]
-chemiedp = chemiedp.resources:library
-
-[paste.app_factory]
-app = chemiedp.utils:Application.create
-
-[pytest11]
-chemiedp_fixtures = chemiedp.tests.fixtures
-
