@@ -20,6 +20,7 @@ setup(name='chemiedp',
       install_requires=[
           # -*- Extra requirements: -*-
           'uvclight[zodb]',
+          'infrae.testbrowser',
       ],
       entry_points={
          'fanstatic.libraries': [
