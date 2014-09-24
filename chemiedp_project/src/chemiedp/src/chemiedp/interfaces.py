@@ -3,9 +3,37 @@ from zope.interface import Interface
 from zope import schema
 
 from chemiedp import MessageFactory as _
+from .vocabularies import anwendungsgebieteVocab
+
+
+class IReinigungsmittel(Interface):
+    """
+    Description of the Example Type
+    """
+
+    anwendungsgebiete = schema.List(title = _(u"Anwendungsgebiete"),
+            description = _(u"Bitte wählen Sie die Anwendungsgebiete des Reinigungsmittels aus."),
+            value_type = schema.Choice(title = _(u"Anwendungsgebiet"),
+                                       vocabulary = anwendungsgebieteVocab),
+            required = True,)
+
+    flammpunkt = schema.Int(title = _(u"Flammpunkt"),
+            description = _(u"Bitte geben Sie hier den Wert des Flammpunktes in Grad Celsius an."),
+            required = False,)
+
+    wertebereich = schema.Bool(title = _(u"Wertebereich für den Flammpunkt"),
+            description = _(u"Bitte treffen Sie hier eine Auswahl wenn der Wertebereich für den\
+                              Flammpunkt größer als der angegebene Zahlenwert ist."),
+            required = False,)
+
+    emissionsgeprueft = schema.Bool(title = _(u"Emissionsarmes Produkt"),
+            description = _(u"Bitte markieren Sie hier, wenn für das Produkt die Kriterien des Gütesiegels\
+                              erfüllt sind."),
+            required = False,)
+
 
 class IHersteller(Interface):
-    """ 
+    """
     Hersteller von Produkten oder Maschinen
     """
 

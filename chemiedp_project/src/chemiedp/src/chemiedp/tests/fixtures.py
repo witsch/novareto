@@ -19,12 +19,11 @@ def config(request):
 @pytest.fixture(scope="session")
 def app(request):
     """ load the paste.deploy wsgi environment from deploy.ini"""
-    deploy_ini = "config=/Users/larswalther/uvclight/chemiedp_project/parts/etc/deploy.ini"
+    deploy_ini = "config:/Users/christian/work/ab_backend/cdp/parts/etc/test.ini"
     return loadapp(deploy_ini, name="main", global_conf={})
 
 
 @pytest.fixture(scope="session")
 def root(request):
     """ create an instance of the application"""
-    return chemiedp.utils.Root('app')
-
+    return chemiedp.utils.Root()

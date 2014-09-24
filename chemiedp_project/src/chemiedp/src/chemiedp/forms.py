@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-from zope.interface import Interface
+
+
 import uvclight
-from uvclight.backends.zodb import Content, Container
-from uvc.content import schema
-from uvc.content import schematic_bootstrap
 from uvc.api import api
-from chemiedp.interfaces import IHersteller
-from chemiedp.models import Hersteller
-from uvc.design.canvas.menus import IAddMenu, IGlobalMenu, IPersonalMenu, IFooterMenu
+from uvc.design.canvas.menus import IAddMenu
+from chemiedp.models import Hersteller, Reinigungsmittel
+from chemiedp.interfaces import IHersteller, IReinigungsmittel
 
 
 class AddHersteller(api.AddForm):
@@ -25,10 +23,34 @@ class AddHersteller(api.AddForm):
         return self.url(self.context)
 
 
-class AddMenuItem(uvclight.MenuItem):
-    uvclight.menu(IGlobalMenu)
+class AddReinigungsmittel(api.AddForm):
+    api.context(IHersteller)
+    fields = api.Fields(IReinigungsmittel)
+
+    def create(self, data):
+        rm = Reinigungsmittel(**data)
+        return rm
+
+    def add(self, obj):
+        key = "Reinigungsmittel-%s" % len(self.context)
+        self.context[key] = obj
+
+    def nextURL(self):
+        return self.url(self.context)
+
+
+class AddMenuHersteller(uvclight.MenuItem):
+    uvclight.menu(IAddMenu)
+    api.context(uvclight.IRootObject)
     api.name('addhersteller')
     api.title('Hersteller adden')
+
+
+class AddMenuReinigungsmittel(uvclight.MenuItem):
+    uvclight.menu(IAddMenu)
+    api.context(IHersteller)
+    api.name('addreinigungsmittel')
+    api.title('Reinigungsmittel adden')
 
 
 class EditHersteller(api.EditForm):
@@ -42,3 +64,14 @@ class ViewHersteller(api.DisplayForm):
     api.name('index')
     fields = api.Fields(IHersteller)
 
+
+class ViewReinigungsmittel(api.DisplayForm):
+    api.context(IReinigungsmittel)
+    api.name('index')
+    fields = api.Fields(IReinigungsmittel)
+
+
+class EditReinigungsmittel(api.EditForm):
+    api.context(IReinigungsmittel)
+    api.name('edit')
+    fields = api.Fields(IReinigungsmittel)
