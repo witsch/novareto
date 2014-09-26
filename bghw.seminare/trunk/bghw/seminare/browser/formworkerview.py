@@ -94,12 +94,17 @@ class seminarworkerView(BrowserView):
         text_kunde = u"""
 Sehr %s %s %s %s,
 
-vielen Dank für Ihre Seminaranmeldung. Diese E-Mail erhalten Sie als Bestätigung Ihrer Seminaranmeldung bei der BGHW. 
+dies ist eine automatisch generierte E-Mail, bitte antworten Sie nicht an diese E-Mailadresse!
+
+Vielen Dank für Ihre Seminaranmeldung. Diese E-Mail erhalten Sie als Bestätigung Ihrer Seminaranmeldung bei der BGHW. 
 Bitte beachten Sie, dass Sie eine endgültige Bestätigung Ihrer Teilnahme am Seminar durch die BGHW auf dem Postweg 
 erhalten. Ein Exemplar Ihrer Anmeldung im PDF-Format erhalten Sie als Anlage zur dieser E-Mail.
 
 Mit freundlichen Grüßen
 Ihre Berufsgenossenschaft Handel und Warendistribution
+
+Hinweis: Bei Rückfragen wenden Sie sich bitte an: ausbildung@bghw.de
+
         """ %(ehrung, myform.get('anrede', ''), myform.get('akad_titel', ''), myform.get('name', ''))
         text_bghw = u"""Im Anhang zu dieser Mail finden Sie die Seminaranmeldung."""
         mailhost = self.mail_host.smtp_host
