@@ -3,10 +3,9 @@
 
 import uvclight
 from uvc.api import api
-from uvc.design.canvas.menus import IAddMenu
-from chemiedp.models import Hersteller, Reinigungsmittel
-from chemiedp.interfaces import IHersteller, IReinigungsmittel
-
+from chemiedp.interfaces import IHersteller, IDruckbestaeubungspuder
+from chemiedp.models import Hersteller, Druckbestaeubungspuder
+from uvc.design.canvas.menus import IAddMenu, IGlobalMenu, IPersonalMenu, IFooterMenu, INavigationMenu
 
 class AddHersteller(api.AddForm):
     api.context(uvclight.IRootObject)
@@ -22,30 +21,6 @@ class AddHersteller(api.AddForm):
     def nextURL(self):
         return self.url(self.context)
 
-
-class AddReinigungsmittel(api.AddForm):
-    api.context(IHersteller)
-    fields = api.Fields(IReinigungsmittel)
-
-    def create(self, data):
-        rm = Reinigungsmittel(**data)
-        return rm
-
-    def add(self, obj):
-        key = "Reinigungsmittel-%s" % len(self.context)
-        self.context[key] = obj
-
-    def nextURL(self):
-        return self.url(self.context)
-
-
-class AddMenuHersteller(uvclight.MenuItem):
-    uvclight.menu(IAddMenu)
-    api.context(uvclight.IRootObject)
-    api.name('addhersteller')
-    api.title('Hersteller adden')
-
-
 class AddMenuReinigungsmittel(uvclight.MenuItem):
     uvclight.menu(IAddMenu)
     api.context(IHersteller)
@@ -58,20 +33,32 @@ class EditHersteller(api.EditForm):
     api.name('edit')
     fields = api.Fields(IHersteller)
 
-
 class ViewHersteller(api.DisplayForm):
     api.context(IHersteller)
     api.name('index')
     fields = api.Fields(IHersteller)
 
+class AddPuder(api.AddForm):
+    api.context(IHersteller)
+    fields = api.Fields(IDruckbestaeubungspuder)
 
-class ViewReinigungsmittel(api.DisplayForm):
-    api.context(IReinigungsmittel)
-    api.name('index')
-    fields = api.Fields(IReinigungsmittel)
+    def create(self, data):
+        puder = Druckbestaeubungspuder(**data)
+        return puder
 
+    def add(self, obj):
+        self.context[obj.name] = obj
 
-class EditReinigungsmittel(api.EditForm):
-    api.context(IReinigungsmittel)
+    def nextURL(self):
+        return self.url(self.context)
+
+class EditPuder(api.EditForm):
+    api.context(IDruckbestaeubungspuder)
     api.name('edit')
-    fields = api.Fields(IReinigungsmittel)
+    fields = api.Fields(IDruckbestaeubungspuder)
+
+class ViewPuder(api.DisplayForm):
+    api.context(IDruckbestaeubungspuder)
+    api.name('index')
+    fields = api.Fields(IDruckbestaeubungspuder)
+

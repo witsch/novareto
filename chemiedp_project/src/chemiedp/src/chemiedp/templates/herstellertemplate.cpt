@@ -1,0 +1,29 @@
+<script type="text/javascript">
+      $(document).ready(function() {
+        $("[data-toggle='popover']").popover();
+        });</script>
+
+<div tal:define="items view.objectdaten">
+  <h1>Übersicht Hersteller</h1>
+  <table class="table table-striped">
+    <thead>
+      <th>Name des Herstellers</th>
+      <th>Homepage</th>
+      <th>Kontakt</th>
+      <th>Produkte</th>
+    </thead>
+    <tbody>
+      <tr tal:repeat="item items">
+        <td><a href="" tal:attributes="href item.get('url')" tal:content="item.get('title')"></a></td>
+        <td><a href="" tal:attributes="href item.get('homepage')" tal:content="item.get('homepage')"></a></td>
+        <td>Klaus</td>
+        <td>
+          <button tal:condition="item.get('objlist')" tabindex="0" class="btn btn-primary" 
+            data-toggle="popover" data-trigger="click" data-placement="left" data-html="true" 
+            title="Produkte" data-content="#" tal:attributes="data-content item.get('objlist')" 
+            data-container="body" >zeigen</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

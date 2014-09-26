@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from zope.interface import Interface
 from zope import schema
-
+from chemiedp.vocabularies import klasse, ausgangsmaterial
 from chemiedp import MessageFactory as _
 from .vocabularies import anwendungsgebieteVocab
 
@@ -41,6 +41,10 @@ class IHersteller(Interface):
             description = _(u"Bitte geben Sie hier den Namen des Herstellers ein."),
             required = True,)
 
+    title = schema.TextLine(title = _(u"Titel"),
+            description = _(u"Bitte geben Sie hier den Titel an der den Benutzern angezeigt werden soll."),
+            required = True,)
+
     anschrift1 = schema.TextLine(title = _(u"Anschrift 1"),
             description = _(u"Bitte geben Sie hier die Anschrift des Herstellers ein."),
             required = True,)
@@ -76,3 +80,39 @@ class IHersteller(Interface):
                               des Herstellers ein."),
             required = False)
 
+class IDruckbestaeubungspuder(Interface):
+    """ 
+    Description of the Example Type
+    """
+
+    name = schema.TextLine(title = _(u"Name"),
+            description = _(u"Bitte geben Sie hier den Namen des Puders ein."),
+            required = True,)
+
+    title = schema.TextLine(title = _(u"Titel"),
+            description = _(u"Bitte geben Sie hier den Titel an der den Benutzern angezeigt werden soll."),
+            required = True,)
+
+    produktklasse = schema.Choice(title = _(u"Produktklasse"),
+            description = _(u"Bitte wählen Sie eine Produktklasse für das Druckbestäubungspuder aus."),
+            vocabulary = klasse,
+            required = True,)
+
+    ausgangsmaterial = schema.Choice(title = _(u"Ausgangsmaterial"),
+            description = _(u"Bitte wählen Sie das Ausgangsmaterial für das Druckbestäubungspuder aus."),
+            vocabulary = ausgangsmaterial,
+            required = True,)
+
+    medianwert = schema.Float(title = _(u"Medianwert in µm"),
+            description = _(u"Bitte geben Sie hier den Medianwert in Micrometer als Gleitkommawert an."),
+            required = True,)
+
+    volumenanteil = schema.Float(title = _(u"Volumenanteil < 10 µm"),
+            description = _(u"Prozentuale Angabe des Volumenanteils der Partikel mit Korngrößen unterhalb\
+                              10 µm am Gesamtvolumen der Puderprobe"),
+            required = True,)
+
+    maschinen = schema.TextLine(title = _(u"Maschinen"),
+            description = _(u"Bitte geben Sie hier Maschinen an, bei denen dieses Druckbestäubungspuder\
+                              explizit verwendet werden darf"),
+            required = False,)
