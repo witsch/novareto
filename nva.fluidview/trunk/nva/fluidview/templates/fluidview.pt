@@ -12,7 +12,7 @@
 
 
   <div tal:condition="not: view/Documentorder" tal:repeat="row view/subList" class="row-fluid">
-    <div tal:repeat="element row" class="span6">
+    <div tal:repeat="element row" class="span5">
       <h2 tal:content="element/title"></h2>
       <p tal:content="element/description"/>
       <button tabindex="0" class="btn btn-small" data-toggle="popover" data-trigger="click" data-placement="bottom"
@@ -46,7 +46,7 @@
   </div>  
 
   <div tal:condition="view/Documentorder" tal:repeat="row view/subList" class="row-fluid">
-    <div tal:repeat="element row" class="span6">
+    <div tal:repeat="element row" class="span5">
       <h2 tal:content="element/title"></h2>
       <p tal:content="element/description"/>
       <button tabindex="0" class="btn btn-small" data-toggle="popover" data-trigger="click" data-placement="bottom"
