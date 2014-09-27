@@ -1,20 +1,11 @@
 # -*- coding: utf-8 -*-
+from zope.interface import Interface
 import uvclight
 from uvc.api import api
-from .interfaces import IHersteller
-from zope.interface import Interface
 
 class Index(api.Page):
     api.context(uvclight.IRootObject)
     template = uvclight.get_template('index.cpt', __file__)
-
-
-class DisplayHersteller(api.Page):
-    api.context(IHersteller)
-    api.name('index')
-
-    template = uvclight.get_template('hersteller.cpt', __file__)
-
 
 class Hersteller(api.Page):
     api.context(uvclight.IRootObject)

@@ -1,16 +1,1 @@
-<h1> Hersteller </h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th> Name </th>
-      <th> Firma </th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr tal:repeat="hersteller context.values()">
-    <td> <a href="" tal:attributes="href hersteller.name" tal:content="hersteller.name"> </a> </td>
-    <td> <span tal:content="hersteller.anschrift1"/> </td>
-    </tr>
-  </tbody>
-</table>
+<h1> Datenbank Druckbestäubungspuder </h1>
