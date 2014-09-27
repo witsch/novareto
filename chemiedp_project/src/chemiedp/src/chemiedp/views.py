@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
 import uvclight
+from uvc.api import api
+from .interfaces import IHersteller
 from zope.interface import Interface
 
 class Index(api.Page):
     api.context(uvclight.IRootObject)
+    template = uvclight.get_template('index.cpt', __file__)
 
-    def render(self):
-        return u"Datenbank Druckbestäubungspuder"
+
+class DisplayHersteller(api.Page):
+    api.context(IHersteller)
+    api.name('index')
+
+    template = uvclight.get_template('hersteller.cpt', __file__)
+
 
 class Hersteller(api.Page):
     api.context(uvclight.IRootObject)
@@ -29,7 +37,7 @@ class Hersteller(api.Page):
         snippet = '<ul>'
         for i in objectlist:
             row = '<li><a href="%s">%s</a></li>' %(i.get('url'),i.get('title'))
-            snippet += row 
+            snippet += row
         snippet += '</ul>'
         return snippet
 

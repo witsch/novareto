@@ -11,7 +11,7 @@ class IReinigungsmittel(Interface):
     Description of the Example Type
     """
 
-    anwendungsgebiete = schema.List(title = _(u"Anwendungsgebiete"),
+    anwendungsgebiete = schema.Set(title = _(u"Anwendungsgebiete"),
             description = _(u"Bitte wählen Sie die Anwendungsgebiete des Reinigungsmittels aus."),
             value_type = schema.Choice(title = _(u"Anwendungsgebiet"),
                                        vocabulary = anwendungsgebieteVocab),
@@ -75,7 +75,7 @@ class IHersteller(Interface):
             description = _(u"Bitte geben Sie hier die E-Mailadresse des Herstellers ein."),
             required = False,)
 
-    homepage = schema.TextLine(title = _("Hompage"),
+    homepage = schema.URI(title = _("Hompage"),
             description = _(u"Bitte geben Sie hier die Internetadresse (http://www.example.de)\
                               des Herstellers ein."),
             required = False)
