@@ -4,6 +4,7 @@ from uvclight.backends.zodb import Root, ZODBPublication
 from uvclight import IRootObject
 from zope.interface import implements
 from uvc.bootstraptheme import IBootstrapThemeRequest
+from uvc.themes.dguv import IDGUVRequest
 
 
 class MyRoot(Root):
@@ -12,5 +13,5 @@ class MyRoot(Root):
 
 
 class Application(ZODBPublication):
-    layers = [IBootstrapThemeRequest, ]
+    layers = [IDGUVRequest, ]
     root = MyRoot
