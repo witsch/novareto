@@ -75,7 +75,7 @@ class IHersteller(Interface):
             description = _(u"Bitte geben Sie hier die E-Mailadresse des Herstellers ein."),
             required = False,)
 
-    homepage = schema.URI(title = _("Hompage"),
+    homepage = schema.TextLine(title = _("Hompage"),
             description = _(u"Bitte geben Sie hier die Internetadresse (http://www.example.de)\
                               des Herstellers ein."),
             required = False)

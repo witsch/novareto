@@ -28,7 +28,7 @@ class EditHersteller(api.EditForm):
 
 class ViewHersteller(api.DisplayForm):
     api.context(IHersteller)
-    api.name('index1')
+    api.name('index')
     fields = api.Fields(IHersteller)
 
 class AddPuder(api.AddForm):
