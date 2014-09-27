@@ -3,7 +3,7 @@ from zope.interface import Interface
 from zope import schema
 from chemiedp.vocabularies import klasse, ausgangsmaterial
 from chemiedp import MessageFactory as _
-from .vocabularies import anwendungsgebieteVocab
+from chemiedp.vocabularies import anwendungsgebieteVocab
 
 
 class IReinigungsmittel(Interface):
