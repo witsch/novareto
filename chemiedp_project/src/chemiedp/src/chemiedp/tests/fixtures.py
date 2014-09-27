@@ -26,4 +26,4 @@ def app(request):
 @pytest.fixture(scope="session")
 def root(request):
     """ create an instance of the application"""
-    return chemiedp.utils.Root()
+    return chemiedp.utils.MyRoot()

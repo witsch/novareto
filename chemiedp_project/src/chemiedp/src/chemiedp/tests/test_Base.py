@@ -27,10 +27,13 @@ class TestClass:
             return control
 
         addValue("form.field.name", "Novareto")
+        addValue("form.field.title", "Novareto")
         addValue("form.field.anschrift1", "Novareto")
         addValue("form.field.land", "Deutschland")
         addValue("form.field.telefon", "0911/7807238")
+        addValue("form.field.homepage", "http://www.novareto.de")
         status = form.submit("form.action.uvcsite.add")
+
         browser.open('http://localhost/')
         assert status == 200
         assert '<a href="Novareto">Novareto</a>' in browser.contents
