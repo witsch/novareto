@@ -1,0 +1,39 @@
+<div class="hersteller">
+  <h1 tal:content="view.context.title">Titel des Herstellers</h1>
+  <div class="address-block">
+    <p tal:content="view.context.anschrift1"/>
+    <p tal:condition="view.context.anschrift2" tal:content="view.context.anschrift2"/>
+    <p tal:condition="view.context.anschrift3" tal:content="view.context.anschrift3"/>
+    <p tal:content="view.context.land"/>
+    <h2>Kontakt</h2>
+    <p>Telefon: <span tal:content="view.context.telefon"/></p>
+    <p tal:condition="view.context.telefax">Telefax: <span tal:content="view.context.telefax"/></p>
+    <p tal:condition="view.context.email">E-Mail: <a href="" tal:attributes="href 'mailto:' + view.context.email"
+      tal:content="view.context.email"></a></p>
+    <p tal:condition="view.context.homepage">Internet: <a href="" tal:attributes="href view.context.homepage"
+      tal:content="view.context.homepage"></a></p>
+  </div>
+  <div class="produkte-block">
+    <h2>Produkte</h2>
+    <p tal:condition="not view.context.items">Für diesen Hersteller sind aktuell leider keine Produkte
+    gelistet.</p>
+    <table tal:condition="view.context.items" class="table table-striped">
+      <thead>
+        <th>Produktname</th>
+        <th>Produktklasse</th>
+        <th>Ausgangsmaterial</th>
+        <th>Medianwert<br/>in µm</th>
+        <th>Volumenanteil<br/>&lt; 10 µm</th>
+      </thead>
+      <tbody>
+        <tr tal:repeat="item view.context.items()">
+          <td tal:content="item[1].title"></td>
+          <td tal:content="item[1].produktklasse"></td>
+          <td tal:content="item[1].ausgangsmaterial"></td>
+          <td tal:content="item[1].medianwert"></td>
+          <td tal:content="item[1].volumenanteil"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

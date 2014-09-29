@@ -30,6 +30,7 @@ class ViewHersteller(api.DisplayForm):
     api.context(IHersteller)
     api.name('index')
     fields = api.Fields(IHersteller)
+    template = uvclight.get_template('herstellerviewtemplate.cpt', __file__)
 
 class AddPuder(api.AddForm):
     api.context(IHersteller)
