@@ -13,6 +13,10 @@ class iFrameView(api.Page):
          if not callid or callid == ';':
              callid = self.context.callid
          src = self.context.src
+         if self.context.absolute_url().startswith('http://'):
+             src = src.replace('https://', 'http://')
+         elif self.context.absolute_url().startswith('https://'):
+             src = src.replace('http://', 'https://')
          baseurl = self.context.absolute_url()
          filename = ''
          if self.context.cssfile:
