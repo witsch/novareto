@@ -14,18 +14,20 @@
     <span class="portletTopRight"></span>
   </dt>
 
-  <dd class="portletItem lastItem">
+  <dd class="portletItem lastItem"
+         tal:define="definitions view/definitions;
+                     entrylist python: list(set([(i.get('url'), i.get('title')) for i in definitions]))">         
     <div id="portlet-glossary-content">
-      <tal:loop repeat="def view/definitions">
-        <div tal:condition="def/show">
+      <ul>
+      <li tal:repeat="entry entrylist">
 	  <a href="#"
 	     class="internal-link"
-             tal:attributes="href def/url"
-             tal:content="def/title">
+             tal:attributes="href python: entry[0]"
+             tal:content="python: entry[1]">
             Definition
           </a>
-        </div>
-      </tal:loop>
+        </li>
+      </ul>
     </div>
     <span class="portletBottomLeft"></span>
     <span class="portletBottomRight"></span>
