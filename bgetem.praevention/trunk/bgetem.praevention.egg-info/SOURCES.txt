@@ -1,0 +1,16 @@
+README.txt
+setup.cfg
+setup.py
+bgetem/__init__.py
+bgetem.praevention.egg-info/PKG-INFO
+bgetem.praevention.egg-info/SOURCES.txt
+bgetem.praevention.egg-info/dependency_links.txt
+bgetem.praevention.egg-info/entry_points.txt
+bgetem.praevention.egg-info/namespace_packages.txt
+bgetem.praevention.egg-info/not-zip-safe
+bgetem.praevention.egg-info/paster_plugins.txt
+bgetem.praevention.egg-info/requires.txt
+bgetem.praevention.egg-info/top_level.txt
+bgetem/praevention/__init__.py
+bgetem/praevention/doku_praevention.py
+bgetem/praevention/tests.py
