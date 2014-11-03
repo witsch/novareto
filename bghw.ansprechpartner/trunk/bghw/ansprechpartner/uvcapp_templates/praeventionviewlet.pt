@@ -18,6 +18,7 @@
             <span tal:content="string: ${plzresults/plz}"/></h2>
 
         <table class="table table-striped">
+	 <thead>
           <tr>
             <th><span i18n:translate="">PLZ</span><br><span i18n:translate="">Ort</span></th>
             <th i18n:translate="">Name, Vorname</th>
@@ -26,6 +27,8 @@
             <th i18n:translate="">Name, Vorname</th>
             <th i18n:translate="">Kontakt</th>
           </tr>
+	 </thead>
+	 <tbody>
           <tr>
             <td data-title="PLZ"><span tal:content="plzresults/plz"/><br><span tal:content="plzresults/ort"/></td>
             <td data-title="Name, Vorname" tal:content="plzresults/tab"/>
@@ -35,6 +38,7 @@
             <td data-title="Name, Vorname" tal:content="plzresults/pb"/>
             <td data-title="Kontakt"><span tal:content="plzresults/pb-tel"/><br><span tal:content="plzresults/pb-mail"/></td>
           </tr>
+	 </tbody>
         </table>
       </span>
       <span tal:condition="not: plzresults">
@@ -46,6 +50,7 @@
 
         <div tal:define="results viewlet/ortresults">
         <table class="table table-striped">  
+	 <thead>
           <tr>
             <th><span i18n:translate="">PLZ</span><br><span i18n:translate="">Ort</span></th>
             <th i18n:translate="">Name, Vorname</th>
@@ -54,6 +59,8 @@
             <th i18n:translate="">Name, Vorname</th>
             <th i18n:translate="">Kontakt</th>
           </tr>
+	</thead>
+	<tbody>
           <span tal:repeat="result results">
           <tr>
             <td data-title="PLZ"><span tal:content="result/plz"/><br><span tal:content="result/ort"/></td>
@@ -65,6 +72,7 @@
             <td data-title="Kontakt"><span tal:content="result/pb-tel"/><br><span tal:content="result/pb-mail"/></td>
           </tr>
           </span>
+	 </tbody>
         </table>
         </div>
       </span>
