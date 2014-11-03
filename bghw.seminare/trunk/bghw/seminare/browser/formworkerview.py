@@ -101,7 +101,7 @@ Bitte beachten Sie, dass Sie eine endgültige Bestätigung Ihrer Teilnahme am Se
 erhalten. Ein Exemplar Ihrer Anmeldung im PDF-Format erhalten Sie als Anlage zur dieser E-Mail.
 
 Mit freundlichen Grüßen
-Ihre Berufsgenossenschaft Handel und Warendistribution
+Ihre Berufsgenossenschaft Handel und Warenlogistik
 
 Hinweis: Bei Rückfragen wenden Sie sich bitte an: ausbildung@bghw.de
 

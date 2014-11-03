@@ -78,7 +78,7 @@ def createpdf(mytmpfile, daten):
     c.setFont(schriftart, 10)
     c.drawString(4.6*cm,25.5*cm,'Berufsgenossenschaft')
     c.drawString(4.6*cm,25.1*cm,'Handel und')
-    c.drawString(4.6*cm,24.7*cm,'Warendistribution')
+    c.drawString(4.6*cm,24.7*cm,'Warenlogistik')
     c.setFillColor(black)
     c.setFont(schriftartfett, 10)
     c.drawString(2.5*cm,23.7*cm, 'Doppel für  Ihre Unterlagen')
