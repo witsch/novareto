@@ -7,9 +7,9 @@
       <div>
         <span class="discreet"><b i18n:translate="">Erläuterung der Abkürzungen</b></span>
         <ul>
-          <li class="discreet" i18n:translate="">AP - Aufsichtsperson</li>
+          <!-- <li class="discreet" i18n:translate="">AP - Aufsichtsperson</li> -->
           <li class="discreet" i18n:translate="">RD - Regionaldirektion</li>
-          <li class="discreet" i18n:translate="">PB - Präventionsberater / -beraterin</li>
+          <!-- <li class="discreet" i18n:translate="">PB - Präventionsberater / -beraterin</li> -->
         </ul>
       </div>
 
@@ -20,11 +20,11 @@
         <table class="table table-striped">
           <tr>
             <th><span i18n:translate="">PLZ</span><br><span i18n:translate="">Ort</span></th>
-            <th i18n:translate="">AP</th>
-            <th i18n:translate="">AP Kontakt</th>
+            <th i18n:translate="">Name, Vorname</th>
+            <th i18n:translate="">Kontakt</th>
             <th i18n:translate="">RD</th>
-            <th i18n:translate="">PB</th>
-            <th><span i18n:translate="">PB</span><br><span i18n:translate="">Kontakt</span></th>
+            <th i18n:translate="">Name, Vorname</th>
+            <th i18n:translate="">Kontakt</th>
           </tr>
           <tr>
             <td><span tal:content="plzresults/plz"/><br><span tal:content="plzresults/ort"/></td>
@@ -48,11 +48,11 @@
         <table class="table table-striped">  
           <tr>
             <th><span i18n:translate="">PLZ</span><br><span i18n:translate="">Ort</span></th>
-            <th i18n:translate="">TAB</th>
-            <th i18n:translate="">TAB Kontakt</th>
+            <th i18n:translate="">Name, Vorname</th>
+            <th i18n:translate="">Kontakt</th>
             <th i18n:translate="">RD</th>
-            <th i18n:translate="">PB</th>
-            <th><span i18n:translate="">PB</span><br><span i18n:translate="">Kontakt</span></th>
+            <th i18n:translate="">Name, Vorname</th>
+            <th i18n:translate="">Kontakt</th>
           </tr>
           <span tal:repeat="result results">
           <tr>
