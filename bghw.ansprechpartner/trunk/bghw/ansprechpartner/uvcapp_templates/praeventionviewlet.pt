@@ -27,13 +27,13 @@
             <th i18n:translate="">Kontakt</th>
           </tr>
           <tr>
-            <td><span tal:content="plzresults/plz"/><br><span tal:content="plzresults/ort"/></td>
-            <td tal:content="plzresults/tab"/>
-            <td><span tal:content="plzresults/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${plzresults/tab-mail}"> 
+            <td data-title="PLZ"><span tal:content="plzresults/plz"/><br><span tal:content="plzresults/ort"/></td>
+            <td data-title="Name, Vorname" tal:content="plzresults/tab"/>
+            <td data-title="Kontakt" ><span tal:content="plzresults/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${plzresults/tab-mail}"> 
                                                             <span tal:content="plzresults/tab-mail"/></a></td>
-            <td><a target="_blank" href="" tal:attributes="href plzresults/orturl"><span tal:content="plzresults/rd"/></a></td>
-            <td tal:content="plzresults/pb"/>
-            <td><span tal:content="plzresults/pb-tel"/><br><span tal:content="plzresults/pb-mail"/></td>
+            <td data-title="RD" ><a target="_blank" href="" tal:attributes="href plzresults/orturl"><span tal:content="plzresults/rd"/></a></td>
+            <td data-title="Name, Vorname" tal:content="plzresults/pb"/>
+            <td data-title="Kontakt"><span tal:content="plzresults/pb-tel"/><br><span tal:content="plzresults/pb-mail"/></td>
           </tr>
         </table>
       </span>
@@ -56,13 +56,13 @@
           </tr>
           <span tal:repeat="result results">
           <tr>
-            <td><span tal:content="result/plz"/><br><span tal:content="result/ort"/></td>
-            <td tal:content="result/tab"/>
-            <td><span tal:content="result/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${result/tab-mail}">
+            <td data-title="PLZ"><span tal:content="result/plz"/><br><span tal:content="result/ort"/></td>
+            <td data-title="Name, Vorname" tal:content="result/tab"/>
+            <td data-title="Kontakt"><span tal:content="result/tab-tel"/><br><a href="" tal:attributes="href string:mailto:${result/tab-mail}">
                                                         <span tal:content="result/tab-mail"/></a></td>
-            <td><a target="_blank" href="" tal:attributes="href result/orturl"><span tal:content="result/rd"/></a></td>
-            <td tal:content="result/pb"/>
-            <td><span tal:content="result/pb-tel"/><br><span tal:content="result/pb-mail"/></td>
+            <td data-title="RD"><a target="_blank" href="" tal:attributes="href result/orturl"><span tal:content="result/rd"/></a></td>
+            <td data-title="Name, Vorname" tal:content="result/pb"/>
+            <td data-title="Kontakt"><span tal:content="result/pb-tel"/><br><span tal:content="result/pb-mail"/></td>
           </tr>
           </span>
         </table>
