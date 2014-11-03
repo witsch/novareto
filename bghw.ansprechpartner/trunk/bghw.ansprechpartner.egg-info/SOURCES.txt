@@ -204,6 +204,7 @@ bghw/ansprechpartner/uvcapp_templates/plznamesuche.pt
 bghw/ansprechpartner/uvcapp_templates/plzortsuche.pt
 bghw/ansprechpartner/uvcapp_templates/praeventionviewlet.pt
 bghw/ansprechpartner/uvcapp_templates/rehaleistungviewlet.pt
+bghw/ansprechpartner/uvcapp_templates/texteviewlet.pt
 bghw/ansprechpartner/uvcapp_templates/uvcapp_fields.pt
 docs/HISTORY.txt
 docs/INSTALL.txt
