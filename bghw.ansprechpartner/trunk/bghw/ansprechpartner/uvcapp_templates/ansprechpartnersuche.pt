@@ -70,10 +70,9 @@
     </form>
 
     <div tal:condition="python: request.get('form.field.plz')" id="ansprechpartner_mub">
-      <h1>Mitgliederservice der BGHW</h1>
-      <p><b>Wenn sie Fragen zum Bereich Mitgliedschaft und Beitrag haben, können sie uns bundesweit wie folgt erreichen:</b></p>
-      <p><b>Telefonisch:  0621-53399001</b></p>
-      <p><b>auf dem Postweg:</b></p>
+      <h1>Ansprechpartner Mitgliedschaft und Beitrag</h1>
+      <p><b>Telefon:  0621 53399001</b></p>
+      <p><b>Postanschrift:</b></p>
       <p>BGHW<br/> 
       Berufsgenossenschaft Handel und Warenlogistik<br/>
       Abteilung Mitgliedschaft und Beitrag<br/>

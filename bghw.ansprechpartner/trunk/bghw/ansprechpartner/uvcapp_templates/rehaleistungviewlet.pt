@@ -1,6 +1,7 @@
 <div tal:condition="viewlet/available">
     <div tal:condition="viewlet/rd">
-      <h1 i18n:translate="">Ihre Suche nach einer Regionaldirektion der BGHW</h1>
+      <h1 i18n:translate="">Ansprechpartner Leistungen</h1>
+      <p>Arbeitsunfall, Wegeunfall, Berufskrankheiten</p>
       <div class="bghw-adresse">
           <h3 i18n:translate="">Ihre zuständige Regionaldirektion</h3>
           <strong tal:content="viewlet/rd">Regionaldirektion</strong>

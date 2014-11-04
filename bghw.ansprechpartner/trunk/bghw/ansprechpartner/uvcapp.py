@@ -95,9 +95,11 @@ class PraeventionViewlet(grok.Viewlet):
             return True
         return False
 
-    def getOrtURL(self, results):
+    def getOrtURL(self, result):
+        """Ermittlung der URL zum Aushang Mitgliedschaft
+           fuer einen Treffer in Form eines Dicts"""
         pcat = self.portal_catalog
-        raw_webcode = results.get('webcode')
+        raw_webcode = result.get('webcode')
         if isinstance(raw_webcode, float):
             webcode = str(int(raw_webcode))
         elif isinstance(raw_webcode, int):
@@ -108,6 +110,27 @@ class PraeventionViewlet(grok.Viewlet):
         if len(brains) == 1:
             return brains[0].getURL()
         return ''
+
+    def getOrtURLs(self, results):
+        """Ermittlung der URLs zu den Aushaengen Mitgliedschaft
+           fuer mehrere Treffer in Form einer Liste"""
+        pcat = self.portal_catalog
+        newresults = []
+        for i in results:
+            raw_webcode = i.get('webcode')
+            if isinstance(raw_webcode, float):
+                webcode = str(int(raw_webcode))
+            elif isinstance(raw_webcode, int):
+                webcode = str(raw_webcode)
+            else:
+                webcode = raw_webcode
+            brains = pcat(Webcode = webcode)
+            if len(brains) == 1:
+                i['orturl'] =  brains[0].getURL()
+            else:
+                i['orturl'] = ''
+            newresults.append(i)
+        return newresults
 
     def update(self):
         self.plzresults = {}
@@ -123,10 +146,9 @@ class PraeventionViewlet(grok.Viewlet):
             ort = self.view.data.get('formdata').get('ort')
             if ort and ort != NO_VALUE:
                 self.ortresults = findTabByOrt(ort, self.view.data.get(u'Praevention'))
-                self.ortresults['orturl'] = self.getOrtURL(self.ortresults)
+                self.ortresults = self.getOrtURLs(self.ortresults)
             if self.plzresults or self.ortresults:
                 self.retval = True
-
 
 class RehaLeistungViewlet(grok.Viewlet):
     grok.context(IUVCAnsprechpartnersuche)
