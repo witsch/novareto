@@ -25,6 +25,13 @@ class IExcelDatenbasis(form.Schema, IImageScaleTraversable):
     Der Ansprechpartnersuche wird eine Excel-Datenbasis hinzugefuegt
     """
 
+    erlaeuterung = RichText(title=u"Nähere Erläuterung",
+                            description = u"Hier können Sie Text eingeben, der oberhalb des Suchformulars angezeigt werden soll",
+                            output_mime_type='text/html',
+                            required=False,
+                            )
+
+
     excelfile = NamedBlobFile(
             title = _(u"Excel-Datei"),
             description = _(u"Bitte laden Sie hier die Excel-Datei mit den Daten hoch."),

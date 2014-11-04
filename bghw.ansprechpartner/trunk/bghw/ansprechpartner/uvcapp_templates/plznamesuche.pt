@@ -21,6 +21,8 @@
          tal:condition="view/status" tal:content="view/status">
     </div>
 
+    <span tal:condition="context/erlaeuterung" tal:replace="structure context/@@text-transform/erlaeuterung/text/html"/>
+
     <form action="." method="post" novalidate="novalidate" tal:attributes="action request/getURL" 
           class="enableUnloadProtection zeam-form">
 

@@ -8,7 +8,7 @@ from bghw.ansprechpartner.excel_datenbasis import IExcelDatenbasis
 from bghw.ansprechpartner.container_ansprechpartner import IContainerAnsprechpartner
 from bghw.ansprechpartner.interfaces import IUVCAnsprechpartnersuche
 from bghw.ansprechpartner.lib.tabreader import findTabByPlz, findTabByOrt, findRehaByPlzName
-from plone.app.layout.viewlets.interfaces import IBelowContentBody
+from plone.app.layout.viewlets.interfaces import IBelowContentBody, IAboveContentBody
 from zeam.form.base import Fields, action
 from zeam.form.base.markers import NO_VALUE
 
@@ -78,7 +78,6 @@ class PlzNameSuche(uvcsite.Form):
         if errors:
             return
         self.data['formdata'] = data
-
 
 class PraeventionViewlet(grok.Viewlet):
     grok.context(IUVCAnsprechpartnersuche)
