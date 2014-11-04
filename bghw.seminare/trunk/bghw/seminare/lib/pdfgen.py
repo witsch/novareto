@@ -7,6 +7,11 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from time import gmtime, strftime
 from reportlab.lib.colors import gray,black,white, red
+from App.config import getConfiguration
+config = getConfiguration()
+configuration = config.product_config.get('basepath', dict())
+basepath = configuration.get('basepath')
+
 
 def setcross(canvas,x,y):
         canvas.setStrokeColor(black)
@@ -57,7 +62,7 @@ def createpdf(mytmpfile, daten):
     datum = strftime("%d.%m.%Y",gmtime())
 
     try:
-        bcp='/opt/ww4/test_p4internet/src/bghw.seminare/bghw/seminare/lib/logo2.jpg'
+        bcp='%s/bghw.seminare/bghw/seminare/lib/logo2.jpg' %basepath
         c.drawImage(bcp,2.2*cm,25.6*cm)
     except:
         pass
