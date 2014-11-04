@@ -17,9 +17,9 @@ def findTabByPlz(plz, data):
     wb = open_workbook(file_contents = data)
     sheet = wb.sheet_by_name('Postleitzahlen')
     cols = sheet.ncols
+    data = {}
     for row in range(sheet.nrows):
         if sheet.cell(row, 0).value == plz:
-            data = {}
             data['plz'] = sheet.cell(row,0).value
             data['ort'] = sheet.cell(row,1).value
             data['tab'] = sheet.cell(row,4).value
@@ -34,7 +34,7 @@ def findTabByPlz(plz, data):
             data['pb-tel'] = sheet.cell(row,8).value
             data['pb-mail'] = sheet.cell(row,9).value
             data['webcode'] = sheet.cell(row,10).value
-            return data
+    return data
 
 def findTabByOrt(ort, data):
     values = []
