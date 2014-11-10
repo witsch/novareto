@@ -1,0 +1,21 @@
+<h1 tal:content="context/title"/>
+<p tal:condition="context/description"><b><span tal:content="context/description"/></b></p>
+
+<div class="navTabs">
+  <ul id="myTab" class="nav nav-tabs">
+    <li tal:repeat="item view/foldercontents" tal:attributes="class item/class">
+      <a tal:condition="not: item/subobjects" tal:attributes="href string:#${item/id};data-toggle item/datatoggle"><span tal:replace="item/title"/></a>
+      <a tal:condition="item/subobjects" class="dropdown-toggle" tal:attributes="href string:#${item/id};data-toggle item/datatoggle"><span tal:replace="item/title"/><b class="caret"/></a>
+      <ul tal:condition="item/subobjects" class="dropdown-menu">
+        <li tal:repeat="sub item/subobjects">
+          <a href="" tal:attributes="href string:#${sub/id}" data-toggle="tab" tal:content="sub/title"/></li>
+      </ul>
+    </li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="" id="" tal:repeat="item view/tabcontents" tal:attributes="class item/tabclass;id item/id">
+      <span tal:replace="structure item/text"/>
+    </div>
+  </div>
+</div>
+
