@@ -1,5 +1,6 @@
 README.txt
 setup.py
+docs/HISTORY.txt
 nva/__init__.py
 nva.flexfolderviews.egg-info/PKG-INFO
 nva.flexfolderviews.egg-info/SOURCES.txt
@@ -9,5 +10,10 @@ nva.flexfolderviews.egg-info/namespace_packages.txt
 nva.flexfolderviews.egg-info/not-zip-safe
 nva.flexfolderviews.egg-info/requires.txt
 nva.flexfolderviews.egg-info/top_level.txt
+nva/flexfolderviews/1
+nva/flexfolderviews/README.txt
 nva/flexfolderviews/__init__.py
+nva/flexfolderviews/configure.zcml
 nva/flexfolderviews/views.py
+nva/flexfolderviews/templates/carouselview.pt
+nva/flexfolderviews/templates/tabview.pt

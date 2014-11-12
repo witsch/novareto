@@ -16,7 +16,7 @@
         <span tal:replace="structure item/text"/>
       </div>
       <div class="accordion-inner" tal:condition="item/subobjects">
-        <div id="myCarousel" class="carousel slide">
+	<div id="myCarousel" class="carousel slide" tal:attributes="id string:myCarousel-${item/acco_id}">
           <div class="carousel-inner">
             <div tal:repeat="sub item/subobjects" class="item active" tal:attributes="class sub/class">
               <div class="carouselCaption">
@@ -28,7 +28,9 @@
           </div>
           <ol class="carousel-indicators">
             <li tal:repeat="sub item/subobjects" data-target="#myCarousel" data-slide-to="0" class=""
-                tal:attributes="data-slide-to sub/carou_id; class sub/liclass"></li>
+	    tal:attributes="data-slide-to sub/carou_id; 
+	                    class sub/liclass;
+			    data-target string:#myCarousel-${item/acco_id}"></li>
           </ol>
         </div>
       </div>
