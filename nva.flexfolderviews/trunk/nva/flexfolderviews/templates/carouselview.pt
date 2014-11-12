@@ -7,7 +7,6 @@
     <div class="accordion-heading">
        <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion3" href="#collapseHorOne"
          tal:attributes="href string:#collapseHor${item/acco_id}" tal:content="item/title">
-           <i class="icon-chevron-right"></i>
        </a>
     </div>
     <div id="collapseHorOne" tal:attributes="id string:collapseHor${item/acco_id}" class="accordion-body collapse">
