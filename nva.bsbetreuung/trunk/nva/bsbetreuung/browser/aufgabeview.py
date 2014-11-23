@@ -125,17 +125,21 @@ class aufgabeView(FieldsetsInputForm):
         cookie = getSessionCookie(self.context, self.request)[0]
         self.adapters = {}
         data = {}
+        #BGHW Spezifikum
+        if step.startswith('1') and not step == '1.4':
+           step = '1G'
+        ##Ende
         if step in cookie.get('steps', []):
             data = cookie['stepdata'][step.replace('.', '_')]['data']
+            print 'DATA:', data
+            if step == '1G':
+                del data['mybool']
         else:
             data = self.getDefaults(self.context.getFragen())
         self.widgets = form.setUpWidgets(
             self.form_fields, self.prefix, self.context, self.request,
             form=self, adapters=self.adapters, ignore_request=ignore_request,
             data=data)
-
-    
-
 
 
     @form.action(u'Zurück')
@@ -156,7 +160,10 @@ class aufgabeView(FieldsetsInputForm):
         alt = self.context.alternativtext
         if data:
             valuedata, commentdata = prepareData(self.context.fragen)
+            print 'VALUEDATA:', valuedata
+            print 'COMMENTDATA:', commentdata
             stepvalue = calculateStep(self.context, valuedata, data, basis, min, max, self.request)
+            print 'STEPVALUE:', stepvalue
             cookie = saveStepData(self.context, stepnr, valuedata, commentdata, data, stepvalue, alt, self.request)
         else:
             checkStepData(self.context, stepnr, self.request)

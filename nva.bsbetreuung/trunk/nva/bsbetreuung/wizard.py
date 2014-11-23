@@ -102,13 +102,22 @@ def saveStepData(context, stepnr, valuedata, commentdata, data, stepvalue, alt, 
     """
     Schreibt die Daten des Steps in die Session
     """
-    print stepnr
-    print valuedata
-    print stepvalue
     cookie, mitarbeiter = getSessionCookie(context, request)
     if stepnr in cookie['steps']:
         cookie['sbsum'] = cookie['sbsum'] - cookie['stepdata'][stepnr.replace('.', '_')]['stepvalue']
         cookie['steps'].pop(cookie['steps'].index(stepnr))
+    #BGHW Spezifikum zur Behandlung von Aufgabengebiet 1
+    if stepnr.startswith('1') and not stepnr == '1.4':
+        if cookie['stepdata'].has_key('1G'):
+            oldvalue = cookie['stepdata']['1G']['stepvalue']
+            cookie['sbsum'] = cookie['sbsum'] - oldvalue
+        else:
+            cookie['steps'].append('1G')
+        cookie['stepdata']['1G'] = {'data':data,
+                                    'valuedata':valuedata,
+                                    'commentdata':commentdata,
+                                    'stepvalue':stepvalue}
+    #Ende
     cookie['sbsum'] = cookie['sbsum'] + stepvalue
     cookie['sbvalues'] = list(set(cookie['sbvalues'] + valuedata))
     cookie['steps'].append(stepnr)
