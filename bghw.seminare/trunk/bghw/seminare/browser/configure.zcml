@@ -3,6 +3,7 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="bghw.seminare">
 
+  <include package="collective.beaker" />
   <include package="plone.app.contentmenu" />
 
   <!-- -*- extra stuff goes here -*- -->
