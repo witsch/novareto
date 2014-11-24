@@ -4,6 +4,8 @@
     i18n_domain="uv.bsbetreuung">
     <!-- -*- extra stuff goes here -*- -->
 
+  <include package="collective.beaker" />
+
   <browser:page
       for="*"
       name="bsbprint_view"
