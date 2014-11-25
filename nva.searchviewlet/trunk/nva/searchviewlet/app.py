@@ -3,6 +3,11 @@ from zope.interface import Interface
 from uvc.api import api
 from Products.CMFCore.utils import getToolByName
 from plone.app.layout.viewlets.interfaces import IPortalHeader
+from zope.component import queryUtility
+try:
+    from collective.solr.interfaces import ISolrConnectionConfig
+except:
+    ISolrConnectionConfig = None
 
 api.templatedir('templates')
 
@@ -58,7 +63,15 @@ class NvaSearch(api.Page):
             webcodeurl = self.checkWebcode(suchtext, path)
             if webcodeurl:
                 return self.request.response.redirect(webcodeurl)
-        searchfacets = '&facet=true&facet.field=portal_type&facet.field=review_state&facet.field=system'
+
+        if ISolrConnectionConfig:
+            config = queryUtility(ISolrConnectionConfig)
+            facets = config.facets
+            searchfacets = '&facet=true'
+            for i in facets:
+                searchfacets += '&facet.field=%s' %i
+        #searchfacets = '&facet=true&facet.field=portal_type&facet.field=review_state&facet.field=system'
+
         url = '%s/@@search?SearchableText=%s%s' %(self.portal_url, suchtext, searchfacets)
         if path:
             url = '%s/@@search?SearchableText=%s&path=%s%s' %(self.portal_url, suchtext, path, searchfacets)
