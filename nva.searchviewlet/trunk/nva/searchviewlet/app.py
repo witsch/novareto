@@ -1,4 +1,5 @@
 import string
+import urllib
 from zope.interface import Interface
 from uvc.api import api
 from Products.CMFCore.utils import getToolByName
@@ -39,7 +40,6 @@ class NvaSearch(api.Page):
         
     def checkWebcode(self, suchtext, path):
         pcat = self.portal_catalog
-        suchtext = suchtext.decode('utf-8')
         if path:
             brains = self.portal_catalog(Webcode=suchtext, path=path)
         else:
@@ -56,6 +56,7 @@ class NvaSearch(api.Page):
 
     def render(self):
         suchtext =  self.request.get("SearchableText", "")
+        suchtext = suchtext.decode('utf-8')
         path =  self.request.get("path", "")
         if path:
            string.join(path[:-1], '/')
@@ -70,9 +71,14 @@ class NvaSearch(api.Page):
             searchfacets = '&facet=true'
             for i in facets:
                 searchfacets += '&facet.field=%s' %i
-        #searchfacets = '&facet=true&facet.field=portal_type&facet.field=review_state&facet.field=system'
-
-        url = '%s/@@search?SearchableText=%s%s' %(self.portal_url, suchtext, searchfacets)
+            parameter = {'SearchableText':suchtext.encode('utf-8')}
+            params = urllib.urlencode(parameter)
+            url = u'%s/@@search?%s%s' %(self.portal_url, params, searchfacets)
+        else:
+            parameter = {'SearchableText':suchtext.encode('utf-8')}
+            params = urllib.urlencode(parameter)
+            url = u'%s/@@search?%s' %(self.portal_url, params)
+           
         if path:
-            url = '%s/@@search?SearchableText=%s&path=%s%s' %(self.portal_url, suchtext, path, searchfacets)
+            url = '%s&path=%s' %(url, path)
         return self.request.response.redirect(url)
