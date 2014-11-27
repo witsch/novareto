@@ -4,7 +4,7 @@
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 <p tal:content="context/Description"/>
 <div tal:replace="structure provider:plone.abovecontentbody" />
-<div class="accordion" id="accordion2">
+<div class="accordion-bghw" id="accordion2">
     <div tal:repeat="object objectlist" class="accordion-group">
       <div class="accordion-heading">
         <h2><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" 
