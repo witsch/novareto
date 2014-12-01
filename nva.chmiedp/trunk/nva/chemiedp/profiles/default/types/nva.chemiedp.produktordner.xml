@@ -16,6 +16,7 @@
     <element value="nva.chemiedp.druckbestaeubungspuder" />
     <element value="nva.chemiedp.reinigungsmittelmanuell" />
     <element value="nva.chemiedp.reinigungsmitteletiketten" />
+    <element value="Document" />
   </property>
   <property name="allow_discussion">False</property>
 
@@ -37,6 +38,7 @@
   <property name="default_view">view</property>
   <property name="view_methods">
    <element value="view"/>
+   <element value="sonderreinigerordnerview"/>
   </property>
   <property name="default_view_fallback">False</property>
   <property name="add_permission">cmf.AddPortalContent</property>

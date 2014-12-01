@@ -28,9 +28,10 @@
 
   <!-- View information -->
   <property name="link_target"></property>
-  <property name="immediate_view">view</property>
-  <property name="default_view">view</property>
+  <property name="immediate_view">herstellerview</property>
+  <property name="default_view">herstellerview</property>
   <property name="view_methods">
+   <element value="herstellerview"/>
    <element value="view"/>
   </property>
   <property name="default_view_fallback">False</property>

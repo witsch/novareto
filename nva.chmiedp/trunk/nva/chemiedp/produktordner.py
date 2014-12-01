@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from five import grok
 
 from z3c.form import group, field
@@ -26,6 +27,21 @@ class IProduktOrdner(form.Schema, IImageScaleTraversable):
     """
     Tabelle bzw. Ordner fuer Produktdatenblaetter
     """
+    titelbilder = RelationList(title=u"Titelbilder",
+                           description=u"Hier können Sie Titelbilder für die Anzeige im Kopf der Seite auswählen",
+                           default=[],
+                           value_type=RelationChoice(title=_(u"Titelbilder"),
+                                                     source=ObjPathSourceBinder()),
+                           required=False,)
+
+    anzeige = schema.Bool(title=u"Anzeige des Titelbildes im Ordner.",
+                          default = True,
+                          required = False,)
+
+    spalte = schema.Bool(title=u"Anzeige des Titelbildes in der Zweispaltenansicht.",
+                         default = True,
+                         required = False,)
+
 
 class ProduktOrdner(Container):
     grok.implements(IProduktOrdner)
