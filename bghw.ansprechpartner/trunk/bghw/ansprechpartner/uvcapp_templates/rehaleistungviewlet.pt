@@ -13,6 +13,6 @@
           </p>
       </div>
       <a tal:condition="viewlet/aushang" class="btn btn-primary" href="" tal:attributes="href viewlet/aushang"
-        >Download Aushang Mitgliedschaft</a>
+        >Download Aushang Zugehörigkeit zur Berufsgenossenschaft</a>
     </div>
 </div>

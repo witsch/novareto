@@ -38,7 +38,8 @@
 
       <span tal:condition="ortresults">
         <h2 i18n:translate="">Ergebnisse Ihrer Suche nach dem Ortsnamen: 
-          <span tal:content="request/form.field.ort"/></h2>
+          <span tal:content="request/form.field.ort"/>
+        </h2>
 
         <div tal:define="results viewlet/ortresults">
         <table class="table table-striped">  

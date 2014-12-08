@@ -51,6 +51,7 @@
         </div>
       </div>
 
+      <!--     
       <div class="row">
         <div class="span16">
           <div class="span1"/>
@@ -59,6 +60,7 @@
           </div>
         </div>
       </div>
+      -->
 
       <div class="actions">
         <span class="action" tal:repeat="widget view/actionWidgets">

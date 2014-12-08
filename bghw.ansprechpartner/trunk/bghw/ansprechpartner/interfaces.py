@@ -22,6 +22,6 @@ class IPlzOrtSuche(Interface):
 
     name = schema.TextLine(
             title = u'Name',
-            description = u'Bitte geben Sie hier den Nachnamen des Versicherten ein',
+            description = u'Bitte geben Sie hier den Nachnamen ein',
             required = True,)
 
