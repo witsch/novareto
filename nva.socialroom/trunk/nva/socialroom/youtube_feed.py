@@ -59,10 +59,13 @@ class YouTubeFeed(Container):
         entry = {}
         entry['title'] = feedentry.media.title.text
         desctxt = feedentry.media.description.text
-        if len(desctxt) > 160:
-            desctxt = desctxt[:160]
-            cutter = desctxt.rfind(' ')
-            desctxt = desctxt[:cutter] + '...'
+        if desctxt:
+            if len(desctxt) > 160:
+                desctxt = desctxt[:160]
+                cutter = desctxt.rfind(' ')
+                desctxt = desctxt[:cutter] + '...'
+        else:
+            desctxt = ''
         entry['description'] = desctxt
         entry['url'] = feedentry.media.player.url
         entrydatetime = datetime.strptime(feedentry.published.text[:19], '%Y-%m-%dT%H:%M:%S').strftime('%d.%m.%Y %H:%M')
