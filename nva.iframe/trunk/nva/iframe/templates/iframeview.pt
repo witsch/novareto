@@ -1,6 +1,8 @@
-<div>
-  <iframe src="" width="" height="" frameborder="0" tal:attributes="src view/srcurl;
+<div class="column-content">
+  <section class="span16">
+    <iframe src="" width="" height="" frameborder="0" tal:attributes="src view/srcurl;
                                                                     width context/width;
                                                                     height context/height;">
-  </iframe>
+    </iframe>
+  </section>
 </div>
