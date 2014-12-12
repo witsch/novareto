@@ -15,7 +15,7 @@ from plone.dexterity.content import Container
 from zope.component.interfaces import IFactory
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from bghw.mediashop.interfaces import IArtikelListe, IBestellung
-from bghw.mediashop.lib.mailer import createMessage
+from bghw.mediashop.lib.mailer import createMessage, createOrderMessage
 from bghw.mediashop.lib.service import addToWS
 
 grok.templatedir('card_templates')
@@ -126,15 +126,15 @@ class medienBestellung(uvcsite.Form):
         except:
             bestellnummer = None
         print bestellnummer
+        #Versand der Bestellung an den Kunden
         message = createMessage(data, bestellnummer)
         message = message.encode('utf-8')
         betreff = u'Neue Bestellung aus dem BGHW-Mediashop'
-        try:
-            mailhost.send(message, mto=mailto, mfrom=mailfrom, subject=betreff, charset='utf-8')
-        except:
-            print 'kein Mailversand'
-        if not bestellnummer:
-            mailhost.send(message, mto='a.lill@bghw.de', mfrom='bghwportal@bghw.de', subject=betreff, charset='utf-8')
+        mailhost.send(message, mto=mailto, mfrom=mailfrom, subject=betreff, charset='utf-8')
+        #Versand der Bestellung an die Medienverwaltung
+        message = createOrderMessage(data, bestellnummer)
+        message = message.encode('utf-8')
+        mailhost.send(message, mto='a.lill@bghw.de', mfrom='bghwportal@bghw.de', subject=betreff, charset='utf-8')
 
     @uvcsite.action('bestellen')
     def handle_send(self):
