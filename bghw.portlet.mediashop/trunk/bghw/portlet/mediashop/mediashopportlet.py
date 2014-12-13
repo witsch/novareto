@@ -4,6 +4,7 @@ from zope.interface import implements
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
+from collective.beaker.interfaces import ISession
 from bghw.mediashop.card import getSessionCookie
 
 # TODO: If you define any fields for the portlet configuration schema below
@@ -98,17 +99,17 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        test = self.context.aq_inner.session_data_manager.hasSessionData()
-        if not test:
-            return False
-        korb = len(getSessionCookie(self.context.aq_inner).keys())
+        #test = self.context.aq_inner.session_data_manager.hasSessionData()
+        #if not test:
+        #    return False
+        korb = len(getSessionCookie(self.context.aq_inner, self.request).keys())
         if korb == 0:
             return False
         return True
 
     @property
     def artikel(self):
-        return len(getSessionCookie(self.context.aq_inner).keys())
+        return len(getSessionCookie(self.context.aq_inner, self.request).keys())
 
     @property
     def shop_url(self):
