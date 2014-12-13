@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from time import strftime
+from zeam.form.base.markers import NO_VALUE
 
 def createMessage(data, bestellnummer=None):
     message = u"""\
@@ -41,8 +42,23 @@ Ihre Berufsgenossenschaft Handel und Warenlogistik."""
 
     return message
 
+def formatData(data):
+    if data == NO_VALUE:
+        return ''
+    return data
+
+
 def createOrderMessage(data, bestellnummer=None):
     """EMail mit der Bestellung an die Medienverwaltung"""
+   
+    mytitel = data.get('titel')
+    if mytitel == u'kein Titel':
+        mytitel = ''
+
+    a_titel = data.get('a_titel')
+    if a_titel == u'kein Titel':
+        a_titel = ''
+
     message = u"""\
 Das ist die Bestellung des Mitgliedsbetriebes:
 """
@@ -64,17 +80,48 @@ Menge: %s
 
     message += """\
 
-Mitgliedsnummer: %s
-Firma: %s
-Titel: %s
-Anrede: %s
-Vorname: %s
-Name: %s
-""" % (data.get('mitgliedsnummer'), 		
-       data.get('firma'), 		
-       data.get('titel'), 		
-       data.get('anrede'), 		
-       data.get('vorname'), 		
-       data.get('name'),)
+Kontaktdaten:
 
+Mitgliedsnummer: %s
+E-Mail: %s
+Telefon: %s
+""" % (data.get('mitgliedsnummer'), 		
+       data.get('email'),
+       formatData(data.get('telefon')))
+
+    message += """\
+
+Adressdaten:
+
+%s
+%s %s %s %s
+%s
+%s %s
+""" % (data.get('firma'),
+       data.get('anrede'),
+       mytitel,
+       data.get('vorname'),
+       data.get('name'),
+       data.get('strhnr'),
+       data.get('plz'),
+       data.get('ort'))
+
+    if data.get('lieferung'):
+        message += """\
+
+Abweichende Lieferadresse:
+
+%s
+%s %s %s %s
+%s
+%s %s
+""" % (formatData(data.get('a_firma')),
+       formatData(data.get('a_anrede')),
+       a_titel,
+       formatData(data.get('a_vorname')),
+       formatData(data.get('a_name')),
+       formatData(data.get('a_strhnr')),
+       formatData(data.get('a_plz')),
+       formatData(data.get('a_ort')))
+    
     return message 

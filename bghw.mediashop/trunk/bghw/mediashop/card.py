@@ -14,42 +14,47 @@ from zeam.form.base.markers import Marker
 from plone.dexterity.content import Container
 from zope.component.interfaces import IFactory
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+from collective.beaker.interfaces import ISession
 from bghw.mediashop.interfaces import IArtikelListe, IBestellung
 from bghw.mediashop.lib.mailer import createMessage, createOrderMessage
 from bghw.mediashop.lib.service import addToWS
 
 grok.templatedir('card_templates')
 
-def getSessionCookie(context):
+def getSessionCookie(context, request):
     """
     Liest das SessionCookie
     """
-    session = context.session_data_manager.getSessionData()
+    #session = context.session_data_manager.getSessionData()
+    session = ISession(request)
     cart_default = {} #leere Artikelliste
     cookie = session.get('cart', cart_default)
     return cookie
 
-def setSessionCookie(context, cookie):
+def setSessionCookie(context, cookie, request):
     """
     Schreibt das Cookie in die Session
     """
-    session = context.session_data_manager.getSessionData()
-    session.set('cart', cookie)
+    #session = context.session_data_manager.getSessionData()
+    #session.set('cart', cookie)
+    session = ISession(request)
+    session['cart'] = cookie
+    session.save()
 
 class ToCard(grok.View):
     """View-Klasse um Daten in die Session zu schreiben"""
     grok.context(Interface)
 
     def update(self):
-        cookie = getSessionCookie(self.context)
+        cookie = getSessionCookie(self.context, self.request)
         if not cookie.has_key(self.context.artikelnummer):
-            cookie[self.context.artikelnummer] = {'artikel':self.context, 'bestellung':self.context.bestellnummer, 'menge':1}
-            setSessionCookie(self.context, cookie)
+            cookie[self.context.artikelnummer] = {'artikel':self.context.title, 'bestellung':self.context.bestellnummer, 'menge':1}
+            setSessionCookie(self.context, cookie, self.request)
         else:
             menge = cookie[self.context.artikelnummer]['menge']
             menge += 1
-            cookie[self.context.artikelnummer] = {'artikel':self.context, 'bestellung': self.context.bestellnummer, 'menge':menge}
-            setSessionCookie(self.context, cookie)
+            cookie[self.context.artikelnummer] = {'artikel':self.context.title, 'bestellung': self.context.bestellnummer, 'menge':menge}
+            setSessionCookie(self.context, cookie, self.request)
 
     def render(self):
         url = self.request.get('redirect')
@@ -60,8 +65,10 @@ class DelCard(grok.View):
     grok.context(Interface)
 
     def update(self):
-        session = self.context.session_data_manager.getSessionData()
+        #session = self.context.session_data_manager.getSessionData()
+        session = ISession(self.request)
         del session['cart']
+        session.save()
 
     def render(self):
         url = self.request.get('redirect')
@@ -85,9 +92,13 @@ class medienBestellung(uvcsite.Form):
     fields['hinweis'].mode = "radio"
     grok.implements(IArtikelListe)
 
+    @property
+    def portal(self):
+        return getToolByName(self.context, 'portal_url').getPortalObject()
+
     def update(self):
         #Lesen des Cookies aus der Session
-        cookie = getSessionCookie(self.context)
+        cookie = getSessionCookie(self.context, self.request)
 
         #Loeschen von Artikeln in der Session wenn im Formular geloescht wird
         if self.request.form.get('form.field.bestellung.remove'):
@@ -97,7 +108,7 @@ class medienBestellung(uvcsite.Form):
                     fieldid = i.split('.')[-1]
                     delart = self.request.get('form.field.bestellung.field.%s.field.artikel' %fieldid)
                     del cookie[delart]
-            setSessionCookie(self.context, cookie)
+            setSessionCookie(self.context, cookie, self.request)
             if not cookie:
                 return self.request.response.redirect(self.context.absolute_url())
 
@@ -113,7 +124,7 @@ class medienBestellung(uvcsite.Form):
         for i in cookie:
             mydefault.append(Order(artikel = i,
                                    bestellnummer = cookie[i]['bestellung'],
-                                   beschreibung = cookie[i]['artikel'].title,
+                                   beschreibung = cookie[i]['artikel'],
                                    anzahl = cookie[i]['menge']))
         self.fields.get('bestellung').defaultValue = mydefault
 
@@ -134,7 +145,7 @@ class medienBestellung(uvcsite.Form):
         #Versand der Bestellung an die Medienverwaltung
         message = createOrderMessage(data, bestellnummer)
         message = message.encode('utf-8')
-        mailhost.send(message, mto='a.lill@bghw.de', mfrom='bghwportal@bghw.de', subject=betreff, charset='utf-8')
+        mailhost.send(message, mto='a.lill@bghw.de', mfrom=self.portal.email_from_address, subject=betreff, charset='utf-8')
 
     @uvcsite.action('bestellen')
     def handle_send(self):
