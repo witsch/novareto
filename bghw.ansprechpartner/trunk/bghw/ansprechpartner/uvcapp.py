@@ -203,12 +203,23 @@ class TexteViewlet(grok.Viewlet):
     def available(self):
         if not hasattr(self.view, 'data'):
             return False
-        if self.view.data.get('formdata') and self.view.__name__ == 'ansprechpartnersuche':
+        #if self.view.data.get('formdata') and self.view.__name__ == 'ansprechpartnersuche':
+        #    return True
+        if self.view.data.get('formdata'):
             return True
         return False
 
     def update(self):
         self.texte = []
         if hasattr(self.view, 'data'):
-            self.texte = self.view.data.get('texte', [])
-
+            if self.view.__name__ == 'ansprechpartnersuche':
+                self.texte = self.view.data.get('texte', [])
+            elif self.context.portal_type == 'bghw.ansprechpartner.exceldatenbasis':
+                if self.context.zusatzinfos:
+                    fc = self.context.aq_inner.aq_parent.getFolderContents()
+                    texte = []
+                    for i in fc:
+                        obj = i.getObject()
+                        if obj.portal_type == 'Document':
+                            texte.append(obj.getText())
+                    self.texte = texte

@@ -49,6 +49,12 @@ class IExcelDatenbasis(form.Schema, IImageScaleTraversable):
             required = True,
             )
 
+    zusatzinfos = schema.Bool(
+            title = _("Zusatzinformationen"),
+            description = _("Hier anklicken, wenn die Zusatzinformationen des Containers Ansprechpartnersuche\
+                             auch im Suchformular dieser Excel-Datenbasis angezeigt werden soll."),
+            required = False,
+            )
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
