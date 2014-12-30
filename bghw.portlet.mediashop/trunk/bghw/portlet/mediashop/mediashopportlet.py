@@ -113,7 +113,9 @@ class Renderer(base.Renderer):
 
     @property
     def shop_url(self):
-        return self.context.aq_inner.portal_url() + self.data.shop + '/@@medienbestellung'
+        url = self.context.aq_inner.portal_url() + self.data.shop + '/@@medienbestellung'
+        url = url.replace('http://', 'https://')
+        return url
 
     @property
     def portlet_titel(self):
@@ -126,7 +128,9 @@ class Renderer(base.Renderer):
     @property
     def del_link(self):
         shopurl = self.context.aq_inner.portal_url() + self.data.shop
-        return shopurl + '/@@delcard?redirect=%s' % shopurl
+        shopurl = shopurl + '/@@delcard?redirect=%s' % shopurl
+        shopurl = shopurl.replace('http://', 'https://')
+        return shopurl
 
 class AddForm(base.AddForm):
     """Portlet add form.
