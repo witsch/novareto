@@ -114,7 +114,7 @@ Hinweis: Bei Rückfragen wenden Sie sich bitte an: ausbildung@bghw.de
 
         if teilnehmer:
             cc = myform.get('e-mail-adresse-der-ansprechperson', '')
-            mailkunde = sMail(mailhost, teilnehmer, 'bghwportal@bghw.de', cc, subject, 
+            mailkunde = sMail(mailhost, teilnehmer, 'ausbildung@bghw.de', cc, subject, 
                               text_kunde, pdfdata, 'seminaranmeldung.pdf')
 
         return self.request.response.redirect(myurl)    
