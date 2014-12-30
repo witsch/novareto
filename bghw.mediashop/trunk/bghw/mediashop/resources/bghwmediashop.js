@@ -7,7 +7,7 @@ $(document).ready(function() {
     $("input[id$=field-bestellnummer]").prop('readonly', true);
     $("input[id$=field-bestellnummer]").css('width', '7em');
     $("input[id$=field-beschreibung]").prop('readonly', true);
-    $("input[id$=field-anzahl]").css('width', '4em');
+    $("input[id$=field-anzahl]").css('width', '2em');
 
     $('fieldset#bghw\\.medienshop\\.lieferung').hide()
 

@@ -145,7 +145,7 @@ class medienBestellung(uvcsite.Form):
         #Versand der Bestellung an die Medienverwaltung
         message = createOrderMessage(data, bestellnummer)
         message = message.encode('utf-8')
-        mailhost.send(message, mto='a.lill@bghw.de', mfrom=self.portal.email_from_address, subject=betreff, charset='utf-8')
+        mailhost.send(message, mto='medien@bghw.de', mfrom=self.portal.email_from_address, subject=betreff, charset='utf-8')
 
     @uvcsite.action('bestellen')
     def handle_send(self):
