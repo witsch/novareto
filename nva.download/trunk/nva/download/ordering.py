@@ -125,7 +125,7 @@ class Ordering_View(uvcsite.Page):
             myimage = '<td data-title="Bild">'
             if obj.bild:
                 url = obj.absolute_url() + '/@@download/bild/' + obj.bild.filename
-                img = '<img width="100" src="%s"/>' % url
+                img = '<img style="max-width:100px;" src="%s"/>' % url
                 image = '<a href="%s">%s</a>\r\n' %(url, img)
                 myimage += image
             myimage += '</td>\r\n'
