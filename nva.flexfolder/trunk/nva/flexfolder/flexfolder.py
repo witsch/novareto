@@ -58,6 +58,10 @@ class IFlexfolder(form.Schema, IImageScaleTraversable):
                           default = True,
                           required = False,)
 
+    spalte = schema.Bool(title=u"Anzeige des Titelbildes in der Zweispaltenansicht.",
+                         default = True,
+                         required = False,)
+
 class Flexfolder(Container):
     grok.implements(IFlexfolder)
 
