@@ -9,14 +9,19 @@ class FluidView(api.Page):
 
     def createFullContent(self, obj, objcount=None):
         myobj = {}
+        myobj['id'] = obj.id
         myobj['title'] = obj.title
         myobj['description'] = obj.Description().decode('utf-8')
         myobj['text'] = ''
+        myobj['details'] = ''
         myobj['count'] = objcount
         if obj.portal_type == 'Document':
             myobj['text'] = obj.getText().decode('utf-8')
+        elif obj.portal_type == 'bgetem.praevention.dokupraevention':
+            myobj['text'] = obj.haupttext.output
+            if obj.details:
+                myobj['details'] = obj.details.output
         return myobj
-
 
     def update(self):
         contents = self.context.getFolderContents()
@@ -44,6 +49,10 @@ class FluidView(api.Page):
                 fullcontents.append(myobj)
         N = 3 #Anzahl der Spalten im FluidView
         self.subList = [fullcontents[n:n+N] for n in range(0, len(fullcontents), N)]
+        self.fullList = []
+        if len(fullcontents) < 3:
+            self.subList = []
+            self.fullList = fullcontents
         self.Folders = folders
         self.Documentorder = True
         if hasattr(self.context, 'documentorder'):

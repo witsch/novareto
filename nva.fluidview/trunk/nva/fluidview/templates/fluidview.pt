@@ -4,12 +4,8 @@
         });</script>
 
   <div tal:replace="structure provider:plone.abovecontenttitle" />
-  <h1 tal:content="context/title"/>
   <div tal:replace="structure provider:plone.belowcontenttitle" />
-  <h2 class="parent-fieldname-description" tal:content="context/description"/>
   <div tal:replace="structure provider:plone.abovecontentbody" />
-  <div><span tal:replace="structure context/text/output | nothing"/></div>
-
 
   <div tal:condition="not: view/Documentorder" tal:repeat="row view/subList" class="row-fluid">
     <div tal:repeat="element row" class="span5">
@@ -19,6 +15,15 @@
         title="#" data-html="true" data-content="#" tal:attributes="title element/title; data-content
         element/text" data-container="body">mehr...</button>
     </div>
+  </div>
+
+  <div tal:condition="not: view/Documentorder" tal:repeat="item view/fullList">
+        <h1 tal:content="item/title"/>
+        <p><b><span tal:content="item/description"/></b></p>
+        <span tal:replace="structure item/text"/>
+        <button tal:condition="item/details" tabindex="0" class="btn btn-small" data-toggle="popover" data-trigger="click" 
+         data-placement="right" title="Detailinformationen" data-html="true" data-content="#" tal:attributes="data-content item/details" 
+         data-container="body">Details</button>
   </div>
 
   <div tal:condition="not: view/Documentorder"><p>&nbsp;</p></div>
@@ -53,6 +58,15 @@
         title="#" data-html="true" data-content="#" tal:attributes="title element/title; data-content
         element/text" data-container="body">mehr...</button>
     </div>
+  </div>
+
+  <div tal:condition="view/Documentorder" tal:repeat="item view/fullList">
+        <h1 tal:content="item/title"/>
+        <p><b><span tal:content="item/description"/></b></p>
+        <span tal:replace="structure item/text"/>
+        <button tal:condition="item/details" tabindex="0" class="btn btn-small" data-toggle="popover" data-trigger="click" 
+         data-placement="right" title="Detailinformationen" data-html="true" data-content="#" tal:attributes="data-content item/details" 
+         data-container="body">Details</button>
   </div>
 
   <div tal:replace="structure provider:plone.belowcontentbody" />
