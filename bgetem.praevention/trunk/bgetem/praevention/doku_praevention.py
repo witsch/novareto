@@ -68,6 +68,21 @@ class IDokuPraevention(form.Schema, IImageScaleTraversable):
               required=False,
               )
 
+    titelbilder = RelationList(title=u"Titelbilder",
+                           description=u"Hier können Sie Titelbilder für die Anzeige im Kopf der Seite auswählen",
+                           default=[],
+                           value_type=RelationChoice(title=_(u"Titelbilder"),
+                                                     source=ObjPathSourceBinder()),
+                           required=False,)
+
+    anzeige = schema.Bool(title=u"Anzeige des Titelbildes im Ordner.",
+                          default = True,
+                          required = False,)
+
+    spalte = schema.Bool(title=u"Anzeige des Titelbildes in der Zweispaltenansicht.",
+                         default = True,
+                         required = False,)
+
     webcode = schema.TextLine(
               title=u"Webcode",
               description=u"Der Webcode für diesen Artikel wird automatisch errechnet und angezeigt. Sie\
