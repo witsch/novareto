@@ -1,3 +1,8 @@
+<script type="text/javascript">
+      $(document).ready(function() {
+        $("[data-toggle='popover']").popover();
+        });</script>
+
 <div id="content">
 <h1 tal:content="context/title"/>
 <p tal:condition="context/description"><b><span tal:content="context/description"/></b></p>
@@ -11,8 +16,12 @@
     </div>
     <div id="collapseHorOne" tal:attributes="id string:collapseHor${item/acco_id}" class="accordion-body collapse">
       <div class="accordion-inner" tal:condition="not: item/subobjects">
+        <h1 tal:content="item/title"/>
         <p><b><span tal:content="item/description"/></b></p>
         <span tal:replace="structure item/text"/>
+        <button tal:condition="item/details" tabindex="0" class="btn btn-small" data-toggle="popover" data-trigger="click" 
+         data-placement="right" title="Detailinformationen" data-html="true" data-content="#" tal:attributes="data-content item/details" 
+         data-container="body">Details</button> 
       </div>
       <div class="accordion-inner" tal:condition="item/subobjects">
 	<div id="myCarousel" class="carousel slide" tal:attributes="id string:myCarousel-${item/acco_id}">

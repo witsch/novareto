@@ -14,8 +14,9 @@ def createFullContent(obj):
     if obj.portal_type == 'Document':
         myobj['text'] = obj.getText().decode('utf-8')
     elif obj.portal_type == 'bgetem.praevention.dokupraevention':
-        myobj['text'] = obj.haupttext.decode('utf-8')
-        myobj['details'] = obj.details.decode('utf-8')
+        myobj['text'] = obj.haupttext.output
+        if obj.details:
+            myobj['details'] = obj.details.output
     return myobj
 
 class CarouselView(api.Page):
