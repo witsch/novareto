@@ -10,7 +10,11 @@ from nva.chemiedp.herstellerordner import IHerstellerOrdner
 from nva.chemiedp.produktordner import IProduktOrdner
 from nva.chemiedp.hersteller import IHersteller
 from nva.chemiedp.reinigungsmittelmanuell import IReinigungsmittelManuell
-from nva.chemiedp.vocabularies import anwendungsgebieteVocab
+from nva.chemiedp.reinigungsmitteletiketten import IReinigungsmittelEtiketten
+from nva.chemiedp.druckbestaeubungspuder import IDruckbestaeubungspuder
+from nva.chemiedp.vocabularies import anwendungsgebieteVocab, zweckVocab
+from nva.chemiedp.vocabularies import klasse as klasseVocab
+from nva.chemiedp.vocabularies import ausgangsmaterial as materialVocab
 
 api.templatedir('viewtemplates')
 
@@ -47,11 +51,12 @@ def createPullDownSnippet(objectlist):
     for i in objectlist:
         objlist_ordered[chemikalie.get(i.portal_type)].append(i)
 
-    #Clearing, solange nicht alle Datenbanken freigegeben sind
+    #Clearing, wenn Hersteller nicht über das gesamte Produktportfolio verfügen 
     if not objlist_ordered['Sonderreiniger']:
-        return None
-    else:
+        del objlist_ordered[u'Sonderreiniger']
+    if not objlist_ordered[u'Etikettenreiniger']:
         del objlist_ordered[u'Etikettenreiniger']
+    if not objlist_ordered[u'Druckbestäubungspuder']:
         del objlist_ordered[u'Druckbestäubungspuder']
     ##########################################################
 
@@ -171,9 +176,180 @@ class SonderreinigerOrdnerView(api.Page):
         self.alle = 'dropdown'
         self.flammpunkt = 'dropdown'
         self.anwendungsgebiet = 'dropdown'
+        self.collapse = 'collapse'
         if self.request.get('flammpunkt'):
             self.flammpunkt = 'dropdown active'
+            self.collapse = 'collapse in'
         elif self.request.get('anwendungsgebiet'):
             self.anwendungsgebiet = 'dropdown active'
+            self.collapse = 'collapse in'
         else:
-            self.alle = 'dropdown active'  
+            self.alle = 'dropdown active'
+            self.collapse = 'collapse'  
+
+
+def splitEinstufungen(einstufungen):
+    oldpicts = []
+    picts = []
+    words = []
+    if 'xi-reizend' in einstufungen:
+        oldpicts.append('reizend_xi.png')
+    if 'xn-gesundheitsschaedlich' in einstufungen:
+        oldpicts.append('gesundheitsschaedlich_xn.png')
+    if 'piktogramm-achtung' in einstufungen:
+        picts.append('piktogramm_achtung.png')
+    if 'piktogramm-aetzend' in einstufungen:
+        picts.append('piktogramm_aetzend.png')
+    if 'piktogramm-entflammbar' in einstufungen:
+        picts.append('piktogramm_entflammbar.png')
+    if 'signalwort-achtung' in einstufungen:
+        words.append(u'Achtung')
+    if 'signalwort-gefahr' in einstufungen:
+        words.append(u'Gefahr')
+    return {'oldpicts':oldpicts, 'picts':picts, 'words': ', '.join(words)}        
+
+class EtikettenOrdnerView(api.Page):
+    api.context(IProduktOrdner)
+
+    def update(self):
+        fc = self.context.getFolderContents()
+        herstellerdict = {}
+        objdict = {}
+        query_verwendungszweck = self.request.get('verwendungszweck', '')
+        query_flammpunkt = self.request.get('flammpunkt', '')
+        for i in fc:
+            entry = {}
+            obj = i.getObject()
+            if not objdict.has_key(obj.hersteller.to_object.id):
+                objdict[obj.hersteller.to_object.id] = []
+                herstellerdict[obj.hersteller.to_object.id] = obj.hersteller.to_object.title
+            entry['title'] = obj.title
+            entry['url'] = obj.absolute_url()
+            entry['einstufungen'] = splitEinstufungen(obj.einstufung)
+            entry['saetze'] = ''
+            if obj.saetze:
+                entry['saetze'] = ', '.join(obj.saetze)
+            verwendungszwecke = [zweckVocab.getTerm(i).title for i in obj.verwendungszweck]
+            entry['verwendungszwecke'] = ', '.join(verwendungszwecke)
+            relsign = ''
+            if obj.wertebereich:
+                relsign = '>'
+            flammpunkt = u'nicht anwendbar'
+            if obj.flammpunkt:
+                flammpunkt = unicode(obj.flammpunkt)
+                if obj.wertebereich:
+                    flammpunkt = u'>' + flammpunkt
+            entry['flammpunkt'] = flammpunkt
+            emissionsgeprueft = 'nein'
+            if obj.emissionsgeprueft:
+                emissionsgeprueft = 'ja'
+            entry['emissionsgeprueft'] = emissionsgeprueft
+            if query_flammpunkt and obj.flammpunkt:
+                if query_flammpunkt == '40-60':
+                    if 40 <= obj.flammpunkt <= 60 and not obj.wertebereich:
+                        objdict[obj.hersteller.to_object.id].append(entry)
+                    if 40 < obj.flammpunkt <= 55 and obj.wertebereich:
+                        objdict[obj.hersteller.to_object.id].append(entry)
+                if query_flammpunkt == '61-99':
+                    if 61 <= obj.flammpunkt <= 99 and not obj.wertebereich:
+                        objdict[obj.hersteller.to_object.id].append(entry)
+                    if 61 < obj.flammpunkt <= 95 and obj.wertebereich:
+                        objdict[obj.hersteller.to_object.id].append(entry)
+                if query_flammpunkt == '100':
+                    if obj.flammpunkt >= 100:
+                        objdict[obj.hersteller.to_object.id].append(entry)
+                    if obj.flammpunkt >95 and obj.wertebereich:
+                        objdict[obj.hersteller.to_object.id].append(entry)
+            elif query_flammpunkt and not obj.flammpunkt:
+                if query_flammpunkt == 'na':
+                        objdict[obj.hersteller.to_object.id].append(entry)
+            elif query_verwendungszweck:
+                if query_verwendungszweck in obj.verwendungszweck:
+                    objdict[obj.hersteller.to_object.id].append(entry)
+            else:
+                objdict[obj.hersteller.to_object.id].append(entry)
+        self.objects = objdict
+        self.hersteller = herstellerdict
+        self.url = self.context.absolute_url()
+        self.alle = 'dropdown'
+        self.flammpunkt = 'dropdown'
+        self.verwendungszweck = 'dropdown'
+        self.collapse = 'collapse'
+        if self.request.get('flammpunkt'):
+            self.flammpunkt = 'dropdown active'
+            self.collapse = 'collapse in'
+        elif self.request.get('anwendungsgebiet'):
+            self.verwendungszweck = 'dropdown active'
+            self.collapse = 'collapse in'
+        else:
+            self.alle = 'dropdown active'
+            self.collapse = 'collapse'  
+
+class EtikettenreinigerView(api.Page):
+    api.context(IReinigungsmittelEtiketten)
+
+    def update(self):
+        self.parenturl = self.context.aq_inner.aq_parent.absolute_url()
+        self.einstufungen = splitEinstufungen(self.context.einstufung)
+        self.saetze = ''
+        if self.context.saetze:
+            self.saetze = ', '.join(self.context.saetze)
+
+class PuderOrdnerView(api.Page):
+    api.context(IProduktOrdner)
+
+    def update(self):
+        fc = self.context.getFolderContents()
+        herstellerdict = {}
+        objdict = {}
+        query_produktklasse = self.request.get('produktklasse', '')
+        query_material = self.request.get('material', '')
+        for i in fc:
+            entry = {}
+            obj = i.getObject()
+            if not objdict.has_key(obj.hersteller.to_object.id):
+                objdict[obj.hersteller.to_object.id] = []
+                herstellerdict[obj.hersteller.to_object.id] = obj.hersteller.to_object.title
+            entry['title'] = obj.title
+            entry['url'] = obj.absolute_url()
+            entry['produktklasse'] = klasseVocab.getTerm(obj.produktklasse).title
+            entry['material'] = materialVocab.getTerm(obj.ausgangsmaterial).title
+            entry['medianwert'] = obj.medianwert
+            entry['volumenanteil'] = obj.volumenanteil
+            entry['maschinen'] = ''
+            if obj.maschinen:
+                entry['maschinen'] = ', '.join(obj.maschinen)
+            #emissionsgeprueft = 'nein'
+            #if obj.emissionsgeprueft:
+            #    emissionsgeprueft = 'ja'
+            #entry['emissionsgeprueft'] = emissionsgeprueft
+            if query_produktklasse:
+                if query_produktklasse == obj.produktklasse:
+                    objdict[obj.hersteller.to_object.id].append(entry)
+            if query_material:
+                if query_material == obj.ausgangsmaterial:
+                    objdict[obj.hersteller.to_object.id].append(entry)
+            else:
+                objdict[obj.hersteller.to_object.id].append(entry)
+        self.objects = objdict
+        self.hersteller = herstellerdict
+        self.url = self.context.absolute_url()
+        self.alle = 'dropdown'
+        self.produktklasse = 'dropdown'
+        self.material = 'dropdown'
+        self.collapse = 'collapse'
+        if self.request.get('produktklasse'):
+            self.produktklasse = 'dropdown active'
+            self.collapse = 'collapse in'
+        elif self.request.get('material'):
+            self.material = 'dropdown active'
+            self.collapse = 'collapse in'
+        else:
+            self.alle = 'dropdown active'
+            self.collapse = 'collapse'  
+
+class PuderView(api.Page):
+    api.context(IDruckbestaeubungspuder)
+
+    def update(self):
+        self.parenturl = self.context.aq_inner.aq_parent.absolute_url()

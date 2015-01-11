@@ -39,6 +39,8 @@
   <property name="view_methods">
    <element value="view"/>
    <element value="sonderreinigerordnerview"/>
+   <element value="etikettenordnerview"/>
+   <element value="puderordnerview"/>
   </property>
   <property name="default_view_fallback">False</property>
   <property name="add_permission">cmf.AddPortalContent</property>

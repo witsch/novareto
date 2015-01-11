@@ -23,30 +23,38 @@
           tal:attributes="href string: ${view/url}/?flammpunkt=na">nicht anwendbar</a></li>
     </ul>
   </li>
-  <li class="dropdown" tal:attributes="class view/anwendungsgebiet">
+  <li class="dropdown" tal:attributes="class view/verwendungszweck">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Anwendungsgebiet<span class="caret"></span>
+      Verwendungszweck<span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Farbreiniger">Farbreiniger</a></li>
+          tal:attributes="href string: ${view/url}/?verwendungszweck=buchdruck">Buchdruck</a></li>
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Plattenreiniger">Plattenreiniger</a></li>
+          tal:attributes="href string: ${view/url}/?verwendungszweck=flexodruck">Flexodruck</a></li>
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Feuchtwalzenreiniger">Feuchtwalzenreiniger</a></li>
+          tal:attributes="href string: ${view/url}/?verwendungszweck=siebdruck">Siebdruck</a></li>
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Gummituchregenerierer">Gummituchregenerierer</a></li>
+          tal:attributes="href string: ${view/url}/?verwendungszweck=offsetdruck">Offsetdruck</a></li>
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Reiniger_Leitstaende_Sensoren">Reiniger für Leistände und Sensoren</a>
-      </li>
+          tal:attributes="href string: ${view/url}/?verwendungszweck=waschanlage">Waschanlage</a></li>
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Klebstoffreiniger">Klebstoffreiniger</a></li>
+          tal:attributes="href string: ${view/url}/?verwendungszweck=tiefdruck">Tiefdruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=klebstoffreiniger">Klebstoffreiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=uv-offsetdruck">UV-Offsetdruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=klischeereiniger">Klischeereiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=farbreiniger_alle_druckverfahren">
+          Farbreiniger alle Druckverfahren</a></li>
     </ul>
   </li>
 </ul>
 
 
-<h1>Datenbank spezieller Reinigungsmittel für den manuellen Gebrauch im Offsetdruck (Sonderreiniger)</h1>
+<h1>Datenbank spezieller Reinigungsmittel für den Etikettendruck</h1>
 <h2>Übersicht Hersteller und Produkte</h2>
 
 <span tal:repeat="objkey python: view.objects.keys()">
@@ -68,16 +76,38 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th class="row-25">Name</th>
-                <th class="row-25">Anwendungsgebiete</th>
-                <th class="row-25">Flammpunkt</th>
-                <th class="row-25">Emissionsgeprüft</th>
+                <th class="row-20">Name</th>
+                <th class="row-15">Einstufungen</th>
+                <th class="row-10">Sätze</th>
+                <th class="row-25">Verwendungszwecke</th>
+                <th class="row-15">Flammpunkt</th>
+                <th class="row-15">Emissionsgeprüft</th>
               </tr>
             </thead>
             <tbody>
               <tr tal:repeat="item python: view.objects.get(objkey)">
                 <td data-title="Name" tal:content="item/title"></td>
-                <td data-title="Anwendungsgebiete" tal:content="item/anwendungsgebiete"></td>
+                <td data-title="Einstufungen">
+                  <p><img 
+                     tal:define="navroot context/@@plone_portal_state/navigation_root_url;
+                                 einstufungen item/einstufungen;
+                                 oldpicts einstufungen/oldpicts"
+                     tal:repeat="pict oldpicts"
+                     tal:attributes="src string:${navroot}/++resource++nva.chemiedp/${pict}"/>
+                  </p>
+                  <p><img 
+                     tal:define="navroot context/@@plone_portal_state/navigation_root_url;
+                                 einstufungen item/einstufungen;
+                                 picts einstufungen/picts"
+                     tal:repeat="pict picts"
+                     tal:attributes="src string:${navroot}/++resource++nva.chemiedp/${pict}"/>
+                  </p>
+                  <p tal:define="einstufungen item/einstufungen;
+                                 words einstufungen/words" tal:content="words">
+                  </p>
+                </td>
+                <td data-title="Sätze" tal:content="item/saetze"></td>
+                <td data-title="Verwendungszwecke" tal:content="item/verwendungszwecke"></td>
                 <td data-title="Flammpunkt" tal:content="item/flammpunkt"></td>
                 <td data-title="Emissionsgeprüft" tal:content="item/emissionsgeprueft"></td>
               </tr>
