@@ -15,4 +15,6 @@ nva/accordion/__init__.py
 nva/accordion/app.py
 nva/accordion/configure.zcml
 nva/accordion/setuphandlers.py
+nva/accordion/profiles/default/import_steps.xml
+nva/accordion/profiles/default/nva.accordion_various.txt
 nva/accordion/templates/accordion_view.pt

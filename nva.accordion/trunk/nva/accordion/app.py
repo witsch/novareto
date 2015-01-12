@@ -24,12 +24,19 @@ class Accordion_View(uvcsite.Page):
         elif IFolderish.providedBy(self.context):
             return self.context.getFolderContents(batch=False)
 
+    def createHtmlSnippet(self, obj):
+        info = ''
+        for i in obj.getFolderContents():
+            info += '<p><a class="internal-link" href="%s">%s</a></p>' % (i.getURL(), i.Title)
+        return info
+
     def update(self):
         """
         Create Objectlist for the Accordion
         """
         brains = self.query
         items_with_bodytext = ['Document', 'News Item']
+        folderish_items = ['Folder', 'nva.flexfolder.flexfolder']
         counter = 1
         objectlist = []
         for i in brains:
@@ -40,6 +47,14 @@ class Accordion_View(uvcsite.Page):
                 entry['desc'] = obj.Description()
                 entry['text'] = obj.getText()
                 entry['marker'] = 'collapse-%s' % counter
+            if i.portal_type in folderish_items:
+                info = self.createHtmlSnippet(i.getObject())
+                if not info:
+                    info = u'<p>Für weitere Informationen klicken Sie bitte <a class="internal-link" href="%s">hier.</a></p>' %i.getURL() 
+                entry['title'] = i.Title
+                entry['desc'] = i.Description
+                entry['text'] = info
+                entry['marker'] = 'collapse-%s' % counter
             else:
                 info = u'<p>Für weitere Informationen klicken Sie bitte <a class="internal-link" href="%s">hier.</a></p>' %i.getURL() 
                 entry['title'] = i.Title
@@ -49,9 +64,4 @@ class Accordion_View(uvcsite.Page):
             objectlist.append(entry)
             counter += 1
         self.objectlist = objectlist
-
-
-
-
-
 
