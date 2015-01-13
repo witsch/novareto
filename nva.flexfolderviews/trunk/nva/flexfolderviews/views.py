@@ -30,7 +30,7 @@ class CarouselView(api.Page):
              obj = i.getObject()
              myobj = createFullContent(obj)
              myobj['subobjects'] = []
-             if obj.portal_type == 'Folder':
+             if obj.portal_type in ['Folder', 'nva.flexfolder.flexfolder']:
                  subcontents = obj.getFolderContents()
                  carou_id = 0
                  for j in subcontents:

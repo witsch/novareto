@@ -1,8 +1,9 @@
+<!--
 <script type="text/javascript">
       $(document).ready(function() {
         $("[data-toggle='popover']").popover();
         });</script>
-
+-->
 <div id="content">
 <h1 tal:content="context/title"/>
 <p tal:condition="context/description"><b><span tal:content="context/description"/></b></p>
@@ -10,7 +11,7 @@
 <div class="accordion" id="accordion3">
   <div tal:repeat="item view/foldercontents" class="accordion-group">
     <div class="accordion-heading">
-       <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion3" href="#collapseHorOne"
+       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseHorOne"
          tal:attributes="href string:#collapseHor${item/acco_id}" tal:content="item/title">
        </a>
     </div>
@@ -29,8 +30,26 @@
             <div tal:repeat="sub item/subobjects" class="item active" tal:attributes="class sub/class">
               <div class="carouselCaption">
                 <h1 id="parent-fieldname-title" class="documentFirstHeading" tal:content="sub/title"/>
-                <h4 tal:content="sub/description"/>
+                <p><b><span tal:content="sub/description"/></b></p>
                 <span tal:replace="structure sub/text"/>
+                <button tal:condition="sub/details" class="btn btn-primary btn-small" data-toggle="modal" data-target=""
+                        tal:attributes="href string:#sub-modal-${item/acco_id}-${sub/carou_id}">Details</button>
+                <div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+                     tal:attributes="id string:sub-modal-${item/acco_id}-${sub/carou_id}">
+                     <div class="modal-dialog modal-lg">
+                       <div class="modal-content">
+                         <div class="modal-header">
+                           <h4 class="modal-title" id="myModalLabel">Details</h4>
+                         </div>
+                         <div class="modal-body">
+                           <span tal:replace="structure sub/details"/>
+                         </div>
+                         <div class="modal-footer">
+                           <button class="btn btn-default btn-small" data-dismiss="modal">Close</button>
+                         </div>
+                       </div>
+                     </div>
+                </div>
               </div>
             </div>
           </div>
