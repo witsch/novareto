@@ -105,7 +105,7 @@ Ihre Berufsgenossenschaft Handel und Warenlogistik
 
 Hinweis: Bei Rückfragen wenden Sie sich bitte an: ausbildung@bghw.de
 
-        """ %(ehrung, myform.get('anrede', ''), myform.get('akad_titel', ''), myform.get('name', ''))
+        """ %(ehrung, myform.get('anrede', ''), myform.get('akad_titel', ''), myform.get('name', '').decode('utf-8'))
         text_bghw = u"""Im Anhang zu dieser Mail finden Sie die Seminaranmeldung."""
         mailhost = self.mail_host.smtp_host
         cc = ''
