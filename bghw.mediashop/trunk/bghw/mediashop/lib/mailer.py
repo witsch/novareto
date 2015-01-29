@@ -73,10 +73,11 @@ Bestell-ID %s
     for i in data.get('bestellung'):
         message += """\
 
+Bestell-Nummer: %s
 Artikelnummer: %s
 Bezeichnung: %s
 Menge: %s
-""" % (i.artikel, i.beschreibung, i.anzahl)
+""" % (i.bestellnummer, i.artikel, i.beschreibung, i.anzahl)
 
     message += """\
 
