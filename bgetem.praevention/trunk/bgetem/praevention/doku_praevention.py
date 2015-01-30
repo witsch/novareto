@@ -59,12 +59,14 @@ class IDokuPraevention(form.Schema, IImageScaleTraversable):
               required = False,
               )
 
-    bilder = RelationChoice(
+    bilder = RelationList(
               title=u"Bildreferenzen",
               description=u"Bitte wählen Sie hier aus, welche Bilder im Zusammenhang mit dem Inhalt angezeigt\
                           werden sollen. Die Bilder werden jedoch nicht als Bestandteil des Haupttextes\
                           angezeigt.",
-              source=ObjPathSourceBinder(object_provides=IATImage.__identifier__),
+              value_type=RelationChoice(title=u"Bilder", 
+                                        source=ObjPathSourceBinder(object_provides=IATImage.__identifier__)),
+              #source=ObjPathSourceBinder(object_provides=IATImage.__identifier__),
               required=False,
               )
 
