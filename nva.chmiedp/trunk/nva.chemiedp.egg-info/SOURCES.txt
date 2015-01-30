@@ -228,4 +228,16 @@ nva/chemiedp/profiles/default/types/nva.chemiedp.reinigungsmittelmanuell.xml
 nva/chemiedp/reinigungsmitteletiketten_templates/sampleview.pt
 nva/chemiedp/reinigungsmittelmanuell_templates/sampleview.pt
 nva/chemiedp/resources/README.txt
+nva/chemiedp/resources/gesundheitsschaedlich_xn.png
+nva/chemiedp/resources/piktogramm_achtung.png
+nva/chemiedp/resources/piktogramm_aetzend.png
+nva/chemiedp/resources/piktogramm_entflammbar.png
+nva/chemiedp/resources/reizend_xi.png
+nva/chemiedp/viewtemplates/etikettenordnerview.pt
+nva/chemiedp/viewtemplates/etikettenreinigerview.pt
 nva/chemiedp/viewtemplates/herstellerordnerview.pt
+nva/chemiedp/viewtemplates/herstellerview.pt
+nva/chemiedp/viewtemplates/puderordnerview.pt
+nva/chemiedp/viewtemplates/puderview.pt
+nva/chemiedp/viewtemplates/sonderreinigerordnerview.pt
+nva/chemiedp/viewtemplates/sonderreinigerview.pt

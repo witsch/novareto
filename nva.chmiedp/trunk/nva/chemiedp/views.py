@@ -302,6 +302,7 @@ class PuderOrdnerView(api.Page):
         fc = self.context.getFolderContents()
         herstellerdict = {}
         objdict = {}
+        #import pdb;pdb.set_trace()
         query_produktklasse = self.request.get('produktklasse', '')
         query_material = self.request.get('material', '')
         for i in fc:
@@ -324,6 +325,7 @@ class PuderOrdnerView(api.Page):
             #    emissionsgeprueft = 'ja'
             #entry['emissionsgeprueft'] = emissionsgeprueft
             if query_produktklasse:
+                #import pdb;pdb.set_trace()
                 if query_produktklasse == obj.produktklasse:
                     objdict[obj.hersteller.to_object.id].append(entry)
             if query_material:
@@ -332,6 +334,9 @@ class PuderOrdnerView(api.Page):
             else:
                 objdict[obj.hersteller.to_object.id].append(entry)
         self.objects = objdict
+        myhersteller = objdict.keys()
+        myhersteller.sort()
+        self.myhersteller = myhersteller
         self.hersteller = herstellerdict
         self.url = self.context.absolute_url()
         self.alle = 'dropdown'

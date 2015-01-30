@@ -40,7 +40,7 @@
 <h1>Datenbank Druckbestäubungspuder</h1>
 <h2>Übersicht Hersteller und Produkte</h2>
 
-<span tal:repeat="objkey python: view.objects.keys()">
+<span tal:repeat="objkey python: view.myhersteller">
 
   <div tal:condition="python: view.objects.get(objkey)" class="betem-accordion" id="accordion2" 
        tal:attributes="id string: accordion2-${objkey}">
