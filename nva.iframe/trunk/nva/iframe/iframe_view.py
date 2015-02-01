@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from uvc.api import api
-from uvc.api.api import grok
 from zope.interface import Interface
 
-grok.templatedir('templates')
+api.templatedir('templates')
 
 class iFrameView(api.Page):
-     grok.context(Interface)
+     api.context(Interface)
 
      def update(self):
          callid = self.request.get('CallID', '') + ';' + self.request.get('DetailID', '')
