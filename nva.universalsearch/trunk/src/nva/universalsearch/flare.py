@@ -9,6 +9,21 @@ class PloneFlare(flare.PloneFlare):
         """ return the URI stored in Solr """
         return self.uri
 
+    def getPath(self, relative=False):
+        path = self.path_string
+        mypath = ''
+        if path:
+            appendix = ''
+            elements = path.split('/')
+            shortlist = elements[2:-1]
+            if len(shortlist) > 4:
+                appendix = '/...'
+            shortlist = shortlist[:4]
+            mypath = '/'.join(shortlist) + appendix
+        if not mypath:
+            mypath = self.system
+        return mypath
+
 class FlareContentListingObject(FlareContentListingObject):
    
     def pretty_title_or_id(self):
