@@ -24,18 +24,25 @@ class TitleImageViewlet(ViewletBase):
 
     def refs(self, obj):
         """ returns a list of references """
-        refs = [i.UID() for i in obj.getReferences('rel_titleimages')]
+        if obj.portal_type in ["nva.flexfolder.flexfolder", "nva.chemiedp.produktordner", "bgetem.praevention.doku_praevention"]:
+            refs = [i.to_object.UID() for i in obj.titelbilder]
+        else:
+            refs = [i.UID() for i in obj.getReferences('rel_titleimages')]
         brains = self.portal_catalog.searchResults(UID=refs, sort_on="Webcode")
+        print brains
         myrefs = []
         for i in brains:
             myrefs.append(i.getObject())
+        print myrefs
         return myrefs
 
     def update(self):
         self.imagelist = []
         self.videopath = None
         self.imagepath = None
-        if self.context.portal_type in ['Folder', 'Document', 'Topic', 'Collection']:
+        if self.context.portal_type in ['Folder', 'Document', 'Topic', 'Collection', 'nva.flexfolder.flexfolder',
+                                         'nva.chemiedp.produktordner', 'nva.chemiedp.datenbankchemiedp',
+                                         'bgetem.praevention.doku_praevention']:
             if getattr(self.context, 'anzeige', False):
                 titelbilder = self.refs(self.context)
                 if titelbilder:
