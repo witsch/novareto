@@ -70,6 +70,11 @@ class zweispaltenView(BrowserView):
                for ref in refs:
                    if ref.getField('image'):
                        imagelist.append(ref.getField('image').tag(ref, scale='mini'))
+            elif obj.portal_type in ["nva.flexfolder.flexfolder", "nva.chemiedp.produktordner", "bgetem.praevention.doku_praevention"]:
+               refs = obj.titelbilder
+               for ref in refs:
+                   if ref.to_object.getField('image'):
+                       imagelist.append(ref.to_object.getField('image').tag(ref.to_object, scale='mini'))
             item['images'] = imagelist
             item['url'] = obj.absolute_url()
             item['tit'] = obj.title
