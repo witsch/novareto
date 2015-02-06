@@ -49,7 +49,7 @@
 <h1>Datenbank spezieller Reinigungsmittel für den manuellen Gebrauch im Offsetdruck (Sonderreiniger)</h1>
 <h2>Übersicht Hersteller und Produkte</h2>
 
-<span tal:repeat="objkey python: view.objects.keys()">
+<span tal:repeat="objkey view/myhersteller">
 
   <div tal:condition="python: view.objects.get(objkey)" class="betem-accordion" id="accordion2" 
        tal:attributes="id string: accordion2-${objkey}">
@@ -68,10 +68,10 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th class="row-25">Name</th>
+                <th class="row-25">Produktname</th>
                 <th class="row-25">Anwendungsgebiete</th>
-                <th class="row-25">Flammpunkt</th>
-                <th class="row-25">Emissionsgeprüft</th>
+                <th class="row-25">Flammpunkt [&deg;C]</th>
+                <th class="row-25">Emissionsarm</th>
               </tr>
             </thead>
             <tbody>

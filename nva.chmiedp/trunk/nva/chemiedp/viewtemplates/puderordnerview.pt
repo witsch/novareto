@@ -59,12 +59,11 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Produktklasse</th>
-                <th>Ausgangsmaterial</th>
-                <th>Medianwert in µm</th>
-                <th>Volumenanteil &lt; 10 µm</th>
-                <th>Maschinen</th>
+                <th class="row-20">Name</th>
+                <th class="row-20">Produktklasse</th>
+                <th class="row-20">Ausgangsmaterial</th>
+                <th class="row-20">Medianwert in µm</th>
+                <th class="row-20">Volumenanteil &lt; 10 µm</th>
               </tr>
             </thead>
             <tbody>
@@ -74,7 +73,6 @@
                 <td data-title="Ausgangsmaterial" tal:content="item/material"></td>
                 <td data-title="Medianwert in µm" tal:content="item/medianwert"></td>
                 <td data-title="Volumenanteil &lt; 10 µm" tal:content="item/volumenanteil"></td>
-                <td data-title="Maschinen" tal:content="item/maschinen"></td>
               </tr>
             </tbody>
           </table>

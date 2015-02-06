@@ -171,6 +171,9 @@ class SonderreinigerOrdnerView(api.Page):
             else:
                 objdict[obj.hersteller.to_object.id].append(entry)
         self.objects = objdict
+        myhersteller = objdict.keys()
+        myhersteller.sort()
+        self.myhersteller = myhersteller
         self.hersteller = herstellerdict
         self.url = self.context.absolute_url()
         self.alle = 'dropdown'
@@ -269,6 +272,9 @@ class EtikettenOrdnerView(api.Page):
             else:
                 objdict[obj.hersteller.to_object.id].append(entry)
         self.objects = objdict
+        myhersteller = objdict.keys()
+        myhersteller.sort()
+        self.myhersteller = myhersteller
         self.hersteller = herstellerdict
         self.url = self.context.absolute_url()
         self.alle = 'dropdown'
@@ -278,7 +284,7 @@ class EtikettenOrdnerView(api.Page):
         if self.request.get('flammpunkt'):
             self.flammpunkt = 'dropdown active'
             self.collapse = 'collapse in'
-        elif self.request.get('anwendungsgebiet'):
+        elif self.request.get('verwendungszweck'):
             self.verwendungszweck = 'dropdown active'
             self.collapse = 'collapse in'
         else:
@@ -325,10 +331,9 @@ class PuderOrdnerView(api.Page):
             #    emissionsgeprueft = 'ja'
             #entry['emissionsgeprueft'] = emissionsgeprueft
             if query_produktklasse:
-                #import pdb;pdb.set_trace()
                 if query_produktklasse == obj.produktklasse:
                     objdict[obj.hersteller.to_object.id].append(entry)
-            if query_material:
+            elif query_material:
                 if query_material == obj.ausgangsmaterial:
                     objdict[obj.hersteller.to_object.id].append(entry)
             else:
