@@ -109,7 +109,12 @@
                 <td data-title="Sätze" tal:content="item/saetze"></td>
                 <td data-title="Verwendungszwecke" tal:content="item/verwendungszwecke"></td>
                 <td data-title="Flammpunkt" tal:content="item/flammpunkt"></td>
-                <td data-title="Emissionsgeprüft" tal:content="item/emissionsgeprueft"></td>
+                <td data-title="Emissionsarm">
+                  <img tal:condition="python: item.get('emissionsgeprueft', '') == 'ja'"
+                       tal:attributes="src string:${navroot}/++resource++nva.chemiedp/icon_emissionsarm.jpg"
+                       title="Emissionsarmes Produkt" alt="ja"/>
+                  <span tal:condition="python: item.get('emissionsgeprueft', '') != 'ja'"> - </span>
+                </td>
               </tr>
             </tbody>
           </table>
