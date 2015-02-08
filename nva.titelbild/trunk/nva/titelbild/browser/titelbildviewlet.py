@@ -27,13 +27,13 @@ class TitleImageViewlet(ViewletBase):
         if obj.portal_type in ["nva.flexfolder.flexfolder", "nva.chemiedp.produktordner", "bgetem.praevention.doku_praevention"]:
             refs = [i.to_object.UID() for i in obj.titelbilder]
         else:
-            refs = [i.UID() for i in obj.getReferences('rel_titleimages')]
+            refs = []
+            if hasattr(obj, 'getReferences'):
+                refs = [i.UID() for i in obj.getReferences('rel_titleimages')]
         brains = self.portal_catalog.searchResults(UID=refs, sort_on="Webcode")
-        print brains
         myrefs = []
         for i in brains:
             myrefs.append(i.getObject())
-        print myrefs
         return myrefs
 
     def update(self):
