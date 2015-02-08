@@ -29,3 +29,10 @@ class iFrameView(api.Page):
                  self.srcurl = src + '?CallID=' + callid
              else:
                  self.srcurl = src
+         showtitle = showdescription = False
+         if hasattr(self.context, 'showtitle'):
+             showtitle = self.context.showtitle
+         if hasattr(self.context, 'showdescription'):
+             showdescription = self.context.showdescription
+         self.showtitle = showtitle
+         self.showdescription = showdescription

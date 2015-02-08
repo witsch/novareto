@@ -48,6 +48,14 @@ class IiFrameLink(form.Schema, IImageScaleTraversable):
                           optisch anzupassen',
             required = False)
 
+    showtitle = schema.Bool(title = u'Titel anzeigen',
+            description = u"Hier klicken wenn der Titel des iFrame-Objektes angezeigt werden soll.",
+            required = False)
+
+    showdescription = schema.Bool(title = u'Beschreibung anzeigen',
+            description = u"Hier klicken wenn die Beschreibung des iFrame-Objektes angezeigt werden soll.",
+            required = False)
+
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
 # methods and properties. Put methods that are mainly useful for rendering
