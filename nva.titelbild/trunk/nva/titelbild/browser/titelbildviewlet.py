@@ -84,9 +84,10 @@ class TitleImageViewlet(ViewletBase):
                                              'img-caption':titelbilder[i].title,
                                              'img-url': refurl}
                                     self.imagelist.append(image)
-                    if self.context.getReferences('rel_videopath'):
-                        self.videopath = self.context.getReferences('rel_videopath')[0].absolute_url()
-                    if self.context.getReferences('rel_imagepath'):
-                        self.imagepath = self.context.getReferences('rel_imagepath')[0].absolute_url()
+                    if hasattr(self.context, 'getReferences'):
+                        if self.context.getReferences('rel_videopath'):
+                            self.videopath = self.context.getReferences('rel_videopath')[0].absolute_url()
+                        if self.context.getReferences('rel_imagepath'):
+                            self.imagepath = self.context.getReferences('rel_imagepath')[0].absolute_url()
 
         return
