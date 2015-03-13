@@ -1,8 +1,9 @@
 <tal:block i18n:domain="plone">
-<dl class="portlet portletNavigationTree"
+ <aside class="hidden-phone hidden-tablet" id="portletNavigation" role="navigation">
+    <ul class="nav nav-list"
     tal:define="root view/navigation_root">
 
-    <dt class="portletHeader"
+    <h4 class="portletHeader"
         tal:attributes="class python:view.hasName() and 'portletHeader' or 'portletHeader hiddenStructure'">
         <span class="portletTopLeft"></span>
         <a href="#"
@@ -11,7 +12,7 @@
            tal:content="view/title"
            i18n:translate="">Navigation</a>
         <span class="portletTopRight"></span>
-    </dt>
+      </h4>
 
     <dd class="portletItem lastItem">
         <ul class="navTree navTreeLevel0">
@@ -43,6 +44,7 @@
         </ul>
         <span class="portletBottomLeft"></span>
         <span class="portletBottomRight"></span>
-    </dd>
-</dl>
+	</dd>
+      </ul>
+    </aside>
 </tal:block>
