@@ -53,8 +53,9 @@ class zweispaltenView(BrowserView):
         """
         Gibt den Haupttext des Ordners zurueck falls vorhanden
         """
-        if self.context.getField('text'):
-            return self.context.getField('text').get(self.context)
+        if hasattr(self.context, 'text'):
+            if self.context.getField('text'):
+                 return self.context.getField('text').get(self.context)
         return None
 
     def folderitems(self):
@@ -70,7 +71,8 @@ class zweispaltenView(BrowserView):
                for ref in refs:
                    if ref.getField('image'):
                        imagelist.append(ref.getField('image').tag(ref, scale='mini'))
-            elif obj.portal_type in ["nva.flexfolder.flexfolder", "nva.chemiedp.produktordner", "bgetem.praevention.doku_praevention"]:
+            elif obj.portal_type in ["nva.flexfolder.flexfolder", "nva.chemiedp.produktordner", 
+                                     "nva.chemiedp.herstellerordner", "bgetem.praevention.doku_praevention"]:
                refs = obj.titelbilder
                for ref in refs:
                    if ref.to_object.getField('image'):
