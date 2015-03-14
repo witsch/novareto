@@ -77,7 +77,13 @@
                 <td data-title="Ausgangsmaterial" tal:content="item/material"></td>
                 <td data-title="Medianwert in µm" tal:content="item/medianwert"></td>
                 <td data-title="Volumenanteil &lt; 10 µm" tal:content="item/volumenanteil"></td>
-                <td data-title="Emissionsarm" tal:content="item/emissionsgeprueft"></td>
+                <td data-title="Emissionsarm">
+                  <img tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+                       tal:condition="python: item.get('emissionsgeprueft', '') == 'ja'"
+                       tal:attributes="src string:${navroot}/++resource++nva.chemiedp/icon_emissionsarm.jpg"
+                       title="Emissionsarmes Produkt" alt="ja"/>
+                  <span tal:condition="python: item.get('emissionsgeprueft', '') != 'ja'"> - </span>
+                </td>
               </tr>
             </tbody>
           </table>
