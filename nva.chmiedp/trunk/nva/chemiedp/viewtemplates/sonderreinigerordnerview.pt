@@ -3,14 +3,35 @@
         $("[data-toggle='popover']").popover();
         });</script>
 
+<div class="row">
 
 <div tal:replace="structure provider:plone.abovecontenttitle" />
 
 <ul class="nav nav-tabs" role="tablist">
-  <li class="dropdown" tal:attributes="class view/alle"><a href="#" tal:attributes="href view/url">Alle</a></li>
+  <li class="dropdown" tal:attributes="class view/alle"><a href="#" tal:attributes="href view/url">Produkte-Hersteller</a></li>
+  <li class="dropdown" tal:attributes="class view/anwendungsgebiet">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Produkte-Anwendungsgebiet<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Farbreiniger">Farbreiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Feuchtwalzenreiniger">Feuchtwalzenreiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Gummituchregenerierer">Gummituchregenerierer</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Klebstoffreiniger">Klebstoffreiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Plattenreiniger">Plattenreiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Reiniger_Leitstaende_Sensoren">Reiniger für Leistände und Sensoren</a>
+      </li>
+    </ul>
+  </li>
   <li class="dropdown" tal:attributes="class view/flammpunkt">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Flammpunkt<span class="caret"></span>
+      Produkte-Flammpunkt<span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
@@ -23,31 +44,13 @@
           tal:attributes="href string: ${view/url}/?flammpunkt=na">nicht anwendbar</a></li>
     </ul>
   </li>
-  <li class="dropdown" tal:attributes="class view/anwendungsgebiet">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Anwendungsgebiet<span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu" role="menu">
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Farbreiniger">Farbreiniger</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Plattenreiniger">Plattenreiniger</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Feuchtwalzenreiniger">Feuchtwalzenreiniger</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Gummituchregenerierer">Gummituchregenerierer</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Reiniger_Leitstaende_Sensoren">Reiniger für Leistände und Sensoren</a>
-      </li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?anwendungsgebiet=Klebstoffreiniger">Klebstoffreiniger</a></li>
-    </ul>
-  </li>
 </ul>
 
 
-<h1>Datenbank spezieller Reinigungsmittel für den manuellen Gebrauch im Offsetdruck (Sonderreiniger)</h1>
-<h2>Übersicht Hersteller und Produkte</h2>
+<h1 tal:content="context/title">Datenbank spezieller Reinigungsmittel für den manuellen Gebrauch im Offsetdruck (Sonderreiniger)</h1>
+<p tal:condition="context/bemerkungen" tal:content="structure python: context.bemerkungen.output"/>
+<p><b tal:condition="view/auswahl">Ihre Auswahl: <span tal:content="structure view/auswahl"/></b></p>
+<h6>Übersicht Hersteller und Produkte</h6>
 
 <span tal:repeat="objkey view/myhersteller">
 
@@ -70,16 +73,16 @@
               <tr>
                 <th class="row-25">Produktname</th>
                 <th class="row-25">Anwendungsgebiete</th>
-                <th class="row-25">Flammpunkt [&deg;C]</th>
-                <th class="row-25">Emissionsarm</th>
+                <th style="text-align: center;" class="row-25">Flammpunkt [&deg;C]</th>
+                <th style="text-align: center;" class="row-25">Emissionsarm</th>
               </tr>
             </thead>
             <tbody>
               <tr tal:repeat="item python: view.objects.get(objkey)">
                 <td data-title="Name" tal:content="item/title"></td>
                 <td data-title="Anwendungsgebiete" tal:content="item/anwendungsgebiete"></td>
-                <td data-title="Flammpunkt" tal:content="item/flammpunkt"></td>
-                <td data-title="Emissionsarm">
+                <td style="text-align: center;" data-title="Flammpunkt" tal:content="item/flammpunkt"></td>
+                <td style="text-align: center;" data-title="Emissionsarm">
                   <img tal:define="navroot context/@@plone_portal_state/navigation_root_url"
                        tal:condition="python: item.get('emissionsgeprueft', '') == 'ja'"
                        tal:attributes="src string:${navroot}/++resource++nva.chemiedp/icon_emissionsarm.jpg"
@@ -96,3 +99,4 @@
 </span>
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
+</div>

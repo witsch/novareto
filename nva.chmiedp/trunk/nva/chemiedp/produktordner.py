@@ -27,6 +27,11 @@ class IProduktOrdner(form.Schema, IImageScaleTraversable):
     """
     Tabelle bzw. Ordner fuer Produktdatenblaetter
     """
+    bemerkungen = RichText(title=_(u"Bemerkungen"),
+                           description=_(u"Hier können Bemerkungen eingefügt werden, die im Kopfbereich der Produktordner\
+                                          angezeigt werden."),
+                           required=False,)
+
     titelbilder = RelationList(title=u"Titelbilder",
                            description=u"Hier können Sie Titelbilder für die Anzeige im Kopf der Seite auswählen",
                            default=[],

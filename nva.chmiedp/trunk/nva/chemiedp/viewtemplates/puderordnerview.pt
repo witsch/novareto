@@ -3,24 +3,25 @@
         $("[data-toggle='popover']").popover();
         });</script>
 
-
+<div class="row">
 <div tal:replace="structure provider:plone.abovecontenttitle" />
 
 <ul class="nav nav-tabs" role="tablist">
-  <li class="dropdown" tal:attributes="class view/alle"><a href="#" tal:attributes="href view/url">Alle</a></li>
+  <li class="dropdown" tal:attributes="class view/alle"><a href="#" tal:attributes="href view/url">Produkte-Hersteller</a></li>
   <li class="dropdown" tal:attributes="class view/produktklasse">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Produktklasse<span class="caret"></span>
+      Produkte-Produktklassen<span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?produktklasse=fein">fein</a></li>
+          tal:attributes="href string: ${view/url}/?produktklasse=fein">fein (Medianwert &le; 20µm)</a></li>
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?produktklasse=mittel">mittel</a></li>
+          tal:attributes="href string: ${view/url}/?produktklasse=mittel">mittel (20µm &lt; Medianwert &le; 40µm)</a></li>
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?produktklasse=grob">grob</a></li>
+          tal:attributes="href string: ${view/url}/?produktklasse=grob">grob (40µm &lt; Medianwert)</a></li>
     </ul>
   </li>
+  <!--
   <li class="dropdown" tal:attributes="class view/material">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       Ausgangsmaterial<span class="caret"></span>
@@ -34,11 +35,13 @@
           tal:attributes="href string: ${view/url}/?material=Zucker">Zucker</a></li>
     </ul>
   </li>
+  -->
 </ul>
 
-
-<h1>Datenbank Druckbestäubungspuder</h1>
-<h2>Übersicht Hersteller und Produkte</h2>
+<h1 tal:content="context/title">Datenbank Druckbestäubungspuder</h1>
+<p tal:condition="context/bemerkungen" tal:content="structure python: context.bemerkungen.output"/>
+<p><b tal:condition="view/auswahl">Ihre Auswahl: <span tal:content="structure view/auswahl"/></b></p>
+<h6>Übersicht Hersteller und Produkte</h6>
 
 <span tal:repeat="objkey python: view.myhersteller">
 
@@ -62,8 +65,9 @@
                 <th class="row-20">Name</th>
                 <th class="row-20">Produktklasse</th>
                 <th class="row-20">Ausgangsmaterial</th>
-                <th class="row-20">Medianwert in µm</th>
-                <th class="row-20">Volumenanteil &lt; 10 µm</th>
+                <th class="row-15"><nobr>Medianwert [µm]</nobr></th>
+                <th class="row-15">Volumenanteil<br/>&lt; 10 µm</th>
+                <th class="row-10">Emissionsarm</th>
               </tr>
             </thead>
             <tbody>
@@ -73,6 +77,7 @@
                 <td data-title="Ausgangsmaterial" tal:content="item/material"></td>
                 <td data-title="Medianwert in µm" tal:content="item/medianwert"></td>
                 <td data-title="Volumenanteil &lt; 10 µm" tal:content="item/volumenanteil"></td>
+                <td data-title="Emissionsarm" tal:content="item/emissionsgeprueft"></td>
               </tr>
             </tbody>
           </table>
@@ -83,3 +88,4 @@
 </span>
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
+</div>

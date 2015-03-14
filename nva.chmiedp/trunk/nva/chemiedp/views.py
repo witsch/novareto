@@ -119,6 +119,7 @@ class SonderreinigerOrdnerView(api.Page):
 
     def update(self):
         fc = self.context.getFolderContents()
+        auswahl = ''
         herstellerdict = {}
         objdict = {}
         query_anwendungsgebiet = self.request.get('anwendungsgebiet', '')
@@ -148,24 +149,33 @@ class SonderreinigerOrdnerView(api.Page):
             entry['emissionsgeprueft'] = emissionsgeprueft
             if query_flammpunkt and obj.flammpunkt:
                 if query_flammpunkt == '40-60':
+                    auswahl = u'Flammpunkt 40-60&deg;C'
                     if 40 <= obj.flammpunkt <= 60 and not obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                     if 40 < obj.flammpunkt <= 55 and obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                 if query_flammpunkt == '61-99':
+                    auswahl = u'Flammpunkt 61-99&deg;C'
                     if 61 <= obj.flammpunkt <= 99 and not obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                     if 61 < obj.flammpunkt <= 95 and obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                 if query_flammpunkt == '100':
+                    auswahl = u'Flammpunkt &ge;100&deg;C'
                     if obj.flammpunkt >= 100:
                         objdict[obj.hersteller.to_object.id].append(entry)
                     if obj.flammpunkt >95 and obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
             elif query_flammpunkt and not obj.flammpunkt:
                 if query_flammpunkt == 'na':
+                        auswahl = u'Flammpunkt nicht anwendbar'
                         objdict[obj.hersteller.to_object.id].append(entry)
             elif query_anwendungsgebiet:
+                if query_anwendungsgebiet == u'Reiniger_Leitstaende_Sensoren':
+                    gebiet = u'Reiniger für Leitstände und Sensoren'
+                else:
+                    gebiet = query_anwendungsgebiet
+                auswahl = u'Anwendungsgebiet %s' %gebiet
                 if query_anwendungsgebiet in obj.anwendungsgebiete:
                     objdict[obj.hersteller.to_object.id].append(entry)
             else:
@@ -173,6 +183,7 @@ class SonderreinigerOrdnerView(api.Page):
         self.objects = objdict
         myhersteller = objdict.keys()
         myhersteller.sort()
+        self.auswahl = auswahl
         self.myhersteller = myhersteller
         self.hersteller = herstellerdict
         self.url = self.context.absolute_url()
@@ -211,11 +222,28 @@ def splitEinstufungen(einstufungen):
         words.append(u'Gefahr')
     return {'oldpicts':oldpicts, 'picts':picts, 'words': ', '.join(words)}        
 
+
+def getVerwendungszweck(verwendungszweck):
+    zwecke = {'buchdruck':u'Buchdruck',
+              'farbreiniger_alle_druckverfahren':u'Farbreiniger alle Druckverfahren',
+              'flexodruck':u'Flexodruck',
+              'klebstoffreiniger':u'Klebstoffreiniger',
+              'klischeereiniger':u'Klischeereiniger',
+              'offsetdruck':u'Offsetdruck',
+              'siebdruck':u'Siebdruck',
+              'tiefdruck':u'Tiefdruck',
+              'uv-offsetdruck':u'UV-Offsetdruck',
+              'waschanlage':u'Waschaanlage',
+              }
+    return zwecke.get(verwendungszweck)
+
+
 class EtikettenOrdnerView(api.Page):
     api.context(IProduktOrdner)
 
     def update(self):
         fc = self.context.getFolderContents()
+        auswahl = ''
         herstellerdict = {}
         objdict = {}
         query_verwendungszweck = self.request.get('verwendungszweck', '')
@@ -249,31 +277,37 @@ class EtikettenOrdnerView(api.Page):
             entry['emissionsgeprueft'] = emissionsgeprueft
             if query_flammpunkt and obj.flammpunkt:
                 if query_flammpunkt == '40-60':
+                    auswahl = u'Flammpunkt 40-60&deg;C'
                     if 40 <= obj.flammpunkt <= 60 and not obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                     if 40 < obj.flammpunkt <= 55 and obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                 if query_flammpunkt == '61-99':
+                    auswahl = u'Flammpunkt 61-99&deg;C'
                     if 61 <= obj.flammpunkt <= 99 and not obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                     if 61 < obj.flammpunkt <= 95 and obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
                 if query_flammpunkt == '100':
+                    auswahl = u'Flammpunkt &ge;100&deg;C'
                     if obj.flammpunkt >= 100:
                         objdict[obj.hersteller.to_object.id].append(entry)
                     if obj.flammpunkt >95 and obj.wertebereich:
                         objdict[obj.hersteller.to_object.id].append(entry)
             elif query_flammpunkt and not obj.flammpunkt:
                 if query_flammpunkt == 'na':
+                        auswahl = u'Flammpunkt nicht anwendbar'
                         objdict[obj.hersteller.to_object.id].append(entry)
             elif query_verwendungszweck:
                 if query_verwendungszweck in obj.verwendungszweck:
+                    auswahl = u'Verwendungszweck %s' %getVerwendungszweck(query_verwendungszweck)
                     objdict[obj.hersteller.to_object.id].append(entry)
             else:
                 objdict[obj.hersteller.to_object.id].append(entry)
         self.objects = objdict
         myhersteller = objdict.keys()
         myhersteller.sort()
+        self.auswahl = auswahl
         self.myhersteller = myhersteller
         self.hersteller = herstellerdict
         self.url = self.context.absolute_url()
@@ -301,14 +335,21 @@ class EtikettenreinigerView(api.Page):
         if self.context.saetze:
             self.saetze = ', '.join(self.context.saetze)
 
+def getProduktklasse(klasse):
+    klassen = {'fein':u'fein (Medianwert &le; 20µm)',
+               'mittel':u'mittel (20µm &lt; Medianwert &le; 40µm)',
+               'grob':u'grob (40µm &lt; Medianwert)'}
+    return klassen.get(klasse)
+
+
 class PuderOrdnerView(api.Page):
     api.context(IProduktOrdner)
 
     def update(self):
         fc = self.context.getFolderContents()
+        auswahl = ''
         herstellerdict = {}
         objdict = {}
-        #import pdb;pdb.set_trace()
         query_produktklasse = self.request.get('produktklasse', '')
         query_material = self.request.get('material', '')
         for i in fc:
@@ -326,12 +367,14 @@ class PuderOrdnerView(api.Page):
             entry['maschinen'] = ''
             if obj.maschinen:
                 entry['maschinen'] = ', '.join(obj.maschinen)
-            #emissionsgeprueft = 'nein'
-            #if obj.emissionsgeprueft:
-            #    emissionsgeprueft = 'ja'
-            #entry['emissionsgeprueft'] = emissionsgeprueft
+            emissionsgeprueft = 'nein'
+            if hasattr(obj, 'emissionsgeprueft'):
+                if obj.emissionsgeprueft:
+                    emissionsgeprueft = 'ja'
+            entry['emissionsgeprueft'] = emissionsgeprueft
             if query_produktklasse:
                 if query_produktklasse == obj.produktklasse:
+                    auswahl = getProduktklasse(query_produktklasse)
                     objdict[obj.hersteller.to_object.id].append(entry)
             elif query_material:
                 if query_material == obj.ausgangsmaterial:
@@ -341,6 +384,7 @@ class PuderOrdnerView(api.Page):
         self.objects = objdict
         myhersteller = objdict.keys()
         myhersteller.sort()
+        self.auswahl = auswahl
         self.myhersteller = myhersteller
         self.hersteller = herstellerdict
         self.url = self.context.absolute_url()

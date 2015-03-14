@@ -229,9 +229,16 @@ nva/chemiedp/reinigungsmitteletiketten_templates/sampleview.pt
 nva/chemiedp/reinigungsmittelmanuell_templates/sampleview.pt
 nva/chemiedp/resources/README.txt
 nva/chemiedp/resources/gesundheitsschaedlich_xn.png
+nva/chemiedp/resources/icon_emissionsarm.jpg
 nva/chemiedp/resources/piktogramm_achtung.png
 nva/chemiedp/resources/piktogramm_aetzend.png
 nva/chemiedp/resources/piktogramm_entflammbar.png
+nva/chemiedp/resources/piktogramm_entflammbar1.png
+nva/chemiedp/resources/piktogramm_explosion.png
+nva/chemiedp/resources/piktogramm_fluessigkeiten.png
+nva/chemiedp/resources/piktogramm_silhouette.png
+nva/chemiedp/resources/piktogramm_toedlich.png
+nva/chemiedp/resources/piktogramm_umwelt.png
 nva/chemiedp/resources/reizend_xi.png
 nva/chemiedp/viewtemplates/etikettenordnerview.pt
 nva/chemiedp/viewtemplates/etikettenreinigerview.pt

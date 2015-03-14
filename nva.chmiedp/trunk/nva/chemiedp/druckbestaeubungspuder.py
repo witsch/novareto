@@ -58,6 +58,11 @@ class IDruckbestaeubungspuder(form.Schema, IImageScaleTraversable):
             value_type = schema.TextLine(title = _(u"Druckbestäubungspuder")),
             required = False,)
 
+    emissionsgeprueft = schema.Bool(title = _(u"Emissionsarmes Produkt"),
+            description = _(u"Bitte markieren Sie hier, wenn für das Produkt die Kriterien des Gütesiegels\
+                              erfüllt sind."),
+            default = True,
+            required = False,)
 
 class Druckbestaeubungspuder(Container):
     grok.implements(IDruckbestaeubungspuder)

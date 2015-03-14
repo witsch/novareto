@@ -6,6 +6,8 @@
           })
         });</script>
 
+<div tal:replace="structure provider:plone.abovecontenttitle" />
+
 <h1 tal:content="context/title" />
 <table class="table table-striped">
   <thead>
@@ -28,7 +30,7 @@
       <td data-title="Produkte">
         <div class="dropdown">
           <button class="btn btn-small dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-            Dropdown
+            Produkte
             <span class="caret"></span>
           </button>
           <span tal:replace="structure item/backrefs"/>

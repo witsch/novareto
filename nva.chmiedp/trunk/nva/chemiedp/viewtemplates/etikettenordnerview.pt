@@ -3,14 +3,42 @@
         $("[data-toggle='popover']").popover();
         });</script>
 
-
+<div class="row">
 <div tal:replace="structure provider:plone.abovecontenttitle" />
 
 <ul class="nav nav-tabs" role="tablist">
-  <li class="dropdown" tal:attributes="class view/alle"><a href="#" tal:attributes="href view/url">Alle</a></li>
+  <li class="dropdown" tal:attributes="class view/alle"><a href="#" tal:attributes="href view/url">Produkte-Hersteller</a></li>
+  <li class="dropdown" tal:attributes="class view/verwendungszweck">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Produkte-Anwendungsgebiet<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=buchdruck">Buchdruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=farbreiniger_alle_druckverfahren">
+          Farbreiniger alle Druckverfahren</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=flexodruck">Flexodruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=klebstoffreiniger">Klebstoffreiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=klischeereiniger">Klischeereiniger</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=offsetdruck">Offsetdruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=siebdruck">Siebdruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=tiefdruck">Tiefdruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=uv-offsetdruck">UV-Offsetdruck</a></li>
+      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
+          tal:attributes="href string: ${view/url}/?verwendungszweck=waschanlage">Waschanlage</a></li>
+    </ul>
+  </li>
   <li class="dropdown" tal:attributes="class view/flammpunkt">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Flammpunkt<span class="caret"></span>
+      Produkte-Flammpunkt<span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
       <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
@@ -23,39 +51,13 @@
           tal:attributes="href string: ${view/url}/?flammpunkt=na">nicht anwendbar</a></li>
     </ul>
   </li>
-  <li class="dropdown" tal:attributes="class view/verwendungszweck">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Verwendungszweck<span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu" role="menu">
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=buchdruck">Buchdruck</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=flexodruck">Flexodruck</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=siebdruck">Siebdruck</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=offsetdruck">Offsetdruck</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=waschanlage">Waschanlage</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=tiefdruck">Tiefdruck</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=klebstoffreiniger">Klebstoffreiniger</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=uv-offsetdruck">UV-Offsetdruck</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=klischeereiniger">Klischeereiniger</a></li>
-      <li role="presentation"><a tabindex="-1" role="menuitem" href="#" 
-          tal:attributes="href string: ${view/url}/?verwendungszweck=farbreiniger_alle_druckverfahren">
-          Farbreiniger alle Druckverfahren</a></li>
-    </ul>
-  </li>
 </ul>
 
 
-<h1>Datenbank spezieller Reinigungsmittel für den Etikettendruck</h1>
-<h2>Übersicht Hersteller und Produkte</h2>
+<h1 tal:content="context/title">Datenbank spezieller Reinigungsmittel für den Etikettendruck</h1>
+<p tal:condition="context/bemerkungen" tal:content="structure python: context.bemerkungen.output"/>
+<p><b tal:condition="view/auswahl">Ihre Auswahl: <span tal:content="structure view/auswahl"/></b></p>
+<h6>Übersicht Hersteller und Produkte</h6>
 
 <span tal:repeat="objkey view/myhersteller">
 
@@ -78,9 +80,9 @@
               <tr>
                 <th class="row-20">Produktname</th>
                 <th class="row-15">Einstufung</th>
-                <th class="row-10">R-Sätze<br/>H-Sätze</th>
+                <th class="row-10"><nobr>R-Sätze</nobr><br/><nobr>H-Sätze</nobr></th>
                 <th class="row-25">Verwendungszweck</th>
-                <th class="row-15">Flammpunkt [&deg;C]</th>
+                <th class="row-15"><nobr>Flammpunkt [&deg;C]</nobr></th>
                 <th class="row-15">Emissionsarm</th>
               </tr>
             </thead>
@@ -108,8 +110,8 @@
                 </td>
                 <td data-title="Sätze" tal:content="item/saetze"></td>
                 <td data-title="Verwendungszwecke" tal:content="item/verwendungszwecke"></td>
-                <td data-title="Flammpunkt" tal:content="item/flammpunkt"></td>
-                <td data-title="Emissionsarm">
+                <td style="text-align: center;" data-title="Flammpunkt" tal:content="item/flammpunkt"></td>
+                <td style="text-align: center;" data-title="Emissionsarm">
                   <img tal:define="navroot context/@@plone_portal_state/navigation_root_url"
                        tal:condition="python: item.get('emissionsgeprueft', '') == 'ja'"
                        tal:attributes="src string:${navroot}/++resource++nva.chemiedp/icon_emissionsarm.jpg"
@@ -126,3 +128,4 @@
 </span>
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
+</div>
