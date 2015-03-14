@@ -24,7 +24,10 @@ class TitleImageViewlet(ViewletBase):
 
     def refs(self, obj):
         """ returns a list of references """
-        if obj.portal_type in ["nva.flexfolder.flexfolder", "nva.chemiedp.produktordner", "bgetem.praevention.doku_praevention"]:
+        if obj.portal_type in ["nva.flexfolder.flexfolder", 
+                               "nva.chemiedp.produktordner",
+                               "nva.chemiedp.herstellerordner",
+                               "bgetem.praevention.doku_praevention"]:
             refs = [i.to_object.UID() for i in obj.titelbilder]
         else:
             refs = []
@@ -41,8 +44,8 @@ class TitleImageViewlet(ViewletBase):
         self.videopath = None
         self.imagepath = None
         if self.context.portal_type in ['Folder', 'Document', 'Topic', 'Collection', 'nva.flexfolder.flexfolder',
-                                         'nva.chemiedp.produktordner', 'nva.chemiedp.datenbankchemiedp',
-                                         'bgetem.praevention.doku_praevention']:
+                                         'nva.chemiedp.produktordner', 'nva.chemiedp.herstellerordner', 
+                                         'nva.chemiedp.datenbankchemiedp', 'bgetem.praevention.doku_praevention']:
             if getattr(self.context, 'anzeige', False):
                 titelbilder = self.refs(self.context)
                 if titelbilder:
